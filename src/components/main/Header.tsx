@@ -7,9 +7,9 @@ interface HeaderProps {
 
 export const Header = ({ isLoggedIn, onLogout }: HeaderProps) => {
   return (
-    <header className="flex items-center w-full  max-w-[90] h-[3.75rem] px-[13rem] ">
-      <nav className="flex  items-center justify-between w-full text-[1.25rem] ">
-        <div className="flex items-center jusitfy-evenly gap-[1.5rem]">
+    <header className="flex  flex-row  items-center w-full  max-w-[90] h-[3.75rem] px-[13rem] ">
+      <nav className="flex  flex-row    items-center justify-between w-full text-[1.25rem] ">
+        <div className="flex  flex-row  items-center jusitfy-evenly gap-[1.5rem]">
           <div className="">
             <img
               className="w-[5.5rem] h-[1.75rem]"

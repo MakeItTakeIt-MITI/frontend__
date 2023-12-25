@@ -1,7 +1,7 @@
 function App() {
   return (
     <div>
-      <h1 className="bg-black text-white">hello</h1>
+      <h1 className="bg-black text-white "></h1>
     </div>
   );
 }
