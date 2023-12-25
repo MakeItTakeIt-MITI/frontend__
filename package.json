@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@storybook/addon-storysource": "^7.6.5",
+    "@storybook/addon-viewport": "^7.6.5",
     "@tanstack/react-query": "^5.14.1",
     "@tanstack/react-query-devtools": "^5.14.1",
     "react": "^18.2.0",

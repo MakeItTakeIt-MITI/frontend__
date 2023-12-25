@@ -2,7 +2,7 @@ import cardImg from "../../assets/game_info.svg";
 
 export const GameDetailCard = () => {
   return (
-    <div className="w-[220px] h-[205px]">
+    <div className="w-[220px] h-[205px] ">
       <img src={cardImg} alt="game info pic" />
       <p className="text-lg font-bold leading-7 truncate">
         수원 매탄 공원 코트 (주차 12...)

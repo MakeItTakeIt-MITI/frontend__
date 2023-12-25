@@ -8,7 +8,8 @@ const config: StorybookConfig = {
     "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
     "@storybook/addon-styling-webpack",
-    '@storybook/addon-storysource'
+    "@storybook/addon-storysource",
+    "@storybook/addon-viewport"
 
   ],
   framework: {
