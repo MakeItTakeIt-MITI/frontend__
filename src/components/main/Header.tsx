@@ -1,8 +1,8 @@
 import mitiLogo from "../../assets/MITI_logo.svg";
 
 interface HeaderProps {
-  isLoggedIn: boolean;
-  onLogout: () => void;
+  isLoggedIn?: boolean;
+  onLogout?: () => void;
 }
 
 export const Header = ({ isLoggedIn, onLogout }: HeaderProps) => {

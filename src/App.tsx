@@ -1,8 +1,12 @@
+import { Outlet } from "react-router-dom";
+import { Header } from "./components/main/Header";
+
 function App() {
   return (
-    <div>
-      <h1 className="bg-black text-white "></h1>
-    </div>
+    <>
+      <Header />
+      <Outlet />
+    </>
   );
 }
 
