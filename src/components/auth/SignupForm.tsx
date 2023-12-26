@@ -19,9 +19,12 @@ export const SignupForm = () => {
   };
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="flex flex-col gap-4 mobile:text-[12px] tablet:text-[16px] "
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <input
-        className="w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
+        className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
         type="email"
         placeholder="이메일"
         {...register("email", {
@@ -30,7 +33,7 @@ export const SignupForm = () => {
       />
 
       <input
-        className="w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
+        className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
         type="password"
         placeholder="비밀번호"
         {...register("password", {
@@ -39,7 +42,7 @@ export const SignupForm = () => {
       />
 
       <input
-        className="w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
+        className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
         type="password"
         placeholder="비빈번호 확인"
         {...register("password_check", {
@@ -48,7 +51,7 @@ export const SignupForm = () => {
       />
 
       <input
-        className="w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
+        className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
         type="text"
         placeholder="닉네임"
         {...register("nickname", {
@@ -56,7 +59,7 @@ export const SignupForm = () => {
         })}
       />
 
-      <button className="bg-[#4065F6]  text-white p-[0.5rem] rounded-lg	">
+      <button className="bg-[#4065F6] mobile:w-[250px]  mobile:mx-auto tablet:w-[350px]  text-white p-[0.5rem] rounded-lg	">
         회원가입
       </button>
     </form>
