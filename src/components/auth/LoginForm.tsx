@@ -16,22 +16,27 @@ export const LoginForm = () => {
     console.log(data);
   };
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="flex flex-col gap-4 mobile:text-[12px] tablet:text-[16px] "
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <input
-        className="w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
+        className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
         type="email"
+        placeholder="이메일"
         {...register("email", {
           required: true,
         })}
       />
       <input
-        className="w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
+        className="mobile:w-[250px]  mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
         type="password"
+        placeholder="비밀번호"
         {...register("password", {
           required: true,
         })}
       />
-      <button className="bg-[#4065F6]  text-white p-[0.5rem] rounded-lg	">
+      <button className="bg-[#4065F6] mobile:w-[250px]  mobile:mx-auto tablet:w-[350px]  text-white p-[0.5rem] rounded-lg	">
         로그인
       </button>
     </form>
