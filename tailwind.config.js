@@ -4,10 +4,9 @@ export default {
   theme: {
     screens: {
       mobile: "320px",
-      tablet: "481px",
-      laptop: "779px",
-      largeMonitor: "1025px",
-      tv: "1201px",
+      tablet: "768px",
+      laptop: "1024px",
+      desktop: "1280px",
     },
     extend: {},
   },
