@@ -10,7 +10,7 @@ export const Header = ({ isLoggedIn, onLogout }: HeaderProps) => {
   return (
     <header
       className="flex items-center  mobile:p-4  mobile:mb-2 mobile:w-screen mobile:gap-4  mobile:flex-col mobile:text-[14px]
-tablet:justify-between tablet:flex-row tablet:max-w-[90rem tablet:w-full  tablet:px-[4rem] laptop:px-[13rem] tablet:mx-auto tablet:text-[20px] desktop:text-[24px] tablet:h-[3.75rem] 
+tablet:justify-between tablet:flex-row tablet:max-w-[90rem tablet:w-full  tablet:px-[4rem] laptop:px-[13rem] tablet:mx-auto tablet:text-[18px] desktop:text-[24px] tablet:h-[3.75rem] 
     "
     >
       <div className="flex mobile:gap-6 tablet:items-center tablet:gap-5 ">
