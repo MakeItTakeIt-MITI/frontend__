@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import useAuthStore from "../../store/useAuthStore";
 
 interface LoginField {
   email: string;
@@ -27,7 +27,8 @@ const testData = [
 
 export const LoginForm = () => {
   const { register, handleSubmit } = useForm<LoginField>();
-  const [loginState, setLoginState] = useState(true);
+  // const [loginState, setLoginState] = useState(true);
+  const { login, logout } = useAuthStore();
 
   const onSubmit = (data: LoginField) => {
     const user = testData.find(
@@ -53,14 +54,16 @@ export const LoginForm = () => {
           },
         },
       };
-      setLoginState(true);
+      // setLoginState(true);
       localStorage.setItem("accessToken", accessToken);
+      login();
       console.log(response);
 
       // You can perform further actions here, e.g., redirect to another page
     } else {
       console.log("Login failed");
-      setLoginState(false);
+      logout();
+      // setLoginState(false);
       // Handle unsuccessful login, e.g., show an error message
     }
   };
@@ -69,11 +72,6 @@ export const LoginForm = () => {
       className="flex flex-col gap-4 mobile:text-[12px] tablet:text-[16px] "
       onSubmit={handleSubmit(onSubmit)}
     >
-      {!loginState && (
-        <p className="text-center text-red-500">
-          로그인 실패. 이메일 또는 비밀번호 확인해주세요.
-        </p>
-      )}
       <input
         className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
         type="email"
