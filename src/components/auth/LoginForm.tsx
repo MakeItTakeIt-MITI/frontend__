@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import useAuthStore from "../../store/useAuthStore";
+import { useNavigate } from "react-router-dom";
 
 interface LoginField {
   email: string;
@@ -27,8 +28,8 @@ const testData = [
 
 export const LoginForm = () => {
   const { register, handleSubmit } = useForm<LoginField>();
-  // const [loginState, setLoginState] = useState(true);
   const { login, logout } = useAuthStore();
+  const navigate = useNavigate();
 
   const onSubmit = (data: LoginField) => {
     const user = testData.find(
@@ -58,6 +59,7 @@ export const LoginForm = () => {
       localStorage.setItem("accessToken", accessToken);
       login();
       console.log(response);
+      navigate("/");
 
       // You can perform further actions here, e.g., redirect to another page
     } else {
