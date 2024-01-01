@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { userRegisterSchema } from "../../modals/userSignupSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface RegisterField {
   email: string;
@@ -11,11 +13,12 @@ export const SignupForm = () => {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
-  } = useForm<RegisterField>();
+    formState: { errors },
+  } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
 
   const onSubmit = (data: RegisterField) => {
     console.log(data);
+    userRegisterSchema.parse(data);
   };
 
   return (
@@ -23,8 +26,23 @@ export const SignupForm = () => {
       className="flex flex-col gap-4 mobile:text-[12px] tablet:text-[16px] "
       onSubmit={handleSubmit(onSubmit)}
     >
+      {errors.email?.message && (
+        <p className="text-center text-red-500">{errors.email?.message}</p>
+      )}
+      {errors.password?.message && (
+        <p className="text-center text-red-500">{errors.password?.message}</p>
+      )}
+      {errors.password_check?.message && (
+        <p className="text-center text-red-500">
+          {errors.password_check?.message}
+        </p>
+      )}
+      {errors.nickname?.message && (
+        <p className="text-center text-red-500">{errors.nickname?.message}</p>
+      )}
+
       <input
-        className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
+        className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2 "
         type="email"
         placeholder="이메일"
         {...register("email", {
@@ -44,7 +62,7 @@ export const SignupForm = () => {
       <input
         className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
         type="password"
-        placeholder="비빈번호 확인"
+        placeholder="비빈번호"
         {...register("password_check", {
           required: true,
         })}

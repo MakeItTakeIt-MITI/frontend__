@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SignupForm } from "../components/auth/SignupForm";
 
 export const UserSignup = () => {
@@ -9,12 +9,12 @@ export const UserSignup = () => {
       <div className="text-center">
         <p className=" text-gray-600">
           이미 회원이신가요?{" "}
-          <NavLink
+          <Link
             to="/login"
             className="text-blue-500 hover:underline cursor-pointer"
           >
             로그인
-          </NavLink>
+          </Link>
         </p>
       </div>
       {/* <hr className="" /> */}

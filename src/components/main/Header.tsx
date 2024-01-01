@@ -1,12 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import mitiLogo from "../../assets/MITI_logo.svg";
+import useAuthStore from "../../store/useAuthStore";
 
-interface HeaderProps {
-  isLoggedIn?: boolean;
-  onLogout?: () => void;
-}
+// interface HeaderProps {
+//   isLoggedIn?: boolean;
+//   onLogout?: () => void;
+// }
 
-export const Header = ({ isLoggedIn, onLogout }: HeaderProps) => {
+export const Header = () => {
+  const { isLoggedIn, logout } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      alert("로그아웃 되었습니다.");
+      logout();
+      navigate("/login");
+      window.location.reload();
+    } else {
+      alert("취소합니다.");
+      return;
+    }
+  };
   return (
     <header
       className="flex items-center  mobile:p-4  mobile:mb-2 mobile:w-screen mobile:gap-4  mobile:flex-col mobile:text-[14px]
@@ -27,7 +42,7 @@ tablet:justify-between tablet:flex-row tablet:max-w-[90rem tablet:w-full  tablet
       </div>
       <div className="flex items-center mobile:gap-4 mobile:text-[14px] desktop:text-[16px]">
         {isLoggedIn ? (
-          <button onClick={onLogout}>로그아웃</button>
+          <button onClick={handleLogout}>로그아웃</button>
         ) : (
           <>
             <Link to="/login" className="text-[#707070]">
