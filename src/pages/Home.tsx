@@ -3,7 +3,7 @@ import banner from "../assets/banner-2.svg";
 
 export const Home = () => {
   return (
-    <div className="w-screen bg-red-200">
+    <div className="w-full mx-auto max-w-[90rem] px-[13rem] bg-red-200">
       <Hero
         backgroundImage={banner}
         launchText="MITI 서비스 런칭"
