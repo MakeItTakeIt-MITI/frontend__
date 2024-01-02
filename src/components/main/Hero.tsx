@@ -12,10 +12,10 @@ export const Hero = ({
   managementText,
 }: HeroProps) => {
   return (
-    <aside className="my-[2.5rem]">
-      <div className="mx-auto relative ">
-        <img className="mx-auto" src={backgroundImage} alt="basketball shot" />
-        <div className="absolute left-6 bottom-6 font-Pretendard">
+    <aside className="my-[2.5rem] ">
+      <div className=" mx-auto relative ">
+        <img src={backgroundImage} alt="basketball shot" />
+        <div className="absolute left-6 bottom-6 ">
           <p className="text-[#FFCF0A] text-[1rem] font-bold">{launchText}</p>
           <p className="text-white text-[2rem] font-extrabold ">
             {recruitText}
