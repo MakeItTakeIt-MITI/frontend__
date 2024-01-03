@@ -1,18 +1,18 @@
-// import { Hero } from "../components/main/Hero";
 import banner from "../assets/banner-2.svg";
-// import { SectionTitle } from "../components/main/SectionTitle";
 import { KakaoMap } from "../components/kakao/KakaoMap";
-import { DateBox } from "../components/main/DateBox";
 import { GameDetailCard } from "../components/main/GameDetailCard";
 import { Hero } from "../components/main/Hero";
 
 export const Home = () => {
   const availableDates = [];
-  for (let i = 0; i < 14; i++) {
+  for (let i = 0; i < 4; i++) {
     const newDate = new Date();
     newDate.setDate(newDate.getDate() + i);
     availableDates.push(newDate);
   }
+
+  // 다음 날짜 표시 함수
+  const displayMoreDates = () => {};
 
   return (
     // <div className="w-full mx-auto max-w-[90rem] px-[13rem] bg-red-200">
@@ -25,11 +25,24 @@ export const Home = () => {
         managementText="관리, 결제, 매칭까지 한번에."
       />
       <KakaoMap />
-      <div className="flex items-center m-4 gap-4">
-        <DateBox />
-        <DateBox />
-        <DateBox />
-        <DateBox />
+      <div className="flex items-center m-4 gap-4 overflow-hidden ">
+        {/* <DateBox /> */}
+        {availableDates.map((date, index) => {
+          return (
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center text-[14px] mobile:w-[60px] tablet:w-[80px] mobile:h-[52px] tablet:h-[60px] bg-[#4065F6] text-white rounded-xl"
+            >
+              <span>
+                {date.toLocaleDateString("ko-kr", { day: "numeric" })}
+              </span>
+              <span>
+                {date.toLocaleDateString("ko-kr", { weekday: "short" })}
+              </span>
+            </div>
+          );
+        })}
+
         {/* {availableDates?.map((dateList, index) => ())} */}
       </div>
       <div className="mx-[16px] flex flex-col gap-4">
