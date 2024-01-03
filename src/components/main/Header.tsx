@@ -24,7 +24,7 @@ export const Header = () => {
   };
   return (
     <header
-      className="flex items-center  mobile:p-4  mobile:mb-2 mobile:w-screen mobile:gap-4  mobile:flex-col mobile:text-[14px]
+      className="mobile:hidden tablet:flex items-center  mobile:p-4  mobile:mb-2 mobile:w-screen mobile:gap-4  mobile:flex-col mobile:text-[14px]
 tablet:justify-between tablet:flex-row tablet:max-w-[90rem tablet:w-full  tablet:px-[4rem] laptop:px-[13rem] tablet:mx-auto tablet:text-[18px] desktop:text-[20px] tablet:h-[3.75rem] 
     "
     >
