@@ -12,7 +12,7 @@ export const Hero = ({
   managementText,
 }: HeroProps) => {
   return (
-    <aside className="my-[2.5rem] flex items-center ">
+    <aside className="mobile:hidden tablet:flex my-[2.5rem]  items-center ">
       <div className=" mx-auto relative ">
         <img src={backgroundImage} alt="basketball shot" />
         <div className="absolute left-6 bottom-6 ">
