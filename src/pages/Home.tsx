@@ -19,6 +19,9 @@ export const Home = () => {
       <div className="flex items-center m-4 gap-4 overflow-hidden ">
         <DateBox />
       </div>
+      <div className="mx-[16px] mt-[20px] mb-[30px]">
+        <span>16개의 매치</span>
+      </div>
       <div className="mx-[16px] flex flex-col gap-4">
         <GameDetailCard />
         <GameDetailCard />
