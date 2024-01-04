@@ -2,14 +2,9 @@ import { useState } from "react";
 
 export const DateBox = () => {
   const [selected, setSelected] = useState(true);
-  const [startIndex, setStartIndex] = useState(0);
 
   const triggerSelected = () => {
     setSelected(!selected);
-  };
-
-  const showNextDates = () => {
-    setStartIndex(startIndex + 4);
   };
 
   const availableDates = [];
