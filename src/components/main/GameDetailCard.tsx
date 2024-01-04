@@ -1,23 +1,16 @@
-import cardImg from "../../assets/game_info.svg";
+// import cardImg from "../../assets/game_info.svg";
 
 export const GameDetailCard = () => {
   return (
-    <div className="w-[220px] h-[205px] ">
-      <img src={cardImg} alt="game info pic" />
-      <p className="text-lg font-bold leading-7 truncate">
-        수원 매탄 공원 코트 (주차 12...)
+    <div className="px-[20px] ph-[16px] border border-[#E8E8E8] rounded-xl">
+      <span className=" bg-[#C1E1FF] text-[##4065F6] text-[11px] font-[600]">
+        1명 모집
+      </span>
+      <p className="font-bold text-[16px]">
+        수원 매탄 공원 4 vs 4 (주차 12자리)
       </p>
-      <p className="text-base font-semibold leading-5">
-        빠른 매칭 16:00 ~ 18:00
-      </p>
-      <div>
-        <span className="p-[2px]  rounded-[2px] text-[11px] font-semibold leading-[13px] bg-[#C1E1FF] text-[#4065F6]">
-          1명 남음
-        </span>
-      </div>
-      <p className="text-base font-medium leading-5">
-        남녀모두 · 5vs5 · 풀코트 · 뉴비
-      </p>
+      <p className="text-[#999] text-[14px]">2023. 11. 15 15:30~ 18:00</p>
+      <p className="text-[#4065F6] font-bold text-[16px]">₩23,000</p>
     </div>
   );
 };
