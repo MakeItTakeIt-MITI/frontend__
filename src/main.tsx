@@ -8,6 +8,8 @@ import { UserLogin } from "./pages/UserLogin.tsx";
 import { UserSignup } from "./pages/UserSignup.tsx";
 import { GameOperate } from "./pages/GameOperate.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
+import { GameInfoPage } from "./pages/GameInfoPage.tsx";
+import { MatchingPage } from "./pages/MatchingPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "/operate",
         element: <GameOperate />,
+      },
+      {
+        path: "/game",
+        element: <GameInfoPage />,
+      },
+      {
+        path: "/match",
+        element: <MatchingPage />,
       },
       {
         path: "/404",
