@@ -8,6 +8,7 @@ import { UserLogin } from "./pages/UserLogin.tsx";
 import { UserSignup } from "./pages/UserSignup.tsx";
 import { GameOperate } from "./pages/GameOperate.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
+import { GameInfoPage } from "./pages/GameInfoPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/operate",
         element: <GameOperate />,
+      },
+      {
+        path: "/game",
+        element: <GameInfoPage />,
       },
       {
         path: "/404",

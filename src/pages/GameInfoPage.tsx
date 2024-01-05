@@ -1,3 +1,3 @@
 export const GameInfoPage = () => {
-  return <div>GameInfoPage</div>;
+  return <div className="mobile:mt-[5rem]"></div>;
 };
