@@ -48,7 +48,11 @@ tablet:static tablet:border-none tablet:top-0 tablet:justify-between tablet:bg-w
           </>
         ) : (
           <>
-            <Link to="/login" className="text-[#707070]">
+            <Link
+              to="/login"
+              className="text-[#707070]"
+              data-testid="login-link"
+            >
               로그인
             </Link>
             <Link to="/signup" className="text-[#707070]">
