@@ -59,7 +59,7 @@ export const GameInfoPage = () => {
               <p className="text-[#444] font-bold">어니언수제어묵 님</p>
               <img src={badge} alt="user verified badge" />
             </div>
-            <div className="flex gap-0.5 w-[250px] mobile:text-[14px] tablet:text-[16px] text-[#222]">
+            <div className="flex gap-0.5 w-[250px] mobile:text-[14px] tablet:text-[16x] text-[#222]">
               <img
                 src={reviewStar}
                 alt="review star"
