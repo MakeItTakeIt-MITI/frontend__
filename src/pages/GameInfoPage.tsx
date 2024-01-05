@@ -84,6 +84,36 @@ export const GameInfoPage = () => {
         </p>
       </div>
       <hr className="h-[8px] w-full bg-gray-200" />
+      <div className=" flex flex-col gap-4 mobile:px-[16px] mobile:py-[18px]">
+        <p className="text-[#222] font-bold">모집 정보</p>
+        <div>
+          <h4 className="text-[#444] font-bold text-[14px]">준비물</h4>
+          <p>실내용 운동화 필수 색 조끼있음, 정수기 있음</p>
+        </div>
+        <button className="px-[16px] mobile:w-full mobile:h-[48px] bg-[#4065f6] text-white rounded-[8px] font-bold">
+          매치 참가하기
+        </button>
+        <div>
+          <h4 className="text-[#444] font-bold text-[14px]">편의시설</h4>
+          <p className="text-[#222]">탈의실, 식수대, 샤워실, 주차장 완비</p>
+        </div>
+
+        <div>
+          <h4 className="text-[#444] font-bold text-[14px]">추가 알림</h4>
+          <p className="text-[#222]">
+            운동하시는 모습을 촬영해서 유튜브에 올리고 있습니다. (참석 시 촬영
+            동의하신 것으로 알겠습니다.)
+          </p>
+        </div>
+
+        <div>
+          <p className="text-[#222]">
+            문자로 계좌번호 받고, 연락없으신 분들이 간혹 계셔서, 예약은 무조건
+            입금순으로 하겠습니다.
+          </p>
+        </div>
+      </div>
+      <hr className="h-[6rem] w-full bg-gray-200" />
     </div>
   );
 };
