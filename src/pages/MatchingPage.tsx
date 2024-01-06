@@ -1,6 +1,7 @@
 import React from "react";
 import left_arrow from "../assets/Chevron_Left.png";
 import court from "../assets/small-basketball-court.svg";
+import { AdvertisementBanner } from "../components/AdvertisementBanner";
 
 export const MatchingPage = () => {
   return (
@@ -27,7 +28,7 @@ export const MatchingPage = () => {
       <hr />
       <div className="p-[16px]">
         <form className="flex flex-col gap-4">
-          <h4>게스트 정보</h4>
+          <h4 className="font-bold">게스트 정보</h4>
           <div className="flex flex-col gap-2">
             <label htmlFor="" className="text-[#969696]">
               성함
@@ -71,6 +72,43 @@ export const MatchingPage = () => {
           </div>
         </form>
       </div>
+      <hr className="h-[8px] w-full bg-gray-200" />
+      <div className="p-[16px] flex flex-col gap-4">
+        <h4 className="font-bold">보증금 정보</h4>
+        <div className="flex justify-between text-[14px]">
+          <p className="text-[#666] ">경기 참여비 (보증금)</p>
+          <p>₩4,000</p>
+        </div>
+        <div className="flex justify-between text-[14px]">
+          <p className="text-[#666] ">MITI 수수료</p>
+          <p>₩0</p>
+        </div>
+        <hr className="max-w-[90rem] w-full mx-auto" />
+        <div className="flex justify-between text-[14px]">
+          <p className="text-[#666] font-bold text-[16px]">총 결제 금액</p>
+          <p className="font-bold text-red-500 text-[16px]">₩4,000</p>
+        </div>
+      </div>
+      <hr className="h-[8px] w-full bg-gray-200" />
+      <div className="p-[16px]">
+        <h4 className="font-bold">결제 수단 - 계좌 이체</h4>
+        <div className="flex justify-between">
+          <div className="flex flex-col rounded-lg">
+            <p className="text-[#969696] ">예금 은행</p>
+            <p className="p-[16px] bg-[#f7f7f7] w-[163px] h-[50px] text-center font-bold">
+              우리은행
+            </p>
+          </div>
+          <div className="flex flex-col rounded-lg">
+            <p className="text-[#969696]">예금주</p>
+            <p className="p-[16px] bg-[#f7f7f7] w-[163px] h-[50px] text-center font-bold">
+              이지원
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr className="h-[8px] w-full bg-gray-200" />
+      <AdvertisementBanner />
     </div>
   );
 };
