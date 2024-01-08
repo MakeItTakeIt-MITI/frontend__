@@ -1,11 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import left_arrow from "../assets/Chevron_Left.png";
 import court from "../assets/small-basketball-court.svg";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
 
 export const MatchingPage = () => {
+  const [modal, setModal] = useState(true);
+
+  const handleShowModal = () => {
+    setModal(true);
+  };
+  const handleCloseModal = () => {
+    setModal(false);
+  };
+
   return (
-    <div>
+    <div className="">
+      {modal && (
+        <div className="z-9 fixed top-0 bottom-0 right-0 left-0 w-full h-full flex items-center justify-center bg-[rgba(0,0,0,0.6)] ">
+          <div className="z-[9998] flex flex-col gap-2 bg-white h-[380px] w-full mx-[32px]  rounded-lg">
+            <h4 className="text-[#222] font-bold p-4">예약내역 확인</h4>
+            <hr />
+            <div className="flex flex-col gap-2 p-4 text-[14px]">
+              <div>
+                <p>수원 매탄 공원 4vs 4 (주차 12자리)</p>
+                <p>경기도 수원시 매탄로 23-1</p>
+              </div>
+              <div className="flex flex-col">
+                <div className="flex gap-2">
+                  <p className="text-[#666]">매치 시작</p>
+                  <p className="font-bold">11월 15일 (일) 15:30</p>
+                </div>
+                <div className="flex gap-2">
+                  <p className="text-[#666]">매치 시작</p>
+                  <p className="font-bold">11월 15일 (일) 15:30</p>
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <div className="flex gap-2">
+                  <p className="text-[#666]">예금주</p>
+                  <p className="font-bold">우리은행 박홍준</p>
+                </div>
+                <div className="flex gap-2">
+                  <p className="text-[#666]">계좌번호</p>
+                  <p className="font-bold">1234-5678-9012</p>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <p className="text-[#666]">총 금액</p>
+                <p className="font-bold">₩28,000</p>
+              </div>
+            </div>
+            <div className="flex gap-4 justify-center text-[14px]">
+              <button
+                onClick={handleCloseModal}
+                className="p-4 bg-[#f7f7f7] rounded-lg"
+              >
+                목록으로 돌아가기
+              </button>
+              <button className="p-4 bg-[#4065F6] text-white  rounded-lg">
+                확인 후 다음으로
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="py-[10px] relative">
         <img src={left_arrow} alt="left arrow" className="absolute px-[13px]" />
         <h4 className="text-center font-bold">매치 참가</h4>
@@ -39,7 +97,7 @@ export const MatchingPage = () => {
               className="p-[16px] text-[14px] bg-[#f7f7f7] "
             />
           </div>
-          <div className="flex flex-col gap-2 relative">
+          <div className="flex flex-col gap-2 ">
             <label htmlFor="" className="text-[#969696]">
               대표 연락처
             </label>
@@ -48,7 +106,7 @@ export const MatchingPage = () => {
               placeholder="휴대폰 번호를 입력해주세요."
               className="p-[16px] bg-[#f7f7f7] text-[14px]  "
             />
-            <button className="absolute right-0">인증하기</button>
+            <button className=" right-0">인증하기</button>
           </div>
         </form>
       </div>
@@ -86,12 +144,12 @@ export const MatchingPage = () => {
             </p>
           </div>
         </div>
-        <div className="flex flex-col rounded-lg relative">
+        <div className="flex flex-col rounded-lg ">
           <p className="text-[#969696]">계좌번호</p>
           <p className="p-[16px] bg-[#f7f7f7] w-full h-[50px] text-center ">
             3333-09-834-6810
           </p>
-          <button className="absolute  right-0 ">복사하기</button>
+          <button className="  right-0 ">복사하기</button>
         </div>
         <div className="flex flex-col">
           <div className="flex rounded-lg">
@@ -112,12 +170,12 @@ export const MatchingPage = () => {
             </span>
           </div>
         </div>
-        <div className="flex flex-col rounded-lg relative">
+        <div className="flex flex-col rounded-lg ">
           <p className="text-[#969696]">예금주</p>
           <p className="p-[16px] bg-[#f7f7f7] text-[14px] text-[#969696] w-full h-[50px] text-center ">
             환불받으실 계좌의 예금주를 기입해주세요.
           </p>
-          <button className="absolute  right-0 ">복사하기</button>
+          <button className="  right-0 ">복사하기</button>
         </div>
       </div>
       <hr className="h-[8px] w-full bg-gray-200" />
@@ -130,7 +188,10 @@ export const MatchingPage = () => {
           분들도 환영합니다. 즐겁게 농구하는 즐농팀입니다. 과격하고 승리에
           집착하시는 분들은 사양합니다.
         </p>
-        <button className="h-[48px] w-full text-center bg-[#E8e8e8] text-[#969696] text-[14px]">
+        <button
+          onClick={handleShowModal}
+          className="h-[48px] w-full text-center bg-[#E8e8e8] text-[#969696] text-[14px]"
+        >
           매치 참여하기
         </button>
       </div>
