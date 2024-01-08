@@ -4,7 +4,7 @@ import court from "../assets/small-basketball-court.svg";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
 
 export const MatchingPage = () => {
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const handleShowModal = () => {
     setModal(true);
