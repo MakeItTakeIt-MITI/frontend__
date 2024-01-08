@@ -27,7 +27,7 @@ export const MatchingPage = () => {
       </div>
       <hr />
       <div className="p-[16px]">
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4 px-[13px]">
           <h4 className="font-bold">게스트 정보</h4>
           <div className="flex flex-col gap-2">
             <label htmlFor="" className="text-[#969696]">
@@ -36,7 +36,7 @@ export const MatchingPage = () => {
             <input
               type="text"
               placeholder="입금자 명과 일치하는 이름을 기입해주세요."
-              className="p-[16px] bg-[#f7f7f7] "
+              className="p-[16px] text-[14px] bg-[#f7f7f7] "
             />
           </div>
           <div className="flex flex-col gap-2 relative">
@@ -46,29 +46,9 @@ export const MatchingPage = () => {
             <input
               type="text"
               placeholder="휴대폰 번호를 입력해주세요."
-              className="p-[16px] bg-[#f7f7f7]  "
+              className="p-[16px] bg-[#f7f7f7] text-[14px]  "
             />
             <button className="absolute right-0">인증하기</button>
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="" className="text-[#969696]">
-              신장
-            </label>
-            <input
-              type="text"
-              placeholder="신장"
-              className="p-[16px] bg-[#f7f7f7] "
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="" className="text-[#969696]">
-              참여자 수
-            </label>
-            <input
-              type="text"
-              placeholder="1명."
-              className="p-[16px] bg-[#f7f7f7] "
-            />
           </div>
         </form>
       </div>
@@ -90,22 +70,69 @@ export const MatchingPage = () => {
         </div>
       </div>
       <hr className="h-[8px] w-full bg-gray-200" />
-      <div className="p-[16px]">
+      <div className="p-[16px] flex flex-col gap-4">
         <h4 className="font-bold">결제 수단 - 계좌 이체</h4>
         <div className="flex justify-between">
           <div className="flex flex-col rounded-lg">
             <p className="text-[#969696] ">예금 은행</p>
-            <p className="p-[16px] bg-[#f7f7f7] w-[163px] h-[50px] text-center font-bold">
+            <p className="p-[16px] bg-[#f7f7f7] w-[163px] h-[50px] text-center ">
               우리은행
             </p>
           </div>
           <div className="flex flex-col rounded-lg">
             <p className="text-[#969696]">예금주</p>
-            <p className="p-[16px] bg-[#f7f7f7] w-[163px] h-[50px] text-center font-bold">
+            <p className="p-[16px] bg-[#f7f7f7] w-[163px] h-[50px] text-center ">
               이지원
             </p>
           </div>
         </div>
+        <div className="flex flex-col rounded-lg relative">
+          <p className="text-[#969696]">계좌번호</p>
+          <p className="p-[16px] bg-[#f7f7f7] w-full h-[50px] text-center ">
+            3333-09-834-6810
+          </p>
+          <button className="absolute  right-0 ">복사하기</button>
+        </div>
+        <div className="flex flex-col">
+          <div className="flex rounded-lg">
+            <p className="text-[#969696] w-[68px]">환불 계화</p>
+          </div>
+          <div className="flex gap-2 rounded-lg">
+            <p className="p-[16px] bg-[#f7f7f7] w-[68px] h-[50px] text-center ">
+              은행
+            </p>
+            <p className="p-[16px] bg-[#f7f7f7] text-[#969696] text-[14px]  w-full h-[50px] text-center ">
+              환불 받으실 계좌 번호를 입력해주세요.
+            </p>
+          </div>
+          <div className="flex justify-end gap-2 mt-2 w-full ">
+            <input type="checkbox" name="" id="" className="w-[24px]" />
+            <span className="text-[14px] text-[#969696] ">
+              예약자명과 예금주 동일
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-col rounded-lg relative">
+          <p className="text-[#969696]">예금주</p>
+          <p className="p-[16px] bg-[#f7f7f7] text-[14px] text-[#969696] w-full h-[50px] text-center ">
+            환불받으실 계좌의 예금주를 기입해주세요.
+          </p>
+          <button className="absolute  right-0 ">복사하기</button>
+        </div>
+      </div>
+      <hr className="h-[8px] w-full bg-gray-200" />
+
+      <div className="flex flex-col gap-4 p-4">
+        <h4 className="font-bold">유의사항</h4>
+        <p className="text-[#969696] text-[14px]">
+          옥정 호수 공원 농구 코트에서 운동하다가 날씨가 추워져서 체육관을 잡고
+          운영하고있습니다. 나이, 키, 성별 상관 없습니다. 5대 5 잘 모르시는
+          분들도 환영합니다. 즐겁게 농구하는 즐농팀입니다. 과격하고 승리에
+          집착하시는 분들은 사양합니다.
+        </p>
+        <button className="h-[48px] w-full text-center bg-[#E8e8e8] text-[#969696] text-[14px]">
+          매치 참여하기
+        </button>
       </div>
       <hr className="h-[8px] w-full bg-gray-200" />
       <AdvertisementBanner />
