@@ -13,6 +13,8 @@ export const MatchingPage = () => {
     setModal(false);
   };
 
+  const goBackPage = () => window.history.back();
+
   return (
     <div className="">
       {modal && (
@@ -65,7 +67,13 @@ export const MatchingPage = () => {
         </div>
       )}
       <div className="py-[10px] relative">
-        <img src={left_arrow} alt="left arrow" className="absolute px-[13px]" />
+        <button onClick={goBackPage} className="hover:cursor-pointer">
+          <img
+            src={left_arrow}
+            alt="left arrow"
+            className="absolute px-[13px]"
+          />
+        </button>
         <h4 className="text-center font-bold">매치 참가</h4>
       </div>
       <hr />
