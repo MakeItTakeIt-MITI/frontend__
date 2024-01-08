@@ -10,6 +10,7 @@ import { GameOperate } from "./pages/GameOperate.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
 import { GameInfoPage } from "./pages/GameInfoPage.tsx";
 import { MatchingPage } from "./pages/MatchingPage.tsx";
+import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
         path: "/match",
         element: <MatchingPage />,
       },
+      { path: "/submitted", element: <MatchSubmittedPage /> },
       {
         path: "/404",
         element: <NotFound />,

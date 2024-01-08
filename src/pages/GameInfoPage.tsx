@@ -5,6 +5,7 @@ import peopleSvg from "../assets/people.svg";
 import badge from "../assets/authentication-badge.svg";
 import reviewStar from "../assets/star-review.png";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
+import { Link } from "react-router-dom";
 export const GameInfoPage = () => {
   return (
     <div className="mobile:pt-[2rem] tablet:max-w-[90rem] tablet:px-[13rem] tablet:mx-auto ">
@@ -108,7 +109,7 @@ export const GameInfoPage = () => {
           <p>실내용 운동화 필수 색 조끼있음, 정수기 있음</p>
         </div>
         <button className="px-[16px] mobile:w-full tablet:w-[40rem] tablet:mx-auto mobile:h-[48px] bg-[#4065f6] text-white rounded-[8px] font-bold">
-          매치 참가하기
+          <Link to="/match">매치 참가하기</Link>
         </button>
         <div>
           <h4 className="text-[#444] font-bold mobile:text-[14px] tablet:text-[16px]">
