@@ -87,6 +87,7 @@ export const LoginForm = () => {
         <input
           type="email"
           id="email"
+          required
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
           placeholder="이메일을 입력해주세요."
           {...register("email", {
@@ -102,22 +103,26 @@ export const LoginForm = () => {
           <input
             type={`${displayPassword ? "text" : "password"}`}
             id="password"
+            required
             className="h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full pr-10"
             placeholder="8자리 이상의 PW를 입력해주세요."
             {...register("password", {
               required: true,
             })}
           />
-          <button onClick={handleDisplayPassword}>
+          <div onClick={handleDisplayPassword}>
             <img
               src={`${displayPassword ? open : close}`}
               alt="hide password"
               className="w-[24px] absolute right-2 top-4 cursor-pointer "
             />
-          </button>
+          </div>
         </div>
       </div>
-      <button className=" h-[58px] p-4 bg-[#4065F6] rounded-lg text-white">
+      <button
+        type="submit"
+        className=" h-[58px] p-4 bg-[#4065F6] rounded-lg text-white"
+      >
         로그인 하기
       </button>
     </form>

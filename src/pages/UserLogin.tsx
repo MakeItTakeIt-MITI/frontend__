@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginForm } from "../components/auth/LoginForm";
 import mitiLogo from "../assets/MITI_logo.svg";
 import backArrow from "../assets/Chevron_Left.png";
 
 export const UserLogin = () => {
+  const navigate = useNavigate();
+
+  const navigatePrev = () => navigate(-1);
+
   return (
     <div className=" ">
-      <div className="p-4">
+      <button className="p-4" onClick={navigatePrev}>
         <img src={backArrow} alt="back arrow" />
-      </div>
+      </button>
       <hr className="w-full" />
       <div className="flex items-center flex-col px-[16px]  py-[24px]">
         <div className="mb-[36px] flex flex-col gap-2">
