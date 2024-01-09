@@ -15,7 +15,7 @@ export const UserLogin = () => {
           <img src={mitiLogo} alt="miti logo" />
           <h5 className="text-[14px] text-[#1c1c1c]">Make it, Take it!</h5>
         </div>
-        {/* <LoginForm /> */}
+        <LoginForm />
         <div className="flex gap-4 text-[#585858] text-[14px]">
           <p className="">아직 회원이 아니신가요? </p>
           <Link to="/signup" className="text-[#4065F6]">

@@ -70,25 +70,40 @@ export const LoginForm = () => {
     }
   };
   return (
-    <form className="" onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="">이메일</label>
-      <input
-        type="email"
-        placeholder="이메일을 입력해주세요."
-        {...register("email", {
-          required: true,
-        })}
-      />
-      <label htmlFor="">비밀번호</label>
-      <input
-        type="password"
-        placeholder="8자리 이상의 PW를 입력해주세요."
-        {...register("password", {
-          required: true,
-        })}
-      />
-      <button className="bg-[#4065F6] mobile:w-[250px]  mobile:mx-auto tablet:w-[350px]  text-white p-[0.5rem] rounded-lg	">
-        로그인
+    <form
+      className="flex flex-col gap-6  w-full"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="flex flex-col gap-2">
+        <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
+          이메일
+        </label>
+        <input
+          type="email"
+          id="email"
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          placeholder="이메일을 입력해주세요."
+          {...register("email", {
+            required: true,
+          })}
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="password" className="text-[12px] text-[#1c1c1c]">
+          비밀번호
+        </label>
+        <input
+          type="password"
+          id="password"
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          placeholder="8자리 이상의 PW를 입력해주세요."
+          {...register("password", {
+            required: true,
+          })}
+        />
+      </div>
+      <button className=" h-[58px] p-4 bg-[#4065F6] rounded-lg text-white">
+        로그인 하기
       </button>
     </form>
   );
