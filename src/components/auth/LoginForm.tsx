@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
 import useAuthStore from "../../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
+import close from "../../assets/clarity_eye-hide-line.svg";
+import open from "../../assets/clarity_eye-show-line.svg";
+import { useState } from "react";
 
 interface LoginField {
   email: string;
@@ -27,9 +30,12 @@ const testData = [
 ];
 
 export const LoginForm = () => {
+  const [displayPassword, setDisplayPassword] = useState(false);
   const { register, handleSubmit } = useForm<LoginField>();
   const { login, logout } = useAuthStore();
   const navigate = useNavigate();
+
+  const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
 
   const onSubmit = (data: LoginField) => {
     const user = testData.find(
@@ -92,15 +98,24 @@ export const LoginForm = () => {
         <label htmlFor="password" className="text-[12px] text-[#1c1c1c]">
           비밀번호
         </label>
-        <input
-          type="password"
-          id="password"
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
-          placeholder="8자리 이상의 PW를 입력해주세요."
-          {...register("password", {
-            required: true,
-          })}
-        />
+        <div className="relative">
+          <input
+            type={`${displayPassword ? "text" : "password"}`}
+            id="password"
+            className="h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full pr-10"
+            placeholder="8자리 이상의 PW를 입력해주세요."
+            {...register("password", {
+              required: true,
+            })}
+          />
+          <button onClick={handleDisplayPassword}>
+            <img
+              src={`${displayPassword ? open : close}`}
+              alt="hide password"
+              className="w-[24px] absolute right-2 top-4 cursor-pointer "
+            />
+          </button>
+        </div>
       </div>
       <button className=" h-[58px] p-4 bg-[#4065F6] rounded-lg text-white">
         로그인 하기
