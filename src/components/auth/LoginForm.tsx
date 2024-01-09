@@ -70,22 +70,19 @@ export const LoginForm = () => {
     }
   };
   return (
-    <form
-      className="flex flex-col gap-4 mobile:text-[12px] tablet:text-[16px] "
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className="" onSubmit={handleSubmit(onSubmit)}>
+      <label htmlFor="">이메일</label>
       <input
-        className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
         type="email"
-        placeholder="이메일"
+        placeholder="이메일을 입력해주세요."
         {...register("email", {
           required: true,
         })}
       />
+      <label htmlFor="">비밀번호</label>
       <input
-        className="mobile:w-[250px]  mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
         type="password"
-        placeholder="비밀번호"
+        placeholder="8자리 이상의 PW를 입력해주세요."
         {...register("password", {
           required: true,
         })}
