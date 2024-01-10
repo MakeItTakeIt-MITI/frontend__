@@ -7,6 +7,9 @@ interface RegisterField {
   password: string;
   password_check: string;
   nickname: string;
+  birthday: string;
+  phone_number: string;
+  confirmation_code: number;
 }
 
 export const SignupForm = () => {
@@ -23,10 +26,10 @@ export const SignupForm = () => {
 
   return (
     <form
-      className="flex flex-col gap-4 mobile:text-[12px] tablet:text-[16px] "
+      className=" flex flex-col gap-6  w-full"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {errors.email?.message && (
+      {/* {errors.email?.message && (
         <p className="text-center text-red-500">{errors.email?.message}</p>
       )}
       {errors.password?.message && (
@@ -39,46 +42,100 @@ export const SignupForm = () => {
       )}
       {errors.nickname?.message && (
         <p className="text-center text-red-500">{errors.nickname?.message}</p>
-      )}
+      )} */}
 
-      <input
-        className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2 "
-        type="email"
-        placeholder="이메일"
-        {...register("email", {
-          required: true,
-        })}
-      />
+      <div className="flex flex-col gap-2">
+        <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
+          이메일
+        </label>
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          type="email"
+          id="email"
+          placeholder="이메일을 입력해주세요."
+          {...register("email", {
+            required: true,
+          })}
+        />
+      </div>
 
-      <input
-        className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
-        type="password"
-        placeholder="비밀번호"
-        {...register("password", {
-          required: true,
-        })}
-      />
+      <div className="flex flex-col gap-2">
+        <label htmlFor="password" className="text-[12px] text-[#1c1c1c]">
+          비빌번호
+        </label>
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          type="password"
+          placeholder="비밀번호를 입력해주세요."
+          id="password-check"
+          {...register("password", {
+            required: true,
+          })}
+        />
+      </div>
 
-      <input
-        className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
-        type="password"
-        placeholder="비빈번호"
-        {...register("password_check", {
-          required: true,
-        })}
-      />
+      <div className="flex flex-col gap-2">
+        <label htmlFor="password_check" className="text-[12px] text-[#1c1c1c]">
+          비빌번호 확인
+        </label>
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          type="text"
+          placeholder="비밀번호를 한번 더 입력해주세요."
+          id="password_check"
+          {...register("password_check", {
+            required: true,
+          })}
+        />
+      </div>
 
-      <input
-        className="mobile:w-[250px] mobile:mx-auto tablet:w-[350px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
-        type="text"
-        placeholder="닉네임"
-        {...register("nickname", {
-          required: true,
-        })}
-      />
+      <div className="flex flex-col gap-2">
+        <label htmlFor="nickname" className="text-[12px] text-[#1c1c1c]">
+          닉네임
+        </label>
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          type="text"
+          id="nickname"
+          placeholder="닉네임을 입력해주세요."
+          {...register("nickname", {
+            required: true,
+          })}
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="birthday" className="text-[12px] text-[#1c1c1c]">
+          생년월일
+        </label>
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          type="date"
+          id="birthday"
+          {...register("birthday", {
+            required: true,
+          })}
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="phone_number" className="text-[12px] text-[#1c1c1c]">
+          핸드폰 번호
+        </label>
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          type="text"
+          id="phone_number"
+          placeholder="휴대폰 번호를 입력해주세요."
+          {...register("phone_number", {
+            required: true,
+          })}
+        />
+      </div>
 
-      <button className="bg-[#4065F6] mobile:w-[250px]  mobile:mx-auto tablet:w-[350px]  text-white p-[0.5rem] rounded-lg	">
-        회원가입
+      <button
+        type="submit"
+        className=" h-[58px] p-4 bg-[#4065F6] rounded-lg text-white"
+      >
+        가입하기
       </button>
     </form>
   );
