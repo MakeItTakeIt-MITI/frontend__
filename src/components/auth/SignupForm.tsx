@@ -29,7 +29,7 @@ export const SignupForm = () => {
       className=" flex flex-col gap-6  w-full"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {/* {errors.email?.message && (
+      {errors.email?.message && (
         <p className="text-center text-red-500">{errors.email?.message}</p>
       )}
       {errors.password?.message && (
@@ -42,9 +42,9 @@ export const SignupForm = () => {
       )}
       {errors.nickname?.message && (
         <p className="text-center text-red-500">{errors.nickname?.message}</p>
-      )} */}
+      )}
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 relative">
         <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
           이메일
         </label>
@@ -57,6 +57,9 @@ export const SignupForm = () => {
             required: true,
           })}
         />
+        <button className="absolute right-2 bottom-2.5 text-[14px] text-white bg-[#4065F6] w-[81px] h-[36px] rounded-[8px]">
+          중복확인
+        </button>
       </div>
 
       <div className="flex flex-col gap-2">
@@ -89,7 +92,7 @@ export const SignupForm = () => {
         />
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 relative">
         <label htmlFor="nickname" className="text-[12px] text-[#1c1c1c]">
           닉네임
         </label>
@@ -102,6 +105,9 @@ export const SignupForm = () => {
             required: true,
           })}
         />
+        <button className="absolute right-2 bottom-2.5 text-[14px] text-white bg-[#4065F6] w-[81px] h-[36px] rounded-[8px]">
+          중복확인
+        </button>
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="birthday" className="text-[12px] text-[#1c1c1c]">
@@ -116,7 +122,7 @@ export const SignupForm = () => {
           })}
         />
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 relative">
         <label htmlFor="phone_number" className="text-[12px] text-[#1c1c1c]">
           핸드폰 번호
         </label>
@@ -129,6 +135,9 @@ export const SignupForm = () => {
             required: true,
           })}
         />
+        <button className="absolute right-2 bottom-2.5 text-[14px] text-white bg-[#4065F6] w-[81px] h-[36px] rounded-[8px]">
+          인증하기
+        </button>
       </div>
 
       <button
