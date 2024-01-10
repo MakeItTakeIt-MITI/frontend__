@@ -17,7 +17,6 @@ export const StepTwo = () => {
         <input
           type="date"
           id="start_date"
-          readOnly
           className=" h-[58px] p-4 bg-[#F7F7F7] w-full"
           {...register("start_date", {
             required: true,
@@ -46,7 +45,6 @@ export const StepTwo = () => {
         <input
           type="date"
           id="end_date"
-          readOnly
           className=" h-[58px] p-4 bg-[#F7F7F7] w-full"
           {...register("end_date", {
             required: true,
