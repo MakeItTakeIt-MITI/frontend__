@@ -94,6 +94,9 @@ export const LoginForm = () => {
             required: true,
           })}
         />
+        {/* <span className="text-[#e43535] text-[13px]">
+          이메일이 올바르지 않습니다.
+        </span> */}
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="password" className="text-[12px] text-[#1c1c1c]">
@@ -110,6 +113,9 @@ export const LoginForm = () => {
               required: true,
             })}
           />
+          {/* <span className="text-[#e43535] text-[13px]">
+            비밀번호가 올바르지 않습니다.
+          </span> */}
           <div onClick={handleDisplayPassword}>
             <img
               src={`${displayPassword ? open : close}`}
