@@ -3,23 +3,13 @@ import { LoginForm } from "../components/auth/LoginForm";
 import mitiLogo from "../assets/MITI_logo.svg";
 import backArrow from "../assets/Chevron_Left.png";
 import kakaoLogin from "../assets/kakao_login_medium_wide.png";
-import axiosUrl from "../utils/axios";
+
+import { userKakaoLogin } from "../api/userAuth";
 
 export const UserLogin = () => {
   const navigate = useNavigate();
 
   const navigatePrev = () => navigate(-1);
-
-  const handleKakaoLogin = async () => {
-    try {
-      const response = await axiosUrl.get(
-        "/users/oauth-login-url/?provider=kakao"
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div className="mb-[4rem]">
@@ -35,7 +25,7 @@ export const UserLogin = () => {
         <LoginForm />
         <div className="flex flex-col gap-2 mt-2">
           <p className="text-center text-[#8C8C8C] text-[12px]">또는</p>
-          <button className="" onClick={handleKakaoLogin}>
+          <button className="" onClick={userKakaoLogin}>
             <img src={kakaoLogin} alt="kakao login" className="w-[343px]" />
           </button>
           <div className="flex justify-center  gap-4 text-[#585858] text-[14px]">
