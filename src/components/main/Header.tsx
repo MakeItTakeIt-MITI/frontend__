@@ -61,10 +61,8 @@ tablet:static tablet:border-none tablet:top-0 tablet:justify-between tablet:bg-w
           </>
         )}
 
-        <Link to="/operate">
-          <button className=" mobile:text-[14px] desktop:text-[16px]  tablet:p-[0.5rem] tablet:rounded-lg tablet:bg-[#4065F6] tablet:text-center tablet:text-white">
-            경기 만들기
-          </button>
+        <Link to="/operate" className="">
+          경기 만들기
         </Link>
       </div>
     </header>
