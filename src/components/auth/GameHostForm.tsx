@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { StepOne } from "../steps/StepOne";
+import { StepTwo } from "../steps/StepTwo";
 
-interface GameHostField {
+export interface GameHostField {
   address: string;
   address_detail: string;
   title: string;
@@ -15,32 +18,28 @@ interface GameHostField {
 }
 
 export const GameHostForm = () => {
-  const { register, handleSubmit } = useForm<GameHostField>();
+  const { handleSubmit } = useForm<GameHostField>();
+  const [step, setStep] = useState(1);
 
   const onSubmit = (data: GameHostField) => {
     console.log(data);
   };
 
+  const handleNextStep = () => setStep(step + 1);
+
   return (
     <form
-      className="flex flex-col gap-6  w-full"
+      className="flex flex-col gap-4 justify-between w-full"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="flex flex-col gap-2">
-        <label htmlFor="text" className="text-[12px] text-[#1c1c1c]">
-          경기장 주소
-        </label>
-        <input
-          type="text"
-          id="text"
-          required
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
-          placeholder="경기장 주소를 입력해주세요."
-          {...register("address", {
-            required: true,
-          })}
-        />
-      </div>
+      {step === 1 && <StepOne />}
+      {step === 2 && <StepTwo />}
+      <button
+        onClick={handleNextStep}
+        className=" w-full h-[58px] bg-[#4065F6] rounded-[8px] text-white"
+      >
+        다음으로
+      </button>
     </form>
   );
 };

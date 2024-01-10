@@ -19,7 +19,7 @@ export const GameOperate = () => {
   }, []);
 
   return (
-    <div className="mb-[4rem] ">
+    <div className="mb-[4rem]">
       <button className="p-4" onClick={navigatePrev}>
         <img src={backArrow} alt="back arrow" />
       </button>
