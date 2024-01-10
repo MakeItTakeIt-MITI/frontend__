@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import mitiLogo from "../assets/MITI_logo.svg";
 import backArrow from "../assets/Chevron_Left.png";
+import { GameHostForm } from "../components/auth/GameHostForm";
 
 export const GameOperate = () => {
   const { isLoggedIn } = useAuthStore();
@@ -28,6 +29,7 @@ export const GameOperate = () => {
           <img src={mitiLogo} alt="miti logo" />
           <h5 className="text-[14px] text-[#1c1c1c]">Make it, Take it!</h5>
         </div>
+        <GameHostForm />
       </div>
     </div>
   );
