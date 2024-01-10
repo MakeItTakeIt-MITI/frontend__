@@ -1,16 +1,7 @@
 import { useForm } from "react-hook-form";
 import { userRegisterSchema } from "../../modals/userSignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-interface RegisterField {
-  email: string;
-  password: string;
-  password_check: string;
-  nickname: string;
-  birthday: string;
-  phone_number: string;
-  confirmation_code: number;
-}
+import { RegisterField } from "../../interface/usersInterface";
 
 export const SignupForm = () => {
   const {

@@ -4,15 +4,7 @@ import { useNavigate } from "react-router-dom";
 import close from "../../assets/clarity_eye-hide-line.svg";
 import open from "../../assets/clarity_eye-show-line.svg";
 import { useState } from "react";
-
-interface LoginField {
-  email: string;
-  password: string;
-  token?: string;
-  access_token?: string;
-  refresh_token?: string;
-  data?: () => void;
-}
+import { LoginField } from "../../interface/usersInterface";
 
 const testData = [
   {
