@@ -2,6 +2,7 @@ export interface RegisterField {
     email: string;
     password: string;
     password_check: string;
+    name: string;
     nickname: string;
     birthday: string;
     phone_number: string;

@@ -76,6 +76,20 @@ export const SignupForm = () => {
       {errors.password_check?.message && (
         <p className=" text-red-500">{errors.password_check?.message}</p>
       )}
+      <div className="flex flex-col gap-2 ">
+        <label htmlFor="name" className="text-[12px] text-[#1c1c1c]">
+          이름
+        </label>
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          type="text"
+          id="name"
+          placeholder="이름을 입력해주세요."
+          {...register("name", {
+            required: true,
+          })}
+        />
+      </div>
       <div className="flex flex-col gap-2 relative">
         <label htmlFor="nickname" className="text-[12px] text-[#1c1c1c]">
           닉네임
