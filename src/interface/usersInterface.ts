@@ -6,12 +6,13 @@ export interface RegisterField {
     nickname: string;
     birthday: string;
     phone_number: string;
-    confirmation_code: number;
+    // confirmation_code: number;
 }
 
 export interface LoginField {
     email: string;
     password: string;
+    date?: string;
     token?: string;
     access_token?: string;
     refresh_token?: string;

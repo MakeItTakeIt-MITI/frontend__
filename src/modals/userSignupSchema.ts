@@ -11,6 +11,9 @@ export const userRegisterSchema = z
         // .min(8, { message: "Password must be at least 8 characters" }),
         password_check: z.string(),
         nickname: z.string().trim().regex(/^[가-힣a-zA-Z]{2,6}$/, { message: '닉네임은 2자 이상, 6자 이상, 영문 또는 한문 포함하여야 합니다.' }),
+        name: z.string(),
+        birthday: z.string(),
+        phone_number: z.string(),
         // .min(5, { message: "Minimum of 5 or more characters" }),
     })
     .refine((data) => data.password === data.password_check, {

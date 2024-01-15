@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { userRegisterSchema } from "../../modals/userSignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterField } from "../../interface/usersInterface";
+import { userSignup } from "../../api/userAuth";
 
 export const SignupForm = () => {
   const {
@@ -11,8 +12,13 @@ export const SignupForm = () => {
   } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
 
   const onSubmit = (data: RegisterField) => {
-    console.log(data);
-    userRegisterSchema.parse(data);
+    try {
+      userRegisterSchema.parse(data);
+      userSignup(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -65,7 +71,7 @@ export const SignupForm = () => {
         </label>
         <input
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
-          type="text"
+          type="password"
           placeholder="비밀번호를 한번 더 입력해주세요."
           id="password_check"
           {...register("password_check", {
@@ -130,7 +136,7 @@ export const SignupForm = () => {
         </label>
         <input
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
-          type="tel"
+          type="string"
           id="phone_number"
           pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
           placeholder="000-0000-0000"
@@ -142,14 +148,14 @@ export const SignupForm = () => {
           인증하기
         </button>
       </div>
-      <input
+      {/* <input
         className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
         type="number"
         placeholder="인증번호"
         {...register("confirmation_code", {
           required: true,
         })}
-      />
+      /> */}
       <button
         type="submit"
         className=" h-[58px] p-4 bg-[#4065F6] rounded-lg text-white"
