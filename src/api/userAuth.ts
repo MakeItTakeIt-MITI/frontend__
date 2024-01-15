@@ -8,10 +8,13 @@ export const userLoginAuth = async () => {
 }
 
 export const userKakaoLogin = async () => {
+
     try {
+
         const response = await axiosUrl.get(
             "/users/oauth-login-url/?provider=kakao"
         );
+        console.log(response);
 
         if (response.status === 200) {
             const loginUrl = response.data.data.login_url;
