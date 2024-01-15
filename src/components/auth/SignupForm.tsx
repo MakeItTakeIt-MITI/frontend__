@@ -23,7 +23,7 @@ export const SignupForm = () => {
 
   return (
     <form
-      className=" flex flex-col gap-6  w-full"
+      className="flex flex-col gap-6  mobile:w-full tablet:px-[5rem]"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col gap-2 relative">
@@ -39,7 +39,10 @@ export const SignupForm = () => {
             required: true,
           })}
         />
-        <button className="absolute right-2 bottom-2.5 text-[14px] text-white bg-[#4065F6] w-[81px] h-[36px] rounded-[8px]">
+        <button
+          type="button"
+          className="absolute right-2 bottom-2.5 text-[14px] text-white bg-[#4065F6] w-[81px] h-[36px] rounded-[8px]"
+        >
           중복확인
         </button>
       </div>
@@ -109,7 +112,10 @@ export const SignupForm = () => {
             required: true,
           })}
         />
-        <button className="absolute right-2 bottom-2.5 text-[14px] text-white bg-[#4065F6] w-[81px] h-[36px] rounded-[8px]">
+        <button
+          type="button"
+          className="absolute right-2 bottom-2.5 text-[14px] text-white bg-[#4065F6] w-[81px] h-[36px] rounded-[8px]"
+        >
           중복확인
         </button>
       </div>
@@ -144,7 +150,10 @@ export const SignupForm = () => {
             required: true,
           })}
         />
-        <button className="absolute right-2 bottom-2.5 text-[14px] text-white bg-[#4065F6] w-[81px] h-[36px] rounded-[8px]">
+        <button
+          type="button"
+          className="absolute right-2 bottom-2.5 text-[14px] text-white bg-[#4065F6] w-[81px] h-[36px] rounded-[8px]"
+        >
           인증하기
         </button>
       </div>
