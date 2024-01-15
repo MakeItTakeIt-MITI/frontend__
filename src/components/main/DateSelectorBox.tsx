@@ -46,7 +46,7 @@ export const DateSelectorBox = () => {
         />
       </svg>
       {displayDates && (
-        <div className="   border absolute flex flex-col gap-3 py-[0.9rem] top-[48px] left-0 px-[1.1rem] rounded-8 text-gray-400  bg-[#FBFBFB] w-full">
+        <div className="h-[25rem]  overflow-y-scroll  border absolute flex flex-col gap-3 py-[0.9rem] top-[48px] left-0 px-[1.1rem] rounded-8 text-gray-400  bg-[#FBFBFB] w-full">
           {availableDates?.map((dateList, index) => (
             <span
               key={index}
