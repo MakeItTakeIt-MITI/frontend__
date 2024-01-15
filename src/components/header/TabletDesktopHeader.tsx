@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import mitiLogo from "../../assets/MITI_logo.svg";
 import useAuthStore from "../../store/useAuthStore";
 
-export const TabletDesktopView = () => {
+export const TabletDesktopHeader = () => {
   const { isLoggedIn, logout } = useAuthStore();
   const navigate = useNavigate();
 

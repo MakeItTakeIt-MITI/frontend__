@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import mitiLogo from "../../assets/MITI_logo.svg";
 import useAuthStore from "../../store/useAuthStore";
-import { TabletDesktopView } from "../header/TabletDesktopView";
+import { TabletDesktopHeader } from "../header/TabletDesktopHeader";
 
 // interface HeaderProps {
 //   isLoggedIn?: boolean;
@@ -32,9 +32,9 @@ tablet:static tablet:border-none tablet:top-0 tablet:justify-between tablet:bg-w
     > */}
       {/* <div className="flex mobile:gap-6 tablet:items-center tablet:gap-5 "> */}
       {/* mobile */}
-      <div className=""></div>
+
       {/* tablet laptop desktop */}
-      <TabletDesktopView />
+      <TabletDesktopHeader />
     </header>
   );
 };
