@@ -4,6 +4,10 @@ import { GameDetailCard } from "../components/main/GameDetailCard";
 import { Hero } from "../components/main/Hero";
 import { DateBox } from "../components/main/DateBox";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
+import { DateSelectorBox } from "../components/main/DateSelectorBox";
+import leftArrow from "../assets/Chevron_Left_MD.svg";
+import rightArrow from "../assets/Chevron_Right_MD.svg";
+import { BrowserHomeView } from "../components/main/BrowserHomeView";
 
 export const Home = () => {
   return (
@@ -16,9 +20,23 @@ export const Home = () => {
         recruitText="MITI와 함께, 경기 모집부터"
         managementText="관리, 결제, 매칭까지 한번에."
       />
-      <KakaoMap />
-      <div className="flex items-center m-4 gap-4 overflow-hidden ">
+      <BrowserHomeView />
+      {/* <KakaoMap />
+      <div className="flex items-center py-4 justify-between ">
+        <div
+          className="w-9 h-9 bg-[#9C99B0] rounded-full flex items-center justify-center hover:cursor-pointer"
+          hover:cursor-pointer
+        >
+          <img
+            src={rightArrow}
+            alt="left arrow"
+            className="text-white rotate-180"
+          />
+        </div>
         <DateBox />
+        <div className="w-9 h-9 bg-[#9C99B0] rounded-full flex items-center justify-center hover:cursor-pointer">
+          <img src={rightArrow} alt="left arrow" className="text-white" />
+        </div>
       </div>
       <div className="mx-[16px] mt-[20px] mb-[30px]">
         <span>16개의 매치</span>
@@ -28,8 +46,7 @@ export const Home = () => {
         <GameDetailCard />
         <GameDetailCard />
         <GameDetailCard />
-      </div>
-      {/* <SectionTitle title="⚡ 마감 ️12시간 전 매칭" /> */}
+      </div> */}
       <AdvertisementBanner />
     </div>
   );
