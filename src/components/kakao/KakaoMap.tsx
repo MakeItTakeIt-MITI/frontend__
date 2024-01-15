@@ -19,5 +19,10 @@ export const KakaoMap = () => {
     const zoomControl = new window.kakao.maps.ZoomControl();
     kakaoMap.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
   }, []);
-  return <div id="map" className="mobile:w-[580px] mobile:h-[450px]"></div>;
+  return (
+    <div
+      id="map"
+      className="tablet:w-[580px]    mobile:w-full  h-[450px]"
+    ></div>
+  );
 };
