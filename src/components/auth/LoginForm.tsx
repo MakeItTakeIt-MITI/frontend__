@@ -1,71 +1,20 @@
 import { useForm } from "react-hook-form";
-import useAuthStore from "../../store/useAuthStore";
-import { useNavigate } from "react-router-dom";
+
 import close from "../../assets/clarity_eye-hide-line.svg";
 import open from "../../assets/clarity_eye-show-line.svg";
 import { useState } from "react";
 import { LoginField } from "../../interface/usersInterface";
 
-const testData = [
-  {
-    id: 1,
-    email: "test@test.co",
-    password: "Test123!@#",
-    nickname: "TestUser",
-  },
-  {
-    id: 2,
-    email: "test2@test.co",
-    password: "Test123!@#",
-    nickname: "TestUser2",
-  },
-];
-
 export const LoginForm = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
   const { register, handleSubmit } = useForm<LoginField>();
-  const { login, logout } = useAuthStore();
-  const navigate = useNavigate();
+  // const { login, logout } = useAuthStore();
+  // const navigate = useNavigate();
 
   const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
 
   const onSubmit = (data: LoginField) => {
-    const user = testData.find(
-      (user) => user.email === data.email && user.password === data.password
-    );
-
-    if (user) {
-      console.log("Login successful", user);
-      const accessToken = "a1r1eagtatgt32tg32g32g23g2g";
-      const refreshToken = "basgasg3gg32g23g2g2g22g2";
-      const response = {
-        status_code: 200,
-        message: "OK",
-        data: {
-          user: {
-            id: user.id,
-            email: user.email,
-            nickname: user.nickname,
-          },
-          token: {
-            access: accessToken,
-            refresh: refreshToken,
-          },
-        },
-      };
-      // setLoginState(true);
-      localStorage.setItem("accessToken", accessToken);
-      login();
-      console.log(response);
-      navigate("/");
-
-      // You can perform further actions here, e.g., redirect to another page
-    } else {
-      console.log("Login failed");
-      logout();
-      // setLoginState(false);
-      // Handle unsuccessful login, e.g., show an error message
-    }
+    console.log(data);
   };
   return (
     <form
@@ -86,9 +35,6 @@ export const LoginForm = () => {
             required: true,
           })}
         />
-        {/* <span className="text-[#e43535] text-[13px]">
-          이메일이 올바르지 않습니다.
-        </span> */}
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="password" className="text-[12px] text-[#1c1c1c]">
