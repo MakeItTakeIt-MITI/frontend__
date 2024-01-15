@@ -1,8 +1,8 @@
 import banner from "../assets/banner-2.svg";
 import { Hero } from "../components/main/Hero";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
-import { BrowserHomeView } from "../components/main/BrowserHomeView";
-import { MobileHomeView } from "../components/main/MobileHomeView";
+import { BrowserHomeView } from "../components/main/browser/BrowserHomeView";
+import { MobileHomeView } from "../components/main/mobile/MobileHomeView";
 
 export const Home = () => {
   return (

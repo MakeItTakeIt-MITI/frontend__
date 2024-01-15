@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { DateSelectorBox } from "../components/main/DateSelectorBox";
+import { DateSelectorBox } from "../components/main/browser/DateSelectorBox";
 
 const meta = {
     title: 'Dates',

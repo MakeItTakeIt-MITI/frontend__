@@ -1,6 +1,6 @@
 // import cardImg from "../../assets/game_info.svg";
 
-export const GameDetailCard = () => {
+export const MobileGameDetailCard = () => {
   return (
     <div className="px-[20px] ph-[16px] border border-[#E8E8E8] rounded-xl">
       <span className=" bg-[#C1E1FF] text-[##4065F6] text-[11px] font-[600]">

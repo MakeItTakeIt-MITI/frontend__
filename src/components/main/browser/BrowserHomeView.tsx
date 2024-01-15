@@ -1,7 +1,7 @@
-import { KakaoMap } from "../kakao/KakaoMap";
+import { KakaoMap } from "../../kakao/KakaoMap";
 import { BrowserGameList } from "./BrowserGameList";
 import { DateSelectorBox } from "./DateSelectorBox";
-import { SectionTitle } from "./SectionTitle";
+import { SectionTitle } from "../SectionTitle";
 
 export const BrowserHomeView = () => {
   return (

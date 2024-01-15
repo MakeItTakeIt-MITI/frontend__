@@ -1,5 +1,5 @@
 import { useState } from "react";
-import rightArrow from "../../assets/Chevron_Right_MD.svg";
+import rightArrow from "../../../assets/Chevron_Right_MD.svg";
 
 export const MobileGameDatesContainer = () => {
   const [selected, setSelected] = useState(true);
