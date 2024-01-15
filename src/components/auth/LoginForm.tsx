@@ -18,7 +18,7 @@ export const LoginForm = () => {
   };
   return (
     <form
-      className="flex flex-col gap-6  w-full"
+      className="flex flex-col gap-6  mobile:w-full tablet:px-[5rem]"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col gap-2">
@@ -65,7 +65,7 @@ export const LoginForm = () => {
       </div>
       <button
         type="submit"
-        className=" h-[58px] p-4 bg-[#4065F6] rounded-lg text-white"
+        className=" mobile:h-[58px] tablet:h-[45px] mx-auto flex items-center justify-center p-4 bg-[#4065F6] rounded-lg text-white mobile:w-full tablet:w-[18rem] tablet:text-[15px] "
       >
         로그인 하기
       </button>
