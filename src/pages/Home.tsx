@@ -1,19 +1,14 @@
 import banner from "../assets/banner-2.svg";
-import { KakaoMap } from "../components/kakao/KakaoMap";
-import { GameDetailCard } from "../components/main/GameDetailCard";
 import { Hero } from "../components/main/Hero";
-import { DateBox } from "../components/main/DateBox";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
-import { DateSelectorBox } from "../components/main/DateSelectorBox";
-import leftArrow from "../assets/Chevron_Left_MD.svg";
-import rightArrow from "../assets/Chevron_Right_MD.svg";
 import { BrowserHomeView } from "../components/main/BrowserHomeView";
+import { MobileHomeView } from "../components/main/MobileHomeView";
 
 export const Home = () => {
   return (
     // <div className="w-full mx-auto max-w-[90rem] px-[13rem] bg-red-200">
 
-    <div className="w-full mobile:mb-[4rem]   tablet:max-w-[90rem] tablet:px-[13rem] mx-auto ">
+    <div className="   tablet:max-w-[90rem] tablet:px-[13rem] mx-auto ">
       <Hero
         backgroundImage={banner}
         launchText="MITI 서비스 런칭"
@@ -21,6 +16,7 @@ export const Home = () => {
         managementText="관리, 결제, 매칭까지 한번에."
       />
       <BrowserHomeView />
+      <MobileHomeView />
       {/* <KakaoMap />
       <div className="flex items-center py-4 justify-between ">
         <div
