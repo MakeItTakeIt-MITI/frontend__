@@ -5,7 +5,7 @@ import { SectionTitle } from "../SectionTitle";
 
 export const BrowserHomeView = () => {
   return (
-    <div className="mobile:hidden tablet:block">
+    <div className=" tablet:block mobile:hidden">
       <div>
         <SectionTitle title="⚡ 빠른 매칭 예약" />
       </div>
@@ -14,7 +14,6 @@ export const BrowserHomeView = () => {
           <DateSelectorBox />
           <BrowserGameList />
         </div>
-
         <KakaoMap />
         {/* <div></div> */}
       </div>

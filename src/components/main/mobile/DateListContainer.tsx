@@ -1,7 +1,7 @@
 import { useState } from "react";
 import rightArrow from "../../../assets/Chevron_Right_MD.svg";
 
-export const MobileGameDatesContainer = () => {
+export const DateListContainer = () => {
   const [selected, setSelected] = useState(true);
 
   const triggerSelected = () => {
@@ -9,13 +9,13 @@ export const MobileGameDatesContainer = () => {
   };
 
   const availableDates = [];
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 6; i++) {
     const newDate = new Date();
     newDate.setDate(newDate.getDate() + i);
     availableDates.push(newDate);
   }
   return (
-    <div className="flex items-center py-4 justify-between ">
+    <div className=" flex items-center py-4 justify-between ">
       <div
         className="w-9 h-9 bg-[#9C99B0] rounded-full flex items-center justify-center hover:cursor-pointer"
         hover:cursor-pointer
