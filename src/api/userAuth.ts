@@ -1,8 +1,8 @@
-import { RegisterField, ValidationField } from "../interface/usersInterface";
+import { LoginField, RegisterField, ValidationField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
-export const userLoginAuth = async () => {
-    const response = await axiosUrl.post('/users/login')
+export const userLoginAuth = async (data: LoginField) => {
+    const response = await axiosUrl.post('/users/login/', data)
     console.log(response);
     return response
 }

@@ -6,7 +6,7 @@ declare global {
   }
 }
 
-export const KakaoMap = () => {
+export const MobileKakaoMap = () => {
   useEffect(() => {
     const container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
     const options = {
@@ -22,8 +22,8 @@ export const KakaoMap = () => {
   return (
     <div
       id="map"
-      // className="block w-full  h-[450px]"
-      className="w-full h-[450px]"
+      className="w-full  h-[450px]"
+      // className="mobile:w-full mobile:h-[450px]"
     ></div>
   );
 };
