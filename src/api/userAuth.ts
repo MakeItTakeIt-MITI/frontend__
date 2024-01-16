@@ -8,21 +8,21 @@ export const userLoginAuth = async (data: LoginField) => {
 }
 
 export const userKakaoLogin = async () => {
-
     try {
-
-        const response = await axiosUrl.get(
-            "/users/oauth-login-url/?provider=kakao"
-        );
-        console.log(response);
-
-        if (response.status === 200) {
-            const loginUrl = response.data.data.login_url;
-            window.location.href = loginUrl;
+        const response = await axiosUrl.get("/users/oauth-login-url/?provider=kakao");
+        const url = response.data.data.login_url
+        if (response.data.status_code === 200) {
+            // console.log(url);
+            window.location.href = url
+            console.log(response.data);
         }
+        console.log(response.data);
     } catch (error) {
         console.log(error);
+
     }
+
+
 }
 
 export const userSignup = async (data: RegisterField) => {

@@ -6,7 +6,8 @@ const axiosUrl: AxiosInstance = axios.create({
     baseURL: baseUrl,
     headers: {
         "Content-Type": "application/json",
-    }
+    },
+    withCredentials: true,
 
 });
 
