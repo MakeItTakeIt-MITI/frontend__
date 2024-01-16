@@ -4,7 +4,7 @@ import mitiLogo from "../assets/MITI_logo.svg";
 import backArrow from "../assets/Chevron_Left.png";
 import kakaoLogin from "../assets/kakao_login_medium_wide.png";
 
-import { userKakaoLogin } from "../api/userAuth";
+import { userKakaoLogin } from "../api/users";
 
 export const UserLogin = () => {
   const navigate = useNavigate();

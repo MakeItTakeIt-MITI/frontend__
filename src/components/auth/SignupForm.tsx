@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { userRegisterSchema } from "../../modals/userSignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterField } from "../../interface/usersInterface";
-import { userValidation } from "../../api/userAuth";
+import { userValidation } from "../../api/validation";
 
 export const SignupForm = () => {
   const {

@@ -4,7 +4,7 @@ import close from "../../assets/clarity_eye-hide-line.svg";
 import open from "../../assets/clarity_eye-show-line.svg";
 import { useState } from "react";
 import { LoginField } from "../../interface/usersInterface";
-import { userLoginAuth } from "../../api/userAuth";
+import { userLoginAuth } from "../../api/users";
 
 export const LoginForm = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
