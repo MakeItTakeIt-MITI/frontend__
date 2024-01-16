@@ -20,7 +20,7 @@ export const LoginForm = () => {
   };
   return (
     <form
-      className="flex flex-col gap-6  mobile:w-full tablet:px-[5rem]"
+      className="flex flex-col gap-6  w-full "
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col gap-2">

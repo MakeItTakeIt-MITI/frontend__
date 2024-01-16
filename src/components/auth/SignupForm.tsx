@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { userRegisterSchema } from "../../modals/userSignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterField } from "../../interface/usersInterface";
-import { userSignup, userValidation } from "../../api/userAuth";
+import { userValidation } from "../../api/userAuth";
 
 export const SignupForm = () => {
   const {
@@ -35,7 +35,7 @@ export const SignupForm = () => {
 
   return (
     <form
-      className="flex flex-col gap-6  mobile:w-full tablet:px-[5rem]"
+      className="flex flex-col gap-6  w-full "
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col gap-2 relative">
