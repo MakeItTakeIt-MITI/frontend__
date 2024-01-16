@@ -19,6 +19,6 @@ export interface LoginField {
     data?: () => void;
 }
 export interface ValidationField {
-    email: string,
-    nickname: string
+    email?: string,
+    nickname?: string
 }

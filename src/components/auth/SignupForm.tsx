@@ -2,23 +2,35 @@ import { useForm } from "react-hook-form";
 import { userRegisterSchema } from "../../modals/userSignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterField } from "../../interface/usersInterface";
-import { userSignup } from "../../api/userAuth";
+import { userSignup, userValidation } from "../../api/userAuth";
 
 export const SignupForm = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
 
+  const handleValidateEmail = () => {
+    userValidation({ email: getValues("email") });
+  };
+  const handleValidateNick = () => {
+    userValidation({ nickname: getValues("nickname") });
+
+    // userValidation(nicknameValue);
+  };
   const onSubmit = (data: RegisterField) => {
-    try {
-      userRegisterSchema.parse(data);
-      userSignup(data);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    // console.log(JSON.stringify(data));
+    console.log(data);
+
+    // try {
+    //   userRegisterSchema.parse(data);
+    //   userSignup(data);
+    //   console.log(data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
@@ -40,6 +52,7 @@ export const SignupForm = () => {
           })}
         />
         <button
+          onClick={handleValidateEmail}
           type="button"
           className="absolute right-2 bottom-2.5 text-[14px] text-white bg-[#4065F6] w-[81px] h-[36px] rounded-[8px]"
         >
@@ -113,6 +126,7 @@ export const SignupForm = () => {
           })}
         />
         <button
+          onClick={handleValidateNick}
           type="button"
           className="absolute right-2 bottom-2.5 text-[14px] text-white bg-[#4065F6] w-[81px] h-[36px] rounded-[8px]"
         >
