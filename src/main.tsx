@@ -11,6 +11,7 @@ import { NotFound } from "./pages/NotFound.tsx";
 import { GameInfoPage } from "./pages/GameInfoPage.tsx";
 import { MatchingPage } from "./pages/MatchingPage.tsx";
 import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
+import { SMSAuthenticationPage } from "./pages/SMSAuthenticationPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <UserSignup />,
+      },
+      {
+        path: "/sms-authentication",
+        element: <SMSAuthenticationPage />,
       },
       {
         path: "/operate",
