@@ -27,6 +27,6 @@ export const userKakaoLogin = async () => {
 
 export const userSignup = async (data: RegisterField) => {
     const response = await axiosUrl.post('/users/', data)
-    console.log(response);
-    return response
+    console.log(response.data);
+    return response.data
 }
