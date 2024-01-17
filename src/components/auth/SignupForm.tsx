@@ -20,6 +20,7 @@ export const SignupForm = () => {
     register,
     handleSubmit,
     getValues,
+    watch,
     formState: { errors },
   } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
 
@@ -58,6 +59,17 @@ export const SignupForm = () => {
       console.log(error);
     }
   };
+
+  // const handlePhoneInput = () => {
+  //   console.log("watching...", watch("phone"));
+  //   const userInput = watch("phone");
+  //   console.log("length", userInput.length);
+  //   userInput.slice(0, 3) +
+  //     "-" +
+  //     userInput.slice(3, 6) +
+  //     "-" +
+  //     userInput.slice(6, 10);
+  // };
 
   const handleValidateEmail = () => {
     console.log("validate email");
@@ -250,7 +262,7 @@ export const SignupForm = () => {
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
           type="string"
           id="phone"
-          placeholder="번호를 입력해주세요."
+          placeholder="'-'을 제외한 휴대포번호를 입력해주세요."
           {...register("phone", {
             required: true,
           })}
