@@ -7,12 +7,14 @@ import alertPass from "../../assets/alert_check.svg";
 import alertFail from "../../assets/alert_failure.svg";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [validNickname, setValidNickname] = useState(false);
   const [displayEmailMsg, setDisplayEmailMsg] = useState(false);
   const [displayNickMsg, setDisplayNickMsg] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -23,6 +25,7 @@ export const SignupForm = () => {
 
   const onSubmit = (data: RegisterField) => {
     console.log("User Register Data", data);
+    navigate("/sms-authentication");
   };
 
   const userValidation = async (data: ValidationField) => {
