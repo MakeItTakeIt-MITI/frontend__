@@ -16,10 +16,7 @@ export const DateListContainer = () => {
   }
   return (
     <div className=" flex items-center py-4 justify-between ">
-      <div
-        className="w-9 h-9 bg-[#9C99B0] rounded-full flex items-center justify-center hover:cursor-pointer"
-        hover:cursor-pointer
-      >
+      <div className="w-9 h-9 bg-[#9C99B0] rounded-full flex items-center justify-center hover:cursor-pointer">
         <img
           src={rightArrow}
           alt="left arrow"
