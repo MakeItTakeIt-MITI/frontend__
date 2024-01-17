@@ -194,7 +194,11 @@ export const SignupForm = () => {
       {errors.nickname?.message && (
         <p className=" text-red-500">{errors.nickname?.message}</p>
       )}
-
+      {validNickname && (
+        <p className="text-green-400 text-[13px] font-[400]">
+          사용 가능한 닉네임이에요!
+        </p>
+      )}
       <div className="flex flex-col gap-2">
         <label htmlFor="birthday" className="text-[12px] text-[#1c1c1c]">
           생년월일
