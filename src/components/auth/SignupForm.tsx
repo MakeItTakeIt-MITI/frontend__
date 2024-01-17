@@ -259,9 +259,9 @@ export const SignupForm = () => {
 
       <button
         type="submit"
-        disabled={!validEmail && !validNickname ? false : true}
+        disabled={!validEmail && !validNickname ? true : false}
         style={
-          !validEmail && !validNickname
+          !validEmail || !validNickname
             ? { backgroundColor: "#E8E8E8" }
             : { backgroundColor: "#4065f6" }
         }
