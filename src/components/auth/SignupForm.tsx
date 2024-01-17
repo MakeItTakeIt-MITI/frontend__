@@ -1,22 +1,29 @@
 import { useForm } from "react-hook-form";
-import { emailSchema, userRegisterSchema } from "../../modals/userSignupSchema";
+import { userRegisterSchema } from "../../modals/userSignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterField, ValidationField } from "../../interface/usersInterface";
 import axiosUrl from "../../utils/axios";
+import alertPass from "../../assets/alert_check.svg";
+import alertFail from "../../assets/alert_failure.svg";
 
 import { useState } from "react";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [validNickname, setValidNickname] = useState(false);
+  const [displayEmailMsg, setDisplayEmailMsg] = useState(false);
+  const [displayNickMsg, setDisplayNickMsg] = useState(false);
 
   const {
     register,
     handleSubmit,
     getValues,
-    control,
     formState: { errors },
   } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
+
+  const onSubmit = (data: RegisterField) => {
+    console.log("User Register Data", data);
+  };
 
   const userValidation = async (data: ValidationField) => {
     try {
@@ -30,16 +37,16 @@ export const SignupForm = () => {
 
         if (emailData && emailData.is_duplicated === true) {
           setValidEmail(false);
-          alert("이미 존재하는 이메일입니다.");
+          setDisplayEmailMsg(true);
         } else if (emailData && emailData.is_duplicated === false) {
           setValidEmail(true);
-          alert("사용 가능한 이메일입니다.");
+          setDisplayEmailMsg(false);
         } else if (nicknameData && nicknameData.is_duplicated === true) {
           setValidNickname(false);
-          alert("이미 존재하는 닉네임입니다.");
+          setDisplayNickMsg(true);
         } else if (nicknameData && nicknameData.is_duplicated === false) {
           setValidNickname(true);
-          alert("사용 가능한 닉네임입니다.");
+          setDisplayNickMsg(false);
         }
 
         return response.data;
@@ -49,25 +56,17 @@ export const SignupForm = () => {
     }
   };
 
-  const handleValidateEmail = () =>
+  const handleValidateEmail = () => {
+    console.log("validate email");
+
     userValidation({ email: getValues("email") });
-
-  const handleValidateNick = () =>
-    userValidation({ nickname: getValues("nickname") });
-
-  const onSubmit = async (data: RegisterField) => {
-    try {
-      userRegisterSchema.parse(data);
-      // userSignup(data);
-      const response = await axiosUrl.post("/users/", data);
-      console.log(response.data);
-      return response.data;
-      // console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
+  const handleValidateNick = () => {
+    console.log("validate nick");
+
+    userValidation({ nickname: getValues("nickname") });
+  };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -107,9 +106,20 @@ export const SignupForm = () => {
         <p className=" text-red-500">{errors.email?.message}</p>
       )}
       {validEmail && (
-        <p className="text-green-400 text-[13px] font-[400]">
-          사용 가능한 이메일이에요!
-        </p>
+        <div className="flex items-center gap-1">
+          <img src={alertPass} alt="email approved icon" className="w-4" />
+          <p className="text-green-400 text-[13px] font-[400]">
+            사용 가능한 이메일이에요!
+          </p>
+        </div>
+      )}
+      {displayEmailMsg && !validEmail && (
+        <div className="flex items-center gap-1">
+          <img src={alertFail} alt="email approved icon" className="w-4" />
+          <p className="text-[#E92C2C] text-[13px] font-[400]">
+            해당 이메일은 이미 회원으로 등록된 이메일입니다.
+          </p>
+        </div>
       )}
 
       <div className="flex flex-col gap-2">
@@ -120,7 +130,7 @@ export const SignupForm = () => {
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
           type="password"
           placeholder="비밀번호를 입력해주세요."
-          id="password-check"
+          id="password"
           {...register("password", {
             required: true,
           })}
@@ -160,6 +170,9 @@ export const SignupForm = () => {
             required: true,
           })}
         />
+        {errors.name?.message && (
+          <p className=" text-red-500">유효한 이름을 입력해주세요.</p>
+        )}
       </div>
       <div className="flex flex-col gap-2 relative">
         <label htmlFor="nickname" className="text-[12px] text-[#1c1c1c]">
@@ -195,9 +208,20 @@ export const SignupForm = () => {
         <p className=" text-red-500">{errors.nickname?.message}</p>
       )}
       {validNickname && (
-        <p className="text-green-400 text-[13px] font-[400]">
-          사용 가능한 닉네임이에요!
-        </p>
+        <div className="flex items-center gap-1">
+          <img src={alertPass} alt="approved icon" className="w-4" />
+          <p className="text-green-400 text-[13px] font-[400]">
+            사용 가능한 닉네임이에요!
+          </p>
+        </div>
+      )}
+      {displayNickMsg && !validNickname && (
+        <div className="flex items-center gap-1">
+          <img src={alertFail} alt="disapprove icon" className="w-4" />
+          <p className="text-[#E92C2C] text-[13px] font-[400]">
+            해당 닉네임은 이미 회원으로 등록된 닉네임입니다.
+          </p>
+        </div>
       )}
       <div className="flex flex-col gap-2">
         <label htmlFor="birthday" className="text-[12px] text-[#1c1c1c]">
@@ -211,45 +235,37 @@ export const SignupForm = () => {
             required: true,
           })}
         />
+        {errors.birthday?.message && (
+          <p className=" text-red-500">유효한 생년월일을 입력해주세요.</p>
+        )}
       </div>
       <div className="flex flex-col gap-2 relative">
-        <label htmlFor="phone_number" className="text-[12px] text-[#1c1c1c]">
+        <label htmlFor="phone" className="text-[12px] text-[#1c1c1c]">
           핸드폰 번호
         </label>
         <input
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
-          type="number"
-          id="phone_number"
-          pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+          type="string"
+          id="phone"
           placeholder="번호를 입력해주세요."
           {...register("phone", {
             required: true,
           })}
         />
-        {/* <button
-          type="button"
-          className="absolute right-2 bottom-2.5 text-[14px] text-white bg-[#4065F6] w-[81px] h-[36px] rounded-[8px]"
-        >
-          인증하기
-        </button> */}
+        {errors.phone?.message && (
+          <p className=" text-red-500">{errors.phone?.message}</p>
+        )}
       </div>
-      {/* <input
-        className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
-        type="number"
-        placeholder="인증번호"
-        {...register("confirmation_code", {
-          required: true,
-        })}
-      /> */}
+
       <button
-        // type="submit"
-        // disabled={!emailValidation && !nickValidation}
-        // style={
-        //   !emailValidation
-        //     ? { backgroundColor: "#eee" }
-        //     : { backgroundColor: "#4065f6" }
-        // }
-        className=" h-[58px] p-4 bg-[#4065F6] rounded-lg text-white"
+        type="submit"
+        disabled={!validEmail && !validNickname ? false : true}
+        style={
+          !validEmail && !validNickname
+            ? { backgroundColor: "#E8E8E8" }
+            : { backgroundColor: "#4065f6" }
+        }
+        className=" h-[58px] p-4 rounded-lg text-white "
       >
         가입하기
       </button>

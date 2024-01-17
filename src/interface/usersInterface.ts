@@ -6,7 +6,7 @@ export interface RegisterField {
     nickname: string;
     birthday: string;
     phone: string;
-    // confirmation_code: number;
+    confirmation_code?: number;
 }
 
 export interface LoginField {
