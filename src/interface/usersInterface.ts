@@ -5,7 +5,7 @@ export interface RegisterField {
     name: string;
     nickname: string;
     birthday: string;
-    phone_number: string;
+    phone: string;
     // confirmation_code: number;
 }
 
