@@ -20,7 +20,7 @@ export const SignupForm = () => {
     register,
     handleSubmit,
     getValues,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
 
