@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { authenticationSMS } from "../api/authentication";
 import { SMSAuth } from "../interface/authInterface";
 import { useForm } from "react-hook-form";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export const SMSAuthenticationPage = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const authToken = localStorage.getItem("authentication");
@@ -13,17 +14,14 @@ export const SMSAuthenticationPage = () => {
       navigate("/");
     }
   }, []);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SMSAuth>();
+  const { register, handleSubmit } = useForm<SMSAuth>();
 
   const onSubmit = async (data: SMSAuth) => {
     try {
       await authenticationSMS(data);
       navigate("/login");
     } catch (error) {
+      setError(true);
       console.log(error);
     }
   };
@@ -39,7 +37,7 @@ export const SMSAuthenticationPage = () => {
           className="mobile:w-full tablet:w-[500px] h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
           type="text"
           {...register("code", {
-            required: "SMS 인증번호를 다시 확인해주세요.",
+            required: true,
           })}
           placeholder="SMS 인증번로 입력해주세요."
         />
@@ -58,8 +56,8 @@ export const SMSAuthenticationPage = () => {
           </button>
         </div>
       </div>
-      {errors.code?.message && (
-        <p className=" text-red-500">{errors.code?.message}</p>
+      {error && (
+        <p className=" text-red-500 text-sm">SMS 인증을 실패하셨습니다.</p>
       )}
     </form>
   );
