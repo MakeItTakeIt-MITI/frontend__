@@ -1,39 +1,66 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { authenticationSMS } from "../api/authentication";
+import { SMSAuth } from "../interface/authInterface";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export const SMSAuthenticationPage = () => {
-  //   const [requestSMS, setRequestSMS] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
 
-  //   const handleRequestAuthCode = () => {
-  //     setRequestSMS(true);
-  //   };
+  useEffect(() => {
+    const authToken = localStorage.getItem("authentication");
+    if (!authToken) {
+      navigate("/");
+    }
+  }, []);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SMSAuth>();
 
-  //   const handleAuthenticateUser = () => {
-  //     setIsAuthenticated(true);
-  //   };
+  const onSubmit = async (data: SMSAuth) => {
+    try {
+      await authenticationSMS(data);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="px-[13rem] h-screen flex items-center flex-col gap-4 justify-center">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="px-[13rem] h-screen flex items-center flex-col gap-4 justify-center"
+    >
       <h1 className="text-[24px] font-bold">SMS 인증번호를 확인해주세요.</h1>
       <div className="flex gap-2">
         <input
           className="mobile:w-full tablet:w-[500px] h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
           type="text"
+          {...register("code", {
+            required: "SMS 인증번호를 다시 확인해주세요.",
+          })}
           placeholder="SMS 인증번로 입력해주세요."
         />
         <div className="flex gap-2">
-          <button className="bg-[#E8E8E8]  rounded-xl w-[100px] text-sm ">
+          <button
+            type="button"
+            className="bg-[#E8E8E8]  rounded-xl w-[100px] text-sm "
+          >
             재전송 요청
           </button>
-          <button className="bg-[#4065f6]  text-white rounded-xl w-[100px] text-sm ">
+          <button
+            type="submit"
+            className="bg-[#4065f6]  text-white rounded-xl w-[100px] text-sm "
+          >
             인증하기
           </button>
         </div>
       </div>
-      {!isAuthenticated && (
-        <p className="text-[#E92C2C] text-[13px] font-[400]">
-          인증을 실패하셨습니다. 다시 확인해주세요.
-        </p>
+      {errors.code?.message && (
+        <p className=" text-red-500">{errors.code?.message}</p>
       )}
-    </div>
+    </form>
   );
 };
