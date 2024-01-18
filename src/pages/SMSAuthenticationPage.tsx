@@ -19,6 +19,7 @@ export const SMSAuthenticationPage = () => {
   const onSubmit = async (data: SMSAuth) => {
     try {
       await authenticationSMS(data);
+      localStorage.removeItem("authentication");
       navigate("/login");
     } catch (error) {
       setError(true);
