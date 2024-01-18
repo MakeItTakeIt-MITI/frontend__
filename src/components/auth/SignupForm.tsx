@@ -8,6 +8,7 @@ import alertFail from "../../assets/alert_failure.svg";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { userSignup } from "../../api/users";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -24,21 +25,13 @@ export const SignupForm = () => {
     formState: { errors },
   } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
 
-  const response = {
-    status_code: 201,
-    message: "Created",
-    data: {
-      email: "mitiuser1@miti.com",
-      nickname: "mitiuser1",
-      authentication_token: "afsdf",
-    },
-  };
-
-  // const onSubmit = (data: RegisterField) => {
-  const onSubmit = () => {
-    console.log("User Register Data", response);
-    localStorage.setItem("authentication", response.data.authentication_token);
-    navigate("/sms-authentication");
+  const onSubmit = (data: RegisterField) => {
+    try {
+      userSignup(data);
+      navigate("/sms-authentication");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const userValidation = async (data: ValidationField) => {
