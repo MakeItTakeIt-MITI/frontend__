@@ -26,7 +26,20 @@ export const userKakaoLogin = async () => {
 }
 
 export const userSignup = async (data: RegisterField) => {
-    const response = await axiosUrl.post('/users/', data)
-    console.log(response.data);
-    return response.data
+    try {
+        const response = await axiosUrl.post('/users/', data)
+        if (response.data.status_code === 201) {
+            console.log(response.data);
+            localStorage.setItem("authentication_token", response.data.data.authentication_token)
+            localStorage.setItem("nickname", response.data.data.nickname)
+            return response.data
+        } else if (response.data.status_code === 400) {
+            console.log('bad request');
+        } else if (response.data.status_code === 500) {
+            console.log('server error');
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
 }

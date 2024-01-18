@@ -24,8 +24,20 @@ export const SignupForm = () => {
     formState: { errors },
   } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
 
-  const onSubmit = (data: RegisterField) => {
-    console.log("User Register Data", data);
+  const response = {
+    status_code: 201,
+    message: "Created",
+    data: {
+      email: "mitiuser1@miti.com",
+      nickname: "mitiuser1",
+      authentication_token: "afsdf",
+    },
+  };
+
+  // const onSubmit = (data: RegisterField) => {
+  const onSubmit = () => {
+    console.log("User Register Data", response);
+    localStorage.setItem("authentication", response.data.authentication_token);
     navigate("/sms-authentication");
   };
 
