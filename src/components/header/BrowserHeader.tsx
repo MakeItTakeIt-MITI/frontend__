@@ -1,22 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import mitiLogo from "../../assets/MITI_logo.svg";
 import useAuthStore from "../../store/useAuthStore";
+import { HeaderField } from "../main/Header";
 
-export const TabletDesktopHeader = () => {
-  const { isLoggedIn, logout } = useAuthStore();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    if (window.confirm("로그아웃 하시겠습니까?")) {
-      alert("로그아웃 되었습니다.");
-      logout();
-      navigate("/login");
-      window.location.reload();
-    } else {
-      alert("취소합니다.");
-      return;
-    }
-  };
+export const BrowserHeader = ({ handleLogout }: HeaderField) => {
+  const { isLoggedIn } = useAuthStore();
 
   return (
     <nav className=" mobile:hidden tablet:flex tablet:h-[3.75rem] items-center  justify-between max-w-[90rem] w-full px-[13rem] mx-auto">
