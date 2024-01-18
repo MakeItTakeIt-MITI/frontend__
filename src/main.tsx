@@ -12,6 +12,7 @@ import { GameInfoPage } from "./pages/GameInfoPage.tsx";
 import { MatchingPage } from "./pages/MatchingPage.tsx";
 import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
 import { SMSAuthenticationPage } from "./pages/SMSAuthenticationPage.tsx";
+import { UserMyPage } from "./pages/UserMyPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/sms-authentication",
         element: <SMSAuthenticationPage />,
+      },
+      {
+        path: "profile/:id",
+        element: <UserMyPage />,
       },
       {
         path: "/operate",
