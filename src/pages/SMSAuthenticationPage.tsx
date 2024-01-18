@@ -9,8 +9,8 @@ export const SMSAuthenticationPage = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const authToken = localStorage.getItem("authentication");
-    if (!authToken) {
+    const authentication_token = localStorage.getItem("authentication");
+    if (!authentication_token) {
       navigate("/");
     }
   }, []);

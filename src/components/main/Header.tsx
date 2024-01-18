@@ -7,7 +7,6 @@ import { MobileHeader } from "../header/MobileHeader";
 // }
 
 export const Header = () => {
-  // const { isLoggedIn, logout } = useAuthStore();
   // const navigate = useNavigate();
 
   // const handleLogout = () => {

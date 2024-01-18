@@ -26,6 +26,7 @@ export const LoginForm = () => {
     try {
       await userLoginAuth(data);
       login();
+      navigate("/");
     } catch (error) {
       console.log(error);
       logout();

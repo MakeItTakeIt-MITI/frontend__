@@ -2,7 +2,7 @@ import { SMSAuth } from "../interface/authInterface";
 import axiosUrl from "../utils/axios"
 
 export const authenticationSMS = async (data: SMSAuth) => {
-    const user_info_token = localStorage.getItem('authentication')
+    const user_info_token = localStorage.getItem('authentication_token')
     try {
         if (user_info_token) {
             const response = await axiosUrl.post(`/users/${user_info_token}/authenticate/`, data)
