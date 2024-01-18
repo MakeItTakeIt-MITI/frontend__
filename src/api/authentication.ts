@@ -20,5 +20,6 @@ export const authenticationSMS = async (data: SMSAuth) => {
         }
     } catch (error) {
         console.log(error);
+        throw error
     }
 }
