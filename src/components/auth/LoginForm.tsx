@@ -2,21 +2,34 @@ import { useForm } from "react-hook-form";
 
 import close from "../../assets/clarity_eye-hide-line.svg";
 import open from "../../assets/clarity_eye-show-line.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoginField } from "../../interface/usersInterface";
 import { userLoginAuth } from "../../api/users";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../store/useAuthStore";
 
 export const LoginForm = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
   const { register, handleSubmit } = useForm<LoginField>();
-  // const { login, logout } = useAuthStore();
-  // const navigate = useNavigate();
+  const { isLoggedIn, login, logout } = useAuthStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, []);
 
   const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
 
-  const onSubmit = (data: LoginField) => {
-    userLoginAuth(data);
-    console.log(data);
+  const onSubmit = async (data: LoginField) => {
+    try {
+      await userLoginAuth(data);
+      login();
+    } catch (error) {
+      console.log(error);
+      logout();
+    }
   };
   return (
     <form
