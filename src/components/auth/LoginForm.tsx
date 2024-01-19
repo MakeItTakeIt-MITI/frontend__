@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-
+// import alertFail from "../../assets/alert_failure.svg";
 import close from "../../assets/clarity_eye-hide-line.svg";
 import open from "../../assets/clarity_eye-show-line.svg";
 import { useEffect, useState } from "react";
@@ -8,16 +8,21 @@ import { userLoginAuth } from "../../api/users";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
 import closeBtn from "../../assets/x_button.svg";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useLoginSchema } from "../../modals/useLoginSchema";
 
 export const LoginForm = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
-  const { register, handleSubmit, watch, setValue } = useForm<LoginField>();
+  const { register, handleSubmit, watch, setValue } = useForm<LoginField>({
+    resolver: zodResolver(useLoginSchema),
+  });
   const { isLoggedIn, login } = useAuthStore();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/");
+      const id = localStorage.getItem("id");
+      navigate(`/profile/${id}`);
     }
   }, []);
 
