@@ -20,13 +20,20 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
   const { isLoggedIn, logout } = useAuthStore();
   const navigate = useNavigate();
 
+  const closeTab = () => setDisplayTab(false);
+
   const handleLogout = () => {
-    logout();
-    setDisplayTab(false);
-    navigate("/");
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      alert("로그아웃 되었습니다.");
+      logout();
+      navigate("/");
+      setDisplayTab(false);
+    } else {
+      alert("취소합니다.");
+      return;
+    }
   };
 
-  const closeTab = () => setDisplayTab(false);
   return (
     <div className="bg-gray-400 bg-opacity-50 fixed top-0 bottom-0 right-0 left-0 ">
       <div className="flex flex-col gap-2 fixed  right-0 bottom-0 left-0 h-[18rem] bg-white rounded-t-xl ">

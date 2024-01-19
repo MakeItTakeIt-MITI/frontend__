@@ -1,3 +1,3 @@
 export const UserMyPage = () => {
-  return <div>MyPage</div>;
+  return <form className="mobile:w-full tablet:px-[13rem] p-4"></form>;
 };

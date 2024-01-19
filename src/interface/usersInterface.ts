@@ -22,3 +22,10 @@ export interface ValidationField {
     email?: string,
     nickname?: string
 }
+
+export interface UserEditField {
+    email?: string,
+    password: string;
+    password_check: string;
+
+}

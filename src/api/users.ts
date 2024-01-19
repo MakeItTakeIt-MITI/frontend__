@@ -1,4 +1,4 @@
-import { LoginField, RegisterField } from "../interface/usersInterface";
+import { LoginField, RegisterField, UserEditField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
 export const userLoginAuth = async (data: LoginField) => {
@@ -13,10 +13,7 @@ export const userLoginAuth = async (data: LoginField) => {
             localStorage.setItem("refreshToken", refreshToken)
             localStorage.setItem('id', userId)
             return response.data
-        }
-    } catch (error) {
-
-        if (response.data.status_code === 400) {
+        } else if (response.data.status_code === 400) {
             alert('올바르지 않은 요청');
         } else if (response.data.status_code === 401) {
             alert('사용자 정보 불일치');
@@ -24,6 +21,9 @@ export const userLoginAuth = async (data: LoginField) => {
             alert('미인증/탈퇴 사용자 로그인');
 
         }
+    } catch (error) {
+
+
         // console.log(error.message);
 
         // throw error
@@ -66,4 +66,12 @@ export const userSignup = async (data: RegisterField) => {
     } catch (error) {
         console.log(error);
     }
+}
+
+
+export const userEditInfo = async (data: UserEditField, id: number) => {
+    const response = await axiosUrl.patch(`/users/${id}`, data)
+    console.log(response.data);
+    return response
+
 }
