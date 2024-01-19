@@ -12,7 +12,7 @@ import { useLoginMutation } from "../../hooks/useLoginMutation";
 import alertFail from "../../assets/alert_failure.svg";
 
 export const LoginForm = () => {
-  // const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [displayPassword, setDisplayPassword] = useState(false);
   const {
     register,
@@ -26,7 +26,7 @@ export const LoginForm = () => {
   const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
 
-  const { mutate: loginMutation } = useLoginMutation();
+  const { mutate: loginMutation } = useLoginMutation({ setErrorMessage });
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -52,11 +52,11 @@ export const LoginForm = () => {
       className="flex flex-col gap-6  mobile:w-full tablet:w-[600px]"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {/* {errorMessage && (
+      {errorMessage && (
         <p className="text-[#E92C2C] text-[13px] font-[400] text-center">
           {errorMessage}
         </p>
-      )} */}
+      )}
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
           이메일

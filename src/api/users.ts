@@ -10,6 +10,7 @@ export const userLoginAuth = async (data: LoginField) => {
         }
     } catch (error) {
         console.log(error);
+        throw error;
     }
 }
 

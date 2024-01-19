@@ -2,8 +2,13 @@ import { useMutation } from "@tanstack/react-query";
 import { userLoginAuth } from "../api/users";
 import useAuthStore from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-export const useLoginMutation = () => {
+interface ErrorMsgProps {
+  setErrorMessage: (arg: string) => void;
+}
+
+export const useLoginMutation = ({ setErrorMessage }: ErrorMsgProps) => {
   const { login } = useAuthStore();
   const navigate = useNavigate();
 
@@ -19,6 +24,11 @@ export const useLoginMutation = () => {
         localStorage.setItem("id", userId);
         login();
         navigate("/");
+      }
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error) && error.response) {
+        setErrorMessage(error.response.data.data.detail);
       }
     },
   });
