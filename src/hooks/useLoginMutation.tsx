@@ -4,7 +4,7 @@ import useAuthStore from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 
 interface ErrorField {
-  setErrorMessage: () => void;
+  setErrorMessage: (arg: string) => void;
 }
 
 export const useLoginMutation = ({ setErrorMessage }: ErrorField) => {
