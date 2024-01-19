@@ -2,9 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { LoginForm } from "../components/auth/LoginForm";
 import mitiLogo from "../assets/MITI_logo.svg";
 import backArrow from "../assets/Chevron_Left.png";
-import kakaoMsgIcon from "../assets/kakao_msg_icon.svg";
 
-import { userKakaoLogin } from "../api/users";
+import { KakaoLoginButton } from "../components/kakao/KakaoLoginButton";
 
 export const UserLogin = () => {
   const navigate = useNavigate();
@@ -30,19 +29,7 @@ export const UserLogin = () => {
           </div>
           <LoginForm />
           <p className="text-center text-[#8C8C8C] text-[12px]">또는</p>
-          <div className="relative w-full">
-            <button
-              className="w-full bg-[#FAE64D] h-[48px]  rounded-lg text-[14px] font-bold"
-              onClick={userKakaoLogin}
-            >
-              카카오로 3초만에 시작하기
-            </button>
-            <img
-              src={kakaoMsgIcon}
-              alt="kakao icon"
-              className="absolute left-3 top-3"
-            />
-          </div>
+          <KakaoLoginButton />
           <div className="flex justify-center  gap-4 text-[#585858] text-[14px]">
             <p className="">아직 회원이 아니신가요? </p>
             <Link to="/signup" className="text-[#4065F6] hover:font-bold  ">
