@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
 import { userRegisterSchema } from "../../modals/userSignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterField, ValidationField } from "../../interface/usersInterface";
-import axiosUrl from "../../utils/axios";
+import { RegisterField } from "../../interface/usersInterface";
 import alertPass from "../../assets/alert_check.svg";
 import alertFail from "../../assets/alert_failure.svg";
 
@@ -10,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../../hooks/useRegisterMutation";
 import useAuthStore from "../../store/useAuthStore";
+import { useUserValidationMutation } from "../../hooks/useUserValidationMutation";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -34,63 +34,27 @@ export const SignupForm = () => {
   } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
 
   const { mutate: registerMutation } = useRegisterMutation();
+  const { mutate: validateMutation } = useUserValidationMutation({
+    setValidEmail,
+    setDisplayEmailMsg,
+    setValidNickname,
+    setDisplayNickMsg,
+  });
 
   const onSubmit = (data: RegisterField) => {
     registerMutation(data);
   };
 
-  const userValidation = async (data: ValidationField) => {
-    try {
-      const response = await axiosUrl.post("/users/signup-check/", data);
-
-      if (response.data.status_code === 200) {
-        console.log(response.data);
-
-        const emailData = response.data.data.email;
-        const nicknameData = response.data.data.nickname;
-
-        if (emailData && emailData.is_duplicated === true) {
-          setValidEmail(false);
-          setDisplayEmailMsg(true);
-        } else if (emailData && emailData.is_duplicated === false) {
-          setValidEmail(true);
-          setDisplayEmailMsg(false);
-        } else if (nicknameData && nicknameData.is_duplicated === true) {
-          setValidNickname(false);
-          setDisplayNickMsg(true);
-        } else if (nicknameData && nicknameData.is_duplicated === false) {
-          setValidNickname(true);
-          setDisplayNickMsg(false);
-        }
-
-        return response.data;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // const handlePhoneInput = () => {
-  //   console.log("watching...", watch("phone"));
-  //   const userInput = watch("phone");
-  //   console.log("length", userInput.length);
-  //   userInput.slice(0, 3) +
-  //     "-" +
-  //     userInput.slice(3, 6) +
-  //     "-" +
-  //     userInput.slice(6, 10);
-  // };
-
   const handleValidateEmail = () => {
     console.log("validate email");
 
-    userValidation({ email: getValues("email") });
+    validateMutation({ email: getValues("email") });
   };
 
   const handleValidateNick = () => {
     console.log("validate nick");
 
-    userValidation({ nickname: getValues("nickname") });
+    validateMutation({ nickname: getValues("nickname") });
   };
   return (
     <form
