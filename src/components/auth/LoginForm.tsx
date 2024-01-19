@@ -13,7 +13,6 @@ import alertFail from "../../assets/alert_failure.svg";
 
 export const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
-  const [disableSubmit, setDisabledSubmit] = useState(true);
   const [displayPassword, setDisplayPassword] = useState(false);
   const {
     register,
@@ -149,7 +148,7 @@ export const LoginForm = () => {
             ? { backgroundColor: "#E8E8E8" }
             : { backgroundColor: "#4065f6" }
         }
-        className=" mobile:h-[58px] tablet:h-[45px] mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:w-[18rem] tablet:text-[15px] "
+        className=" mobile:h-[48px] tablet:h-[45px] mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:w-[18rem] tablet:text-[15px] "
       >
         로그인 하기
       </button>
