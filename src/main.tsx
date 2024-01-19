@@ -13,6 +13,10 @@ import { MatchingPage } from "./pages/MatchingPage.tsx";
 import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
 import { SMSAuthenticationPage } from "./pages/SMSAuthenticationPage.tsx";
 import { UserMyPage } from "./pages/UserMyPage.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -59,6 +63,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
     <RouterProvider router={router}></RouterProvider>
   </React.StrictMode>
 );
