@@ -10,6 +10,7 @@ import useAuthStore from "../../store/useAuthStore";
 import closeBtn from "../../assets/x_button.svg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginSchema } from "../../modals/useLoginSchema";
+import { useLoginMutation } from "../../hooks/useLoginMutation";
 
 export const LoginForm = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
@@ -18,6 +19,8 @@ export const LoginForm = () => {
   });
   const { isLoggedIn, login } = useAuthStore();
   const navigate = useNavigate();
+
+  const { mutate, isPending, isError } = useLoginMutation();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -35,15 +38,22 @@ export const LoginForm = () => {
   const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
 
   const onSubmit = async (data: LoginField) => {
-    await userLoginAuth(data);
+    // await userLoginAuth(data);
+    mutate(data);
     login();
     navigate("/");
   };
+
+  if (isError) {
+    console.log("Error...");
+  }
+
   return (
     <form
       className="flex flex-col gap-6  mobile:w-full tablet:w-[600px]"
       onSubmit={handleSubmit(onSubmit)}
     >
+      {isPending && <p>Pending..</p>}
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
           이메일
