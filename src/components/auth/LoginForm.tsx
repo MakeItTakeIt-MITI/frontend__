@@ -9,11 +9,19 @@ import closeBtn from "../../assets/x_button.svg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginSchema } from "../../modals/useLoginSchema";
 import { useLoginMutation } from "../../hooks/useLoginMutation";
+import alertFail from "../../assets/alert_failure.svg";
 
 export const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
+  const [disableSubmit, setDisabledSubmit] = useState(true);
   const [displayPassword, setDisplayPassword] = useState(false);
-  const { register, handleSubmit, watch, setValue } = useForm<LoginField>({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<LoginField>({
     resolver: zodResolver(useLoginSchema),
   });
   const { isLoggedIn, login } = useAuthStore();
@@ -57,7 +65,9 @@ export const LoginForm = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       {errorMessage && (
-        <p className=" text-red-500 text-sm text-center">{errorMessage}</p>
+        <p className="text-[#E92C2C] text-[13px] font-[400] text-center">
+          {errorMessage}
+        </p>
       )}
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
@@ -85,6 +95,14 @@ export const LoginForm = () => {
             </button>
           )}
         </div>
+        {errors.email && (
+          <div className="flex items-center gap-1">
+            <img src={alertFail} alt="alert icon" />
+            <p className="text-[#E92C2C] text-[13px] font-[400]">
+              {errors.email.message}
+            </p>
+          </div>
+        )}
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="password" className="text-[12px] text-[#1c1c1c]">
@@ -114,10 +132,24 @@ export const LoginForm = () => {
             />
           </button>
         </div>
+        {errors.password && (
+          <div className="flex items-center gap-1">
+            <img src={alertFail} alt="alert icon" />
+            <p className="text-[#E92C2C] text-[13px] font-[400]">
+              {errors.password.message}
+            </p>
+          </div>
+        )}
       </div>
       <button
         type="submit"
-        className=" mobile:h-[58px] tablet:h-[45px] mx-auto flex items-center justify-center p-4 bg-[#4065F6] rounded-lg text-white mobile:w-full tablet:w-[18rem] tablet:text-[15px] "
+        disabled={errors.email || errors.password ? true : false}
+        style={
+          errors.email || errors.password
+            ? { backgroundColor: "#E8E8E8" }
+            : { backgroundColor: "#4065f6" }
+        }
+        className=" mobile:h-[58px] tablet:h-[45px] mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:w-[18rem] tablet:text-[15px] "
       >
         로그인 하기
       </button>
