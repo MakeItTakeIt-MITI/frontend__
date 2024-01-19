@@ -6,16 +6,24 @@ import axiosUrl from "../../utils/axios";
 import alertPass from "../../assets/alert_check.svg";
 import alertFail from "../../assets/alert_failure.svg";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { userSignup } from "../../api/users";
+import { useRegisterMutation } from "../../hooks/useRegisterMutation";
+import useAuthStore from "../../store/useAuthStore";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [validNickname, setValidNickname] = useState(false);
   const [displayEmailMsg, setDisplayEmailMsg] = useState(false);
   const [displayNickMsg, setDisplayNickMsg] = useState(false);
+  const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, []);
 
   const {
     register,
@@ -25,13 +33,10 @@ export const SignupForm = () => {
     formState: { errors },
   } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
 
+  const { mutate: registerMutation } = useRegisterMutation();
+
   const onSubmit = (data: RegisterField) => {
-    try {
-      userSignup(data);
-      navigate("/sms-authentication");
-    } catch (error) {
-      console.log(error);
-    }
+    registerMutation(data);
   };
 
   const userValidation = async (data: ValidationField) => {
