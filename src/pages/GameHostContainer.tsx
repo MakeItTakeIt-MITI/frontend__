@@ -6,7 +6,7 @@ import mitiLogo from "../assets/MITI_logo.svg";
 import backArrow from "../assets/Chevron_Left.png";
 import { GameHostForm } from "../components/auth/GameHostForm";
 
-export const GameOperate = () => {
+export const GameHostContainer = () => {
   const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
 

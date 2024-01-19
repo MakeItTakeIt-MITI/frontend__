@@ -27,9 +27,7 @@ export const GameHostForm = () => {
       className="flex flex-col gap-4 justify-between w-full"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div>
-        <h4 className="text-[24px] font-bold">경기장 주소를 입력해주세요. </h4>
-      </div>
+      <h4>경기 정보</h4>
       <div className="flex flex-col gap-2">
         <label htmlFor="address" className="text-[12px] text-[#1c1c1c]">
           경기장 주소

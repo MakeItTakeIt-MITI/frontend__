@@ -6,7 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Home } from "./pages/Home.tsx";
 import { UserLogin } from "./pages/UserLogin.tsx";
 import { UserSignup } from "./pages/UserSignup.tsx";
-import { GameOperate } from "./pages/GameOperate.tsx";
+import { GameHostContainer } from "./pages/GameHostContainer.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
 import { GameInfoPage } from "./pages/GameInfoPage.tsx";
 import { MatchingPage } from "./pages/MatchingPage.tsx";
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/operate",
-        element: <GameOperate />,
+        element: <GameHostContainer />,
       },
       {
         path: "/game",
