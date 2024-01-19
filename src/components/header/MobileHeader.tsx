@@ -9,11 +9,15 @@ import profileIconColor from "../../assets/header_profile_color.svg";
 // import viewIconColor from "../../assets/header_view_color.svg";
 
 import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Sidebar } from "./Sidebar";
 
 export const MobileHeader = () => {
+  const [displayTab, setDisplayTab] = useState(false);
+
   const { pathname } = useLocation();
   return (
-    <nav className="tablet:hidden mobile:flex fixed bottom-0 left-0 right-0 w-full bg-white h-[4rem] border border-t-gray-200 z-10">
+    <nav className="tablet:hidden mobile:flex fixed bottom-0 left-0 right-0 w-full bg-white h-[4rem] border border-t-gray-200 z-10 rounded-t-2xl">
       <div className="flex items-center w-full justify-center gap-16  p-4">
         <Link to="/" className="flex flex-col gap-1 items-center ">
           {pathname === "/" ? (
@@ -39,11 +43,16 @@ export const MobileHeader = () => {
           )}
           <span className="text-[13px] text-[#969696]">프로필</span>
         </Link>
-        <div className="flex flex-col gap-1 items-center">
+        <button
+          type="button"
+          onClick={() => setDisplayTab(true)}
+          className="flex flex-col gap-1 items-center"
+        >
           <img src={viewAllIcon} alt="view all icon" />
           <span className="text-[13px] text-[#969696]">전체</span>
-        </div>
+        </button>
       </div>
+      {displayTab && <Sidebar setDisplayTab={setDisplayTab} />}
     </nav>
   );
 };
