@@ -21,6 +21,14 @@ export interface LoginField {
 export interface ValidationField {
     email?: string,
     nickname?: string
+
+}
+
+export interface ValidationProps {
+    setValidEmail: (arg: boolean) => void,
+    setDisplayEmailMsg: (arg: boolean) => void,
+    setValidNickname: (arg: boolean) => void,
+    setDisplayNickMsg: (arg: boolean) => void,
 }
 
 export interface UserEditField {
