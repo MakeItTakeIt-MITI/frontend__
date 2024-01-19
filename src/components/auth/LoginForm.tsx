@@ -11,6 +11,7 @@ import { useLoginSchema } from "../../modals/useLoginSchema";
 import { useLoginMutation } from "../../hooks/useLoginMutation";
 
 export const LoginForm = () => {
+  const [errorMessage, setErrorMessage] = useState("");
   const [displayPassword, setDisplayPassword] = useState(false);
   const { register, handleSubmit, watch, setValue } = useForm<LoginField>({
     resolver: zodResolver(useLoginSchema),
@@ -18,12 +19,7 @@ export const LoginForm = () => {
   const { isLoggedIn, login } = useAuthStore();
   const navigate = useNavigate();
 
-  const {
-    mutate: loginMutation,
-    error,
-    isPending,
-    isError,
-  } = useLoginMutation();
+  const { mutate: loginMutation } = useLoginMutation();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -41,19 +37,28 @@ export const LoginForm = () => {
   const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
 
   const onSubmit = async (data: LoginField) => {
-    loginMutation(data);
+    loginMutation(data, {
+      onSuccess: () => {
+        login();
+        navigate("/");
+      },
+      onError: (error) => {
+        if (error.response.data) {
+          console.log(error.response.data.data.detail);
+          setErrorMessage(error.response.data.data.detail);
+        }
+      },
+    });
   };
-
-  if (isError) {
-    console.log("Error...", error);
-  }
 
   return (
     <form
       className="flex flex-col gap-6  mobile:w-full tablet:w-[600px]"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {isPending && <p className="text-center">Loading..</p>}
+      {errorMessage && (
+        <p className=" text-red-500 text-sm text-center">{errorMessage}</p>
+      )}
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
           이메일
@@ -96,9 +101,7 @@ export const LoginForm = () => {
               required: true,
             })}
           />
-          {/* <span className="text-[#e43535] text-[13px]">
-            비밀번호가 올바르지 않습니다.
-          </span> */}
+
           <button
             type="button"
             onClick={handleDisplayPassword}

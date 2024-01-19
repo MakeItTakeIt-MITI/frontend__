@@ -13,16 +13,17 @@ export const userLoginAuth = async (data: LoginField) => {
             localStorage.setItem("refreshToken", refreshToken)
             localStorage.setItem('id', userId)
             return response.data
-        } else if (response.data.status_code === 400) {
-            alert('올바르지 않은 요청');
-        } else if (response.data.status_code === 401) {
-            alert('사용자 정보 불일치');
-        } else if (response.data.status_code === 403) {
-            alert('미인증/탈퇴 사용자 로그인');
-
+            // } else if (response.data.status_code === 400) {
+            //     alert('올바르지 않은 요청');
+            // } else if (response.data.status_code === 401) {
+            //     alert('사용자 정보 불일치');
+            // } else if (response.data.status_code === 403) {
+            //     alert('미인증/탈퇴 사용자 로그인');
         }
+        // }
     } catch (error) {
 
+        console.log(error);
 
         // console.log(error.message);
 
