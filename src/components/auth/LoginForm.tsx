@@ -23,10 +23,10 @@ export const LoginForm = () => {
   } = useForm<LoginField>({
     resolver: zodResolver(useLoginSchema),
   });
-  const { isLoggedIn, login } = useAuthStore();
+  const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
 
-  const { mutate: loginMutation } = useLoginMutation();
+  const { mutate: loginMutation } = useLoginMutation({ setErrorMessage });
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -43,19 +43,8 @@ export const LoginForm = () => {
 
   const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
 
-  const onSubmit = async (data: LoginField) => {
-    loginMutation(data, {
-      onSuccess: () => {
-        login();
-        navigate("/");
-      },
-      onError: (error) => {
-        if (error.response.data) {
-          console.log(error.response.data.data.detail);
-          setErrorMessage(error.response.data.data.detail);
-        }
-      },
-    });
+  const onSubmit = (data: LoginField) => {
+    loginMutation(data);
   };
 
   return (
