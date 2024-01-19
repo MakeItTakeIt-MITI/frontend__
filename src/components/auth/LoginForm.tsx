@@ -7,11 +7,12 @@ import { LoginField } from "../../interface/usersInterface";
 import { userLoginAuth } from "../../api/users";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
+import closeBtn from "../../assets/x_button.svg";
 
 export const LoginForm = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
-  const { register, handleSubmit } = useForm<LoginField>();
-  const { isLoggedIn, login, logout } = useAuthStore();
+  const { register, handleSubmit, watch, setValue } = useForm<LoginField>();
+  const { isLoggedIn, login } = useAuthStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,17 +21,18 @@ export const LoginForm = () => {
     }
   }, []);
 
+  const emailValue = watch("email");
+
+  const handleEraseInput = () => {
+    return setValue("email", "");
+  };
+
   const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
 
   const onSubmit = async (data: LoginField) => {
-    try {
-      await userLoginAuth(data);
-      login();
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      logout();
-    }
+    await userLoginAuth(data);
+    login();
+    navigate("/");
   };
   return (
     <form
@@ -41,16 +43,28 @@ export const LoginForm = () => {
         <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
           이메일
         </label>
-        <input
-          type="email"
-          id="email"
-          required
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
-          placeholder="이메일을 입력해주세요."
-          {...register("email", {
-            required: true,
-          })}
-        />
+        <div className="relative">
+          <input
+            type="email"
+            id="email"
+            required
+            className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+            placeholder="이메일을 입력해주세요."
+            {...register("email", {
+              required: true,
+            })}
+          />
+
+          {emailValue?.length > 0 && (
+            <button
+              type="button"
+              className="absolute right-2 top-4 hover:cursor-pointer"
+              onClick={handleEraseInput}
+            >
+              <img src={closeBtn} alt="erase input" className="w-[24px]   " />
+            </button>
+          )}
+        </div>
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="password" className="text-[12px] text-[#1c1c1c]">
@@ -61,7 +75,7 @@ export const LoginForm = () => {
             type={`${displayPassword ? "text" : "password"}`}
             id="password"
             required
-            className="h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full pr-10"
+            className="h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
             placeholder="8자리 이상의 PW를 입력해주세요."
             {...register("password", {
               required: true,
@@ -70,13 +84,17 @@ export const LoginForm = () => {
           {/* <span className="text-[#e43535] text-[13px]">
             비밀번호가 올바르지 않습니다.
           </span> */}
-          <div onClick={handleDisplayPassword}>
+          <button
+            type="button"
+            onClick={handleDisplayPassword}
+            className="absolute right-2 top-4 hover:cursor-pointer"
+          >
             <img
               src={`${displayPassword ? open : close}`}
               alt="hide password"
-              className="w-[24px] absolute right-2 top-4 cursor-pointer "
+              className="w-[24px] cursor-pointer "
             />
-          </div>
+          </button>
         </div>
       </div>
       <button
