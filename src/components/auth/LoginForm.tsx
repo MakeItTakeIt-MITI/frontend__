@@ -1,10 +1,8 @@
 import { useForm } from "react-hook-form";
-// import alertFail from "../../assets/alert_failure.svg";
 import close from "../../assets/clarity_eye-hide-line.svg";
 import open from "../../assets/clarity_eye-show-line.svg";
 import { useEffect, useState } from "react";
 import { LoginField } from "../../interface/usersInterface";
-import { userLoginAuth } from "../../api/users";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
 import closeBtn from "../../assets/x_button.svg";
@@ -20,7 +18,12 @@ export const LoginForm = () => {
   const { isLoggedIn, login } = useAuthStore();
   const navigate = useNavigate();
 
-  const { mutate, isPending, isError } = useLoginMutation();
+  const {
+    mutate: loginMutation,
+    error,
+    isPending,
+    isError,
+  } = useLoginMutation();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -38,14 +41,11 @@ export const LoginForm = () => {
   const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
 
   const onSubmit = async (data: LoginField) => {
-    // await userLoginAuth(data);
-    mutate(data);
-    login();
-    navigate("/");
+    loginMutation(data);
   };
 
   if (isError) {
-    console.log("Error...");
+    console.log("Error...", error);
   }
 
   return (
@@ -53,7 +53,7 @@ export const LoginForm = () => {
       className="flex flex-col gap-6  mobile:w-full tablet:w-[600px]"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {isPending && <p>Pending..</p>}
+      {isPending && <p className="text-center">Loading..</p>}
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
           이메일
