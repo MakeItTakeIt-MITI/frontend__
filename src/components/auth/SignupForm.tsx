@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { userRegisterSchema } from "../../modals/userSignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterField } from "../../interface/usersInterface";
+<<<<<<< HEAD
 import alertPass from "../../assets/alert_check.svg";
 import alertFail from "../../assets/alert_failure.svg";
 
@@ -10,6 +11,9 @@ import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../../hooks/useRegisterMutation";
 import useAuthStore from "../../store/useAuthStore";
 import { useUserValidationMutation } from "../../hooks/useUserValidationMutation";
+=======
+import { userSignup } from "../../api/userAuth";
+>>>>>>> feat/homepage
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -42,7 +46,18 @@ export const SignupForm = () => {
   });
 
   const onSubmit = (data: RegisterField) => {
+<<<<<<< HEAD
     registerMutation(data);
+=======
+    // console.log(data);
+    try {
+      userRegisterSchema.parse(data);
+      userSignup(data);
+      alert("success");
+    } catch (error) {
+      console.log(error);
+    }
+>>>>>>> feat/homepage
   };
 
   const handleValidateEmail = () => {

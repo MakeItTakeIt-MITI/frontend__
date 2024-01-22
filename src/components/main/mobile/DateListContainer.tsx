@@ -3,11 +3,22 @@ import rightArrow from "../../../assets/Chevron_Right_MD.svg";
 
 export const DateListContainer = () => {
   const [selected, setSelected] = useState(true);
+<<<<<<< HEAD:src/components/main/mobile/DateListContainer.tsx
+=======
+  // const [startIndex, setStartIndex] = useState(0);
+>>>>>>> feat/homepage:src/components/main/DateBox.tsx
 
   const triggerSelected = () => {
     setSelected(!selected);
   };
 
+<<<<<<< HEAD:src/components/main/mobile/DateListContainer.tsx
+=======
+  // const showNextDates = () => {
+  //   setStartIndex(startIndex + 4);
+  // };
+
+>>>>>>> feat/homepage:src/components/main/DateBox.tsx
   const availableDates = [];
   for (let i = 0; i < 6; i++) {
     const newDate = new Date();
@@ -28,6 +39,7 @@ export const DateListContainer = () => {
           <button
             key={index}
             className="flex flex-col items-center justify-center text-[14px] mobile:w-[60px] tablet:w-[80px] mobile:h-[52px] tablet:h-[60px] rounded-xl"
+            // className=" w-[60px] h-[52px]"
             style={
               selected && index === 0
                 ? { backgroundColor: "#4065F6", color: "white" }
