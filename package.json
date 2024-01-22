@@ -20,11 +20,8 @@
     "@tanstack/react-query-devtools": "^5.14.1",
     "axios": "^1.6.5",
     "react": "^18.2.0",
-<<<<<<< HEAD
     "react-daum-postcode": "^3.1.3",
-=======
     "react-device-detect": "^2.2.3",
->>>>>>> feat/homepage
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.2",
     "react-router-dom": "^6.4.0",

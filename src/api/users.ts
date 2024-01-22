@@ -19,12 +19,14 @@ export const userKakaoLogin = async () => {
     try {
         const response = await axiosUrl.get("/users/oauth-login-url/?provider=kakao");
         const url = response.data.data.login_url
-        if (response.data.status_code === 200) {
-            // console.log(url);
-            window.location.href = url
-            console.log(response);
-        }
-        console.log(response);
+        console.log(url);
+
+        // if (response.data.status_code === 200) {
+        //     window.location.href = url
+        //     console.log("Redirecting to Kakao login...");
+        //     return response
+        // }
+        console.log(response.data);
     } catch (error) {
         console.log(error);
 
