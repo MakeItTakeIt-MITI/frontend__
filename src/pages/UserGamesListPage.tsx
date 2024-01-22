@@ -8,7 +8,7 @@ export const UserGamesListPage = () => {
     setDisplayTab(!displayTab);
   };
   return (
-    <div>
+    <div className="mobile:w-full tablet:px-[13rem]">
       <NavigateToPrevContainer />
       <div className="flex justify-between p-4 ">
         <h4 className="text-[18px] font-bold">나의 매치 스케줄</h4>
