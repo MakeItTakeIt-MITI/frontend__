@@ -22,9 +22,9 @@ export const userKakaoLogin = async () => {
         if (response.data.status_code === 200) {
             // console.log(url);
             window.location.href = url
-            console.log(response.data);
+            console.log(response);
         }
-        console.log(response.data);
+        console.log(response);
     } catch (error) {
         console.log(error);
 
