@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         element: <SMSAuthenticationPage />,
       },
       {
-        path: "profile/:id",
+        path: "/profile",
         element: <UserMyPage />,
       },
       {
