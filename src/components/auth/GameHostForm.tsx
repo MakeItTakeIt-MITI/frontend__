@@ -1,19 +1,6 @@
 import { useForm } from "react-hook-form";
 import { DaumAddressSearcher } from "../address/DaumAddressSearcher";
-
-export interface GameHostField {
-  address: string;
-  address_detail: string;
-  title: string;
-  fee: number;
-  min_players: number;
-  max_players: number;
-  start_date: string;
-  start_time: number;
-  end_date: string;
-  end_time: number;
-  announcement: string;
-}
+import { GameHostField } from "../../interface/gameInterface";
 
 export const GameHostForm = () => {
   const { handleSubmit, register } = useForm<GameHostField>();
