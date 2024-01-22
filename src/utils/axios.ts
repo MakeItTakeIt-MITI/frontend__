@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 
-const baseUrl = 'http://api.makeittakeit.kr'
+const baseUrl = 'https://api.makeittakeit.kr'
 
 const axiosUrl: AxiosInstance = axios.create({
     baseURL: baseUrl,

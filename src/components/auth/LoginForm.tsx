@@ -30,8 +30,9 @@ export const LoginForm = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      const id = localStorage.getItem("id");
-      navigate(`/profile/${id}`);
+      navigate('/profile')
+      // const id = localStorage.getItem("id");
+      // navigate(`/profile`);
     }
   }, []);
 

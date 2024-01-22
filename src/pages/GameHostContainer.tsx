@@ -13,7 +13,7 @@ export const GameHostContainer = () => {
   const navigatePrev = () => navigate(-1);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       navigate("/login");
     }
   }, []);
