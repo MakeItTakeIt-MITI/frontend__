@@ -36,7 +36,9 @@ export const MobileHeader = () => {
           <span className="text-[13px] text-[#969696]">경기</span>
         </Link>
         <Link to="/login" className="flex flex-col gap-1 items-center">
-          {pathname === "/login" || pathname === "/signup" ? (
+          {pathname === "/login" ||
+          pathname === "/signup" ||
+          pathname === "/profile" ? (
             <img src={profileIconColor} alt="profile icon" />
           ) : (
             <img src={profileIcon} alt="profile icon" />
