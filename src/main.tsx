@@ -15,6 +15,7 @@ import { SMSAuthenticationPage } from "./pages/SMSAuthenticationPage.tsx";
 import { UserMyPage } from "./pages/UserMyPage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { UserGamesListPage } from "./pages/UserGamesListPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/game",
         element: <GameInfoPage />,
+      },
+      {
+        path: "/game/user/list",
+        element: <UserGamesListPage />,
       },
       {
         path: "/match",
