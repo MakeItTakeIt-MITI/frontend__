@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { DaumAddressSearcher } from "../address/DaumAddressSearcher";
 
 export interface GameHostField {
   address: string;
@@ -42,26 +43,8 @@ export const GameHostForm = () => {
           })}
         />
       </div>
-      <div className="flex flex-col gap-2 relative">
-        <label htmlFor="address" className=" text-[#999]">
-          경기장 주소
-        </label>
-        <div className="flex">
-          <input
-            type="text"
-            id="address"
-            readOnly
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full"
-            placeholder="경기장 주소를 입력해주세요."
-            {...register("address", {
-              required: true,
-            })}
-          />
-          <button className="w-[81px] h-[36px]  bg-[#4065F6] text-[12px] rounded-xl text-white absolute right-0 bottom-1.5">
-            주소검색
-          </button>
-        </div>
-      </div>
+      <DaumAddressSearcher register={register} />
+
       <div className="flex flex-col gap-2">
         <label htmlFor="address_detail" className=" text-[#999]">
           상세 주소

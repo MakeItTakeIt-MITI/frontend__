@@ -43,23 +43,27 @@ export const DaumAddressSearcher = ({ register }: Register) => {
   };
 
   return (
-    <div className="flex    gap-4">
-      {/* <Label htmlFor="addressBar">경기장 주소</Label> */}
-      <button
-        onClick={handleClick}
-        className="hover:cursor-pointer border border-gray-200 w-[5rem] p-2 text-[14px] rounded-md "
-      >
-        주소찾기
-      </button>
+    <div className="flex flex-col gap-2 relative">
+      <label htmlFor="address" className=" text-[#999]">
+        경기장 주소
+      </label>
+
       <input
-        className=" w-[450px] h-[35px] bg-[#F3F5F7] rounded-lg border border-gray-200 p-2"
+        className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full"
         type="text"
         {...register("address", {
           required: true,
         })}
         value={showAddressPopup ? showAddressPopup : ""}
         readOnly
+        placeholder="경기장 주소를 입력해주세요."
       />
+      <button
+        onClick={handleClick}
+        className="w-[81px] h-[36px]  bg-[#4065F6] text-[12px] rounded-xl text-white absolute right-0 bottom-1.5"
+      >
+        주소찾기
+      </button>
     </div>
   );
 };
