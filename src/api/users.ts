@@ -84,3 +84,20 @@ export const deleteAccount = async () => {
 
     return response.data
 }
+
+export const userLogout = async () => {
+    const refresh_token = localStorage.getItem("refreshToken");
+
+    try {
+        const response = await axios.post('/users/logout/', null, {
+            headers: {
+                'Refresh': refresh_token
+            }
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Logout error:', error);
+        throw error;
+    }
+}
