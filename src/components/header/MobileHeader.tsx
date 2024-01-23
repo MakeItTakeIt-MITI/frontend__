@@ -16,6 +16,7 @@ export const MobileHeader = () => {
   const [displayTab, setDisplayTab] = useState(false);
 
   const { pathname } = useLocation();
+
   return (
     <>
       {pathname === "/signup" ? null : (

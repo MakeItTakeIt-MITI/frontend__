@@ -1,11 +1,6 @@
-// import rightArrow from "../../assets/Chevron_Left.png";
-import closeButton from "../../assets/x_button.svg";
-import homeIcon from "../../assets/header_home_icon.svg";
-import gamesIcon from "../../assets/header_games_icon.svg";
-import profileIcon from "../../assets/header_profile_icon.svg";
-
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
+import { useLogoutMutation } from "../../hooks/useLogoutMutation";
 
 interface DisplayTab {
   setDisplayTab: (arg: boolean) => void;
@@ -13,7 +8,7 @@ interface DisplayTab {
 
 export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
   const { isLoggedIn, logout } = useAuthStore();
-  const navigate = useNavigate();
+  const { mutate: mutateLogout, isError, isPending } = useLogoutMutation();
 
   const closeTab = () => setDisplayTab(false);
 
@@ -21,7 +16,8 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       alert("로그아웃 되었습니다.");
       logout();
-      navigate("/");
+      mutateLogout();
+      // navigate("/");
 
       setDisplayTab(false);
     } else {
@@ -29,6 +25,12 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
       return;
     }
   };
+
+  if (isPending) {
+    console.log("Loading...");
+  } else if (isError) {
+    console.log("error...");
+  }
 
   return (
     <div className="bg-black bg-opacity-50 fixed top-0 bottom-0 right-0 left-0 ">
