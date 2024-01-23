@@ -1,15 +1,15 @@
-import { useState } from "react";
 import { useNicknameMutation } from "../hooks/useNicknameMutation";
 import { useDeleteAccMutation } from "../hooks/useDeleteAccMutation";
+import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
+import { useForm } from "react-hook-form";
+import { UserEditField } from "../interface/usersInterface";
 
 export const UserMyPage = () => {
-  const [nickname, setNickname] = useState("");
-  // const id = localStorage.getItem("id");
-  // console.log(id);
+  const { register, handleSubmit } = useForm<UserEditField>();
 
-  const handleChangeNickname = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    mutateNickname(nickname);
+  const onSubmit = (data: UserEditField) => {
+    console.log(data);
+    mutateNickname(data);
   };
 
   const handleDeleteAccount = () => {
@@ -28,47 +28,61 @@ export const UserMyPage = () => {
   }
 
   return (
-    <div className=" mobile:w-full tablet:px-[13rem] flex flex-col gap-4">
-      <div>
-        {" "}
-        <h1 className="p-4">지원님 안녕하세요</h1>
-        <hr className="w-full h-2 bg-gray-200" />
+    <div className="tablet:p-10 mobile:flex mobile:flex-col  h-screen pb-[6rem] ">
+      <NavigateToPrevContainer />
+      <div className="p-4 flex flex-col gap-2">
+        <p className="text-xl">지원 님 (자바스원)</p>
+        <p>현재 모집중인 경게 참여하세요!</p>
       </div>
-      <form onSubmit={handleChangeNickname} className="flex flex-col gap-4 p-4">
-        <div className="flex gap-2">
-          <label htmlFor="nickname">닉네임</label>
-          <input
-            className="bg-gray-100 border"
-            id="nickname"
-            type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder={nickname}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="password">현재 비밀번호</label>
-          <input
-            className="bg-gray-100 border"
-            type="password"
-            name=""
-            id="password"
-          />
-          <label htmlFor="password_check">비밀번호 확인</label>
-          <input
-            className="bg-gray-100 border"
-            type="password"
-            name=""
-            id="password_check"
-          />
-        </div>
+      <hr className="mobile:block tablet:hidden w-full" />
 
-        <button className="bg-blue-400 border-white h-[54px] text-white rounded-xl">
-          닉네임 수정
-        </button>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-6  mobile:w-full mobile:p-4 tablet:px-[13rem] tablet:w-[600px]"
+      >
+        <h4 className="font-bold">닉네임 수정</h4>
+        <input
+          type="text"
+          id="nickname"
+          required
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          placeholder="닉네임을 입력해주세요."
+          {...register("nickname", {
+            required: true,
+          })}
+        />
+        <input
+          type="password"
+          id="password"
+          required
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          placeholder="현재 비밀번호를 입력해주세요."
+          {...register("password", {
+            required: true,
+          })}
+        />
+        <input
+          type="password"
+          id="password"
+          required
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          placeholder="확인 비밀번호를 입력해주세요."
+          {...register("password_check", {
+            required: true,
+          })}
+        />
+        <button className="rounded-xl w-full h-14 bg-gray-200">수정하기</button>
       </form>
-      <div onClick={handleDeleteAccount}>
-        <button className="w-full bg-gray-200 h-14">회원탈퇴</button>
+      <hr className="mobile:block tablet:hidden w-full" />
+
+      <div className="p-4 flex flex-col gap-4">
+        <p className="text-red-400 font-bold">계정 삭제하기</p>
+        <button
+          onClick={handleDeleteAccount}
+          className=" rounded-xl w-full  h-14 bg-gray-200"
+        >
+          회원탈퇴
+        </button>
       </div>
     </div>
   );
