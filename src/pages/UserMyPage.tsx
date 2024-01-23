@@ -63,7 +63,7 @@ export const UserMyPage = () => {
         />
         <input
           type="password"
-          id="password"
+          id="password_check"
           required
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           placeholder="확인 비밀번호를 입력해주세요."
