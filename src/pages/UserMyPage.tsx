@@ -1,14 +1,31 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNicknameMutation } from "../hooks/useNicknameMutation";
+import { useDeleteAccMutation } from "../hooks/useDeleteAccMutation";
 
 export const UserMyPage = () => {
   const [nickname, setNickname] = useState("");
+  // const id = localStorage.getItem("id");
+  // console.log(id);
 
   const handleChangeNickname = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setNickname(nickname);
-    console.log(nickname);
+    mutateNickname(nickname);
   };
+
+  const handleDeleteAccount = () => {
+    mutateDelete();
+  };
+
+  const { mutate: mutateNickname, isPending, isError } = useNicknameMutation();
+  const { mutate: mutateDelete } = useDeleteAccMutation();
+
+  if (isPending) {
+    console.log("Pending..");
+  }
+
+  if (isError) {
+    console.log(isError);
+  }
 
   return (
     <div className=" mobile:w-full tablet:px-[13rem] flex flex-col gap-4">
@@ -16,15 +33,6 @@ export const UserMyPage = () => {
         {" "}
         <h1 className="p-4">지원님 안녕하세요</h1>
         <hr className="w-full h-2 bg-gray-200" />
-        {/* <div className="flex flex-col p-4"> */}
-        {/* <h2>바로가기</h2> */}
-        {/* <div className="my-4 flex justify-center text-xl gap-4">
-            <Link to="/">홈</Link>
-            <Link to="/">경기 만들기</Link>
-            <Link to="/">경기 참여하기</Link>
-            <Link to="/">기록</Link>
-          </div> */}
-        {/* </div> */}
       </div>
       <form onSubmit={handleChangeNickname} className="flex flex-col gap-4 p-4">
         <div className="flex gap-2">
@@ -59,6 +67,9 @@ export const UserMyPage = () => {
           닉네임 수정
         </button>
       </form>
+      <div onClick={handleDeleteAccount}>
+        <button className="w-full bg-gray-200 h-14">회원탈퇴</button>
+      </div>
     </div>
   );
 };
