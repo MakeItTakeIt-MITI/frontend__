@@ -32,9 +32,10 @@ export interface ValidationProps {
 }
 
 export interface UserEditField {
-    nickname: string;
-    password: string;
-    password_check: string;
+    userId?: number;
+    nickname?: string;
+    password?: string;
+    password_check?: string;
 
 }
 

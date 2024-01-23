@@ -4,23 +4,28 @@ import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
 import { useForm } from "react-hook-form";
 import { UserEditField } from "../interface/usersInterface";
 import useUserDataStore from "../store/useUserDataStore";
+import { userEditInfo } from "../api/users";
 
 export const UserMyPage = () => {
-  const { register, handleSubmit } = useForm<UserEditField>();
+  const { register, handleSubmit, getValues, watch } = useForm<UserEditField>();
   const { userId } = useUserDataStore();
-  console.log(userId);
 
   const handleDeleteAccount = () => {
-    mutateDelete();
+    mutateDelete(userId);
   };
 
   const { mutate: mutateNickname, isPending, isError } = useNicknameMutation();
   const { mutate: mutateDelete } = useDeleteAccMutation();
 
-  const onSubmit = (data: UserEditField) => {
-    mutateNickname(data, userId);
+  const onSubmit = () => {
+    const watchNick = watch("nickname");
+    mutateNickname({ id: userId, data: { nickname: watchNick } });
   };
 
+  const handleChangeNickname = () => {
+    const nickname = watch("nickname");
+    userEditInfo(userId, { nickname });
+  };
   if (isPending) {
     console.log("Pending..");
   }
@@ -53,6 +58,9 @@ export const UserMyPage = () => {
             required: true,
           })}
         />
+        <button onClick={handleChangeNickname} type="button">
+          닉네임 변경
+        </button>
         <input
           type="password"
           id="password"

@@ -71,15 +71,19 @@ export const userSignup = async (data: RegisterField) => {
 }
 
 
-export const userEditInfo = async (data: UserEditField, id: number) => {
-    const response = await axiosUrl.patch(`/users/${id}`, data)
-    console.log(response.data);
-    return response.data
+export const userEditInfo = async (id: number | null, data: UserEditField) => {
+    try {
+        const response = await axiosUrl.patch(`/users/${id}/`, data)
+        console.log(response);
+        return response
+    } catch (error) {
+        console.error(error)
+    }
 
 }
 
-export const deleteAccount = async () => {
-    const response = await axiosUrl.post("/users/5")
+export const deleteAccount = async (id: number) => {
+    const response = await axiosUrl.delete(`/users/${id}/`)
     console.log(response.data);
 
     return response.data
