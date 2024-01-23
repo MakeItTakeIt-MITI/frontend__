@@ -3,6 +3,7 @@ import { userLoginAuth } from "../api/users";
 import useAuthStore from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import useUserDataStore from "../store/useUserDataStore";
 
 interface ErrorMsgProps {
   setErrorMessage: (arg: string) => void;
@@ -11,6 +12,7 @@ interface ErrorMsgProps {
 export const useLoginMutation = ({ setErrorMessage }: ErrorMsgProps) => {
   const { login } = useAuthStore();
   const navigate = useNavigate();
+  const { setUserId } = useUserDataStore();
 
   return useMutation({
     mutationFn: userLoginAuth,
@@ -19,6 +21,7 @@ export const useLoginMutation = ({ setErrorMessage }: ErrorMsgProps) => {
         const accessToken = data.data.token.access;
         const refreshToken = data.data.token.refresh;
         const userId = data.data.id;
+        setUserId(userId);
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("id", userId);

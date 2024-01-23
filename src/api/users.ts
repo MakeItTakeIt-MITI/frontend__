@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { LoginField, RegisterField, TokenField, UserEditField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
@@ -71,8 +71,8 @@ export const userSignup = async (data: RegisterField) => {
 }
 
 
-export const userEditInfo = async (data: UserEditField) => {
-    const response = await axiosUrl.patch(`/users/5`, data)
+export const userEditInfo = async (data: UserEditField, id: number) => {
+    const response = await axiosUrl.patch(`/users/${id}`, data)
     console.log(response.data);
     return response.data
 

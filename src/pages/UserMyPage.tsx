@@ -3,14 +3,12 @@ import { useDeleteAccMutation } from "../hooks/useDeleteAccMutation";
 import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
 import { useForm } from "react-hook-form";
 import { UserEditField } from "../interface/usersInterface";
+import useUserDataStore from "../store/useUserDataStore";
 
 export const UserMyPage = () => {
   const { register, handleSubmit } = useForm<UserEditField>();
-
-  const onSubmit = (data: UserEditField) => {
-    console.log(data);
-    mutateNickname(data);
-  };
+  const { userId } = useUserDataStore();
+  console.log(userId);
 
   const handleDeleteAccount = () => {
     mutateDelete();
@@ -18,6 +16,10 @@ export const UserMyPage = () => {
 
   const { mutate: mutateNickname, isPending, isError } = useNicknameMutation();
   const { mutate: mutateDelete } = useDeleteAccMutation();
+
+  const onSubmit = (data: UserEditField) => {
+    mutateNickname(data, userId);
+  };
 
   if (isPending) {
     console.log("Pending..");
