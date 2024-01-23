@@ -37,3 +37,8 @@ export interface UserEditField {
     password_check: string;
 
 }
+
+export interface TokenField {
+    access_token: string | null,
+    refresh_token: string | null
+}

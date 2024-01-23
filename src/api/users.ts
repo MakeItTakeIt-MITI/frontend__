@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LoginField, RegisterField, UserEditField } from "../interface/usersInterface";
+import { LoginField, RegisterField, TokenField, UserEditField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
 export const userLoginAuth = async (data: LoginField) => {
@@ -85,15 +85,17 @@ export const deleteAccount = async () => {
     return response.data
 }
 
-export const userLogout = async () => {
-    const refresh_token = localStorage.getItem("refreshToken");
+export const userLogout = async ({ access_token, refresh_token }: TokenField) => {
 
     try {
-        const response = await axios.post('/users/logout/', null, {
+
+        const response = await axiosUrl.get('/users/logout/', {
             headers: {
-                'Refresh': refresh_token
+                Authorization: `Bearer ${access_token}`,
+                Refresh: refresh_token
             }
         });
+
         console.log(response.data);
         return response.data;
     } catch (error) {

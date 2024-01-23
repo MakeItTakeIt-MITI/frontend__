@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
-import { useLogoutMutation } from "../../hooks/useLogoutMutation";
 import closeButton from "../../assets/x_button.svg";
+import { userLogout } from "../../api/users";
 
 interface DisplayTab {
   setDisplayTab: (arg: boolean) => void;
@@ -9,7 +9,7 @@ interface DisplayTab {
 
 export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
   const { isLoggedIn, logout } = useAuthStore();
-  const { mutate: mutateLogout, isError, isPending } = useLogoutMutation();
+  const navigate = useNavigate();
 
   const closeTab = () => setDisplayTab(false);
 
@@ -17,8 +17,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       alert("로그아웃 되었습니다.");
       logout();
-      mutateLogout();
-      // navigate("/");
+      navigate("/");
 
       setDisplayTab(false);
     } else {
@@ -26,12 +25,6 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
       return;
     }
   };
-
-  if (isPending) {
-    console.log("Loading...");
-  } else if (isError) {
-    console.log("error...");
-  }
 
   return (
     <div className="bg-black bg-opacity-50 fixed top-0 bottom-0 right-0 left-0 ">

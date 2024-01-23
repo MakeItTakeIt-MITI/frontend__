@@ -14,10 +14,11 @@ export const KakaoLoginButton = () => {
         "/users/oauth-login-url/?provider=kakao"
       );
       const url = response.data.data.login_url;
-      console.log(response);
 
       if (response.data.status_code === 200) {
         window.location.href = url;
+        // console.log(url);
+        console.log(response);
         // console.log(url);
       }
       // setUserData(response.data.data);

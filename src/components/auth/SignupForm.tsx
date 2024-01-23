@@ -43,12 +43,16 @@ export const SignupForm = () => {
 
   const onSubmit = (data: RegisterField) => {
     registerMutation(data);
-  }
+  };
 
   const handleValidateEmail = () => {
     console.log("validate email");
 
-    validateMutation({ email: getValues("email") });
+    const email = validateMutation({ email: getValues("email") });
+    console.log(email);
+
+    // const email = { email: getValues("email") };
+    // console.log(email);
   };
 
   const handleValidateNick = () => {
