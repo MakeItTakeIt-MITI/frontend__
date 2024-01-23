@@ -103,10 +103,10 @@ export const userLogout = async () => {
     }
 }
 
-export const getUserData = async (userId: number) => {
+export const getUserData = async (userId: number | null) => {
     try {
         const response = await axiosUrl.get(`/users/${userId}/`)
-        console.log(response.data);
+        // console.log(response.data);
         return response.data
     } catch (error) {
         console.error(error)

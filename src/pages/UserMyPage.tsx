@@ -6,11 +6,14 @@ import { UserEditField } from "../interface/usersInterface";
 import useUserDataStore from "../store/useUserDataStore";
 import { deleteAccount, userEditInfo } from "../api/users";
 import { useNavigate } from "react-router-dom";
+import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
 
 export const UserMyPage = () => {
-  const { register, handleSubmit, getValues, watch } = useForm<UserEditField>();
+  const { register, handleSubmit, watch } = useForm<UserEditField>();
   const { userId } = useUserDataStore();
   const navigate = useNavigate();
+  const { data } = useUserInfoQuery(userId);
+  console.log("mypage user data query", data);
 
   const handleDeleteAccount = () => {
     if (window.confirm("정말 계정을 삭제하기겠습니까?")) {
@@ -39,8 +42,10 @@ export const UserMyPage = () => {
     <div className="tablet:p-10 mobile:flex mobile:flex-col  h-screen pb-[6rem] ">
       <NavigateToPrevContainer />
       <div className="p-4 flex flex-col gap-2">
-        <p className="text-xl">지원 님 (자바스원)</p>
-        <p>현재 모집중인 경게 참여하세요!</p>
+        <p className="text-xl">
+          {data?.data.name} 님 ({data?.data.nickname})
+        </p>
+        <p>현재 모집중인 경기에 참여하기!</p>
       </div>
       <hr className="mobile:block tablet:hidden w-full" />
 
@@ -54,7 +59,7 @@ export const UserMyPage = () => {
           id="nickname"
           required
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
-          placeholder="닉네임을 입력해주세요."
+          placeholder={data?.data.nickname}
           {...register("nickname", {
             required: true,
           })}
