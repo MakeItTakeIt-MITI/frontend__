@@ -22,6 +22,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
       alert("로그아웃 되었습니다.");
       logout();
       navigate("/");
+
       setDisplayTab(false);
     } else {
       alert("취소합니다.");

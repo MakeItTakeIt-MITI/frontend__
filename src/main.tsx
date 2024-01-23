@@ -15,6 +15,7 @@ import { SMSAuthenticationPage } from "./pages/SMSAuthenticationPage.tsx";
 import { UserMyPage } from "./pages/UserMyPage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { KakaoAuthHandler } from "./components/auth/KakaoAuthHandler.tsx";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/sms-authentication",
         element: <SMSAuthenticationPage />,
+      },
+      {
+        path: "/users/login/oauth",
+        element: <KakaoAuthHandler />,
       },
       {
         path: "/profile",

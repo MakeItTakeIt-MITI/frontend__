@@ -1,3 +1,4 @@
+import axios from "axios";
 import { LoginField, RegisterField, UserEditField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
@@ -19,17 +20,38 @@ export const userKakaoLogin = async () => {
     try {
         const response = await axiosUrl.get("/users/oauth-login-url/?provider=kakao");
         const url = response.data.data.login_url
+        console.log(response);
+
+
+        // console.log(JSON.stringify(response))
+
         if (response.data.status_code === 200) {
-            // console.log(url);
             window.location.href = url
-            console.log(response.data);
+            // const REDIRECT_URI = "http://api.makeittakeit.kr/users/callback/kakao/login/"
+            // const REDIRECT_URI = "http://localhost:3000/oauth"
+
+            // const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY
+            // console.log(REDIRECT_URI);
+            // console.log(REST_API_KEY);
+            // window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
         }
-        console.log(response.data);
+        // console.log(url);
+        // window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+        // return window.location.href = url
+        // alert(JSON.stringify(response))
+        // const code = new URL(window.location.href).searchParams.get('code')
+        // console.log(response);
+
+
+
+        // }
+        console.log(response);
+        // console.log(response.data);
+        // return response
     } catch (error) {
         console.log(error);
-
     }
-
 
 }
 
