@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
 import { useLogoutMutation } from "../../hooks/useLogoutMutation";
+import closeButton from "../../assets/x_button.svg";
 
 interface DisplayTab {
   setDisplayTab: (arg: boolean) => void;
@@ -37,7 +38,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
       <div className="flex flex-col justify-around py-2 fixed  right-0 bottom-0 left-0 h-[18rem] bg-white rounded-t-xl ">
         <div className="h-8 p-2 flex justify-end">
           <button onClick={() => setDisplayTab(false)}>
-            {/* <img src={closeButton} alt="close tab" className="w-6 " /> */}
+            <img src={closeButton} alt="close tab" className="w-6 " />
           </button>
         </div>
         <hr className="w-full" />
