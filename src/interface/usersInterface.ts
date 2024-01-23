@@ -32,7 +32,7 @@ export interface ValidationProps {
 }
 
 export interface UserEditField {
-    email?: string,
+    email?: (arg: string) => void,
     password: string;
     password_check: string;
 
