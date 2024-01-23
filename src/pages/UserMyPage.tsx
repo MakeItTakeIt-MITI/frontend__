@@ -1,5 +1,3 @@
-import { useNicknameMutation } from "../hooks/useNicknameMutation";
-import { useDeleteAccMutation } from "../hooks/useDeleteAccMutation";
 import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
 import { useForm } from "react-hook-form";
 import { UserEditField } from "../interface/usersInterface";
@@ -18,7 +16,8 @@ export const UserMyPage = () => {
   const handleDeleteAccount = () => {
     if (window.confirm("정말 계정을 삭제하기겠습니까?")) {
       alert("계정 삭제되었습니다");
-      deleteAccount(userId);
+      const id = data?.data.id;
+      deleteAccount(id);
       localStorage.clear();
       // window.location.reload();
       navigate("/login");
