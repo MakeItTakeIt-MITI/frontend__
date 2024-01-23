@@ -102,3 +102,14 @@ export const userLogout = async () => {
         console.error(error)
     }
 }
+
+export const getUserData = async (userId: number) => {
+    try {
+        const response = await axiosUrl.get(`/users/${userId}/`)
+        console.log(response.data);
+        return response.data
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
