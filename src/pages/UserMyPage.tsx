@@ -4,35 +4,36 @@ import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
 import { useForm } from "react-hook-form";
 import { UserEditField } from "../interface/usersInterface";
 import useUserDataStore from "../store/useUserDataStore";
-import { userEditInfo } from "../api/users";
+import { deleteAccount, userEditInfo } from "../api/users";
+import { useNavigate } from "react-router-dom";
 
 export const UserMyPage = () => {
   const { register, handleSubmit, getValues, watch } = useForm<UserEditField>();
   const { userId } = useUserDataStore();
+  const navigate = useNavigate();
 
   const handleDeleteAccount = () => {
-    mutateDelete(userId);
+    if (window.confirm("정말 계정을 삭제하기겠습니까?")) {
+      alert("계정 삭제되었습니다");
+      deleteAccount(userId);
+      localStorage.clear();
+      // window.location.reload();
+      navigate("/login");
+    } else {
+      alert("취소합니다.");
+      return;
+    }
   };
 
-  const { mutate: mutateNickname, isPending, isError } = useNicknameMutation();
-  const { mutate: mutateDelete } = useDeleteAccMutation();
-
   const onSubmit = () => {
-    const watchNick = watch("nickname");
-    mutateNickname({ id: userId, data: { nickname: watchNick } });
+    // const watchNick = watch("nickname");
+    // mutateNickname({ id: userId, data: { nickname: watchNick } });
   };
 
   const handleChangeNickname = () => {
     const nickname = watch("nickname");
     userEditInfo(userId, { nickname });
   };
-  if (isPending) {
-    console.log("Pending..");
-  }
-
-  if (isError) {
-    console.log(isError);
-  }
 
   return (
     <div className="tablet:p-10 mobile:flex mobile:flex-col  h-screen pb-[6rem] ">
@@ -58,8 +59,12 @@ export const UserMyPage = () => {
             required: true,
           })}
         />
-        <button onClick={handleChangeNickname} type="button">
-          닉네임 변경
+        <button
+          className=" rounded-xl w-full  h-14 bg-gray-200"
+          onClick={handleChangeNickname}
+          type="button"
+        >
+          닉네임 수정
         </button>
         <input
           type="password"
@@ -81,13 +86,16 @@ export const UserMyPage = () => {
             required: true,
           })}
         />
-        <button className="rounded-xl w-full h-14 bg-gray-200">수정하기</button>
+        <button type="button" className="rounded-xl w-full h-14 bg-gray-200">
+          비밀번호 수정
+        </button>
       </form>
       <hr className="mobile:block tablet:hidden w-full" />
 
       <div className="p-4 flex flex-col gap-4">
-        <p className="text-red-400 font-bold">계정 삭제하기</p>
+        <p className="text-red-400 ">계정 삭제하기</p>
         <button
+          type="button"
           onClick={handleDeleteAccount}
           className=" rounded-xl w-full  h-14 bg-gray-200"
         >

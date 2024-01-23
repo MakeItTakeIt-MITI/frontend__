@@ -82,28 +82,23 @@ export const userEditInfo = async (id: number | null, data: UserEditField) => {
 
 }
 
-export const deleteAccount = async (id: number) => {
-    const response = await axiosUrl.delete(`/users/${id}/`)
-    console.log(response.data);
-
-    return response.data
+export const deleteAccount = async (id: number | null) => {
+    try {
+        const response = await axiosUrl.delete(`/users/${id}/`)
+        console.log(response.data);
+        return response.data
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-export const userLogout = async ({ access_token, refresh_token }: TokenField) => {
-
+export const userLogout = async () => {
     try {
-
-        const response = await axiosUrl.get('/users/logout/', {
-            headers: {
-                Authorization: `Bearer ${access_token}`,
-                Refresh: refresh_token
-            }
-        });
-
+        const response = await axiosUrl.post('/users/logout/')
         console.log(response.data);
         return response.data;
+
     } catch (error) {
-        console.error('Logout error:', error);
-        throw error;
+        console.error(error)
     }
 }
