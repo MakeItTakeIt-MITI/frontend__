@@ -81,6 +81,16 @@ export const userEditNickname = async (id: number | null, data: UserEditField) =
     }
 }
 
+export const userEditPassword = async (id: number | null, data: UserEditField) => {
+    try {
+        const response = await axiosUrl.patch(`/users/${id}/`, data)
+        console.log(response);
+        return response.data
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 export const deleteAccount = async (id: number | null) => {
     try {
         const response = await axiosUrl.delete(`/users/${id}/`)

@@ -2,7 +2,11 @@ import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
 import { useForm } from "react-hook-form";
 import { UserEditField } from "../interface/usersInterface";
 import useUserDataStore from "../store/useUserDataStore";
-import { deleteAccount, userEditNickname } from "../api/users";
+import {
+  deleteAccount,
+  userEditNickname,
+  userEditPassword,
+} from "../api/users";
 import { useNavigate } from "react-router-dom";
 import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
 
@@ -43,6 +47,27 @@ export const UserMyPage = () => {
     }
   };
 
+  const handleChangePassword = () => {
+    const watchPassword = watch("password");
+    const watchPasswordCheck = watch("password_check");
+    const id = data?.data.id;
+
+    if (watchPassword !== watchPasswordCheck) {
+      alert("password does not match");
+      return;
+    }
+
+    if (id != null && watchPassword != null && watchPasswordCheck !== null) {
+      const userEditField: UserEditField = {
+        id: id,
+        password: watchPassword,
+        password_check: watchPasswordCheck,
+      };
+      userEditPassword(id, userEditField);
+      window.location.reload();
+    }
+  };
+
   return (
     <div className="tablet:p-10 mobile:flex mobile:flex-col  h-screen pb-[6rem] ">
       <NavigateToPrevContainer />
@@ -78,7 +103,7 @@ export const UserMyPage = () => {
           id="password"
           required
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
-          placeholder="현재 비밀번호를 입력해주세요."
+          placeholder="새로운 비밀번호를 입력해주세요."
           {...register("password", {
             required: true,
           })}
@@ -93,7 +118,11 @@ export const UserMyPage = () => {
             required: true,
           })}
         />
-        <button type="button" className="rounded-xl w-full h-14 bg-gray-200">
+        <button
+          type="button"
+          onClick={handleChangePassword}
+          className="rounded-xl w-full h-14 bg-gray-200"
+        >
           비밀번호 수정
         </button>
       </form>
