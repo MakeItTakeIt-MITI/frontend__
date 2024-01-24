@@ -1,5 +1,5 @@
 
-import { LoginField, RegisterField, TokenField, UserEditField } from "../interface/usersInterface";
+import { LoginField, RegisterField, RequestCodeField, TokenField, UserEditField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
 export const userLoginAuth = async (data: LoginField) => {
@@ -107,6 +107,19 @@ export const getUserData = async (userId: number | null) => {
     try {
         const response = await axiosUrl.get(`/users/${userId}/`)
         // console.log(response.data);
+        return response.data
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
+
+export const requestSmsCode = async (data: RequestCodeField) => {
+    try {
+        const response = await axiosUrl.post('/users/send-sms/', data)
+        localStorage.removeItem("authentication_token");
+        localStorage.setItem("authentication_token", response.data.data.authentication_token)
+        console.log(response.data);
         return response.data
     } catch (error) {
         console.error(error)

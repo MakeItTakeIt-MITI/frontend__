@@ -43,3 +43,8 @@ export interface TokenField {
     access_token: string | null,
     refresh_token: string | null
 }
+
+export interface RequestCodeField {
+    email: string;
+    password: string;
+}
