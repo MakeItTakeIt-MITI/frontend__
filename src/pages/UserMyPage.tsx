@@ -69,7 +69,7 @@ export const UserMyPage = () => {
   };
 
   return (
-    <div className="tablet:p-10 mobile:flex mobile:flex-col  h-screen pb-[6rem] ">
+    <div className="tablet:px-[13rem] w-full  mobile:flex mobile:flex-col  pb-[6rem] ">
       <NavigateToPrevContainer />
       <div className="p-4 flex flex-col gap-2">
         <p className="text-xl">
@@ -78,9 +78,9 @@ export const UserMyPage = () => {
         <p>{data?.data.birthday}</p>
         <p>{data?.data.email}</p>
       </div>
-      <hr className="mobile:block tablet:hidden w-full" />
+      <hr className="  w-full" />
 
-      <form className="flex flex-col gap-6  mobile:w-full mobile:p-4 tablet:px-[13rem] tablet:w-[600px]">
+      <form className="flex flex-col gap-6  mobile:w-full mobile:p-4 ">
         <h4 className="font-bold">닉네임 수정</h4>
         <input
           type="text"
@@ -94,12 +94,14 @@ export const UserMyPage = () => {
         />
 
         <button
-          className=" rounded-xl w-full  h-14 bg-gray-200"
+          className=" rounded-xl w-full  h-14 bg-[#4065f6] text-white"
           onClick={handleChangeNickname}
           type="button"
         >
           닉네임 수정
         </button>
+        <h4 className="font-bold">비밀번호 변경</h4>
+
         <input
           type="password"
           id="password"
@@ -124,7 +126,7 @@ export const UserMyPage = () => {
         <button
           type="button"
           onClick={handleChangePassword}
-          className="rounded-xl w-full h-14 bg-gray-200"
+          className="rounded-xl w-full h-14 bg-[#4065f6] text-white"
         >
           비밀번호 수정
         </button>
@@ -132,11 +134,12 @@ export const UserMyPage = () => {
       <hr className="mobile:block tablet:hidden w-full" />
 
       <div className="p-4 flex flex-col gap-4">
-        <p className="text-red-400 ">계정 삭제하기</p>
+        <h4 className="font-bold">계정 삭제</h4>
+
         <button
           type="button"
           onClick={handleDeleteAccount}
-          className=" rounded-xl w-full  h-14 bg-gray-200"
+          className=" rounded-xl w-full  h-14 bg-[#db5e5e] text-white"
         >
           회원탈퇴
         </button>
