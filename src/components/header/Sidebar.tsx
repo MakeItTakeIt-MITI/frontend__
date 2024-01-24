@@ -6,9 +6,9 @@ import { userLogout } from "../../api/users";
 import homeIcon from "../../assets/header_home_icon.svg";
 import gamesIcon from "../../assets/header_games_icon.svg";
 import profileIcon from "../../assets/header_profile_icon.svg";
-import viewAllIcon from "../../assets/header_all_icon.svg";
 import { useUserInfoQuery } from "../../hooks/useUserInfoQuery";
-import { useEffect } from "react";
+import "./sidebar.css";
+import useUserDataStore from "../../store/useUserDataStore";
 
 interface DisplayTab {
   setDisplayTab: (arg: boolean) => void;
@@ -16,8 +16,8 @@ interface DisplayTab {
 
 export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
   const { isLoggedIn, logout } = useAuthStore();
+  const { userId } = useUserDataStore();
   const navigate = useNavigate();
-  const userId = localStorage.getItem("id");
 
   const { data } = useUserInfoQuery(userId);
 
@@ -41,7 +41,10 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
 
   return (
     <div className="bg-black bg-opacity-50 fixed top-0 bottom-0 right-0 left-0  ">
-      <div className="flex flex-col gap-6 justify-around px-4 py-6 fixed  top-0 left-0 bottom-0   w-[18rem] bg-white rounded-tr-xl rounded-br-xl ">
+      <div
+        id="fill-left-to-right"
+        className="flex flex-col gap-6 justify-around px-4 py-6 fixed  top-0 left-0 bottom-0   w-[18rem] bg-white rounded-tr-xl rounded-br-xl "
+      >
         <div className="h-8 flex justify-between">
           <div>
             {isLoggedIn ? (

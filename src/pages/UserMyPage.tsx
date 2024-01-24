@@ -75,7 +75,8 @@ export const UserMyPage = () => {
         <p className="text-xl">
           {data?.data.name} 님 ({data?.data.nickname})
         </p>
-        <p>현재 모집중인 경기에 참여하기!</p>
+        <p>{data?.data.birthday}</p>
+        <p>{data?.data.email}</p>
       </div>
       <hr className="mobile:block tablet:hidden w-full" />
 
