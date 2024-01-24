@@ -27,14 +27,14 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
   };
 
   return (
-    <div className="bg-black bg-opacity-50 fixed top-0 bottom-0 right-0 left-0 ">
-      <div className="flex flex-col justify-around py-2 fixed  right-0 bottom-0 left-0 h-[18rem] bg-white rounded-t-xl ">
+    <div className="bg-black bg-opacity-50 fixed top-0 bottom-0 right-0 left-0  ">
+      <div className="flex flex-col justify-around py-2 fixed  top-0 left-0 bottom-0   w-[18rem] bg-white rounded-tr-xl rounded-br-xl ">
         <div className="h-8 p-2 flex justify-end">
           <button onClick={() => setDisplayTab(false)}>
             <img src={closeButton} alt="close tab" className="w-6 " />
           </button>
         </div>
-        <hr className="w-full" />
+        {/* <hr className="w-full" /> */}
         {/* <h4 className="text-red-600 text-center">수정중</h4> */}
         <div className="p-6 flex items-center  flex-wrap gap-6 text-md">
           <Link
