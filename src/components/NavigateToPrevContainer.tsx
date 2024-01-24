@@ -1,14 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import backArrow from "../assets/Chevron_Left.png";
+import useAuthStore from "../store/useAuthStore";
 
 export const NavigateToPrevContainer = () => {
+  const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
 
-  const navigatePrev = () => navigate(-1);
+  // const navigatePrev = () => navigate(-1);
+  const navigateHome = () => navigate("/");
 
   return (
     <div className="tablet:p-10">
-      <button className="mobile:block tablet:hidden p-4" onClick={navigatePrev}>
+      <button className="mobile:block tablet:hidden p-4" onClick={navigateHome}>
         <img src={backArrow} alt="back arrow" className="w-6" />
       </button>
       <hr className="mobile:block tablet:hidden w-full" />

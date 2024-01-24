@@ -4,19 +4,22 @@ import mitiLogo from "../assets/MITI_logo.svg";
 import backArrow from "../assets/Chevron_Left.png";
 
 import { KakaoLoginButton } from "../components/kakao/KakaoLoginButton";
+import useAuthStore from "../store/useAuthStore";
 
 export const UserLogin = () => {
+  const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
 
   const navigatePrev = () => navigate(-1);
+  const navigateHome = () => navigate("/");
 
   return (
-    <div className="tablet:p-10 mobile:flex mobile:flex-col mobile:justify-between h-screen pb-[6rem] ">
+    <div className="tablet:p-10 mobile:flex mobile:flex-col mobile:justify-between h-screen pb-4">
       <div className="flex flex-col gap-8">
         <div>
           <button
             className="mobile:block tablet:hidden p-4"
-            onClick={navigatePrev}
+            onClick={isLoggedIn ? navigatePrev : navigateHome}
           >
             <img src={backArrow} alt="back arrow" />
           </button>
