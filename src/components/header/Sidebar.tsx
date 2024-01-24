@@ -45,13 +45,16 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
         <div className="h-8 flex justify-between">
           <div>
             {isLoggedIn ? (
-              <Link
-                to="/profile"
-                className="font-[600] text-xl"
-                onClick={closeTab}
-              >
-                {data?.data.name} 님 ({data?.data.nickname})
-              </Link>
+              <div className="flex flex-col">
+                <Link
+                  to="/profile"
+                  className="font-[600] text-xl"
+                  onClick={closeTab}
+                >
+                  {data?.data.name} 님 ({data?.data.nickname})
+                </Link>{" "}
+                <p className="font-[400] text-sm">{data?.data.email}</p>
+              </div>
             ) : (
               <Link
                 to="/login"
