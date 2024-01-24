@@ -2,15 +2,16 @@ import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
 import { useForm } from "react-hook-form";
 import { UserEditField } from "../interface/usersInterface";
 import useUserDataStore from "../store/useUserDataStore";
-import { deleteAccount, userEditInfo } from "../api/users";
+import { deleteAccount, userEditNickname } from "../api/users";
 import { useNavigate } from "react-router-dom";
 import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
 
 export const UserMyPage = () => {
-  const { register, handleSubmit, watch } = useForm<UserEditField>();
+  const { register, watch } = useForm<UserEditField>();
   const { userId } = useUserDataStore();
   const navigate = useNavigate();
   const { data } = useUserInfoQuery(userId);
+
   console.log("mypage user data query", data);
 
   const handleDeleteAccount = () => {
@@ -27,14 +28,19 @@ export const UserMyPage = () => {
     }
   };
 
-  const onSubmit = () => {
-    // const watchNick = watch("nickname");
-    // mutateNickname({ id: userId, data: { nickname: watchNick } });
-  };
-
   const handleChangeNickname = () => {
-    const nickname = watch("nickname");
-    userEditInfo(userId, { nickname });
+    const watchNick = watch("nickname");
+    const id = data?.data.id;
+
+    if (id != null && watchNick != null) {
+      const userEditField: UserEditField = {
+        id: id,
+        nickname: watchNick,
+      };
+
+      userEditNickname(id, userEditField);
+      window.location.reload();
+    }
   };
 
   return (
@@ -48,10 +54,7 @@ export const UserMyPage = () => {
       </div>
       <hr className="mobile:block tablet:hidden w-full" />
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-6  mobile:w-full mobile:p-4 tablet:px-[13rem] tablet:w-[600px]"
-      >
+      <form className="flex flex-col gap-6  mobile:w-full mobile:p-4 tablet:px-[13rem] tablet:w-[600px]">
         <h4 className="font-bold">닉네임 수정</h4>
         <input
           type="text"

@@ -1,5 +1,5 @@
 
-import { LoginField, RegisterField, RequestCodeField, TokenField, UserEditField } from "../interface/usersInterface";
+import { LoginField, RegisterField, RequestCodeField, UserEditField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
 export const userLoginAuth = async (data: LoginField) => {
@@ -71,15 +71,14 @@ export const userSignup = async (data: RegisterField) => {
 }
 
 
-export const userEditInfo = async (id: number | null, data: UserEditField) => {
+export const userEditNickname = async (id: number | null, data: UserEditField) => {
     try {
         const response = await axiosUrl.patch(`/users/${id}/`, data)
         console.log(response);
-        return response
+        return response.data
     } catch (error) {
         console.error(error)
     }
-
 }
 
 export const deleteAccount = async (id: number | null) => {

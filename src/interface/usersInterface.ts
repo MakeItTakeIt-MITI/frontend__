@@ -32,8 +32,8 @@ export interface ValidationProps {
 }
 
 export interface UserEditField {
-    userId?: number;
-    nickname?: string;
+    id: number | null
+    nickname?: string | null;
     password?: string;
     password_check?: string;
 
