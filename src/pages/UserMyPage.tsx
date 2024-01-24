@@ -9,12 +9,14 @@ import {
 } from "../api/users";
 import { useNavigate } from "react-router-dom";
 import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
+import { useState } from "react";
 
 export const UserMyPage = () => {
   const { register, watch } = useForm<UserEditField>();
   const { userId } = useUserDataStore();
   const navigate = useNavigate();
   const { data } = useUserInfoQuery(userId);
+  const [passwordError, setPasswordError] = useState("");
 
   console.log("mypage user data query", data);
 
@@ -53,7 +55,7 @@ export const UserMyPage = () => {
     const id = data?.data.id;
 
     if (watchPassword !== watchPasswordCheck) {
-      alert("password does not match");
+      setPasswordError("비밀번호가 일치하지 않습니다.");
       return;
     }
 
@@ -63,6 +65,17 @@ export const UserMyPage = () => {
         password: watchPassword,
         password_check: watchPasswordCheck,
       };
+
+      const passwordRegex =
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
+      if (!passwordRegex.test(watchPassword)) {
+        setPasswordError(
+          "비밀번호는 8자 이상의 영문 대소문자와 숫자, 특수문자를 포함하여야 합니다."
+        );
+        return;
+      }
+
+      setPasswordError("");
       userEditPassword(id, userEditField);
       window.location.reload();
     }
@@ -118,6 +131,8 @@ export const UserMyPage = () => {
             required: true,
           })}
         />
+        {passwordError && <p className="text-red-400">{passwordError}</p>}
+
         <button
           type="button"
           onClick={handleChangePassword}
