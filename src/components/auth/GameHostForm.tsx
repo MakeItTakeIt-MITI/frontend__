@@ -8,8 +8,7 @@ export const GameHostForm = () => {
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
 
-  // console.log(setValue("starttime", startTime));
-  const onInvalid = (errors: string) => console.error(errors);
+  // const onInvalid = (errors) => console.error(errors);
   useEffect(() => {
     const startDate = startDateTime.split("T")[0];
     const startTime = startDateTime.split("T")[1];
@@ -34,7 +33,7 @@ export const GameHostForm = () => {
   return (
     <form
       className="flex flex-col gap-4  justify-between w-full text-[14px]"
-      onSubmit={handleSubmit(onSubmit, onInvalid)}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <h4 className="font-bold">경기 정보</h4>
       <div className="flex flex-col gap-2">
