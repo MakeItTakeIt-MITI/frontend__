@@ -45,20 +45,19 @@ export const DaumAddressSearcher = ({ register }: Register) => {
   return (
     <div className="flex flex-col gap-2 relative">
       <label htmlFor="address" className=" text-[#999]">
-        경기장 주소
+        경기 주소
       </label>
 
       <input
-        className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full"
+        className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full  pr-[90px]"
         type="text"
-        {...register("address", {
-          required: true,
-        })}
+        {...register("address")}
         value={showAddressPopup ? showAddressPopup : ""}
         readOnly
         placeholder="경기장 주소를 입력해주세요."
       />
       <button
+        type="button"
         onClick={handleClick}
         className="w-[81px] h-[36px]  bg-[#4065F6] text-[12px] rounded-xl text-white absolute right-0 bottom-1.5"
       >

@@ -1,9 +1,31 @@
 import { useForm } from "react-hook-form";
 import { DaumAddressSearcher } from "../address/DaumAddressSearcher";
 import { GameHostField } from "../../interface/gameInterface";
+import { useEffect, useState } from "react";
 
 export const GameHostForm = () => {
-  const { handleSubmit, register } = useForm<GameHostField>();
+  const { handleSubmit, register, setValue } = useForm<GameHostField>();
+  const [startDateTime, setStartDateTime] = useState("");
+  const [endDateTime, setEndDateTime] = useState("");
+
+  // console.log(setValue("starttime", startTime));
+  const onInvalid = (errors: string) => console.error(errors);
+  useEffect(() => {
+    const startDate = startDateTime.split("T")[0];
+    const startTime = startDateTime.split("T")[1];
+    const endDate = endDateTime.split("T")[0];
+    const endTime = endDateTime.split("T")[1];
+
+    setValue("starttime", startTime);
+    setValue("startdate", startDate);
+    setValue("enddate", endDate);
+    setValue("endtime", endTime);
+
+    // console.log("starttime:", startTime);
+    // console.log("startdate:", startDate);
+    // console.log("enddate:", endDate);
+    // console.log("endtime:", endTime);
+  }, [setValue, startDateTime, endDateTime]);
 
   const onSubmit = (data: GameHostField) => {
     console.log(data);
@@ -12,7 +34,7 @@ export const GameHostForm = () => {
   return (
     <form
       className="flex flex-col gap-4  justify-between w-full text-[14px]"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit, onInvalid)}
     >
       <h4 className="font-bold">경기 정보</h4>
       <div className="flex flex-col gap-2">
@@ -30,6 +52,86 @@ export const GameHostForm = () => {
           })}
         />
       </div>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="title" className=" text-[#999]">
+          경기장 이름
+        </label>
+
+        <input
+          type="text"
+          id="title"
+          placeholder="경기장 이름을 입력해주세요"
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
+          {...register("court_title", {
+            required: true,
+          })}
+        />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label>경기 시작</label>
+        <div className="flex items-center ">
+          <input
+            type="datetime-local"
+            id="start_date"
+            required
+            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full"
+            onChange={(e) => setStartDateTime(e.target.value)}
+            // {...register("start_date", {
+            //   required: true,
+            // })}
+          />
+          <input
+            hidden
+            type="text"
+            id="start_date"
+            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full"
+            {...register("startdate", {})}
+          />
+          <input
+            hidden
+            type="text"
+            id="start_time"
+            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
+            {...register("starttime", {})}
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2"></div>
+      <div className="flex flex-col gap-2 justify-center ">
+        <label>경기 종료</label>
+        <div className="flex items-center">
+          <input
+            type="datetime-local"
+            required
+            onChange={(e) => setEndDateTime(e.target.value)}
+            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full"
+          />
+          <input
+            hidden
+            type="text"
+            id="end_date"
+            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] \"
+            {...register("enddate", {})}
+          />
+          <input
+            hidden
+            type="text"
+            id="endtime"
+            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
+            step={900}
+            {...register("endtime", {})}
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="end_time" className=" text-[#999]">
+          경기 종료 시간
+        </label>
+      </div>
+
       <DaumAddressSearcher register={register} />
 
       <div className="flex flex-col gap-2">
@@ -42,61 +144,6 @@ export const GameHostForm = () => {
           className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
           placeholder="상세 주소를 입력해주세요."
           {...register("address_detail", {
-            required: true,
-          })}
-        />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <label htmlFor="start_date" className=" text-[#999]">
-          경기 시작 날짜
-        </label>
-
-        <input
-          type="date"
-          id="start_date"
-          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full"
-        />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <label htmlFor="start_time" className=" text-[#999]">
-          경기 시작 시간
-        </label>
-        <input
-          type="time"
-          id="start_time"
-          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
-          step={900}
-          {...register("start_time", {
-            required: true,
-          })}
-        />
-      </div>
-      <div className="flex flex-col gap-2">
-        <label htmlFor="end_date" className=" text-[#999]">
-          경기 종료 날짜
-        </label>
-
-        <input
-          type="date"
-          id="end_date"
-          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full"
-          {...register("end_date", {
-            required: true,
-          })}
-        />
-      </div>
-      <div className="flex flex-col gap-2">
-        <label htmlFor="end_time" className=" text-[#999]">
-          경기 종료 시간
-        </label>
-        <input
-          type="time"
-          id="end_time"
-          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
-          step={900}
-          {...register("end_time", {
             required: true,
           })}
         />
@@ -152,7 +199,7 @@ export const GameHostForm = () => {
       <hr className="h-[8px] w-full bg-gray-200" />
 
       <h4 className="font-bold">경기 정보</h4>
-      {/* <div className="flex w-full px-0 flex-col gap-2">
+      <div className="flex w-full px-0 flex-col gap-2">
         <label htmlFor="fee" className=" text-[#999]">
           참여비
         </label>
@@ -165,7 +212,7 @@ export const GameHostForm = () => {
             required: true,
           })}
         />
-      </div> */}
+      </div>
 
       <div className="flex justify-between">
         <div className="flex flex-col rounded-lg">
@@ -182,7 +229,10 @@ export const GameHostForm = () => {
         </div>
       </div>
 
-      <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white">
+      <button
+        type="submit"
+        className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white"
+      >
         경기 생성하기
       </button>
     </form>
