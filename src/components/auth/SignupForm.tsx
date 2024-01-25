@@ -240,7 +240,7 @@ export const SignupForm = () => {
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
           type="string"
           id="phone"
-          placeholder="'-'을 제외한 휴대포번호를 입력해주세요."
+          placeholder="'-'을 제외한 휴대폰번호를 입력해주세요."
           {...register("phone", {
             required: true,
           })}
