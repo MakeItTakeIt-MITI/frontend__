@@ -224,6 +224,7 @@ export const SignupForm = () => {
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
           type="date"
           id="birthday"
+          role="user-birthday"
           {...register("birthday", {
             required: true,
           })}
@@ -251,6 +252,7 @@ export const SignupForm = () => {
       </div>
 
       <button
+        role="submit"
         type="submit"
         disabled={!validEmail && !validNickname ? true : false}
         style={
