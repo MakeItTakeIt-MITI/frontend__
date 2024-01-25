@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SMSAuth } from "../interface/authInterface";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import { useRequestSmsCodeMutation } from "../hooks/useRequestSmsCodeMutation";
 
 export const SMSAuthenticationPage = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
 
   useEffect(() => {
     const authentication_token = localStorage.getItem("authentication_token");
@@ -49,9 +49,9 @@ export const SMSAuthenticationPage = () => {
         <button className="mobile:w-full tablet:w-[500px]  h-[44px] bg-[#4065f6] text-white  w-16   rounded-xl text-[13px]  ">
           인증하기
         </button>
-        {error && (
+        {/* {error && (
           <p className=" text-red-500 text-sm">SMS 인증을 실패하셨습니다.</p>
-        )}
+        )} */}
       </form>
 
       <form

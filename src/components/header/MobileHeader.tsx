@@ -6,7 +6,6 @@ import viewAllIcon from "../../assets/header_all_icon.svg";
 import homeIconColor from "../../assets/header_home_color.svg";
 import gamesIconColor from "../../assets/header_game_color.svg";
 import profileIconColor from "../../assets/header_profile_color.svg";
-// import viewIconColor from "../../assets/header_view_color.svg";
 
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";

@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { authenticationSMS } from "../api/authentication";
+import { authenticationSMS } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
 export const useVerifySmsMutation = () => {

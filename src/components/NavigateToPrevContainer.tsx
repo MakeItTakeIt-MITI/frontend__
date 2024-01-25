@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import backArrow from "../assets/Chevron_Left.png";
-import useAuthStore from "../store/useAuthStore";
 
 export const NavigateToPrevContainer = () => {
-  const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
 
   // const navigatePrev = () => navigate(-1);

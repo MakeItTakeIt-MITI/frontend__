@@ -1,11 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { userKakaoLogin } from "../../api/users";
 import kakaoMsgIcon from "../../assets/kakao_msg_icon.svg";
 import axiosUrl from "../../utils/axios";
-import { useState } from "react";
 
 export const KakaoLoginButton = () => {
-  // const [userData, setUserData] = useState([]);
   const navigate = useNavigate();
 
   const userKakaoLogin = async () => {
@@ -17,7 +14,6 @@ export const KakaoLoginButton = () => {
 
       if (response.data.status_code === 200) {
         window.location.href = url;
-        // console.log(url);
         console.log(response);
         // console.log(url);
       }

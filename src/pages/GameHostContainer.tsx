@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
 import { useEffect } from "react";
 
-import mitiLogo from "../assets/MITI_logo.svg";
 import backArrow from "../assets/Chevron_Left.png";
 import { GameHostForm } from "../components/auth/GameHostForm";
 

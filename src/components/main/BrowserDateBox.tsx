@@ -1,4 +1,4 @@
-import { TabletView, isDesktop } from "react-device-detect";
+import { TabletView } from "react-device-detect";
 
 export const BrowserDateBox = () => {
   return (
