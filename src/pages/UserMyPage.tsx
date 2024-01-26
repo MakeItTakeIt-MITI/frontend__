@@ -86,6 +86,7 @@ export const UserMyPage = () => {
           type="text"
           id="nickname"
           required
+          role="input-nickname"
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           placeholder={data?.data.nickname}
           {...register("nickname", {
@@ -97,6 +98,7 @@ export const UserMyPage = () => {
           className=" rounded-xl w-full  h-14 bg-[#4065f6] text-white"
           onClick={handleChangeNickname}
           type="button"
+          role="change-nickname"
         >
           닉네임 수정
         </button>
@@ -106,6 +108,7 @@ export const UserMyPage = () => {
           type="password"
           id="password"
           required
+          role="input-password"
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           placeholder="새로운 비밀번호를 입력해주세요."
           {...register("password", {
@@ -116,6 +119,7 @@ export const UserMyPage = () => {
           type="password"
           id="password_check"
           required
+          role="input-password-confirm"
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           placeholder="확인 비밀번호를 입력해주세요."
           {...register("password_check", {
@@ -125,6 +129,7 @@ export const UserMyPage = () => {
 
         <button
           type="button"
+          role="change-password"
           onClick={handleChangePassword}
           className="rounded-xl w-full h-14 bg-[#4065f6] text-white"
         >

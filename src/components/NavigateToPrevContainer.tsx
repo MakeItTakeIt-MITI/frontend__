@@ -9,7 +9,11 @@ export const NavigateToPrevContainer = () => {
 
   return (
     <div className="tablet:p-10">
-      <button className="mobile:block tablet:hidden p-4" onClick={navigateHome}>
+      <button
+        role="go-prev-button"
+        className="mobile:block tablet:hidden p-4"
+        onClick={navigateHome}
+      >
         <img src={backArrow} alt="back arrow" className="w-6" />
       </button>
       <hr className="mobile:block tablet:hidden w-full" />
