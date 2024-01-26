@@ -1,0 +1,61 @@
+// import "@testing-library/jest-dom";
+// import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+// import { MemoryRouter } from "react-router-dom";
+// import { BrowserHeader } from "../components/header/BrowserHeader";
+// import useAuthStore from "../store/useAuthStore";
+
+// function handleLogoutMock(): void {
+//   throw new Error("Function not implemented.");
+// }
+
+// test("Landing on a 404 Page Test", () => {
+//   const badRoute = "/some/bad/route";
+//   <MemoryRouter initialEntries={[badRoute]}></MemoryRouter>;
+
+//   expect(screen.getByText(/NotFound/i)).toBeInTheDocument();
+// });
+
+// test("Tests <BrowserHeader /> Routing Path", async () => {
+//   useAuthStore.setState({ isLoggedIn: false });
+
+//   render(
+//     <MemoryRouter>
+//       <BrowserHeader handleLogout={handleLogoutMock} />
+//     </MemoryRouter>
+//   );
+
+//   const loginEl = screen.getByText("로그인");
+
+//   fireEvent.click(loginEl);
+//   expect(loginEl).toHaveBeenCalledTimes(1);
+//   expect(loginEl).toBeInTheDocument();
+//   console.log("Current path:", window.location.pathname);
+//   await waitFor(() => expect(window.location.pathname).toEqual("/login"));
+//     timeout: 5000,
+//   });
+
+//   const signupEl = screen.getByText("회원가입");
+//   const createGameEl = screen.getByText("경기 만들기");
+//   const findGamesEl = screen.getByText("빠른 매칭");
+
+//   const logo = screen.getByAltText("miti logo");
+//   fireEvent.click(signupEl);
+//   await waitFor(() => {
+//     expect(window.location.pathname).toBe("/signup");
+//   });
+
+//   fireEvent.click(createGameEl);
+//   await waitFor(() => {
+//     expect(window.location.pathname).toBe("/operate");
+//   });
+
+//   fireEvent.click(findGamesEl);
+//   await waitFor(() => {
+//     expect(window.location.pathname).toBe("/");
+//   });
+
+//   fireEvent.click(logo);
+//   await waitFor(() => {
+//     expect(window.location.pathname).toContain("/");
+//   });
+// });
