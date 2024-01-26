@@ -35,7 +35,11 @@ export const UserLogin = () => {
           <KakaoLoginButton />
           <div className="flex justify-center  gap-4 text-[#585858] text-[14px]">
             <p className="">아직 회원이 아니신가요? </p>
-            <Link to="/signup" className="text-[#4065F6] hover:font-bold  ">
+            <Link
+              role="to-signup"
+              to="/signup"
+              className="text-[#4065F6] hover:font-bold  "
+            >
               회원가입하기
             </Link>
           </div>

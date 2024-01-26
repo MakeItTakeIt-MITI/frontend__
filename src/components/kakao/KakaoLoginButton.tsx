@@ -34,6 +34,7 @@ export const KakaoLoginButton = () => {
       <button
         className="w-full bg-[#FAE64D] h-[48px]  rounded-lg text-[14px] font-bold"
         onClick={kakaoLogin}
+        role="kakao-login-btn"
       >
         카카오로 3초만에 시작하기
       </button>
