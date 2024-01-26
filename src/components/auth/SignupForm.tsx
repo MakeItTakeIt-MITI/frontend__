@@ -73,6 +73,7 @@ export const SignupForm = () => {
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
           type="email"
           id="email"
+          role="input-email"
           disabled={validEmail ? true : false}
           placeholder="이메일을 입력해주세요."
           {...register("email", {
@@ -85,6 +86,7 @@ export const SignupForm = () => {
             !validEmail ? handleValidateEmail : () => setValidEmail(false)
           }
           type="button"
+          role="validate-email"
           style={
             !validEmail
               ? { backgroundColor: "#4065f6" }
@@ -124,6 +126,7 @@ export const SignupForm = () => {
           type="password"
           placeholder="비밀번호를 입력해주세요."
           id="password"
+          role="input-password"
           {...register("password", {
             required: true,
           })}
@@ -142,6 +145,7 @@ export const SignupForm = () => {
           type="password"
           placeholder="비밀번호를 한번 더 입력해주세요."
           id="password_check"
+          role="input-password-check"
           {...register("password_check", {
             required: true,
           })}
@@ -158,6 +162,7 @@ export const SignupForm = () => {
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
           type="text"
           id="name"
+          role="input-name"
           placeholder="이름을 입력해주세요."
           {...register("name", {
             required: true,
@@ -175,6 +180,7 @@ export const SignupForm = () => {
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
           type="text"
           id="nickname"
+          role="input-nickname"
           disabled={validNickname ? true : false}
           placeholder="닉네임을 입력해주세요."
           {...register("nickname", {
@@ -187,6 +193,7 @@ export const SignupForm = () => {
             !validNickname ? handleValidateNick : () => setValidNickname(false)
           }
           type="button"
+          role="validate-nickname"
           style={
             !validNickname
               ? { backgroundColor: "#4065f6" }

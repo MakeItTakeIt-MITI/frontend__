@@ -10,12 +10,16 @@ export const UserSignup = () => {
 
   return (
     <div className="tablet:p-10">
-      <button className="mobile:block tablet:hidden p-4" onClick={navigatePrev}>
+      <button
+        role="prev-btn"
+        className="mobile:block tablet:hidden p-4"
+        onClick={navigatePrev}
+      >
         <img src={backArrow} alt="back arrow" />
       </button>
       <hr className="mobile:block tablet:hidden w-full" />
       <div className="flex items-center flex-col mobile:px-[16px]  mobile:py-[24px] tablet:px-[13rem]">
-        <div className="mb-[36px] flex flex-col gap-2">
+        <div role="miti-logo" className="mb-[36px] flex flex-col gap-2">
           <img src={mitiLogo} alt="miti logo" />
           <h5 className="text-[14px] text-[#1c1c1c]">Make it, Take it!</h5>
         </div>
