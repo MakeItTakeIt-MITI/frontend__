@@ -49,39 +49,3 @@ describe("Tests <BrowserHeader /> DOM Rendering when user is logged/not logged i
     expect(logo).toBeVisible();
   });
 });
-
-// test("Is the path correctly set on <Header /> (Router) when isLoggedIn is false", async () => {
-//   useAuthStore.setState({ isLoggedIn: false });
-
-//   render(
-//     <MemoryRouter>
-//       <BrowserHeader handleLogout={handleLogoutMock} />
-//     </MemoryRouter>
-//   );
-
-//   const loginEl = screen.getByText("로그인");
-//   const signupEl = screen.getByText("회원가입");
-//   const createGameEl = screen.getByText("경기 만들기");
-//   const logo = screen.getByAltText("miti logo");
-//   const findGamesEl = screen.getByText("빠른 배칭");
-
-//   fireEvent.click(loginEl);
-//   await waitFor(() => {
-//     expect(window.location.pathname).toBe("/login");
-//   });
-//   fireEvent.click(signupEl);
-//   await waitFor(() => {
-//     expect(window.location.pathname).toBe("/signup");
-//   });
-//   fireEvent.click(createGameEl);
-//   await waitFor(() => {
-//     expect(window.location.pathname).toBe("/operate");
-//   });
-//   fireEvent.click(findGamesEl);
-//   await waitFor(() => {
-//     expect(window.location.pathname).toBe("/");
-//   });
-
-//   fireEvent.click(logo);
-//   expect(window.location.pathname).toContain("/");
-// });
