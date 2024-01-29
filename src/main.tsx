@@ -17,6 +17,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { KakaoAuthHandler } from "./components/auth/KakaoAuthHandler.tsx";
 import { UserGamesListPage } from "./pages/UserGamesListPage.tsx";
+import { PrivateRoute } from "./pages/PrivateRoute.tsx";
 
 const queryClient = new QueryClient();
 
@@ -27,37 +28,51 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       {
-        path: "/login",
-        element: <UserLogin />,
+        path: "/user",
+        children: [
+          {
+            path: "login",
+            element: <UserLogin />,
+          },
+          {
+            path: "signup",
+            element: <UserSignup />,
+          },
+          {
+            path: "kakao",
+            element: <KakaoAuthHandler />,
+          },
+        ],
       },
-      {
-        path: "/signup",
-        element: <UserSignup />,
-      },
+
       {
         path: "/sms-authentication",
         element: <SMSAuthenticationPage />,
       },
       {
-        path: "/user/kakao",
-        element: <KakaoAuthHandler />,
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: "/profile/:id",
+            element: <UserMyPage />,
+          },
+          {
+            path: "/games",
+            children: [
+              { path: "host", element: <GameHostContainer /> },
+              {
+                path: "detail",
+                element: <GameInfoPage />,
+              },
+              {
+                path: "mygames:id",
+                element: <UserGamesListPage />,
+              },
+            ],
+          },
+        ],
       },
-      {
-        path: "/profile",
-        element: <UserMyPage />,
-      },
-      {
-        path: "/operate",
-        element: <GameHostContainer />,
-      },
-      {
-        path: "/game",
-        element: <GameInfoPage />,
-      },
-      {
-        path: "/game/user/list",
-        element: <UserGamesListPage />,
-      },
+
       {
         path: "/match",
         element: <MatchingPage />,
