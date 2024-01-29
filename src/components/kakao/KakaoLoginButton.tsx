@@ -1,33 +1,15 @@
-import { useNavigate } from "react-router-dom";
 import kakaoMsgIcon from "../../assets/kakao_msg_icon.svg";
-import axiosUrl from "../../utils/axios";
 
 export const KakaoLoginButton = () => {
-  const navigate = useNavigate();
-
-  const userKakaoLogin = async () => {
-    try {
-      const response = await axiosUrl.get(
-        "/users/oauth-login-url/?provider=kakao"
-      );
-      const url = response.data.data.login_url;
-
-      if (response.data.status_code === 200) {
-        window.location.href = url;
-        console.log(response);
-        // console.log(url);
-      }
-      // setUserData(response.data.data);
-
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
+  const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const kakaoLogin = () => {
-    userKakaoLogin();
-    navigate("/");
+    // console.log(REST_API_KEY);
+    // const response = KAKAO_AUTH_URL;
+    // console.log(response);
+    window.location.href = KAKAO_AUTH_URL;
   };
   return (
     <div className="relative w-full">

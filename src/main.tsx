@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <SMSAuthenticationPage />,
       },
       {
-        path: "/kakao/callback",
+        path: "/user/kakao",
         element: <KakaoAuthHandler />,
       },
       {
