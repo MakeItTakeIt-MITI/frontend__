@@ -18,6 +18,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { KakaoAuthHandler } from "./components/auth/KakaoAuthHandler.tsx";
 import { UserGamesListPage } from "./pages/UserGamesListPage.tsx";
 import { PrivateRoute } from "./pages/PrivateRoute.tsx";
+import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
 
 const queryClient = new QueryClient();
 
@@ -27,8 +28,11 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Home /> },
+
       {
         path: "/user",
+        element: <AuthenticateRoutes />,
+
         children: [
           {
             path: "login",
@@ -65,7 +69,7 @@ const router = createBrowserRouter([
                 element: <GameInfoPage />,
               },
               {
-                path: "mygames:id",
+                path: "mygames/:id",
                 element: <UserGamesListPage />,
               },
             ],
