@@ -50,7 +50,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
             {isLoggedIn ? (
               <div className="flex flex-col">
                 <Link
-                  to="/profile"
+                  to="/profile/:id"
                   className="font-[600] text-xl"
                   onClick={closeTab}
                 >
@@ -60,7 +60,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
               </div>
             ) : (
               <Link
-                to="/login"
+                to="/user/login"
                 className="font-[600] text-2xl"
                 onClick={closeTab}
               >
@@ -107,14 +107,14 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
                     경기 매칭
                   </Link>
                   <Link
-                    to="/operate"
+                    to="/games/host"
                     className="hover:underline"
                     onClick={closeTab}
                   >
                     경기 호스팅
                   </Link>
                   <Link
-                    to="/operate"
+                    to="/games/mygames/:id"
                     className="hover:underline"
                     onClick={closeTab}
                   >
@@ -132,7 +132,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
                 <div className="flex flex-col gap-3 ml-1">
                   {isLoggedIn ? (
                     <Link
-                      to="/profile"
+                      to={`/profile/${userId}`}
                       className="hover:underline"
                       onClick={closeTab}
                     >
@@ -141,14 +141,14 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
                   ) : (
                     <>
                       <Link
-                        to="/login"
+                        to="/user/login"
                         className="hover:underline"
                         onClick={closeTab}
                       >
                         로그인
                       </Link>
                       <Link
-                        to="/signup"
+                        to="/user/signup"
                         className="hover:underline"
                         onClick={closeTab}
                       >
@@ -171,7 +171,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
             로그아웃
           </button>
         ) : (
-          <Link onClick={closeTab} to="/login" className="text-center">
+          <Link onClick={closeTab} to="/user/login" className="text-center">
             로그인
           </Link>
         )}

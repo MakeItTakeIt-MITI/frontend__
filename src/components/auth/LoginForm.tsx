@@ -10,6 +10,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginSchema } from "../../modals/useLoginSchema";
 import { useLoginMutation } from "../../hooks/useLoginMutation";
 import alertFail from "../../assets/alert_failure.svg";
+import { useUserInfoQuery } from "../../hooks/useUserInfoQuery";
+import useUserDataStore from "../../store/useUserDataStore";
 
 export const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -27,14 +29,16 @@ export const LoginForm = () => {
   const navigate = useNavigate();
 
   const { mutate: loginMutation } = useLoginMutation({ setErrorMessage });
+  const { userId } = useUserDataStore();
+  const { data } = useUserInfoQuery(userId);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/profile");
-      // const id = localStorage.getItem("id");
-      // navigate(`/profile`);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     navigate(`/profile/${data?.data.id}`);
+  //     // const id = localStorage.getItem("id");
+  //     // navigate(`/profile`);
+  //   }
+  // }, []);
 
   const emailValue = watch("email");
 
