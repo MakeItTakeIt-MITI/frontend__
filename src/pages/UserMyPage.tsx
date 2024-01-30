@@ -9,12 +9,13 @@ import {
 } from "../api/users";
 import { useNavigate } from "react-router-dom";
 import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
+import { LoadingPage } from "./LoadingPage";
 
 export const UserMyPage = () => {
-  const { register, watch } = useForm<UserEditField>();
+  const { register, watch, getValues } = useForm<UserEditField>();
   const { userId } = useUserDataStore();
   const navigate = useNavigate();
-  const { data } = useUserInfoQuery(userId);
+  const { data, isLoading } = useUserInfoQuery(userId);
 
   console.log("mypage user data query", data);
 
@@ -33,23 +34,22 @@ export const UserMyPage = () => {
   };
 
   const handleChangeNickname = () => {
-    const watchNick = watch("nickname");
-    const id = data?.data.id;
+    const watchNick = getValues("nickname");
 
-    if (id != null && watchNick != null) {
+    if (userId != null && watchNick != null) {
       const userEditField: UserEditField = {
-        id: id,
+        id: userId,
         nickname: watchNick,
       };
-      userEditNickname(id, userEditField);
-      window.location.reload();
+      userEditNickname(userId, userEditField);
+      // window.location.reload();
     }
   };
 
   const handleChangePassword = () => {
     const watchPassword = watch("password");
     const watchPasswordCheck = watch("password_check");
-    const id = data?.data.id;
+    const id = userId;
 
     if (watchPassword !== watchPasswordCheck) {
       alert("비밀번호가 일치하지 않습니다.");
@@ -64,9 +64,13 @@ export const UserMyPage = () => {
       };
 
       userEditPassword(id, userEditField);
-      window.location.reload();
+      // window.location.reload();
     }
   };
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="tablet:px-[13rem] w-full  mobile:flex mobile:flex-col  pb-[6rem] ">
