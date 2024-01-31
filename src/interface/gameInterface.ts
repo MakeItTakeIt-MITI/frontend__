@@ -11,4 +11,15 @@ export interface GameHostField {
     enddate: string;
     endtime: string;
     announcement: string;
+    account_bank: string;
+    account_holder: string;
+    account_number: number;
+}
+
+
+export interface AddressField {
+    address: string;
+    addressType: string;
+    bname: string;
+    buildingName: string;
 }

@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
-import { DaumAddressSearcher } from "../address/DaumAddressSearcher";
-import { GameHostField } from "../../interface/gameInterface";
+import { AddressField, GameHostField } from "../../interface/gameInterface";
 import { useEffect, useState } from "react";
+import { useDaumPostcodePopup } from "react-daum-postcode";
 
 export const GameHostForm = () => {
-  const { handleSubmit, register, setValue } = useForm<GameHostField>();
+  const { handleSubmit, register, setValue, watch } = useForm<GameHostField>();
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
 
@@ -19,12 +19,31 @@ export const GameHostForm = () => {
     setValue("startdate", startDate);
     setValue("enddate", endDate);
     setValue("endtime", endTime);
-
-    // console.log("starttime:", startTime);
-    // console.log("startdate:", startDate);
-    // console.log("enddate:", endDate);
-    // console.log("endtime:", endTime);
   }, [setValue, startDateTime, endDateTime]);
+
+  const handleOpenAddressBox = useDaumPostcodePopup();
+
+  const handleComplete = (data: AddressField) => {
+    let fullAddress = data.address;
+    let extraAddress = "";
+
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    }
+
+    setValue("address", fullAddress);
+  };
+
+  const handleClick = () => {
+    handleOpenAddressBox({ onComplete: handleComplete });
+  };
 
   const onSubmit = (data: GameHostField) => {
     console.log(data);
@@ -131,7 +150,31 @@ export const GameHostForm = () => {
         </label>
       </div>
 
-      <DaumAddressSearcher register={register} />
+      {/* <DaumAddressSearcher register={register} /> */}
+
+      <div className="flex flex-col gap-2 relative">
+        <label htmlFor="address" className=" text-[#999]">
+          경기 주소
+        </label>
+
+        <input
+          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full  pr-[90px]"
+          type="text"
+          {...register("address")}
+          value={watch("address")}
+          readOnly
+          placeholder="경기장 주소를 입력해주세요."
+        />
+        <button
+          type="button"
+          onClick={handleClick}
+          className="w-[81px] h-[36px]  bg-[#4065F6] text-[12px] rounded-xl text-white absolute right-0 bottom-1.5"
+        >
+          주소찾기
+        </button>
+      </div>
+
+      {/*  */}
 
       <div className="flex flex-col gap-2">
         <label htmlFor="address_detail" className=" text-[#999]">
@@ -148,9 +191,9 @@ export const GameHostForm = () => {
         />
       </div>
 
-      <div className="flex gap-4 items-center justify-beween">
+      <div className="flex  items-center mobile:justify-between">
         <div className="flex flex-col gap-2">
-          <label htmlFor="min_players" className=" text-[#999]">
+          <label htmlFor="max_players" className=" text-[#999]">
             총 모집 인원
           </label>
           <input
@@ -164,7 +207,7 @@ export const GameHostForm = () => {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="max_players" className=" text-[#999]">
+          <label htmlFor="min_players" className=" text-[#999]">
             최소 모집 인원
           </label>
 
@@ -184,10 +227,9 @@ export const GameHostForm = () => {
         <label htmlFor="announcement" className=" text-[#999]">
           추가 정보
         </label>
-        <input
-          type="text"
+        <textarea
           id="announcement"
-          placeholder=""
+          placeholder="주차 4자리 가능, 샤워 불가, 4 vs 4, 파란 유니폼 지참, 남녀 모두 참가 가능한 매치입니다"
           className="w-full h-[68px]  text-[14px] px-4 py-3 bg-[#F7F7F7] rounded-lg "
           {...register("announcement", {
             required: true,
@@ -213,19 +255,40 @@ export const GameHostForm = () => {
         />
       </div>
 
-      <div className="flex justify-between">
-        <div className="flex flex-col rounded-lg">
-          <p className="text-[#969696] ">예금 은행</p>
-          <p className="p-[16px] bg-[#f7f7f7] w-[163px] h-[50px] text-center ">
-            우리은행
-          </p>
+      <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-2 ">
+          <h5 className="text-[#969696] ">예금 은행</h5>
+          <input
+            {...register("account_bank", {
+              required: true,
+            })}
+            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
+          />
         </div>
-        <div className="flex flex-col rounded-lg">
-          <p className="text-[#969696]">예금주</p>
-          <p className="p-[16px] bg-[#f7f7f7] w-[163px] h-[50px] text-center ">
-            이지원
-          </p>
+        <div className="flex flex-col gap-2 ">
+          <h5 className="text-[#969696]">예금주</h5>
+          <input
+            {...register("account_holder", {
+              required: true,
+            })}
+            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
+          />
         </div>
+      </div>
+
+      <div className="flex w-full px-0 flex-col gap-2">
+        <label htmlFor="account_number" className=" text-[#999]">
+          계좌번호
+        </label>
+        <input
+          type="number"
+          id="account_number"
+          placeholder="'-'을 제외한 계좌번호를 입력해주세요."
+          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
+          {...register("account_number", {
+            required: true,
+          })}
+        />
       </div>
 
       <button

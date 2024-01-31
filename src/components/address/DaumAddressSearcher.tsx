@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 
-interface Register {
-  register: any; // eslint-disable-line @typescript-eslint/no-explicit-any
-}
+// interface Register {
+// register: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+//   register: () => void;
+// }
 
 interface FindAddress {
   address: string;
@@ -12,10 +13,8 @@ interface FindAddress {
   buildingName: string;
 }
 
-export const DaumAddressSearcher = ({ register }: Register) => {
-  const [showAddressPopup, setShowAddressPopup] = useState<string | false>(
-    false
-  );
+export const DaumAddressSearcher = () => {
+  const [showAddressPopup, setShowAddressPopup] = useState("");
   const open = useDaumPostcodePopup();
 
   const handleComplete = (data: FindAddress) => {
@@ -51,8 +50,8 @@ export const DaumAddressSearcher = ({ register }: Register) => {
       <input
         className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full  pr-[90px]"
         type="text"
-        {...register("address")}
-        value={showAddressPopup ? showAddressPopup : ""}
+        // {...register("address")}
+        value={showAddressPopup}
         readOnly
         placeholder="경기장 주소를 입력해주세요."
       />
