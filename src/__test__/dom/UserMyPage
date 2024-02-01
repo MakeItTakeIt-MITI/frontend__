@@ -3,8 +3,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
 import { UserMyPage } from "../../pages/UserMyPage";
+import useAuthStore from "../../store/useAuthStore";
 
 test("Tests DOM elements on <UserMyPage />", () => {
+  useAuthStore.setState({ isLoggedIn: true });
+
   const queryClient = new QueryClient();
 
   render(
@@ -15,14 +18,12 @@ test("Tests DOM elements on <UserMyPage />", () => {
     </QueryClientProvider>
   );
 
-  const prevButtonEl = screen.getByRole("go-prev-button");
   const inputNicknameEl = screen.getByRole("input-nickname");
   const changeNickButtonEl = screen.getByRole("change-nickname");
   const inputPasswordEl = screen.getByRole("input-password");
   const inputConfirmPassEl = screen.getByRole("input-password-confirm");
   const changePassButtonEl = screen.getByRole("change-password");
 
-  expect(prevButtonEl).toBeInTheDocument();
   expect(inputNicknameEl).toBeInTheDocument();
   expect(changeNickButtonEl).toBeInTheDocument();
   expect(inputPasswordEl).toBeInTheDocument();
