@@ -1,8 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
-import useUserDataStore from "../store/useUserDataStore";
-import { LoadingPage } from "./LoadingPage";
+
 import useAuthStore from "../store/useAuthStore";
 
 export const AuthenticateRoutes = () => {
