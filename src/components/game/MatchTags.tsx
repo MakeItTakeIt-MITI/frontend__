@@ -9,14 +9,16 @@ export const MatchTags = ({
   textColor,
 }: TagProp) => {
   return (
-    <span
-      style={{
-        backgroundColor,
-        color: textColor,
-      }}
-      className="text-[11px] font-[600] rounded-[2px] p-1 "
-    >
-      {children}
-    </span>
+    <div>
+      <span
+        style={{
+          backgroundColor,
+          color: textColor,
+        }}
+        className="text-[11px] font-[600] rounded-md px-2 py-1  "
+      >
+        {children}
+      </span>
+    </div>
   );
 };
