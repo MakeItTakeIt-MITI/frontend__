@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import { useEffect } from "react";
 
 export const KakaoAuthHandler = () => {
@@ -7,14 +7,16 @@ export const KakaoAuthHandler = () => {
   // const GRANT_TYPE: string = "authorization_code";
 
   // const REST_API_KEY = ;
-  const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
-  const REDIRECT_URI = "http://localhost:3000/auth/kakao/callback";
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  // const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
+  // const REDIRECT_URI = "http://localhost:3000/auth/kakao/callback";
+  // const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get("code");
-    localStorage.setItem("code", code);
-    console.log(code);
+    if (code !== null) {
+      localStorage.setItem("code", code);
+      console.log(code);
+    }
 
     //   const kakaoLogin = async () => {
     //     try {
