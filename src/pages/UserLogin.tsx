@@ -6,7 +6,7 @@ import backArrow from "../assets/Chevron_Left.png";
 import { KakaoLoginButton } from "../components/kakao/KakaoLoginButton";
 import useAuthStore from "../store/useAuthStore";
 import { useState } from "react";
-import { FindMyEmailModal } from "../user/findMyEmailModal";
+import { FindMyEmailModal } from "../user/FindMyEmailModal";
 
 export const UserLogin = () => {
   const { isLoggedIn } = useAuthStore();

@@ -1,5 +1,5 @@
 import { SMSAuth } from "../interface/authInterface";
-import { FindEmailField } from "../user/findMyEmailModal";
+import { FindEmailField } from "../user/FindMyEmailModal";
 import axiosUrl from "../utils/axios"
 
 export const authenticationSMS = async (data: SMSAuth) => {
