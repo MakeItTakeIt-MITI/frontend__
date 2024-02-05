@@ -3,11 +3,14 @@ import { AddressField, GameHostField } from "../../interface/gameInterface";
 import { useEffect, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useHostGameMutation } from "../../hooks/useHostGameMutation";
+import { useNavigate } from "react-router-dom";
 
 export const GameHostForm = () => {
   const { handleSubmit, register, setValue, watch } = useForm<GameHostField>();
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
+
+  const navigate = useNavigate();
 
   // const onInvalid = (errors) => console.error(errors);
   useEffect(() => {
@@ -39,7 +42,7 @@ export const GameHostForm = () => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
 
-    setValue("address", fullAddress);
+    setValue("court.address", fullAddress);
   };
 
   const handleClick = () => {
@@ -48,8 +51,35 @@ export const GameHostForm = () => {
 
   const { mutate: hostGameMutation } = useHostGameMutation();
   const onSubmit = (data: GameHostField) => {
+    // const gameData = getValues();
+    const formData = {
+      title: data.title,
+      startdate: data.startdate,
+      starttime: data.starttime,
+      enddate: data.enddate,
+      endtime: data.endtime,
+      min_invitation: data.min_invitation,
+      max_invitation: data.max_invitation,
+      info: data.info,
+      fee: data.fee,
+      account_bank: data.account_bank,
+      account_holder: data.account_holder,
+      account_number: data.account_number,
+      court: {
+        name: data.court.name,
+        address: data.court.address,
+        address_detail: data.court.address_detail,
+      },
+    };
+
+    console.log(formData);
+
     // console.log(data);
-    hostGameMutation(data);
+    hostGameMutation(formData, {
+      onSuccess: () => {
+        navigate("/");
+      },
+    });
   };
 
   return (
@@ -83,7 +113,7 @@ export const GameHostForm = () => {
           id="title"
           placeholder="경기장 이름을 입력해주세요"
           className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          {...register("court_title", {
+          {...register("court.name", {
             required: true,
           })}
         />
@@ -155,11 +185,11 @@ export const GameHostForm = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2">
+      {/* <div className="flex flex-col gap-2">
         <label htmlFor="end_time" className=" text-[#999]">
           경기 종료 시간
         </label>
-      </div>
+      </div> */}
 
       {/* <DaumAddressSearcher register={register} /> */}
 
@@ -171,8 +201,8 @@ export const GameHostForm = () => {
         <input
           className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full  pr-[90px]"
           type="text"
-          {...register("address")}
-          value={watch("address")}
+          {...register("court.address")}
+          value={watch("court.address")}
           readOnly
           placeholder="경기장 주소를 입력해주세요."
         />
@@ -196,7 +226,7 @@ export const GameHostForm = () => {
           id="address_detail"
           className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
           placeholder="상세 주소를 입력해주세요."
-          {...register("address_detail")}
+          {...register("court.address_detail")}
         />
       </div>
 
@@ -210,7 +240,7 @@ export const GameHostForm = () => {
             id="max_players"
             placeholder="00명"
             className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full text-center font-bold"
-            {...register("max_players", {
+            {...register("max_invitation", {
               required: true,
             })}
           />
@@ -225,7 +255,7 @@ export const GameHostForm = () => {
             id="min_players"
             placeholder="00명"
             className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
-            {...register("min_players", {
+            {...register("min_invitation", {
               required: true,
             })}
           />
@@ -240,7 +270,7 @@ export const GameHostForm = () => {
           id="announcement"
           placeholder="주차 4자리 가능, 샤워 불가, 4 vs 4, 파란 유니폼 지참, 남녀 모두 참가 가능한 매치입니다"
           className="w-full   mobile:text-[14px] tablet:text-[16px] px-4 py-3 bg-[#F7F7F7] rounded-lg "
-          {...register("announcement", {
+          {...register("info", {
             required: true,
           })}
         />
@@ -290,10 +320,10 @@ export const GameHostForm = () => {
           계좌번호
         </label>
         <input
-          type="number"
+          type="text"
           id="account_number"
-          // placeholder="'-'을 제외한 계좌번호를 입력해주세요."
-          placeholder="계좌번호를 입력해주세요."
+          placeholder="'-'을 제외한 계좌번호를 입력해주세요."
+          // placeholder="계좌번호를 입력해주세요."
           className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
           {...register("account_number", {
             required: true,

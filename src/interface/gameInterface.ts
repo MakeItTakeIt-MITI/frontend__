@@ -1,19 +1,23 @@
-export interface GameHostField {
+interface Court {
+    name: string;
     address: string;
     address_detail: string;
+}
+
+export interface GameHostField {
     title: string;
-    court_title: string;
-    fee: number;
-    min_players: number;
-    max_players: number;
     startdate: string;
     starttime: string;
     enddate: string;
     endtime: string;
-    announcement: string;
+    min_invitation: number;
+    max_invitation: number;
+    info: string;
+    fee: number;
     account_bank: string;
     account_holder: string;
-    account_number: number;
+    account_number: string;
+    court: Court;
 }
 
 
