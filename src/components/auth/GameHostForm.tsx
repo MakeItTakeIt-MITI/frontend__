@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { AddressField, GameHostField } from "../../interface/gameInterface";
 import { useEffect, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
+import { useHostGameMutation } from "../../hooks/useHostGameMutation";
 
 export const GameHostForm = () => {
   const { handleSubmit, register, setValue, watch } = useForm<GameHostField>();
@@ -45,8 +46,10 @@ export const GameHostForm = () => {
     handleOpenAddressBox({ onComplete: handleComplete });
   };
 
+  const { mutate: hostGameMutation } = useHostGameMutation();
   const onSubmit = (data: GameHostField) => {
-    console.log(data);
+    // console.log(data);
+    hostGameMutation(data);
   };
 
   return (
