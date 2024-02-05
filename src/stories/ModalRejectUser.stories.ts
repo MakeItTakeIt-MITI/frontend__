@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { ModalRejectUser } from "../components/game/ModalRejectUser";
+import { ModalRejectUser } from "../components/game/host/ModalRejectUser";
 
 
 const meta = {

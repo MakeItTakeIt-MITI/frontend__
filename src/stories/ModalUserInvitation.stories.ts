@@ -1,15 +1,15 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { ModalUserInvite } from "../components/game/ModalUserInvite";
+import { ModalUserInvitation } from "../components/game/guest/ModalUserInvitation";
 
 
 const meta = {
     title: "Modal",
-    component: ModalUserInvite,
+    component: ModalUserInvitation,
     tags: ["autodocs"],
     parameters: {
         layout: "centered",
     },
-} satisfies Meta<typeof ModalUserInvite>;
+} satisfies Meta<typeof ModalUserInvitation>;
 
 export default meta;
 

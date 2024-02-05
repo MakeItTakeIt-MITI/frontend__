@@ -7,7 +7,7 @@ interface ModalInviteProp {
   buttonContextTwo: string;
 }
 
-export const ModalUserInvite = ({
+export const ModalUserInvitation = ({
   hostName,
   titleContextOne,
   titleContextTwo,

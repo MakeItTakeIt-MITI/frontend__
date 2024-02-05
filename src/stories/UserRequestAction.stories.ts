@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { UserRequestActionButton } from "../components/game/UserRequestActionButton";
+import { UserRequestActionButton } from "../components/game/host/UserRequestActionButton";
 
 
 const meta = {

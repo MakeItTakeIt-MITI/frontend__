@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { MatchStatusBox } from "../components/game/MatchStatusBox";
+import { MatchStatusBox } from "../components/game/host/MatchStatusBox";
 
 
 const meta = {
