@@ -18,15 +18,15 @@ export const GameHostContainer = () => {
   // }, []);
 
   return (
-    <div className="mb-[4rem] ">
-      <div className="p-4 flex relative">
+    <div className="mb-[4rem] tablet:px-[13rem] ">
+      <div className="mobile:block tablet:hidden p-4 flex relative">
         <button className="absolute left-2" onClick={navigatePrev}>
           <img src={backArrow} alt="back arrow" />
         </button>
 
-        <h4 className="font-bold text-center w-full">매치 생성</h4>
+        <h4 className=" font-bold text-center w-full">매치 생성</h4>
       </div>
-      <hr className="w-full" />
+      <hr className="mobile:block tablet:hidden w-full" />
       <div className="flex items-center flex-col px-[16px] py-4">
         <GameHostForm />
       </div>
