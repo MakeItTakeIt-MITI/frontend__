@@ -6,8 +6,12 @@ import { KakaoMap } from "../components/kakao/KakaoMap";
 import { DateListContainer } from "../components/main/mobile/DateListContainer";
 
 import { GameDetailCard } from "../components/main/mobile/GameDetailCard";
+import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
 
 export const Home = () => {
+  const { data } = useGetGamesDataQuery();
+  console.log(data);
+
   return (
     // <div className="w-full mx-auto max-w-[90rem] px-[13rem] bg-red-200">
 
