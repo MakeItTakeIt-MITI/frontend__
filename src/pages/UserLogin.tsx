@@ -5,13 +5,22 @@ import backArrow from "../assets/Chevron_Left.png";
 
 import { KakaoLoginButton } from "../components/kakao/KakaoLoginButton";
 import useAuthStore from "../store/useAuthStore";
+import { useFindEmailMutation } from "../hooks/useFindEmailMutation";
+import { useState } from "react";
+import { FindMyEmailModal } from "../user/findMyEmailModal";
 
 export const UserLogin = () => {
   const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
+  const { mutate: findEmailMutate } = useFindEmailMutation();
+  const [findEmailModal, displayFindEmailModal] = useState(false);
 
   const navigatePrev = () => navigate(-1);
   const navigateHome = () => navigate("/");
+
+  const handleFindEmail = (data: string) => {
+    findEmailMutate(data);
+  };
 
   return (
     <div className="tablet:p-10 mobile:flex mobile:flex-col mobile:justify-between h-screen pb-4">
@@ -46,10 +55,16 @@ export const UserLogin = () => {
         </div>
       </div>
       <div className="  flex  justify-center  gap-4 text-[#8c8c8c] text-[13px]">
-        <p>고객센터</p>
+        <button>고객센터</button>
         <p>|</p>
-        <p>ID / PW를 잊으셨나요?</p>
+        <button onClick={() => displayFindEmailModal(true)}>
+          ID / PW를 잊으셨나요?
+        </button>
       </div>
+      <FindMyEmailModal
+        findEmailModal={findEmailModal}
+        displayFindEmailModal={displayFindEmailModal}
+      />
     </div>
   );
 };

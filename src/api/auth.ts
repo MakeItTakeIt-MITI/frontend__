@@ -1,4 +1,5 @@
 import { SMSAuth } from "../interface/authInterface";
+import { FindEmailField } from "../user/findMyEmailModal";
 import axiosUrl from "../utils/axios"
 
 export const authenticationSMS = async (data: SMSAuth) => {
@@ -9,20 +10,14 @@ export const authenticationSMS = async (data: SMSAuth) => {
             console.log(response.data);
             return response.data
 
-            // if (response.data.status_code === 200) {
-            //     console.log(response.data);
-            //     // return response.data
-            // } else if (response.data.status_code === 400) {
-            //     console.log('인증 실패');
-            // } else if (response.data.status_code === 404) {
-            //     console.log('사용자 인증 조회 실패');
-            // } else if (response.data.status_code === 500) {
-            //     console.log('internal server error ');
-
-            // }
         }
     } catch (error) {
         console.error(error);
         throw error
     }
 }
+
+export const findEmail = async (phone: FindEmailField) => {
+    const response = await axiosUrl.post('/users/find-email/', phone)
+    return response.data
+} 
