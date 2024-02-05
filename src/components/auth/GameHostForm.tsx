@@ -51,7 +51,7 @@ export const GameHostForm = () => {
 
   return (
     <form
-      className="flex flex-col gap-4  justify-between w-full text-[14px]"
+      className="flex flex-col gap-4  justify-between mobile:w-full  mobile:text-[14px] tablet:text-lg"
       onSubmit={handleSubmit(onSubmit)}
     >
       <h4 className="font-bold">경기 정보</h4>
@@ -87,13 +87,16 @@ export const GameHostForm = () => {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label>경기 시작</label>
-        <div className="flex items-center ">
+        <label className="text-[#999]">경기 시작</label>
+        <div className="flex gap-4 w-full">
+          <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full">
+            {endDateTime.split("T")[0]} {endDateTime.split("T")[1]}
+          </div>
           <input
             type="datetime-local"
             id="start_date"
             required
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full"
+            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#DFEFFE]  "
             onChange={(e) => setStartDateTime(e.target.value)}
             // {...register("start_date", {
             //   required: true,
@@ -118,14 +121,19 @@ export const GameHostForm = () => {
 
       <div className="flex flex-col gap-2"></div>
       <div className="flex flex-col gap-2 justify-center ">
-        <label>경기 종료</label>
-        <div className="flex items-center">
+        <label className="text-[#999]">경기 종료</label>
+
+        <div className="flex items-center gap-4 w-full">
+          <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full">
+            {endDateTime.split("T")[0]} {endDateTime.split("T")[1]}
+          </div>
           <input
             type="datetime-local"
             required
             onChange={(e) => setEndDateTime(e.target.value)}
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full"
+            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#DFEFFE]  "
           />
+
           <input
             hidden
             type="text"
@@ -168,7 +176,7 @@ export const GameHostForm = () => {
         <button
           type="button"
           onClick={handleClick}
-          className="w-[81px] h-[36px]  bg-[#4065F6] text-[12px] rounded-xl text-white absolute right-0 bottom-1.5"
+          className="w-[81px] h-[36px]  bg-[#4065F6] mobile:text-[12px] tablet:text-[14px] rounded-xl text-white absolute right-0 bottom-1.5"
         >
           주소찾기
         </button>
@@ -185,14 +193,12 @@ export const GameHostForm = () => {
           id="address_detail"
           className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
           placeholder="상세 주소를 입력해주세요."
-          {...register("address_detail", {
-            required: true,
-          })}
+          {...register("address_detail")}
         />
       </div>
 
-      <div className="flex  items-center mobile:justify-between">
-        <div className="flex flex-col gap-2">
+      <div className="flex tablet:gap-4  items-center mobile:justify-between ">
+        <div className="flex flex-col gap-2 tablet:w-full">
           <label htmlFor="max_players" className=" text-[#999]">
             총 모집 인원
           </label>
@@ -206,7 +212,7 @@ export const GameHostForm = () => {
             })}
           />
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 tablet:w-full">
           <label htmlFor="min_players" className=" text-[#999]">
             최소 모집 인원
           </label>
@@ -230,7 +236,7 @@ export const GameHostForm = () => {
         <textarea
           id="announcement"
           placeholder="주차 4자리 가능, 샤워 불가, 4 vs 4, 파란 유니폼 지참, 남녀 모두 참가 가능한 매치입니다"
-          className="w-full h-[68px]  text-[14px] px-4 py-3 bg-[#F7F7F7] rounded-lg "
+          className="w-full   mobile:text-[14px] tablet:text-[16px] px-4 py-3 bg-[#F7F7F7] rounded-lg "
           {...register("announcement", {
             required: true,
           })}
@@ -255,8 +261,8 @@ export const GameHostForm = () => {
         />
       </div>
 
-      <div className="flex items-center justify-between">
-        <div className="flex flex-col gap-2 ">
+      <div className="flex items-center mobile:justify-between tablet:justify-center tablet:gap-4 tablet:w-full">
+        <div className="flex flex-col gap-2 tablet:w-full">
           <h5 className="text-[#969696] ">예금 은행</h5>
           <input
             {...register("account_bank", {
@@ -265,7 +271,7 @@ export const GameHostForm = () => {
             className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
           />
         </div>
-        <div className="flex flex-col gap-2 ">
+        <div className="flex flex-col gap-2 tablet:w-full">
           <h5 className="text-[#969696]">예금주</h5>
           <input
             {...register("account_holder", {
@@ -283,7 +289,8 @@ export const GameHostForm = () => {
         <input
           type="number"
           id="account_number"
-          placeholder="'-'을 제외한 계좌번호를 입력해주세요."
+          // placeholder="'-'을 제외한 계좌번호를 입력해주세요."
+          placeholder="계좌번호를 입력해주세요."
           className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
           {...register("account_number", {
             required: true,

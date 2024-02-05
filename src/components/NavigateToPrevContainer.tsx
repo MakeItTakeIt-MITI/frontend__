@@ -8,7 +8,7 @@ export const NavigateToPrevContainer = () => {
   const navigateHome = () => navigate("/");
 
   return (
-    <div className="tablet:p-10">
+    <div className="">
       <button
         role="go-prev-button"
         className="mobile:block tablet:hidden p-4"
