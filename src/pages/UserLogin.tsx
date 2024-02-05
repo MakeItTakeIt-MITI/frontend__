@@ -5,22 +5,16 @@ import backArrow from "../assets/Chevron_Left.png";
 
 import { KakaoLoginButton } from "../components/kakao/KakaoLoginButton";
 import useAuthStore from "../store/useAuthStore";
-import { useFindEmailMutation } from "../hooks/useFindEmailMutation";
 import { useState } from "react";
 import { FindMyEmailModal } from "../user/findMyEmailModal";
 
 export const UserLogin = () => {
   const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
-  const { mutate: findEmailMutate } = useFindEmailMutation();
   const [findEmailModal, displayFindEmailModal] = useState(false);
 
   const navigatePrev = () => navigate(-1);
   const navigateHome = () => navigate("/");
-
-  const handleFindEmail = (data: string) => {
-    findEmailMutate(data);
-  };
 
   return (
     <div className="tablet:p-10 mobile:flex mobile:flex-col mobile:justify-between h-screen pb-4">
