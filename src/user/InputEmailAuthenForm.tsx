@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
 import { SMSAuth } from "../interface/authInterface";
 import { useVerifySmsMutation } from "../hooks/useVerifySmsMutation";
-import { Link } from "react-router-dom";
 
-export const InputEmailAuthenForm = ({ handleCloseModal }) => {
+interface InputAuthenProp {
+  handleCloseModal: () => void;
+}
+
+export const InputEmailAuthenForm = ({ handleCloseModal }: InputAuthenProp) => {
   const { register, handleSubmit, setValue } = useForm<SMSAuth>({});
   const { mutate: verifyCode, data: userInfoData } = useVerifySmsMutation();
 
