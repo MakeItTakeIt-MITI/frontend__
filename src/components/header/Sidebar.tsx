@@ -118,7 +118,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
                     className="hover:underline"
                     onClick={closeTab}
                   >
-                    참여중인 경기
+                    나의 경기
                   </Link>
                 </div>
               </div>
