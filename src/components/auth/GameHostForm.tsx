@@ -93,7 +93,7 @@ export const GameHostForm = () => {
         <label className="text-[#999]">경기 시작</label>
         <div className="flex gap-4 w-full">
           <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full">
-            {endDateTime.split("T")[0]} {endDateTime.split("T")[1]}
+            {startDateTime.split("T")[0]} {startDateTime.split("T")[1]}
           </div>
           <input
             type="datetime-local"
