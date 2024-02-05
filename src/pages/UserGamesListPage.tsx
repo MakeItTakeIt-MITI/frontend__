@@ -18,7 +18,7 @@ export const UserGamesListPage = () => {
     setDisplayTab(false);
   };
   return (
-    <div className="mobile:w-full tablet:px-[13rem]">
+    <div className="mobile:w-full mb-[4rem] tablet:px-[13rem]">
       <NavigateToPrevContainer />
       <div className="flex justify-between p-4 ">
         <h4 className="text-[18px] font-bold">나의 매치 스케줄</h4>
@@ -36,7 +36,14 @@ export const UserGamesListPage = () => {
           />
         </div>
       </div>
-      <div className="p-4">
+      <div className="h-full flex flex-col gap-4 p-4">
+        <MatchContainer />
+        <MatchContainer />
+        <MatchContainer />
+        <MatchContainer />
+        <MatchContainer />
+        <MatchContainer />
+        <MatchContainer />
         <MatchContainer />
       </div>
     </div>
