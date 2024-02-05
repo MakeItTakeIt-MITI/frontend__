@@ -4,7 +4,7 @@ import axiosUrl from "../utils/axios"
 
 export const userLoginAuth = async (data: LoginField) => {
     try {
-        const response = await axiosUrl.post('/users/login/', data)
+        const response = await axiosUrl.post('/auth/login/', data)
         if (response.data.status_code === 200) {
             return response.data
         }
@@ -35,7 +35,7 @@ export const userKakaoLogin = async () => {
 
 export const userSignup = async (data: RegisterField) => {
     try {
-        const response = await axiosUrl.post('/users/', data)
+        const response = await axiosUrl.post('/auth/', data)
         if (response.data.status_code === 201) {
             console.log(response.data);
             localStorage.setItem("authentication_token", response.data.data.authentication_token)
@@ -81,7 +81,7 @@ export const deleteAccount = async (id: number | null) => {
 
 export const userLogout = async () => {
     try {
-        const response = await axiosUrl.post('/users/logout/')
+        const response = await axiosUrl.post('/auth/logout/')
         console.log(response.data);
         return response.data;
 
@@ -103,7 +103,7 @@ export const getUserData = async (userId: number | null) => {
 
 export const requestSmsCode = async (data: RequestCodeField) => {
     try {
-        const response = await axiosUrl.post('/users/send-sms/', data)
+        const response = await axiosUrl.post('/auth/send-sms/', data)
         localStorage.removeItem("authentication_token");
         localStorage.setItem("authentication_token", response.data.data.authentication_token)
         console.log(response.data);

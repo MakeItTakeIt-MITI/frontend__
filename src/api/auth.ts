@@ -6,7 +6,7 @@ export const authenticationSMS = async (data: SMSAuth) => {
     const user_info_token = localStorage.getItem('authentication_token')
     try {
         if (user_info_token) {
-            const response = await axiosUrl.post(`/users/${user_info_token}/authenticate/`, data)
+            const response = await axiosUrl.post(`/auth/${user_info_token}/authenticate/`, data)
             console.log(response.data);
             return response.data
 
@@ -18,6 +18,6 @@ export const authenticationSMS = async (data: SMSAuth) => {
 }
 
 export const findEmail = async (phone: FindEmailField) => {
-    const response = await axiosUrl.post('/users/find-email/', phone)
+    const response = await axiosUrl.post('/auth/find-email/', phone)
     return response.data
 } 
