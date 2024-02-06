@@ -6,16 +6,12 @@ import { KakaoMap } from "../components/kakao/KakaoMap";
 import { DateListContainer } from "../components/main/mobile/DateListContainer";
 
 import { GameDetailCard } from "../components/main/mobile/GameDetailCard";
-import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
 
 export const Home = () => {
-  const { data } = useGetGamesDataQuery();
-  console.log(data);
-
   return (
     // <div className="w-full mx-auto max-w-[90rem] px-[13rem] bg-red-200">
 
-    <div className="tablet:max-w-[90rem] tablet:px-[13rem] mx-auto ">
+    <div className="w-full tablet:px-[13rem] mx-auto ">
       <Hero
         backgroundImage={banner}
         launchText="MITI 서비스 런칭"
@@ -31,14 +27,9 @@ export const Home = () => {
           <span>16개의 매치</span>
         </div> */}
 
-        <div className="pl-2 flex mobile:flex-col mobile:gap-4 tablet:flex-row tablet:flex-wrap ">
+        {/* <div className=" flex mobile:flex-col mobile:gap-4 tablet:flex-row tablet:flex-wrap   ">
           <GameDetailCard />
-          <GameDetailCard />
-          <GameDetailCard />
-          <GameDetailCard />
-          <GameDetailCard />
-          <GameDetailCard />
-        </div>
+        </div> */}
       </div>
       {/* <MobileHomeView /> */}
       {/* <BrowserHomeView /> */}

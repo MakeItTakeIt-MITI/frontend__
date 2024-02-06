@@ -32,7 +32,7 @@ export const DateListContainer = () => {
         return (
           <button
             key={index}
-            className="flex flex-col items-center justify-center text-[14px] mobile:w-[60px] tablet:w-[80px] mobile:h-[52px] tablet:h-[60px] rounded-xl"
+            className="flex flex-col items-center justify-center text-[14px]  mobile:h-[52px] tablet:h-[60px] rounded-xl"
             // className=" w-[60px] h-[52px]"
             style={
               selected && index === 0
