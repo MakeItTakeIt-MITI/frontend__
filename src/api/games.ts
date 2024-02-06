@@ -12,3 +12,8 @@ export const getAllGames = async () => {
     const response = await axiosUrl.get("/games/")
     return response.data
 }
+
+export const getGameDetail = async (gameId) => {
+    const response = await axiosUrl.get(`/games/${gameId}/`)
+    return response.data
+}

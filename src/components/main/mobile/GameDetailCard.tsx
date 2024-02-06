@@ -1,15 +1,25 @@
+import { Link } from "react-router-dom";
 import cardImg from "../../../assets/court.svg";
 import { useGetGamesDataQuery } from "../../../hooks/useGetGamesDataQuery";
 
+interface GameDetailsField {
+  id: number;
+  startdate: string;
+  starttime: string;
+  endtime: string;
+  title: string;
+  fee: number;
+}
+
 export const GameDetailCard = () => {
   const { data } = useGetGamesDataQuery();
-  console.log(data);
 
   return (
     <>
-      {data?.data.map((game) => {
+      {data?.data.map((game: GameDetailsField) => {
         return (
-          <div
+          <Link
+            to={`/games/detail/${game.id}`}
             key={game.id}
             className="w-[221px] h-[205px]  border border-gray-200 rounded-xl"
           >
@@ -31,7 +41,7 @@ export const GameDetailCard = () => {
                 })}
               </p>
             </div>
-          </div>
+          </Link>
         );
       })}
     </>

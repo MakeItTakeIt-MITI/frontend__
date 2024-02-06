@@ -8,7 +8,7 @@ import { UserLogin } from "./pages/UserLogin.tsx";
 import { UserSignup } from "./pages/UserSignup.tsx";
 import { GameHostContainer } from "./pages/GameHostContainer.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
-import { GameInfoPage } from "./pages/GameInfoPage.tsx";
+import { MatchDetailsPage } from "./pages/MatchDetailsPage.tsx";
 import { MatchingPage } from "./pages/MatchingPage.tsx";
 import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
 import { SMSAuthenticationPage } from "./pages/SMSAuthenticationPage.tsx";
@@ -65,8 +65,14 @@ const router = createBrowserRouter([
             children: [
               { path: "host", element: <GameHostContainer /> },
               {
-                path: "detail",
-                element: <GameInfoPage />,
+                path: "detail/:id",
+                element: <MatchDetailsPage />,
+                children: [
+                  {
+                    path: "join",
+                    // element: <MatchingPage />,
+                  },
+                ],
               },
               {
                 path: "mygames/:id",
@@ -77,10 +83,6 @@ const router = createBrowserRouter([
         ],
       },
 
-      {
-        path: "/match",
-        element: <MatchingPage />,
-      },
       { path: "/submitted", element: <MatchSubmittedPage /> },
       {
         path: "/404",
