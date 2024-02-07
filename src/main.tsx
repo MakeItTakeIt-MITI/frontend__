@@ -9,7 +9,7 @@ import { UserSignup } from "./pages/UserSignup.tsx";
 import { GameHostContainer } from "./pages/GameHostContainer.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
 import { MatchDetailsPage } from "./pages/MatchDetailsPage.tsx";
-import { MatchingPage } from "./pages/MatchingPage.tsx";
+import { UserJoinMatchPage } from "./pages/UserJoinMatchPage.tsx";
 import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
 import { SMSAuthenticationPage } from "./pages/SMSAuthenticationPage.tsx";
 import { UserMyPage } from "./pages/UserMyPage.tsx";
@@ -67,12 +67,10 @@ const router = createBrowserRouter([
               {
                 path: "detail/:id",
                 element: <MatchDetailsPage />,
-                children: [
-                  {
-                    path: "join",
-                    // element: <MatchingPage />,
-                  },
-                ],
+              },
+              {
+                path: "detail/:id/join",
+                element: <UserJoinMatchPage />,
               },
               {
                 path: "mygames/:id",

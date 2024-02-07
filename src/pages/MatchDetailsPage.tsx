@@ -4,20 +4,20 @@ import phoneSvg from "../assets/Phone.svg";
 import peopleSvg from "../assets/people.svg";
 import badge from "../assets/authentication-badge.svg";
 // import reviewStar from "../assets/star-review.png";
-import { AdvertisementBanner } from "../components/AdvertisementBanner";
 import { Link, useParams } from "react-router-dom";
 import { useGetGameDetailQuery } from "../hooks/useGetGameDetailQuery";
+import { LoadingPage } from "./LoadingPage";
 export const MatchDetailsPage = () => {
   const { id } = useParams();
   const gameIdParam = Number(id);
   const { data: gameDetail, isLoading } = useGetGameDetailQuery(gameIdParam);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingPage />;
   }
 
   return (
-    <div className="py-4 tablet:px-[13rem] tablet:mx-auto ">
+    <div className="py-4 tablet:px-[13rem] tablet:mx-auto desktop:px-[16rem] ">
       <div>
         <img
           src={courtbg}
@@ -158,8 +158,8 @@ export const MatchDetailsPage = () => {
           </p>
         </div>
       </div>
-      <Link to={`/games/detail/${id}/join`}>
-        <button className="px-[16px] mobile:w-full tablet:w-[40rem] tablet:mx-auto mobile:h-[48px] bg-[#4065f6] text-white rounded-[8px] font-bold">
+      <Link to={`/games/detail/${gameIdParam}/join`}>
+        <button className="px-[16px] mobile:w-full tablet:w-[40rem] flex items-center justify-center desktop:w-[50rem] desktop:mx-auto tablet:mx-auto mobile:h-[48px] bg-[#4065f6] text-white rounded-[8px] font-bold">
           매치 참가하기
         </button>
       </Link>
