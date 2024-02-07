@@ -13,7 +13,12 @@ export const getAllGames = async () => {
     return response.data
 }
 
-export const getGameDetail = async (gameId) => {
+export const getGameDetail = async (gameId: number) => {
     const response = await axiosUrl.get(`/games/${gameId}/`)
+    return response.data
+}
+
+export const userParticipateGame = async (gameId: number) => {
+    const response = await axiosUrl.post(`/games/${gameId}/participations/`)
     return response.data
 }
