@@ -6,6 +6,7 @@ import { useGetGameDetailQuery } from "../hooks/useGetGameDetailQuery";
 import { useForm } from "react-hook-form";
 import { JoinMatchPreviewModal } from "../components/game/guest/JoinMatchPreviewModal";
 import { JoinGamePriceDetail } from "../components/game/JoinGamePriceDetail";
+import { useParticipateGameMutation } from "../hooks/useParticipateGameMutation";
 // import downArrow from "../assets/Chevron_Down_MD.svg";
 
 interface JoinGameField {
@@ -22,10 +23,12 @@ export const UserJoinMatchPage = () => {
   const { id } = useParams();
   const gameIdParam = Number(id);
   const { data: gameDetail } = useGetGameDetailQuery(gameIdParam);
+  const { mutate } = useParticipateGameMutation(gameDetail.data.id);
 
   const { register, handleSubmit } = useForm<JoinGameField>();
 
   const onSubmit = (data: JoinGameField) => {
+    mutate(data);
     console.log(data);
   };
 
