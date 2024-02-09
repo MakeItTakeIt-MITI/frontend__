@@ -9,7 +9,7 @@ import { DatesListContainer } from "../components/main/DatesListContainer";
 
 export const Home = () => {
   return (
-    <div className="w-full tablet:px-[13rem] mx-auto ">
+    <div className="w-full tablet:px-[13rem] mx-auto  max-w-[90rem]">
       <Hero
         backgroundImage={banner}
         launchText="MITI 서비스 런칭"
