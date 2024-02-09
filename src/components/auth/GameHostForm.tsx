@@ -4,13 +4,22 @@ import { useEffect, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useHostGameMutation } from "../../hooks/useHostGameMutation";
 import { useNavigate } from "react-router-dom";
+import { useCourtDetailsQuery } from "../../hooks/useCourtDetailsQuery";
 
 export const GameHostForm = () => {
   const { handleSubmit, register, setValue, watch } = useForm<GameHostField>();
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
 
+  const courtAddress = watch("court.address");
+  const { data: getAddressDetail, refetch } =
+    useCourtDetailsQuery(courtAddress);
+  const { mutate: hostGameMutation } = useHostGameMutation();
+
   const navigate = useNavigate();
+  // const detailAddress = data?.data[0]?.address_detail;
+
+  // console.log(setValue("court.address_detail", ));
 
   // const onInvalid = (errors) => console.error(errors);
   useEffect(() => {
@@ -18,12 +27,23 @@ export const GameHostForm = () => {
     const startTime = startDateTime.split("T")[1];
     const endDate = endDateTime.split("T")[0];
     const endTime = endDateTime.split("T")[1];
+    const fullAddress = watch("court.address");
 
     setValue("starttime", startTime);
     setValue("startdate", startDate);
     setValue("enddate", endDate);
     setValue("endtime", endTime);
-  }, [setValue, startDateTime, endDateTime]);
+
+    getAddressDetail?.data.map((address) => {
+      if (fullAddress === address.address) {
+        setValue("court.address_detail", address.address_detail);
+      } else {
+        setValue("court.address_detail", "");
+      }
+    });
+
+    refetch();
+  }, [courtAddress, setValue, startDateTime, endDateTime, getAddressDetail]);
 
   const handleOpenAddressBox = useDaumPostcodePopup();
 
@@ -49,7 +69,6 @@ export const GameHostForm = () => {
     handleOpenAddressBox({ onComplete: handleComplete });
   };
 
-  const { mutate: hostGameMutation } = useHostGameMutation();
   const onSubmit = (data: GameHostField) => {
     // const gameData = getValues();
     const formData = {

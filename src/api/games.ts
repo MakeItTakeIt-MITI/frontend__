@@ -22,3 +22,9 @@ export const userParticipateGame = async (gameId: number) => {
     const response = await axiosUrl.post(`/games/${gameId}/participations/`)
     return response.data
 }
+
+export const getGameCourtDetails = async (address: string) => {
+    const response = await axiosUrl.get(`/courts/?address=${address}`)
+    return response.data
+
+}
