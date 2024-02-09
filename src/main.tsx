@@ -19,6 +19,7 @@ import { KakaoAuthHandler } from "./components/auth/KakaoAuthHandler.tsx";
 import { UserGamesListPage } from "./pages/UserGamesListPage.tsx";
 import { PrivateRoute } from "./pages/PrivateRoute.tsx";
 import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
+import { UserGameHistoryPage } from "./pages/UserGameHistoryPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +65,8 @@ const router = createBrowserRouter([
             path: "/games",
             children: [
               { path: "host", element: <GameHostContainer /> },
+              { path: "history", element: <UserGameHistoryPage /> },
+
               {
                 path: "detail/:id",
                 element: <MatchDetailsPage />,

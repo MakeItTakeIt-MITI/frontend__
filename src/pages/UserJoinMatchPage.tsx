@@ -24,7 +24,7 @@ export const UserJoinMatchPage = () => {
   const { id } = useParams();
   const gameIdParam = Number(id);
   const { data: gameDetail } = useGetGameDetailQuery(gameIdParam);
-  const { mutate } = useParticipateGameMutation(gameDetail.data.id);
+  const { mutate } = useParticipateGameMutation(gameDetail?.data.id);
 
   const { register, handleSubmit } = useForm<JoinGameField>();
 
