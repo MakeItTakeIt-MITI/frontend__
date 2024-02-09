@@ -4,7 +4,7 @@ import { useNicknameSchema } from "../../modals/useNicknameSchema";
 import { userEditNickname } from "../../api/users";
 
 interface NicknameField {
-  id: number;
+  id: number | null;
   refetch: () => void;
   data: () => { data: () => void; nickname?: string };
   nickname?: string;
