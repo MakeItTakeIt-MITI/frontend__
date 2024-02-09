@@ -1,17 +1,13 @@
 import { useForm } from "react-hook-form";
 import close from "../../assets/clarity_eye-hide-line.svg";
 import open from "../../assets/clarity_eye-show-line.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LoginField } from "../../interface/usersInterface";
-import { useNavigate } from "react-router-dom";
-import useAuthStore from "../../store/useAuthStore";
 import closeBtn from "../../assets/x_button.svg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginSchema } from "../../modals/useLoginSchema";
 import { useLoginMutation } from "../../hooks/useLoginMutation";
 import alertFail from "../../assets/alert_failure.svg";
-import { useUserInfoQuery } from "../../hooks/useUserInfoQuery";
-import useUserDataStore from "../../store/useUserDataStore";
 
 export const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -25,20 +21,8 @@ export const LoginForm = () => {
   } = useForm<LoginField>({
     resolver: zodResolver(useLoginSchema),
   });
-  const { isLoggedIn } = useAuthStore();
-  const navigate = useNavigate();
 
   const { mutate: loginMutation } = useLoginMutation({ setErrorMessage });
-  const { userId } = useUserDataStore();
-  const { data } = useUserInfoQuery(userId);
-
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     navigate(`/profile/${data?.data.id}`);
-  //     // const id = localStorage.getItem("id");
-  //     // navigate(`/profile`);
-  //   }
-  // }, []);
 
   const emailValue = watch("email");
 

@@ -34,7 +34,7 @@ export const UserMyPage = () => {
   }
 
   return (
-    <div className=" mobile:w-full tablet:w-[560px] tablet:mb-0 mx-auto mobile:mb-[4rem] py-3">
+    <div className=" mobile:w-full tablet:w-[560px] tablet:mb-0 mx-auto  mobile:mb-[4rem] py-3">
       <NavigateToPrevContainer />
       <div className="p-4 flex flex-col gap-2">
         <p className="text-xl">
@@ -50,9 +50,8 @@ export const UserMyPage = () => {
       <div className="flex flex-col gap-6  mobile:w-full mobile:p-4 "></div>
       <hr className="mobile:block tablet:hidden w-full" />
 
-      <div className="p-4 flex flex-col gap-4">
+      <div className="flex flex-col gap-4 mobile:p-4 tablet:p-0">
         <h4 className="font-bold">계정 삭제</h4>
-
         <button
           type="button"
           onClick={handleDeleteAccount}

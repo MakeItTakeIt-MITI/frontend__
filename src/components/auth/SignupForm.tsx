@@ -5,10 +5,8 @@ import { RegisterField } from "../../interface/usersInterface";
 import alertPass from "../../assets/alert_check.svg";
 import alertFail from "../../assets/alert_failure.svg";
 
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useRegisterMutation } from "../../hooks/useRegisterMutation";
-import useAuthStore from "../../store/useAuthStore";
 import { useUserValidationMutation } from "../../hooks/useUserValidationMutation";
 
 export const SignupForm = () => {
@@ -16,20 +14,11 @@ export const SignupForm = () => {
   const [validNickname, setValidNickname] = useState(false);
   const [displayEmailMsg, setDisplayEmailMsg] = useState(false);
   const [displayNickMsg, setDisplayNickMsg] = useState(false);
-  const { isLoggedIn } = useAuthStore();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/");
-    }
-  }, []);
 
   const {
     register,
     handleSubmit,
     getValues,
-    // watch,
     formState: { errors },
   } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
 
@@ -50,9 +39,6 @@ export const SignupForm = () => {
 
     const email = validateMutation({ email: getValues("email") });
     console.log(email);
-
-    // const email = { email: getValues("email") };
-    // console.log(email);
   };
 
   const handleValidateNick = () => {

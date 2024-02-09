@@ -3,15 +3,24 @@ import { useForm } from "react-hook-form";
 import { useNicknameSchema } from "../../modals/useNicknameSchema";
 import { userEditNickname } from "../../api/users";
 
-interface NicknameField {
+interface NicknameProps {
   id: number | null;
   refetch: () => void;
-  data: () => { data: () => void; nickname?: string };
-  nickname?: string;
+  data: { data: { nickname: string } };
 }
 
-export const NicknameEditForm = ({ id, refetch, data }: NicknameField) => {
-  const { register, reset, handleSubmit } = useForm<NicknameField>({
+interface NicknameField {
+  id: number | null;
+  nickname: string;
+}
+
+export const NicknameEditForm = ({ id, refetch, data }: NicknameProps) => {
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<NicknameField>({
     resolver: zodResolver(useNicknameSchema),
   });
 
@@ -42,6 +51,11 @@ export const NicknameEditForm = ({ id, refetch, data }: NicknameField) => {
       >
         닉네임 수정
       </button>
+      {errors.nickname && (
+        <p className="text-center text-red-400 font-bold text-sm">
+          {errors.nickname.message}
+        </p>
+      )}
     </form>
   );
 };
