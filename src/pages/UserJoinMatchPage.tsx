@@ -23,13 +23,22 @@ export const UserJoinMatchPage = () => {
   const { id } = useParams();
   const gameIdParam = Number(id);
   const { data: gameDetail } = useGetGameDetailQuery(gameIdParam);
-  const { mutate } = useParticipateGameMutation(gameDetail.data.id);
+  const { mutate } = useParticipateGameMutation(gameDetail?.data.id);
 
-  const { register, handleSubmit } = useForm<JoinGameField>();
+  const { register, handleSubmit, watch } = useForm<JoinGameField>();
+  const bank_holder = watch("player_account_holder");
 
   const onSubmit = (data: JoinGameField) => {
     mutate(data);
-    console.log(data);
+  };
+
+  const handleCopyClipBoard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("클립보드에 복사되었어요.");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleShowModal = () => {
@@ -155,6 +164,9 @@ export const UserJoinMatchPage = () => {
                 </p>
                 <button
                   type="button"
+                  onClick={() =>
+                    handleCopyClipBoard(gameDetail?.data.account_number)
+                  }
                   className="absolute top-0 right-0 bottom-0 bg-[#4065F6] text-white my-2 mx-2  text-sm py-2 px-5 rounded-lg "
                 >
                   복사하기
@@ -206,6 +218,7 @@ export const UserJoinMatchPage = () => {
 
                 <button
                   type="button"
+                  onClick={() => handleCopyClipBoard(bank_holder)}
                   className="absolute top-0 right-0 bottom-0 bg-[#4065F6] text-white my-2 mx-2  text-sm py-2 px-5 rounded-lg "
                 >
                   복사하기
