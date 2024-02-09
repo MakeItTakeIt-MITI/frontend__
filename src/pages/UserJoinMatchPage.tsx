@@ -1,7 +1,7 @@
 import { useState } from "react";
 import left_arrow from "../assets/Chevron_Left.png";
 import court from "../assets/small-basketball-court.svg";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetGameDetailQuery } from "../hooks/useGetGameDetailQuery";
 import { useForm } from "react-hook-form";
 import { JoinMatchPreviewModal } from "../components/game/guest/JoinMatchPreviewModal";
@@ -20,6 +20,7 @@ interface JoinGameField {
 
 export const UserJoinMatchPage = () => {
   const [modal, setModal] = useState(false);
+  const navigate = useNavigate();
   const { id } = useParams();
   const gameIdParam = Number(id);
   const { data: gameDetail } = useGetGameDetailQuery(gameIdParam);
@@ -29,16 +30,12 @@ export const UserJoinMatchPage = () => {
   const bank_holder = watch("player_account_holder");
 
   const onSubmit = (data: JoinGameField) => {
-    mutate(data);
-  };
-
-  const handleCopyClipBoard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      alert("클립보드에 복사되었어요.");
-    } catch (err) {
-      console.log(err);
-    }
+    mutate(data, {
+      onSuccess: () => {
+        navigate("/games/join/submitted");
+      },
+    });
+    console.log(data);
   };
 
   const handleShowModal = () => {
@@ -244,24 +241,6 @@ export const UserJoinMatchPage = () => {
           )}
         </form>
       </div>
-
-      {/* <div className="flex flex-col gap-4 p-4">
-        <h4 className="font-bold">유의사항</h4>
-        <p className="text-[#969696] text-[14px]">
-          옥정 호수 공원 농구 코트에서 운동하다가 날씨가 추워져서 체육관을 잡고
-          운영하고있습니다. 나이, 키, 성별 상관 없습니다. 5대 5 잘 모르시는
-          분들도 환영합니다. 즐겁게 농구하는 즐농팀입니다. 과격하고 승리에
-          집착하시는 분들은 사양합니다.
-        </p>
-        <button
-          onClick={handleShowModal}
-          className="h-[48px] w-full text-center bg-[#E8e8e8] text-[#969696] text-[14px]"
-        >
-          매치 참여하기
-        </button>
-      </div> */}
-      {/* <hr className="h-[8px] w-full bg-gray-200" /> */}
-      {/* <AdvertisementBanner /> */}
     </div>
   );
 };
