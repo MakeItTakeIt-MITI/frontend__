@@ -18,7 +18,7 @@ export const GameHostContainer = () => {
   // }, []);
 
   return (
-    <div className="mb-[4rem] tablet:px-[13rem] ">
+    <div className=" mobile:w-full tablet:w-[560px] tablet:mb-0 mx-auto mobile:mb-[4rem] py-3">
       <div className="mobile:block tablet:hidden p-4 flex relative">
         <button className="absolute left-2" onClick={navigatePrev}>
           <img src={backArrow} alt="back arrow" />

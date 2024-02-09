@@ -10,18 +10,14 @@ export const GameHostForm = () => {
   const { handleSubmit, register, setValue, watch } = useForm<GameHostField>();
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
+  const navigate = useNavigate();
 
+  // tanstack query
   const courtAddress = watch("court.address");
   const { data: getAddressDetail, refetch } =
     useCourtDetailsQuery(courtAddress);
   const { mutate: hostGameMutation } = useHostGameMutation();
 
-  const navigate = useNavigate();
-  // const detailAddress = data?.data[0]?.address_detail;
-
-  // console.log(setValue("court.address_detail", ));
-
-  // const onInvalid = (errors) => console.error(errors);
   useEffect(() => {
     const startDate = startDateTime.split("T")[0];
     const startTime = startDateTime.split("T")[1];
@@ -83,7 +79,7 @@ export const GameHostForm = () => {
       fee: data.fee,
       account_bank: data.account_bank,
       account_holder: data.account_holder,
-      account_number: data.account_number,
+      account_number: data.account_number.replace(/-/g, ""),
       court: {
         name: data.court.name,
         address: data.court.address,
@@ -91,7 +87,7 @@ export const GameHostForm = () => {
       },
     };
 
-    console.log(formData);
+    // console.log(formData);
 
     // console.log(data);
     hostGameMutation(formData, {
@@ -106,9 +102,11 @@ export const GameHostForm = () => {
       className="flex flex-col gap-4  justify-between mobile:w-full  mobile:text-[14px] tablet:text-lg"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h4 className="font-bold">경기 정보</h4>
+      <h4 className="font-bold tablet:text-2xl tablet:text-center">
+        경기 정보
+      </h4>
       <div className="flex flex-col gap-2">
-        <label htmlFor="title" className=" text-[#999]">
+        <label htmlFor="title" className=" text-[#999] ">
           경기 제목
         </label>
 
@@ -141,7 +139,7 @@ export const GameHostForm = () => {
       <div className="flex flex-col gap-2">
         <label className="text-[#999]">경기 시작</label>
         <div className="flex gap-4 w-full">
-          <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full">
+          <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg ">
             {startDateTime.split("T")[0]} {startDateTime.split("T")[1]}
           </div>
           <input
@@ -176,7 +174,7 @@ export const GameHostForm = () => {
         <label className="text-[#999]">경기 종료</label>
 
         <div className="flex items-center gap-4 w-full">
-          <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full">
+          <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg ">
             {endDateTime.split("T")[0]} {endDateTime.split("T")[1]}
           </div>
           <input
@@ -258,7 +256,7 @@ export const GameHostForm = () => {
             type="number"
             id="max_players"
             placeholder="00명"
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full text-center font-bold"
+            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg  w-full text-center font-bold"
             {...register("max_invitation", {
               required: true,
             })}
@@ -341,7 +339,7 @@ export const GameHostForm = () => {
         <input
           type="text"
           id="account_number"
-          placeholder="'-'을 제외한 계좌번호를 입력해주세요."
+          placeholder="계좌번호를 입력해주세요."
           // placeholder="계좌번호를 입력해주세요."
           className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
           {...register("account_number", {
