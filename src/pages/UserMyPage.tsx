@@ -73,7 +73,7 @@ export const UserMyPage = () => {
   }
 
   return (
-    <div className="tablet:px-[13rem] w-full  mobile:flex mobile:flex-col  pb-[6rem] ">
+    <div className=" mobile:w-full tablet:w-[560px] tablet:mb-0 mx-auto mobile:mb-[4rem] py-3">
       <NavigateToPrevContainer />
       <div className="p-4 flex flex-col gap-2">
         <p className="text-xl">
