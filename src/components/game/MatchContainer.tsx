@@ -4,7 +4,7 @@ import gameDetailBtn from "../../assets/More_Info_btn.svg";
 
 export const MatchContainer = () => {
   return (
-    <div className="  flex items-center  justify-between p-4 border border-[#E8E8E8] rounded-xl">
+    <div className="mobile:w-full tablet:w-[480px]  flex   justify-between p-4 border border-[#E8E8E8] rounded-xl">
       <div className=" flex flex-col gap-1">
         <div className="flex gap-2">
           <MatchTags {...HostTag.args} />

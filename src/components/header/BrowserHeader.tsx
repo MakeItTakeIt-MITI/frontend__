@@ -21,7 +21,7 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
       <div className="flex items-center gap-4  ">
         {isLoggedIn ? (
           <>
-            <Link to="/games/history" className=" ">
+            <Link to="/games/mygames/:id" className=" ">
               나의 경기
             </Link>
             <Link to={`/profile/${userId}`}>마이페이지</Link>
