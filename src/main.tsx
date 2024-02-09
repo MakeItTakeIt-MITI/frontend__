@@ -76,12 +76,12 @@ const router = createBrowserRouter([
                 path: "mygames/:id",
                 element: <UserGamesListPage />,
               },
+              { path: "join/submitted", element: <MatchSubmittedPage /> },
             ],
           },
         ],
       },
 
-      { path: "/submitted", element: <MatchSubmittedPage /> },
       {
         path: "/404",
         element: <NotFound />,
