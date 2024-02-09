@@ -12,10 +12,10 @@ import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
 import { LoadingPage } from "./LoadingPage";
 
 export const UserMyPage = () => {
-  const { register, watch, getValues } = useForm<UserEditField>();
+  const { register, watch, getValues, reset } = useForm<UserEditField>();
   const { userId } = useUserDataStore();
   const navigate = useNavigate();
-  const { data, isLoading } = useUserInfoQuery(userId);
+  const { data, isLoading, refetch } = useUserInfoQuery(userId);
 
   console.log("mypage user data query", data);
 
@@ -25,7 +25,6 @@ export const UserMyPage = () => {
       const id = data?.data.id;
       deleteAccount(id);
       localStorage.clear();
-      // window.location.reload();
       navigate("/login");
     } else {
       alert("취소합니다.");
@@ -42,7 +41,8 @@ export const UserMyPage = () => {
         nickname: watchNick,
       };
       userEditNickname(userId, userEditField);
-      // window.location.reload();
+      reset();
+      refetch();
     }
   };
 
@@ -64,7 +64,8 @@ export const UserMyPage = () => {
       };
 
       userEditPassword(id, userEditField);
-      // window.location.reload();
+      reset();
+      refetch();
     }
   };
 
