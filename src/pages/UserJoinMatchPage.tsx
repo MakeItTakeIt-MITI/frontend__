@@ -42,7 +42,7 @@ export const UserJoinMatchPage = () => {
   const goBackPage = () => window.history.back();
 
   return (
-    <div className="mobile:w-full mobile:pb-[5rem]  tablet:py-6 tablet:px-[13rem] desktop:px-[16rem]">
+    <div className=" mobile:w-full tablet:w-[560px] tablet:mb-0 mx-auto mobile:mb-[4rem] py-3">
       <div className="mobile:block tablet:hidden py-[10px] relative">
         <button onClick={goBackPage} className="hover:cursor-pointer">
           <img
