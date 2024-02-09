@@ -17,7 +17,7 @@ export const MatchDetailsPage = () => {
   }
 
   return (
-    <div className="py-4 tablet:px-[13rem] tablet:mx-auto desktop:px-[16rem] ">
+    <div className=" mobile:w-full tablet:w-[560px] tablet:mb-0 mx-auto mobile:mb-[4rem] py-3">
       <div>
         <img
           src={courtbg}
@@ -119,10 +119,9 @@ export const MatchDetailsPage = () => {
           </div>
         </div>
         <p className="text-[#666] ">
-          옥정 호수 공원 농구 코트에서 운동하다가 날씨가 추워져서 체육관을 잡고
-          운영하고있습니다. 나이, 키, 성별 상관 없습니다. 5대 5 잘 모르시는
-          분들도 환영합니다. 즐겁게 농구하는 즐농팀입니다. 과격하고 승리에
-          집착하시는 분들은 사양합니다.
+          나이, 키, 성별 상관 없습니다. 농구를 잘 모르시는 분들도 환영합니다.
+          즐겁게 농구하는 즐농팀입니다. 과격하고 승리에 집착하시는 분들은
+          사양합니다.
         </p>
       </div>
       <hr className="h-[8px] w-full bg-gray-200" />
@@ -152,14 +151,12 @@ export const MatchDetailsPage = () => {
         </div> */}
 
         <div>
-          <p className="text-[#222]">
-            문자로 계좌번호 받고, 연락없으신 분들이 간혹 계셔서, 예약은 무조건
-            입금순으로 하겠습니다.
-          </p>
+          <p className="text-[#222]">예약은 무조건 입금순으로 하겠습니다.</p>
         </div>
       </div>
       <Link to={`/games/detail/${gameIdParam}/join`}>
-        <button className="px-[16px] mobile:w-full tablet:w-[40rem] flex items-center justify-center desktop:w-[50rem] desktop:mx-auto tablet:mx-auto mobile:h-[48px] bg-[#4065f6] text-white rounded-[8px] font-bold">
+        <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white">
+          {" "}
           매치 참가하기
         </button>
       </Link>
