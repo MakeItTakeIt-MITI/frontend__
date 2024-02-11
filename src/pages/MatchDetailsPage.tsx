@@ -7,10 +7,17 @@ import badge from "../assets/authentication-badge.svg";
 import { Link, useParams } from "react-router-dom";
 import { useGetGameDetailQuery } from "../hooks/useGetGameDetailQuery";
 import { LoadingPage } from "./LoadingPage";
+import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
+import useUserDataStore from "../store/useUserDataStore";
+import { MatchInfoParticipantsBox } from "../components/game/host/MatchInfoParticipantsBox";
 export const MatchDetailsPage = () => {
   const { id } = useParams();
   const gameIdParam = Number(id);
+  const { userId } = useUserDataStore();
   const { data: gameDetail, isLoading } = useGetGameDetailQuery(gameIdParam);
+  const { data: userData } = useUserInfoQuery(userId);
+  const userEmail = userData?.data.email;
+  const hostEmail = gameDetail?.data.host.email;
 
   if (isLoading) {
     return <LoadingPage />;
@@ -73,6 +80,7 @@ export const MatchDetailsPage = () => {
           </p>
         </div>
       </div>
+      {userEmail === hostEmail ? <MatchInfoParticipantsBox /> : null}
       <hr className="h-[8px] w-full bg-gray-200" />
       <div className="flex flex-col gap-2 mobile:px-[16px] mobile:py-[18px] ">
         <p className="text-[#222] font-bold tablet:text-[18px]">호스트 소개</p>
@@ -154,12 +162,22 @@ export const MatchDetailsPage = () => {
           <p className="text-[#222]">예약은 무조건 입금순으로 하겠습니다.</p>
         </div>
       </div>
-      <Link to={`/games/detail/${gameIdParam}/join`}>
-        <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white">
-          {" "}
-          매치 참가하기
-        </button>
-      </Link>
+
+      {userEmail === hostEmail ? (
+        <Link to={`/games/detail/${gameIdParam}/join`}>
+          <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white">
+            {" "}
+            매치 상태 변경
+          </button>
+        </Link>
+      ) : (
+        <Link to={`/games/detail/${gameIdParam}/join`}>
+          <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white">
+            {" "}
+            매치 참가하기
+          </button>
+        </Link>
+      )}
 
       {/* <AdvertisementBanner /> */}
     </div>
