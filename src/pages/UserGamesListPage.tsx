@@ -40,7 +40,7 @@ export const UserGamesListPage = () => {
         <span className="text-[#666]">등록된 매치 스케줄 </span>{" "}
         <span className="font-bold text-[#333]">12개</span>
       </div>
-      <div className="flex-wrap h-full flex justify-around gap-4 py-4">
+      <div className="flex-wrap h-full flex justify-around gap-4 py-4 mobile:px-4">
         <MatchContainer />
         <MatchContainer />
         <MatchContainer />

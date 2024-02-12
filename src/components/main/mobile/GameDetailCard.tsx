@@ -21,7 +21,7 @@ export const GameDetailCard = () => {
           <Link
             to={`/games/detail/${game.id}`}
             key={game.id}
-            className="w-[221px] h-[205px]  border border-gray-200 rounded-xl"
+            className="tablet:w-[221px] tablet:h-[205px]  border border-gray-200 rounded-xl mobile:w-full"
           >
             <div>
               <img src={cardImg} alt="game card" />

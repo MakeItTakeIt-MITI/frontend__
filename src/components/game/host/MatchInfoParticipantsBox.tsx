@@ -23,7 +23,7 @@ export const MatchInfoParticipantsBox = () => {
           <h4 className="text-[14px] text-[#222] font-bold">
             결제 및 참가 완료된 게스트 (6)
           </h4>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4  overflow-x-scroll">
             <ParticipantCard />
             <ParticipantCard />
             <ParticipantCard />

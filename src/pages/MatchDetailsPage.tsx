@@ -162,23 +162,23 @@ export const MatchDetailsPage = () => {
           <p className="text-[#222]">예약은 무조건 입금순으로 하겠습니다.</p>
         </div>
       </div>
-
-      {userEmail === hostEmail ? (
-        <Link to={`/games/detail/${gameIdParam}/join`}>
-          <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white">
-            {" "}
-            매치 상태 변경
-          </button>
-        </Link>
-      ) : (
-        <Link to={`/games/detail/${gameIdParam}/join`}>
-          <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white">
-            {" "}
-            매치 참가하기
-          </button>
-        </Link>
-      )}
-
+      <div className="mobile:px-2">
+        {userEmail === hostEmail ? (
+          <Link to={`/games/detail/${gameIdParam}/join`}>
+            <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white ">
+              {" "}
+              매치 상태 변경
+            </button>
+          </Link>
+        ) : (
+          <Link to={`/games/detail/${gameIdParam}/join`}>
+            <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white ">
+              {" "}
+              매치 참가하기
+            </button>
+          </Link>
+        )}
+      </div>
       {/* <AdvertisementBanner /> */}
     </div>
   );
