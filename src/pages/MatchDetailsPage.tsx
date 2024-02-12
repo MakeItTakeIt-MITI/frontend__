@@ -141,22 +141,6 @@ export const MatchDetailsPage = () => {
           </h4>
           <p> {gameDetail?.data.info}</p>
         </div>
-        {/* <div>
-          <h4 className="text-[#444] font-bold mobile:text-[14px] tablet:text-[16px]">
-            편의시설
-          </h4>
-          <p className="text-[#222]">탈의실, 식수대, 샤워실, 주차장 완비</p>
-        </div> */}
-
-        {/* <div>
-          <h4 className="text-[#444] font-bold mobile:text-[14px] tablet:text-[16px]">
-            추가 알림
-          </h4>
-          <p className="text-[#222]">
-            운동하시는 모습을 촬영해서 유튜브에 올리고 있습니다. (참석 시 촬영
-            동의하신 것으로 알겠습니다.)
-          </p>
-        </div> */}
 
         <div>
           <p className="text-[#222]">예약은 무조건 입금순으로 하겠습니다.</p>

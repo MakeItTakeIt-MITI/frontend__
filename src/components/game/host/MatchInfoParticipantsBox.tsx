@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import rightArrow from "../../../assets/Chevron_Down_MD.svg";
 import { ParticipantCard } from "./ParticipantCard";
 
@@ -9,9 +10,9 @@ export const MatchInfoParticipantsBox = () => {
       <div className="flex flex-col gap-4 p-4">
         <div className="flex justify-between">
           <h4 className="font-bold">참가 인원 관리</h4>
-          <button>
+          <Link to={`manage_participants`}>
             <img src={rightArrow} alt="right arrow" className="-rotate-90" />
-          </button>
+          </Link>
         </div>
         <div className="text-[14px]">
           <h4 className="text-[#222] font-bold">참가 현황</h4>

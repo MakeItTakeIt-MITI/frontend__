@@ -14,7 +14,7 @@ export const UserRequestActionButton = ({
       style={{
         backgroundColor,
       }}
-      className="flex flex-col  w-[48px] h-[40px]  text-white rounded-lg text-[12px] font-bold"
+      className="flex flex-col items-center justify-center w-[48px] h-[40px]  text-white rounded-lg text-[12px] font-bold"
     >
       <span>{textOne}</span>
       <span>{textTwo}</span>

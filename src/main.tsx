@@ -19,6 +19,7 @@ import { KakaoAuthHandler } from "./components/auth/KakaoAuthHandler.tsx";
 import { UserGamesListPage } from "./pages/UserGamesListPage.tsx";
 import { PrivateRoute } from "./pages/PrivateRoute.tsx";
 import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
+import { ManageParticipants } from "./pages/games/ManageParticipants.tsx";
 // import { UserGameHistoryPage } from "./pages/UserGameHistoryPage.tsx";
 
 const queryClient = new QueryClient();
@@ -70,15 +71,22 @@ const router = createBrowserRouter([
               {
                 path: "detail/:id",
                 element: <MatchDetailsPage />,
+                children: [],
               },
+
               {
                 path: "detail/:id/join",
                 element: <UserJoinMatchPage />,
               },
               {
+                path: "detail/:id/manage_participants",
+                element: <ManageParticipants />,
+              },
+              {
                 path: "mygames/:id",
                 element: <UserGamesListPage />,
               },
+
               { path: "join/submitted", element: <MatchSubmittedPage /> },
             ],
           },
