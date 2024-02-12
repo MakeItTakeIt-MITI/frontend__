@@ -14,7 +14,7 @@ export const ManageParticipants = () => {
   const navigateHome = () => navigate(-1);
 
   return (
-    <>
+    <div className="h-screen">
       <div className="">
         <button
           role="go-prev-button"
@@ -47,6 +47,7 @@ export const ManageParticipants = () => {
             <UserRejectInfoBox />
           </div>
         </div>
+
         <hr className="h-[8px] w-full bg-gray-200" />
 
         <div className="flex flex-col gap-4 mobile:px-4">
@@ -58,6 +59,6 @@ export const ManageParticipants = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

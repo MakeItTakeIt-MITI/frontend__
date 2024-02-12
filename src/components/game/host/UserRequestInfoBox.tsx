@@ -8,7 +8,7 @@ import {
 export const UserRequestInfoBox = () => {
   return (
     <div className="flex justify-between text-[14px]">
-      <div className="flex gap-4">
+      <div className="flex items-center gap-4">
         <div className="w-10 h-10 rounded-full bg-[#666]"></div>
 
         <div className="flex  flex-col ">
@@ -24,7 +24,7 @@ export const UserRequestInfoBox = () => {
 export const UserRejectInfoBox = () => {
   return (
     <div className="flex justify-between text-[14px]">
-      <div className="flex gap-4">
+      <div className="flex items-center gap-4">
         <div className="w-10 h-10 rounded-full bg-[#666]"></div>
 
         <div className="flex  flex-col ">
@@ -40,7 +40,7 @@ export const UserRejectInfoBox = () => {
 export const UserRefundInfoBox = () => {
   return (
     <div className="flex justify-between  text-[14px]">
-      <div className="flex gap-4">
+      <div className="flex items-center gap-4">
         <div className="w-10 h-10 rounded-full bg-[#666]"></div>
 
         <div className="flex  flex-col ">

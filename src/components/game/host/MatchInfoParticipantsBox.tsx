@@ -5,7 +5,7 @@ import { ParticipantCard } from "./ParticipantCard";
 export const MatchInfoParticipantsBox = () => {
   return (
     <>
-      <hr className="h-[8px] w-full bg-gray-200" />
+      <hr className="h-[8px] w-full bg-gray-200 tablet:hidden mobile:block" />
 
       <div className="flex flex-col gap-4 p-4">
         <div className="flex justify-between">
