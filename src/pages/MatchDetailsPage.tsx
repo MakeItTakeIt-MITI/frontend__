@@ -3,7 +3,7 @@ import markerSvg from "../assets/Map_Pin.svg";
 import phoneSvg from "../assets/Phone.svg";
 import peopleSvg from "../assets/people.svg";
 import badge from "../assets/authentication-badge.svg";
-// import reviewStar from "../assets/star-review.png";
+import reviewStar from "../assets/star-review.png";
 import { Link, useParams } from "react-router-dom";
 import { useGetGameDetailQuery } from "../hooks/useGetGameDetailQuery";
 import { LoadingPage } from "./LoadingPage";
@@ -125,36 +125,36 @@ export const MatchDetailsPage = () => {
                   </p>
                   <img src={badge} alt="user verified badge" />
                 </div>
-                {/* <div className="flex gap-0.5 w-[250px] mobile:text-[14px] tablet:text-[16x] text-[#222]">
-              <img
-                src={reviewStar}
-                alt="review star"
-                className="w-[16px] h-[16px]"
-              />
-              <img
-                src={reviewStar}
-                alt="review star"
-                className="w-[16px] h-[16px]"
-              />
-              <img
-                src={reviewStar}
-                alt="review star"
-                className="w-[16px] h-[16px]"
-              />
-              <img
-                src={reviewStar}
-                alt="review star"
-                className="w-[16px] h-[16px]"
-              />
-              <img
-                src={reviewStar}
-                alt="review star"
-                className="w-[16px] h-[16px]"
-              />
+                <div className="flex gap-0.5 w-[250px] mobile:text-[14px] tablet:text-[16x] text-[#222]">
+                  <img
+                    src={reviewStar}
+                    alt="review star"
+                    className="w-[16px] h-[16px]"
+                  />
+                  <img
+                    src={reviewStar}
+                    alt="review star"
+                    className="w-[16px] h-[16px]"
+                  />
+                  <img
+                    src={reviewStar}
+                    alt="review star"
+                    className="w-[16px] h-[16px]"
+                  />
+                  <img
+                    src={reviewStar}
+                    alt="review star"
+                    className="w-[16px] h-[16px]"
+                  />
+                  <img
+                    src={reviewStar}
+                    alt="review star"
+                    className="w-[16px] h-[16px]"
+                  />
 
-              <p className="ml-[4px]">5.0</p>
-              <p className="ml-[8px] underline">후기 7</p>
-            </div> */}
+                  <p className="ml-[4px]">5.0</p>
+                  <p className="ml-[8px] underline">후기 0</p>
+                </div>
               </div>
             </div>
             <p className="text-[#666] ">
