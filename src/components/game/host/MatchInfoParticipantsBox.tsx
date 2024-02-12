@@ -7,7 +7,7 @@ export const MatchInfoParticipantsBox = () => {
     <>
       <hr className="h-[8px] w-full bg-gray-200 tablet:hidden mobile:block" />
 
-      <div className="flex flex-col gap-4 p-4">
+      <div className="flex flex-col gap-4 p-4 ">
         <div className="flex justify-between">
           <h4 className="font-bold">참가 인원 관리</h4>
           <Link to={`manage_participants`}>
@@ -24,7 +24,14 @@ export const MatchInfoParticipantsBox = () => {
           <h4 className="text-[14px] text-[#222] font-bold">
             결제 및 참가 완료된 게스트 (6)
           </h4>
-          <div className="flex items-center gap-4  overflow-x-scroll">
+          <div className="flex items-center gap-4 tablet:flex-wrap tablet:overflow-x-hidden mobile:overflow-x-scroll">
+            <ParticipantCard />
+            <ParticipantCard />
+            <ParticipantCard />
+            <ParticipantCard />
+            <ParticipantCard />
+            <ParticipantCard />
+            <ParticipantCard />
             <ParticipantCard />
             <ParticipantCard />
             <ParticipantCard />

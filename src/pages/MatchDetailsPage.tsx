@@ -29,25 +29,27 @@ export const MatchDetailsPage = () => {
       <hr className="h-[8px] w-full bg-gray-200" />
 
       <div className="flex mobile:flex-col tablet:flex-row  ">
-        <div className="w-[430px]">
+        <div className="tablet:min-w-[400px] ">
           <img
             src={courtbg}
             alt="basketball court"
             className="mobile:w-full tablet:hidden"
           />
-          <div className="mobile:px-[16px] mobile:py-[18px]">
-            <span className="mobile:text-[11px] tablet:text-[14px] text-[#4065F6] bg-[#C1e1ff] p-[3px] rounded-sm font-[500]">
-              {/* 2명 모집 */}
-              {gameDetail?.data.max_invitation}명 모집
-            </span>
-            <p className="font-bold text-[#222] tablet:text-[20px]">
-              {gameDetail?.data.title}
-            </p>
-            <p className="text-[#999] mobile:text-[14px] tablet:text-[16px] ">
-              {gameDetail?.data.startdate}{" "}
-              {gameDetail?.data.starttime.slice(0, 5)} ~{" "}
-              {gameDetail?.data.endtime.slice(0, 5)}
-            </p>
+          <div className="mobile:px-[16px] mobile:py-[18px] ">
+            <div className="tablet:flex tablet:flex-col tablet:gap-1 tablet:items-start">
+              <span className="mobile:text-[11px] tablet:text-[14px] text-[#4065F6] bg-[#C1e1ff] p-[3px] rounded-sm font-[500]">
+                {/* 2명 모집 */}
+                {gameDetail?.data.max_invitation}명 모집
+              </span>
+              <p className="font-bold text-[#222] tablet:text-[20px]">
+                {gameDetail?.data.title}
+              </p>
+              <p className="text-[#999] mobile:text-[14px] tablet:text-[16px] ">
+                {gameDetail?.data.startdate}{" "}
+                {gameDetail?.data.starttime.slice(0, 5)} ~{" "}
+                {gameDetail?.data.endtime.slice(0, 5)}
+              </p>
+            </div>
             <div className="flex flex-col gap-2 my-[16px] mobile:text-[14px] tablet:text-[16px] text-[#444]">
               <div className="flex gap-1">
                 <img
