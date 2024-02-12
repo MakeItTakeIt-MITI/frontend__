@@ -34,31 +34,51 @@ export const UserMyPage = () => {
   }
 
   return (
-    <div className=" mobile:w-full tablet:w-[560px] tablet:mb-0 mx-auto  mobile:mb-[4rem] py-3">
-      <NavigateToPrevContainer />
-      <div className="p-4 flex flex-col gap-2">
-        <p className="text-xl">
-          {data?.data.name} 님 ({data?.data.nickname})
-        </p>
-        <p>{data?.data.birthday}</p>
-        <p>{data?.data.email}</p>
-      </div>
-      <hr className="  w-full" />
+    <div className=" w-full tablet:max-w-[90rem] tablet:px-[13rem] tablet:mb-0 mx-auto  mobile:mb-[4rem] py-3">
+      <hr className="  w-full tablet:block mobile:hidden" />
 
-      <NicknameEditForm id={id} refetch={refetch} data={data} />
-      <PasswordUpdateForm id={id} refetch={refetch} />
-      <div className="flex flex-col gap-6  mobile:w-full mobile:p-4 "></div>
-      <hr className="mobile:block tablet:hidden w-full" />
+      <div className="flex mobile:flex-col tablet:flex-row">
+        <div className="mobile:hidden tablet:block min-w-[250px]">
+          <div className="p-4 flex flex-col gap-4 ">
+            <p className="text-xl font-bold">
+              {data?.data.name} 님 ({data?.data.nickname})
+            </p>
+            <p>{data?.data.birthday}</p>
+            <p>{data?.data.email}</p>
+          </div>
+          <div className="p-4 flex flex-col gap-4 ">
+            <button>닉네임 변경</button>
+            <button>비밀번호 변경</button>
+            <button className="hover:text-red-400">회원탈퇴</button>
+          </div>
+        </div>
+        <div className="w-full">
+          <NavigateToPrevContainer />
+          <div className="tablet:hidden mobile:block p-4 flex flex-col gap-2">
+            <p className="text-xl">
+              {data?.data.name} 님 ({data?.data.nickname})
+            </p>
+            <p>{data?.data.birthday}</p>
+            <p>{data?.data.email}</p>
+          </div>
+          <hr className="  w-full tablet:hidden mobile:block" />
 
-      <div className="flex flex-col gap-4 mobile:p-4 tablet:p-0">
-        <h4 className="font-bold">계정 삭제</h4>
-        <button
-          type="button"
-          onClick={handleDeleteAccount}
-          className=" rounded-xl w-full  h-14 bg-[#db5e5e] text-white"
-        >
-          회원탈퇴
-        </button>
+          <NicknameEditForm id={id} refetch={refetch} data={data} />
+          <PasswordUpdateForm id={id} refetch={refetch} />
+          <div className="flex flex-col gap-6  mobile:w-full mobile:p-4 "></div>
+          <hr className="mobile:block tablet:hidden w-full" />
+
+          <div className="flex flex-col gap-4 mobile:p-4 tablet:p-0">
+            <h4 className="font-bold">계정 삭제</h4>
+            <button
+              type="button"
+              onClick={handleDeleteAccount}
+              className=" rounded-xl w-full  h-14 bg-[#db5e5e] text-white"
+            >
+              회원탈퇴
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
