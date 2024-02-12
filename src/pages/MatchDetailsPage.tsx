@@ -24,9 +24,9 @@ export const MatchDetailsPage = () => {
   }
 
   return (
-    <div className=" w-full tablet:px-[13rem]  tablet:max-w-[90rem] tablet:mb-0 mx-auto mobile:mb-[4rem] py-6 ">
+    <div className=" w-full tablet:px-[13rem]  tablet:max-w-[90rem] tablet:mb-0 mx-auto mobile:mb-[4rem] pt-10 pb-4 ">
       {/* <div className=" mobile:w-full tablet:w-[560px] tablet:mb-0 mx-auto mobile:mb-[4rem] py-3"> */}
-      <hr className="h-[8px] w-full bg-gray-200" />
+      <hr className="h-[8px] w-full bg-gray-200 mobile:hidden tablet:block" />
 
       <div className="flex mobile:flex-col tablet:flex-row  ">
         <div className="tablet:min-w-[400px] ">
