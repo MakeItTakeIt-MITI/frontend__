@@ -15,12 +15,8 @@ export const ManageParticipants = () => {
 
   return (
     <div className="h-screen">
-      <div className="">
-        <button
-          role="go-prev-button"
-          className="mobile:block tablet:hidden p-4"
-          onClick={navigateHome}
-        >
+      <div className="mobile:block tablet:hidden">
+        <button role="go-prev-button" className=" p-4" onClick={navigateHome}>
           <img src={backArrow} alt="back arrow" className="w-6" />
         </button>
         <div className="pb-4">
@@ -29,33 +25,62 @@ export const ManageParticipants = () => {
 
         <hr className="mobile:block tablet:hidden w-full" />
       </div>
-      <div className="flex flex-col gap-4 mobile:w-full tablet:w-[560px] tablet:mb-0 mx-auto mobile:mb-[4rem] py-3  ">
-        <div className="flex flex-col gap-4 mobile:px-4">
-          <h4 className="font-bold text-xl text-[#222]">참여 인원 6/8</h4>
-          <div className="flex flex-col gap-2">
-            <h4 className="text-lg">참여 확정 게스트</h4>
-            <UserRequestInfoBox />
-            <UserRequestInfoBox />
-            <UserRequestInfoBox />
-          </div>
-        </div>
-        <div className="flex flex-col gap-4 mobile:px-4">
-          <div className="flex flex-col gap-2">
-            <h4 className="text-lg">참여 확정 게스트</h4>
-            <UserRejectInfoBox />
-            <UserRejectInfoBox />
-            <UserRejectInfoBox />
-          </div>
-        </div>
 
-        <hr className="h-[8px] w-full bg-gray-200" />
+      <div className="flex flex-col gap-4 w-full tablet:px-[13rem] tablet:max-w-[90rem]  tablet:mb-0 mx-auto mobile:mb-[4rem] py-3  ">
+        {/* <hr className="mobile:hidden tablet:block w-full" /> */}
+        <h4 className="font-bold text-2xl text-[#222] text-center mobile:hidden tablet:block">
+          나의 매치 스케줄
+        </h4>
+        <h4 className="font-bold text-xl  text-[#222] mobile:px-4 mobile:text-start tablet:text-center">
+          참여 인원 6/8
+        </h4>
+        {/* <hr className="mobile:hidden tablet:block w-full" /> */}
 
-        <div className="flex flex-col gap-4 mobile:px-4">
-          <div className="flex flex-col gap-2">
-            <h4 className="font-bold text-lg">환불 요청 (3)</h4>
-            <UserRefundInfoBox />
-            <UserRefundInfoBox />
-            <UserRefundInfoBox />
+        <div className=" flex mobile:flex-col tablet:flex-row mobile:gap-4 tablet:justify-between">
+          <div className="flex flex-col gap-4 mobile:px-4 tablet:w-[30%]">
+            <div className="flex flex-col tablet:gap-4 mobile:gap-2">
+              <h4 className="text-lg tablet:text-center mobile:text-start">
+                참여 확정 게스트
+              </h4>
+              <UserRequestInfoBox />
+              <UserRequestInfoBox />
+              <UserRequestInfoBox />
+              <UserRequestInfoBox />
+              <UserRequestInfoBox />
+              <UserRequestInfoBox />
+              <UserRequestInfoBox />
+              <UserRequestInfoBox />
+            </div>
+          </div>
+          <hr className="h-screen w-1 h bg-gray-200 mobile:hidden tablet:block" />
+
+          <div className="flex flex-col gap-4 mobile:px-4 tablet:w-[30%]">
+            <div className="flex flex-col tablet:gap-4 mobile:gap-2">
+              <h4 className="text-lg tablet:text-center mobile:text-start">
+                참여 확정 게스트
+              </h4>
+              <UserRejectInfoBox />
+              <UserRejectInfoBox />
+              <UserRejectInfoBox />
+              <UserRejectInfoBox />
+              <UserRejectInfoBox />
+            </div>
+          </div>
+          <hr className="h-screen w-1 h bg-gray-200 mobile:hidden tablet:block" />
+
+          <hr className="h-[8px] w-full bg-gray-200 mobile:block tablet:hidden" />
+
+          <div className="flex flex-col gap-4 mobile:px-4 tablet:w-[40%]">
+            <div className="flex flex-col tablet:gap-4 mobile:gap-2 ">
+              <h4 className="mobile:font-bold  text-lg tablet:text-center mobile:text-start">
+                환불 요청 (3)
+              </h4>
+              <UserRefundInfoBox />
+              <UserRefundInfoBox />
+              <UserRefundInfoBox />
+              <UserRefundInfoBox />
+              <UserRefundInfoBox />
+            </div>
           </div>
         </div>
       </div>
