@@ -24,6 +24,11 @@ export const userParticipateGame = async (gameId: number, data: JoinGameField) =
     return response.data
 }
 
+export const getParticipatingUsers = async (gameId: number) => {
+    const response = await axiosUrl.get(`/games/${gameId}/participations/`)
+    return response.data
+}
+
 export const getGameCourtDetails = async (address: string) => {
     const response = await axiosUrl.get(`/courts/?address=${address}`)
     return response.data

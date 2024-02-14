@@ -5,6 +5,10 @@ import {
   RejectUserButton,
 } from "../../../stories/UserRequestAction.stories";
 
+interface ParticipantsProp {
+  participantsData: () => void;
+}
+
 export const UserRequestInfoBox = () => {
   return (
     <div className="flex justify-between text-[14px]">
@@ -21,19 +25,25 @@ export const UserRequestInfoBox = () => {
   );
 };
 
-export const UserRejectInfoBox = () => {
+export const UserRejectInfoBox = ({ participantsData }) => {
   return (
-    <div className="flex justify-between text-[14px]">
-      <div className="flex items-center gap-4">
-        <div className="w-10 h-10 rounded-full bg-[#666]"></div>
+    <>
+      {participantsData?.data.requested.map((user) => {
+        return (
+          <div key={user.id} className="flex justify-between text-[14px]">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-full bg-[#666]"></div>
 
-        <div className="flex  flex-col ">
-          <p>홍길동 님</p>
-          <p className="text-[#666]">010-2592-2414</p>
-        </div>
-      </div>
-      <UserRequestActionButton {...RejectUserButton.args} />
-    </div>
+              <div className="flex  flex-col ">
+                <p> {user.player_name}</p>
+                <p className="text-[#666]">{user.player_phone}</p>
+              </div>
+            </div>
+            <UserRequestActionButton {...RejectUserButton.args} />
+          </div>
+        );
+      })}
+    </>
   );
 };
 

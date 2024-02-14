@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import backArrow from "../../assets/Chevron_Left.png";
 
 import {
@@ -6,9 +6,21 @@ import {
   UserRejectInfoBox,
   UserRequestInfoBox,
 } from "../../components/game/host/UserRequestInfoBox";
+import { useParticipatingUsersQuery } from "../../hooks/useParticipatingUsersQuery";
+import { UserRequestActionButton } from "../../components/game/host/UserRequestActionButton";
+import {
+  ApproveUserButton,
+  CopyBankInfoButton,
+  RejectUserButton,
+} from "../../stories/UserRequestAction.stories";
 
 export const ManageParticipants = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const gameIdParam = Number(id);
+
+  const { data: participantsData } = useParticipatingUsersQuery(gameIdParam);
+  console.log(participantsData?.data);
 
   // const navigatePrev = () => navigate(-1);
   const navigateHome = () => navigate(-1);
@@ -43,13 +55,24 @@ export const ManageParticipants = () => {
                 참여 확정 게스트
               </h4>
               <UserRequestInfoBox />
-              <UserRequestInfoBox />
-              <UserRequestInfoBox />
-              <UserRequestInfoBox />
-              <UserRequestInfoBox />
-              <UserRequestInfoBox />
-              <UserRequestInfoBox />
-              <UserRequestInfoBox />
+              {participantsData?.data.confirmed.map((user) => {
+                return (
+                  <div
+                    key={user.id}
+                    className="flex justify-between text-[14px]"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-[#666]"></div>
+
+                      <div className="flex  flex-col ">
+                        <p> {user.player_name}</p>
+                        <p className="text-[#666]">{user.player_phone}</p>
+                      </div>
+                    </div>
+                    <UserRequestActionButton {...ApproveUserButton.args} />
+                  </div>
+                );
+              })}
             </div>
           </div>
           <hr className="h-screen w-1 h bg-gray-200 mobile:hidden tablet:block" />
@@ -57,13 +80,31 @@ export const ManageParticipants = () => {
           <div className="flex flex-col gap-4 mobile:px-4 tablet:w-[30%]">
             <div className="flex flex-col tablet:gap-4 mobile:gap-2">
               <h4 className="text-lg tablet:text-center mobile:text-start">
-                참여 확정 게스트
+                참여 요청 게스트
               </h4>
+              {participantsData?.data.requested.map((user) => {
+                return (
+                  <div
+                    key={user.id}
+                    className="flex justify-between text-[14px]"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-[#666]"></div>
+
+                      <div className="flex  flex-col ">
+                        <p> {user.player_name}</p>
+                        <p className="text-[#666]">{user.player_phone}</p>
+                      </div>
+                    </div>
+                    <UserRequestActionButton {...RejectUserButton.args} />
+                  </div>
+                );
+              })}
+              {/* <UserRejectInfoBox participantsData={participantsData} /> */}
+              {/* <UserRejectInfoBox />
               <UserRejectInfoBox />
               <UserRejectInfoBox />
-              <UserRejectInfoBox />
-              <UserRejectInfoBox />
-              <UserRejectInfoBox />
+              <UserRejectInfoBox /> */}
             </div>
           </div>
           <hr className="h-screen w-1 h bg-gray-200 mobile:hidden tablet:block" />
@@ -76,10 +117,27 @@ export const ManageParticipants = () => {
                 환불 요청 (3)
               </h4>
               <UserRefundInfoBox />
-              <UserRefundInfoBox />
-              <UserRefundInfoBox />
-              <UserRefundInfoBox />
-              <UserRefundInfoBox />
+              {participantsData?.data.refund_requested.map((user) => {
+                return (
+                  <div
+                    key={user.id}
+                    className="flex justify-between text-[14px]"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-[#666]"></div>
+
+                      <div className="flex  flex-col ">
+                        <p> {user.player_name}</p>
+                        <p className="text-[#666]">{user.player_phone}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <UserRequestActionButton {...CopyBankInfoButton.args} />
+                      <UserRequestActionButton {...RejectUserButton.args} />
+                    </div>{" "}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
