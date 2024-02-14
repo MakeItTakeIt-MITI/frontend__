@@ -35,7 +35,7 @@ export const userKakaoLogin = async () => {
 
 export const userSignup = async (data: RegisterField) => {
     try {
-        const response = await axiosUrl.post('/auth/', data)
+        const response = await axiosUrl.post('/auth/signup/', data)
         if (response.data.status_code === 201) {
             console.log(response.data);
             localStorage.setItem("authentication_token", response.data.data.authentication_token)
