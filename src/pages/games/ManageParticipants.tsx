@@ -12,18 +12,28 @@ import {
   CopyBankInfoButton,
   RejectUserButton,
 } from "../../stories/UserRequestAction.stories";
-import { updateParticipationStatus } from "../../api/gameHost";
+import {
+  cancelParticipationStatus,
+  updateParticipationStatus,
+} from "../../api/gameHost";
 
 export const ManageParticipants = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const gameIdParam = Number(id);
 
-  const { data: participantsData } = useParticipatingUsersQuery(gameIdParam);
+  const { data: participantsData, refetch } =
+    useParticipatingUsersQuery(gameIdParam);
   console.log(participantsData?.data);
 
   const handlePatchStatus = (gameId: number, userId: number) => {
     updateParticipationStatus(gameId, userId);
+    refetch();
+  };
+
+  const rejectParticipationStatus = (gameId: number, userId: number) => {
+    cancelParticipationStatus(gameId, userId);
+    refetch();
   };
 
   // const navigatePrev = () => navigate(-1);
@@ -73,13 +83,24 @@ export const ManageParticipants = () => {
                         <p className="text-[#666]">{user.player_phone}</p>
                       </div>
                     </div>
-                    <UserRequestActionButton
+                    {/* <UserRequestActionButton
                       {...ApproveUserButton.args}
                       {...RejectUserButton.args}
                       userId={user.id}
                       gameIdParam={participantsData?.data.id}
                       handlePatchStatus={handlePatchStatus}
-                    />
+                    /> */}
+                    <button
+                      className="text-red-400"
+                      onClick={() =>
+                        rejectParticipationStatus(
+                          participantsData?.data.id,
+                          user.id
+                        )
+                      }
+                    >
+                      delete
+                    </button>
                   </div>
                 );
               })}
