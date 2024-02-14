@@ -3,7 +3,6 @@ import backArrow from "../../assets/Chevron_Left.png";
 
 import {
   UserRefundInfoBox,
-  UserRejectInfoBox,
   UserRequestInfoBox,
 } from "../../components/game/host/UserRequestInfoBox";
 import { useParticipatingUsersQuery } from "../../hooks/useParticipatingUsersQuery";
@@ -13,6 +12,7 @@ import {
   CopyBankInfoButton,
   RejectUserButton,
 } from "../../stories/UserRequestAction.stories";
+import { updateParticipationStatus } from "../../api/gameHost";
 
 export const ManageParticipants = () => {
   const navigate = useNavigate();
@@ -21,6 +21,10 @@ export const ManageParticipants = () => {
 
   const { data: participantsData } = useParticipatingUsersQuery(gameIdParam);
   console.log(participantsData?.data);
+
+  const handlePatchStatus = (gameId: number, userId: number) => {
+    updateParticipationStatus(gameId, userId);
+  };
 
   // const navigatePrev = () => navigate(-1);
   const navigateHome = () => navigate(-1);
@@ -69,7 +73,13 @@ export const ManageParticipants = () => {
                         <p className="text-[#666]">{user.player_phone}</p>
                       </div>
                     </div>
-                    <UserRequestActionButton {...ApproveUserButton.args} />
+                    <UserRequestActionButton
+                      {...ApproveUserButton.args}
+                      {...RejectUserButton.args}
+                      userId={user.id}
+                      gameIdParam={participantsData?.data.id}
+                      handlePatchStatus={handlePatchStatus}
+                    />
                   </div>
                 );
               })}
@@ -96,7 +106,12 @@ export const ManageParticipants = () => {
                         <p className="text-[#666]">{user.player_phone}</p>
                       </div>
                     </div>
-                    <UserRequestActionButton {...RejectUserButton.args} />
+                    <UserRequestActionButton
+                      {...RejectUserButton.args}
+                      userId={user.id}
+                      gameIdParam={participantsData?.data.id}
+                      handlePatchStatus={handlePatchStatus}
+                    />
                   </div>
                 );
               })}
@@ -132,8 +147,20 @@ export const ManageParticipants = () => {
                       </div>
                     </div>
                     <div className="flex gap-2">
-                      <UserRequestActionButton {...CopyBankInfoButton.args} />
-                      <UserRequestActionButton {...RejectUserButton.args} />
+                      <UserRequestActionButton
+                        {...CopyBankInfoButton.args}
+                        {...RejectUserButton.args}
+                        userId={user.id}
+                        gameIdParam={participantsData?.data.id}
+                        handlePatchStatus={handlePatchStatus}
+                      />
+                      <UserRequestActionButton
+                        {...RejectUserButton.args}
+                        {...RejectUserButton.args}
+                        userId={user.id}
+                        gameIdParam={participantsData?.data.id}
+                        handlePatchStatus={handlePatchStatus}
+                      />
                     </div>{" "}
                   </div>
                 );
