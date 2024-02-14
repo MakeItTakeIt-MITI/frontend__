@@ -1,4 +1,5 @@
 import { GameHostField } from "../interface/gameInterface";
+import { JoinGameField } from "../pages/UserJoinMatchPage";
 import axiosUrl from "../utils/axios"
 
 
@@ -18,8 +19,8 @@ export const getGameDetail = async (gameId: number) => {
     return response.data
 }
 
-export const userParticipateGame = async (gameId: number) => {
-    const response = await axiosUrl.post(`/games/${gameId}/participations/`)
+export const userParticipateGame = async (gameId: number, data: JoinGameField) => {
+    const response = await axiosUrl.post(`/games/${gameId}/participations/`, data)
     return response.data
 }
 

@@ -7,9 +7,10 @@ import { useForm } from "react-hook-form";
 import { JoinMatchPreviewModal } from "../components/game/guest/JoinMatchPreviewModal";
 import { JoinGamePriceDetail } from "../components/game/JoinGamePriceDetail";
 import { useParticipateGameMutation } from "../hooks/useParticipateGameMutation";
+import { userParticipateGame } from "../api/games";
 // import downArrow from "../assets/Chevron_Down_MD.svg";
 
-interface JoinGameField {
+export interface JoinGameField {
   player_name: string;
   player_phone: string;
   player_height: string;
@@ -20,21 +21,24 @@ interface JoinGameField {
 
 export const UserJoinMatchPage = () => {
   const [modal, setModal] = useState(false);
+
   const navigate = useNavigate();
   const { id } = useParams();
   const gameIdParam = Number(id);
   const { data: gameDetail } = useGetGameDetailQuery(gameIdParam);
-  const { mutate } = useParticipateGameMutation(gameDetail?.data.id);
+  // const { mutate } = useParticipateGameMutation(gameDetail?.data.id);
 
   const { register, handleSubmit, watch } = useForm<JoinGameField>();
   const bank_holder = watch("player_account_holder");
 
   const onSubmit = (data: JoinGameField) => {
-    mutate(data, {
-      onSuccess: () => {
-        navigate("/games/join/submitted");
-      },
-    });
+    // mutate(data);
+    userParticipateGame(gameIdParam, data);
+    // mutate(data, {
+    //   onSuccess: () => {
+    //     navigate("/games/join/submitted");
+    //   },
+    // });
     console.log(data);
   };
 
