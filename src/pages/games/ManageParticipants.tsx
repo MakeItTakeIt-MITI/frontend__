@@ -1,42 +1,19 @@
 import { useNavigate, useParams } from "react-router-dom";
 import backArrow from "../../assets/Chevron_Left.png";
 
-import {
-  UserRefundInfoBox,
-  UserRequestInfoBox,
-} from "../../components/game/host/UserRequestInfoBox";
+import { UsersConfirmedTab } from "../../components/game/host/UsersConfirmedTab";
+import { UsersRequestingTab } from "../../components/game/host/UsersRequestingTab";
+import { UsersRefundTab } from "../../components/game/host/UsersRefundTab";
 import { useParticipatingUsersQuery } from "../../hooks/useParticipatingUsersQuery";
-import { UserRequestActionButton } from "../../components/game/host/UserRequestActionButton";
-import {
-  ApproveUserButton,
-  CopyBankInfoButton,
-  RejectUserButton,
-} from "../../stories/UserRequestAction.stories";
-import {
-  cancelParticipationStatus,
-  updateParticipationStatus,
-} from "../../api/gameHost";
 
 export const ManageParticipants = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const gameIdParam = Number(id);
 
-  const { data: participantsData, refetch } =
+  const { refetch, data: participantsData } =
     useParticipatingUsersQuery(gameIdParam);
-  console.log(participantsData?.data);
 
-  const handlePatchStatus = (gameId: number, userId: number) => {
-    updateParticipationStatus(gameId, userId);
-    refetch();
-  };
-
-  const rejectParticipationStatus = (gameId: number, userId: number) => {
-    cancelParticipationStatus(gameId, userId);
-    refetch();
-  };
-
-  // const navigatePrev = () => navigate(-1);
   const navigateHome = () => navigate(-1);
 
   return (
@@ -63,129 +40,43 @@ export const ManageParticipants = () => {
         {/* <hr className="mobile:hidden tablet:block w-full" /> */}
 
         <div className=" flex mobile:flex-col tablet:flex-row mobile:gap-4 tablet:justify-between">
-          <div className="flex flex-col gap-4 mobile:px-4 tablet:w-[30%]">
+          <div className="flex flex-col gap-4 mobile:px-4 w-full">
             <div className="flex flex-col tablet:gap-4 mobile:gap-2">
               <h4 className="text-lg tablet:text-center mobile:text-start">
                 참여 확정 게스트
               </h4>
-              <UserRequestInfoBox />
-              {participantsData?.data.confirmed.map((user) => {
-                return (
-                  <div
-                    key={user.id}
-                    className="flex justify-between text-[14px]"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full bg-[#666]"></div>
-
-                      <div className="flex  flex-col ">
-                        <p> {user.player_name}</p>
-                        <p className="text-[#666]">{user.player_phone}</p>
-                      </div>
-                    </div>
-                    {/* <UserRequestActionButton
-                      {...ApproveUserButton.args}
-                      {...RejectUserButton.args}
-                      userId={user.id}
-                      gameIdParam={participantsData?.data.id}
-                      handlePatchStatus={handlePatchStatus}
-                    /> */}
-                    <button
-                      className="text-red-400"
-                      onClick={() =>
-                        rejectParticipationStatus(
-                          participantsData?.data.id,
-                          user.id
-                        )
-                      }
-                    >
-                      delete
-                    </button>
-                  </div>
-                );
-              })}
+              <UsersConfirmedTab
+                refetch={refetch}
+                participantsData={participantsData}
+              />
             </div>
           </div>
           <hr className="h-screen w-1 h bg-gray-200 mobile:hidden tablet:block" />
 
-          <div className="flex flex-col gap-4 mobile:px-4 tablet:w-[30%]">
+          <div className="flex flex-col gap-4 mobile:px-4 w-full">
             <div className="flex flex-col tablet:gap-4 mobile:gap-2">
               <h4 className="text-lg tablet:text-center mobile:text-start">
                 참여 요청 게스트
               </h4>
-              {participantsData?.data.requested.map((user) => {
-                return (
-                  <div
-                    key={user.id}
-                    className="flex justify-between text-[14px]"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full bg-[#666]"></div>
-
-                      <div className="flex  flex-col ">
-                        <p> {user.player_name}</p>
-                        <p className="text-[#666]">{user.player_phone}</p>
-                      </div>
-                    </div>
-                    <UserRequestActionButton
-                      {...RejectUserButton.args}
-                      userId={user.id}
-                      gameIdParam={participantsData?.data.id}
-                      handlePatchStatus={handlePatchStatus}
-                    />
-                  </div>
-                );
-              })}
-              {/* <UserRejectInfoBox participantsData={participantsData} /> */}
-              {/* <UserRejectInfoBox />
-              <UserRejectInfoBox />
-              <UserRejectInfoBox />
-              <UserRejectInfoBox /> */}
+              <UsersRequestingTab
+                refetch={refetch}
+                participantsData={participantsData}
+              />
             </div>
           </div>
           <hr className="h-screen w-1 h bg-gray-200 mobile:hidden tablet:block" />
 
           <hr className="h-[8px] w-full bg-gray-200 mobile:block tablet:hidden" />
 
-          <div className="flex flex-col gap-4 mobile:px-4 tablet:w-[40%]">
+          <div className="flex flex-col gap-4 mobile:px-4 w-full">
             <div className="flex flex-col tablet:gap-4 mobile:gap-2 ">
               <h4 className="mobile:font-bold  text-lg tablet:text-center mobile:text-start">
                 환불 요청 (3)
               </h4>
-              <UserRefundInfoBox />
-              {participantsData?.data.refund_requested.map((user) => {
-                return (
-                  <div
-                    key={user.id}
-                    className="flex justify-between text-[14px]"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full bg-[#666]"></div>
-
-                      <div className="flex  flex-col ">
-                        <p> {user.player_name}</p>
-                        <p className="text-[#666]">{user.player_phone}</p>
-                      </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <UserRequestActionButton
-                        {...CopyBankInfoButton.args}
-                        {...RejectUserButton.args}
-                        userId={user.id}
-                        gameIdParam={participantsData?.data.id}
-                        handlePatchStatus={handlePatchStatus}
-                      />
-                      <UserRequestActionButton
-                        {...RejectUserButton.args}
-                        {...RejectUserButton.args}
-                        userId={user.id}
-                        gameIdParam={participantsData?.data.id}
-                        handlePatchStatus={handlePatchStatus}
-                      />
-                    </div>{" "}
-                  </div>
-                );
-              })}
+              <UsersRefundTab
+                refetch={refetch}
+                participantsData={participantsData}
+              />
             </div>
           </div>
         </div>

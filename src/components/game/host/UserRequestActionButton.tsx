@@ -2,22 +2,24 @@ interface RequestButtonProp {
   textOne: string;
   textTwo: string;
   backgroundColor: string;
-  userId: number;
-  gameIdParam: number;
-  handlePatchStatus: (arg1: number, arg2: number) => void;
+  handleRemoveFromGame?: (userId: number) => void;
+  handleConfirmToGame?: (userId: number) => void;
+  handleCopyClipBoard?: (arg: string) => void;
 }
 
 export const UserRequestActionButton = ({
   textOne,
   textTwo,
   backgroundColor,
-  userId,
-  gameIdParam,
-  handlePatchStatus,
+  handleConfirmToGame,
+  handleRemoveFromGame,
+  handleCopyClipBoard,
 }: RequestButtonProp) => {
   return (
     <button
-      onClick={() => handlePatchStatus(gameIdParam, userId)}
+      onClick={
+        handleConfirmToGame || handleRemoveFromGame || handleCopyClipBoard
+      }
       style={{
         backgroundColor,
       }}
