@@ -5,21 +5,26 @@ interface RequestButtonProp {
   handleRemoveFromGame?: (userId: number) => void;
   handleConfirmToGame?: (userId: number) => void;
   handleCopyClipBoard?: (arg: string) => void;
+  userId: number;
 }
 
 export const UserRequestActionButton = ({
   textOne,
   textTwo,
   backgroundColor,
-  handleConfirmToGame,
   handleRemoveFromGame,
   handleCopyClipBoard,
+  userId,
 }: RequestButtonProp) => {
+  const handleConfirmToGame = (userId: number) => {
+    updateParticipationStatus(participantsData?.data.id, userId);
+    refetch();
+  };
+
   return (
+    // || handleRemoveFromGame || handleCopyClipBoard
     <button
-      onClick={
-        handleConfirmToGame || handleRemoveFromGame || handleCopyClipBoard
-      }
+      onClick={() => handleConfirmToGame(userId)}
       style={{
         backgroundColor,
       }}

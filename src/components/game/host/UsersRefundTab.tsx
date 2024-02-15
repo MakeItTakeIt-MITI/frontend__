@@ -1,21 +1,11 @@
 import { UserRequestActionButton } from "./UserRequestActionButton";
-import {
-  ApproveUserButton,
-  CopyBankInfoButton,
-  RejectUserButton,
-} from "../../../stories/UserRequestAction.stories";
-import { updateParticipationStatus } from "../../../api/gameHost";
+import { CopyBankInfoButton } from "../../../stories/UserRequestAction.stories";
 
-export const UsersRefundTab = ({ refetch, participantsData }) => {
-  const handleConfirmToGame = (userId: number) => {
-    updateParticipationStatus(participantsData?.data.id, userId);
-    refetch();
-  };
-
-  const handleCopyClipBoard = async (text: string) => {
+export const UsersRefundTab = ({ participantsData, phoneFormatter }) => {
+  const handleCopyClipBoard = async (accNumber: string) => {
     try {
-      await navigator.clipboard.writeText(text);
-      alert("클립보드에 링크가 복사되었습니다.");
+      await navigator.clipboard.writeText(accNumber);
+      alert("클립보드에 계좌번호가 복사되었습니다.");
     } catch (e) {
       alert("복사에 실패하였습니다");
     }
@@ -31,20 +21,23 @@ export const UsersRefundTab = ({ refetch, participantsData }) => {
 
               <div className="flex  flex-col ">
                 <p>{user.player_name}</p>
-                <p className="text-[#666]">010-2592-2414</p>
+                <p className="text-[#666]">
+                  {phoneFormatter(user.player_phone)}
+                </p>
               </div>
             </div>
             <div className="flex gap-2">
-              <UserRequestActionButton
-                handleCopyClipBoard={() =>
-                  handleCopyClipBoard(user.player_account_number)
+              <button
+                onClick={() =>
+                  handleCopyClipBoard(
+                    `${user.player_account_bank} ${user.player_account_number}`
+                  )
                 }
-                {...CopyBankInfoButton.args}
-              />
-              {/* <UserRequestActionButton
-                handleConfirmToGame={() => handleConfirmToGame(user.id)}
-                {...ApproveUserButton.args}
-              /> */}
+                className="bg-[#3BDE87] flex flex-col items-center justify-center w-[48px] h-[40px]  text-white rounded-lg text-[12px] font-bold"
+              >
+                <span>계좌</span>
+                <span>복사</span>
+              </button>
             </div>
           </div>
         );

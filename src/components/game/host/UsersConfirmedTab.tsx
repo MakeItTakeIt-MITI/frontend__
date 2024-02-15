@@ -1,18 +1,21 @@
-import { useParams } from "react-router-dom";
-import { useParticipatingUsersQuery } from "../../../hooks/useParticipatingUsersQuery";
-import { UserRequestActionButton } from "./UserRequestActionButton";
-import { ApproveUserButton } from "../../../stories/UserRequestAction.stories";
+import { useState } from "react";
 import { cancelParticipationStatus } from "../../../api/gameHost";
+import { ModalRemoveUser } from "../../modals/ModalRemoveUser";
 
-export const UsersConfirmedTab = ({ refetch, participantsData }) => {
-  // const { id } = useParams();
-  // const gameIdParam = Number(id);
-
-  // const { data: participantsData } = useParticipatingUsersQuery(gameIdParam);
+export const UsersConfirmedTab = ({
+  refetch,
+  participantsData,
+  phoneFormatter,
+}) => {
+  const [removeUserModal, setRemoveUserModal] = useState(false);
+  const handleShowModal = () => {
+    setRemoveUserModal(true);
+  };
 
   const handleRemoveFromGame = (userId: number) => {
     cancelParticipationStatus(participantsData?.data.id, userId);
     refetch();
+    setRemoveUserModal(false);
   };
 
   return (
@@ -25,13 +28,26 @@ export const UsersConfirmedTab = ({ refetch, participantsData }) => {
 
               <div className="flex  flex-col ">
                 <p>{user.player_name}</p>
-                <p className="text-[#666]">010-2592-2414</p>
+                <p className="text-[#666]">
+                  {" "}
+                  {phoneFormatter(user.player_phone)}
+                </p>
               </div>
             </div>
-            <UserRequestActionButton
-              {...ApproveUserButton.args}
-              handleRemoveFromGame={() => handleRemoveFromGame(user.id)}
-            />
+            <button
+              onClick={handleShowModal}
+              // onClick={() => handleRemoveFromGame(user.id)}
+              className="bg-[#F95040] flex flex-col items-center justify-center w-[48px] h-[40px]  text-white rounded-lg text-[12px] font-bold"
+            >
+              <span>참여</span>
+              <span>취소</span>
+            </button>
+            {removeUserModal && (
+              <ModalRemoveUser
+                userId={user.id}
+                handleRemoveFromGame={handleRemoveFromGame}
+              />
+            )}
           </div>
         );
       })}

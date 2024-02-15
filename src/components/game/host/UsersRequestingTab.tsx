@@ -1,15 +1,13 @@
-import { useParams } from "react-router-dom";
-import { useParticipatingUsersQuery } from "../../../hooks/useParticipatingUsersQuery";
-import { UserRequestActionButton } from "./UserRequestActionButton";
-import { RejectUserButton } from "../../../stories/UserRequestAction.stories";
+import { useState } from "react";
 import { updateParticipationStatus } from "../../../api/gameHost";
+import { ModalRejectUser } from "../../modals/ModalRemoveUser";
+import { JSX } from "react/jsx-runtime";
 
-export const UsersRequestingTab = ({ refetch, participantsData }) => {
-  // const { id } = useParams();
-  // const gameIdParam = Number(id);
-
-  // const { data: participantsData } = useParticipatingUsersQuery(gameIdParam);
-
+export const UsersRequestingTab = ({
+  refetch,
+  participantsData,
+  phoneFormatter,
+}) => {
   const handleConfirmToGame = (userId: number) => {
     updateParticipationStatus(participantsData?.data.id, userId);
     refetch();
@@ -25,13 +23,19 @@ export const UsersRequestingTab = ({ refetch, participantsData }) => {
 
               <div className="flex  flex-col ">
                 <p> {user.player_name}</p>
-                <p className="text-[#666]">{user.player_phone}</p>
+                <p className="text-[#666]">
+                  {" "}
+                  {phoneFormatter(user.player_phone)}
+                </p>
               </div>
             </div>
-            <UserRequestActionButton
-              {...RejectUserButton.args}
-              handleConfirmToGame={() => handleConfirmToGame(user.id)}
-            />
+            <button
+              onClick={() => handleConfirmToGame(user.id)}
+              className="bg-[#4065F6] flex flex-col items-center justify-center w-[48px] h-[40px]  text-white rounded-lg text-[12px] font-bold"
+            >
+              <span>참여</span>
+              <span>확정</span>
+            </button>
           </div>
         );
       })}
