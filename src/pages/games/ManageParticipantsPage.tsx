@@ -53,7 +53,7 @@ export const ManageParticipantsPage = () => {
         </h4>
         {/* <hr className="mobile:hidden tablet:block w-full" /> */}
 
-        <div className=" flex tablet:border  border-gray-200 rounded-md  mobile:flex-col tablet:flex-row mobile:gap-4 tablet:justify-between">
+        <div className=" flex  mobile:flex-col tablet:flex-row mobile:gap-4 tablet:justify-between">
           <div className="flex flex-col gap-4 mobile:px-4 w-full tablet:p-4">
             <div className="flex flex-col tablet:gap-4 mobile:gap-2">
               <h4 className="text-lg tablet:text-center mobile:text-start">
