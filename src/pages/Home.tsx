@@ -6,8 +6,12 @@ import { KakaoMap } from "../components/kakao/KakaoMap";
 
 import { GameDetailCard } from "../components/main/mobile/GameDetailCard";
 import { DatesListContainer } from "../components/main/DatesListContainer";
+import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
 
 export const Home = () => {
+  const { data: allGamesData } = useGetGamesDataQuery();
+  allGamesData?.data.map((court) => console.log(court.court.address));
+
   return (
     <div className="w-full tablet:px-[13rem] mx-auto  max-w-[90rem]">
       <Hero
@@ -17,7 +21,7 @@ export const Home = () => {
         managementText="관리, 결제, 매칭까지 한번에."
       />
       <div className=" flex flex-col px-2">
-        <KakaoMap />
+        <KakaoMap allGamesData={allGamesData} />
 
         <DatesListContainer />
 
