@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { ModalRejectUser } from "../components/modals/ModalRemoveUser";
+import { ModalRejectUser } from "../components/modal_box/ModalRemoveUserFromMatch";
 
 
 const meta = {

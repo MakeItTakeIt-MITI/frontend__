@@ -1,7 +1,4 @@
-import { useState } from "react";
 import { updateParticipationStatus } from "../../../api/gameHost";
-import { ModalRejectUser } from "../../modals/ModalRemoveUser";
-import { JSX } from "react/jsx-runtime";
 
 export const UsersRequestingTab = ({
   refetch,

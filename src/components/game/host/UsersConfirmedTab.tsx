@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { cancelParticipationStatus } from "../../../api/gameHost";
-import { ModalRemoveUser } from "../../modals/ModalRemoveUser";
+import { ModalRemoveUserFromMatch } from "../../modal_box/ModalRemoveUserFromMatch";
 
 export const UsersConfirmedTab = ({
   refetch,
@@ -43,8 +43,9 @@ export const UsersConfirmedTab = ({
               <span>취소</span>
             </button>
             {removeUserModal && (
-              <ModalRemoveUser
+              <ModalRemoveUserFromMatch
                 userId={user.id}
+                userName={user.player_name}
                 handleRemoveFromGame={handleRemoveFromGame}
               />
             )}
