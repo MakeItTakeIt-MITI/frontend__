@@ -7,6 +7,7 @@ import { KakaoMap } from "../components/kakao/KakaoMap";
 import { GameDetailCard } from "../components/main/mobile/GameDetailCard";
 import { DatesListContainer } from "../components/main/DatesListContainer";
 import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
+import { DateSelectorBox } from "../components/main/browser/DateSelectorBox";
 
 export const Home = () => {
   const { data: allGamesData } = useGetGamesDataQuery();
@@ -21,9 +22,12 @@ export const Home = () => {
         managementText="관리, 결제, 매칭까지 한번에."
       />
       <div className=" flex flex-col px-2">
-        <KakaoMap allGamesData={allGamesData} />
+        <div className="flex">
+          <DateSelectorBox />
+          <KakaoMap allGamesData={allGamesData} />
+        </div>
 
-        <DatesListContainer />
+        {/* <DatesListContainer /> */}
 
         <div className=" flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap  items-center    ">
           <GameDetailCard />

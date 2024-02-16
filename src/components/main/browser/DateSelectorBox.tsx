@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const DateSelectorBox = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
-  const [displayDates, setDisplayDates] = useState(true);
+  const [displayDates, setDisplayDates] = useState(false);
 
   const handleDisplayDates = () => {
     setDisplayDates(!displayDates);
@@ -66,13 +66,14 @@ export const DateSelectorBox = () => {
                   : "gray-400",
             }}
           >
-            {dateList.toLocaleDateString("ko-KR", {
-              timeZone: "Asia/Seoul",
-              year: "numeric",
-              month: "numeric",
-              day: "numeric",
-              weekday: "long",
-            })}
+            {displayDates &&
+              dateList.toLocaleDateString("ko-KR", {
+                timeZone: "Asia/Seoul",
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+                weekday: "long",
+              })}
           </span>
         ))}
       </div>
