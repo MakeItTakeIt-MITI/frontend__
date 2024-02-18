@@ -46,7 +46,7 @@ export const DateSelectorBox = () => {
             fill="#454545"
           />
         </svg>
-        <div className="absolute top-full left-0  w-full rounded-lg bg-white  ">
+        <div className="absolute top-full left-0 w-full rounded-lg bg-white  ">
           {availableDates &&
             availableDates.map((date, index) => {
               return (

@@ -15,18 +15,18 @@ export const Home = () => {
   allGamesData?.data.map((court) => console.log(court.court.address));
 
   return (
-    <div className="w-full tablet:px-[13rem] mx-auto  max-w-[90rem]">
+    <div className="flex flex-col gap-6  w-full tablet:px-[13rem] mx-auto  max-w-[90rem]">
       <Hero
         backgroundImage={banner}
         launchText="MITI 서비스 런칭"
         recruitText="MITI와 함께, 경기 모집부터"
         managementText="관리, 결제, 매칭까지 한번에."
       />
-      <div className=" flex flex-col px-2 ">
+      <div className=" flex flex-col ">
         <div className="flex tablet:flex-row mobile:flex-col tablet:gap-10 mobile:gap-4 ">
           <div className="flex flex-col gap-4">
             <DateSelectorBox />
-            <div className="px-4 py-2 flex flex-col gap-4 rounded-lg bg-[#FBFBFB]">
+            <div className="px-4 py-2 flex flex-col gap-4 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll">
               {allGamesData?.data.map((game) => {
                 return (
                   <>
@@ -63,10 +63,9 @@ export const Home = () => {
           </div>{" "}
           <KakaoMap allGamesData={allGamesData} />
         </div>
-
-        <div className=" flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap  items-center    ">
-          <GameDetailCard />
-        </div>
+      </div>
+      <div className=" flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap  items-center   ">
+        <GameDetailCard />
       </div>
       {/* <MobileHomeView /> */}
       {/* <BrowserHomeView /> */}
