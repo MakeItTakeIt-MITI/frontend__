@@ -42,7 +42,7 @@ export const KakaoMap = ({ allGamesData }) => {
 
     // 지도 중심을 부드럽게 이동시킵니다
     // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-    kakaoMap.panTo(moveLatLon);
+    kakaoMap.setCenter(moveLatLon);
     // }
 
     allGamesData?.data.map((match) => {
@@ -65,6 +65,7 @@ export const KakaoMap = ({ allGamesData }) => {
               map: kakaoMap,
               position: coords,
             });
+            const iwRemoveable = true;
 
             // 인포윈도우로 장소에 대한 설명을 표시합니다
             const infowindow = new window.kakao.maps.InfoWindow({
@@ -75,16 +76,13 @@ export const KakaoMap = ({ allGamesData }) => {
               <circle opacity="0.6" cx="16" cy="16" r="16" fill="#C1E1FF"/>
               <path d="M17.945 24.93C20.1238 23.0125 24 19.095 24 15.5C24 13.5109 23.2098 11.6032 21.8033 10.1967C20.3968 8.79018 18.4891 8 16.5 8C14.5109 8 12.6032 8.79018 11.1967 10.1967C9.79018 11.6032 9 13.5109 9 15.5C9 19.095 12.875 23.0125 15.055 24.93C15.4526 25.2849 15.967 25.4811 16.5 25.4811C17.033 25.4811 17.5474 25.2849 17.945 24.93ZM14 15.5C14 14.837 14.2634 14.2011 14.7322 13.7322C15.2011 13.2634 15.837 13 16.5 13C17.163 13 17.7989 13.2634 18.2678 13.7322C18.7366 14.2011 19 14.837 19 15.5C19 16.163 18.7366 16.7989 18.2678 17.2678C17.7989 17.7366 17.163 18 16.5 18C15.837 18 15.2011 17.7366 14.7322 17.2678C14.2634 16.7989 14 16.163 14 15.5Z" fill="#4065F6"/>
              </svg>
-
           </div>
-
           <h2 class="text-[14px]">
           ${match.title}
           </h2>
-
           </div>
-
             </div>`,
+              removable: iwRemoveable,
             });
             infowindow.open(kakaoMap, marker);
 
@@ -100,7 +98,7 @@ export const KakaoMap = ({ allGamesData }) => {
     <div
       id="map"
       // className="block w-full  h-[450px]"
-      className="w-full h-[450px]"
+      className="w-full "
     ></div>
   );
 };
