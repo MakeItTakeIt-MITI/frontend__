@@ -27,6 +27,24 @@ export const KakaoMap = ({ allGamesData }) => {
     // kakao 경기 목록
     const geocoder = new window.kakao.maps.services.Geocoder();
 
+    // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+    const mapTypeControl = new window.kakao.maps.MapTypeControl();
+    // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+    // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+    kakaoMap.addControl(
+      mapTypeControl,
+      window.kakao.maps.ControlPosition.TOPRIGHT
+    );
+
+    // function panTo() {
+    // 이동할 위도 경도 위치를 생성합니다
+    const moveLatLon = new window.kakao.maps.LatLng(33.45058, 126.574942);
+
+    // 지도 중심을 부드럽게 이동시킵니다
+    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    kakaoMap.panTo(moveLatLon);
+    // }
+
     allGamesData?.data.map((match) => {
       return geocoder.addressSearch(
         // "제주특별자치도 제주시 첨단로 242",
@@ -77,6 +95,7 @@ export const KakaoMap = ({ allGamesData }) => {
       );
     });
   }, [allGamesData]);
+
   return (
     <div
       id="map"
