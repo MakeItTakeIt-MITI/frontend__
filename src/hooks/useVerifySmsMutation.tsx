@@ -8,7 +8,7 @@ export const useVerifySmsMutation = () => {
     mutationFn: authenticationSMS,
     onSuccess: () => {
       localStorage.removeItem("authentication_token");
-      navigate("/login");
+      navigate("/user/login");
     },
   });
 };
