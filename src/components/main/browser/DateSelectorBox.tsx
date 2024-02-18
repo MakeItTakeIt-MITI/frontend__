@@ -20,63 +20,87 @@ export const DateSelectorBox = () => {
   }
 
   return (
-    <div
-      onClick={handleDisplayDates}
-      className=" hover:cursor-pointer relative flex items-center justify-between px-[1.1rem] py-[0.9rem] w-[450px] mb-[16px] h-[48px] rounded-8 bg-[#FBFBFB]"
-    >
-      <span className="font-bold leading-[20.8px]">
-        {selectingDate.toLocaleDateString("ko-KR", {
-          timeZone: "Asia/Seoul",
-          year: "numeric",
-          month: "numeric",
-          day: "numeric",
-          weekday: "long",
-        })}
-      </span>
-      {/* <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="12"
-        height="10"
-        viewBox="0 0 12 11"
-        fill="none"
+    <div>
+      <div
+        onClick={handleDisplayDates}
+        className="relative hover:cursor-pointer flex items-center justify-between px-[1.1rem] py-[0.9rem] w-[450px]  rounded-8 bg-[#FBFBFB]"
       >
-        <path
-          d="M10.59 0.365357L6 6.54619L1.41 0.365358L-4.61523e-07 2.26819L6 10.3654L12 2.26819L10.59 0.365357Z"
-          fill="#454545"
-        />
-      </svg> */}
-      {/* {displayDates && ( */}
-
-      <div className="h-[25rem]  overflow-y-scroll  border absolute flex flex-col gap-3 py-[0.9rem] top-[48px] left-0 px-[1.1rem] rounded-8 text-gray-400  bg-[#FBFBFB] w-full">
-        {availableDates?.map((dateList, index) => (
-          <span
-            key={index}
-            className="hover:cursor-pointer hover:text-black hover:font-bold "
-            onClick={() => handleSelectDate(dateList)}
-            style={{
-              fontWeight:
-                selectingDate.toISOString().slice(0, 10) ===
-                dateList.toISOString().slice(0, 10)
-                  ? 700
-                  : 500,
-              color:
-                selectingDate.toISOString().slice(0, 10) ===
-                dateList.toISOString().slice(0, 10)
-                  ? "black"
-                  : "gray-400",
-            }}
-          >
-            {displayDates &&
-              dateList.toLocaleDateString("ko-KR", {
-                timeZone: "Asia/Seoul",
-                year: "numeric",
-                month: "numeric",
-                day: "numeric",
-                weekday: "long",
-              })}
-          </span>
-        ))}
+        <span className="font-bold leading-[20.8px]">
+          {selectingDate.toLocaleDateString("ko-KR", {
+            timeZone: "Asia/Seoul",
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+            weekday: "long",
+          })}
+        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="10"
+          viewBox="0 0 12 11"
+          fill="none"
+        >
+          <path
+            d="M10.59 0.365357L6 6.54619L1.41 0.365358L-4.61523e-07 2.26819L6 10.3654L12 2.26819L10.59 0.365357Z"
+            fill="#454545"
+          />
+        </svg>
+        <div className="absolute top-full left-0  w-full">
+          {availableDates &&
+            availableDates.map((date, index) => {
+              return (
+                <div
+                  className="bg-[#fbfbfb] w-full h-full px-[1.1rem] hover:font-bold text-gray-400 hover:text-black rounded-2"
+                  key={index}
+                  onClick={() => handleSelectDate(date)}
+                >
+                  <p>
+                    {displayDates &&
+                      date.toLocaleDateString("ko-KR", {
+                        timeZone: "Asia/Seoul",
+                        year: "numeric",
+                        month: "numeric",
+                        day: "numeric",
+                        weekday: "long",
+                      })}
+                  </p>
+                </div>
+              );
+            })}
+        </div>
       </div>
+      {/* <div className=" border absolute flex flex-col gap-3 py-[0.9rem] top-[48px] left-0 px-[1.1rem] bg-white rounded-8 text-gray-400  w-full">
+          {availableDates?.map((dateList, index) => (
+            <span
+              key={index}
+              className="hover:cursor-pointer hover:text-black hover:font-bold "
+              onClick={() => handleSelectDate(dateList)}
+              style={{
+                fontWeight:
+                  selectingDate.toISOString().slice(0, 10) ===
+                  dateList.toISOString().slice(0, 10)
+                    ? 700
+                    : 500,
+                color:
+                  selectingDate.toISOString().slice(0, 10) ===
+                  dateList.toISOString().slice(0, 10)
+                    ? "black"
+                    : "gray-400",
+              }}
+            >
+              {displayDates &&
+                dateList.toLocaleDateString("ko-KR", {
+                  timeZone: "Asia/Seoul",
+                  year: "numeric",
+                  month: "numeric",
+                  day: "numeric",
+                  weekday: "long",
+                })}
+            </span>
+          ))}
+        </div> */}
+
       {/* )} */}
     </div>
   );

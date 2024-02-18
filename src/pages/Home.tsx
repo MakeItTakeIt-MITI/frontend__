@@ -8,6 +8,7 @@ import { GameDetailCard } from "../components/main/mobile/GameDetailCard";
 import { DatesListContainer } from "../components/main/DatesListContainer";
 import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
 import { DateSelectorBox } from "../components/main/browser/DateSelectorBox";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   const { data: allGamesData } = useGetGamesDataQuery();
@@ -22,12 +23,46 @@ export const Home = () => {
         managementText="관리, 결제, 매칭까지 한번에."
       />
       <div className=" flex flex-col px-2">
-        <div className="flex">
-          <DateSelectorBox />
+        <div className="flex tablet:flex-row mobile:flex-col justify-between">
+          <div className="flex flex-col h-full w-[450px]">
+            <DateSelectorBox />
+            <div className="px-4 py-2 flex flex-col gap-4">
+              {allGamesData?.data.map((game) => {
+                return (
+                  <>
+                    <Link
+                      to={`/games/detail/${game.id}`}
+                      key={game.id}
+                      className=""
+                    >
+                      <div className="flex flex-col gap-1 ">
+                        <h2 className="font-bold text-[18px] truncate">
+                          {game.title}{" "}
+                        </h2>
+                        <p className="text-[14px] text-gray-500">
+                          {`${game.startdate} ${game.starttime.slice(
+                            0,
+                            -3
+                          )} ~ ${game.endtime.slice(0, -3)}`}
+                        </p>
+                        <p className="text-[14px] text-red-500 font-bold">
+                          {game.fee.toLocaleString("ko-KR", {
+                            style: "currency",
+                            currency: "KRW",
+                          })}
+                        </p>
+                      </div>
+                    </Link>
+                    <hr className="w-full bg-[#ECECEC] " />
+                  </>
+                );
+              })}
+            </div>
+            {/* <DatesListContainer /> */}
+            {/* <div>gamelist</div> */}
+          </div>{" "}
           <KakaoMap allGamesData={allGamesData} />
         </div>
-
-        {/* <DatesListContainer /> */}
 
         <div className=" flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap  items-center    ">
           <GameDetailCard />
