@@ -98,7 +98,7 @@ export const KakaoMap = ({ allGamesData }) => {
     <div
       id="map"
       // className="block w-full  h-[450px]"
-      className="w-full "
+      className="tablet:w-full  tablet:h-[473px]  mobile:h-[300px]"
     ></div>
   );
 };
@@ -106,7 +106,7 @@ export const KakaoMap = ({ allGamesData }) => {
 export const KakaoDetailContainer = ({ match }) => {
   return (
     <>
-      <div className="flex items-center justify-around w-[169px] h-[62px] p-[12px] rounded-xl shadow-lg">
+      <div className="flex items-center justify-around p-[12px] rounded-xl shadow-lg">
         <div className="">
           <svg
             xmlns="http://www.w3.org/2000/svg"

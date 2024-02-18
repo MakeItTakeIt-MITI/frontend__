@@ -20,10 +20,10 @@ export const DateSelectorBox = () => {
   }
 
   return (
-    <div>
+    <div className="w-[307px] ">
       <div
         onClick={handleDisplayDates}
-        className="relative hover:cursor-pointer flex items-center justify-between px-[1.1rem] py-[0.9rem] w-[450px]  rounded-8 bg-[#FBFBFB]"
+        className="relative hover:cursor-pointer flex items-center justify-between p-4   rounded-lg bg-[#FBFBFB]"
       >
         <span className="font-bold leading-[20.8px]">
           {selectingDate.toLocaleDateString("ko-KR", {
@@ -46,16 +46,16 @@ export const DateSelectorBox = () => {
             fill="#454545"
           />
         </svg>
-        <div className="absolute top-full left-0  w-full">
+        <div className="absolute top-full left-0  w-full rounded-lg bg-white  ">
           {availableDates &&
             availableDates.map((date, index) => {
               return (
                 <div
-                  className="bg-[#fbfbfb] w-full h-full px-[1.1rem] hover:font-bold text-gray-400 hover:text-black rounded-2"
+                  className="bg-white w-full h-full px-[1.1rem] hover:font-bold text-gray-400 hover:text-black rounded-2 "
                   key={index}
                   onClick={() => handleSelectDate(date)}
                 >
-                  <p>
+                  <p className="mb-2 ">
                     {displayDates &&
                       date.toLocaleDateString("ko-KR", {
                         timeZone: "Asia/Seoul",
