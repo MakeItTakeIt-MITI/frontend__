@@ -8,8 +8,8 @@ import { GameDetailCard } from "../components/main/mobile/GameDetailCard";
 import { DatesListContainer } from "../components/main/DatesListContainer";
 import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
 import { DateSelectorBox } from "../components/main/browser/DateSelectorBox";
-import { Link } from "react-router-dom";
 import { GameDetailField } from "../interface/gameInterface";
+import { MatchListDetail } from "../components/game/MatchesListContainer";
 
 export const Home = () => {
   const { data: allGamesData } = useGetGamesDataQuery();
@@ -30,30 +30,8 @@ export const Home = () => {
               {allGamesData?.data.map((game: GameDetailField) => {
                 return (
                   <>
-                    <Link
-                      to={`/games/detail/${game.id}`}
-                      key={game.id}
-                      className=""
-                    >
-                      <div className="flex flex-col gap-1 ">
-                        <h2 className="font-bold text-[18px] truncate">
-                          {game.title}{" "}
-                        </h2>
-                        <p className="text-[14px] text-gray-500">
-                          {`${game.startdate} ${game.starttime.slice(
-                            0,
-                            -3
-                          )} ~ ${game.endtime.slice(0, -3)}`}
-                        </p>
-                        <p className="text-[14px] text-red-500 font-bold">
-                          {game.fee.toLocaleString("ko-KR", {
-                            style: "currency",
-                            currency: "KRW",
-                          })}
-                        </p>
-                      </div>
-                    </Link>
-                    <hr className="w-full bg-[#ECECEC] " />
+                    <MatchListDetail game={game} />
+                    <hr className="w-full bg-[#ECECEC] my-2" />
                   </>
                 );
               })}
