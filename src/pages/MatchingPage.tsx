@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import left_arrow from "../assets/Chevron_Left.png";
 import court from "../assets/small-basketball-court.svg";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
