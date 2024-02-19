@@ -20,7 +20,7 @@ export const DateSelectorBox = () => {
   }
 
   return (
-    <div className="w-[307px] ">
+    <div className="tablet:block mobile:hidden w-[307px] ">
       <div
         onClick={handleDisplayDates}
         className="relative hover:cursor-pointer flex items-center justify-between p-4   rounded-lg bg-[#FBFBFB]"

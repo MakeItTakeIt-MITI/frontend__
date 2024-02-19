@@ -102,7 +102,7 @@ export const KakaoMap = ({ allGamesData }) => {
     <div
       id="map"
       // className="block w-full  h-[450px]"
-      className="tablet:w-full  tablet:h-[473px]  mobile:h-[300px]"
+      className="tablet:w-full  tablet:h-[473px]  mobile:h-[300px] mobile:px-4"
     ></div>
   );
 };

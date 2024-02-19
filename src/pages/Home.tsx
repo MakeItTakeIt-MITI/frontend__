@@ -26,7 +26,7 @@ export const Home = () => {
         <div className="flex tablet:flex-row mobile:flex-col tablet:gap-10 mobile:gap-4 ">
           <div className="flex flex-col gap-4">
             <DateSelectorBox />
-            <div className="px-4 py-2 flex flex-col gap-4 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll">
+            <div className="mobile:hidden tablet:block px-4 py-2 flex flex-col gap-4 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll">
               {allGamesData?.data.map((game) => {
                 return (
                   <>
@@ -62,6 +62,7 @@ export const Home = () => {
             {/* <div>gamelist</div> */}
           </div>{" "}
           <KakaoMap allGamesData={allGamesData} />
+          <DatesListContainer />
         </div>
       </div>
       <div className=" flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap  items-center   ">
