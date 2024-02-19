@@ -1,8 +1,14 @@
 import { useState } from "react";
 
-export const DateSelectorBox = () => {
-  const [selectingDate, setSelectedDate] = useState(new Date());
+export const DateSelectorBox = ({ selectingDate, setSelectedDate }) => {
   const [displayDates, setDisplayDates] = useState(false);
+  const availableDates = [];
+
+  for (let i = 0; i < 14; i++) {
+    const newDate = new Date();
+    newDate.setDate(newDate.getDate() + i);
+    availableDates.push(newDate);
+  }
 
   const handleDisplayDates = () => {
     setDisplayDates(!displayDates);
@@ -11,13 +17,6 @@ export const DateSelectorBox = () => {
   const handleSelectDate = (input: Date) => {
     setSelectedDate(input);
   };
-
-  const availableDates = [];
-  for (let i = 0; i < 14; i++) {
-    const newDate = new Date();
-    newDate.setDate(newDate.getDate() + i);
-    availableDates.push(newDate);
-  }
 
   return (
     <div className="tablet:block mobile:hidden w-[307px] ">
@@ -70,38 +69,6 @@ export const DateSelectorBox = () => {
             })}
         </div>
       </div>
-      {/* <div className=" border absolute flex flex-col gap-3 py-[0.9rem] top-[48px] left-0 px-[1.1rem] bg-white rounded-8 text-gray-400  w-full">
-          {availableDates?.map((dateList, index) => (
-            <span
-              key={index}
-              className="hover:cursor-pointer hover:text-black hover:font-bold "
-              onClick={() => handleSelectDate(dateList)}
-              style={{
-                fontWeight:
-                  selectingDate.toISOString().slice(0, 10) ===
-                  dateList.toISOString().slice(0, 10)
-                    ? 700
-                    : 500,
-                color:
-                  selectingDate.toISOString().slice(0, 10) ===
-                  dateList.toISOString().slice(0, 10)
-                    ? "black"
-                    : "gray-400",
-              }}
-            >
-              {displayDates &&
-                dateList.toLocaleDateString("ko-KR", {
-                  timeZone: "Asia/Seoul",
-                  year: "numeric",
-                  month: "numeric",
-                  day: "numeric",
-                  weekday: "long",
-                })}
-            </span>
-          ))}
-        </div> */}
-
-      {/* )} */}
     </div>
   );
 };

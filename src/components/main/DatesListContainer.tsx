@@ -1,6 +1,7 @@
+import { LoadingPage } from "../../pages/LoadingPage";
 import { DateBox } from "./DateBox";
 
-export const DatesListContainer = () => {
+export const DatesListContainer = ({ isPending }) => {
   //   const koreanDayOfWeek = date.toLocaleDateString("ko-KR", { weekday: "long" });
 
   const availableDates = [];
@@ -8,6 +9,10 @@ export const DatesListContainer = () => {
     const date = new Date();
     date.setDate(date.getDate() + i);
     availableDates.push(date);
+  }
+
+  if (isPending) {
+    return <p>Loading...</p>;
   }
 
   return (

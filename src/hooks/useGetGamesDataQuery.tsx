@@ -5,6 +5,6 @@ export const useGetGamesDataQuery = () => {
   return useQuery({
     queryKey: ["allGames"],
     queryFn: () => getAllGames(),
-    retry: 1,
+    retry: 2,
   });
 };
