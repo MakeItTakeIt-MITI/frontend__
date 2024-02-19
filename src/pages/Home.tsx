@@ -9,6 +9,7 @@ import { DatesListContainer } from "../components/main/DatesListContainer";
 import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
 import { DateSelectorBox } from "../components/main/browser/DateSelectorBox";
 import { Link } from "react-router-dom";
+import { GameDetailField } from "../interface/gameInterface";
 
 export const Home = () => {
   const { data: allGamesData } = useGetGamesDataQuery();
@@ -26,7 +27,7 @@ export const Home = () => {
           <div className="flex flex-col gap-4">
             <DateSelectorBox />
             <div className="mobile:hidden tablet:block px-4 py-2 flex flex-col gap-4 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll">
-              {allGamesData?.data.map((game) => {
+              {allGamesData?.data.map((game: GameDetailField) => {
                 return (
                   <>
                     <Link
@@ -62,9 +63,9 @@ export const Home = () => {
           <DatesListContainer />
         </div>
       </div>
-      <div className=" flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap  items-center   ">
-        <GameDetailCard />
-      </div>
+      {/* <div className=" flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap  items-center   "> */}
+      <GameDetailCard />
+      {/* </div> */}
 
       <AdvertisementBanner />
     </div>
