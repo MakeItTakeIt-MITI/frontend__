@@ -4,7 +4,6 @@ import { AdvertisementBanner } from "../components/AdvertisementBanner";
 
 import { KakaoMap } from "../components/kakao/KakaoMap";
 
-import { GameDetailCard } from "../components/main/mobile/GameDetailCard";
 import { DatesListContainer } from "../components/main/DatesListContainer";
 import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
 import { DateSelectorBox } from "../components/main/browser/DateSelectorBox";
@@ -17,8 +16,7 @@ export const Home = () => {
   const formatDate = selectingDate.toISOString().split("T")[0];
   console.log(formatDate);
 
-  const { data: allGamesData, refetch, isPending } = useGetGamesDataQuery();
-  console.log(allGamesData);
+  const { data: allGamesData, isPending } = useGetGamesDataQuery();
 
   return (
     <div className="flex flex-col gap-6  w-full tablet:px-[13rem] mx-auto  max-w-[90rem]">
@@ -47,6 +45,7 @@ export const Home = () => {
             </div>
           </div>{" "}
           <KakaoMap allGamesData={allGamesData} />
+          {/* <KakaoMapBox /> */}
           <DatesListContainer isPending={isPending} />
         </div>
       </div>
