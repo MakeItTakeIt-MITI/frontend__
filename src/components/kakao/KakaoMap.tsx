@@ -80,6 +80,8 @@ const KakaoMap = ({ allGamesData }: GameDataProps) => {
                   currency: "KRW",
                 }
               )}원</p>
+              <div> 
+              </div>
             </div>
           `;
             addMarkerWithInfowindow(kakaoMap, coords, content);
