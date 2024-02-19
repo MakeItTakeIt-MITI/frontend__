@@ -51,7 +51,7 @@ export const Home = () => {
         </div>
       </div>
       {/* <div className=" flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap  items-center   "> */}
-      <GameDetailCard />
+      {/* <GameDetailCard /> */}
       {/* </div> */}
 
       <AdvertisementBanner />

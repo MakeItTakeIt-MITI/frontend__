@@ -7,7 +7,7 @@ export const GameDetailCard = () => {
   const { data } = useGetGamesDataQuery();
 
   return (
-    <div className="flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap mobile:flex-nowrap  tablet:items-center  mobile:px-2 mobile:w-full">
+    <div className="flex mobile:flex-col tablet:justify-between  mobile:gap-4 tablet:flex-row tablet:flex-wrap mobile:flex-nowrap  tablet:items-center  mobile:px-2 mobile:w-full">
       {data?.data.map((game: GameDetailField) => {
         return (
           <Link
