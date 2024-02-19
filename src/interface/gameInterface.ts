@@ -27,3 +27,16 @@ export interface AddressField {
     bname: string;
     buildingName: string;
 }
+
+export interface GameDetailField {
+    id: number;
+    game_status: string;
+    title: string;
+    startdate: string;
+    starttime: string;
+    enddate: string;
+    endtime: string;
+    fee: number;
+    court: Court;
+    address: string
+}

@@ -1,22 +1,14 @@
 import { Link } from "react-router-dom";
 import cardImg from "../../../assets/court.svg";
 import { useGetGamesDataQuery } from "../../../hooks/useGetGamesDataQuery";
-
-interface GameDetailsField {
-  id: number;
-  startdate: string;
-  starttime: string;
-  endtime: string;
-  title: string;
-  fee: number;
-}
+import { GameDetailField } from "../../../interface/gameInterface";
 
 export const GameDetailCard = () => {
   const { data } = useGetGamesDataQuery();
 
   return (
     <div className="flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap mobile:flex-nowrap  tablet:items-center  mobile:px-2 mobile:w-full">
-      {data?.data.map((game: GameDetailsField) => {
+      {data?.data.map((game: GameDetailField) => {
         return (
           <Link
             to={`/games/detail/${game.id}`}

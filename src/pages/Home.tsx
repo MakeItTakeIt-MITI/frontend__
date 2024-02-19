@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 
 export const Home = () => {
   const { data: allGamesData } = useGetGamesDataQuery();
-  allGamesData?.data.map((court) => console.log(court.court.address));
 
   return (
     <div className="flex flex-col gap-6  w-full tablet:px-[13rem] mx-auto  max-w-[90rem]">
@@ -58,8 +57,6 @@ export const Home = () => {
                 );
               })}
             </div>
-            {/* <DatesListContainer /> */}
-            {/* <div>gamelist</div> */}
           </div>{" "}
           <KakaoMap allGamesData={allGamesData} />
           <DatesListContainer />
@@ -68,39 +65,8 @@ export const Home = () => {
       <div className=" flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap  items-center   ">
         <GameDetailCard />
       </div>
-      {/* <MobileHomeView /> */}
-      {/* <BrowserHomeView /> */}
 
       <AdvertisementBanner />
     </div>
   );
 };
-
-{
-  /* <KakaoMap />
-      <div className="flex items-center py-4 justify-between ">
-        <div
-          className="w-9 h-9 bg-[#9C99B0] rounded-full flex items-center justify-center hover:cursor-pointer"
-          hover:cursor-pointer
-        >
-          <img
-            src={rightArrow}
-            alt="left arrow"
-            className="text-white rotate-180"
-          />
-        </div>
-        <DateBox />
-        <div className="w-9 h-9 bg-[#9C99B0] rounded-full flex items-center justify-center hover:cursor-pointer">
-          <img src={rightArrow} alt="left arrow" className="text-white" />
-        </div>
-      </div>
-      <div className="mx-[16px] mt-[20px] mb-[30px]">
-        <span>16개의 매치</span>
-      </div>
-      <div className="mx-[16px] flex flex-col gap-4">
-        <GameDetailCard />
-        <GameDetailCard />
-        <GameDetailCard />
-        <GameDetailCard />
-      </div> */
-}
