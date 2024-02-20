@@ -36,3 +36,11 @@ export const getGameCourtDetails = async (address: string) => {
 
 }
 
+export const getMyGameHistory = async (userId: number) => {
+    const response = await axiosUrl(`/users/${userId}/participations/`)
+    return response.data
+}
+export const getMyHostHistory = async (userId: number) => {
+    const response = await axiosUrl(`/users/${userId}/hostings/`)
+    return response.data
+}
