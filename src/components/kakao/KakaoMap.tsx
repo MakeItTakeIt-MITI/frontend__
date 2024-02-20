@@ -15,7 +15,7 @@ const createMap = () => {
   const container = document.getElementById("map");
   const options = {
     center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-    level: 2,
+    level: 4,
   };
   return new window.kakao.maps.Map(container, options);
 };
@@ -43,7 +43,7 @@ const addMarkerWithInfowindow = (map: any, coords: any, content: string) => {
   // infowindow.open(map);
 };
 
-const KakaoMap = ({ allGamesData }: GameDataProps) => {
+export const KakaoMap = ({ allGamesData }: GameDataProps) => {
   useEffect(() => {
     if (!window.kakao) {
       console.error("카카오 지도가 존재하지 않습니다");
@@ -99,5 +99,3 @@ const KakaoMap = ({ allGamesData }: GameDataProps) => {
     ></div>
   );
 };
-
-export default KakaoMap;
