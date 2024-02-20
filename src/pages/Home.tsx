@@ -56,7 +56,7 @@ export const Home = () => {
             </div>
           </div>{" "}
           <KakaoMap allGamesData={allGamesData} />
-          <DatesListContainer isPending={isPending} />
+          <DatesListContainer />
         </div>
       </div>
       <GameDetailCard />
