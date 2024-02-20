@@ -7,15 +7,15 @@ export const GameDetailCard = () => {
   const { data } = useGetGamesDataQuery();
 
   return (
-    <div className="flex mobile:flex-col tablet:justify-between  mobile:gap-4 tablet:flex-row tablet:flex-wrap mobile:flex-nowrap  tablet:items-center  mobile:px-2 mobile:w-full">
+    <div className="tablet:hidden  flex flex-col  gap-4  flex-nowrap  px-2 w-full">
       {data?.data.map((game: GameDetailField) => {
         return (
           <Link
             to={`/games/detail/${game.id}`}
             key={game.id}
-            className="tablet:w-[221px] tablet:h-[205px]  border border-b-gray-200  rounded-xl "
+            className="  border border-b-gray-200  rounded-xl "
           >
-            <div className="tablet:block mobile:hidden ">
+            <div className=" hidden ">
               <img src={cardImg} alt="game card" />
             </div>
             <div className="flex flex-col gap-1 p-3">
@@ -33,7 +33,7 @@ export const GameDetailCard = () => {
                 })}
               </p>
             </div>
-            <hr className="mobile:block tablet:hidden" />
+            <hr className="block " />
           </Link>
         );
       })}

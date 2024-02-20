@@ -10,6 +10,7 @@ import { DateSelectorBox } from "../components/main/browser/DateSelectorBox";
 import { GameDetailField } from "../interface/gameInterface";
 import { MatchListDetail } from "../components/game/MatchesListContainer";
 import { useState } from "react";
+import { GameDetailCard } from "../components/main/mobile/GameDetailCard";
 
 export const Home = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
@@ -50,7 +51,7 @@ export const Home = () => {
         </div>
       </div>
       {/* <div className=" flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap  items-center   "> */}
-      {/* <GameDetailCard /> */}
+      <GameDetailCard />
       {/* </div> */}
 
       <AdvertisementBanner />
