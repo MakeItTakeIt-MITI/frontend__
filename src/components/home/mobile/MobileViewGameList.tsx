@@ -3,8 +3,12 @@ import cardImg from "../../../assets/court.svg";
 import { useGetGamesDataQuery } from "../../../hooks/useGetGamesDataQuery";
 import { GameDetailField } from "../../../interface/gameInterface";
 
-export const GameDetailCard = () => {
-  const { data } = useGetGamesDataQuery();
+interface GameDetailProp {
+  formatDate: string;
+}
+
+export const MobileViewGameList = ({ formatDate }: GameDetailProp) => {
+  const { data } = useGetGamesDataQuery(formatDate);
 
   return (
     <div className="tablet:hidden  flex flex-col  gap-4  flex-nowrap  px-2 w-full">

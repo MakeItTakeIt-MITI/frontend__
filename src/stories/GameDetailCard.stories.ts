@@ -1,6 +1,6 @@
 
 import { Meta, StoryObj } from '@storybook/react';
-import { GameDetailCard } from '../components/home/mobile/GameDetailCard';
+import { GameDetailCard } from '../components/home/mobile/MobileViewGameList';
 
 
 

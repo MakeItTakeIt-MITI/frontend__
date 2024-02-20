@@ -8,7 +8,7 @@ import { DesktopViewDatesList } from "../components/home/DesktopViewDatesList";
 import { GameDetailField } from "../interface/gameInterface";
 import { MatchListDetail } from "../components/game/MatchesListContainer";
 import { useEffect, useState } from "react";
-import { GameDetailCard } from "../components/home/mobile/GameDetailCard";
+import { MobileViewGameList } from "../components/home/mobile/MobileViewGameList";
 import { LoadingPage } from "./LoadingPage";
 
 export const HomePage = () => {
@@ -23,7 +23,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     refetch();
-  }, [selectingDate, refetch]);
+  }, [selectingDate, refetch, formatDate]);
 
   if (isPending) {
     return <LoadingPage />;
@@ -59,7 +59,7 @@ export const HomePage = () => {
           <MobileViewDatesList setSelectedDate={setSelectedDate} />
         </div>
       </div>
-      <GameDetailCard />
+      <MobileViewGameList formatDate={formatDate} />
       <AdvertisementBanner />
     </div>
   );

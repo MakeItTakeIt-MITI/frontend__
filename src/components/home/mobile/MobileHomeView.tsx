@@ -1,6 +1,6 @@
 // import { KakaoMap } from "../../kakao/KakaoMap";
 import { KakaoMap } from "../../kakao/KakaoMap";
-import { GameDetailCard } from "./GameDetailCard";
+import { GameDetailCard } from "./MobileViewGameList";
 import { DateListContainer } from "./DateListContainer";
 // import { MobileGameDetailCard } from "./MobileGameDetailCard";
 
