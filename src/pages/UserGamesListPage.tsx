@@ -7,7 +7,7 @@ import { MatchContainer } from "../components/game/MatchContainer";
 // import { ViewAllButton } from "../stories/FilterButtons.stories";
 export const UserGamesListPage = () => {
   const [displayTab, setDisplayTab] = useState(false);
-  const [tabName, setTabName] = useState("전체보기");
+  const [tabName, setTabName] = useState("호스트만 보기");
 
   const handleToggleTab = () => {
     setDisplayTab(!displayTab);
