@@ -9,9 +9,9 @@ export const createGameData = async (data: GameHostField) => {
 
 }
 
-export const getAllGames = async () => {
-    // const response = await axiosUrl.get(`/games/?startdate=${date}`)
-    const response = await axiosUrl.get(`/games/`)
+export const getAllGames = async (date: string) => {
+    const response = await axiosUrl.get(`/games/?startdate=${date}`)
+    // const response = await axiosUrl.get(`/games/`)
     return response.data
 }
 

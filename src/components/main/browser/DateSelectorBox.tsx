@@ -1,6 +1,14 @@
 import { useState } from "react";
 
-export const DateSelectorBox = ({ selectingDate, setSelectedDate }) => {
+interface DateBoxProps {
+  selectingDate: Date;
+  setSelectedDate: (arg: Date) => void;
+}
+
+export const DateSelectorBox = ({
+  selectingDate,
+  setSelectedDate,
+}: DateBoxProps) => {
   const [displayDates, setDisplayDates] = useState(false);
   const availableDates = [];
 

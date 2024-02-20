@@ -1,23 +1,33 @@
 import banner from "../assets/banner-2.svg";
 import { Hero } from "../components/main/Hero";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
-
 import { KakaoMap } from "../components/kakao/KakaoMap";
-
 import { DatesListContainer } from "../components/main/DatesListContainer";
 import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
 import { DateSelectorBox } from "../components/main/browser/DateSelectorBox";
 import { GameDetailField } from "../interface/gameInterface";
 import { MatchListDetail } from "../components/game/MatchesListContainer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GameDetailCard } from "../components/main/mobile/GameDetailCard";
+import { LoadingPage } from "./LoadingPage";
 
 export const Home = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
-  const formatDate = selectingDate.toISOString().split("T")[0];
-  console.log(formatDate);
 
-  const { data: allGamesData, isPending } = useGetGamesDataQuery();
+  const formatDate = selectingDate.toISOString().split("T")[0];
+  const {
+    data: allGamesData,
+    isPending,
+    refetch,
+  } = useGetGamesDataQuery(formatDate);
+
+  useEffect(() => {
+    refetch();
+  }, [selectingDate, refetch]);
+
+  if (isPending) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="flex flex-col gap-6  w-full tablet:px-[13rem] mx-auto  max-w-[90rem]">
@@ -46,14 +56,10 @@ export const Home = () => {
             </div>
           </div>{" "}
           <KakaoMap allGamesData={allGamesData} />
-          {/* <KakaoMapBox /> */}
           <DatesListContainer isPending={isPending} />
         </div>
       </div>
-      {/* <div className=" flex mobile:flex-col  mobile:gap-4 tablet:flex-row tablet:flex-wrap  items-center   "> */}
       <GameDetailCard />
-      {/* </div> */}
-
       <AdvertisementBanner />
     </div>
   );
