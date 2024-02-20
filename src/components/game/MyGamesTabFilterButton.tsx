@@ -28,16 +28,6 @@ export const MyGamesTabFilterButton = ({
             전체보기
           </button> */}
           <button
-            onClick={() => handleChangeTab("게스트만 보기")}
-            style={
-              tabName === "게스트만 보기"
-                ? { fontWeight: 700 }
-                : { fontWeight: 400 }
-            }
-          >
-            게스트만 보기
-          </button>
-          <button
             onClick={() => handleChangeTab("호스트만 보기")}
             style={
               tabName === "호스트만 보기"
@@ -46,6 +36,16 @@ export const MyGamesTabFilterButton = ({
             }
           >
             호스트만 보기
+          </button>
+          <button
+            onClick={() => handleChangeTab("게스트만 보기")}
+            style={
+              tabName === "게스트만 보기"
+                ? { fontWeight: 700 }
+                : { fontWeight: 400 }
+            }
+          >
+            게스트만 보기
           </button>
         </div>
       ) : null}

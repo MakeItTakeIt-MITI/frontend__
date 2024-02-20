@@ -3,11 +3,19 @@ import downarrow from "../assets/Chevron_Down_MD.svg";
 import { useState } from "react";
 import { MyGamesTabFilterButton } from "../components/game/MyGamesTabFilterButton";
 import { MatchContainer } from "../components/game/MatchContainer";
-// import { UserMatchesFilterBtn } from "../components/game/UserMatchesFilterBtn";
-// import { ViewAllButton } from "../stories/FilterButtons.stories";
+import { useParams } from "react-router-dom";
+import { useGetHostHistoryQuery } from "../hooks/useGetHostHistoryQuery";
+import { useGetGameHistoryQuery } from "../hooks/useGetGameHistoryQuery";
 export const UserGamesListPage = () => {
   const [displayTab, setDisplayTab] = useState(false);
   const [tabName, setTabName] = useState("호스트만 보기");
+
+  const { id } = useParams();
+  const userIdParam = Number(id);
+
+  const { data: hostHistory } = useGetHostHistoryQuery(userIdParam);
+  const { data: guestHistory } = useGetGameHistoryQuery(userIdParam);
+  console.log(hostHistory);
 
   const handleToggleTab = () => {
     setDisplayTab(!displayTab);
@@ -38,21 +46,18 @@ export const UserGamesListPage = () => {
       </div>
       <div className="px-4 text-[14px]">
         <span className="text-[#666]">등록된 매치 스케줄 </span>{" "}
-        <span className="font-bold text-[#333]">12개</span>
+        <span className="font-bold text-[#333]">
+          {tabName === "호스트만 보기" && hostHistory?.data.length + "개"}
+          {tabName === "게스트만 보기" && guestHistory?.data.length + "개"}
+        </span>
       </div>
-      <div className="flex-wrap h-full flex justify-around gap-4 py-4 mobile:px-4">
-        <MatchContainer />
-        <MatchContainer />
-        <MatchContainer />
-        <MatchContainer />
-        <MatchContainer />
-        <MatchContainer />
-        <MatchContainer />
-        <MatchContainer />
-        <MatchContainer />
-        <MatchContainer />
-        <MatchContainer />
-        <MatchContainer />
+      <div className="flex-wrap h-full flex justify-between gap-4 py-4 mobile:px-4">
+        {tabName === "호스트만 보기" && (
+          <MatchContainer hostHistory={hostHistory} />
+        )}
+        {tabName === "호스트만 보기" && (
+          <MatchContainer guestHistory={guestHistory} />
+        )}
       </div>
     </div>
   );
