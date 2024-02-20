@@ -7,7 +7,7 @@ interface GameDetailProp {
 
 export const MatchListDetail = ({ game }: GameDetailProp) => {
   return (
-    <Link to={`/games/detail/${game.id}`} key={game.id} className="">
+    <Link to={`/games/detail/${game.id}`} className="">
       <div className="flex flex-col gap-1  ">
         <h2 className="font-bold text-[18px] truncate">{game.title} </h2>
         <p className="text-[14px] text-gray-500">

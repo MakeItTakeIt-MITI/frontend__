@@ -37,10 +37,10 @@ export const Home = () => {
             <div className="mobile:hidden tablet:block px-4 py-2 flex flex-col gap-4 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll">
               {allGamesData?.data.map((game: GameDetailField) => {
                 return (
-                  <>
+                  <div key={game.id}>
                     <MatchListDetail game={game} />
                     <hr className="w-full bg-[#ECECEC] my-2" />
-                  </>
+                  </div>
                 );
               })}
             </div>
