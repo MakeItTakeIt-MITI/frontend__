@@ -2,7 +2,7 @@ import banner from "../assets/banner-2.svg";
 import { Hero } from "../components/main/Hero";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
 import { KakaoMap } from "../components/kakao/KakaoMap";
-import { DatesListContainer } from "../components/main/DatesListContainer";
+import { MobileViewDatesList } from "../components/main/DatesListContainer";
 import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
 import { DateSelectorBox } from "../components/main/browser/DateSelectorBox";
 import { GameDetailField } from "../interface/gameInterface";
@@ -56,7 +56,7 @@ export const Home = () => {
             </div>
           </div>{" "}
           <KakaoMap allGamesData={allGamesData} />
-          <DatesListContainer />
+          <MobileViewDatesList setSelectedDate={setSelectedDate} />
         </div>
       </div>
       <GameDetailCard />

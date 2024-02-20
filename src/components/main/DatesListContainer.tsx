@@ -2,8 +2,11 @@ import { useState } from "react";
 import leftArrow from "../../assets/Chevron_Left.png";
 import rightArrow from "../../assets/Chevron_Left.png";
 
-export const DatesListContainer = () => {
-  const [displayDates, setDisplayDates] = useState(false);
+interface DateBoxProps {
+  setSelectedDate: (arg: Date) => void;
+}
+
+export const MobileViewDatesList = ({ setSelectedDate }: DateBoxProps) => {
   const [startIndex, setStartIndex] = useState(0);
   const availableDates = [];
 
@@ -13,21 +16,11 @@ export const DatesListContainer = () => {
     availableDates.push(newDate);
   }
 
-  // const [selected, setSelected] = useState(true);
-
   const today = new Date().toDateString();
 
-  // const triggerSelected = () => {
-  //   setSelected(!selected);
-  // };
-
-  // const availableDates = [];
-  // for (let i = 0; i < 4; i++) {
-  //   const date = new Date();
-  //   date.setDate(date.getDate() + startIndex + i);
-  //   // date.setDate(date.getDate() + i);
-  //   availableDates.push(date);
-  // }
+  const handleSelectDate = (input: Date) => {
+    setSelectedDate(input);
+  };
 
   const handleRightArrowClick = () => {
     if (startIndex <= 14) {
@@ -35,7 +28,7 @@ export const DatesListContainer = () => {
     }
   };
   const handleLeftArrowClick = () => {
-    if (startIndex >= 0) {
+    if (startIndex > 0) {
       setStartIndex(startIndex - 1);
     }
   };
@@ -51,7 +44,7 @@ export const DatesListContainer = () => {
             <button
               key={index}
               className="flex flex-col items-center justify-center text-[14px] w-[60px]  h-[52px]  rounded-xl "
-              // onClick={triggerSelected}
+              onClick={() => handleSelectDate(date)}
               style={{
                 backgroundColor:
                   date.toDateString() === today ? "#4065F6" : "#F2F2F2",
