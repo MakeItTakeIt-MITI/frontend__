@@ -24,12 +24,12 @@ export const MobileViewDatesList = ({ setSelectedDate }: DateBoxProps) => {
 
   const handleRightArrowClick = () => {
     if (startIndex <= 14) {
-      setStartIndex(startIndex + 1);
+      setStartIndex(startIndex + 4);
     }
   };
   const handleLeftArrowClick = () => {
     if (startIndex > 0) {
-      setStartIndex(startIndex - 1);
+      setStartIndex(startIndex - 4);
     }
   };
 

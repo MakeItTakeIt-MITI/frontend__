@@ -1,6 +1,6 @@
 // Hero.stories.tsx
 import { Meta, StoryObj } from '@storybook/react';
-import { DatesListContainer } from '../components/main/DatesListContainer';
+import { DatesListContainer } from '../components/home/MobileViewDatesList';
 
 const meta = {
     title: 'Buttons',

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import mitiLogo from "../../assets/MITI_logo.svg";
 import useAuthStore from "../../store/useAuthStore";
-import { HeaderField } from "../main/Header";
+import { HeaderField } from "../home/Header";
 import useUserDataStore from "../../store/useUserDataStore";
 
 export const BrowserHeader = ({ handleLogout }: HeaderField) => {

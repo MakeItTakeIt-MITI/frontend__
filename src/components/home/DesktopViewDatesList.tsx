@@ -5,7 +5,7 @@ interface DateBoxProps {
   setSelectedDate: (arg: Date) => void;
 }
 
-export const DateSelectorBox = ({
+export const DesktopViewDatesList = ({
   selectingDate,
   setSelectedDate,
 }: DateBoxProps) => {

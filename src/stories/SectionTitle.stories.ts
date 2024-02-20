@@ -1,7 +1,7 @@
 
 import { Meta, StoryObj } from '@storybook/react';
 
-import { SectionTitle } from '../components/main/SectionTitle';
+import { SectionTitle } from '../components/home/SectionTitle';
 
 const meta = {
     title: 'Title',

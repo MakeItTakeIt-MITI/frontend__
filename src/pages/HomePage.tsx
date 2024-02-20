@@ -1,17 +1,17 @@
 import banner from "../assets/banner-2.svg";
-import { Hero } from "../components/main/Hero";
+import { Hero } from "../components/home/Hero";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
 import { KakaoMap } from "../components/kakao/KakaoMap";
-import { MobileViewDatesList } from "../components/main/DatesListContainer";
+import { MobileViewDatesList } from "../components/home/MobileViewDatesList";
 import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
-import { DateSelectorBox } from "../components/main/browser/DateSelectorBox";
+import { DesktopViewDatesList } from "../components/home/DesktopViewDatesList";
 import { GameDetailField } from "../interface/gameInterface";
 import { MatchListDetail } from "../components/game/MatchesListContainer";
 import { useEffect, useState } from "react";
-import { GameDetailCard } from "../components/main/mobile/GameDetailCard";
+import { GameDetailCard } from "../components/home/mobile/GameDetailCard";
 import { LoadingPage } from "./LoadingPage";
 
-export const Home = () => {
+export const HomePage = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
 
   const formatDate = selectingDate.toISOString().split("T")[0];
@@ -40,7 +40,7 @@ export const Home = () => {
       <div className=" flex flex-col ">
         <div className="flex tablet:flex-row mobile:flex-col tablet:gap-10 mobile:gap-4 ">
           <div className="flex flex-col gap-4">
-            <DateSelectorBox
+            <DesktopViewDatesList
               selectingDate={selectingDate}
               setSelectedDate={setSelectedDate}
             />

@@ -1,6 +1,6 @@
 // Hero.stories.tsx
 import { Meta, StoryObj } from '@storybook/react';
-import { DateBox } from '../components/main/DateBox';
+import { DateBox } from '../components/home/DateBox';
 
 const meta = {
     title: 'Buttons',
