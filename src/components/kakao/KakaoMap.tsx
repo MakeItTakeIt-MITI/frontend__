@@ -2,48 +2,46 @@
 import { useEffect } from "react";
 import { GameDetailField } from "../../interface/gameInterface";
 
-interface GameDataProps {
-  allGamesData: GameDetailField;
-}
+// interface GameDataProps {}
 
 interface GeocoderResult {
   x: number;
   y: number;
 }
 
-const createMap = () => {
-  const container = document.getElementById("map");
-  const options = {
-    center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-    level: 4,
+export const KakaoMap = ({ allGamesData }: any) => {
+  const createMap = () => {
+    const container = document.getElementById("map");
+    const options = {
+      center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+      level: 4,
+    };
+    return new window.kakao.maps.Map(container, options);
   };
-  return new window.kakao.maps.Map(container, options);
-};
 
-const addZoomControl = (map: any) => {
-  const zoomControl = new window.kakao.maps.ZoomControl();
-  map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
-};
+  const addZoomControl = (map: any) => {
+    const zoomControl = new window.kakao.maps.ZoomControl();
+    map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
+  };
 
-const moveMapToLocation = (map: any, latitude: number, longitude: number) => {
-  const moveLatLon = new window.kakao.maps.LatLng(latitude, longitude);
-  map.setCenter(moveLatLon);
-};
+  const moveMapToLocation = (map: any, latitude: number, longitude: number) => {
+    const moveLatLon = new window.kakao.maps.LatLng(latitude, longitude);
+    map.setCenter(moveLatLon);
+  };
 
-const addMarkerWithInfowindow = (map: any, coords: any, content: string) => {
-  // const infowindow = new window.kakao.maps.InfoWindow({
-  const infowindow = new window.kakao.maps.CustomOverlay({
-    // content: content,
-    map: map,
-    // position: coords,
-    position: coords,
-    content: content,
-  });
-  infowindow.setMap(map);
-  // infowindow.open(map);
-};
+  const addMarkerWithInfowindow = (map: any, coords: any, content: string) => {
+    // const infowindow = new window.kakao.maps.InfoWindow({
+    const infowindow = new window.kakao.maps.CustomOverlay({
+      // content: content,
+      map: map,
+      // position: coords,
+      position: coords,
+      content: content,
+    });
+    infowindow.setMap(map);
+    // infowindow.open(map);
+  };
 
-export const KakaoMap = ({ allGamesData }: GameDataProps) => {
   useEffect(() => {
     if (!window.kakao) {
       console.error("카카오 지도가 존재하지 않습니다");
@@ -58,7 +56,7 @@ export const KakaoMap = ({ allGamesData }: GameDataProps) => {
     const kakaoMap = createMap();
     addZoomControl(kakaoMap);
 
-    allGamesData.data.forEach((match) => {
+    allGamesData?.data.map((match: GameDetailField) => {
       const geocoder = new window.kakao.maps.services.Geocoder();
       geocoder.addressSearch(
         match.court.address,
@@ -76,7 +74,6 @@ export const KakaoMap = ({ allGamesData }: GameDataProps) => {
               <p class="font-bold text-[14px]">${match.fee.toLocaleString(
                 "ko-KR",
                 {
-                  // style: "currency",
                   currency: "KRW",
                 }
               )}원</p>
