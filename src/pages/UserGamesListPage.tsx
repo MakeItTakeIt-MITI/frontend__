@@ -2,7 +2,7 @@ import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
 import downarrow from "../assets/Chevron_Down_MD.svg";
 import { useState } from "react";
 import { MyGamesTabFilterButton } from "../components/game/MyGamesTabFilterButton";
-import { MatchContainer } from "../components/game/MatchContainer";
+import { MyGameHistoryInfoBox } from "../components/game/MatchContainer";
 import { useParams } from "react-router-dom";
 import { useGetHostHistoryQuery } from "../hooks/useGetHostHistoryQuery";
 import { useGetGameHistoryQuery } from "../hooks/useGetGameHistoryQuery";
@@ -53,10 +53,10 @@ export const UserGamesListPage = () => {
       </div>
       <div className="flex-wrap h-full flex justify-between gap-4 py-4 mobile:px-4">
         {tabName === "호스트만 보기" && (
-          <MatchContainer hostHistory={hostHistory} />
+          <MyGameHistoryInfoBox hostHistory={hostHistory} />
         )}
         {tabName === "호스트만 보기" && (
-          <MatchContainer guestHistory={guestHistory} />
+          <MyGameHistoryInfoBox guestHistory={guestHistory} />
         )}
       </div>
     </div>

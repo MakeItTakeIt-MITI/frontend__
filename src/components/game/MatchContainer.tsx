@@ -10,11 +10,14 @@ import { Link } from "react-router-dom";
 import { GameDetailField } from "../../interface/gameInterface";
 
 interface MatchProps {
-  hostHistory: GameDetailField;
-  guestHistory: GameDetailField;
+  hostHistory?: { data: [GameDetailField] };
+  guestHistory?: { data: [GameDetailField] };
 }
 
-export const MatchContainer = ({ hostHistory, guestHistory }: MatchProps) => {
+export const MyGameHistoryInfoBox = ({
+  hostHistory,
+  guestHistory,
+}: MatchProps) => {
   return (
     <>
       {hostHistory?.data.map((hostGame: GameDetailField) => {
@@ -33,7 +36,6 @@ export const MatchContainer = ({ hostHistory, guestHistory }: MatchProps) => {
                 )}
               </div>
               <h4>{hostGame?.title}</h4>
-              {/* <h4>광교 호수 공원 3 vs 3 (주차 불가)</h4> */}
               <p className="text-[14px] text-[#999]">
                 {`${hostGame.startdate} ${hostGame.starttime.slice(
                   0,
