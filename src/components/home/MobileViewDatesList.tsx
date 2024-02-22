@@ -1,22 +1,26 @@
+import { useState } from "react";
+
 interface DateBoxProps {
   setSelectedDate: (arg: Date) => void;
 }
 
 export const MobileViewDatesList = ({ setSelectedDate }: DateBoxProps) => {
-  // const [startIndex, setStartIndex] = useState(0);
+  const [selected, setSelected] = useState<Date | null>(null);
+  const [today, setToday] = useState<string | null>(new Date().toDateString());
+
   const availableDates = [];
 
   for (let i = 0; i < 16; i++) {
     const newDate = new Date();
-    // newDate.setDate(newDate.getDate() + startIndex + i);
     newDate.setDate(newDate.getDate() + i);
     availableDates.push(newDate);
   }
 
-  const today = new Date().toDateString();
-
-  const handleSelectDate = (input: Date) => {
+  const handleSelectDate = (input: Date, index: number) => {
     setSelectedDate(input);
+    setToday(null);
+    setSelected(input);
+    console.log(index);
   };
 
   return (
@@ -27,11 +31,18 @@ export const MobileViewDatesList = ({ setSelectedDate }: DateBoxProps) => {
             <button
               key={index}
               className="flex flex-col items-center justify-center text-[14px] w-[60px]  h-[52px]  rounded-xl "
-              onClick={() => handleSelectDate(date)}
+              onClick={() => handleSelectDate(date, index)}
               style={{
                 backgroundColor:
-                  date.toDateString() === today ? "#4065F6" : "#F2F2F2",
-                color: date.toDateString() === today ? "#fff" : "#707070",
+                  date.toDateString() === today ||
+                  selected?.toDateString() === date.toDateString()
+                    ? " #4065f6 "
+                    : "#f2f2f2",
+                color:
+                  date.toDateString() === today ||
+                  selected?.toDateString() === date.toDateString()
+                    ? "#fff"
+                    : "#707070",
               }}
             >
               <span>
@@ -47,16 +58,29 @@ export const MobileViewDatesList = ({ setSelectedDate }: DateBoxProps) => {
     </div>
   );
 };
-{
-  /* <button onClick={handleLeftArrowClick}>
+// {
+/* <button onClick={handleLeftArrowClick}>
         <img src={leftArrow} alt="" />
       </button> */
-}
-{
-  /* <button onClick={handleRightArrowClick}>
+
+// style={{
+//   backgroundColor:
+//     date.toDateString() === today ? "#4065F6" : "#F2F2F2",
+//   color: date.toDateString() === today ? "#fff" : "#707070",
+// }}
+
+// style={{
+//   backgroundColor:
+//     index === 0 && !selected ? "#4065f6" : "#f2f2f2",
+//   color: index === 0 && !selected ? "#fff" : "#707070",
+// }}
+// }
+
+// {
+/* <button onClick={handleRightArrowClick}>
         <img src={rightArrow} alt="" className="rotate-180" />
       </button> */
-}
+// }
 
 // const handleRightArrowClick = () => {
 //   if (startIndex <= 14) {
