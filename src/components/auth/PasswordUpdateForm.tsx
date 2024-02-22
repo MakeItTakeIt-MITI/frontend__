@@ -80,7 +80,7 @@ export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
 
       <button
         role="change-password"
-        className="rounded-xl w-full h-14 bg-[#4065f6] text-white"
+        className="rounded-xl mobile:w-full tablet:w-[400px] tablet:mx-auto h-14 bg-[#4065f6] text-white"
       >
         비밀번호 수정
       </button>

@@ -46,10 +46,9 @@ export const UserMyPage = () => {
             <p>{data?.data.birthday}</p>
             <p>{data?.data.email}</p>
           </div>
-          <div className="p-4 flex flex-col gap-4 ">
-            <button>닉네임 변경</button>
-            <button>비밀번호 변경</button>
-            <button className="hover:text-red-400">회원탈퇴</button>
+          <div className="flex flex-col gap-4 ">
+            <button>프로필 수정</button>
+            {/* <button className="hover:text-red-400">회원탈퇴</button> */}
           </div>
         </div>
         <div className="w-full">
@@ -68,12 +67,12 @@ export const UserMyPage = () => {
           <div className="flex flex-col gap-6  mobile:w-full mobile:p-4 "></div>
           <hr className="mobile:block tablet:hidden w-full" />
 
-          <div className="flex flex-col gap-4 mobile:p-4 tablet:p-0">
+          <div className="flex flex-col gap-6 p-4 mobile:w-full ">
             <h4 className="font-bold">계정 삭제</h4>
             <button
               type="button"
               onClick={handleDeleteAccount}
-              className=" rounded-xl w-full  h-14 bg-[#db5e5e] text-white"
+              className=" rounded-xl mobile:w-full tablet:w-[400px] tablet:mx-auto  h-14 bg-[#db5e5e] text-white"
             >
               회원탈퇴
             </button>

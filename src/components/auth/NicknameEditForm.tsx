@@ -33,7 +33,7 @@ export const NicknameEditForm = ({ id, refetch, data }: NicknameProps) => {
   return (
     <form
       onSubmit={handleSubmit(handleChangeNickname)}
-      className="flex flex-col gap-6 p-4 w-full"
+      className="flex flex-col gap-6 p-4 mobile:w-full "
     >
       <h4 className="font-bold">닉네임 수정</h4>
       <input
@@ -46,7 +46,7 @@ export const NicknameEditForm = ({ id, refetch, data }: NicknameProps) => {
         {...register("nickname")}
       />
       <button
-        className=" rounded-xl w-full  h-14 bg-[#4065f6] text-white"
+        className=" rounded-xl mobile:w-full tablet:w-[400px] tablet:mx-auto h-14 bg-[#4065f6] text-white "
         role="change-nickname"
       >
         닉네임 수정
