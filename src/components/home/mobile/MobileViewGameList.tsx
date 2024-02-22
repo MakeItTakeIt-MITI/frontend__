@@ -1,21 +1,30 @@
-import { Link } from "react-router-dom";
 import cardImg from "../../../assets/court.svg";
 import { useGetGamesDataQuery } from "../../../hooks/useGetGamesDataQuery";
 import { GameDetailField } from "../../../interface/gameInterface";
 
 interface GameDetailProp {
   formatDate: string;
+  handleSearchAddress: (arg: string) => void;
 }
 
-export const MobileViewGameList = ({ formatDate }: GameDetailProp) => {
+export const MobileViewGameList = ({
+  formatDate,
+
+  handleSearchAddress,
+}: GameDetailProp) => {
   const { data } = useGetGamesDataQuery(formatDate);
 
   return (
     <div className="tablet:hidden  flex flex-col  gap-4  flex-nowrap  px-2 w-full">
       {data?.data.map((game: GameDetailField) => {
         return (
-          <Link
-            to={`/games/detail/${game.id}`}
+          // <Link
+          //   to={`/games/detail/${game.id}`}
+          //   key={game.id}
+          //   className="  border border-b-gray-200  rounded-xl "
+          // >
+          <div
+            onClick={() => handleSearchAddress(game?.court.address)}
             key={game.id}
             className="  border border-b-gray-200  rounded-xl "
           >
@@ -38,7 +47,7 @@ export const MobileViewGameList = ({ formatDate }: GameDetailProp) => {
               </p>
             </div>
             <hr className="block " />
-          </Link>
+          </div>
         );
       })}
     </div>

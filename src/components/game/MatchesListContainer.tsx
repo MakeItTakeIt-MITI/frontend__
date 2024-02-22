@@ -1,13 +1,21 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { GameDetailField } from "../../interface/gameInterface";
 
 interface GameDetailProp {
   game: GameDetailField;
+  handleSearchAddress: (arg: string) => void;
 }
 
-export const MatchListDetail = ({ game }: GameDetailProp) => {
+export const MatchListDetail = ({
+  game,
+  handleSearchAddress,
+}: GameDetailProp) => {
   return (
-    <Link to={`/games/detail/${game.id}`} className="">
+    <div
+      onClick={() => handleSearchAddress(game?.court.address)}
+      className="hover:cursor-pointer"
+    >
+      {/* <Link to={`/games/detail/${game.id}`} className=""> */}
       <div className="flex flex-col gap-1  ">
         <h2 className="font-bold text-[18px] truncate">{game.title} </h2>
         <p className="text-[14px] text-gray-500">
@@ -23,6 +31,6 @@ export const MatchListDetail = ({ game }: GameDetailProp) => {
           })}
         </p>
       </div>
-    </Link>
+    </div>
   );
 };

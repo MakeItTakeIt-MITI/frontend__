@@ -13,6 +13,7 @@ import { LoadingPage } from "./LoadingPage";
 
 export const HomePage = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
+  const [searchAddress, setSearchAddress] = useState("");
 
   const formatDate = selectingDate.toISOString().split("T")[0];
   const {
@@ -20,6 +21,10 @@ export const HomePage = () => {
     isPending,
     refetch,
   } = useGetGamesDataQuery(formatDate);
+
+  const handleSearchAddress = (address: string) => {
+    setSearchAddress(address);
+  };
 
   useEffect(() => {
     refetch();
@@ -49,7 +54,10 @@ export const HomePage = () => {
                 ? allGamesData?.data.map((game: GameDetailField) => {
                     return (
                       <div key={game.id}>
-                        <MatchListDetail game={game} />
+                        <MatchListDetail
+                          game={game}
+                          handleSearchAddress={handleSearchAddress}
+                        />
                         <hr className="w-full bg-[#ECECEC] my-2" />
                       </div>
                     );
@@ -57,11 +65,14 @@ export const HomePage = () => {
                 : null}
             </div>
           </div>{" "}
-          <KakaoMap allGamesData={allGamesData} />
+          <KakaoMap allGamesData={allGamesData} searchAddress={searchAddress} />
           <MobileViewDatesList setSelectedDate={setSelectedDate} />
         </div>
       </div>
-      <MobileViewGameList formatDate={formatDate} />
+      <MobileViewGameList
+        formatDate={formatDate}
+        handleSearchAddress={handleSearchAddress}
+      />
       <AdvertisementBanner />
     </div>
   );

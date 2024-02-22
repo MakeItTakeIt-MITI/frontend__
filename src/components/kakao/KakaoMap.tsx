@@ -9,7 +9,7 @@ interface GeocoderResult {
   y: number;
 }
 
-export const KakaoMap = ({ allGamesData }: any) => {
+export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
   const createMap = () => {
     const container = document.getElementById("map");
     const options = {
@@ -29,17 +29,22 @@ export const KakaoMap = ({ allGamesData }: any) => {
     map.setCenter(moveLatLon);
   };
 
-  const addMarkerWithInfowindow = (map: any, coords: any, content: string) => {
-    // const infowindow = new window.kakao.maps.InfoWindow({
+  const addMarkerWithInfowindow = (
+    map: any,
+    coords: any,
+    content: string,
+    match: GameDetailField
+  ) => {
     const infowindow = new window.kakao.maps.CustomOverlay({
-      // content: content,
       map: map,
-      // position: coords,
       position: coords,
       content: content,
     });
+    window.kakao.maps.event.addListener(infowindow, "click", function () {
+      alert("window");
+      console.log(match?.court.address);
+    });
     infowindow.setMap(map);
-    // infowindow.open(map);
   };
 
   useEffect(() => {
@@ -55,10 +60,29 @@ export const KakaoMap = ({ allGamesData }: any) => {
 
     const kakaoMap = createMap();
     addZoomControl(kakaoMap);
+    const geocoder = new window.kakao.maps.services.Geocoder();
+
+    geocoder.addressSearch(searchAddress, function (result: any, status: any) {
+      // 정상적으로 검색이 완료됐으면
+      if (status === kakao.maps.services.Status.OK) {
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // // 인포윈도우로 장소에 대한 설명을 표시합니다
+        // const infowindow = new kakao.maps.InfoWindow({
+        //   content:
+        //     '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
+        // });
+        // infowindow.open(kakaoMap);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        kakaoMap.setCenter(coords);
+      }
+    });
 
     if (allGamesData) {
       allGamesData?.data.map((match: GameDetailField) => {
-        const geocoder = new window.kakao.maps.services.Geocoder();
+        // console.log(match.court.address);
+
         geocoder.addressSearch(
           match.court.address,
           function (result: GeocoderResult[], status: GeocoderResult[]) {
@@ -82,14 +106,16 @@ export const KakaoMap = ({ allGamesData }: any) => {
               </div>
             </div>
           `;
-              addMarkerWithInfowindow(kakaoMap, coords, content);
+
+              addMarkerWithInfowindow(kakaoMap, coords, content, match);
               moveMapToLocation(kakaoMap, result[0].y, result[0].x);
             }
           }
         );
       });
     }
-  }, [allGamesData]);
+    //
+  }, [allGamesData, searchAddress]);
 
   return (
     <div
