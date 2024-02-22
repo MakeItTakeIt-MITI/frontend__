@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export const MatchSubmittedPage = () => {
   return (
-    <div>
+    <div className=" mobile:w-full tablet:w-[560px] tablet:mb-0 mx-auto mobile:mb-[4rem] py-6">
       <div className="flex items-center justify-center flex-col bg-[#E2F1FF] h-[200px]">
         <p className="font-bold text-[24px]">🎉 매치 참가 완료!</p>
         <p className="text-[#333]">아래에서 경기 정보를 확인하세요</p>

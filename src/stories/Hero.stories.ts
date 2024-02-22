@@ -1,6 +1,6 @@
 // Hero.stories.tsx
 import { Meta, StoryObj } from '@storybook/react';
-import { Hero } from '../components/main/Hero';
+import { Hero } from '../components/home/Hero';
 import mainBanner from "../assets/banner-2.svg"
 import secondBanner from "../assets/banner-1.svg"
 

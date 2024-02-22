@@ -1,27 +1,64 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginForm } from "../components/auth/LoginForm";
+import mitiLogo from "../assets/MITI_logo.svg";
+import backArrow from "../assets/Chevron_Left.png";
+
+import { KakaoLoginButton } from "../components/kakao/KakaoLoginButton";
+import useAuthStore from "../store/useAuthStore";
+import { useState } from "react";
+import { FindMyEmailModal } from "../user/FindMyEmailModal";
 
 export const UserLogin = () => {
+  const { isLoggedIn } = useAuthStore();
+  const navigate = useNavigate();
+  const [findEmailModal, displayFindEmailModal] = useState(false);
+
+  const navigatePrev = () => navigate(-1);
+  const navigateHome = () => navigate("/");
+
   return (
-    <div className="flex flex-col gap-4 mobile:my-[2rem]">
-      <h1 className="text-center font-bold text-2xl ">로그인</h1>
-      <LoginForm />
-      <div className="text-center">
-        <p className=" text-gray-600  hover:underline cursor-pointer">
-          아이디/비밀번호를 잊으셨나요?
-        </p>
-        <p className=" text-gray-600">
-          계정이 없으신가요?{" "}
-          <Link
-            to="/signup"
-            className="text-blue-500 hover:underline cursor-pointer"
+    <div className="tablet:p-10 mobile:flex mobile:flex-col mobile:justify-between h-screen pb-4">
+      <div className="flex flex-col gap-8">
+        <div>
+          <button
+            className="mobile:block tablet:hidden p-4"
+            onClick={isLoggedIn ? navigatePrev : navigateHome}
           >
-            회원가입
-          </Link>
-        </p>
+            <img src={backArrow} alt="back arrow" />
+          </button>
+          <hr className="mobile:block tablet:hidden w-full" />
+        </div>
+        <div className="flex items-center flex-col gap-3  mobile:px-[16px] tablet:px-[13rem]">
+          <div className="mb-[36px] flex flex-col gap-2">
+            <img src={mitiLogo} alt="miti logo" />
+            <h5 className="text-[14px] text-[#1c1c1c]">Make it, Take it!</h5>
+          </div>
+          <LoginForm />
+          <p className="text-center text-[#8C8C8C] text-[12px]">또는</p>
+          <KakaoLoginButton />
+          <div className="flex justify-center  gap-4 text-[#585858] text-[14px]">
+            <p className="">아직 회원이 아니신가요? </p>
+            <Link
+              role="to-signup"
+              to="/user/signup"
+              className="text-[#4065F6] hover:font-bold  "
+            >
+              회원가입하기
+            </Link>
+          </div>
+        </div>
       </div>
-      {/* <hr className="" /> */}
-      {/* <KakaoLoginButton /> */}
+      <div className="  flex  justify-center  gap-4 text-[#8c8c8c] text-[13px]">
+        <button>고객센터</button>
+        <p>|</p>
+        <button onClick={() => displayFindEmailModal(true)}>
+          ID / PW를 잊으셨나요?
+        </button>
+      </div>
+      <FindMyEmailModal
+        findEmailModal={findEmailModal}
+        displayFindEmailModal={displayFindEmailModal}
+      />
     </div>
   );
 };

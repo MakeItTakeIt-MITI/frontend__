@@ -1,24 +1,30 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SignupForm } from "../components/auth/SignupForm";
+import mitiLogo from "../assets/MITI_logo.svg";
+import backArrow from "../assets/Chevron_Left.png";
 
 export const UserSignup = () => {
+  const navigate = useNavigate();
+
+  const navigatePrev = () => navigate(-1);
+
   return (
-    <div className="flex flex-col gap-4 mobile:my-[2rem]">
-      <h1 className="text-center font-bold text-2xl ">회원가입</h1>
-      <SignupForm />
-      <div className="text-center">
-        <p className=" text-gray-600">
-          이미 회원이신가요?{" "}
-          <Link
-            to="/login"
-            className="text-blue-500 hover:underline cursor-pointer"
-          >
-            로그인
-          </Link>
-        </p>
+    <div className="tablet:p-10">
+      <button
+        role="prev-btn"
+        className="mobile:block tablet:hidden p-4"
+        onClick={navigatePrev}
+      >
+        <img src={backArrow} alt="back arrow" />
+      </button>
+      <hr className="mobile:block tablet:hidden w-full" />
+      <div className="flex items-center flex-col mobile:px-[16px]  mobile:py-[24px] tablet:px-[13rem]">
+        <div role="miti-logo" className="mb-[36px] flex flex-col gap-2">
+          <img src={mitiLogo} alt="miti logo" />
+          <h5 className="text-[14px] text-[#1c1c1c]">Make it, Take it!</h5>
+        </div>
+        <SignupForm />
       </div>
-      {/* <hr className="" /> */}
-      {/* <KakaoLoginButton /> */}
     </div>
   );
 };
