@@ -1,64 +1,84 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
+import useUserDataStore from "../store/useUserDataStore";
+import { deleteAccount } from "../api/users";
+import { useNavigate } from "react-router-dom";
+import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
+import { LoadingPage } from "./LoadingPage";
+import { NicknameEditForm } from "../components/auth/NicknameEditForm";
+import { PasswordUpdateForm } from "../components/auth/PasswordUpdateForm";
 
 export const UserMyPage = () => {
-  const [nickname, setNickname] = useState("");
+  const { userId } = useUserDataStore();
+  const id = userId;
 
-  const handleChangeNickname = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setNickname(nickname);
-    console.log(nickname);
+  const navigate = useNavigate();
+  const { data, isLoading, refetch } = useUserInfoQuery(userId);
+
+  console.log("mypage user data query", data);
+
+  const handleDeleteAccount = () => {
+    if (window.confirm("정말 계정을 삭제하기겠습니까?")) {
+      alert("계정 삭제되었습니다");
+      const id = data?.data.id;
+      deleteAccount(id);
+      localStorage.clear();
+      navigate("/login");
+    } else {
+      alert("취소합니다.");
+      return;
+    }
   };
 
-  return (
-    <div className=" mobile:w-full tablet:px-[13rem] flex flex-col gap-4">
-      <div>
-        {" "}
-        <h1 className="p-4">지원님 안녕하세요</h1>
-        <hr className="w-full h-2 bg-gray-200" />
-        {/* <div className="flex flex-col p-4"> */}
-        {/* <h2>바로가기</h2> */}
-        {/* <div className="my-4 flex justify-center text-xl gap-4">
-            <Link to="/">홈</Link>
-            <Link to="/">경기 만들기</Link>
-            <Link to="/">경기 참여하기</Link>
-            <Link to="/">기록</Link>
-          </div> */}
-        {/* </div> */}
-      </div>
-      <form onSubmit={handleChangeNickname} className="flex flex-col gap-4 p-4">
-        <div className="flex gap-2">
-          <label htmlFor="nickname">닉네임</label>
-          <input
-            className="bg-gray-100 border"
-            id="nickname"
-            type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder={nickname}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="password">현재 비밀번호</label>
-          <input
-            className="bg-gray-100 border"
-            type="password"
-            name=""
-            id="password"
-          />
-          <label htmlFor="password_check">비밀번호 확인</label>
-          <input
-            className="bg-gray-100 border"
-            type="password"
-            name=""
-            id="password_check"
-          />
-        </div>
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
-        <button className="bg-blue-400 border-white h-[54px] text-white rounded-xl">
-          닉네임 수정
-        </button>
-      </form>
+  return (
+    <div className=" w-full tablet:max-w-[90rem] tablet:px-[13rem] tablet:mb-0 mx-auto  mobile:mb-[4rem] py-3">
+      <hr className="  w-full tablet:block mobile:hidden" />
+
+      <div className="flex mobile:flex-col tablet:flex-row">
+        <div className="mobile:hidden tablet:block min-w-[250px]">
+          <div className="p-4 flex flex-col gap-4 ">
+            <p className="text-xl font-bold">
+              {data?.data.name} 님 ({data?.data.nickname})
+            </p>
+            <p>{data?.data.birthday}</p>
+            <p>{data?.data.email}</p>
+          </div>
+          <div className="flex flex-col gap-4 ">
+            <button>프로필 수정</button>
+            {/* <button className="hover:text-red-400">회원탈퇴</button> */}
+          </div>
+        </div>
+        <div className="w-full">
+          <NavigateToPrevContainer />
+          <div className="tablet:hidden mobile:block p-4 flex flex-col gap-2">
+            <p className="text-xl">
+              {data?.data.name} 님 ({data?.data.nickname})
+            </p>
+            <p>{data?.data.birthday}</p>
+            <p>{data?.data.email}</p>
+          </div>
+          <hr className="  w-full tablet:hidden mobile:block" />
+
+          <NicknameEditForm id={id} refetch={refetch} data={data} />
+          <PasswordUpdateForm id={id} refetch={refetch} />
+          <div className="flex flex-col gap-6  mobile:w-full mobile:p-4 "></div>
+          <hr className="mobile:block tablet:hidden w-full" />
+
+          <div className="flex flex-col gap-6 p-4 mobile:w-full ">
+            <h4 className="font-bold">계정 삭제</h4>
+            <button
+              type="button"
+              onClick={handleDeleteAccount}
+              className=" rounded-xl mobile:w-full tablet:w-[400px] tablet:mx-auto  h-14 bg-[#db5e5e] text-white"
+            >
+              회원탈퇴
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

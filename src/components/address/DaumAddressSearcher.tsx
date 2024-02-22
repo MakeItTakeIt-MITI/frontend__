@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 
-interface Register {
-  register: any; // eslint-disable-line @typescript-eslint/no-explicit-any
-}
+// interface Register {
+// register: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+//   register: () => void;
+// }
 
 interface FindAddress {
   address: string;
@@ -12,10 +13,8 @@ interface FindAddress {
   buildingName: string;
 }
 
-export const DaumAddressSearcher = ({ register }: Register) => {
-  const [showAddressPopup, setShowAddressPopup] = useState<string | false>(
-    false
-  );
+export const DaumAddressSearcher = () => {
+  const [showAddressPopup, setShowAddressPopup] = useState("");
   const open = useDaumPostcodePopup();
 
   const handleComplete = (data: FindAddress) => {
@@ -45,20 +44,19 @@ export const DaumAddressSearcher = ({ register }: Register) => {
   return (
     <div className="flex flex-col gap-2 relative">
       <label htmlFor="address" className=" text-[#999]">
-        경기장 주소
+        경기 주소
       </label>
 
       <input
-        className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full"
+        className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full  pr-[90px]"
         type="text"
-        {...register("address", {
-          required: true,
-        })}
-        value={showAddressPopup ? showAddressPopup : ""}
+        // {...register("address")}
+        value={showAddressPopup}
         readOnly
         placeholder="경기장 주소를 입력해주세요."
       />
       <button
+        type="button"
         onClick={handleClick}
         className="w-[81px] h-[36px]  bg-[#4065F6] text-[12px] rounded-xl text-white absolute right-0 bottom-1.5"
       >

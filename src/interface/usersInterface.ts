@@ -32,8 +32,19 @@ export interface ValidationProps {
 }
 
 export interface UserEditField {
-    email?: string,
-    password: string;
-    password_check: string;
+    id: number | null
+    nickname?: string | null;
+    password?: string;
+    password_check?: string;
 
+}
+
+export interface TokenField {
+    access_token: string | null,
+    refresh_token: string | null
+}
+
+export interface RequestCodeField {
+    email: string;
+    password: string;
 }

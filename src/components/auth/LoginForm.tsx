@@ -1,10 +1,8 @@
 import { useForm } from "react-hook-form";
 import close from "../../assets/clarity_eye-hide-line.svg";
 import open from "../../assets/clarity_eye-show-line.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LoginField } from "../../interface/usersInterface";
-import { useNavigate } from "react-router-dom";
-import useAuthStore from "../../store/useAuthStore";
 import closeBtn from "../../assets/x_button.svg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginSchema } from "../../modals/useLoginSchema";
@@ -23,18 +21,8 @@ export const LoginForm = () => {
   } = useForm<LoginField>({
     resolver: zodResolver(useLoginSchema),
   });
-  const { isLoggedIn } = useAuthStore();
-  const navigate = useNavigate();
 
   const { mutate: loginMutation } = useLoginMutation({ setErrorMessage });
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/profile')
-      // const id = localStorage.getItem("id");
-      // navigate(`/profile`);
-    }
-  }, []);
 
   const emailValue = watch("email");
 
@@ -66,6 +54,7 @@ export const LoginForm = () => {
           <input
             type="email"
             id="email"
+            role="user-email-input"
             required
             className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
             placeholder="이메일을 입력해주세요."
@@ -101,6 +90,7 @@ export const LoginForm = () => {
           <input
             type={`${displayPassword ? "text" : "password"}`}
             id="password"
+            role="user-password-input"
             required
             className="h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
             placeholder="8자리 이상의 PW를 입력해주세요."
@@ -111,6 +101,7 @@ export const LoginForm = () => {
 
           <button
             type="button"
+            role="show-password-btn"
             onClick={handleDisplayPassword}
             className="absolute right-2 top-4 hover:cursor-pointer"
           >
@@ -132,13 +123,14 @@ export const LoginForm = () => {
       </div>
       <button
         type="submit"
+        role="user-login-btn"
         disabled={errors.email || errors.password ? true : false}
         style={
           errors.email || errors.password
             ? { backgroundColor: "#E8E8E8" }
             : { backgroundColor: "#4065f6" }
         }
-        className=" mobile:h-[48px] tablet:h-[45px] mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:w-[18rem] tablet:text-[15px] "
+        className=" mobile:h-[48px] tablet:w-[600px] tablet:h-[45px] mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:text-[15px] "
       >
         로그인 하기
       </button>
