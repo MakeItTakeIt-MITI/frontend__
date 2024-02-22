@@ -25,9 +25,9 @@ export const HomePage = () => {
     refetch();
   }, [selectingDate, refetch, formatDate]);
 
-  if (isPending) {
-    return <LoadingPage />;
-  }
+  // if (isPending) {
+  //   return <LoadingPage />;
+  // }
 
   return (
     <div className="flex flex-col gap-6  w-full tablet:px-[13rem] mx-auto  max-w-[90rem]">
@@ -45,14 +45,16 @@ export const HomePage = () => {
               setSelectedDate={setSelectedDate}
             />
             <div className="mobile:hidden tablet:block px-4 py-2 flex flex-col gap-4 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll">
-              {allGamesData?.data.map((game: GameDetailField) => {
-                return (
-                  <div key={game.id}>
-                    <MatchListDetail game={game} />
-                    <hr className="w-full bg-[#ECECEC] my-2" />
-                  </div>
-                );
-              })}
+              {allGamesData
+                ? allGamesData?.data.map((game: GameDetailField) => {
+                    return (
+                      <div key={game.id}>
+                        <MatchListDetail game={game} />
+                        <hr className="w-full bg-[#ECECEC] my-2" />
+                      </div>
+                    );
+                  })
+                : null}
             </div>
           </div>{" "}
           <KakaoMap allGamesData={allGamesData} />

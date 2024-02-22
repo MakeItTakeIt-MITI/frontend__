@@ -56,17 +56,18 @@ export const KakaoMap = ({ allGamesData }: any) => {
     const kakaoMap = createMap();
     addZoomControl(kakaoMap);
 
-    allGamesData?.data.map((match: GameDetailField) => {
-      const geocoder = new window.kakao.maps.services.Geocoder();
-      geocoder.addressSearch(
-        match.court.address,
-        function (result: GeocoderResult[], status: GeocoderResult[]) {
-          if (status === window.kakao.maps.services.Status.OK) {
-            const coords = new window.kakao.maps.LatLng(
-              result[0].y,
-              result[0].x
-            );
-            const content = `
+    if (allGamesData) {
+      allGamesData?.data.map((match: GameDetailField) => {
+        const geocoder = new window.kakao.maps.services.Geocoder();
+        geocoder.addressSearch(
+          match.court.address,
+          function (result: GeocoderResult[], status: GeocoderResult[]) {
+            if (status === window.kakao.maps.services.Status.OK) {
+              const coords = new window.kakao.maps.LatLng(
+                result[0].y,
+                result[0].x
+              );
+              const content = `
             <div  key={match.id} class=" hover:cursor-pointer w-[76px]  h-[56px] p-2  flex flex-col  items-center justify-center bg-white rounded-lg drop-shadow-lg">
               <p class="text-[12px]  text-[#999]">${
                 match.court.address_detail
@@ -81,12 +82,13 @@ export const KakaoMap = ({ allGamesData }: any) => {
               </div>
             </div>
           `;
-            addMarkerWithInfowindow(kakaoMap, coords, content);
-            moveMapToLocation(kakaoMap, result[0].y, result[0].x);
+              addMarkerWithInfowindow(kakaoMap, coords, content);
+              moveMapToLocation(kakaoMap, result[0].y, result[0].x);
+            }
           }
-        }
-      );
-    });
+        );
+      });
+    }
   }, [allGamesData]);
 
   return (
