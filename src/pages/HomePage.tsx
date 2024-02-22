@@ -25,9 +25,9 @@ export const HomePage = () => {
     refetch();
   }, [selectingDate, refetch, formatDate]);
 
-  // if (isPending) {
-  //   return <LoadingPage />;
-  // }
+  if (isPending) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="flex flex-col gap-6  w-full tablet:px-[13rem] mx-auto  max-w-[90rem]">

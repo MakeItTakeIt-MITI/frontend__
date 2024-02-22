@@ -58,37 +58,3 @@ export const MobileViewDatesList = ({ setSelectedDate }: DateBoxProps) => {
     </div>
   );
 };
-// {
-/* <button onClick={handleLeftArrowClick}>
-        <img src={leftArrow} alt="" />
-      </button> */
-
-// style={{
-//   backgroundColor:
-//     date.toDateString() === today ? "#4065F6" : "#F2F2F2",
-//   color: date.toDateString() === today ? "#fff" : "#707070",
-// }}
-
-// style={{
-//   backgroundColor:
-//     index === 0 && !selected ? "#4065f6" : "#f2f2f2",
-//   color: index === 0 && !selected ? "#fff" : "#707070",
-// }}
-// }
-
-// {
-/* <button onClick={handleRightArrowClick}>
-        <img src={rightArrow} alt="" className="rotate-180" />
-      </button> */
-// }
-
-// const handleRightArrowClick = () => {
-//   if (startIndex <= 14) {
-//     setStartIndex(startIndex + 4);
-//   }
-// };
-// const handleLeftArrowClick = () => {
-//   if (startIndex > 0) {
-//     setStartIndex(startIndex - 4);
-//   }
-// };
