@@ -1,15 +1,12 @@
-import { useMutation, useQueries, useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { kakaoAuthSMS } from "../api/auth";
+import { requestSmsCode } from "../api/users";
+import { RequestCodeField } from "../interface/usersInterface";
+import { SMSAuth } from "../interface/authInterface";
 
-export const useVerifySmsMutation = (code: string | null) => {
-  // const navigate = useNavigate();
+export const useVerifySmsMutation = () => {
   return useMutation({
-    mutationFn: () => kakaoAuthSMS(code),
-    onSuccess: () => {
-      // localStorage.removeItem("authentication_token");
-      // navigate("/user/login");
-    },
+    mutationFn: (code: RequestCodeField) => requestSmsCode(code),
   });
 };
 
