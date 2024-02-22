@@ -1,18 +1,15 @@
-import { useState } from "react";
-import leftArrow from "../../assets/Chevron_Left.png";
-import rightArrow from "../../assets/Chevron_Left.png";
-
 interface DateBoxProps {
   setSelectedDate: (arg: Date) => void;
 }
 
 export const MobileViewDatesList = ({ setSelectedDate }: DateBoxProps) => {
-  const [startIndex, setStartIndex] = useState(0);
+  // const [startIndex, setStartIndex] = useState(0);
   const availableDates = [];
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 16; i++) {
     const newDate = new Date();
-    newDate.setDate(newDate.getDate() + startIndex + i);
+    // newDate.setDate(newDate.getDate() + startIndex + i);
+    newDate.setDate(newDate.getDate() + i);
     availableDates.push(newDate);
   }
 
@@ -22,22 +19,8 @@ export const MobileViewDatesList = ({ setSelectedDate }: DateBoxProps) => {
     setSelectedDate(input);
   };
 
-  const handleRightArrowClick = () => {
-    if (startIndex <= 14) {
-      setStartIndex(startIndex + 4);
-    }
-  };
-  const handleLeftArrowClick = () => {
-    if (startIndex > 0) {
-      setStartIndex(startIndex - 4);
-    }
-  };
-
   return (
-    <div className="flex justify-between px-2 items-center tablet:hidden  ">
-      <button onClick={handleLeftArrowClick}>
-        <img src={leftArrow} alt="" />
-      </button>
+    <div className="flex gap-4 px-4 items-center tablet:hidden  overflow-y-scroll">
       <div className="flex gap-4 justify-center items-center">
         {availableDates.map((date, index) => {
           return (
@@ -61,9 +44,27 @@ export const MobileViewDatesList = ({ setSelectedDate }: DateBoxProps) => {
           );
         })}
       </div>
-      <button onClick={handleRightArrowClick}>
-        <img src={rightArrow} alt="" className="rotate-180" />
-      </button>
     </div>
   );
 };
+{
+  /* <button onClick={handleLeftArrowClick}>
+        <img src={leftArrow} alt="" />
+      </button> */
+}
+{
+  /* <button onClick={handleRightArrowClick}>
+        <img src={rightArrow} alt="" className="rotate-180" />
+      </button> */
+}
+
+// const handleRightArrowClick = () => {
+//   if (startIndex <= 14) {
+//     setStartIndex(startIndex + 4);
+//   }
+// };
+// const handleLeftArrowClick = () => {
+//   if (startIndex > 0) {
+//     setStartIndex(startIndex - 4);
+//   }
+// };
