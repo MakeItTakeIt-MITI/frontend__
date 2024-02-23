@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useRegisterMutation } from "../../hooks/useRegisterMutation";
 import { useUserValidationMutation } from "../../hooks/useUserValidationMutation";
 import { SubmitButton } from "../common/SubmitButtons";
+import { ValidateInputButton } from "../common/ValidationButtons";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -68,21 +69,13 @@ export const SignupForm = () => {
           })}
         />
 
-        <button
-          onClick={
+        <ValidateInputButton
+          validation={
             !validEmail ? handleValidateEmail : () => setValidEmail(false)
           }
-          type="button"
-          role="validate-email"
-          style={
-            !validEmail
-              ? { backgroundColor: "#4065f6" }
-              : { backgroundColor: "#E8E8E8" }
-          }
-          className="absolute right-2 bottom-2.5 text-[14px] text-white w-[81px] h-[36px] rounded-[8px]"
-        >
-          {!validEmail ? "중복확인" : "수정하기"}
-        </button>
+          isValid={validEmail}
+          validateFunction={handleValidateEmail}
+        />
       </div>
       {errors.email?.message && (
         <p className=" text-red-500">{errors.email?.message}</p>
@@ -175,21 +168,13 @@ export const SignupForm = () => {
           })}
         />
 
-        <button
-          onClick={
+        <ValidateInputButton
+          validation={
             !validNickname ? handleValidateNick : () => setValidNickname(false)
           }
-          type="button"
-          role="validate-nickname"
-          style={
-            !validNickname
-              ? { backgroundColor: "#4065f6" }
-              : { backgroundColor: "#E8E8E8" }
-          }
-          className="absolute right-2 bottom-2.5 text-[14px] text-white w-[81px] h-[36px] rounded-[8px]"
-        >
-          {!validNickname ? "중복확인" : "수정하기"}
-        </button>
+          isValid={validNickname}
+          validateFunction={handleValidateNick}
+        />
       </div>
       {errors.nickname?.message && (
         <p className=" text-red-500">{errors.nickname?.message}</p>
