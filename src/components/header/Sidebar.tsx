@@ -114,7 +114,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
                     경기 호스팅
                   </Link>
                   <Link
-                    to="/games/mygames/:id"
+                    to={`/games/mygames/${userId}`}
                     className="hover:underline"
                     onClick={closeTab}
                   >
