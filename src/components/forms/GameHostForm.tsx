@@ -1,5 +1,9 @@
 import { useForm } from "react-hook-form";
-import { AddressField, GameHostField } from "../../interface/gameInterface";
+import {
+  AddressField,
+  Court,
+  GameHostField,
+} from "../../interface/gameInterface";
 import { useEffect, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useHostGameMutation } from "../../hooks/useHostGameMutation";
@@ -30,7 +34,7 @@ export const GameHostForm = () => {
     setValue("enddate", endDate);
     setValue("endtime", endTime);
 
-    getAddressDetail?.data.map((address) => {
+    getAddressDetail?.data.map((address: Court) => {
       if (fullAddress === address.address) {
         setValue("court.address_detail", address.address_detail);
       } else {
@@ -216,7 +220,7 @@ export const GameHostForm = () => {
         </label>
 
         <input
-          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full  pr-[90px]"
+          className="input-primary pr-[99px]"
           type="text"
           {...register("court.address")}
           value={watch("court.address")}
@@ -226,7 +230,7 @@ export const GameHostForm = () => {
         <button
           type="button"
           onClick={handleClick}
-          className="w-[81px] h-[36px]  bg-[#4065F6] mobile:text-[12px] tablet:text-[14px] rounded-xl text-white absolute right-0 bottom-1.5"
+          className=" w-[81px] h-9 absolute right-2 bottom-2.5 text-[14px] bg-[#4065f6] text-white  rounded-lg"
         >
           주소찾기
         </button>
@@ -247,7 +251,7 @@ export const GameHostForm = () => {
         />
       </div>
 
-      <div className="flex tablet:gap-4  items-center mobile:justify-between ">
+      <div className="flex gap-4  items-center mobile:justify-between ">
         <div className="flex flex-col gap-2 tablet:w-full">
           <label htmlFor="max_players" className=" text-[#999]">
             총 모집 인원

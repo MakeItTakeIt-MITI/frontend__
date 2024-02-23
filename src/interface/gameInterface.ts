@@ -1,8 +1,9 @@
-interface Court {
+export interface Court {
     name: string;
     address: string;
     address_detail: string;
 }
+
 
 export interface GameHostField {
     title: string;
@@ -19,6 +20,8 @@ export interface GameHostField {
     account_number: string;
     court: Court;
 }
+
+
 
 
 export interface AddressField {

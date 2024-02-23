@@ -4,8 +4,8 @@ import { deleteAccount } from "../api/users";
 import { useNavigate } from "react-router-dom";
 import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
 import { LoadingPage } from "./LoadingPage";
-import { NicknameEditForm } from "../components/auth/NicknameEditForm";
-import { PasswordUpdateForm } from "../components/auth/PasswordUpdateForm";
+import { NicknameEditForm } from "../components/forms/NicknameEditForm";
+import { PasswordUpdateForm } from "../components/forms/PasswordUpdateForm";
 
 export const UserMyPage = () => {
   const { userId } = useUserDataStore();

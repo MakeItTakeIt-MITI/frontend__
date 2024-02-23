@@ -15,7 +15,7 @@ import { SMSAuthenticationPage } from "./pages/SMSAuthenticationPage.tsx";
 import { UserMyPage } from "./pages/UserMyPage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { KakaoAuthHandler } from "./components/auth/KakaoAuthHandler.tsx";
+import { KakaoAuthHandler } from "./components/forms/KakaoAuthHandler.tsx";
 import { UserGamesListPage } from "./pages/UserGamesListPage.tsx";
 import { PrivateRoute } from "./pages/PrivateRoute.tsx";
 import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
