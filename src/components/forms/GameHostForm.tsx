@@ -14,6 +14,7 @@ export const GameHostForm = () => {
   const { handleSubmit, register, setValue, watch } = useForm<GameHostField>();
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
+
   const navigate = useNavigate();
 
   // tanstack query
@@ -22,6 +23,7 @@ export const GameHostForm = () => {
     useCourtDetailsQuery(courtAddress);
   const { mutate: hostGameMutation } = useHostGameMutation();
 
+  //
   useEffect(() => {
     const startDate = startDateTime.split("T")[0];
     const startTime = startDateTime.split("T")[1];
@@ -34,6 +36,7 @@ export const GameHostForm = () => {
     setValue("enddate", endDate);
     setValue("endtime", endTime);
 
+    // if address already exists, automatically add address_detail
     getAddressDetail?.data.map((address: Court) => {
       if (fullAddress === address.address) {
         setValue("court.address_detail", address.address_detail);
@@ -43,7 +46,15 @@ export const GameHostForm = () => {
     });
 
     refetch();
-  }, [courtAddress, setValue, startDateTime, endDateTime, getAddressDetail]);
+  }, [
+    courtAddress,
+    watch,
+    refetch,
+    setValue,
+    startDateTime,
+    endDateTime,
+    getAddressDetail,
+  ]);
 
   const handleOpenAddressBox = useDaumPostcodePopup();
 
@@ -70,31 +81,7 @@ export const GameHostForm = () => {
   };
 
   const onSubmit = (data: GameHostField) => {
-    // const gameData = getValues();
-    const formData = {
-      title: data.title,
-      startdate: data.startdate,
-      starttime: data.starttime,
-      enddate: data.enddate,
-      endtime: data.endtime,
-      min_invitation: data.min_invitation,
-      max_invitation: data.max_invitation,
-      info: data.info,
-      fee: data.fee,
-      account_bank: data.account_bank,
-      account_holder: data.account_holder,
-      account_number: data.account_number.replace(/-/g, ""),
-      court: {
-        name: data.court.name,
-        address: data.court.address,
-        address_detail: data.court.address_detail,
-      },
-    };
-
-    // console.log(formData);
-
-    // console.log(data);
-    hostGameMutation(formData, {
+    hostGameMutation(data, {
       onSuccess: () => {
         navigate("/");
       },
@@ -142,7 +129,7 @@ export const GameHostForm = () => {
 
       <div className="flex flex-col gap-2">
         <label className="text-[#999]">경기 시작</label>
-        <div className="flex gap-4 w-full">
+        <div className="flex gap-2 w-full">
           <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg ">
             {startDateTime.split("T")[0]} {startDateTime.split("T")[1]}
           </div>
@@ -150,11 +137,8 @@ export const GameHostForm = () => {
             type="datetime-local"
             id="start_date"
             required
-            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#DFEFFE]  "
+            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#DFEFFE] rounded-lg "
             onChange={(e) => setStartDateTime(e.target.value)}
-            // {...register("start_date", {
-            //   required: true,
-            // })}
           />
           <input
             hidden
@@ -173,11 +157,10 @@ export const GameHostForm = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2"></div>
       <div className="flex flex-col gap-2 justify-center ">
         <label className="text-[#999]">경기 종료</label>
 
-        <div className="flex items-center gap-4 w-full">
+        <div className="flex items-center gap-2 w-full">
           <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg ">
             {endDateTime.split("T")[0]} {endDateTime.split("T")[1]}
           </div>
@@ -185,14 +168,14 @@ export const GameHostForm = () => {
             type="datetime-local"
             required
             onChange={(e) => setEndDateTime(e.target.value)}
-            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#DFEFFE]  "
+            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#DFEFFE] rounded-lg "
           />
 
           <input
             hidden
             type="text"
             id="end_date"
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] \"
+            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] "
             {...register("enddate", {})}
           />
           <input
@@ -205,14 +188,6 @@ export const GameHostForm = () => {
           />
         </div>
       </div>
-
-      {/* <div className="flex flex-col gap-2">
-        <label htmlFor="end_time" className=" text-[#999]">
-          경기 종료 시간
-        </label>
-      </div> */}
-
-      {/* <DaumAddressSearcher register={register} /> */}
 
       <div className="flex flex-col gap-2 relative">
         <label htmlFor="address" className=" text-[#999]">
@@ -230,13 +205,11 @@ export const GameHostForm = () => {
         <button
           type="button"
           onClick={handleClick}
-          className=" w-[81px] h-9 absolute right-2 bottom-2.5 text-[14px] bg-[#4065f6] text-white  rounded-lg"
+          className=" w-[81px] h-9 absolute  right-2 bottom-2.5 text-[14px] bg-[#4065f6] text-[#FFF] font-[400]  rounded-lg"
         >
           주소찾기
         </button>
       </div>
-
-      {/*  */}
 
       <div className="flex flex-col gap-2">
         <label htmlFor="address_detail" className=" text-[#999]">
@@ -315,7 +288,7 @@ export const GameHostForm = () => {
         />
       </div>
 
-      <div className="flex items-center mobile:justify-between tablet:justify-center tablet:gap-4 tablet:w-full">
+      <div className="flex items-center mobile:justify-between tablet:justify-center gap-4 tablet:w-full">
         <div className="flex flex-col gap-2 tablet:w-full">
           <h5 className="text-[#969696] ">예금 은행</h5>
           <input
@@ -344,7 +317,6 @@ export const GameHostForm = () => {
           type="text"
           id="account_number"
           placeholder="계좌번호를 입력해주세요."
-          // placeholder="계좌번호를 입력해주세요."
           className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
           {...register("account_number", {
             required: true,
@@ -356,7 +328,7 @@ export const GameHostForm = () => {
         type="submit"
         className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white"
       >
-        경기 생성하기
+        매치 생성하기
       </button>
     </form>
   );
