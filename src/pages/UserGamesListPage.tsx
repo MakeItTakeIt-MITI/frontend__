@@ -2,10 +2,14 @@ import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
 import downarrow from "../assets/Chevron_Down_MD.svg";
 import { useState } from "react";
 import { MyGamesTabFilterButton } from "../components/game/MyGamesTabFilterButton";
-import { MyGameHistoryInfoBox } from "../components/game/MatchContainer";
 import { useParams } from "react-router-dom";
 import { useGetHostHistoryQuery } from "../hooks/useGetHostHistoryQuery";
 import { useGetGameHistoryQuery } from "../hooks/useGetGameHistoryQuery";
+import { NoGameHistoryBox } from "../components/game/NoGameHistoryBox";
+import {
+  GuestGameHistory,
+  HostGameHistory,
+} from "../components/game/GameHistory";
 export const UserGamesListPage = () => {
   const [displayTab, setDisplayTab] = useState(false);
   const [tabName, setTabName] = useState("호스트만 보기");
@@ -52,11 +56,13 @@ export const UserGamesListPage = () => {
         </span>
       </div>
       <div className="flex-wrap h-full flex justify-between gap-4 py-4 mobile:px-4">
-        {tabName === "호스트만 보기" && (
-          <MyGameHistoryInfoBox hostHistory={hostHistory} />
-        )}
-        {tabName === "호스트만 보기" && (
-          <MyGameHistoryInfoBox guestHistory={guestHistory} />
+        {(tabName === "호스트만 보기" && hostHistory?.data.length < 1) ||
+        (tabName === "게스트만 보기" && guestHistory?.data.length < 1) ? (
+          <NoGameHistoryBox />
+        ) : tabName === "호스트만 보기" ? (
+          <HostGameHistory hostHistory={hostHistory} />
+        ) : (
+          <GuestGameHistory guestHistory={guestHistory} />
         )}
       </div>
     </div>
