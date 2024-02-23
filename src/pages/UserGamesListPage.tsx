@@ -10,6 +10,7 @@ import {
   GuestGameHistory,
   HostGameHistory,
 } from "../components/game/GameHistory";
+import { LoadingPage } from "./LoadingPage";
 export const UserGamesListPage = () => {
   const [displayTab, setDisplayTab] = useState(false);
   const [tabName, setTabName] = useState("호스트만 보기");
@@ -17,9 +18,8 @@ export const UserGamesListPage = () => {
   const { id } = useParams();
   const userIdParam = Number(id);
 
-  const { data: hostHistory } = useGetHostHistoryQuery(userIdParam);
+  const { data: hostHistory, isPending } = useGetHostHistoryQuery(userIdParam);
   const { data: guestHistory } = useGetGameHistoryQuery(userIdParam);
-  console.log(hostHistory);
 
   const handleToggleTab = () => {
     setDisplayTab(!displayTab);
@@ -29,6 +29,10 @@ export const UserGamesListPage = () => {
     setTabName(name);
     setDisplayTab(false);
   };
+
+  if (isPending) {
+    return <LoadingPage />;
+  }
   return (
     <div className=" mobile:w-full tablet:px-[13rem] tablet:max-w-[90rem] tablet:mb-0 mx-auto mobile:mb-[4rem] py-3">
       <NavigateToPrevContainer />
