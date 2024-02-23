@@ -42,7 +42,6 @@ export const HomePage = () => {
         recruitText="MITI와 함께, 경기 모집부터"
         managementText="관리, 결제, 매칭까지 한번에."
       />
-      {/* <div className=" flex "> */}
       <div className="flex  tablet:flex-row mobile:flex-col tablet:gap-10 mobile:gap-4 mobile:-mt-4 ">
         <div className="flex flex-col gap-4">
           <DesktopViewDatesList
@@ -68,7 +67,6 @@ export const HomePage = () => {
         <KakaoMap allGamesData={allGamesData} searchAddress={searchAddress} />
         <MobileViewDatesList setSelectedDate={setSelectedDate} />
       </div>
-      {/* </div> */}
       <MobileViewGameList
         formatDate={formatDate}
         handleSearchAddress={handleSearchAddress}
