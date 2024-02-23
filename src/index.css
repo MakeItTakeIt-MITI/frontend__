@@ -12,3 +12,11 @@
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
+
+/* mobile:h-[48px] tablet:w-[600px] tablet:h-[45px] mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:text-[15px] " */
+
+@layer components {
+  .btn-primary {
+    @apply h-12 tablet:w-[600px]  mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:text-[15px];
+  }
+}

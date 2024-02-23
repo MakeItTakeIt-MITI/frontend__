@@ -8,6 +8,7 @@ import alertFail from "../../assets/alert_failure.svg";
 import { useState } from "react";
 import { useRegisterMutation } from "../../hooks/useRegisterMutation";
 import { useUserValidationMutation } from "../../hooks/useUserValidationMutation";
+import { SubmitButton } from "../../ReusableComponents/SubmitButtons";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -193,6 +194,7 @@ export const SignupForm = () => {
       {errors.nickname?.message && (
         <p className=" text-red-500">{errors.nickname?.message}</p>
       )}
+
       {validNickname && (
         <div className="flex items-center gap-1">
           <img src={alertPass} alt="approved icon" className="w-4" />
@@ -239,24 +241,27 @@ export const SignupForm = () => {
             required: true,
           })}
         />
-        {errors.phone?.message && (
-          <p className=" text-red-500">{errors.phone?.message}</p>
-        )}
       </div>
+      {errors.phone?.message && (
+        <p className=" text-red-500">{errors.phone?.message}</p>
+      )}
 
-      <button
-        role="submit"
-        type="submit"
-        disabled={!validEmail && !validNickname ? true : false}
-        style={
-          !validEmail || !validNickname
-            ? { backgroundColor: "#E8E8E8" }
-            : { backgroundColor: "#4065f6" }
+      <SubmitButton
+        disabled={
+          !!(
+            errors.email ||
+            errors.password ||
+            errors.password_check ||
+            errors.nickname ||
+            errors.name ||
+            errors.birthday ||
+            errors.phone
+          )
         }
-        className=" h-[58px] p-4 rounded-lg text-white "
-      >
-        가입하기
-      </button>
+        type="submit"
+        role="submit"
+        children="가입하기"
+      />
     </form>
   );
 };
