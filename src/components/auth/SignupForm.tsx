@@ -75,6 +75,7 @@ export const SignupForm = () => {
           }
           isValid={validEmail}
           validateFunction={handleValidateEmail}
+          role={"validate-email"}
         />
       </div>
       {errors.email?.message && (
@@ -174,6 +175,7 @@ export const SignupForm = () => {
           }
           isValid={validNickname}
           validateFunction={handleValidateNick}
+          role={"validate-nickname"}
         />
       </div>
       {errors.nickname?.message && (

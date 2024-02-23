@@ -2,13 +2,19 @@ interface ValidateProps {
   isValid: boolean;
   validateFunction: (arg: boolean) => void;
   validation: () => void;
+  role: string;
 }
 
-export const ValidateInputButton = ({ isValid, validation }: ValidateProps) => {
+export const ValidateInputButton = ({
+  isValid,
+  validation,
+  role,
+}: ValidateProps) => {
   return (
     <button
       onClick={validation}
       type="button"
+      role={role}
       style={{
         backgroundColor: !isValid ? "#4065f6" : "#E8E8E8",
       }}
