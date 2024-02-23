@@ -21,7 +21,7 @@ export const GameHostForm = () => {
   const courtAddress = watch("court.address");
   const { data: getAddressDetail, refetch } =
     useCourtDetailsQuery(courtAddress);
-  const { mutate: hostGameMutation } = useHostGameMutation();
+  const { mutate: hostGameMutation, isError } = useHostGameMutation();
 
   //
   useEffect(() => {
@@ -96,6 +96,14 @@ export const GameHostForm = () => {
       <h4 className="font-bold tablet:text-2xl tablet:text-center">
         경기 정보
       </h4>
+      {isError && (
+        <div>
+          <p className="text-red-500 text-center">매치 생성에 실패했습니다.</p>
+          <p className="text-red-500 text-center">
+            입력한 정보를 다시 한번 확인해주세요.
+          </p>
+        </div>
+      )}
       <div className="flex flex-col gap-2">
         <label htmlFor="title" className=" text-[#999] ">
           경기 제목
@@ -292,19 +300,21 @@ export const GameHostForm = () => {
         <div className="flex flex-col gap-2 tablet:w-full">
           <h5 className="text-[#969696] ">예금 은행</h5>
           <input
+            placeholder="우리은행"
             {...register("account_bank", {
               required: true,
             })}
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
+            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg text-center font-[500]"
           />
         </div>
         <div className="flex flex-col gap-2 tablet:w-full">
           <h5 className="text-[#969696]">예금주</h5>
           <input
+            placeholder="홍길동"
             {...register("account_holder", {
               required: true,
             })}
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
+            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg text-center font-[500]"
           />
         </div>
       </div>
@@ -316,7 +326,7 @@ export const GameHostForm = () => {
         <input
           type="text"
           id="account_number"
-          placeholder="계좌번호를 입력해주세요."
+          placeholder="'-'을 제외한 계좌번호를 입력해주세요."
           className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
           {...register("account_number", {
             required: true,
