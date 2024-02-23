@@ -58,7 +58,7 @@ export const SignupForm = () => {
           이메일
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="email"
           id="email"
           role="input-email"
@@ -102,7 +102,7 @@ export const SignupForm = () => {
           비빌번호
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="password"
           placeholder="비밀번호를 입력해주세요."
           id="password"
@@ -121,7 +121,7 @@ export const SignupForm = () => {
           비빌번호 확인
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="password"
           placeholder="비밀번호를 한번 더 입력해주세요."
           id="password_check"
@@ -139,7 +139,7 @@ export const SignupForm = () => {
           이름
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="text"
           id="name"
           role="input-name"
@@ -157,7 +157,7 @@ export const SignupForm = () => {
           닉네임
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="text"
           id="nickname"
           role="input-nickname"
@@ -201,7 +201,7 @@ export const SignupForm = () => {
           생년월일
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="date"
           id="birthday"
           role="user-birthday"
@@ -218,7 +218,7 @@ export const SignupForm = () => {
           핸드폰 번호
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="string"
           id="phone"
           placeholder="'-'을 제외한 휴대폰번호를 입력해주세요."

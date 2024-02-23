@@ -19,4 +19,7 @@
   .btn-primary {
     @apply h-12 tablet:w-[600px]  mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:text-[15px];
   }
+  .input-primary {
+    @apply h-[58px] p-4 bg-[#F7F7F7] rounded-lg;
+  }
 }
