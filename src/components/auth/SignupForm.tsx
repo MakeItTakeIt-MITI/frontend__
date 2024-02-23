@@ -8,7 +8,7 @@ import alertFail from "../../assets/alert_failure.svg";
 import { useState } from "react";
 import { useRegisterMutation } from "../../hooks/useRegisterMutation";
 import { useUserValidationMutation } from "../../hooks/useUserValidationMutation";
-import { SubmitButton } from "../../ReusableComponents/SubmitButtons";
+import { SubmitButton } from "../common/SubmitButtons";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);

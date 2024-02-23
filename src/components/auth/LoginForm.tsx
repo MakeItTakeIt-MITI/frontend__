@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginSchema } from "../../modals/useLoginSchema";
 import { useLoginMutation } from "../../hooks/useLoginMutation";
 import alertFail from "../../assets/alert_failure.svg";
-import { SubmitButton } from "../../ReusableComponents/SubmitButtons";
+import { SubmitButton } from "../common/SubmitButtons";
 
 export const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");

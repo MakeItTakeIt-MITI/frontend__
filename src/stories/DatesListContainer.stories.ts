@@ -1,15 +1,15 @@
 // Hero.stories.tsx
 import { Meta, StoryObj } from '@storybook/react';
-import { DatesListContainer } from '../components/home/MobileViewDatesList';
+import { MobileViewDatesList } from '../components/home/MobileViewDatesList';
 
 const meta = {
     title: 'Buttons',
-    component: DatesListContainer,
+    component: MobileViewDatesList,
     tags: ['autodocs'],
     parameters: {
         layout: 'centered',
     },
-} satisfies Meta<typeof DatesListContainer>;
+} satisfies Meta<typeof MobileViewDatesList>;
 
 export default meta
 

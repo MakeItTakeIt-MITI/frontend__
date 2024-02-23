@@ -35,7 +35,7 @@ export const UserLogin = () => {
           </div>
           <LoginForm />
           <p className="text-center text-[#8C8C8C] text-[12px]">또는</p>
-          <KakaoLoginButton />
+          <KakaoLoginButton children="카카오로 3초만에 시작하기" />
           <div className="flex justify-center  gap-4 text-[#585858] text-[14px]">
             <p className="">아직 회원이 아니신가요? </p>
             <Link
