@@ -20,6 +20,7 @@ export const ValidateEmail: Story = {
         validation: () => {
             // Handle email validation logic
         },
+        role: "validate-email"
     }
 };
 
@@ -29,5 +30,6 @@ export const ValidateNickname: Story = {
         validation: () => {
             // Handle email validation logic
         },
+        role: "validate-nickname"
     }
 }
