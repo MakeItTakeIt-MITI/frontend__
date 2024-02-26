@@ -14,15 +14,13 @@ export const UserMyPage = () => {
   const navigate = useNavigate();
   const { data, isLoading, refetch } = useUserInfoQuery(userId);
 
-  console.log("mypage user data query", data);
-
   const handleDeleteAccount = () => {
     if (window.confirm("정말 계정을 삭제하기겠습니까?")) {
       alert("계정 삭제되었습니다");
       const id = data?.data.id;
       deleteAccount(id);
       localStorage.clear();
-      navigate("/login");
+      navigate("/user/login");
     } else {
       alert("취소합니다.");
       return;
