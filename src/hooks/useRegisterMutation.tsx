@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { userSignup } from "../api/users";
 import { useNavigate } from "react-router-dom";
+import { userSignup } from "../api/auth";
 
 export const useRegisterMutation = () => {
   const navigate = useNavigate();
@@ -11,9 +11,6 @@ export const useRegisterMutation = () => {
     },
     onError: () => {
       navigate("/user/login");
-      // if (error) {
-      //   console.log(error);
-      // }
     },
   });
 };
