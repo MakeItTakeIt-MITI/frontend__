@@ -30,15 +30,7 @@ export const deleteAccount = async (id: number | null) => {
     }
 }
 
-export const userLogout = async () => {
-    try {
-        const response = await axiosUrl.post('/auth/logout/')
-        return response.data;
 
-    } catch (error) {
-        throw new Error
-    }
-}
 
 export const getUserData = async (userId: number | null) => {
     try {
