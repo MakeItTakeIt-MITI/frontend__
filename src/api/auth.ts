@@ -1,8 +1,8 @@
 import { FindEmailField } from "../user/FindMyEmailModal";
 import axiosUrl from "../utils/axios"
 
-export const kakaoAuthSMS = async (code) => {
-    const response = axiosUrl.get(`/auth/oauth/kakao/login/?code=${code}`)
+export const kakaoAuthSMS = async (data: string) => {
+    const response = axiosUrl.post("/auth/oauth/kakao/login/", data)
     console.log(response);
     return response
 }
