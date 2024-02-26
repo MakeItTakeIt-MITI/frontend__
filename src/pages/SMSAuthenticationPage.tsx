@@ -10,8 +10,8 @@ export const SMSAuthenticationPage = () => {
   const navigate = useNavigate();
   // const [error, setError] = useState(false);
 
+  const authentication_token = localStorage.getItem("authentication_token");
   useEffect(() => {
-    const authentication_token = localStorage.getItem("authentication_token");
     if (!authentication_token) {
       navigate("/");
     }
@@ -20,7 +20,8 @@ export const SMSAuthenticationPage = () => {
   const { register: registerCode, handleSubmit: handleRequestSms } =
     useForm<RequestCodeField>();
 
-  const { mutate: mutateVerifySms } = useVerifySmsMutation();
+  const { mutate: mutateVerifySms } =
+    useVerifySmsMutation(authentication_token);
   const { mutate: mutateRequestSms } = useRequestSmsCodeMutation();
 
   const onSubmitCode = (data: SMSAuth) => {

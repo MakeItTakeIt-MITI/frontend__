@@ -9,10 +9,11 @@ export const useRegisterMutation = () => {
     onSuccess: () => {
       navigate("/sms-authentication");
     },
-    onError: (error) => {
-      if (error) {
-        console.log(error);
-      }
+    onError: () => {
+      navigate("/user/login");
+      // if (error) {
+      //   console.log(error);
+      // }
     },
   });
 };
