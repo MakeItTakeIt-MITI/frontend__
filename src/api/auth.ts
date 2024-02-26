@@ -3,7 +3,7 @@ import { SMSAuth } from "../interface/authInterface";
 import { FindEmailField } from "../user/FindMyEmailModal";
 import axiosUrl from "../utils/axios"
 
-export const kakaoAuthSMS = async (data: KakaoLoginField) => {
+export const kakaoAuth = async (data: KakaoLoginField) => {
     const response = await axiosUrl.post("/auth/oauth/kakao/login/", data)
     return response.data
 }
