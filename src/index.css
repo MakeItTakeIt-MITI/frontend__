@@ -13,6 +13,10 @@
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
+li:hover {
+  text-decoration: underline;
+}
+
 /* mobile:h-[48px] tablet:w-[600px] tablet:h-[45px] mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:text-[15px] " */
 
 @layer components {
