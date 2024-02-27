@@ -1,4 +1,4 @@
-// import { useLogoutMutation } from "../../hooks/useLogoutMutation";
+import { useLogoutMutation } from "../../hooks/useLogoutMutation";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
 import { BrowserHeader } from "../header/BrowserHeader";
@@ -9,7 +9,7 @@ export interface HeaderField {
 }
 
 export const Header = () => {
-  // const { mutate: logoutMutation } = useLogoutMutation();
+  const { mutate: logoutMutation } = useLogoutMutation();
   const { logout } = useAuthStore();
   const navigate = useNavigate();
 

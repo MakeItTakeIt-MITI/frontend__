@@ -1,4 +1,3 @@
-import axios from "axios";
 import { KakaoLoginField } from "../components/forms/KakaoAuthHandler";
 import { SMSAuth } from "../interface/authInterface";
 import { LoginField, RegisterField } from "../interface/usersInterface";
@@ -19,21 +18,7 @@ export const userLogin = async (data: LoginField) => {
 
 export const userLogout = async () => {
     try {
-        const accessToken = localStorage.getItem("accessToken");
-        const refreshToken = localStorage.getItem("refreshToken");
-
-
-        if (!accessToken || !refreshToken) {
-            throw new Error("토큰이 없습니다.");
-        }
-
-        const headers = {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${accessToken}`,
-            'refresh': refreshToken
-        };
-
-        const response = await axios.post('https://api.makeittakeit.kr/auth/logout/', null, { headers });
+        const response = await axiosUrl.post('/auth/logout/');
         return response.data;
     } catch {
         throw new Error
