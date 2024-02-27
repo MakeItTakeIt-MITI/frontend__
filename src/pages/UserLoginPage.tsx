@@ -8,7 +8,7 @@ import useAuthStore from "../store/useAuthStore";
 import { useState } from "react";
 import { FindMyEmailModal } from "../user/FindMyEmailModal";
 
-export const UserLogin = () => {
+export const UserLoginPage = () => {
   const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
   const [findEmailModal, displayFindEmailModal] = useState(false);

@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/HomePage.tsx";
-import { UserLogin } from "./pages/UserLogin.tsx";
+import { UserLoginPage } from "./pages/UserLoginPage.tsx";
 import { UserSignup } from "./pages/UserSignup.tsx";
 import { GameHostContainer } from "./pages/GameHostContainer.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "login",
-            element: <UserLogin />,
+            element: <UserLoginPage />,
           },
           {
             path: "signup",
