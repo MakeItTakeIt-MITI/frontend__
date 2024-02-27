@@ -20,6 +20,7 @@ interface PasswordField {
 
 export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
   const [displayPassword, setDisplayPassword] = useState(false);
+  const [displayConfirmPassword, setDisplayConfirmPassword] = useState(false);
 
   const {
     register,
@@ -30,7 +31,9 @@ export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
     resolver: zodResolver(useUpdatePassSchema),
   });
 
-  const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
+  const handleViewMainPassword = () => setDisplayPassword(!displayPassword);
+  const handleViewSecondaryPassword = () =>
+    setDisplayConfirmPassword(!displayConfirmPassword);
 
   const handleChangePassword = (data: PasswordField) => {
     userEditPassword(id, data);
@@ -57,7 +60,7 @@ export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
         <button
           type="button"
           role="show-password-btn"
-          onClick={handleDisplayPassword}
+          onClick={handleViewMainPassword}
           className="absolute right-2 top-4 hover:cursor-pointer"
         >
           <img
@@ -69,13 +72,25 @@ export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
       </div>
       <div className="relative">
         <input
-          type={`${displayPassword ? "text" : "password"}`}
+          type={`${displayConfirmPassword ? "text" : "password"}`}
           id="password_check"
           role="input-password-confirm"
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           placeholder="확인 비밀번호를 입력해주세요."
           {...register("password_check")}
         />
+        <button
+          type="button"
+          role="show-password-btn"
+          onClick={handleViewSecondaryPassword}
+          className="absolute right-2 top-4 hover:cursor-pointer"
+        >
+          <img
+            src={`${displayConfirmPassword ? open : close}`}
+            alt="hide password"
+            className="w-[24px] cursor-pointer "
+          />
+        </button>
       </div>
 
       <button
