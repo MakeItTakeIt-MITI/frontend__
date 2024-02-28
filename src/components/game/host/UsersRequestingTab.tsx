@@ -1,10 +1,11 @@
 import { updateParticipationStatus } from "../../../api/gameHost";
+import { ParticipantActionsProps } from "../../../interface/gameInterface";
 
 export const UsersRequestingTab = ({
   refetch,
   participantsData,
   phoneFormatter,
-}) => {
+}: ParticipantActionsProps) => {
   const handleConfirmToGame = (userId: number) => {
     updateParticipationStatus(participantsData?.data.id, userId);
     refetch();

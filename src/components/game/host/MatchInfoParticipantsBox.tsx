@@ -2,17 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import rightArrow from "../../../assets/Chevron_Down_MD.svg";
 import { ParticipantCard } from "./ParticipantCard";
 import { useParticipatingUsersQuery } from "../../../hooks/useParticipatingUsersQuery";
-
-export interface ParticipantField {
-  id: number;
-  player_name: string;
-  player_phone: number;
-  player_height: number;
-  player_account_holder: string;
-  player_account_bank: string;
-  player_account_number: number;
-  participation_status: string;
-}
+import { ParticipantField } from "../../../interface/gameInterface";
 
 export const MatchInfoParticipantsBox = () => {
   const { id } = useParams();

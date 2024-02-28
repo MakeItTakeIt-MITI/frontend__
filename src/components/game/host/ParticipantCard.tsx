@@ -1,5 +1,5 @@
 import blankProfile from "../../../assets/blank_profile.png";
-import { ParticipantField } from "./MatchInfoParticipantsBox";
+import { ParticipantField } from "../../../interface/gameInterface";
 
 export interface ProfileCardProp {
   user: ParticipantField;

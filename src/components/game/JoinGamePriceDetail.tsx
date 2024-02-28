@@ -1,4 +1,6 @@
-export const JoinGamePriceDetail = ({ gameDetail }) => {
+import { GameDetailProp } from "../../interface/gameInterface";
+
+export const JoinGamePriceDetail = ({ gameDetail }: GameDetailProp) => {
   return (
     <div className="p-[16px] flex flex-col gap-4">
       <h4 className="font-bold">보증금 정보</h4>

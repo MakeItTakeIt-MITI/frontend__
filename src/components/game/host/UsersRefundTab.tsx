@@ -1,7 +1,9 @@
-import { UserRequestActionButton } from "./UserRequestActionButton";
-import { CopyBankInfoButton } from "../../../stories/UserRequestAction.stories";
+import { ParticipantActionsProps } from "../../../interface/gameInterface";
 
-export const UsersRefundTab = ({ participantsData, phoneFormatter }) => {
+export const UsersRefundTab = ({
+  participantsData,
+  phoneFormatter,
+}: ParticipantActionsProps) => {
   const handleCopyClipBoard = async (accNumber: string) => {
     try {
       await navigator.clipboard.writeText(accNumber);

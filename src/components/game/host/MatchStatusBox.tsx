@@ -1,9 +1,4 @@
-interface BoxProp {
-  titleOne: string;
-  titleTwo: string;
-  titleOneColor: string;
-  titleTwoColor: string;
-}
+import { BoxProp } from "../../../interface/gameInterface";
 
 export const MatchStatusBox = ({
   titleOne,

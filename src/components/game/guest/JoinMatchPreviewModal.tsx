@@ -1,23 +1,4 @@
-interface GameDetailProp {
-  gameDetail: {
-    data: {
-      title: string;
-      startdate: string;
-      starttime: string;
-      enddate: string;
-      endtime: string;
-      account_bank: string;
-      account_holder: string;
-      account_number: string;
-      fee: number;
-      court: {
-        address: string;
-        address_detail: string;
-      };
-    };
-  };
-  handleCloseModal: () => void;
-}
+import { GameDetailProp } from "../../../interface/gameInterface";
 
 export const JoinMatchPreviewModal = ({
   gameDetail,
