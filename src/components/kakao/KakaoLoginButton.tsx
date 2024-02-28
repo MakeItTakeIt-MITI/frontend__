@@ -1,14 +1,15 @@
 import kakaoMsgIcon from "../../assets/kakao_msg_icon.svg";
 
-export const KakaoLoginButton = () => {
+interface KakaoLoginProp {
+  children: string;
+}
+
+export const KakaoLoginButton = ({ children }: KakaoLoginProp) => {
   const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
   const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const kakaoLogin = () => {
-    // console.log(REST_API_KEY);
-    // const response = KAKAO_AUTH_URL;
-    // console.log(response);
     window.location.href = KAKAO_AUTH_URL;
   };
   return (
@@ -18,7 +19,7 @@ export const KakaoLoginButton = () => {
         onClick={kakaoLogin}
         role="kakao-login-btn"
       >
-        카카오로 3초만에 시작하기
+        {children}{" "}
       </button>
       <img
         src={kakaoMsgIcon}

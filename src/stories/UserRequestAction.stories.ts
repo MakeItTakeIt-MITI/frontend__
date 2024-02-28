@@ -15,16 +15,19 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const ApproveUserButton: Story = {
+export const RejectUserButton: Story = {
+
     args: {
         textOne: "참여 ",
         textTwo: "취소",
         backgroundColor: "#F95040",
+
     },
+
 };
 
 
-export const RejectUserButton: Story = {
+export const ApproveUserButton: Story = {
     args: {
         textOne: "참여 ",
         textTwo: "확정",

@@ -19,13 +19,23 @@ export const MyGamesTabFilterButton = ({
           }}
           className=" text-[14px] py-1 px-2 flex flex-col justify-around items-start bg-[#fff] absolute  right-1 w-[157px] h-[102px]"
         >
-          <button
+          {/* <button
             onClick={() => handleChangeTab("전체보기")}
             style={
               tabName === "전체보기" ? { fontWeight: 700 } : { fontWeight: 400 }
             }
           >
             전체보기
+          </button> */}
+          <button
+            onClick={() => handleChangeTab("호스트만 보기")}
+            style={
+              tabName === "호스트만 보기"
+                ? { fontWeight: 700 }
+                : { fontWeight: 400 }
+            }
+          >
+            호스트만 보기
           </button>
           <button
             onClick={() => handleChangeTab("게스트만 보기")}
@@ -36,16 +46,6 @@ export const MyGamesTabFilterButton = ({
             }
           >
             게스트만 보기
-          </button>
-          <button
-            onClick={() => handleChangeTab("호스트만 보기")}
-            style={
-              tabName === "호스트만 보기"
-                ? { fontWeight: 700 }
-                : { fontWeight: 400 }
-            }
-          >
-            호스트만 보기
           </button>
         </div>
       ) : null}

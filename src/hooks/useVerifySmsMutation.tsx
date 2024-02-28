@@ -1,14 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
-import { authenticationSMS } from "../api/auth";
-// import { useNavigate } from "react-router-dom";
+import { verifySignupSMS } from "../api/auth";
+import { SMSAuth } from "../interface/authInterface";
 
-export const useVerifySmsMutation = () => {
+export const useVerifySmsMutation = (auth_token: string | null) => {
   // const navigate = useNavigate();
   return useMutation({
-    mutationFn: authenticationSMS,
+    mutationFn: (data: SMSAuth) => verifySignupSMS(auth_token, data),
     onSuccess: () => {
       localStorage.removeItem("authentication_token");
-      // navigate("/login");
     },
   });
 };

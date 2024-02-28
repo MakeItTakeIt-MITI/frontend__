@@ -5,7 +5,7 @@ export const NavigateToPrevContainer = () => {
   const navigate = useNavigate();
 
   // const navigatePrev = () => navigate(-1);
-  const navigateHome = () => navigate("/");
+  const navigateHome = () => navigate(-1);
 
   return (
     <div className="">

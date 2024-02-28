@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { userSignup } from "../api/users";
 import { useNavigate } from "react-router-dom";
+import { userSignup } from "../api/auth";
 
 export const useRegisterMutation = () => {
   const navigate = useNavigate();
@@ -9,10 +9,8 @@ export const useRegisterMutation = () => {
     onSuccess: () => {
       navigate("/sms-authentication");
     },
-    onError: (error) => {
-      if (error) {
-        console.log(error);
-      }
+    onError: () => {
+      navigate("/user/login");
     },
   });
 };

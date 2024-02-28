@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { userLoginAuth } from "../api/users";
 import useAuthStore from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useUserDataStore from "../store/useUserDataStore";
+import { userLogin } from "../api/auth";
 
 interface ErrorMsgProps {
   setErrorMessage: (arg: string) => void;
@@ -15,7 +15,7 @@ export const useLoginMutation = ({ setErrorMessage }: ErrorMsgProps) => {
   const { setUserId } = useUserDataStore();
 
   return useMutation({
-    mutationFn: userLoginAuth,
+    mutationFn: userLogin,
     onSuccess: (data) => {
       if (data?.status_code === 200) {
         const accessToken = data.data.token.access;

@@ -1,115 +1,54 @@
 
-import { LoginField, RegisterField, RequestCodeField, UserEditField } from "../interface/usersInterface";
+import { NicknameField, PasswordField, RequestCodeField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
-export const userLoginAuth = async (data: LoginField) => {
-    try {
-        const response = await axiosUrl.post('/users/login/', data)
-        if (response.data.status_code === 200) {
-            return response.data
-        }
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
-}
 
-
-export const userKakaoLogin = async () => {
-    try {
-        const response = await axiosUrl.get("/users/oauth-login-url/?provider=kakao");
-        const url = response.data.data.login_url
-        console.log(response);
-        if (response.data.status_code === 200) {
-            window.location.href = url
-
-        }
-
-        console.log(response);
-
-    } catch (error) {
-        console.log(error);
-    }
-
-}
-
-export const userSignup = async (data: RegisterField) => {
-    try {
-        const response = await axiosUrl.post('/users/', data)
-        if (response.data.status_code === 201) {
-            console.log(response.data);
-            localStorage.setItem("authentication_token", response.data.data.authentication_token)
-            localStorage.setItem("nickname", response.data.data.nickname)
-            return response.data
-        }
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-
-export const userEditNickname = async (id: number | null, data: UserEditField) => {
+export const userUpdateNickname = async (id: number | null, data: NicknameField) => {
     try {
         const response = await axiosUrl.patch(`/users/${id}/`, data)
-        console.log(response);
         return response.data
     } catch (error) {
-        console.error(error)
+        throw new Error
     }
 }
 
-export const userEditPassword = async (id: number | null, data: UserEditField) => {
+export const userChangePassword = async (id: number | null, data: PasswordField) => {
     try {
         const response = await axiosUrl.patch(`/users/${id}/`, data)
-        console.log(response);
         return response.data
     } catch (error) {
-        console.error(error)
+        throw new Error
     }
 }
 
 export const deleteAccount = async (id: number | null) => {
     try {
         const response = await axiosUrl.delete(`/users/${id}/`)
-        console.log(response.data);
         return response.data
     } catch (error) {
-        console.error(error)
+        throw new Error
     }
 }
 
-export const userLogout = async () => {
-    try {
-        const response = await axiosUrl.post('/users/logout/')
-        console.log(response.data);
-        return response.data;
 
-    } catch (error) {
-        console.error(error)
-    }
-}
 
 export const getUserData = async (userId: number | null) => {
     try {
         const response = await axiosUrl.get(`/users/${userId}/`)
-        // console.log(response.data);
         return response.data
     } catch (error) {
-        console.error(error)
-        throw error
+        throw new Error
     }
 }
 
 export const requestSmsCode = async (data: RequestCodeField) => {
     try {
-        const response = await axiosUrl.post('/users/send-sms/', data)
+        const response = await axiosUrl.post('/auth/send-sms/', data)
         localStorage.removeItem("authentication_token");
         localStorage.setItem("authentication_token", response.data.data.authentication_token)
-        console.log(response.data);
         return response.data
     } catch (error) {
-        console.error(error)
-        throw error
+        throw new Error
+
     }
 }
