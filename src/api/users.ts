@@ -1,9 +1,9 @@
 
-import { RequestCodeField, UserEditField } from "../interface/usersInterface";
+import { NicknameField, RequestCodeField, UserEditField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
 
-export const userEditNickname = async (id: number | null, data: UserEditField) => {
+export const userUpdateNickname = async (id: number | null, data: NicknameField) => {
     try {
         const response = await axiosUrl.patch(`/users/${id}/`, data)
         return response.data

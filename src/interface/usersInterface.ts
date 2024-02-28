@@ -48,3 +48,13 @@ export interface RequestCodeField {
     email: string;
     password: string;
 }
+
+export interface NicknameProps {
+    id: number | null;
+    data: { data: { nickname: string } };
+}
+
+export interface NicknameField {
+    id: number | null;
+    nickname: string;
+}

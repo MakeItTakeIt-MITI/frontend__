@@ -5,12 +5,12 @@ import { NicknameEditForm } from "../forms/NicknameEditForm";
 import { PasswordUpdateForm } from "../forms/PasswordUpdateForm";
 import { deleteAccount } from "../../api/users";
 import { DeleteAccountButton } from "./DeleteAccountButton";
+import { LoadingPage } from "../../pages/LoadingPage";
 
 export const EditProfile = () => {
   const { userId } = useUserDataStore();
-
   const navigate = useNavigate();
-  const { data, isLoading, refetch, isError } = useUserInfoQuery(userId);
+  const { data, isPending, refetch, isError } = useUserInfoQuery(userId);
 
   const handleDeleteAccount = () => {
     if (window.confirm("정말 계정을 삭제하기겠습니까?")) {
@@ -25,8 +25,8 @@ export const EditProfile = () => {
     }
   };
 
-  if (isLoading) {
-    return <p>Error..</p>;
+  if (isPending) {
+    return <LoadingPage />;
   }
   if (isError) {
     return <p>Error..</p>;
@@ -34,11 +34,8 @@ export const EditProfile = () => {
 
   return (
     <div>
-      {/* <NavigateToPrevContainer /> */}
-      {/* <hr className="  w-full tablet:hidden mobile:block" /> */}
-      <NicknameEditForm id={userId} refetch={refetch} data={data} />
+      <NicknameEditForm id={userId} data={data} />
       <PasswordUpdateForm id={userId} refetch={refetch} />
-      {/* <hr className="mobile:block tablet:hidden w-full" /> */}
       <DeleteAccountButton handleDeleteAccount={handleDeleteAccount} />
     </div>
   );
