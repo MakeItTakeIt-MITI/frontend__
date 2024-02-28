@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/HomePage.tsx";
-import { UserLogin } from "./pages/UserLogin.tsx";
+import { UserLoginPage } from "./pages/UserLoginPage.tsx";
 import { UserSignup } from "./pages/UserSignup.tsx";
 import { GameHostContainer } from "./pages/GameHostContainer.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
@@ -15,11 +15,12 @@ import { SMSAuthenticationPage } from "./pages/SMSAuthenticationPage.tsx";
 import { UserMyPage } from "./pages/UserMyPage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { KakaoAuthHandler } from "./components/auth/KakaoAuthHandler.tsx";
+import { KakaoAuthHandler } from "./components/forms/KakaoAuthHandler.tsx";
 import { UserGamesListPage } from "./pages/UserGamesListPage.tsx";
 import { PrivateRoute } from "./pages/PrivateRoute.tsx";
 import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
 import { ManageParticipantsPage } from "./pages/games/ManageParticipantsPage.tsx";
+import { FindUserInfoPage } from "./pages/user/FindUserInfoPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "login",
-            element: <UserLogin />,
+            element: <UserLoginPage />,
           },
           {
             path: "signup",
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/sms-authentication",
         element: <SMSAuthenticationPage />,
+      },
+      {
+        path: "/find-user-info",
+        element: <FindUserInfoPage />,
       },
       {
         element: <PrivateRoute />,

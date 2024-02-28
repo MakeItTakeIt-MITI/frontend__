@@ -15,18 +15,13 @@ export const MobileViewGameList = ({
   const { data } = useGetGamesDataQuery(formatDate);
 
   return (
-    <div className="tablet:hidden  flex flex-col  gap-4  flex-nowrap  px-2 w-full">
+    <div className="tablet:hidden flex flex-col  gap-4  flex-nowrap  px-2 w-full">
       {data?.data.map((game: GameDetailField) => {
         return (
-          // <Link
-          //   to={`/games/detail/${game.id}`}
-          //   key={game.id}
-          //   className="  border border-b-gray-200  rounded-xl "
-          // >
           <div
             onClick={() => handleSearchAddress(game?.court.address)}
             key={game.id}
-            className="  border border-b-gray-200  rounded-xl "
+            className="  border border-b-gray-200  rounded-xl  hover:cursor-pointer  "
           >
             <div className=" hidden ">
               <img src={cardImg} alt="game card" />

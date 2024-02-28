@@ -1,11 +1,4 @@
-interface ModalInviteProp {
-  hostName: string;
-  titleContextOne: string;
-  titleContextTwo: string;
-  mainContext: string;
-  buttonContextOne: string;
-  buttonContextTwo: string;
-}
+import { ModalInviteProp } from "../../../interface/gameInterface";
 
 export const ModalUserInvitation = ({
   hostName,

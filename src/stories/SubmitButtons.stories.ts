@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { SubmitButton } from "../common/SubmitButton";
+import { SubmitButton } from "../components/common/SubmitButtons";
 
 const meta = {
-  title: "Submit Buttons",
+  title: "Buttons",
   component: SubmitButton,
   tags: ["autodocs"],
   parameters: {
-    layout: "fullscreen",
+    layout: "centered",
   },
 } satisfies Meta<typeof SubmitButton>;
 
@@ -14,29 +14,23 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const HostGameButton: Story = {
+export const LoginFormButton: Story = {
   args: {
-    errors: false,
-    children: "매치 생성하기",
-  },
-};
-export const JoinGameButton: Story = {
-  args: {
-    errors: false,
-    children: "매치 참여하기",
+    type: "submit",
+    role: "user-login-btn",
+    children: "로그인하기",
+    disabled: false
   },
 };
 
-export const UserLoginButton: Story = {
-  args: {
-    errors: false,
-    children: "로그인 하기",
-  },
-};
 
-export const UserRegisterButton: Story = {
+
+
+export const RegisterFormButton: Story = {
   args: {
-    errors: false,
+    type: "submit",
+    role: "submit",
     children: "가입하기",
+    disabled: false
   },
 };
