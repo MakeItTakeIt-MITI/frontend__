@@ -5,3 +5,7 @@ export interface SMSAuth {
 export interface EmailAuth {
     email: string;
 }
+
+export interface ResetPassField {
+    data: EmailAuth;
+}
