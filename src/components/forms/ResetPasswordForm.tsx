@@ -37,14 +37,15 @@ export const ResetPasswordForm = () => {
           {data?.status_code === 200 ? "다시 요청" : "전송 요청"}
         </button>
       </form>
-      <div className="text-center">
-        <span className="text-green-400 ">
-          {isSuccess && "해당 이메일로 메일이 전송 되었습니다."}
-        </span>
-        <span className="text-red-500">
-          {isError && "일치 사용자 정보 조회 실패"}
-        </span>
-      </div>
+
+      {isSuccess && (
+        <p className="text-green-500 text-center">
+          해당 이메일로 메일이 전송 되었습니다.
+        </p>
+      )}
+      {isError && (
+        <p className="text-red-500 text-center">일치 사용자 정보 조회 실패</p>
+      )}
     </>
   );
 };

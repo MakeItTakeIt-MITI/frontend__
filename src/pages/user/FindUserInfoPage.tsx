@@ -1,5 +1,5 @@
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
-import { EmailAuthCodeForm } from "../../components/forms/EmailAuthCodeForm";
+import { FindEmailAuthCode } from "../../components/forms/EmailAuthCodeForm";
 import { FindEmailForm } from "../../components/forms/FindEmailForm";
 import { ResetPasswordForm } from "../../components/forms/ResetPasswordForm";
 
@@ -16,7 +16,7 @@ export const FindUserInfoPage = () => {
               휴대폰 인증 후 이메일을 안내해 드립니다.
             </h2>
             <FindEmailForm />
-            <EmailAuthCodeForm />
+            <FindEmailAuthCode />
           </div>
 
           <div className="flex flex-col gap-6 ">

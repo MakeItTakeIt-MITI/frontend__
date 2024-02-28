@@ -2,10 +2,15 @@ import { useForm } from "react-hook-form";
 import { SMSAuth } from "../../interface/authInterface";
 import { useVerifySmsMutation } from "../../hooks/useVerifySmsMutation";
 
-export const EmailAuthCodeForm = () => {
+export const FindEmailAuthCode = () => {
   const { register, handleSubmit, setValue } = useForm<SMSAuth>({});
   const auth_token = localStorage.getItem("authentication_token");
-  const { mutate: verifyCode, data } = useVerifySmsMutation(auth_token);
+  const {
+    mutate: verifyCode,
+    data,
+    isSuccess,
+    isError,
+  } = useVerifySmsMutation(auth_token);
 
   const onSubmit = (data: SMSAuth) => {
     verifyCode(data, {
@@ -14,6 +19,8 @@ export const EmailAuthCodeForm = () => {
       },
     });
   };
+
+  console.log(data);
 
   return (
     <>
@@ -35,14 +42,10 @@ export const EmailAuthCodeForm = () => {
           {data?.status_code === 200 ? "인증 완료" : "인증 하기"}
         </button>
       </form>
-      <p className="text-green-400 text-center">
-        {" "}
-        {data?.status_code === 200 && data?.data.email}
-      </p>
-      <p className="text-red-500 text-center">
-        {" "}
-        {data?.status_code === 404 && "일치 사용자 정보 조회 실패"}
-      </p>
+      {isSuccess && (
+        <p className="text-green-500 text-center">{data?.data.email}입니다.</p>
+      )}
+      {isError && <p className="text-red-500 text-center">인증 실패</p>}
     </>
   );
 };
