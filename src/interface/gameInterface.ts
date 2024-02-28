@@ -62,7 +62,7 @@ export interface GameDetailProp {
             };
         };
     };
-    handleCloseModal: () => void;
+    handleCloseModal?: () => void;
 }
 
 export interface ParticipantsField {
@@ -117,4 +117,61 @@ export interface RequestButtonProp {
     handleConfirmToGame?: (userId: number) => void;
     handleCopyClipBoard?: (arg: string) => void;
     userId: number;
+}
+
+export interface GameIfno {
+    id: number;
+    player_name: string;
+    player_phone: string;
+    player_height: number;
+    player_account_holder: string;
+    player_account_bank: string;
+    player_account_number: string;
+    participation_status: string;
+}
+
+export interface GameDetailField {
+
+    game_status: string;
+    title: string;
+    startdate: string;
+    starttime: string;
+    enddate: string;
+    endtime: string;
+    min_invitation: number;
+    max_invitation: number;
+    info: string;
+    fee: number;
+    account_bank: string;
+    account_holder: string;
+    account_number: string;
+    created_at: string;
+    modified_at: string;
+    confimed_participations: number;
+}
+
+export interface HostField {
+    email: string;
+    nickname: string;
+    phone: string;
+}
+
+export interface CourtField {
+    id: number;
+    address: string;
+    address_detail: string;
+    name: string;
+    info: string;
+}
+
+export interface ParticipantsField {
+    id: number;
+    host: HostField[];
+    court: CourtField[];
+    data: GameDetailField;
+
+}
+
+export interface GameDetailProp {
+    gameData: ParticipantsField;
 }

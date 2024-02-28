@@ -15,6 +15,7 @@ export const MatchDetailsPage = () => {
   const gameIdParam = Number(id);
   const { userId } = useUserDataStore();
   const { data: gameDetail, isLoading } = useGetGameDetailQuery(gameIdParam);
+
   const { data: userData } = useUserInfoQuery(userId);
   const userEmail = userData?.data.email;
   const hostEmail = gameDetail?.data.host.email;
@@ -39,7 +40,9 @@ export const MatchDetailsPage = () => {
             <div className="tablet:flex tablet:flex-col tablet:gap-1 tablet:items-start">
               <span className="mobile:text-[11px] tablet:text-[14px] text-[#4065F6] bg-[#C1e1ff] p-[3px] rounded-sm font-[500]">
                 {/* 2명 모집 */}
-                {gameDetail?.data.max_invitation}명 모집
+                {gameDetail?.data.max_invitation -
+                  gameDetail?.data.confimed_participations}
+                명 모집
               </span>
               <p className="font-bold text-[#222] tablet:text-[20px]">
                 {gameDetail?.data.title}
@@ -69,7 +72,7 @@ export const MatchDetailsPage = () => {
                   alt="phone icon"
                   className="tablet:w-[20px]"
                 />
-                <p>010-0000-0000</p>
+                <p>{gameDetail?.data.host.phone}</p>
               </div>
               <div className="flex gap-1">
                 <img

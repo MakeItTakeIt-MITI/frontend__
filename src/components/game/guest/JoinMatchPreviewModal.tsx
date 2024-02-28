@@ -1,9 +1,17 @@
-import { GameDetailProp } from "../../../interface/gameInterface";
+import { useParams } from "react-router-dom";
+import { useGetGameDetailQuery } from "../../../hooks/useGetGameDetailQuery";
+
+interface JoinMatchModalProp {
+  handleCloseModal: () => void;
+}
 
 export const JoinMatchPreviewModal = ({
-  gameDetail,
   handleCloseModal,
-}: GameDetailProp) => {
+}: JoinMatchModalProp) => {
+  const { id } = useParams();
+  const gameIdParam = Number(id);
+  const { data: gameDetail } = useGetGameDetailQuery(gameIdParam);
+
   return (
     <div className=" tablet:px-[16rem]  z-[99] fixed top-0 bottom-0 right-0 left-0 w-screen h-screen flex items-center justify-center bg-[rgba(0,0,0,0.6)] ">
       <div className="z-[9998] flex flex-col gap-2 bg-white h-[380px] w-full mx-[32px]  rounded-lg">
