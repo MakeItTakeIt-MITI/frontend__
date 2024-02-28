@@ -5,19 +5,16 @@ import backArrow from "../assets/Chevron_Left.png";
 
 import { KakaoLoginButton } from "../components/kakao/KakaoLoginButton";
 import useAuthStore from "../store/useAuthStore";
-import { useState } from "react";
-import { FindMyEmailModal } from "../user/FindMyEmailModal";
 
 export const UserLoginPage = () => {
   const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
-  const [findEmailModal, displayFindEmailModal] = useState(false);
 
   const navigatePrev = () => navigate(-1);
   const navigateHome = () => navigate("/");
 
   return (
-    <div className="tablet:p-10 mobile:flex mobile:flex-col mobile:justify-between h-screen pb-4">
+    <div className="tablet:p-10 mobile:flex mobile:flex-col mobile:justify-between pb-4">
       <div className="flex flex-col gap-8">
         <div>
           <button
@@ -36,29 +33,32 @@ export const UserLoginPage = () => {
           <LoginForm />
           <p className="text-center text-[#8C8C8C] text-[12px]">또는</p>
           <KakaoLoginButton children="카카오로 3초만에 시작하기" />
-          <div className="flex justify-center  gap-4 text-[#585858] text-[14px]">
-            <p className="">아직 회원이 아니신가요? </p>
-            <Link
-              role="to-signup"
-              to="/user/signup"
-              className="text-[#4065F6] hover:font-bold  "
-            >
-              회원가입하기
-            </Link>
+          <div className="flex flex-col gap-2">
+            <div className="flex justify-center  gap-4 text-[#585858] text-[14px]">
+              <p className="">아직 회원이 아니신가요? </p>
+              <Link
+                role="to-signup"
+                to="/user/signup"
+                className="text-[#4065F6] hover:font-bold  "
+              >
+                회원가입하기
+              </Link>
+            </div>
+            <div className="  flex  justify-center  gap-4 text-[#8c8c8c] text-[13px]">
+              <button onClick={() => alert("not available")}>고객센터</button>
+              <p>|</p>
+              <Link to="/find-user-info">
+                <button>ID / PW를 잊으셨나요?</button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-      <div className="  flex  justify-center  gap-4 text-[#8c8c8c] text-[13px]">
-        <button>고객센터</button>
-        <p>|</p>
-        <button onClick={() => displayFindEmailModal(true)}>
-          ID / PW를 잊으셨나요?
-        </button>
-      </div>
-      <FindMyEmailModal
+
+      {/* <FindMyEmailModal
         findEmailModal={findEmailModal}
         displayFindEmailModal={displayFindEmailModal}
-      />
+      /> */}
     </div>
   );
 };

@@ -20,6 +20,7 @@ import { UserGamesListPage } from "./pages/UserGamesListPage.tsx";
 import { PrivateRoute } from "./pages/PrivateRoute.tsx";
 import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
 import { ManageParticipantsPage } from "./pages/games/ManageParticipantsPage.tsx";
+import { FindUserInfoPage } from "./pages/user/FindUserInfoPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/sms-authentication",
         element: <SMSAuthenticationPage />,
+      },
+      {
+        path: "/find-user-info",
+        element: <FindUserInfoPage />,
       },
       {
         element: <PrivateRoute />,
