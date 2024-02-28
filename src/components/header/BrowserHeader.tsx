@@ -9,7 +9,7 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
   const { userId } = useUserDataStore();
 
   return (
-    <nav className="z-[999] mobile:hidden tablet:flex tablet:h-[3.75rem] items-center  justify-between max-w-[90rem] w-full px-[13rem] mx-auto">
+    <nav className="z-[999] mobile:hidden tablet:flex tablet:h-[3.75rem] items-center  justify-between max-w-[90rem] w-full laptop:px-[13rem] tablet:px-[2rem] mx-auto">
       <div className="flex gap-4 items-center">
         <Link to="/">
           <img src={mitiLogo} alt="miti logo" />

@@ -30,7 +30,7 @@ export const ManageParticipantsPage = () => {
   }
 
   return (
-    <div className="h-screen">
+    <div className="h-screen ">
       <div className="mobile:block tablet:hidden">
         <button role="go-prev-button" className=" p-4" onClick={navigateHome}>
           <img src={backArrow} alt="back arrow" className="w-6" />
@@ -42,7 +42,7 @@ export const ManageParticipantsPage = () => {
         <hr className="mobile:block tablet:hidden w-full" />
       </div>
 
-      <div className="flex flex-col gap-4 w-full tablet:px-[13rem] tablet:max-w-[90rem]  tablet:mb-0 mx-auto mobile:mb-[4rem] py-3  ">
+      <div className="flex flex-col gap-4 w-full laptop:px-[13rem] tablet:px-[2rem] tablet:max-w-[90rem]  tablet:mb-0 mx-auto mobile:mb-[4rem] py-3  ">
         {/* <hr className="mobile:hidden tablet:block w-full" /> */}
         <h4 className="font-bold text-2xl text-[#222] mobile:hidden tablet:block">
           나의 매치 스케줄
