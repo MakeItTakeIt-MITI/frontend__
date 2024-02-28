@@ -6,17 +6,10 @@ import { useState } from "react";
 
 import close from "../../assets/clarity_eye-hide-line.svg";
 import open from "../../assets/clarity_eye-show-line.svg";
-
-interface PasswordChangeProps {
-  id: number | null;
-  refetch: () => void;
-}
-
-interface PasswordField {
-  id: number | null;
-  password: string;
-  password_check: string;
-}
+import {
+  PasswordChangeProps,
+  PasswordField,
+} from "../../interface/usersInterface";
 
 export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
   const [displayPassword, setDisplayPassword] = useState(false);

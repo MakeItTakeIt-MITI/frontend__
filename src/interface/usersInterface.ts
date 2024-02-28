@@ -58,3 +58,14 @@ export interface NicknameField {
     id: number | null;
     nickname: string;
 }
+
+export interface PasswordChangeProps {
+    id: number | null;
+    refetch: () => void;
+}
+
+export interface PasswordField {
+    id: number | null;
+    password: string;
+    password_check: string;
+}
