@@ -1,7 +1,7 @@
 import close from "../assets/x_button.svg";
+import { FindEmailAuthCode } from "../components/forms/EmailAuthCodeForm";
 import { useFindEmailMutation } from "../hooks/useFindEmailMutation";
 import { useForm } from "react-hook-form";
-import { InputEmailAuthenForm } from "../components/forms/EmailAuthCodeForm";
 
 export interface FindEmailField {
   phone: string;
@@ -12,10 +12,7 @@ interface EmailModalProp {
   displayFindEmailModal: (arg: boolean) => void;
 }
 
-export const FindMyEmailModal = ({
-  findEmailModal,
-  displayFindEmailModal,
-}: EmailModalProp) => {
+export const FindMyEmailModal = ({ displayFindEmailModal }: EmailModalProp) => {
   const { mutate, data: userData } = useFindEmailMutation();
   if (userData) {
     console.log(userData);
@@ -67,9 +64,7 @@ export const FindMyEmailModal = ({
               이메일 찾기
             </button>
           </form>
-          {userData?.status_code === 201 && (
-            <InputEmailAuthenForm handleCloseModal={handleCloseModal} />
-          )}
+          {userData?.status_code === 201 && <FindEmailAuthCode />}
         </div>
       </div>
     </div>

@@ -30,6 +30,10 @@ export interface ParticipantActionProps {
     participantsData: ParticipantsField;
     phoneFormatter: (arg: string) => string;
 }
+export interface RefundActionsProp {
+    participantsData: ParticipantsField;
+    phoneFormatter: (arg: string) => string;
+}
 
 export interface RemoveParticipantProp {
     handleRemoveFromGame: (arg: number) => void;
