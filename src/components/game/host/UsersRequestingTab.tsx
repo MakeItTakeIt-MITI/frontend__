@@ -1,4 +1,4 @@
-import { updateParticipationStatus } from "../../../api/gameHost";
+import { useConfirmParticipantMutation } from "../../../hooks/useUpdateParticipantStatusMutation";
 import { ParticipantActionProps } from "../../../interface/participant_types";
 
 export const UsersRequestingTab = ({
@@ -6,10 +6,22 @@ export const UsersRequestingTab = ({
   participantsData,
   phoneFormatter,
 }: ParticipantActionProps) => {
+  const gameId = participantsData?.data.id;
+
+  const { mutate: approveMutate, isError } =
+    useConfirmParticipantMutation(gameId);
+
   const handleConfirmToGame = (userId: number) => {
-    updateParticipationStatus(participantsData?.data.id, userId);
-    refetch();
+    approveMutate(userId, {
+      onSuccess: () => {
+        refetch();
+      },
+    });
   };
+
+  if (isError) {
+    console.log("Error..");
+  }
 
   return (
     <>

@@ -1,3 +1,8 @@
+
+export interface UpdatePartcipationProps {
+    gameId: number;
+    userId: number | null;
+}
 export interface PlayerInfo {
     id: number;
     player_name: string;
@@ -15,7 +20,8 @@ export interface ParticipantsField {
         id: number;
         confirmed: PlayerInfo[];
         cancelled: PlayerInfo[];
-        requested: PlayerInfo[]
+        requested: PlayerInfo[];
+        refund_requested: PlayerInfo[];
     }
 }
 

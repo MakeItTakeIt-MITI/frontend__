@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { cancelParticipationStatus } from "../../../api/gameHost";
+
 import { ModalRemoveUserFromMatch } from "../../modal_box/ModalRemoveUserFromMatch";
 
 import { ParticipantActionProps } from "../../../interface/participant_types";
+import { useRejectParticipantMutation } from "../../../hooks/useUpdateParticipantStatusMutation";
 
 export const UsersConfirmedTab = ({
   refetch,
@@ -13,13 +14,22 @@ export const UsersConfirmedTab = ({
   const handleShowModal = () => {
     setRemoveUserModal(true);
   };
+  const gameId = participantsData?.data.id;
+  const { mutate: removeMutation, isError } =
+    useRejectParticipantMutation(gameId);
 
-  const handleRemoveFromGame = (userId: number) => {
-    const participatingUserId = participantsData?.data.id;
-    cancelParticipationStatus(participatingUserId, userId);
-    refetch();
-    setRemoveUserModal(false);
+  const handleRemoveFromGame = (participantId: number) => {
+    removeMutation(participantId, {
+      onSuccess: () => {
+        refetch();
+        setRemoveUserModal(false);
+      },
+    });
   };
+
+  if (isError) {
+    console.log("Error");
+  }
 
   return (
     <>
