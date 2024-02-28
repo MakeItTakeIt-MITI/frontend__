@@ -1,9 +1,9 @@
-import { ParticipantActionsProps } from "../../../interface/gameInterface";
+import { ParticipantActionProps } from "../../../interface/participant_types";
 
 export const UsersRefundTab = ({
   participantsData,
   phoneFormatter,
-}: ParticipantActionsProps) => {
+}: ParticipantActionProps) => {
   const handleCopyClipBoard = async (accNumber: string) => {
     try {
       await navigator.clipboard.writeText(accNumber);
