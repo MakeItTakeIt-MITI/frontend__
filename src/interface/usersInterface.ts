@@ -61,7 +61,7 @@ export interface NicknameField {
 
 export interface PasswordChangeProps {
     id: number | null;
-    refetch: () => void;
+
 }
 
 export interface PasswordField {

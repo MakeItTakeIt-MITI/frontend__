@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userEditPassword } from "../../api/users";
 import { useUpdatePassSchema } from "../../modals/useUpdatePassSchema";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -10,14 +9,15 @@ import {
   PasswordChangeProps,
   PasswordField,
 } from "../../interface/usersInterface";
+import { usePasswordChangeMutation } from "../../hooks/usePasswordChangeMutation";
 
-export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
+export const PasswordEditForm = ({ id }: PasswordChangeProps) => {
   const [displayPassword, setDisplayPassword] = useState(false);
   const [displayConfirmPassword, setDisplayConfirmPassword] = useState(false);
+  const { mutate: mutatePassword, isError } = usePasswordChangeMutation(id);
 
   const {
     register,
-    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<PasswordField>({
@@ -29,9 +29,9 @@ export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
     setDisplayConfirmPassword(!displayConfirmPassword);
 
   const handleChangePassword = (data: PasswordField) => {
-    userEditPassword(id, data);
-    reset();
-    refetch();
+    mutatePassword(data);
+    alert("비밀번호가 변경되었습니다.");
+    window.location.reload();
   };
 
   return (
@@ -92,6 +92,11 @@ export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
       >
         비밀번호 수정
       </button>
+      {isError && (
+        <p className="text-center text-red-400 font-bold text-sm">
+          비밀번호 변경에 실패했습니다.
+        </p>
+      )}
       {errors.password && (
         <p className="text-center text-red-400 font-bold text-sm">
           {errors.password.message}

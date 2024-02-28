@@ -1,5 +1,5 @@
 
-import { NicknameField, RequestCodeField, UserEditField } from "../interface/usersInterface";
+import { NicknameField, PasswordField, RequestCodeField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
 
@@ -12,7 +12,7 @@ export const userUpdateNickname = async (id: number | null, data: NicknameField)
     }
 }
 
-export const userEditPassword = async (id: number | null, data: UserEditField) => {
+export const userChangePassword = async (id: number | null, data: PasswordField) => {
     try {
         const response = await axiosUrl.patch(`/users/${id}/`, data)
         return response.data

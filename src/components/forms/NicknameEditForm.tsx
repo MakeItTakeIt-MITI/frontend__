@@ -14,11 +14,7 @@ export const NicknameEditForm = ({ id, data }: NicknameProps) => {
     resolver: zodResolver(useNicknameSchema),
   });
 
-  const {
-    mutate: mutateNickname,
-    isError,
-    isSuccess,
-  } = useNicknameChangeMutation(id);
+  const { mutate: mutateNickname, isError } = useNicknameChangeMutation(id);
 
   const handleChangeNickname = (data: NicknameField) => {
     mutateNickname(data);
@@ -48,11 +44,7 @@ export const NicknameEditForm = ({ id, data }: NicknameProps) => {
           수정
         </button>
       </div>
-      {isSuccess && (
-        <p className="text-center text-green-500 font-bold text-sm">
-          닉네임이 변경되었습니다.
-        </p>
-      )}
+
       {isError && (
         <p className="text-center text-red-400 font-bold text-sm">
           닉네임 변경에 실패했습니다.
