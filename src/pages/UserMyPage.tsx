@@ -17,7 +17,7 @@ export const UserMyPage = () => {
   }
 
   return (
-    <div className=" w-full tablet:max-w-[90rem] tablet:px-[13rem] tablet:mb-0 mx-auto  mobile:mb-[4rem] py-3">
+    <div className=" w-full tablet:max-w-[90rem] laptop:px-[13rem] tablet:px-[2rem] tablet:mb-0 mx-auto  mobile:mb-[4rem] py-3">
       {/* // <div className=" mobile:w-full mx-auto h-full "> */}
       {/* FAQ  */}
       {/* 프로필 수정 */}
