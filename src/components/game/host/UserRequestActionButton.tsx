@@ -1,24 +1,15 @@
-interface RequestButtonProp {
-  textOne: string;
-  textTwo: string;
-  backgroundColor: string;
-  handleRemoveFromGame?: (userId: number) => void;
-  handleConfirmToGame?: (userId: number) => void;
-  handleCopyClipBoard?: (arg: string) => void;
-  userId: number;
-}
+import { RequestButtonProp } from "../../../interface/gameInterface";
 
 export const UserRequestActionButton = ({
   textOne,
   textTwo,
   backgroundColor,
-  handleRemoveFromGame,
-  handleCopyClipBoard,
+
   userId,
 }: RequestButtonProp) => {
   const handleConfirmToGame = (userId: number) => {
-    updateParticipationStatus(participantsData?.data.id, userId);
-    refetch();
+    // updateParticipationStatus(participantsData?.data.id, userId);
+    console.log(userId);
   };
 
   return (

@@ -1,6 +1,5 @@
 import { KakaoMap } from "../../kakao/KakaoMap";
 import { BrowserGameList } from "./BrowserGameList";
-import { DateSelectorBox } from "../DesktopViewDatesList";
 import { SectionTitle } from "../SectionTitle";
 
 export const BrowserHomeView = () => {
@@ -11,7 +10,6 @@ export const BrowserHomeView = () => {
       </div>
       <div className="flex justify-between mt-6">
         <div className="flex flex-col">
-          <DateSelectorBox />
           <BrowserGameList />
         </div>
         <KakaoMap />

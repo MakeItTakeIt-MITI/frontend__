@@ -8,6 +8,8 @@ import alertFail from "../../assets/alert_failure.svg";
 import { useState } from "react";
 import { useRegisterMutation } from "../../hooks/useRegisterMutation";
 import { useUserValidationMutation } from "../../hooks/useUserValidationMutation";
+import { SubmitButton } from "../common/SubmitButtons";
+import { ValidateInputButton } from "../common/ValidationButtons";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -56,7 +58,7 @@ export const SignupForm = () => {
           이메일
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="email"
           id="email"
           role="input-email"
@@ -67,21 +69,14 @@ export const SignupForm = () => {
           })}
         />
 
-        <button
-          onClick={
+        <ValidateInputButton
+          validation={
             !validEmail ? handleValidateEmail : () => setValidEmail(false)
           }
-          type="button"
-          role="validate-email"
-          style={
-            !validEmail
-              ? { backgroundColor: "#4065f6" }
-              : { backgroundColor: "#E8E8E8" }
-          }
-          className="absolute right-2 bottom-2.5 text-[14px] text-white w-[81px] h-[36px] rounded-[8px]"
-        >
-          {!validEmail ? "중복확인" : "수정하기"}
-        </button>
+          isValid={validEmail}
+          validateFunction={handleValidateEmail}
+          role={"validate-email"}
+        />
       </div>
       {errors.email?.message && (
         <p className=" text-red-500">{errors.email?.message}</p>
@@ -108,7 +103,7 @@ export const SignupForm = () => {
           비빌번호
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="password"
           placeholder="비밀번호를 입력해주세요."
           id="password"
@@ -127,7 +122,7 @@ export const SignupForm = () => {
           비빌번호 확인
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="password"
           placeholder="비밀번호를 한번 더 입력해주세요."
           id="password_check"
@@ -145,7 +140,7 @@ export const SignupForm = () => {
           이름
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="text"
           id="name"
           role="input-name"
@@ -163,7 +158,7 @@ export const SignupForm = () => {
           닉네임
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="text"
           id="nickname"
           role="input-nickname"
@@ -174,25 +169,19 @@ export const SignupForm = () => {
           })}
         />
 
-        <button
-          onClick={
+        <ValidateInputButton
+          validation={
             !validNickname ? handleValidateNick : () => setValidNickname(false)
           }
-          type="button"
-          role="validate-nickname"
-          style={
-            !validNickname
-              ? { backgroundColor: "#4065f6" }
-              : { backgroundColor: "#E8E8E8" }
-          }
-          className="absolute right-2 bottom-2.5 text-[14px] text-white w-[81px] h-[36px] rounded-[8px]"
-        >
-          {!validNickname ? "중복확인" : "수정하기"}
-        </button>
+          isValid={validNickname}
+          validateFunction={handleValidateNick}
+          role={"validate-nickname"}
+        />
       </div>
       {errors.nickname?.message && (
         <p className=" text-red-500">{errors.nickname?.message}</p>
       )}
+
       {validNickname && (
         <div className="flex items-center gap-1">
           <img src={alertPass} alt="approved icon" className="w-4" />
@@ -214,7 +203,7 @@ export const SignupForm = () => {
           생년월일
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="date"
           id="birthday"
           role="user-birthday"
@@ -231,7 +220,7 @@ export const SignupForm = () => {
           핸드폰 번호
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+          className="input-primary"
           type="string"
           id="phone"
           placeholder="'-'을 제외한 휴대폰번호를 입력해주세요."
@@ -239,24 +228,27 @@ export const SignupForm = () => {
             required: true,
           })}
         />
-        {errors.phone?.message && (
-          <p className=" text-red-500">{errors.phone?.message}</p>
-        )}
       </div>
+      {errors.phone?.message && (
+        <p className=" text-red-500">{errors.phone?.message}</p>
+      )}
 
-      <button
-        role="submit"
-        type="submit"
-        disabled={!validEmail && !validNickname ? true : false}
-        style={
-          !validEmail || !validNickname
-            ? { backgroundColor: "#E8E8E8" }
-            : { backgroundColor: "#4065f6" }
+      <SubmitButton
+        disabled={
+          !!(
+            errors.email ||
+            errors.password ||
+            errors.password_check ||
+            errors.nickname ||
+            errors.name ||
+            errors.birthday ||
+            errors.phone
+          )
         }
-        className=" h-[58px] p-4 rounded-lg text-white "
-      >
-        가입하기
-      </button>
+        type="submit"
+        role="submit"
+        children="가입하기"
+      />
     </form>
   );
 };

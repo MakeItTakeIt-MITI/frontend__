@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 // import { useEffect } from "react";
 
 import backArrow from "../assets/Chevron_Left.png";
-import { GameHostForm } from "../components/auth/GameHostForm";
+import { GameHostForm } from "../components/forms/GameHostForm";
 
 export const GameHostContainer = () => {
   // const { isLoggedIn } = useAuthStore();

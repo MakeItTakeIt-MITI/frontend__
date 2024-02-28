@@ -1,83 +1,92 @@
 import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
 import useUserDataStore from "../store/useUserDataStore";
-import { deleteAccount } from "../api/users";
-import { useNavigate } from "react-router-dom";
 import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
 import { LoadingPage } from "./LoadingPage";
-import { NicknameEditForm } from "../components/auth/NicknameEditForm";
-import { PasswordUpdateForm } from "../components/auth/PasswordUpdateForm";
+import profileImg from "../assets/profile_circle (1).svg";
+import { EditProfile } from "../components/profile/EditProfile";
 
 export const UserMyPage = () => {
   const { userId } = useUserDataStore();
-  const id = userId;
+  const { data, isPending, isError } = useUserInfoQuery(userId);
 
-  const navigate = useNavigate();
-  const { data, isLoading, refetch } = useUserInfoQuery(userId);
-
-  console.log("mypage user data query", data);
-
-  const handleDeleteAccount = () => {
-    if (window.confirm("정말 계정을 삭제하기겠습니까?")) {
-      alert("계정 삭제되었습니다");
-      const id = data?.data.id;
-      deleteAccount(id);
-      localStorage.clear();
-      navigate("/login");
-    } else {
-      alert("취소합니다.");
-      return;
-    }
-  };
-
-  if (isLoading) {
+  if (isPending) {
     return <LoadingPage />;
+  }
+  if (isError) {
+    return <p>Error..</p>;
   }
 
   return (
     <div className=" w-full tablet:max-w-[90rem] tablet:px-[13rem] tablet:mb-0 mx-auto  mobile:mb-[4rem] py-3">
-      <hr className="  w-full tablet:block mobile:hidden" />
+      {/* // <div className=" mobile:w-full mx-auto h-full "> */}
+      {/* FAQ  */}
+      {/* 프로필 수정 */}
+      <NavigateToPrevContainer />
 
-      <div className="flex mobile:flex-col tablet:flex-row">
-        <div className="mobile:hidden tablet:block min-w-[250px]">
-          <div className="p-4 flex flex-col gap-4 ">
-            <p className="text-xl font-bold">
-              {data?.data.name} 님 ({data?.data.nickname})
-            </p>
-            <p>{data?.data.birthday}</p>
-            <p>{data?.data.email}</p>
-          </div>
-          <div className="flex flex-col gap-4 ">
-            <button>프로필 수정</button>
-            {/* <button className="hover:text-red-400">회원탈퇴</button> */}
-          </div>
-        </div>
+      <div className="flex  flex-col mobile:p-6">
+        {/* 사용자 정보 */}
         <div className="w-full">
-          <NavigateToPrevContainer />
-          <div className="tablet:hidden mobile:block p-4 flex flex-col gap-2">
-            <p className="text-xl">
-              {data?.data.name} 님 ({data?.data.nickname})
-            </p>
-            <p>{data?.data.birthday}</p>
-            <p>{data?.data.email}</p>
+          <div className="flex items-center gap-1.5  ">
+            <div>
+              <img src={profileImg} alt="profile icon" />
+            </div>
+            <div className=" flex flex-col ">
+              <p className="text-2xl font-bold">{data?.data.nickname}</p>
+              <p className="text-[12px] text-[#969696]">{data?.data.email}</p>
+            </div>
           </div>
-          <hr className="  w-full tablet:hidden mobile:block" />
+          {/* Player Stats */}
+          {/* <div className="flex flex-col gap-4 mobile:p-6 tablet:py-6 tablet:mx-13  text-white ">
+            <div className="flex gap-7 ">
+              <div className="w-full h-[52px] bg-[#74BCFF] p-2 rounded-lg">
+                <p className="text-[10px] ">평점</p>
+                <p className="text-right">/</p>
+              </div>
+              <div className="w-full h-[52px] bg-[#FFA674] p-2 rounded-lg">
+                <p className="text-[10px] ">레벨</p>
+                <p className="text-right">/</p>
+              </div>
+            </div>
+            <div className="w-full bg-[#FFC774] p-2 rounded-lg">
+              <p className="text-[10px] ">나의 지갑</p>
+              <p className="text-right">/</p>
+            </div>
+          </div> */}
+          {/* <hr /> */}
 
-          <NicknameEditForm id={id} refetch={refetch} data={data} />
-          <PasswordUpdateForm id={id} refetch={refetch} />
-          <div className="flex flex-col gap-6  mobile:w-full mobile:p-4 "></div>
-          <hr className="mobile:block tablet:hidden w-full" />
+          {/* 바로가기 메뉴 */}
+          {/* <div className="px-2 py-3 w-full">
+              <h4 className="text-[28px] font-bold">내 정보</h4>
+              <ul className="flex flex-col gap-2.5 	p-5 mobile:text-[16px] tablet:text-xl">
+                <li>작성 리뷰</li>
+                <li>내 리뷰</li>
+                <li onClick={handleOpenProfileTab}>프로필 수정</li>
+                <li>FAQ</li>
+                <li>고객센터</li>
+              </ul>
+            </div> */}
+          {/* Profile Edit */}
 
-          <div className="flex flex-col gap-6 p-4 mobile:w-full ">
-            <h4 className="font-bold">계정 삭제</h4>
-            <button
-              type="button"
-              onClick={handleDeleteAccount}
-              className=" rounded-xl mobile:w-full tablet:w-[400px] tablet:mx-auto  h-14 bg-[#db5e5e] text-white"
-            >
-              회원탈퇴
-            </button>
-          </div>
+          {/* <div>
+            <NavigateToPrevContainer />
+            <hr className="  w-full tablet:hidden mobile:block" />
+            <NicknameEditForm id={id} refetch={refetch} data={data} />
+            <PasswordUpdateForm id={id} refetch={refetch} />
+            <div className="flex flex-col gap-6  mobile:w-full mobile:p-4 "></div>
+            <hr className="mobile:block tablet:hidden w-full" />
+            <div className="flex flex-col gap-6 p-4 mobile:w-full ">
+              <h4 className="font-bold">계정 삭제</h4>
+              <button
+                type="button"
+                onClick={handleDeleteAccount}
+                className=" rounded-xl mobile:w-full tablet:w-[400px] tablet:mx-auto  h-14 bg-[#db5e5e] text-white"
+              >
+                회원탈퇴
+              </button>
+            </div>
+          </div> */}
         </div>
+        <EditProfile />
       </div>
     </div>
   );

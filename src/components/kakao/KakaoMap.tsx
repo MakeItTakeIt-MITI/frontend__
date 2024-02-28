@@ -3,6 +3,11 @@ import { useEffect } from "react";
 import { GameDetailField } from "../../interface/gameInterface";
 
 // interface GameDataProps {}
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
 
 interface GeocoderResult {
   x: number;
@@ -40,9 +45,9 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
       position: coords,
       content: content,
     });
+
     window.kakao.maps.event.addListener(infowindow, "click", function () {
-      alert("window");
-      console.log(match?.court.address);
+      window.location.href = `/games/detail/${match.id}/`;
     });
     infowindow.setMap(map);
   };
@@ -64,16 +69,8 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
 
     geocoder.addressSearch(searchAddress, function (result: any, status: any) {
       // 정상적으로 검색이 완료됐으면
-      if (status === kakao.maps.services.Status.OK) {
-        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // // 인포윈도우로 장소에 대한 설명을 표시합니다
-        // const infowindow = new kakao.maps.InfoWindow({
-        //   content:
-        //     '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
-        // });
-        // infowindow.open(kakaoMap);
-
+      if (status === window.kakao.maps.services.Status.OK) {
+        const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         kakaoMap.setCenter(coords);
       }
@@ -93,6 +90,7 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
               );
               const content = `
             <div  key={match.id} class=" hover:cursor-pointer w-[76px]  h-[56px] p-2  flex flex-col  items-center justify-center bg-white rounded-lg drop-shadow-lg">
+            <a href="/games/detail/${match.id}">
               <p class="text-[12px]  text-[#999]">${
                 match.court.address_detail
               }</p>
@@ -104,6 +102,7 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
               )}원</p>
               <div> 
               </div>
+              </a>
             </div>
           `;
 

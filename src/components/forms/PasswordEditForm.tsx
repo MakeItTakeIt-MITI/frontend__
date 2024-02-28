@@ -1,41 +1,37 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userEditPassword } from "../../api/users";
 import { useUpdatePassSchema } from "../../modals/useUpdatePassSchema";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
 import close from "../../assets/clarity_eye-hide-line.svg";
 import open from "../../assets/clarity_eye-show-line.svg";
+import {
+  PasswordChangeProps,
+  PasswordField,
+} from "../../interface/usersInterface";
+import { usePasswordChangeMutation } from "../../hooks/usePasswordChangeMutation";
 
-interface PasswordChangeProps {
-  id: number | null;
-  refetch: () => void;
-}
-
-interface PasswordField {
-  id: number | null;
-  password: string;
-  password_check: string;
-}
-
-export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
+export const PasswordEditForm = ({ id }: PasswordChangeProps) => {
   const [displayPassword, setDisplayPassword] = useState(false);
+  const [displayConfirmPassword, setDisplayConfirmPassword] = useState(false);
+  const { mutate: mutatePassword, isError } = usePasswordChangeMutation(id);
 
   const {
     register,
-    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<PasswordField>({
     resolver: zodResolver(useUpdatePassSchema),
   });
 
-  const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
+  const handleViewMainPassword = () => setDisplayPassword(!displayPassword);
+  const handleViewSecondaryPassword = () =>
+    setDisplayConfirmPassword(!displayConfirmPassword);
 
   const handleChangePassword = (data: PasswordField) => {
-    userEditPassword(id, data);
-    reset();
-    refetch();
+    mutatePassword(data);
+    alert("비밀번호가 변경되었습니다.");
+    window.location.reload();
   };
 
   return (
@@ -57,7 +53,7 @@ export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
         <button
           type="button"
           role="show-password-btn"
-          onClick={handleDisplayPassword}
+          onClick={handleViewMainPassword}
           className="absolute right-2 top-4 hover:cursor-pointer"
         >
           <img
@@ -69,13 +65,25 @@ export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
       </div>
       <div className="relative">
         <input
-          type={`${displayPassword ? "text" : "password"}`}
+          type={`${displayConfirmPassword ? "text" : "password"}`}
           id="password_check"
           role="input-password-confirm"
           className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           placeholder="확인 비밀번호를 입력해주세요."
           {...register("password_check")}
         />
+        <button
+          type="button"
+          role="show-password-btn"
+          onClick={handleViewSecondaryPassword}
+          className="absolute right-2 top-4 hover:cursor-pointer"
+        >
+          <img
+            src={`${displayConfirmPassword ? open : close}`}
+            alt="hide password"
+            className="w-[24px] cursor-pointer "
+          />
+        </button>
       </div>
 
       <button
@@ -84,6 +92,11 @@ export const PasswordUpdateForm = ({ id, refetch }: PasswordChangeProps) => {
       >
         비밀번호 수정
       </button>
+      {isError && (
+        <p className="text-center text-red-400 font-bold text-sm">
+          비밀번호 변경에 실패했습니다.
+        </p>
+      )}
       {errors.password && (
         <p className="text-center text-red-400 font-bold text-sm">
           {errors.password.message}

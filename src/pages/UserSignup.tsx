@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { SignupForm } from "../components/auth/SignupForm";
+import { SignupForm } from "../components/forms/SignupForm";
 import mitiLogo from "../assets/MITI_logo.svg";
 import backArrow from "../assets/Chevron_Left.png";
 

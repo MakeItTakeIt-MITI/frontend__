@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
 import closeButton from "../../assets/x_button.svg";
-import { userLogout } from "../../api/users";
 
 import homeIcon from "../../assets/header_home_icon.svg";
 import gamesIcon from "../../assets/header_games_icon.svg";
@@ -15,24 +14,21 @@ interface DisplayTab {
 }
 
 export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
-  const { isLoggedIn, logout } = useAuthStore();
+  const { isLoggedIn } = useAuthStore();
   const { userId } = useUserDataStore();
-  const navigate = useNavigate();
-
   const { data } = useUserInfoQuery(userId);
-
-  if (userId) {
-    console.log(data);
-  }
   const closeTab = () => setDisplayTab(false);
+
+  const { logout } = useAuthStore();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       alert("로그아웃 되었습니다.");
       logout();
-      userLogout();
-      setDisplayTab(false);
-      navigate("/");
+      navigate("/user/login");
+      // logoutMutation();
+      // window.location.reload();
     } else {
       alert("취소합니다.");
       return;
@@ -114,7 +110,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
                     경기 호스팅
                   </Link>
                   <Link
-                    to="/games/mygames/:id"
+                    to={`/games/mygames/${userId}`}
                     className="hover:underline"
                     onClick={closeTab}
                   >
