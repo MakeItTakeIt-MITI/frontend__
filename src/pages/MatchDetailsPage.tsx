@@ -12,8 +12,8 @@ import useUserDataStore from "../store/useUserDataStore";
 import { MatchInfoParticipantsBox } from "../components/game/host/MatchInfoParticipantsBox";
 export const MatchDetailsPage = () => {
   const { id } = useParams();
-  const gameIdParam = Number(id);
   const { userId } = useUserDataStore();
+  const gameIdParam = Number(id);
   const { data: gameDetail, isLoading } = useGetGameDetailQuery(gameIdParam);
 
   const { data: userData } = useUserInfoQuery(userId);

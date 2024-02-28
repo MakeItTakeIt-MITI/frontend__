@@ -45,9 +45,9 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
       position: coords,
       content: content,
     });
+
     window.kakao.maps.event.addListener(infowindow, "click", function () {
-      alert("window");
-      console.log(match?.court.address);
+      window.location.href = `/games/detail/${match.id}/`;
     });
     infowindow.setMap(map);
   };
@@ -90,6 +90,7 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
               );
               const content = `
             <div  key={match.id} class=" hover:cursor-pointer w-[76px]  h-[56px] p-2  flex flex-col  items-center justify-center bg-white rounded-lg drop-shadow-lg">
+            <a href="/games/detail/${match.id}">
               <p class="text-[12px]  text-[#999]">${
                 match.court.address_detail
               }</p>
@@ -101,6 +102,7 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
               )}원</p>
               <div> 
               </div>
+              </a>
             </div>
           `;
 
