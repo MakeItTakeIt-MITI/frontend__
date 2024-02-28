@@ -33,7 +33,7 @@ export const UserGamesListPage = () => {
   //   return <LoadingPage />;
   // }
   return (
-    <div className=" mobile:w-full tablet:px-[13rem] tablet:max-w-[90rem] tablet:mb-0 mx-auto mobile:mb-[4rem] py-3">
+    <div className=" w-full laptop:px-[13rem] tablet:px-[2rem] tablet:max-w-[90rem] tablet:mb-0 mx-auto mobile:mb-[4rem] py-3">
       <NavigateToPrevContainer />
       <div className="flex justify-between p-4 ">
         <h4 className="text-[18px] font-bold">나의 매치 스케줄</h4>

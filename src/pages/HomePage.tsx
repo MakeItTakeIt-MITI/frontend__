@@ -35,7 +35,7 @@ export const HomePage = () => {
   }
 
   return (
-    <div className="flex flex-col gap-6  w-full tablet:px-[13rem] mx-auto  max-w-[90rem] tablet:mb-4 mobile:mb-16">
+    <div className="flex flex-col gap-6  w-full laptop:px-[13rem] tablet:px-[2rem] mx-auto  max-w-[90rem] tablet:mb-4 mobile:mb-16">
       <Hero
         backgroundImage={banner}
         launchText="MITI 서비스 런칭"

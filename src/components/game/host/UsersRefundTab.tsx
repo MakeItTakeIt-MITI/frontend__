@@ -1,9 +1,9 @@
-import { ParticipantActionProps } from "../../../interface/participant_types";
+import { RemoveActionProps } from "../../../interface/participant_types";
 
 export const UsersRefundTab = ({
   participantsData,
   phoneFormatter,
-}: ParticipantActionProps) => {
+}: RemoveActionProps) => {
   const handleCopyClipBoard = async (accNumber: string) => {
     try {
       await navigator.clipboard.writeText(accNumber);
