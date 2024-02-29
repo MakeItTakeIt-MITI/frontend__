@@ -7,7 +7,7 @@ import axiosUrl from "../utils/axios"
 
 export const userLogin = async (data: LoginField) => {
     try {
-        const response = await axiosUrl.post('/auth/login/', data)
+        const response = await axiosUrl.post('/auth/login', data)
         if (response.data.status_code === 200) {
             return response.data
         }
@@ -18,7 +18,7 @@ export const userLogin = async (data: LoginField) => {
 
 export const userLogout = async () => {
     try {
-        const response = await axiosUrl.post('/auth/logout/');
+        const response = await axiosUrl.post('/auth/logout');
         return response.data;
     } catch {
         throw new Error
@@ -43,7 +43,7 @@ export const userSignup = async (data: RegisterField) => {
 
 export const kakaoAuth = async (data: KakaoLoginField) => {
     try {
-        const response = await axiosUrl.post("/auth/oauth/kakao/login/", data)
+        const response = await axiosUrl.post("/auth/oauth/kakao/login", data)
         return response.data
     } catch {
         throw new Error
@@ -52,7 +52,7 @@ export const kakaoAuth = async (data: KakaoLoginField) => {
 
 export const findEmail = async (phone: FindEmailField) => {
     try {
-        const response = await axiosUrl.post('/auth/find-email/', phone)
+        const response = await axiosUrl.post('/auth/find-email', phone)
         return response.data
     } catch {
         throw new Error
@@ -61,7 +61,7 @@ export const findEmail = async (phone: FindEmailField) => {
 
 export const requestPasswordReset = async (data: EmailAuth) => {
     try {
-        const response = await axiosUrl.post(`/auth/password-reset-email/`, data);
+        const response = await axiosUrl.post(`/auth/password-reset-email`, data);
         return response.data
     } catch {
         throw new Error
@@ -70,7 +70,7 @@ export const requestPasswordReset = async (data: EmailAuth) => {
 
 export const verifySignupSMS = async (user_token: string | null, data: SMSAuth) => {
     try {
-        const response = await axiosUrl.post(`/auth/${user_token}/authenticate/`, data)
+        const response = await axiosUrl.post(`/auth/${user_token}/authenticate`, data)
         return response.data
     } catch {
         throw new Error
@@ -79,7 +79,7 @@ export const verifySignupSMS = async (user_token: string | null, data: SMSAuth) 
 
 export const requestResetPassword = async (data: string) => {
     try {
-        const response = await axiosUrl.post('/auth/password-reset-email/', data)
+        const response = await axiosUrl.post('/auth/password-reset-email', data)
         return response.data
     } catch {
         throw new Error
