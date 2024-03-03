@@ -31,7 +31,6 @@ export const PasswordEditForm = ({ id }: PasswordChangeProps) => {
   const handleChangePassword = (data: PasswordField) => {
     mutatePassword(data);
     alert("비밀번호가 변경되었습니다.");
-    window.location.reload();
   };
 
   return (

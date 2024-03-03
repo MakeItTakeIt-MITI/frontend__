@@ -12,10 +12,11 @@ export const KakaoAuthHandler = () => {
     isError,
   } = useOAuthLoginMutation();
 
-  const code = new URL(window.location.href).searchParams.get("code");
+  const code = new URL(document.location.toString()).searchParams.get("code");
   useEffect(() => {
-    const requestLogin = { code: code };
-    kakaoLoginAuth(requestLogin);
+    kakaoLoginAuth({ code: code });
+    // kakaoLoginAuth(code);
+    console.log(code);
   }, [code, kakaoLoginAuth]);
 
   if (isPending) {

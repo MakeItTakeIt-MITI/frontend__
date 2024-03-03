@@ -18,7 +18,6 @@ export const NicknameEditForm = ({ id, data }: NicknameProps) => {
 
   const handleChangeNickname = (data: NicknameField) => {
     mutateNickname(data);
-    window.location.reload();
   };
 
   return (
