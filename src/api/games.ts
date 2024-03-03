@@ -35,7 +35,7 @@ export const getParticipatingUsers = async (gameId: number) => {
 }
 
 export const getGameCourtDetails = async (address: string) => {
-    const response = await axiosUrl.get(`/courts/?address=${address}`)
+    const response = await axiosUrl.get(`/courts?address=${address}`)
     return response.data
 
 }
