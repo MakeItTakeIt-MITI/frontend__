@@ -19,7 +19,7 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
     const container = document.getElementById("map");
     const options = {
       center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-      level: 4,
+      level: 5,
     };
     return new window.kakao.maps.Map(container, options);
   };
@@ -37,8 +37,8 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
   const addMarkerWithInfowindow = (
     map: any,
     coords: any,
-    content: string,
-    match: GameDetailField
+    content: string
+    // match: GameDetailField
   ) => {
     const infowindow = new window.kakao.maps.CustomOverlay({
       map: map,
@@ -47,7 +47,7 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
     });
 
     window.kakao.maps.event.addListener(infowindow, "click", function () {
-      window.location.href = `/games/detail/${match.id}/`;
+      // window.location.href = `/games/detail/${match.id}/`;
     });
     infowindow.setMap(map);
   };
@@ -88,6 +88,7 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
                 result[0].y,
                 result[0].x
               );
+
               const content = `
             <div  key={match.id} class=" hover:cursor-pointer w-[76px]  h-[56px] p-2  flex flex-col  items-center justify-center bg-white rounded-lg drop-shadow-lg">
             <a href="/games/detail/${match.id}">
@@ -106,7 +107,8 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
             </div>
           `;
 
-              addMarkerWithInfowindow(kakaoMap, coords, content, match);
+              // addMarkerWithInfowindow(kakaoMap, coords, content, match);
+              addMarkerWithInfowindow(kakaoMap, coords, content);
               moveMapToLocation(kakaoMap, result[0].y, result[0].x);
             }
           }
@@ -117,9 +119,9 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
   }, [allGamesData, searchAddress]);
 
   return (
-    <div
+    <section
       id="map"
       className="tablet:w-full  tablet:h-[473px]  mobile:h-[300px] mobile:px-4 "
-    ></div>
+    ></section>
   );
 };
