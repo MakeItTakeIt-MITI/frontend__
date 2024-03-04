@@ -85,3 +85,14 @@ export const requestResetPassword = async (data: string) => {
         throw new Error
     }
 }
+export const requestNewToken = async () => {
+    try {
+        const response = axiosUrl.post("/auth/refresh-token",
+            {
+                refresh: localStorage.getItem("refreshToken")
+            })
+        return response
+    } catch {
+        throw new Error
+    }
+}
