@@ -31,12 +31,11 @@ export const PasswordEditForm = ({ id }: PasswordChangeProps) => {
   const handleChangePassword = (data: PasswordField) => {
     mutatePassword(data);
     alert("비밀번호가 변경되었습니다.");
-    window.location.reload();
   };
 
   return (
     <form
-      className="flex flex-col gap-6 p-4 w-full"
+      className="flex flex-col gap-6 py-4 w-full"
       onSubmit={handleSubmit(handleChangePassword)}
     >
       <h4 className="font-bold">비밀번호 변경</h4>
@@ -45,7 +44,7 @@ export const PasswordEditForm = ({ id }: PasswordChangeProps) => {
           type={`${displayPassword ? "text" : "password"}`}
           id="password"
           role="input-password"
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
           placeholder="새로운 비밀번호를 입력해주세요."
           {...register("password")}
         />
@@ -68,7 +67,7 @@ export const PasswordEditForm = ({ id }: PasswordChangeProps) => {
           type={`${displayConfirmPassword ? "text" : "password"}`}
           id="password_check"
           role="input-password-confirm"
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
           placeholder="확인 비밀번호를 입력해주세요."
           {...register("password_check")}
         />
@@ -88,7 +87,7 @@ export const PasswordEditForm = ({ id }: PasswordChangeProps) => {
 
       <button
         role="change-password"
-        className="rounded-xl mobile:w-full tablet:w-[400px] tablet:mx-auto h-14 bg-[#4065f6] text-white"
+        className="rounded-xl w-full  h-[50px] bg-[#4065f6] text-white"
       >
         비밀번호 수정
       </button>

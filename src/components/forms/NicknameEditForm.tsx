@@ -18,13 +18,12 @@ export const NicknameEditForm = ({ id, data }: NicknameProps) => {
 
   const handleChangeNickname = (data: NicknameField) => {
     mutateNickname(data);
-    window.location.reload();
   };
 
   return (
     <form
       onSubmit={handleSubmit(handleChangeNickname)}
-      className="flex flex-col gap-6 p-4 mobile:w-full "
+      className="flex flex-col gap-6 py-4 mobile:w-full "
     >
       <h4 className="font-bold">닉네임 수정</h4>
       <div className="flex items-center gap-2">
@@ -33,12 +32,12 @@ export const NicknameEditForm = ({ id, data }: NicknameProps) => {
           id="nickname"
           required
           role="input-nickname"
-          className=" h-[60px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
           placeholder={data?.data.nickname}
           {...register("nickname")}
         />
         <button
-          className=" rounded-xl w-16 tablet:mx-auto h-14 bg-[#4065f6] text-white "
+          className=" rounded-xl w-16 tablet:mx-auto h-[50px] bg-[#F7F7F7] text-[#999] "
           role="change-nickname"
         >
           수정
