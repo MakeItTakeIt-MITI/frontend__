@@ -10,5 +10,8 @@ export const useParticipateGameMutation = (gameId: number) => {
     onSuccess: () => {
       navigate("/games/join/submitted");
     },
+    onError: () => {
+      console.error();
+    },
   });
 };
