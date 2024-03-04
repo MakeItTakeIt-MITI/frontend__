@@ -1,7 +1,7 @@
 import { useState } from "react";
 import left_arrow from "../assets/Chevron_Left.png";
 import court from "../assets/small-basketball-court.svg";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetGameDetailQuery } from "../hooks/useGetGameDetailQuery";
 import { useForm } from "react-hook-form";
 import { JoinMatchPreviewModal } from "../components/game/guest/JoinMatchPreviewModal";
@@ -21,13 +21,10 @@ export const UserJoinMatchPage = () => {
   const gameIdParam = Number(id);
 
   const { data: gameDetail } = useGetGameDetailQuery(gameIdParam);
-  const {
-    mutate: mutateJoinGame,
-    isError,
-    error,
-  } = useParticipateGameMutation(gameIdParam);
+  const { mutate: mutateJoinGame, isError } =
+    useParticipateGameMutation(gameIdParam);
 
-  const { register, handleSubmit } = useForm<JoinGameField>();
+  const { register, handleSubmit, formState } = useForm<JoinGameField>();
   // const bank_holder = watch("player_account_holder");
 
   const onSubmit = (data: JoinGameField) => {
@@ -165,15 +162,28 @@ export const UserJoinMatchPage = () => {
           <button
             type="button"
             onClick={handleShowModal}
-            className="h-[48px]  w-full text-center bg-[#4065F6] text-white text-[14px]"
+            style={{
+              backgroundColor: !formState.isValid ? "#969696" : "#4065F6",
+            }}
+            disabled={!formState.isValid}
+            className="h-[48px]  w-full text-center text-white text-[14px]"
           >
             매치 참여하기
           </button>
 
+          {isError && (
+            <div className="text-center text-red-500">
+              <p>참여할 수 없는 경기 입니다.</p>
+
+              <Link to="/" className="underline">
+                돌아가기
+              </Link>
+            </div>
+          )}
+
           {modal && (
             <JoinMatchPreviewModal
               isError={isError}
-              error={error}
               handleCloseModal={handleCloseModal}
             />
           )}

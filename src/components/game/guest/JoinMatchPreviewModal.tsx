@@ -5,20 +5,19 @@ import closeButton from "../../../assets/x_button.svg";
 interface JoinMatchModalProp {
   handleCloseModal: () => void;
   isError: boolean;
-  error: {
-    response: { data: { data: { detail: string | null } } };
-    message: string | null;
-  };
 }
 
 export const JoinMatchPreviewModal = ({
   handleCloseModal,
   isError,
-  error,
 }: JoinMatchModalProp) => {
   const { id } = useParams();
   const gameIdParam = Number(id);
   const { data: gameDetail } = useGetGameDetailQuery(gameIdParam);
+
+  if (isError) {
+    handleCloseModal();
+  }
 
   return (
     <div className=" w-full laptop:px-[13rem] tablet:px-[2rem]  z-[99] fixed top-0 bottom-0 right-0 left-0 h-screen flex items-center justify-center bg-[rgba(0,0,0,0.6)] ">
@@ -31,15 +30,7 @@ export const JoinMatchPreviewModal = ({
             <img src={closeButton} alt="close button" />
           </button>
         </div>
-        {isError && (
-          <div>
-            <h2 className=" text-center text-red-500">{error.message} </h2>
 
-            <h2 className=" text-center text-red-500">
-              {error.response.data.data.detail}
-            </h2>
-          </div>
-        )}
         <hr />
         <div className="flex flex-col gap-2 p-4 mobile:text-[14px] tablet:text-[16px]">
           <div>
