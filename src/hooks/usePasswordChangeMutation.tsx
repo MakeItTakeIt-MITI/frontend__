@@ -5,5 +5,6 @@ import { PasswordField } from "../interface/usersInterface";
 export const usePasswordChangeMutation = (id: number | null) => {
   return useMutation({
     mutationFn: (data: PasswordField) => userChangePassword(id, data),
+    onSuccess: () => window.location.reload(),
   });
 };

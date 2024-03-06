@@ -12,22 +12,32 @@ const axiosUrl: AxiosInstance = axios.create({
 });
 
 
-axiosUrl.interceptors.request.use(async function (config) {
+axiosUrl.interceptors.request.use((config) => {
     const accessToken = localStorage.getItem("accessToken");
-    // const refreshToken = localStorage.getItem("refreshToken");
-
     if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
     }
-
-    // if (refreshToken) {
-    //     config.headers["refresh"] = refreshToken;
-    // }
-
-
     return config;
 }
+
 );
+
+axiosUrl.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+        // console.log(error);
+        if (error.response && error.response.status === 401) {
+            console.log('token expired');
+            localStorage.removeItem('accessToken')
+            // localStorage.clear()
+            // await requestNewToken()
+        }
+    }
+)
+
+axios.interceptors.response.use()
+
+
 export default axiosUrl;
 
 

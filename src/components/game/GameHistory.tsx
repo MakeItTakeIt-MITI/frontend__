@@ -23,6 +23,7 @@ export const HostGameHistory = ({ hostHistory }: HostGameProps) => {
         return (
           <Link
             to={`/games/detail/${hostGame.id}`}
+            key={hostGame.id}
             className="mobile:w-full tablet:w-[480px]  flex   justify-between p-4 border border-[#E8E8E8] rounded-xl"
           >
             <div className=" flex flex-col gap-1">
@@ -58,6 +59,7 @@ export const GuestGameHistory = ({ guestHistory }: GuestGameHistory) => {
       {guestHistory?.data.map((guest: GameDetailField) => {
         return (
           <Link
+            key={guest.id}
             to={`/games/detail/${guest.id}`}
             className="mobile:w-full tablet:w-[480px]  flex   justify-between p-4 border border-[#E8E8E8] rounded-xl"
           >

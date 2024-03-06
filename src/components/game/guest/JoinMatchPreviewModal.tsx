@@ -1,23 +1,36 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetGameDetailQuery } from "../../../hooks/useGetGameDetailQuery";
+import closeButton from "../../../assets/x_button.svg";
 
 interface JoinMatchModalProp {
   handleCloseModal: () => void;
+  isError: boolean;
 }
 
 export const JoinMatchPreviewModal = ({
   handleCloseModal,
+  isError,
 }: JoinMatchModalProp) => {
   const { id } = useParams();
   const gameIdParam = Number(id);
   const { data: gameDetail } = useGetGameDetailQuery(gameIdParam);
 
+  if (isError) {
+    handleCloseModal();
+  }
+
   return (
-    <div className=" tablet:px-[16rem]  z-[99] fixed top-0 bottom-0 right-0 left-0 w-screen h-screen flex items-center justify-center bg-[rgba(0,0,0,0.6)] ">
-      <div className="z-[9998] flex flex-col gap-2 bg-white h-[380px] w-full mx-[32px]  rounded-lg">
-        <h4 className="text-[#222] font-bold p-4 tablet:text-[20px]">
-          예약내역 확인
-        </h4>
+    <div className=" w-full laptop:px-[13rem] tablet:px-[2rem]  z-[99] fixed top-0 bottom-0 right-0 left-0 h-screen flex items-center justify-center bg-[rgba(0,0,0,0.6)] ">
+      <div className="z-[9998] flex flex-col gap-2 bg-white px-4 py-6 w-full  rounded-lg">
+        <div className="flex justify-between">
+          <h4 className="text-[#222] font-bold p-4 tablet:text-[20px]">
+            예약내역 확인
+          </h4>
+          <button className="w-6" onClick={handleCloseModal}>
+            <img src={closeButton} alt="close button" />
+          </button>
+        </div>
+
         <hr />
         <div className="flex flex-col gap-2 p-4 mobile:text-[14px] tablet:text-[16px]">
           <div>
@@ -71,13 +84,9 @@ export const JoinMatchPreviewModal = ({
           </div>
         </div>
         <div className="flex gap-4 justify-center text-[14px]">
-          <button
-            type="button"
-            onClick={handleCloseModal}
-            className="p-4 bg-[#f7f7f7] rounded-lg"
-          >
+          <Link to="/" className="p-4 bg-[#f7f7f7] rounded-lg">
             목록으로 돌아가기
-          </button>
+          </Link>
           <button
             type="submit"
             className="p-4 bg-[#4065F6] text-white  rounded-lg"
