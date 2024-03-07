@@ -11,7 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { useCourtDetailsQuery } from "../../hooks/useCourtDetailsQuery";
 
 export const GameHostForm = () => {
-  const { handleSubmit, register, setValue, watch } = useForm<GameHostField>();
+  const { handleSubmit, register, setValue, watch, formState } =
+    useForm<GameHostField>();
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
 
@@ -335,8 +336,12 @@ export const GameHostForm = () => {
       </div>
 
       <button
+        disabled={!formState.isValid}
+        style={{
+          backgroundColor: !formState.isValid ? "#969696" : "#4065F6",
+        }}
         type="submit"
-        className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white"
+        className=" w-full h-[50px] rounded-[8px] text-white"
       >
         매치 생성하기
       </button>
