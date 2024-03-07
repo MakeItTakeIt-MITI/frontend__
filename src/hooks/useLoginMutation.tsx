@@ -1,15 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import useAuthStore from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import useUserDataStore from "../store/useUserDataStore";
 import { userLogin } from "../api/auth";
 
-interface ErrorMsgProps {
-  setErrorMessage: (arg: string) => void;
-}
-
-export const useLoginMutation = ({ setErrorMessage }: ErrorMsgProps) => {
+export const useLoginMutation = () => {
   const { login } = useAuthStore();
   const navigate = useNavigate();
   const { setUserId } = useUserDataStore();
@@ -27,11 +22,6 @@ export const useLoginMutation = ({ setErrorMessage }: ErrorMsgProps) => {
         localStorage.setItem("id", userId);
         login();
         navigate("/");
-      }
-    },
-    onError: (error) => {
-      if (axios.isAxiosError(error) && error.response) {
-        setErrorMessage(error.response.data.data.detail);
       }
     },
   });
