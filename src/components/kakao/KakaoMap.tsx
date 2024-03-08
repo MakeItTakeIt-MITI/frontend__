@@ -90,11 +90,16 @@ export const KakaoMap = ({ allGamesData, searchAddress }: any) => {
               );
 
               const content = `
-            <div  key={match.id} class=" hover:cursor-pointer w-[76px]  h-[56px] p-2  flex flex-col  items-center justify-center bg-white rounded-lg drop-shadow-lg">
+            <div  key={match.id} class=" hover:cursor-pointer w-[82px]  h-[60px] p-4 flex flex-col  items-center justify-center bg-white rounded-lg drop-shadow-lg">
             <a href="/games/detail/${match.id}">
-              <p class="text-[12px]  text-[#999]">${
-                match.court.address_detail
-              }</p>
+            <p class="text-[10px] text-center text-[#999]">${match.starttime.slice(
+              0,
+              -3
+            )}</p>  
+            <p class="text-[12px] text-center  text-[#999]">${
+              match.court.address_detail
+            }</p>
+          
               <p class="font-bold text-[14px]">${match.fee.toLocaleString(
                 "ko-KR",
                 {
