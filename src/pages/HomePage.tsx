@@ -1,7 +1,6 @@
 import banner from "../assets/banner-2.svg";
 import { Hero } from "../components/home/Hero";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
-import { KakaoMap } from "../components/kakao/KakaoMap";
 import { MobileViewDatesList } from "../components/home/MobileViewDatesList";
 import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
 import { DesktopViewDatesList } from "../components/home/DesktopViewDatesList";
