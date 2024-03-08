@@ -3,9 +3,13 @@ import { JoinGameField } from "../pages/UserJoinMatchPage";
 import axiosUrl from "../utils/axios"
 
 
-export const createGameData = async (data: GameHostField) => {
-    const response = await axiosUrl.post('/games', data)
-    return response.data
+export const hostGame = async (data: GameHostField) => {
+    try {
+        const response = await axiosUrl.post('/games', data)
+        return response.data
+    } catch {
+        throw new Error
+    }
 
 }
 
