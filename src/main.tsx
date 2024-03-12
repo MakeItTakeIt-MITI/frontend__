@@ -7,7 +7,7 @@ import { HomePage } from "./pages/HomePage.tsx";
 import { UserLoginPage } from "./pages/UserLoginPage.tsx";
 import { UserSignup } from "./pages/UserSignup.tsx";
 import { GameHostContainer } from "./pages/GameHostContainer.tsx";
-import { NotFound } from "./pages/NotFound.tsx";
+import { NotFoundPage } from "./pages/NotFoundPage.tsx";
 import { MatchDetailsPage } from "./pages/MatchDetailsPage.tsx";
 import { UserJoinMatchPage } from "./pages/UserJoinMatchPage.tsx";
 import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
@@ -98,8 +98,8 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/404",
-        element: <NotFound />,
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
   },
