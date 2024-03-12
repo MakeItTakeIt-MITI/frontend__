@@ -39,9 +39,9 @@ export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any)
                         result[0].x
                     );
 
-                    const content = customInfoContent(match); // html element content
-                    const overlayoption = displayCustomInfoWindow(map, coords, content); //display custom infobox
-                    closeOverlay(content, overlayoption, map, match);
+                    const content = customInfoHTMLContent(match);
+                    displayCustomInfoWindow(map, coords, content);
+                    closeOverlay(content, map, match);
 
                     map.setCenter(coords);
                 }
@@ -58,11 +58,12 @@ export const onClickRelocateMapPosition = (geocoder: any, address: any, map: any
         address,
         function (result: any, status: boolean) {
             if (status === kakao.maps.services.Status.OK) {
-                new window.kakao.maps.LatLng(
+                const coords = new window.kakao.maps.LatLng(
                     result[0].y,
                     result[0].x
                 );
-                moveMapToLocation(map, result[0].y, result[0].x);
+                const moveLatLon = new kakao.maps.LatLng(coords);
+                return map.setCenter(moveLatLon);
             }
         }
     );
@@ -72,14 +73,6 @@ export const onClickRelocateMapPosition = (geocoder: any, address: any, map: any
 
 
 
-export const moveMapToLocation = (map: any, latitude: any, longitude: any) => {
-    const moveLatLon = new kakao.maps.LatLng(latitude, longitude);
-    map.setCenter(moveLatLon);
-    console.log('relocation')
-
-    return moveLatLon
-
-};
 
 
 export const displayCustomInfoWindow = (map: any, coords: any, content: any) => {
@@ -97,6 +90,19 @@ export const displayCustomInfoWindow = (map: any, coords: any, content: any) => 
     return customOverlay
 }
 
+export const closeDisplayModalInfoWindow = (map: any, content: any) => {
+    const customOverlay = new kakao.maps.CustomOverlay({
+        map: map,
+        content: content,
+    })
+
+
+
+    return customOverlay
+}
+
+
+// 커스텀 오버레이 윈도우 
 export const displayModalInfoWindow = (map: any, content: any) => {
     const centerCoords = map.getCenter();
 
@@ -106,74 +112,87 @@ export const displayModalInfoWindow = (map: any, content: any) => {
         content: content,
     })
     customOverlay.setMap(map);
-    return customOverlay
-}
 
-
-export const closeDisplayModalInfoWindow = (map: any, content: any) => {
-    const customOverlay = new kakao.maps.CustomOverlay({
-        map: map,
-        content: content,
-    })
-
-    kakao.maps.event.addListener(content, 'click', function () {
-        customOverlay.setMap(null);
-    });
 
     return customOverlay
 }
 
 
 
-export const closeOverlay = (customOverlay: any, customOverlayOption: any, map: any, match: any) => {
+export const closeOverlay = (customOverlay: any, map: any, match: any) => {
+
+
+
     const modalInfo = (match: any) => {
-        return (
-            '<div class="bg-white p-4 flex flex-col justify-around text-sm shadow-lg w-[244px] h-[192px] rounded-xl">' +
-            '    <div class="flex justify-between">' +
-            '        <p class="font-bold text-lg truncate">' + match.title + '</p>' +
-            '        <button onclick=closeModalButton() class="text-md font-bold bg-[#9C99B0] p-1 w-5 h-5 rounded-full flex items-center justify-center">' +
-            '            <p class="text-white">x</p>' +
-            '        </button>' +
-            '    </div>' +
-            '    <div>' +
-            '        <p style="white-space: normal;">' + match.court.address + ' ' + match.court.address_detail + '</p>' +
-            '    </div>' +
-            '    <a href="/games/detail/' + match.id + '" class="bg-[#4065F6] h-[40px] flex items-center justify-center text-white rounded-sm">' +
-            '        참가하기' +
-            '    </a>' +
-            '</div>'
-        );
+        const div = document.createElement('div');
+        div.classList.add('z-[999]', 'bg-white', 'p-4', 'flex', 'flex-col', 'justify-around', 'text-sm', 'shadow-lg', 'w-[244px]', 'h-[192px]', 'rounded-xl');
+
+        const innerDiv = document.createElement('div');
+        innerDiv.classList.add('flex', 'justify-between');
+
+        const titleP = document.createElement('p');
+        titleP.classList.add('font-bold', 'text-lg', 'truncate');
+        titleP.textContent = match.title;
+
+        const closeButton = document.createElement('button');
+        closeButton.id = 'close-button';
+        closeButton.classList.add('text-md', 'font-bold', 'bg-[#9C99B0]', 'p-1', 'w-5', 'h-5', 'rounded-full', 'flex', 'items-center', 'justify-center');
+        closeButton.innerHTML = '<p class="text-white">x</p>';
+        closeButton.addEventListener('click', () => {
+            div.remove();
+        });
+
+        innerDiv.appendChild(titleP);
+        innerDiv.appendChild(closeButton);
+
+        const addressP = document.createElement('p');
+        addressP.style.whiteSpace = 'normal';
+        addressP.textContent = match.court.address + ' ' + match.court.address_detail;
+
+        const link = document.createElement('a');
+        link.href = '/games/detail/' + match.id;
+        link.classList.add('bg-[#4065F6]', 'h-[40px]', 'flex', 'items-center', 'justify-center', 'text-white', 'rounded-sm');
+        link.textContent = '참가하기';
+
+        div.appendChild(innerDiv);
+        div.appendChild(addressP);
+        div.appendChild(link);
+
+        return div;
     };
 
+
     customOverlay.addEventListener("click", () => {
-        customOverlayOption.setMap(null);
-        console.log('closed custom overlay')
-        console.log('open modal')
+        // customOverlayOption.setMap(null);
+        console.log('closed custom overlay');
+        console.log('open modal');
         const openModalContent = modalInfo(match);
         displayModalInfoWindow(map, openModalContent);
 
     });
 
-}
+
+};
 
 
 
-export const customInfoContent = (match: any) => {
+
+export const customInfoHTMLContent = (match: any) => {
     const div = document.createElement('div');
 
     div.setAttribute('key', match.id);
-    div.classList.add('bg-white', 'w-[80px]', 'p-2', 'text-center', 'rounded-xl');
+    div.classList.add('bg-white', 'w-[80px]', 'p-2', 'text-center', 'rounded-xl', 'hover:bg-[#4065F6]', 'hover:text-white');
     const contentContainer = document.createElement('div'); // Create a container for the content
     div.appendChild(contentContainer);
 
 
     const p1 = document.createElement('p');
-    p1.classList.add('text-[10px]', 'text-center', 'text-[#999]');
+    p1.classList.add('text-[10px]', 'text-center', 'text-[#999]',);
     p1.textContent = match.starttime.slice(0, -3);
     contentContainer.appendChild(p1);
 
     const p2 = document.createElement('p');
-    p2.classList.add('text-[12px]', 'text-center', 'text-[#999]');
+    p2.classList.add('text-[12px]', 'text-center', 'text-[#999]', 'truncate');
     p2.textContent = match.court.address_detail;
     contentContainer.appendChild(p2);
 
@@ -185,13 +204,3 @@ export const customInfoContent = (match: any) => {
 }
 
 
-
-export const closeModalPopup = (customOverlay: any) => {
-
-    customOverlay.setMap(null);
-
-    console.log('closed modal')
-
-
-
-}
