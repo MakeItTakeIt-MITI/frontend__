@@ -87,12 +87,16 @@ export const requestResetPassword = async (data: string) => {
 }
 export const requestNewToken = async () => {
     try {
-        const response = axiosUrl.post("/auth/refresh-token",
-            {
-                refresh: localStorage.getItem("refreshToken")
-            })
-        return response
+        const refreshToken = localStorage.getItem("refreshToken");
+        const response = await axiosUrl.post("/auth/refresh-token", {}, {
+            headers: {
+                'refresh': refreshToken
+            }
+        });
+        const access = response.data.data.access
+        localStorage.setItem('accessToken', access)
+        return response.data;
     } catch {
         throw new Error
     }
-}
+};
