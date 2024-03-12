@@ -65,7 +65,11 @@ export const HomePage = () => {
               : null}
           </div>
         </div>{" "}
-        <KakaoMapV2 allGamesData={allGamesData} searchAddress={searchAddress} />
+        <KakaoMapV2
+          allGamesData={allGamesData}
+          searchAddress={searchAddress}
+          refetch={refetch}
+        />
         {/* <KakaoMap allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         <MobileViewDatesList setSelectedDate={setSelectedDate} />
       </div>
