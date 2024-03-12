@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import {
+  closeOverlay,
   customInfoContent,
   displayCustomInfoWindow,
   displayMap,
@@ -34,11 +35,12 @@ export const KakaoMapV2 = ({ allGamesData, searchAddress }: any) => {
               result[0].y,
               result[0].x
             );
+
             const content = customInfoContent(match); // html element content
-            displayCustomInfoWindow(map, coords, content); //display custom infobox
+            const overlayoption = displayCustomInfoWindow(map, coords, content); //display custom infobox
+            closeOverlay(content, overlayoption, map, match);
 
             moveMapToLocation(map, result[0].y, result[0].x); // moves to clicked game
-
             map.setCenter(coords);
           }
         }

@@ -1,4 +1,5 @@
 
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
     interface Window {
@@ -36,6 +37,24 @@ export const displayCustomInfoWindow = (map: any, coords: any, content: any) => 
 
     customOverlay.setMap(map);
 
+
+
+    return customOverlay
+}
+
+export const displayModalInfoWindow = (map: any, content: any) => {
+    const centerCoords = map.getCenter();
+
+    const customOverlay = new kakao.maps.CustomOverlay({
+        map: map,
+        position: centerCoords,
+        content: content,
+    })
+
+    customOverlay.setMap(map);
+
+
+
     return customOverlay
 }
 
@@ -44,10 +63,27 @@ export const moveMapToLocation = (map: any, latitude: number, longitude: number)
     map.setCenter(moveLatLon);
 };
 
+export const closeOverlay = (customOverlay: any, customOverlayOption: any, map: any, match: any) => {
+
+
+    customOverlay.addEventListener("click", () => {
+        customOverlayOption.setMap(null);
+        console.log('closed custom overlay')
+        const openModalContent = modalInfo(match);
+        displayModalInfoWindow(map, openModalContent);
+
+
+    });
+
+
+}
 
 export const customInfoContent = (match: any) => {
-    const div = document.createElement('div');
 
+
+
+
+    const div = document.createElement('div');
 
     div.setAttribute('key', match.id);
     div.classList.add('bg-white', 'w-[80px]', 'p-2', 'text-center', 'rounded-xl');
@@ -55,9 +91,6 @@ export const customInfoContent = (match: any) => {
     const contentContainer = document.createElement('div'); // Create a container for the content
     div.appendChild(contentContainer);
 
-    contentContainer.addEventListener("click", () => {
-        console.log("clicked")
-    });
 
     const p1 = document.createElement('p');
     p1.classList.add('text-[10px]', 'text-center', 'text-[#999]');
@@ -74,21 +107,31 @@ export const customInfoContent = (match: any) => {
     p3.textContent = `${match.fee.toLocaleString("ko-KR", { currency: "KRW" })}원`;
     contentContainer.appendChild(p3);
     return div;
+
+
 }
 
 
 
 
-// const joinGameModal = () => {
-//     const div = document.createElement('div');
-//     div.style.padding = '6px';
-//     div.style.zIndex = '9999'; // Set a high z-index value
-//     div.style.position = 'fixed'; // Ensure modal is fixed in place
+export const modalInfo = (match: any) => {
+    return `
+    <div class="bg-white p-4 flex flex-col justify-around text-sm shadow-lg w-[244px] h-[192px] rounded-xl">
+    <div class="flex justify-between">
+    <p class="font-bold text-lg">${match.title}</p>
+            <button class="text-md font-bold bg-[#9C99B0] p-1 w-5 h-5 rounded-full flex items-center justify-center">
+                <p class="text-white">x</p>  
+            </button>
+        </div>
 
-//     const p = document.createElement('p');
-//     p.textContent = '안녕하세요, 모달입니다.';
 
-//     div.appendChild(p);
+        <div>
+            <p style="white-space: normal;">${match.court.address} ${match.court.address_detail}</p>
+        </div>
 
-//     return div;
-// }
+        <a href="/games/detail/${match.id}" class="bg-[#4065F6] h-[40px] flex items-center justify-center text-white rounded-sm">
+            참가하기
+        </a>
+    </div>
+    `;
+};
