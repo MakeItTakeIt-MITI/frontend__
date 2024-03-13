@@ -124,11 +124,7 @@ export const closeOverlay = (customOverlay: any, map: any, match: any) => {
 
 
     const modalInfo = (match: any) => {
-        const backgroundDiv = document.createElement('div');
-        backgroundDiv.classList.add('w-screen', 'h-screen', 'bg-white', 'bg-opacity-30', 'flex', 'items-center', 'justify-center');
-
         const div = document.createElement('div');
-        // div.classList.add('z-[999]', 'bg-white', 'p-4', 'flex', 'flex-col', 'justify-around', 'text-sm', 'shadow-lg', 'w-[244px]', 'h-[192px]', 'rounded-xl');
         div.classList.add('z-[999]', 'bg-white', 'p-4', 'flex', 'flex-col', 'justify-around', 'text-sm', 'shadow-lg', 'w-[244px]', 'h-[192px]', 'rounded-xl');
 
         const innerDiv = document.createElement('div');
@@ -143,7 +139,7 @@ export const closeOverlay = (customOverlay: any, map: any, match: any) => {
         closeButton.classList.add('text-md', 'font-bold', 'bg-[#9C99B0]', 'p-1', 'w-5', 'h-5', 'rounded-full', 'flex', 'items-center', 'justify-center');
         closeButton.innerHTML = '<p class="text-white">x</p>';
         closeButton.addEventListener('click', () => {
-            backgroundDiv.remove();
+            div.remove();
         });
 
         innerDiv.appendChild(titleP);
@@ -158,13 +154,11 @@ export const closeOverlay = (customOverlay: any, map: any, match: any) => {
         link.classList.add('bg-[#4065F6]', 'h-[40px]', 'flex', 'items-center', 'justify-center', 'text-white', 'rounded-sm');
         link.textContent = '참가하기';
 
-        backgroundDiv.appendChild(div)
         div.appendChild(innerDiv);
         div.appendChild(addressP);
         div.appendChild(link);
 
-        return backgroundDiv
-        // return div;
+        return div;
     };
 
 
