@@ -121,46 +121,61 @@ export const displayModalInfoWindow = (map: any, content: any) => {
 
 export const closeOverlay = (customOverlay: any, map: any, match: any) => {
 
-
-
-
     const modalInfo = (match: any) => {
-        const div = document.createElement('div');
-        div.classList.add('z-[999]', 'bg-white', 'p-4', 'flex', 'flex-col', 'justify-around', 'text-sm', 'shadow-lg', 'w-[244px]', 'h-[192px]', 'rounded-xl');
 
-        const innerDiv = document.createElement('div');
-        innerDiv.classList.add('flex', 'justify-between');
+        const address = match.court.address + ' ' + match.court.address_detail;
+        const linkHref = '/games/detail/' + match.id;
 
-        const titleP = document.createElement('p');
-        titleP.classList.add('font-bold', 'text-lg', 'truncate');
-        titleP.textContent = match.title;
-
-        const closeButton = document.createElement('button');
-        closeButton.id = 'close-button';
-        closeButton.classList.add('text-md', 'font-bold', 'bg-[#9C99B0]', 'p-1', 'w-5', 'h-5', 'rounded-full', 'flex', 'items-center', 'justify-center');
-        closeButton.innerHTML = '<p class="text-white">x</p>';
-        closeButton.addEventListener('click', () => {
-            div.remove();
-        });
-
-        innerDiv.appendChild(titleP);
-        innerDiv.appendChild(closeButton);
-
-        const addressP = document.createElement('p');
-        addressP.style.whiteSpace = 'normal';
-        addressP.textContent = match.court.address + ' ' + match.court.address_detail;
-
-        const link = document.createElement('a');
-        link.href = 'http://makeittakeit.s3-website.kr.object.ncloudstorage.com/games/detail/' + match.id;
-        link.classList.add('bg-[#4065F6]', 'h-[40px]', 'flex', 'items-center', 'justify-center', 'text-white', 'rounded-sm');
-        link.textContent = '참가하기';
-
-        div.appendChild(innerDiv);
-        div.appendChild(addressP);
-        div.appendChild(link);
-
-        return div;
+        return `
+            <div key={match.id} class="z-[999] bg-white p-4 flex flex-col justify-around text-sm shadow-lg w-[244px] h-[192px] rounded-xl">
+                <div class="flex justify-between">
+                    <p class="font-bold text-lg truncate">${match.title}</p>
+                    <button id="close-button" class="text-md font-bold bg-[#9C99B0] p-1 w-5 h-5 rounded-full flex items-center justify-center"><p class="text-white">x</p></button>
+                </div>
+                <p style="white-space: normal">${address}</p>
+                <a href="${linkHref}" class="bg-[#4065F6] h-[40px] flex items-center justify-center text-white rounded-sm">참가하기</a>
+            </div>
+        `;
     };
+
+
+    // const modalInfo = (match: any) => {
+    //     const div = document.createElement('div');
+    //     div.classList.add('z-[999]', 'bg-white', 'p-4', 'flex', 'flex-col', 'justify-around', 'text-sm', 'shadow-lg', 'w-[244px]', 'h-[192px]', 'rounded-xl');
+
+    //     const innerDiv = document.createElement('div');
+    //     innerDiv.classList.add('flex', 'justify-between');
+
+    //     const titleP = document.createElement('p');
+    //     titleP.classList.add('font-bold', 'text-lg', 'truncate');
+    //     titleP.textContent = match.title;
+
+    //     const closeButton = document.createElement('button');
+    //     closeButton.id = 'close-button';
+    //     closeButton.classList.add('text-md', 'font-bold', 'bg-[#9C99B0]', 'p-1', 'w-5', 'h-5', 'rounded-full', 'flex', 'items-center', 'justify-center');
+    //     closeButton.innerHTML = '<p class="text-white">x</p>';
+    //     closeButton.addEventListener('click', () => {
+    //         div.remove();
+    //     });
+
+    //     innerDiv.appendChild(titleP);
+    //     innerDiv.appendChild(closeButton);
+
+    //     const addressP = document.createElement('p');
+    //     addressP.style.whiteSpace = 'normal';
+    //     addressP.textContent = match.court.address + ' ' + match.court.address_detail;
+
+    //     const link = document.createElement('a');
+    //     link.href = 'http://makeittakeit.s3-website.kr.object.ncloudstorage.com/games/detail/' + match.id;
+    //     link.classList.add('bg-[#4065F6]', 'h-[40px]', 'flex', 'items-center', 'justify-center', 'text-white', 'rounded-sm');
+    //     link.textContent = '참가하기';
+
+    //     div.appendChild(innerDiv);
+    //     div.appendChild(addressP);
+    //     div.appendChild(link);
+
+    //     return div;
+    // };
 
 
     customOverlay.addEventListener("click", () => {
