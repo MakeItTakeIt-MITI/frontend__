@@ -13,6 +13,8 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.3.2",
     "@storybook/addon-storysource": "^7.6.5",
     "@storybook/addon-viewport": "^7.6.5",
@@ -29,6 +31,7 @@
     "react-jwt": "^1.2.0",
     "react-kakao-maps-sdk": "^1.1.26",
     "react-router-dom": "^6.4.0",
+    "styled-components": "^6.1.8",
     "zod": "^3.22.4",
     "zustand": "^4.4.7"
   },

@@ -7,52 +7,54 @@ import alertFail from "../../assets/alert_failure.svg";
 
 import { useState } from "react";
 import { useRegisterMutation } from "../../hooks/useRegisterMutation";
-import { useUserValidationMutation } from "../../hooks/useUserValidationMutation";
+import {
+  useValidateDuplicateEmail,
+  useValidateDuplicateNickname,
+} from "../../hooks/useUserValidationMutation";
 import { SubmitButton } from "../common/SubmitButtons";
 import { ValidateInputButton } from "../common/ValidationButtons";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [validNickname, setValidNickname] = useState(false);
-  const [displayEmailMsg, setDisplayEmailMsg] = useState(false);
-  const [displayNickMsg, setDisplayNickMsg] = useState(false);
 
   const {
     register,
     handleSubmit,
     getValues,
     formState: { errors },
+    formState,
   } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
 
-  const { mutate: registerMutation } = useRegisterMutation();
-  const { mutate: validateMutation } = useUserValidationMutation({
+  const { mutate: registerMutation, isError } = useRegisterMutation();
+  const { mutate: emailMutation, data: emailData } = useValidateDuplicateEmail({
     setValidEmail,
-    setDisplayEmailMsg,
-    setValidNickname,
-    setDisplayNickMsg,
   });
+  const { mutate: nicknameMutation, data: nickData } =
+    useValidateDuplicateNickname({ setValidNickname });
 
-  const onSubmit = (data: RegisterField) => {
-    registerMutation(data);
-  };
+  const onSubmit = (data: RegisterField) => registerMutation(data);
 
-  const handleValidateEmail = () => {
-    console.log("validate email");
+  const handleValidateEmail = () =>
+    emailMutation({ email: getValues("email") });
 
-    const email = validateMutation({ email: getValues("email") });
-    console.log(email);
-  };
+  const handleValidateNick = () =>
+    nicknameMutation({ nickname: getValues("nickname") });
 
-  const handleValidateNick = () => {
-    console.log("validate nick");
+  const isDuplicated =
+    emailData?.data?.email?.is_duplicated === true ||
+    nickData?.data?.nickname?.is_duplicated === true;
 
-    validateMutation({ nickname: getValues("nickname") });
-  };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-6  mobile:w-full tablet:w-[600px]"
     >
+      {isError && (
+        <p className="text-[#E92C2C] text-[13px] font-[400] text-center">
+          회원가입에 실패하셨습니다. 다시 시도해주세요.
+        </p>
+      )}
       <div className="flex flex-col gap-2 relative">
         <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
           이메일
@@ -81,7 +83,7 @@ export const SignupForm = () => {
       {errors.email?.message && (
         <p className=" text-red-500">{errors.email?.message}</p>
       )}
-      {validEmail && (
+      {emailData?.data.email.is_duplicated === false && (
         <div className="flex items-center gap-1">
           <img src={alertPass} alt="email approved icon" className="w-4" />
           <p className="text-green-400 text-[13px] font-[400]">
@@ -89,7 +91,7 @@ export const SignupForm = () => {
           </p>
         </div>
       )}
-      {displayEmailMsg && !validEmail && (
+      {emailData?.data.email.is_duplicated === true && (
         <div className="flex items-center gap-1">
           <img src={alertFail} alt="email approved icon" className="w-4" />
           <p className="text-[#E92C2C] text-[13px] font-[400]">
@@ -181,23 +183,23 @@ export const SignupForm = () => {
       {errors.nickname?.message && (
         <p className=" text-red-500">{errors.nickname?.message}</p>
       )}
-
-      {validNickname && (
+      {nickData?.data.nickname.is_duplicated === false && (
         <div className="flex items-center gap-1">
-          <img src={alertPass} alt="approved icon" className="w-4" />
+          <img src={alertPass} alt="email approved icon" className="w-4" />
           <p className="text-green-400 text-[13px] font-[400]">
             사용 가능한 닉네임이에요!
           </p>
         </div>
       )}
-      {displayNickMsg && !validNickname && (
+      {nickData?.data.nickname.is_duplicated === true && (
         <div className="flex items-center gap-1">
-          <img src={alertFail} alt="disapprove icon" className="w-4" />
+          <img src={alertFail} alt="email approved icon" className="w-4" />
           <p className="text-[#E92C2C] text-[13px] font-[400]">
             해당 닉네임은 이미 회원으로 등록된 닉네임입니다.
           </p>
         </div>
       )}
+
       <div className="flex flex-col gap-2">
         <label htmlFor="birthday" className="text-[12px] text-[#1c1c1c]">
           생년월일
@@ -235,15 +237,7 @@ export const SignupForm = () => {
 
       <SubmitButton
         disabled={
-          !!(
-            errors.email ||
-            errors.password ||
-            errors.password_check ||
-            errors.nickname ||
-            errors.name ||
-            errors.birthday ||
-            errors.phone
-          )
+          !formState.isValid || !validEmail || !validNickname || isDuplicated
         }
         type="submit"
         role="submit"

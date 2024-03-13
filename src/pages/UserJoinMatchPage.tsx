@@ -126,7 +126,7 @@ export const UserJoinMatchPage = () => {
             <h4 className="font-bold">게스트 정보</h4>
             <div className="flex flex-col">
               <div className="flex rounded-lg">
-                <p className="text-[#969696] w-[68px]">환불 계화</p>
+                <p className="text-[#969696] w-[68px]">환불 계좌</p>
               </div>
               <div className="flex gap-2 rounded-lg">
                 <div className="p-4.5 text-[#222] font-[500] flex  ">

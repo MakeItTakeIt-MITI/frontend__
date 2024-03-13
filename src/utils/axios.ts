@@ -2,6 +2,8 @@ import axios, { AxiosInstance } from "axios";
 
 const baseUrl = 'https://api.makeittakeit.kr'
 
+
+
 const axiosUrl: AxiosInstance = axios.create({
     baseURL: baseUrl,
     headers: {
@@ -27,10 +29,13 @@ axiosUrl.interceptors.response.use(
     async (error) => {
         // console.log(error);
         if (error.response && error.response.status === 401) {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('userLoginStatus');
             console.log('token expired');
-            localStorage.removeItem('accessToken')
-            // localStorage.clear()
-            // await requestNewToken()
+
+
+
+
         }
     }
 )

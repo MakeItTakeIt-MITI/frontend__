@@ -1,7 +1,6 @@
 import banner from "../assets/banner-2.svg";
 import { Hero } from "../components/home/Hero";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
-import { KakaoMap } from "../components/kakao/KakaoMap";
 import { MobileViewDatesList } from "../components/home/MobileViewDatesList";
 import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
 import { DesktopViewDatesList } from "../components/home/DesktopViewDatesList";
@@ -10,10 +9,12 @@ import { MatchListDetail } from "../components/game/MatchesListContainer";
 import { useEffect, useState } from "react";
 import { MobileViewGameList } from "../components/home/mobile/MobileViewGameList";
 import { LoadingPage } from "./LoadingPage";
+import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
 
 export const HomePage = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
   const [searchAddress, setSearchAddress] = useState("");
+  // const [displyModal, setDisplayModal] = useState(false);
 
   const formatDate = selectingDate.toISOString().split("T")[0];
   const {
@@ -35,7 +36,7 @@ export const HomePage = () => {
   }
 
   return (
-    <div className="flex flex-col gap-6  w-full laptop:px-[13rem] tablet:px-[2rem] mx-auto  max-w-[90rem] tablet:mb-4 mobile:mb-16">
+    <div className="  flex flex-col gap-6  w-full laptop:px-[13rem] tablet:px-[2rem] mx-auto  max-w-[90rem] tablet:mb-4 mobile:mb-16">
       <Hero
         backgroundImage={banner}
         launchText="MITI 서비스 런칭"
@@ -64,7 +65,8 @@ export const HomePage = () => {
               : null}
           </div>
         </div>{" "}
-        <KakaoMap allGamesData={allGamesData} searchAddress={searchAddress} />
+        <KakaoMapV2 allGamesData={allGamesData} searchAddress={searchAddress} />
+        {/* <KakaoMap allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         <MobileViewDatesList setSelectedDate={setSelectedDate} />
       </div>
       <MobileViewGameList

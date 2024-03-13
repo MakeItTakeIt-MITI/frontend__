@@ -7,18 +7,16 @@ import {
 import { useEffect, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useHostGameMutation } from "../../hooks/useHostGameMutation";
-import { useNavigate } from "react-router-dom";
 import { useCourtDetailsQuery } from "../../hooks/useCourtDetailsQuery";
 
 export const GameHostForm = () => {
-  const { handleSubmit, register, setValue, watch } = useForm<GameHostField>();
+  const { handleSubmit, register, setValue, watch, formState } =
+    useForm<GameHostField>();
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
 
-  const navigate = useNavigate();
-
   // tanstack query
-  const courtAddress = watch("court.address");
+  const courtAddress = watch("court.address") || "";
   const { data: getAddressDetail, refetch } =
     useCourtDetailsQuery(courtAddress);
   const { mutate: hostGameMutation, isError } = useHostGameMutation();
@@ -29,7 +27,7 @@ export const GameHostForm = () => {
     const startTime = startDateTime.split("T")[1];
     const endDate = endDateTime.split("T")[0];
     const endTime = endDateTime.split("T")[1];
-    const fullAddress = watch("court.address");
+    const fullAddress = courtAddress;
 
     setValue("starttime", startTime);
     setValue("startdate", startDate);
@@ -48,7 +46,7 @@ export const GameHostForm = () => {
     refetch();
   }, [
     courtAddress,
-    watch,
+
     refetch,
     setValue,
     startDateTime,
@@ -81,11 +79,9 @@ export const GameHostForm = () => {
   };
 
   const onSubmit = (data: GameHostField) => {
-    hostGameMutation(data, {
-      onSuccess: () => {
-        navigate("/");
-      },
-    });
+    console.log(data);
+
+    hostGameMutation(data);
   };
 
   return (
@@ -145,9 +141,10 @@ export const GameHostForm = () => {
             type="datetime-local"
             id="start_date"
             required
-            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#DFEFFE] rounded-lg "
+            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#F7F7F7] text-[#999] rounded-lg "
             onChange={(e) => setStartDateTime(e.target.value)}
           />
+
           <input
             hidden
             type="text"
@@ -174,9 +171,10 @@ export const GameHostForm = () => {
           </div>
           <input
             type="datetime-local"
+            placeholder="Select date and time"
             required
             onChange={(e) => setEndDateTime(e.target.value)}
-            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#DFEFFE] rounded-lg "
+            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#F7F7F7] text-[#999] rounded-lg "
           />
 
           <input
@@ -335,8 +333,12 @@ export const GameHostForm = () => {
       </div>
 
       <button
+        disabled={!formState.isValid}
+        style={{
+          backgroundColor: !formState.isValid ? "#969696" : "#4065F6",
+        }}
         type="submit"
-        className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white"
+        className=" w-full h-[50px] rounded-[8px] text-white"
       >
         매치 생성하기
       </button>
