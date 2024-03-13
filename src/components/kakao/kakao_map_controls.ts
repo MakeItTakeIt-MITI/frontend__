@@ -166,10 +166,8 @@ export const closeOverlay = (customOverlay: any, map: any, match: any) => {
         addressP.textContent = match.court.address + ' ' + match.court.address_detail;
 
         const link = document.createElement('a');
-        link.href = '/games/detail/' + match.id;
+        link.href = 'games/detail/' + match.id;
         link.classList.add('bg-[#4065F6]', 'h-[40px]', 'flex', 'items-center', 'justify-center', 'text-white', 'rounded-sm');
-        link.target = '_blank';
-
         link.textContent = '참가하기';
 
         div.appendChild(innerDiv);
