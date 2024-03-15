@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
-import { UserSignup } from "../../pages/UserSignup";
+import { UserSignup } from "../pages/UserSignup";
 
 test("Are all elements present on the Signup Form Page?", () => {
   const queryClient = new QueryClient();
