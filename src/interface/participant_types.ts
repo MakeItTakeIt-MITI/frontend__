@@ -3,11 +3,14 @@ export interface UpdatePartcipationProps {
     gameId: number;
     userId: number | null;
 }
+
+export interface PlayerDetail {
+    email: string;
+    nickname: string;
+}
 export interface PlayerInfo {
     id: number;
-    player_name: string;
-    player_phone: string;
-    player_height: number;
+    player: PlayerDetail;
     player_account_holder: string;
     player_account_bank: string;
     player_account_number: string;
@@ -28,11 +31,9 @@ export interface ParticipantsField {
 export interface ParticipantActionProps {
     refetch: () => void;
     participantsData: ParticipantsField;
-    phoneFormatter: (arg: string) => string;
 }
 export interface RemoveActionProps {
     participantsData: ParticipantsField;
-    phoneFormatter: (arg: string) => string;
 }
 
 

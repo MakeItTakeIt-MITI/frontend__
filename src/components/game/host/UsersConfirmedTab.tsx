@@ -8,7 +8,6 @@ import { useRejectParticipantMutation } from "../../../hooks/useUpdateParticipan
 export const UsersConfirmedTab = ({
   refetch,
   participantsData,
-  phoneFormatter,
 }: ParticipantActionProps) => {
   const [removeUserModal, setRemoveUserModal] = useState(false);
   const handleShowModal = () => {
@@ -40,11 +39,8 @@ export const UsersConfirmedTab = ({
               <div className="w-10 h-10 rounded-full bg-[#666]"></div>
 
               <div className="flex  flex-col ">
-                <p>{user.player_name}</p>
-                <p className="text-[#666]">
-                  {" "}
-                  {phoneFormatter(user.player_phone)}
-                </p>
+                <p> {user.player_account_holder} 님</p>
+                <p className="text-[#666]">{user.player.email}</p>
               </div>
             </div>
             <button
