@@ -1,4 +1,5 @@
 import { RemoveActionProps } from "../../../interface/participant_types";
+import profile from "../../../assets/profile_circle (1).svg";
 
 export const UsersRefundTab = ({ participantsData }: RemoveActionProps) => {
   const handleCopyClipBoard = async (accNumber: string) => {
@@ -16,8 +17,9 @@ export const UsersRefundTab = ({ participantsData }: RemoveActionProps) => {
         return (
           <div key={user.id} className="flex justify-between text-[14px]">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-[#666]"></div>
-
+              <div className="w-10 h-10 rounded-full">
+                <img src={profile} alt="profile icon" className="w-full" />
+              </div>
               <div className="flex  flex-col ">
                 <p> {user.player_account_holder} 님</p>
                 <p className="text-[#666]">{user.player.email}</p>

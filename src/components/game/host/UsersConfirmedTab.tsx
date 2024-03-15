@@ -1,4 +1,5 @@
 import { useState } from "react";
+import profile from "../../../assets/profile_circle (1).svg";
 
 import { ModalRemoveUserFromMatch } from "../../modal_box/ModalRemoveUserFromMatch";
 
@@ -36,8 +37,9 @@ export const UsersConfirmedTab = ({
         return (
           <div key={user.id} className="flex justify-between text-[14px]">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-[#666]"></div>
-
+              <div className="w-10 h-10 rounded-full">
+                <img src={profile} alt="profile icon" className="w-full" />
+              </div>
               <div className="flex  flex-col ">
                 <p> {user.player_account_holder} 님</p>
                 <p className="text-[#666]">{user.player.email}</p>
