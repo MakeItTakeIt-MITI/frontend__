@@ -28,10 +28,10 @@ export const displayZoomControls = (map: any) => {
 
 export const getCurrentLocation = (map: any) => {
 
-    const geolocControl = new kakao.maps.MapTypeControl();
-    map.addControl(geolocControl, kakao.maps.ControlPosition.TOPRIGHT);
+    // const geolocControl = new kakao.maps.MapTypeControl();
+    // map.addControl(geolocControl, kakao.maps.ControlPosition.TOPRIGHT);
 
-    console.log(navigator.geolocation);
+    // console.log(navigator.geolocation);
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -43,7 +43,7 @@ export const getCurrentLocation = (map: any) => {
             map.setCenter(userLatLng);
         });
     } else {
-        alert('현재 브라우저에서 위치를 확인할 수 없습니다.');
+        console.log('현재 브라우저에서 위치를 확인할 수 없습니다.');
     }
 
 }

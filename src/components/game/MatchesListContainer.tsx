@@ -16,9 +16,6 @@ export const MatchListDetail = ({
     <div
       onClick={() => handleSearchAddress(game?.court.address)}
       className="hover:cursor-pointer"
-      style={{
-        cursor: game.game_status === "cancelled" ? "not-allowed" : "pointer",
-      }}
     >
       {/* <Link to={`/games/detail/${game.id}`} className=""> */}
       <div className="flex flex-col gap-1  ">
