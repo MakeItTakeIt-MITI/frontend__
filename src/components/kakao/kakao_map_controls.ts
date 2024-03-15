@@ -15,7 +15,7 @@ export const displayMap = () => {
 
     const options = {
         center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 7,
+        level: 6,
     };
     return new kakao.maps.Map(container, options);
 };
@@ -26,6 +26,27 @@ export const displayZoomControls = (map: any) => {
 
 }
 
+export const getCurrentLocation = (map: any) => {
+
+    const geolocControl = new kakao.maps.MapTypeControl();
+    map.addControl(geolocControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+    console.log(navigator.geolocation);
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+
+            const userLatLng = new kakao.maps.LatLng(lat, lng);
+
+            map.setCenter(userLatLng);
+        });
+    } else {
+        alert('현재 브라우저에서 위치를 확인할 수 없습니다.');
+    }
+
+}
 export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any) => {
 
     return allGamesData?.data.map((match: GameDetailField) => {
@@ -43,7 +64,7 @@ export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any)
                     displayCustomInfoWindow(map, coords, content);
                     closeOverlay(content, map, match);
 
-                    map.setCenter(coords);
+                    map.getCenter(coords);
                 }
             }
         );
