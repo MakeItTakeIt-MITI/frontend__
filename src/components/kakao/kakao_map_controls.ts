@@ -64,7 +64,8 @@ export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any)
                     displayCustomInfoWindow(map, coords, content);
                     closeOverlay(content, map, match);
 
-                    map.getCenter(coords);
+                    map.setCenter(coords);
+                    // map.getCenter(coords);
                 }
             }
         );

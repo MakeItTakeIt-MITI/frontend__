@@ -5,7 +5,7 @@ import {
   displayAllGamesOnMap,
   displayMap,
   displayZoomControls,
-  getCurrentLocation,
+  // getCurrentLocation,
   onClickRelocateMapPosition,
 } from "./kakao_map_controls";
 
@@ -28,7 +28,7 @@ export const KakaoMapV2 = ({ allGamesData, searchAddress }: any) => {
 
     // 커스텀 오버레이를 사용해 모든 경기 표시
     displayAllGamesOnMap(allGamesData, map, geocoder);
-    getCurrentLocation(map);
+    // getCurrentLocation(map);
   }, [allGamesData, searchAddress]);
 
   return <section id="map" className="w-full  h-[473px] relative" />;
