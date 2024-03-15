@@ -37,10 +37,10 @@ export const HostGameHistory = ({ hostHistory }: HostGameProps) => {
               </div>
               <h4>{hostGame?.title}</h4>
               <p className="text-[14px] text-[#999]">
-                {`${hostGame.startdate} ${hostGame.starttime.slice(
+                {`${hostGame?.startdate} ${hostGame?.starttime.slice(
                   0,
                   -3
-                )} ~ ${hostGame.endtime.slice(0, -3)}`}
+                )} ~ ${hostGame?.endtime.slice(0, -3)}`}
               </p>
             </div>
             <div>
@@ -74,10 +74,7 @@ export const GuestGameHistory = ({ guestHistory }: GuestGameHistory) => {
               </div>
               <h4>{guest?.title}</h4>
               <p className="text-[14px] text-[#999]">
-                {`${guest.startdate} ${guest.starttime.slice(
-                  0,
-                  -3
-                )} ~ ${guest.endtime.slice(0, -3)}`}
+                {`${guest.startdate} ${guest.starttime} ~ ${guest.endtime}`}
               </p>
             </div>
             <div>
