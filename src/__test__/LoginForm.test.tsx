@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { LoginForm } from "../components/forms/LoginForm";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -14,9 +14,9 @@ test("button should be disabled if the form is empty", () => {
     </QueryClientProvider>
   );
 
-  const emailInputEl = screen.getByRole("user-email-input");
-  const passwordInputEl = screen.getByRole("user-password-input");
-  const loginButtonEl = screen.getByRole("user-login-btn");
+  // const emailInputEl = screen.getByRole("user-email-input");
+  // const passwordInputEl = screen.getByRole("user-password-input");
+  // const loginButtonEl = screen.getByRole("user-login-btn");
 
   expect(screen.getByRole("user-login-btn")).toBeDisabled();
 
