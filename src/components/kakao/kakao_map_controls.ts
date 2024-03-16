@@ -15,7 +15,7 @@ export const displayMap = () => {
 
     const options = {
         center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 7,
+        level: 6,
     };
     return new kakao.maps.Map(container, options);
 };
@@ -26,6 +26,27 @@ export const displayZoomControls = (map: any) => {
 
 }
 
+export const getCurrentLocation = (map: any) => {
+
+    // const geolocControl = new kakao.maps.MapTypeControl();
+    // map.addControl(geolocControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+    // console.log(navigator.geolocation);
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+
+            const userLatLng = new kakao.maps.LatLng(lat, lng);
+
+            map.setCenter(userLatLng);
+        });
+    } else {
+        console.log('현재 브라우저에서 위치를 확인할 수 없습니다.');
+    }
+
+}
 export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any) => {
 
     return allGamesData?.data.map((match: GameDetailField) => {
@@ -44,6 +65,7 @@ export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any)
                     closeOverlay(content, map, match);
 
                     map.setCenter(coords);
+                    // map.getCenter(coords);
                 }
             }
         );
@@ -150,6 +172,7 @@ export const closeOverlay = (customOverlay: any, map: any, match: any) => {
         titleP.classList.add('font-bold', 'text-lg', 'truncate');
         titleP.textContent = match.title;
 
+
         const closeButton = document.createElement('button');
         closeButton.id = 'close-button';
         closeButton.classList.add('text-md', 'font-bold', 'bg-[#9C99B0]', 'p-1', 'w-5', 'h-5', 'rounded-full', 'flex', 'items-center', 'justify-center');
@@ -158,19 +181,40 @@ export const closeOverlay = (customOverlay: any, map: any, match: any) => {
             div.remove();
         });
 
-        innerDiv.appendChild(titleP);
+        const matchStatus = document.createElement('span');
+        matchStatus.style.whiteSpace = 'normal';
+        if (match.game_status === 'open') {
+            matchStatus.textContent = '모집 중';
+            matchStatus.classList.add('bg-[#E5F8EB]', 'text-[#00BA34]', 'px-1', 'rounded', 'text-[12px]', 'font-[500]');
+        } else {
+            matchStatus.textContent = '모집 종료';
+            matchStatus.classList.add('bg-[#F7F7F7]', 'text-[#999999]', 'px-1', 'rounded', 'text-[12px]', 'font-[500]');
+        }
+
+        innerDiv.appendChild(matchStatus);
         innerDiv.appendChild(closeButton);
+
 
         const addressP = document.createElement('p');
         addressP.style.whiteSpace = 'normal';
         addressP.textContent = match.court.address + ' ' + match.court.address_detail;
 
+
         const link = document.createElement('a');
         link.href = '/games/detail/' + match.id;
-        link.classList.add('bg-[#4065F6]', 'h-[40px]', 'flex', 'items-center', 'justify-center', 'text-white', 'rounded-sm');
-        link.textContent = '참가하기';
+        if (match.game_status === 'open') {
+            link.textContent = '참가하기';
+            link.classList.add('bg-[#4065F6]', 'h-[40px]', 'flex', 'items-center', 'justify-center', 'text-white', 'rounded-sm');
+        } else {
+            link.textContent = '모짐 종료';
+            link.classList.add('bg-[#999999]', 'h-[40px]', 'flex', 'items-center', 'justify-center', 'text-white', 'rounded-sm');
+            link.style.pointerEvents = 'none';
+        }
+
+
 
         div.appendChild(innerDiv);
+        div.appendChild(titleP);
         div.appendChild(addressP);
         div.appendChild(link);
 

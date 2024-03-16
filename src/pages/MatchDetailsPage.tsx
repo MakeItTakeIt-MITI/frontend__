@@ -82,7 +82,7 @@ export const MatchDetailsPage = () => {
                 />
                 <p>
                   총 {gameDetail?.data.max_invitation}명 중{" "}
-                  {gameDetail?.data.min_invitation}명 모집
+                  {gameDetail?.data.confimed_participations}명 모집
                 </p>
               </div>
             </div>
@@ -95,15 +95,38 @@ export const MatchDetailsPage = () => {
           </div>
           <div className="px-2 tablet:block mobile:hidden">
             {userEmail === hostEmail ? (
-              <Link to={`/games/detail/${gameIdParam}/join`}>
-                <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white ">
-                  {" "}
-                  매치 상태 변경
-                </button>
-              </Link>
+              // <Link to={`/games/detail/${gameIdParam}/join`}>
+              <button
+                onClick={() => alert("In progress")}
+                disabled={
+                  gameDetail?.data.game_status === "cancelled" ? true : false
+                }
+                style={{
+                  backgroundColor:
+                    gameDetail?.data.game_status === "cancelled"
+                      ? "#E8E8E8"
+                      : "#4065F6",
+                }}
+                className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white "
+              >
+                {" "}
+                매치 상태 변경
+              </button>
             ) : (
+              // </Link>
               <Link to={`/games/detail/${gameIdParam}/join`}>
-                <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white ">
+                <button
+                  disabled={
+                    gameDetail?.data.game_status === "cancelled" ? true : false
+                  }
+                  style={{
+                    backgroundColor:
+                      gameDetail?.data.game_status === "cancelled"
+                        ? "#E8E8E8"
+                        : "#4065F6",
+                  }}
+                  className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white "
+                >
                   {" "}
                   매치 참가하기
                 </button>

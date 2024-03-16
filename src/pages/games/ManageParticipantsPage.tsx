@@ -19,15 +19,15 @@ export const ManageParticipantsPage = () => {
 
   const navigateHome = () => navigate(-1);
 
-  function phoneFormatter(number: string) {
-    const cleanedNumber = number.replace(/\D/g, "");
-    const formattedNumber = `010-${cleanedNumber.slice(
-      3,
-      7
-    )}-${cleanedNumber.slice(7)}`;
+  // function phoneFormatter(number: string) {
+  //   const cleanedNumber = number.replace(/\D/g, "");
+  //   const formattedNumber = `010-${cleanedNumber.slice(
+  //     3,
+  //     7
+  //   )}-${cleanedNumber.slice(7)}`;
 
-    return formattedNumber;
-  }
+  //   return formattedNumber;
+  // }
 
   return (
     <div className="h-screen ">
@@ -62,7 +62,6 @@ export const ManageParticipantsPage = () => {
               <UsersConfirmedTab
                 refetch={refetch}
                 participantsData={participantsData}
-                phoneFormatter={phoneFormatter}
               />
             </div>
           </div>
@@ -76,7 +75,6 @@ export const ManageParticipantsPage = () => {
               <UsersRequestingTab
                 refetch={refetch}
                 participantsData={participantsData}
-                phoneFormatter={phoneFormatter}
               />
             </div>
           </div>
@@ -87,12 +85,9 @@ export const ManageParticipantsPage = () => {
           <div className="flex flex-col gap-4 mobile:px-4 w-full  tablet:p-4">
             <div className="flex flex-col tablet:gap-4 mobile:gap-2 ">
               <h4 className="mobile:font-bold  text-lg tablet:text-center mobile:text-start">
-                환불 요청 (3)
+                환불 요청
               </h4>
-              <UsersRefundTab
-                participantsData={participantsData}
-                phoneFormatter={phoneFormatter}
-              />
+              <UsersRefundTab participantsData={participantsData} />
             </div>
           </div>
         </div>

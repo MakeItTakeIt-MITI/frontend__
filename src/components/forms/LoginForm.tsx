@@ -126,7 +126,7 @@ export const LoginForm = () => {
         disabled={!formState.isValid}
         type="submit"
         role="user-login-btn"
-        children="로그인하기"
+        children="로그인 하기"
       />
     </form>
   );
