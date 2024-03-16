@@ -15,7 +15,7 @@ export const ParticipantCard = ({ user }: ProfileCardProp) => {
         className="w-10 h-10 rounded-full"
       />
       <span className="w-[52px] text-[14px] text-[#666]">
-        {user.player_name} 님
+        {user.player_account_holder} 님
       </span>
     </div>
   );
