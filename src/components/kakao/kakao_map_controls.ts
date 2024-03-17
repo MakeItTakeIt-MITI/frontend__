@@ -17,8 +17,18 @@ export const displayMap = () => {
         center: new kakao.maps.LatLng(33.450701, 126.570667),
         level: 6,
     };
+
     return new kakao.maps.Map(container, options);
 };
+
+
+export const relayout = (map: any) => {
+
+    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
+    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+    map.relayout();
+}
 
 export const displayZoomControls = (map: any) => {
     const zoomControl = new kakao.maps.ZoomControl();
@@ -39,7 +49,6 @@ export const getCurrentLocation = (map: any) => {
             const lng = position.coords.longitude;
 
             const userLatLng = new kakao.maps.LatLng(lat, lng);
-
             map.setCenter(userLatLng);
         });
     } else {
@@ -70,7 +79,6 @@ export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any)
             }
         );
     });
-
 
 }
 
@@ -139,6 +147,10 @@ export const displayModalInfoWindow = (map: any, content: any) => {
     return customOverlay
 }
 
+function setDraggable(map, draggable) {
+    // 마우스 드래그로 지도 이동 가능여부를 설정합니다
+    map.setDraggable(draggable);
+}
 
 
 export const closeOverlay = (customOverlay: any, map: any, match: any) => {
@@ -179,6 +191,7 @@ export const closeOverlay = (customOverlay: any, map: any, match: any) => {
         closeButton.innerHTML = '<p class="text-white">x</p>';
         closeButton.addEventListener('click', () => {
             div.remove();
+            setDraggable(map, true)
         });
 
         const matchStatus = document.createElement('span');
@@ -228,7 +241,7 @@ export const closeOverlay = (customOverlay: any, map: any, match: any) => {
         console.log('open modal');
         const openModalContent = modalInfo(match);
         displayModalInfoWindow(map, openModalContent);
-
+        setDraggable(map, false)
     });
 
 
