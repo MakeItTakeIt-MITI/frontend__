@@ -147,7 +147,7 @@ export const displayModalInfoWindow = (map: any, content: any) => {
     return customOverlay
 }
 
-function setDraggable(map, draggable) {
+function setDraggable(map: any, draggable: boolean) {
     // 마우스 드래그로 지도 이동 가능여부를 설정합니다
     map.setDraggable(draggable);
 }
