@@ -12,18 +12,19 @@ const { kakao } = window;
 // 지도 생성
 export const displayMap = () => {
     const container = document.getElementById("map");
-    let lat = null;
-    let lng = null;
+    // let lat = null;
+    // let lng = null;
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            lat = position.coords.latitude;
-            lng = position.coords.longitude;
-        });
-    }
+    // if (navigator.geolocation) {
+    //     navigator.geolocation.getCurrentPosition(function (position) {
+    //         lat = position.coords.latitude;
+    //         lng = position.coords.longitude;
+    //     });
+    // }
 
     const options = {
-        center: new kakao.maps.LatLng(lat, lng),
+        // center: new kakao.maps.LatLng(lat, lng),
+        center: new kakao.maps.LatLng(37.496486063, 127.028361548),
         // center: new kakao.maps.LatLng(33.450701, 126.570667),
         level: 6,
     };
