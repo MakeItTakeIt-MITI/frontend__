@@ -13,6 +13,10 @@ import {
 } from "../../hooks/useUserValidationMutation";
 import { SubmitButton } from "../common/SubmitButtons";
 import { ValidateInputButton } from "../common/ValidationButtons";
+import {
+  DisabledSignupButton,
+  EnabledSignupButton,
+} from "../../stories/SubmitButtons.stories";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -235,14 +239,11 @@ export const SignupForm = () => {
         <p className=" text-red-500">{errors.phone?.message}</p>
       )}
 
-      <SubmitButton
-        disabled={
-          !formState.isValid || !validEmail || !validNickname || isDuplicated
-        }
-        type="submit"
-        role="submit"
-        children="가입하기"
-      />
+      {!formState.isValid || !validEmail || !validNickname || isDuplicated ? (
+        <SubmitButton {...DisabledSignupButton.args} />
+      ) : (
+        <SubmitButton {...EnabledSignupButton.args} />
+      )}
     </form>
   );
 };

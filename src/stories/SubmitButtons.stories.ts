@@ -31,8 +31,6 @@ export const DisabledLoginButton: Story = {
   },
 };
 
-
-
 export const EnabledSignupButton: Story = {
   args: {
     type: "submit",
