@@ -7,6 +7,9 @@ import { useForm } from "react-hook-form";
 import { JoinMatchPreviewModal } from "../components/game/guest/JoinMatchPreviewModal";
 import { JoinGamePriceDetail } from "../components/game/JoinGamePriceDetail";
 import { useParticipateGameMutation } from "../hooks/useParticipateGameMutation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useJoinGameSchema } from "../modals/useJoinGameSchema";
+import alertFail from "../assets/alert_failure.svg";
 
 export interface JoinGameField {
   player_account_bank: string;
@@ -24,8 +27,14 @@ export const UserJoinMatchPage = () => {
   const { mutate: mutateJoinGame, isError } =
     useParticipateGameMutation(gameIdParam);
 
-  const { register, handleSubmit, formState } = useForm<JoinGameField>();
-  // const bank_holder = watch("player_account_holder");
+  const {
+    register,
+    handleSubmit,
+    formState,
+    formState: { errors },
+  } = useForm<JoinGameField>({
+    resolver: zodResolver(useJoinGameSchema),
+  });
 
   const onSubmit = (data: JoinGameField) => {
     mutateJoinGame(data);
@@ -145,6 +154,14 @@ export const UserJoinMatchPage = () => {
                   className="p-[16px] bg-[#f7f7f7] text-[#969696] text-[14px]  w-full h-[50px]  "
                 />
               </div>
+              {errors.player_account_number && (
+                <div className="flex items-center gap-1 pt-2">
+                  <img src={alertFail} alt="alert icon" />
+                  <p className="text-[#E92C2C] text-[13px] font-[400]">
+                    {errors.player_account_number.message}
+                  </p>
+                </div>
+              )}
             </div>
             <div className="flex flex-col">
               <p className="text-[#969696]">예금주</p>
@@ -154,6 +171,14 @@ export const UserJoinMatchPage = () => {
                   placeholder="환불받으실 계좌의 예금주를 기입해주세요."
                   className="p-[16px] bg-[#f7f7f7] text-[#969696] text-[14px]  w-full h-[50px] "
                 />
+                {errors.player_account_holder && (
+                  <div className="flex items-center gap-1 pt-2">
+                    <img src={alertFail} alt="alert icon" />
+                    <p className="text-[#E92C2C] text-[13px] font-[400]">
+                      {errors.player_account_holder.message}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -165,7 +190,7 @@ export const UserJoinMatchPage = () => {
             style={{
               backgroundColor: !formState.isValid ? "#969696" : "#4065F6",
             }}
-            disabled={!formState.isValid}
+            disabled={!errors}
             className="h-[48px]  w-full text-center text-white text-[14px]"
           >
             매치 참여하기
