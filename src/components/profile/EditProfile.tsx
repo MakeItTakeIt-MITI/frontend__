@@ -18,7 +18,7 @@ export const EditProfile = () => {
       const id = data?.data.id;
       deleteAccount(id);
       localStorage.clear();
-      navigate("/user/login");
+      navigate("/auth/login");
     } else {
       alert("취소합니다.");
       return;

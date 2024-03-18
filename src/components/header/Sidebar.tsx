@@ -26,7 +26,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       alert("로그아웃 되었습니다.");
       logout();
-      navigate("/user/login");
+      navigate("/auth/login");
       // logoutMutation();
       // window.location.reload();
     } else {
@@ -56,7 +56,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
               </div>
             ) : (
               <Link
-                to="/user/login"
+                to="/auth/login"
                 className="font-[600] text-2xl"
                 onClick={closeTab}
               >
@@ -137,14 +137,14 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
                   ) : (
                     <>
                       <Link
-                        to="/user/login"
+                        to="/auth/login"
                         className="hover:underline"
                         onClick={closeTab}
                       >
                         로그인
                       </Link>
                       <Link
-                        to="/user/signup"
+                        to="/auth/signup"
                         className="hover:underline"
                         onClick={closeTab}
                       >
@@ -167,7 +167,7 @@ export const Sidebar = ({ setDisplayTab }: DisplayTab) => {
             로그아웃
           </button>
         ) : (
-          <Link onClick={closeTab} to="/user/login" className="text-center">
+          <Link onClick={closeTab} to="/auth/login" className="text-center">
             로그인
           </Link>
         )}

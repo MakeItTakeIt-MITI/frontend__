@@ -10,7 +10,7 @@ export const useLogoutMutation = () => {
     mutationFn: userLogout,
     onSuccess: () => {
       logout();
-      navigate("/user/login");
+      navigate("/auth/login");
     },
   });
 };

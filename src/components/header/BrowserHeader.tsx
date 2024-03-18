@@ -30,13 +30,13 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
         ) : (
           <>
             <Link
-              to="/user/login"
+              to="/auth/login"
               className="text-[#707070]"
               data-testid="login-link"
             >
               로그인
             </Link>
-            <Link to="/user/signup" className="text-[#707070]">
+            <Link to="/auth/signup" className="text-[#707070]">
               회원가입
             </Link>
           </>
