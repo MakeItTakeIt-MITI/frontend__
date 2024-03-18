@@ -9,6 +9,10 @@ import { useLoginSchema } from "../../modals/useLoginSchema";
 import { useLoginMutation } from "../../hooks/useLoginMutation";
 import alertFail from "../../assets/alert_failure.svg";
 import { SubmitButton } from "../common/SubmitButtons";
+import {
+  DisabledLoginButton,
+  EnabledLoginButton,
+} from "../../stories/SubmitButtons.stories";
 
 export const LoginForm = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
@@ -122,12 +126,11 @@ export const LoginForm = () => {
         )}
       </div>
 
-      <SubmitButton
-        disabled={!formState.isValid}
-        type="submit"
-        role="user-login-btn"
-        children="로그인 하기"
-      />
+      {!formState.isValid ? (
+        <SubmitButton {...DisabledLoginButton.args} />
+      ) : (
+        <SubmitButton {...EnabledLoginButton.args} />
+      )}
     </form>
   );
 };

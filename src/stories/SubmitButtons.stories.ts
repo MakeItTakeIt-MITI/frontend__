@@ -14,23 +14,38 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const LoginFormButton: Story = {
+export const EnabledLoginButton: Story = {
   args: {
     type: "submit",
     role: "user-login-btn",
-    children: "로그인하기",
+    children: "로그인 하기",
     disabled: false
+  },
+};
+export const DisabledLoginButton: Story = {
+  args: {
+    type: "submit",
+    role: "user-login-btn",
+    children: "로그인 하기",
+    disabled: true
   },
 };
 
 
 
-
-export const RegisterFormButton: Story = {
+export const EnabledSignupButton: Story = {
   args: {
     type: "submit",
     role: "submit",
     children: "가입하기",
     disabled: false
+  },
+};
+export const DisabledSignupButton: Story = {
+  args: {
+    type: "submit",
+    role: "submit",
+    children: "가입하기",
+    disabled: true
   },
 };
