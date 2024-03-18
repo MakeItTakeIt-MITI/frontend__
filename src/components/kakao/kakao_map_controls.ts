@@ -12,9 +12,19 @@ const { kakao } = window;
 // 지도 생성
 export const displayMap = () => {
     const container = document.getElementById("map");
+    let lat = null;
+    let lng = null;
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            lat = position.coords.latitude;
+            lng = position.coords.longitude;
+        });
+    }
 
     const options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        center: new kakao.maps.LatLng(lat, lng),
+        // center: new kakao.maps.LatLng(33.450701, 126.570667),
         level: 6,
     };
 
@@ -57,6 +67,7 @@ export const getCurrentLocation = (map: any) => {
 
 }
 export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any) => {
+    // const bounds = new window.kakao.maps.LatLngBounds();
 
     return allGamesData?.data.map((match: GameDetailField) => {
 
@@ -73,8 +84,12 @@ export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any)
                     displayCustomInfoWindow(map, coords, content);
                     closeOverlay(content, map, match);
 
+                    // const center = bounds.getCenter();
                     map.setCenter(coords);
+                    relayout(map)
+                    // map.setCenter(coords);
                     // map.getCenter(coords);
+
                 }
             }
         );

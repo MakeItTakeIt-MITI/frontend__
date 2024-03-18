@@ -22,6 +22,8 @@ export const KakaoMapV2 = ({ allGamesData, searchAddress }: any) => {
     // 지도를 생성
     const map = displayMap();
     relayout(map);
+
+    // 지도 렌더링, 현재위치로 변경
     getCurrentLocation(map);
 
     // 지도 확대/축소 컨트롤러 생성
