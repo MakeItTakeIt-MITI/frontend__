@@ -24,8 +24,8 @@ export const displayMap = () => {
 
     const options = {
         // center: new kakao.maps.LatLng(lat, lng),
-        center: new kakao.maps.LatLng(37.496486063, 127.028361548),
-        // center: new kakao.maps.LatLng(33.450701, 126.570667),
+        // center: new kakao.maps.LatLng(37.496486063, 127.028361548),
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
         level: 6,
     };
 
