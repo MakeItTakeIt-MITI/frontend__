@@ -18,11 +18,8 @@ const useAuthStore = create(
                 }
             },
             logout: () => {
-                const userLocalStorage = localStorage.getItem('accessToken');
-                if (!userLocalStorage) {
-                    set({ isLoggedIn: false });
-                    localStorage.clear();
-                }
+                set({ isLoggedIn: false });
+                localStorage.clear();
             },
         }),
         {

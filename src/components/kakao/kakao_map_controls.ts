@@ -49,8 +49,8 @@ export const displayZoomControls = (map: any) => {
 
 export const getCurrentLocation = (map: any) => {
 
-    // const geolocControl = new kakao.maps.MapTypeControl();
-    // map.addControl(geolocControl, kakao.maps.ControlPosition.TOPRIGHT);
+    const geolocControl = new kakao.maps.MapTypeControl();
+    map.addControl(geolocControl, kakao.maps.ControlPosition.TOPRIGHT);
 
     // console.log(navigator.geolocation);
 
@@ -60,6 +60,8 @@ export const getCurrentLocation = (map: any) => {
             const lng = position.coords.longitude;
 
             const userLatLng = new kakao.maps.LatLng(lat, lng);
+            console.log('current location set');
+
             map.setCenter(userLatLng);
         });
     } else {
@@ -85,11 +87,9 @@ export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any)
                     displayCustomInfoWindow(map, coords, content);
                     closeOverlay(content, map, match);
 
-                    // const center = bounds.getCenter();
                     map.setCenter(coords);
                     relayout(map)
-                    // map.setCenter(coords);
-                    // map.getCenter(coords);
+
 
                 }
             }
@@ -98,11 +98,12 @@ export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any)
 
 }
 
-export const onClickRelocateMapPosition = (geocoder: any, address: any, map: any) => {
+export const onClickRelocateMapPosition = (geocoder: any, address: any, map: any, isSearched: any) => {
 
     return geocoder.addressSearch(
         address,
         function (result: any, status: boolean) {
+            isSearched(true)
             if (status === kakao.maps.services.Status.OK) {
                 const coords = new window.kakao.maps.LatLng(
                     result[0].y,
@@ -163,30 +164,15 @@ export const displayModalInfoWindow = (map: any, content: any) => {
     return customOverlay
 }
 
-function setDraggable(map: any, draggable: boolean) {
-    // 마우스 드래그로 지도 이동 가능여부를 설정합니다
-    map.setDraggable(draggable);
-}
+// function setDraggable(map: any, draggable: boolean) {
+//     // 마우스 드래그로 지도 이동 가능여부를 설정합니다
+//     map.setDraggable(draggable);
+// }
 
 
 export const closeOverlay = (customOverlay: any, map: any, match: any) => {
 
-    // const modalInfo = (match: any) => {
 
-    //     const address = match.court.address + ' ' + match.court.address_detail;
-    //     const linkHref = '/games/detail/' + match.id;
-
-    //     return `
-    //         <div key={match.id} class="z-[999] bg-white p-4 flex flex-col justify-around text-sm shadow-lg w-[244px] h-[192px] rounded-xl">
-    //             <div class="flex justify-between">
-    //                 <p class="font-bold text-lg truncate">${match.title}</p>
-    //                 <button id="close-button" class="text-md font-bold bg-[#9C99B0] p-1 w-5 h-5 rounded-full flex items-center justify-center"><p class="text-white">x</p></button>
-    //             </div>
-    //             <p style="white-space: normal">${address}</p>
-    //             <a href="${linkHref}" class="bg-[#4065F6] h-[40px] flex items-center justify-center text-white rounded-sm">참가하기</a>
-    //         </div>
-    //     `;
-    // };
 
 
     const modalInfo = (match: any) => {
@@ -207,7 +193,8 @@ export const closeOverlay = (customOverlay: any, map: any, match: any) => {
         closeButton.innerHTML = '<p class="text-white">x</p>';
         closeButton.addEventListener('click', () => {
             div.remove();
-            setDraggable(map, true)
+
+            // setDraggable(map, true)
         });
 
         const matchStatus = document.createElement('span');
@@ -257,8 +244,9 @@ export const closeOverlay = (customOverlay: any, map: any, match: any) => {
         console.log('open modal');
         const openModalContent = modalInfo(match);
         displayModalInfoWindow(map, openModalContent);
-        setDraggable(map, false)
+        // setDraggable(map, false)
     });
+
 
 
 };
