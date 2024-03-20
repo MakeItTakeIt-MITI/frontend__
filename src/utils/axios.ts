@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const baseUrl = 'https://api.makeittakeit.kr'
 
