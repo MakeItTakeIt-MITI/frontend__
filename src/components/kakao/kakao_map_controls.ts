@@ -12,21 +12,11 @@ const { kakao } = window;
 // 지도 생성
 export const displayMap = () => {
     const container = document.getElementById("map");
-    // let lat = null;
-    // let lng = null;
-
-    // if (navigator.geolocation) {
-    //     navigator.geolocation.getCurrentPosition(function (position) {
-    //         lat = position.coords.latitude;
-    //         lng = position.coords.longitude;
-    //     });
-    // }
 
     const options = {
-        // center: new kakao.maps.LatLng(lat, lng),
-        // center: new kakao.maps.LatLng(37.496486063, 127.028361548),
+
         center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 6,
+        level: 4,
     };
 
     return new kakao.maps.Map(container, options);
@@ -69,34 +59,35 @@ export const getCurrentLocation = (map: any) => {
     }
 
 }
-export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any) => {
-    // const bounds = new window.kakao.maps.LatLngBounds();
+/** 클로스터로 대체 */
+// export const displayAllGamesOnMap = (allGamesData: any, map: any, geocoder: any) => {
+//     // const bounds = new window.kakao.maps.LatLngBounds();
 
-    return allGamesData?.data.map((match: GameDetailField) => {
+//     return allGamesData?.data.map((match: GameDetailField) => {
 
-        geocoder.addressSearch(
-            match.court.address,
-            function (result: any, status: boolean) {
-                if (status === kakao.maps.services.Status.OK) {
-                    const coords = new window.kakao.maps.LatLng(
-                        result[0].y,
-                        result[0].x
-                    );
+//         geocoder.addressSearch(
+//             match.court.address,
+//             function (result: any, status: boolean) {
+//                 if (status === kakao.maps.services.Status.OK) {
+//                     const coords = new window.kakao.maps.LatLng(
+//                         result[0].y,
+//                         result[0].x
+//                     );
 
-                    const content = customInfoHTMLContent(match);
-                    displayCustomInfoWindow(map, coords, content);
-                    closeOverlay(content, map, match);
+//                     const content = customInfoHTMLContent(match);
+//                     displayCustomInfoWindow(map, coords, content);
+//                     closeOverlay(content, map, match);
 
-                    map.setCenter(coords);
-                    relayout(map)
+//                     map.setCenter(coords);
+//                     relayout(map)
 
 
-                }
-            }
-        );
-    });
+//                 }
+//             }
+//         );
+//     });
 
-}
+// }
 
 export const onClickRelocateMapPosition = (geocoder: any, address: any, map: any, isSearched: any) => {
 
@@ -128,25 +119,26 @@ export const displayCustomInfoWindow = (map: any, coords: any, content: any) => 
         map: map,
         position: coords,
         content: content,
+
+
     })
 
     customOverlay.setMap(map);
 
 
-
     return customOverlay
 }
 
-export const closeDisplayModalInfoWindow = (map: any, content: any) => {
-    const customOverlay = new kakao.maps.CustomOverlay({
-        map: map,
-        content: content,
-    })
+// export const closeDisplayModalInfoWindow = (map: any, content: any) => {
+//     const customOverlay = new kakao.maps.CustomOverlay({
+//         map: map,
+//         content: content,
+//     })
 
 
 
-    return customOverlay
-}
+//     return customOverlay
+// }
 
 
 // 커스텀 오버레이 윈도우 
@@ -159,6 +151,7 @@ export const displayModalInfoWindow = (map: any, content: any) => {
         content: content,
     })
     customOverlay.setMap(map);
+
 
 
     return customOverlay
@@ -243,8 +236,8 @@ export const closeOverlay = (customOverlay: any, map: any, match: any) => {
 
     customOverlay.addEventListener("click", () => {
         // customOverlayOption.setMap(null);
-        console.log('closed custom overlay');
-        console.log('open modal');
+        // console.log('closed custom overlay');
+        // console.log('open modal');
         const openModalContent = modalInfo(match);
         displayModalInfoWindow(map, openModalContent);
         // setDraggable(map, false)
@@ -292,10 +285,17 @@ export const clusterDisplayAllGames = (map: any, allGamesData: any, geocoder: an
     });
 
 
+    // const customAddress: string[] = [];
+    // const duplicateAddresses: string[] = [];
+
     return allGamesData?.data.map((match: GameDetailField) => {
         geocoder.addressSearch(
             match.court.address,
             function (result: any, status: boolean) {
+                // allAddressArray.push(match.court.address)
+
+
+
                 if (status === kakao.maps.services.Status.OK) {
                     const coords = new kakao.maps.LatLng(
                         result[0].y,
@@ -303,15 +303,32 @@ export const clusterDisplayAllGames = (map: any, allGamesData: any, geocoder: an
                     );
 
                     const content = customInfoHTMLContent(match);
-                    const overays = displayCustomInfoWindow(map, coords, content);
+
+
+                    const overlay = displayCustomInfoWindow(map, coords, content);
+
                     closeOverlay(content, map, match);
 
-                    clusterer.addMarker(overays);
+                    // const address = match.court.address;
+                    // if (customAddress.includes(address)) {
+                    //     // This address is a duplicate
+                    //     duplicateAddresses.push(address);
+                    //     console.log('duplicated', duplicateAddresses);
+
+                    // } else {
+                    //     customAddress.push(address);
+                    //     console.log('custom', customAddress);
+
+                    // }
+
+                    clusterer.addMarker(overlay);
                     map.setCenter(coords);
                     relayout(map);
                 }
             }
         );
-    });
+    }
+    );
+
 }
 
