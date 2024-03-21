@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import {
-  displayAllGamesOnMap,
+  clusterDisplayAllGames,
+  // displayAllGamesOnMap,
   displayMap,
   displayZoomControls,
   getCurrentLocation,
@@ -39,7 +40,8 @@ export const KakaoMapV2 = ({ allGamesData, searchAddress }: any) => {
     );
 
     // 커스텀 오버레이를 사용해 모든 경기 표시
-    displayAllGamesOnMap(allGamesData, map, geocoder);
+    // displayAllGamesOnMap(allGamesData, map, geocoder);
+    clusterDisplayAllGames(map, allGamesData, geocoder);
     if (!searchAddressChanged) {
       getCurrentLocation(map);
     }

@@ -173,7 +173,9 @@ export const displayModalInfoWindow = (map: any, content: any) => {
 export const closeOverlay = (customOverlay: any, map: any, match: any) => {
 
 
-
+    const closeDiv = (div: HTMLElement) => {
+        div.remove()
+    }
 
     const modalInfo = (match: any) => {
         const div = document.createElement('div');
@@ -192,7 +194,8 @@ export const closeOverlay = (customOverlay: any, map: any, match: any) => {
         closeButton.classList.add('text-md', 'font-bold', 'bg-[#9C99B0]', 'p-1', 'w-5', 'h-5', 'rounded-full', 'flex', 'items-center', 'justify-center');
         closeButton.innerHTML = '<p class="text-white">x</p>';
         closeButton.addEventListener('click', () => {
-            div.remove();
+            // div.remove();
+            closeDiv(div)
 
             // setDraggable(map, true)
         });
@@ -280,4 +283,35 @@ export const customInfoHTMLContent = (match: any) => {
     return div;
 }
 
+
+export const clusterDisplayAllGames = (map: any, allGamesData: any, geocoder: any) => {
+    const clusterer = new kakao.maps.MarkerClusterer({
+        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+        minLevel: 4 // 클러스터 할 최소 지도 레벨 
+    });
+
+
+    return allGamesData?.data.map((match: GameDetailField) => {
+        geocoder.addressSearch(
+            match.court.address,
+            function (result: any, status: boolean) {
+                if (status === kakao.maps.services.Status.OK) {
+                    const coords = new kakao.maps.LatLng(
+                        result[0].y,
+                        result[0].x
+                    );
+
+                    const content = customInfoHTMLContent(match);
+                    const overays = displayCustomInfoWindow(map, coords, content);
+                    closeOverlay(content, map, match);
+
+                    clusterer.addMarker(overays);
+                    map.setCenter(coords);
+                    relayout(map);
+                }
+            }
+        );
+    });
+}
 
