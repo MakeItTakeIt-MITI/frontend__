@@ -39,8 +39,8 @@ export const displayZoomControls = (map: any) => {
 
 export const getCurrentLocation = (map: any) => {
 
-    const geolocControl = new kakao.maps.MapTypeControl();
-    map.addControl(geolocControl, kakao.maps.ControlPosition.TOPRIGHT);
+    // const geolocControl = new kakao.maps.MapTypeControl();
+    // map.addControl(geolocControl, kakao.maps.ControlPosition.TOPLEFT);
 
     // console.log(navigator.geolocation);
 
