@@ -9,7 +9,8 @@ import { MatchListDetail } from "../components/game/MatchesListContainer";
 import { useEffect, useState } from "react";
 import { MobileViewGameList } from "../components/home/mobile/MobileViewGameList";
 import { LoadingPage } from "./LoadingPage";
-import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
+// import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
+import { NaverMap } from "../components/naver/NaverMap";
 
 export const HomePage = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
@@ -65,7 +66,8 @@ export const HomePage = () => {
               : null}
           </div>
         </div>{" "}
-        <KakaoMapV2 allGamesData={allGamesData} searchAddress={searchAddress} />
+        <NaverMap />
+        {/* <KakaoMapV2 allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         {/* <KakaoMap allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         <MobileViewDatesList setSelectedDate={setSelectedDate} />
       </div>
