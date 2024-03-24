@@ -66,3 +66,11 @@ export const addressToLatLongCoord = (inputAddress: string) => {
     });
     // [출처] 네이버 지도 JavaScript API v3 배우기(11) - 주소 ↔ 좌표 변환(Geocoder), 현재 위치 이동(Geoloaction)|작성자 별동산
 }
+
+export const displayAllGames = (setAddressList, allGamesData) => {
+
+    if (allGamesData) {
+        setAddressList(allGamesData.data.map((game) => game.court.address))
+    }
+
+}
