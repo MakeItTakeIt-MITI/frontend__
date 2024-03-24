@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
-import { geolocation, renderMap } from "./naver_map_controls";
+import { useEffect } from "react";
+import { renderMap } from "./naver_map_controls";
+import { getGeolocation } from "./Geolocation";
 
 export const NaverMap = () => {
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
   useEffect(() => {
     const map = renderMap();
 
-    geolocation(setLatitude, setLongitude);
-
-    console.log(latitude, longitude);
-  }, [latitude, longitude]);
+    // geolocation(setLatitude, setLongitude);
+    getGeolocation();
+  }, []);
 
   return <section id="map" className="w-full  h-[473px] relative" />;
 };
