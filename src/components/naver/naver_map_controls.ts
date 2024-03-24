@@ -8,16 +8,20 @@ declare global {
 
 const { naver } = window;
 
-export const renderMap = () => {
+export const renderMap = (latitude, longitude) => {
     const mapOptions = {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 10,
+        center: new naver.maps.LatLng(latitude, longitude),
+        // center: new naver.maps.LatLng(37.3595704, 127.105399),
+        zoom: 12,
         mapTypeId: naver.maps.MapTypeId.NORMAL,
         zoomControl: true,
         zoomControlOptions: {
             position: naver.maps.Position.TOP_RIGHT
         },
     };
+
+
+
 
     return new naver.maps.Map("map", mapOptions);
 
