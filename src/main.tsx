@@ -21,6 +21,7 @@ import { PrivateRoute } from "./pages/PrivateRoute.tsx";
 import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
 import { ManageParticipantsPage } from "./pages/games/ManageParticipantsPage.tsx";
 import { FindUserInfoPage } from "./pages/user/FindUserInfoPage.tsx";
+import { UserLoginPageV2 } from "./pages/user/UserLoginPageV2.tsx";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
           {
             path: "login",
             element: <UserLoginPage />,
+            // element: <UserLoginPageV2 />,
           },
           {
             path: "signup",
