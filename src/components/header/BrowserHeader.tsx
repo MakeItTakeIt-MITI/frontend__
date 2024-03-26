@@ -5,6 +5,7 @@ import { HeaderField } from "../home/Header";
 import useUserDataStore from "../../store/useUserDataStore";
 import bars from "../../assets/tab-bars.svg";
 import { useState } from "react";
+import tabImg from "../../assets/all-items-tab-img.jpg";
 
 export const BrowserHeader = ({ handleLogout }: HeaderField) => {
   const { isLoggedIn } = useAuthStore();
@@ -16,7 +17,7 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
   };
 
   return (
-    <nav className=" z-[999] mobile:hidden tablet:flex tablet:h-[3.75rem] items-center  justify-between max-w-[90rem] w-full laptop:px-[13rem] tablet:px-[2rem] mx-auto">
+    <nav className="relative  z-[999] mobile:hidden tablet:flex tablet:h-[3.75rem] items-center  justify-between max-w-[90rem] w-full laptop:px-[13rem] tablet:px-[2rem] mx-auto">
       <div className="flex gap-4 items-center">
         <Link to="/">
           <img src={mitiLogo} alt="miti logo" />
@@ -55,33 +56,38 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
         >
           경기 만들기
         </Link> */}
-        <div className="relative " onClick={displayTab}>
+        <div className="" onClick={displayTab}>
           <img src={bars} alt="tab icon" className="hover:cursor-pointer" />
           {displayTabItems && (
             <div
-              className="bg-[#F5F5F5] z-[99] absolute right-0 w-[537px] h-[196px] rounded-xl"
+              className="bg-[#fff] mx-auto z-[9999] absolute left-0  drop-shadow-xl right-0 top-[58px] rounded-xl  w-full max-w-[64rem] h-[300px] p-4 "
               onMouseLeave={displayTab}
             >
-              <div className="p-4 flex gap-[176px] text-[14px]">
-                <div className="flex flex-col gap-2 justify-between h-full ">
-                  <div className="flex flex-col gap-1">
-                    <h2 className="font-bold">경기</h2>
-                    <p>🏀 나의 참여 경기</p>
-                    <p>🏁 나의 호스팅 경기</p>
-                    <p>✉️ 경기 생성하기</p>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <h2 className="font-bold">경기장</h2>
-                    <p>🔍 경기장 조회</p>
-                  </div>
+              <div className="p-4 flex justify-around ">
+                <div className="flex justify-center items-center ">
+                  <img
+                    src={tabImg}
+                    alt="basketball img"
+                    className="w-[250px]"
+                  />
                 </div>
-                <div className="flex flex-col gap-1">
-                  <h2 className="font-bold">내 정보</h2>
-                  <p>🗒️작성 리뷰</p>
-                  <p>📪 내 리뷰</p>
-                  <p>🏀 프로필 수정</p>
-                  <p>⁉️ FAQ</p>
-                  <p>📢 고객센터</p>
+                <div className="flex flex-col gap-4">
+                  <h2 className="font-bold ">경기</h2>
+                  <Link to="/">🏀 나의 참여 경기</Link>
+                  <Link to="/">🏁 나의 호스팅 경기</Link>
+                  <Link to="/games/host">✉️ 경기 생성하기</Link>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h2 className="font-bold ">경기장</h2>
+                  <Link to="/">🔍 경기장 조회</Link>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h2 className="font-bold ">내 정보</h2>
+                  <Link to="/">🗒️ 작성 리뷰</Link>
+                  <Link to="/">📪 내 리뷰</Link>
+                  <Link to={`/profile/${userId}`}>🏀 프로필 수정</Link>
+                  <Link to="/">⁉️ FAQ</Link>
+                  <Link to="/">📢 고객센터</Link>
                 </div>
               </div>
             </div>
