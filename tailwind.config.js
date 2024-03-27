@@ -9,6 +9,8 @@ export default {
       desktop: "1280px",
     },
     colors: {
+      white: "#fff",
+      black: "#000",
       input: "#F7F7F7",
       disabled: "#e8e8e8",
       active: "#4065F6",
