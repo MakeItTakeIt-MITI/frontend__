@@ -32,7 +32,7 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
             <Link to={`/games/mygames/${userId}`} className=" ">
               나의 경기
             </Link>
-            <Link to={`/profile/${userId}`}>마이페이지</Link>
+            <Link to={`/mypage`}>마이페이지</Link>
             <button onClick={handleLogout}>로그아웃</button>
           </>
         ) : (

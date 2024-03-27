@@ -53,10 +53,7 @@ export const MobileHeader = () => {
                 <span className="text-[13px] text-[#969696]">프로필</span>
               </Link>
             ) : (
-              <Link
-                to={`/profile/${userId}`}
-                className="flex flex-col gap-1 items-center"
-              >
+              <Link to={`/mypage`} className="flex flex-col gap-1 items-center">
                 {pathname === `/profile/${data?.data.id}` ? (
                   <img src={profileIconColor} alt="profile icon" />
                 ) : (

@@ -22,7 +22,8 @@ import { ManageParticipantsPage } from "./pages/games/ManageParticipantsPage.tsx
 import { FindUserInfoPage } from "./pages/user/FindUserInfoPage.tsx";
 import { UserMyPage } from "./pages/user/UserMyPage.tsx";
 import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
-import { FAQPage } from "./pages/user/FAQPage.tsx";
+import { CustomerServicePage } from "./pages/user/CustomerServicePage.tsx";
+import { MyQueryPage } from "./pages/user/MyQueryPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -62,26 +63,28 @@ const router = createBrowserRouter([
         path: "/find-user-info",
         element: <FindUserInfoPage />,
       },
-      {
-        path: "/FAQ",
-        element: <FAQPage />,
-      },
+
       {
         element: <PrivateRoute />,
         children: [
           {
-            path: "/profile",
-            children: [
-              {
-                path: ":id",
-                element: <UserMyPage />,
-              },
-              {
-                path: ":id/edit",
-                element: <EditProfilePage />,
-              },
-            ],
+            path: "/user-profile/edit",
+            element: <EditProfilePage />,
           },
+          {
+            path: "/mypage",
+            element: <UserMyPage />,
+          },
+
+          {
+            path: "/customer-service",
+            element: <CustomerServicePage />,
+          },
+          {
+            path: "/user-query",
+            element: <MyQueryPage />,
+          },
+
           {
             path: "/games",
             children: [

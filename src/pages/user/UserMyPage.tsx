@@ -69,9 +69,9 @@ export const UserMyPage = () => {
             <h2 className="text-[20px] font-bold">메뉴</h2>
             <Link to="/">🗒 작성 리뷰</Link>
             <Link to="/">📭 내 리뷰</Link>
-            <Link to={`/profile/${userId}/edit`}>🏀 프로필 수정</Link>
-            <Link to="/FAQ">⁉️ FAQ</Link>
-            <Link to="/">📢 고객센터</Link>
+            <Link to="/user-profile/edit">🏀 프로필 수정</Link>
+            <Link to="/">⁉️ FAQ</Link>
+            <Link to="/customer-service">📢 고객센터</Link>
           </div>
         </div>
       </div>
