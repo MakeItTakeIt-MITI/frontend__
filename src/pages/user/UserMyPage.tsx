@@ -17,17 +17,17 @@ export const UserMyPage = () => {
   }
 
   return (
-    <>
+    <section className="mt-4">
       {/* <div className=" w-full tablet:max-w-[90rem] laptop:px-[13rem] tablet:px-[2rem] tablet:mb-0 mx-auto  mobile:mb-[4rem] py-3"> */}
       {/* // <div className=" mobile:w-full mx-auto h-full "> */}
       {/* FAQ  */}
       {/* 프로필 수정 */}
-      <NavigateToPrevContainer />
+      <NavigateToPrevContainer children="내 정보" />
 
-      <div className="w-[600px] mx-auto mobile:p-3 laptop:p-0">
-        <div className="flex  flex-col mobile:py-6 mobile:px-2">
+      <div className="laptop:w-[600px] mobile:w-full mx-auto">
+        <div className="flex  flex-col mobile:py-6 mobile:p-0">
           {/* 사용자 정보 */}
-          <div className="w-full">
+          <div className="w-full tablet:p-0 mobile:p-4">
             <div className="flex items-center gap-1.5  ">
               <div>
                 <img src={profileImg} alt="profile icon" />
@@ -39,7 +39,7 @@ export const UserMyPage = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-2  my-4 text-white">
+          <div className="flex flex-col gap-2  my-4 text-white tablet:p-0 mobile:p-4">
             <div className="flex  gap-2 h-[54px] ">
               <div className="bg-[#74BCFF] w-full py-1 px-2 rounded-lg">
                 <p className="text-sm">⭐️ 리뷰 평점</p>
@@ -65,7 +65,7 @@ export const UserMyPage = () => {
           </div>
           <hr className="w-full bg-[#fff] my-5" />
           {/* <EditProfile /> */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 tablet:p-0 mobile:p-4">
             <h2 className="text-[20px] font-bold">메뉴</h2>
             <Link to="/">🗒 작성 리뷰</Link>
             <Link to="/">📭 내 리뷰</Link>
@@ -75,6 +75,6 @@ export const UserMyPage = () => {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };
