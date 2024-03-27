@@ -22,6 +22,7 @@ import { ManageParticipantsPage } from "./pages/games/ManageParticipantsPage.tsx
 import { FindUserInfoPage } from "./pages/user/FindUserInfoPage.tsx";
 import { UserMyPage } from "./pages/user/UserMyPage.tsx";
 import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
+import { FAQPage } from "./pages/user/FAQPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/find-user-info",
         element: <FindUserInfoPage />,
+      },
+      {
+        path: "/FAQ",
+        element: <FAQPage />,
       },
       {
         element: <PrivateRoute />,
