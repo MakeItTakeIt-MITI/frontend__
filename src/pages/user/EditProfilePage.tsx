@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import useUserDataStore from "../../store/useUserDataStore";
 import { useUserInfoQuery } from "../../hooks/useUserInfoQuery";
-import { NicknameEditForm } from "../forms/NicknameEditForm";
-import { PasswordEditForm } from "../forms/PasswordEditForm";
+import { NicknameEditForm } from "../../components/forms/NicknameEditForm";
+import { PasswordEditForm } from "../../components/forms/PasswordEditForm";
 import { deleteAccount } from "../../api/users";
-import { DeleteAccountButton } from "./DeleteAccountButton";
-import { LoadingPage } from "../../pages/LoadingPage";
+import { DeleteAccountButton } from "../../components/profile/DeleteAccountButton";
+import { LoadingPage } from "../LoadingPage";
 
-export const EditProfile = () => {
+export const EditProfilePage = () => {
   const { userId } = useUserDataStore();
   const navigate = useNavigate();
   const { data, isPending, isError } = useUserInfoQuery(userId);
@@ -33,7 +33,7 @@ export const EditProfile = () => {
   }
 
   return (
-    <div>
+    <div className="w-[600px] mx-auto mobile:p-3 laptop:p-0">
       {isError && (
         <p className="text-center text-red-400">Data loading error</p>
       )}

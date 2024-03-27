@@ -1,9 +1,8 @@
-import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
-import useUserDataStore from "../store/useUserDataStore";
-import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
-import { LoadingPage } from "./LoadingPage";
-import profileImg from "../assets/profile_circle (1).svg";
-import { EditProfile } from "../components/profile/EditProfile";
+import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
+import useUserDataStore from "../../store/useUserDataStore";
+import { useUserInfoQuery } from "../../hooks/useUserInfoQuery";
+import { LoadingPage } from "../LoadingPage";
+import profileImg from "../../assets/profile_circle (1).svg";
 import { Link } from "react-router-dom";
 
 export const UserMyPage = () => {
@@ -70,7 +69,7 @@ export const UserMyPage = () => {
             <h2 className="text-[20px] font-bold">메뉴</h2>
             <Link to="/">🗒 작성 리뷰</Link>
             <Link to="/">📭 내 리뷰</Link>
-            <Link to="/">🏀 프로필 수정</Link>
+            <Link to={`/profile/${userId}/edit`}>🏀 프로필 수정</Link>
             <Link to="/">⁉️ FAQ</Link>
             <Link to="/">📢 고객센터</Link>
           </div>

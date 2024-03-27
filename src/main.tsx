@@ -12,7 +12,6 @@ import { MatchDetailsPage } from "./pages/MatchDetailsPage.tsx";
 import { UserJoinMatchPage } from "./pages/UserJoinMatchPage.tsx";
 import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
 import { SMSAuthenticationPage } from "./pages/SMSAuthenticationPage.tsx";
-import { UserMyPage } from "./pages/UserMyPage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { KakaoAuthHandler } from "./components/forms/KakaoAuthHandler.tsx";
@@ -21,6 +20,8 @@ import { PrivateRoute } from "./pages/PrivateRoute.tsx";
 import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
 import { ManageParticipantsPage } from "./pages/games/ManageParticipantsPage.tsx";
 import { FindUserInfoPage } from "./pages/user/FindUserInfoPage.tsx";
+import { UserMyPage } from "./pages/user/UserMyPage.tsx";
+import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -64,8 +65,17 @@ const router = createBrowserRouter([
         element: <PrivateRoute />,
         children: [
           {
-            path: "/profile/:id",
-            element: <UserMyPage />,
+            path: "/profile",
+            children: [
+              {
+                path: ":id",
+                element: <UserMyPage />,
+              },
+              {
+                path: ":id/edit",
+                element: <EditProfilePage />,
+              },
+            ],
           },
           {
             path: "/games",
