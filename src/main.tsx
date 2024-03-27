@@ -24,6 +24,7 @@ import { UserMyPage } from "./pages/user/UserMyPage.tsx";
 import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
 import { CustomerServicePage } from "./pages/user/CustomerServicePage.tsx";
 import { MyQueryPage } from "./pages/user/MyQueryPage.tsx";
+import { FAQPage } from "./pages/user/FAQPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/find-user-info",
         element: <FindUserInfoPage />,
+      },
+      {
+        path: "/faq",
+        element: <FAQPage />,
       },
 
       {

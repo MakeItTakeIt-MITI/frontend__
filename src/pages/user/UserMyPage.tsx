@@ -70,7 +70,7 @@ export const UserMyPage = () => {
             <Link to="/">🗒 작성 리뷰</Link>
             <Link to="/">📭 내 리뷰</Link>
             <Link to="/user-profile/edit">🏀 프로필 수정</Link>
-            <Link to="/">⁉️ FAQ</Link>
+            <Link to="/faq">⁉️ FAQ</Link>
             <Link to="/customer-service">📢 고객센터</Link>
           </div>
         </div>

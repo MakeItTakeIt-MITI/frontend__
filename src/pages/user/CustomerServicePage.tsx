@@ -8,7 +8,7 @@ export const CustomerServicePage = () => {
       <NavigateToPrevContainer children="고객센터" />
       <div className="laptop:w-[600px] mobile:w-full mx-auto mobile:px-4 tablet:px-0">
         <h1 className="mobile:hidden tablet:block text-center font-bold text-2xl">
-          FAQ
+          고객센터
         </h1>
 
         <div className="py-5 flex flex-col gap-4">
