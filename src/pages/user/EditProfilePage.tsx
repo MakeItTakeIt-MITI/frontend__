@@ -36,7 +36,8 @@ export const EditProfilePage = () => {
   return (
     <section className="mt-4">
       <NavigateToPrevContainer children="내 정보" />
-      <div className="laptop:w-[600px] mobile:w-full mx-auto mobile:p-3 laptop:p-0">
+      {/* <div className="laptop:w-[600px] mobile:w-full mx-auto mobile:p-3 laptop:p-0"> */}
+      <div className="laptop:w-[500px] laptop:h-[735px]   mobile:w-full mx-auto border border-gray-300 p-4 rounded-lg">
         <div className="flex items-center justify-center w-full">
           <div className="h-[64px] w-[64px] rounded-full bg-[#D9D9D9]"></div>{" "}
         </div>

@@ -24,7 +24,7 @@ export const UserMyPage = () => {
       {/* 프로필 수정 */}
       <NavigateToPrevContainer children="내 정보" />
 
-      <div className="laptop:w-[600px] mobile:w-full mx-auto">
+      <div className="laptop:w-[500px] laptop:h-[735px]   mobile:w-full mx-auto border border-gray-300 p-4 rounded-lg">
         <div className="flex  flex-col mobile:py-6 mobile:p-0">
           {/* 사용자 정보 */}
           <div className="w-full tablet:p-0 mobile:p-4">
