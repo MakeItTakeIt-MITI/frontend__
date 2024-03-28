@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 // import { useNavigate } from "react-router-dom";
 
-const baseUrl = 'https://api.makeittakeit.kr'
+const baseUrl = 'https://dev.makeittakeit.kr'
 
 
 
