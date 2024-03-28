@@ -1,30 +1,16 @@
 // import { useNavigate } from "react-router-dom";
 import useUserDataStore from "../../store/useUserDataStore";
 import { useUserInfoQuery } from "../../hooks/useUserInfoQuery";
-import { NicknameEditForm } from "../../components/forms/NicknameEditForm";
-import { PasswordEditForm } from "../../components/forms/PasswordEditForm";
-// import { deleteAccount } from "../../api/users";
-// import { DeleteAccountButton } from "../../components/profile/DeleteAccountButton";
+
 import { LoadingPage } from "../LoadingPage";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
+import { useForm } from "react-hook-form";
 
 export const EditProfilePage = () => {
   const { userId } = useUserDataStore();
-  // const navigate = useNavigate();
   const { data, isPending, isError } = useUserInfoQuery(userId);
 
-  // const handleDeleteAccount = () => {
-  //   if (window.confirm("정말 계정을 삭제하기겠습니까?")) {
-  //     alert("계정 삭제되었습니다");
-  //     const id = data?.data.id;
-  //     deleteAccount(id);
-  //     localStorage.clear();
-  //     navigate("/auth/login");
-  //   } else {
-  //     alert("취소합니다.");
-  //     return;
-  //   }
-  // };
+  const { register } = useForm();
 
   if (isPending) {
     return <LoadingPage />;
@@ -36,22 +22,83 @@ export const EditProfilePage = () => {
   return (
     <section className="mt-4">
       <NavigateToPrevContainer children="내 정보" />
-      {/* <div className="laptop:w-[600px] mobile:w-full mx-auto mobile:p-3 laptop:p-0"> */}
-      <div className="laptop:w-[500px] laptop:h-[735px]   mobile:w-full mx-auto border border-gray-300 p-4 rounded-lg">
+      <form className="laptop:w-[500px] laptop:h-[735px]    mobile:w-full mx-auto   border border-gray-300 p-4 rounded-lg flex flex-col justify-between py-8">
+        <h1 className="text-center font-bold text-xl">내 정보</h1>
         <div className="flex items-center justify-center w-full">
-          <div className="h-[64px] w-[64px] rounded-full bg-[#D9D9D9]"></div>{" "}
+          {/* empty profile icon  */}
+          <div className="h-[64px] w-[64px] rounded-full bg-[#D9D9D9]"></div>
         </div>
-        {isError && (
-          <p className="text-center text-red-400">Data loading error</p>
-        )}
-        <NicknameEditForm id={userId} data={data} />
-        <div></div>
-        <PasswordEditForm id={userId} />
-        {/* <DeleteAccountButton handleDeleteAccount={handleDeleteAccount} /> */}
+        {/* nickname field */}
+        <div className="flex flex-col justify-between gap-10">
+          <div className="relative flex flex-col gap-2">
+            <label htmlFor="nickname" className="text-[#999]">
+              닉네임
+            </label>
+            <input
+              type="text"
+              id="nickname"
+              required
+              role="input-nickname"
+              className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full relative"
+              placeholder={data?.data.nickname}
+              {...register("nickname")}
+            />
+            <button
+              className="text-sm absolute right-2 bottom-2 ml-2 w-[81px] rounded-xl tablet:mx-auto h-[36px] bg-[#E8E8E8] "
+              role="change-nickname"
+            >
+              중복확인
+            </button>
+          </div>
+          {/* passworld field */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="password" className="text-[#999]">
+              기존 비밀번호
+            </label>
+            <input
+              type="password"
+              id="password"
+              role="input-password"
+              className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
+              placeholder="기존 비밀번호를 입력해주세요"
+              {...register("password", {
+                required: true,
+              })}
+            />
+          </div>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="new_password" className="text-[#999]">
+                새로운 비밀번호
+              </label>
+              <input
+                type="password"
+                id="new_password"
+                role="input-password"
+                className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
+                placeholder="변경할 비밀번호를 입력해주세요."
+                {...register("new_password")}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="new_check_password" className="text-[#999]">
+                새로운 비밀번호 확인
+              </label>
+              <input
+                type="password"
+                id="new_check_password"
+                role="input-password"
+                className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
+                placeholder="변경할 비밀번호를 입력해주세요."
+                {...register("new_password_check")}
+              />
+            </div>
+          </div>
+        </div>
         <button className="h-[56px] w-full rounded-lg bg-[#E8E8E8] ">
           저장하기
         </button>
-      </div>
+      </form>
     </section>
   );
 };
