@@ -28,7 +28,7 @@ export const userLogout = async () => {
 
 export const userSignup = async (data: RegisterField) => {
     try {
-        const response = await axiosUrl.post('/auth/signup/', data)
+        const response = await axiosUrl.post('/auth/signup', data)
         if (response.data.status_code === 201) {
             localStorage.setItem("authentication_token", response.data.data.authentication_token)
             localStorage.setItem("nickname", response.data.data.nickname)

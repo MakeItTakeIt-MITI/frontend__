@@ -73,8 +73,8 @@ export const SignupForm = () => {
         <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
           이메일
         </label>
-        {/* <input
-          className="input-primary"
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           type="email"
           id="email"
           role="input-email"
@@ -83,11 +83,6 @@ export const SignupForm = () => {
           {...register("email", {
             required: true,
           })}
-        /> */}
-        <FormInput
-          register={register}
-          disabled={validEmail ? true : false}
-          {...SignupEmailField.args}
         />
 
         <ValidateInputButton
@@ -123,8 +118,8 @@ export const SignupForm = () => {
         <label htmlFor="password" className="text-[12px] text-[#1c1c1c]">
           비빌번호
         </label>
-        {/* <input
-          className="input-primary"
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           type="password"
           placeholder="비밀번호를 입력해주세요."
           id="password"
@@ -132,8 +127,7 @@ export const SignupForm = () => {
           {...register("password", {
             required: true,
           })}
-        /> */}
-        <FormInput register={register} {...SignupPasswordField.args} />
+        />
       </div>
       {errors.password?.message && (
         <p className=" text-red-500">{errors.password?.message}</p>
@@ -143,8 +137,8 @@ export const SignupForm = () => {
         <label htmlFor="password_check" className="text-[12px] text-[#1c1c1c]">
           비빌번호 확인
         </label>
-        {/* <input
-          className="input-primary"
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           type="password"
           placeholder="비밀번호를 한번 더 입력해주세요."
           id="password_check"
@@ -152,8 +146,7 @@ export const SignupForm = () => {
           {...register("password_check", {
             required: true,
           })}
-        /> */}
-        <FormInput register={register} {...SignupConfirmPasswordField.args} />
+        />
       </div>
       {errors.password_check?.message && (
         <p className=" text-red-500">{errors.password_check?.message}</p>
@@ -162,8 +155,8 @@ export const SignupForm = () => {
         <label htmlFor="name" className="text-[12px] text-[#1c1c1c]">
           이름
         </label>
-        {/* <input
-          className="input-primary"
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           type="text"
           id="name"
           role="input-name"
@@ -171,8 +164,7 @@ export const SignupForm = () => {
           {...register("name", {
             required: true,
           })}
-        /> */}
-        <FormInput register={register} {...SignupNameField.args} />
+        />
         {errors.name?.message && (
           <p className=" text-red-500">유효한 이름을 입력해주세요.</p>
         )}
@@ -181,8 +173,8 @@ export const SignupForm = () => {
         <label htmlFor="nickname" className="text-[12px] text-[#1c1c1c]">
           닉네임
         </label>
-        {/* <input
-          className="input-primary"
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           type="text"
           id="nickname"
           role="input-nickname"
@@ -191,11 +183,6 @@ export const SignupForm = () => {
           {...register("nickname", {
             required: true,
           })}
-        /> */}
-        <FormInput
-          disabled={validNickname ? true : false}
-          register={register}
-          {...SignupNicknameField.args}
         />
 
         <ValidateInputButton
@@ -231,16 +218,15 @@ export const SignupForm = () => {
         <label htmlFor="birthday" className="text-[12px] text-[#1c1c1c]">
           생년월일
         </label>
-        {/* <input
-          className="input-primary"
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           type="date"
           id="birthday"
           role="user-birthday"
           {...register("birthday", {
             required: true,
           })}
-        /> */}
-        <FormInput register={register} {...SignupDateField.args} />
+        />
         {errors.birthday?.message && (
           <p className=" text-red-500">유효한 생년월일을 입력해주세요.</p>
         )}
@@ -249,26 +235,28 @@ export const SignupForm = () => {
         <label htmlFor="phone" className="text-[12px] text-[#1c1c1c]">
           핸드폰 번호
         </label>
-        {/* <input
-          className="input-primary"
+        <input
+          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
           type="string"
           id="phone"
           placeholder="'-'을 제외한 휴대폰번호를 입력해주세요."
           {...register("phone", {
             required: true,
           })}
-        /> */}
-        <FormInput register={register} {...SignupPhoneField.args} />
+        />
       </div>
       {errors.phone?.message && (
         <p className=" text-red-500">{errors.phone?.message}</p>
       )}
 
-      {!formState.isValid ? (
-        <SubmitButton {...DisabledSignupButton.args} />
-      ) : (
-        <SubmitButton {...EnabledSignupButton.args} />
-      )}
+      <SubmitButton
+        // disabled={
+        //   !formState.isValid || !validEmail || !validNickname || isDuplicated
+        // }
+        type="submit"
+        role="submit"
+        children="가입하기"
+      />
     </form>
   );
 };
