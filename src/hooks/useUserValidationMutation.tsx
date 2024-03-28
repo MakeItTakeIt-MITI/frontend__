@@ -7,10 +7,6 @@ interface EmailValidationProp {
   setValidEmail: SetValidFunction;
 }
 
-interface NicknameValidationProp {
-  setValidNickname: SetValidFunction;
-}
-
 export const useValidateDuplicateEmail = ({
   setValidEmail,
 }: EmailValidationProp) => {
@@ -19,11 +15,8 @@ export const useValidateDuplicateEmail = ({
     onSuccess: () => setValidEmail(true),
   });
 };
-export const useValidateDuplicateNickname = ({
-  setValidNickname,
-}: NicknameValidationProp) => {
+export const useValidateDuplicateNickname = () => {
   return useMutation({
     mutationFn: userValidation,
-    onSuccess: () => setValidNickname(true),
   });
 };

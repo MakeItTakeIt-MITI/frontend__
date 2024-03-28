@@ -3,9 +3,9 @@ import { NicknameField, PasswordField, RequestCodeField } from "../interface/use
 import axiosUrl from "../utils/axios"
 
 
-export const userUpdateNickname = async (id: number | null, data: NicknameField) => {
+export const userUpdateNickname = async (id: number | null, nickname: NicknameField) => {
     try {
-        const response = await axiosUrl.patch(`/users/${id}`, data)
+        const response = await axiosUrl.patch(`/users/${id}`, nickname)
         return response.data
     } catch (error) {
         throw new Error

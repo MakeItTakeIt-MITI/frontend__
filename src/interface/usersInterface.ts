@@ -51,12 +51,11 @@ export interface RequestCodeField {
 
 export interface NicknameProps {
     id: number | null;
-    data: { data: { nickname: string } };
+    data: { data: { nickname: string | undefined } };
 }
 
 export interface NicknameField {
-    id: number | null;
-    nickname: string;
+    nickname: { nickname: string | undefined };
 }
 
 export interface PasswordChangeProps {
