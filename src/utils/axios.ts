@@ -28,33 +28,12 @@ axiosUrl.interceptors.request.use((config) => {
 axiosUrl.interceptors.response.use(
     (response) => response,
     async (error) => {
-        // console.log(error);
         if (error.response && error.response.status === 401) {
             localStorage.removeItem('accessToken');
             localStorage.removeItem('userLoginStatus')
-
             console.log('401 token expired');
-
-            // const refreshToken = localStorage.getItem("refreshToken")
-            // const response = await axios.post(`${baseUrl}/auth/refresh-token`, null, {
-            //     headers: {
-            //         "refresh": refreshToken
-            //     }
-            // })
-            // const newToken = response.data.data.access
-            // localStorage.setItem('accessToken', newToken)
-            // console.log(response, 'response!!');
-            // return response.data
-
-
-
-            // localStorage.removeItem('userLoginStatus');
-            // console.log('token expired');
-
-
-
-
-
+        } else {
+            console.log(error.response);
 
         }
     }
