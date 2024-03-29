@@ -40,7 +40,7 @@ export const MyQueryPage = () => {
       <NavigateToPrevContainer children="문의하기" />
       {modal && (
         <Modal
-          isOpen={openModal}
+          isOpen={modal}
           // onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           style={customStyles}
