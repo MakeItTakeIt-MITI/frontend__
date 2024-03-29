@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { useState } from "react";
 import Modal from "react-modal";
+import { DisplayModal } from "../../components/common/DisplayModal";
 
 export interface QueryField {
   title: string;
@@ -39,27 +40,12 @@ export const MyQueryPage = () => {
     <section className="mt-4 ">
       <NavigateToPrevContainer children="문의하기" />
       {modal && (
-        <Modal
-          isOpen={modal}
-          // onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <div className="w-[361px] h-[185px] p-4 flex flex-col justify-between rounded-lg">
-            <h1 className="p-8 text-center font-bold">
-              문의 작성을 완료하였습니다.
-            </h1>
-            <div className="flex justify-center">
-              <button
-                onClick={closeModal}
-                className="bg-[#4065F6] text-white w-[100px] h-[36px] rounded-lg"
-              >
-                확인
-              </button>
-            </div>
-          </div>
-        </Modal>
+        <DisplayModal
+          modal={modal}
+          closeModal={closeModal}
+          title="문의 작성을 완료하였습니다."
+          content="확인"
+        />
       )}
       <form className="relative laptop:w-[500px] min-h-[735px]   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-10 laptop:px-12 mobile:p-4 rounded-lg flex flex-col justify-between ">
         <h1 className="mobile:hidden tablet:block text-center font-bold text-2xl">
