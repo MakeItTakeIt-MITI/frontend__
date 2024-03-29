@@ -68,7 +68,7 @@ export const UserMyPage = () => {
           <div className="flex flex-col gap-4 tablet:p-0 mobile:p-4">
             <h2 className="text-[20px] font-bold">메뉴</h2>
             <Link to="/">🗒 작성 리뷰</Link>
-            <Link to="/">📭 내 리뷰</Link>
+            <Link to="/user-reviews">📭 내 리뷰</Link>
             <Link to="/user-profile/edit">🏀 프로필 수정</Link>
             <Link to="/faq">⁉️ FAQ</Link>
             <Link to="/customer-service">📢 고객센터</Link>

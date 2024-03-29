@@ -25,6 +25,7 @@ import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
 import { CustomerServicePage } from "./pages/user/CustomerServicePage.tsx";
 import { MyQueryPage } from "./pages/user/MyQueryPage.tsx";
 import { FAQPage } from "./pages/user/FAQPage.tsx";
+import { MyReviewPage } from "./pages/user/MyReviewPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -68,7 +69,7 @@ const router = createBrowserRouter([
         path: "/faq",
         element: <FAQPage />,
       },
-
+      { path: "/user-reviews", element: <MyReviewPage /> },
       {
         element: <PrivateRoute />,
         children: [
