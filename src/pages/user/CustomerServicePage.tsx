@@ -6,14 +6,14 @@ export const CustomerServicePage = () => {
   return (
     <section className="mt-4">
       <NavigateToPrevContainer children="고객센터" />
-      <div className="laptop:w-[600px] mobile:w-full mx-auto mobile:px-4 tablet:px-0">
+      <div className="flex flex-col gap-4 laptop:w-[500px] min-h-[735px]   mobile:w-full mx-auto laptop:border laptop:border-gray-300  laptop:py-10 laptop:px-12 mobile:p-4 rounded-lg">
         <h1 className="mobile:hidden tablet:block text-center font-bold text-2xl">
           고객센터
         </h1>
 
         <div className="py-5 flex flex-col gap-4">
           <Link to="/user-query">
-            <button className="h-[48px] w-full border border-gray-300 rounded-lg font-bold">
+            <button className="h-[48px] w-full border border-gray-300  rounded-lg font-bold">
               문의하기
             </button>
           </Link>

@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { UserEditField } from "../../interface/user-edit-interface";
 import { useValidateDuplicateNickname } from "../../hooks/useUserValidationMutation";
 import { useUpdateUserMutation } from "../../hooks/useCheckDuplicateMutation";
-import { UpdateUserField } from "../../interface/usersInterface";
 
 export const EditProfilePage = () => {
   const { userId } = useUserDataStore();
@@ -23,6 +22,7 @@ export const EditProfilePage = () => {
 
   const onSubmit = (userData: UserEditField) => {
     updateUserInfoMutation(userData);
+    console.log(userData);
   };
 
   if (isPending) {
@@ -44,7 +44,7 @@ export const EditProfilePage = () => {
       <NavigateToPrevContainer children="내 정보" />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="laptop:w-[500px] laptop:h-[735px]    mobile:w-full mx-auto   border border-gray-300 p-4 rounded-lg flex flex-col justify-between py-8"
+        className="laptop:w-[500px] min-h-[735px]   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-10 laptop:px-12 mobile:p-4 rounded-lg flex flex-col justify-between "
       >
         <h1 className="text-center font-bold text-xl">내 정보</h1>
         <div className="flex items-center justify-center w-full">
@@ -113,6 +113,7 @@ export const EditProfilePage = () => {
               role="input-password"
               className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
               placeholder="기존 비밀번호를 입력해주세요"
+              {...register("password")}
               // {...register("password", {
               //   required: true,
               // })}

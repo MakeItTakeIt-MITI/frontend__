@@ -1,3 +1,4 @@
+import { UserEditField } from "../interface/user-edit-interface";
 import { ValidationField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios";
 export const userValidation = async (data: ValidationField) => {
@@ -10,7 +11,7 @@ export const userValidation = async (data: ValidationField) => {
     }
 };
 
-export const updateUserInfo = async (userId: number | null, data: { nickname: string | undefined }) => {
+export const updateUserInfo = async (userId: number | null, data: UserEditField) => {
     try {
         const response = await axiosUrl.patch(`/users/${userId}`, data)
         return response
