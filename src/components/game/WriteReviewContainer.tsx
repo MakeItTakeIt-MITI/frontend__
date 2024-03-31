@@ -4,7 +4,7 @@ import linkArrow from "../../assets/Chevron_Right_MD.svg";
 export const WriteReviewContainer = () => {
   return (
     <Link
-      to="/user-review-detail"
+      to="/"
       className="  w-full h-[96px] border text-[#545454] border-gray-300 rounded-lg flex  justify-between p-4"
     >
       <div className="flex items-center gap-2">
@@ -50,7 +50,7 @@ export const WriteReviewContainer = () => {
             </svg>
             <span className="text-[14px]">5.0</span>
           </div>
-          <p className="text-[9px]">팀 구성을 균형있게 해주셨어요!</p>
+          <p className="text-[13px]">팀 구성을 균형있게 해주셨어요!</p>
         </div>
       </div>
       <button>

@@ -27,6 +27,7 @@ import { MyQueryPage } from "./pages/user/MyQueryPage.tsx";
 import { FAQPage } from "./pages/user/FAQPage.tsx";
 import { MyReviewPage } from "./pages/user/MyReviewPage.tsx";
 import { MyReviewDetailPage } from "./pages/user/MyReviewDetailPage.tsx";
+import { UserReviewsPage } from "./pages/user/UserReviewsPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -71,8 +72,12 @@ const router = createBrowserRouter([
         element: <FAQPage />,
       },
       {
-        path: "/user-reviews",
+        path: "/my-reviews",
         element: <MyReviewPage />,
+      },
+      {
+        path: "/users-reviews",
+        element: <UserReviewsPage />,
       },
 
       {
@@ -95,7 +100,7 @@ const router = createBrowserRouter([
             path: "/user-query",
             element: <MyQueryPage />,
           },
-          { path: "/user-reviews-detail", element: <MyReviewDetailPage /> },
+          { path: "/my-reviews-detail", element: <MyReviewDetailPage /> },
 
           {
             path: "/games",
