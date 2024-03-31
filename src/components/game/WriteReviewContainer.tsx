@@ -4,7 +4,7 @@ import linkArrow from "../../assets/Chevron_Right_MD.svg";
 export const WriteReviewContainer = () => {
   return (
     <Link
-      to="/"
+      to="/user-review-detail"
       className="  w-full h-[96px] border text-[#545454] border-gray-300 rounded-lg flex  justify-between p-4"
     >
       <div className="flex items-center gap-2">
