@@ -28,6 +28,7 @@ import { FAQPage } from "./pages/user/FAQPage.tsx";
 import { MyReviewPage } from "./pages/user/MyReviewPage.tsx";
 import { MyReviewDetailPage } from "./pages/user/MyReviewDetailPage.tsx";
 import { UserReviewsPage } from "./pages/user/UserReviewsPage.tsx";
+import { WrittenReviewDetailPage } from "./pages/user/WrittenReviewDetailPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
         path: "/users-reviews",
         element: <UserReviewsPage />,
       },
+      {
+        path: "/review/:id",
+        element: <WrittenReviewDetailPage />,
+      },
 
       {
         element: <PrivateRoute />,
@@ -111,7 +116,6 @@ const router = createBrowserRouter([
               {
                 path: "detail/:id",
                 element: <MatchDetailsPage />,
-                children: [],
               },
 
               {

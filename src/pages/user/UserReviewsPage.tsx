@@ -1,5 +1,5 @@
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
-import { WriteReviewContainer } from "../../components/game/WriteReviewContainer";
+import { WriteReviewContainer } from "./WriteReviewContainer";
 
 export const UserReviewsPage = () => {
   return (
