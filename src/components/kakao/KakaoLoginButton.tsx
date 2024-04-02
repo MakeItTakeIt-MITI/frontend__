@@ -13,7 +13,8 @@ export const KakaoLoginButton = ({ children }: KakaoLoginProp) => {
     window.location.href = KAKAO_AUTH_URL;
   };
   return (
-    <div className="relative  mobile:w-full tablet:w-[600px]">
+    <div className="relative  w-full">
+      {/* <div className="relative  mobile:w-full tablet:w-[600px]"> */}
       <button
         className="w-full bg-[#FAE64D] h-[48px]  rounded-lg text-[14px] font-bold"
         onClick={kakaoLogin}

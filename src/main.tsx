@@ -29,6 +29,7 @@ import { MyReviewPage } from "./pages/user/MyReviewPage.tsx";
 import { MyReviewDetailPage } from "./pages/user/MyReviewDetailPage.tsx";
 import { UserReviewsPage } from "./pages/user/UserReviewsPage.tsx";
 import { WrittenReviewDetailPage } from "./pages/user/WrittenReviewDetailPage.tsx";
+import { SignupIntroPage } from "./pages/auth/SignupIntroPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -47,7 +48,10 @@ const router = createBrowserRouter([
           {
             path: "login",
             element: <UserLoginPage />,
-            // element: <UserLoginPageV2 />,
+          },
+          {
+            path: "signup-option",
+            element: <SignupIntroPage />,
           },
           {
             path: "signup",

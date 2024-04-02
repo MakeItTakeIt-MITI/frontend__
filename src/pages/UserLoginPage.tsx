@@ -38,7 +38,7 @@ export const UserLoginPage = () => {
               <p className="">아직 회원이 아니신가요? </p>
               <Link
                 role="to-signup"
-                to="/auth/signup"
+                to="/auth/signup-option"
                 className="text-[#4065F6] hover:font-bold  "
               >
                 회원가입하기
