@@ -25,7 +25,7 @@ export const FormInput = ({
       type={type}
       id={id}
       role={role}
-      className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+      className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
       placeholder={placeholder}
       {...register(register_type, {
         required: requiredValue,

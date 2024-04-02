@@ -48,7 +48,8 @@ export const LoginForm = () => {
 
   return (
     <form
-      className="flex flex-col gap-6  mobile:w-full tablet:w-[600px]"
+      // className="flex flex-col gap-6  mobile:w-full tablet:w-[600px]"
+      className="flex flex-col gap-4"
       onSubmit={handleSubmit(onSubmit)}
     >
       {isError && (
@@ -62,16 +63,6 @@ export const LoginForm = () => {
           이메일
         </label>
         <div className="relative">
-          {/* <input
-            type="email"
-            id="email"
-            role="user-email-input"
-            className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
-            placeholder="이메일을 입력해주세요."
-            {...register("email", {
-              required: true,
-            })}
-          /> */}
           <FormInput register={register} {...EmailInputField.args} />
 
           {emailValue && (

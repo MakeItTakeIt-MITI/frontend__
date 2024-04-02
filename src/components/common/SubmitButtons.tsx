@@ -17,7 +17,7 @@ export const SubmitButton = ({
       role={role}
       disabled={disabled}
       style={{ backgroundColor: disabled ? "#E8e8e8" : "#4065f6" }}
-      className="h-12 tablet:w-[600px]  mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:text-[15px] "
+      className="h-12 w-full  mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:text-[15px] "
     >
       {children}
     </button>

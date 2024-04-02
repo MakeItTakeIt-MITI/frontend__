@@ -88,7 +88,10 @@ const router = createBrowserRouter([
         path: "/review/:id",
         element: <WrittenReviewDetailPage />,
       },
-
+      {
+        path: "/customer-service",
+        element: <CustomerServicePage />,
+      },
       {
         element: <PrivateRoute />,
         children: [
@@ -101,10 +104,6 @@ const router = createBrowserRouter([
             element: <UserMyPage />,
           },
 
-          {
-            path: "/customer-service",
-            element: <CustomerServicePage />,
-          },
           {
             path: "/user-query",
             element: <MyQueryPage />,
