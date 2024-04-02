@@ -15,7 +15,6 @@ export const EditProfilePage = () => {
   const [nicknameVerification, setNicknameVerification] = useState("");
   const [passVerification, setPassVerification] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
   const { userId } = useUserDataStore();
   const { data, isPending } = useUserInfoQuery(userId);
@@ -30,8 +29,7 @@ export const EditProfilePage = () => {
     userId,
     setPassVerification,
     setNicknameVerification,
-    setNewPassword,
-    setConfirmNewPassword
+    setNewPassword
   );
 
   const removeEmptyFields = (data: UserEditField) => {
@@ -156,7 +154,11 @@ export const EditProfilePage = () => {
                 placeholder="변경할 비밀번호를 입력해주세요."
                 {...register("new_password")}
               />
+              {newPassword && (
+                <p className="text-[#E92C2C] text-[13px]">{newPassword}</p>
+              )}
             </div>
+
             <div className="flex flex-col gap-2">
               <label htmlFor="new_check_password" className="text-[#999]">
                 새로운 비밀번호 확인
@@ -169,6 +171,12 @@ export const EditProfilePage = () => {
                 placeholder="변경할 비밀번호를 입력해주세요."
                 {...register("new_password_check")}
               />
+              {getValues("new_password") !==
+                getValues("new_password_check") && (
+                <p className="text-[#E92C2C] text-[13px]">
+                  비밀번호가 일치하지 않습니다.
+                </p>
+              )}
             </div>
           </div>
         </div>

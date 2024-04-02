@@ -7,8 +7,7 @@ export const useUpdateUserMutation = (
   userId: number | null,
   setPassVerification: (arg: string) => void,
   setNicknameVerification: (arg: string) => void,
-  setNewPassword: (arg: string) => void,
-  setConfirmNewPassword: (arg: string) => void
+  setNewPassword: (arg: string) => void
 ) => {
   const navigate = useNavigate();
   return useMutation({
@@ -30,6 +29,7 @@ export const useUpdateUserMutation = (
             setNicknameVerification("이미 사용중인 닉네임입니다.");
           }
         });
+        // password verification
       } else if (response.data && response.data.data.password) {
         response.data.data.password.map((errorMsg: string) => {
           console.log(errorMsg, "pass");
@@ -43,8 +43,21 @@ export const useUpdateUserMutation = (
             setPassVerification("비밀번호가 일치하지 않습니다.");
           }
         });
+        // new assword verification
+      } else if (response.data && response.data.data.new_password) {
+        response.data.data.new_password.map((errorMsg: string) => {
+          console.log(errorMsg, "pass");
+          if (
+            errorMsg ===
+            "비밀번호는 8자 이상의 영문 대소문자와 숫자, 특수문자를 포함하여야 합니다."
+          ) {
+            console.log("true");
+            setNewPassword("유효한 비밀번호가 아닙니다.");
+          } else {
+            setNewPassword("비밀번호가 일치하지 않습니다.");
+          }
+        });
       }
-      // password verification
     },
   });
 };
