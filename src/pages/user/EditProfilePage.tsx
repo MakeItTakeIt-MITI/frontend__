@@ -8,36 +8,52 @@ import { useForm } from "react-hook-form";
 
 import { UserEditField } from "../../interface/user-edit-interface";
 import { useValidateDuplicateNickname } from "../../hooks/useUserValidationMutation";
-import { useUpdateUserMutation } from "../../hooks/useCheckDuplicateMutation";
+import { useUpdateUserMutation } from "../../hooks/useUpdateUserMutation";
+import { useState } from "react";
 
 export const EditProfilePage = () => {
-  const { userId } = useUserDataStore();
-  const { data, isPending, isError } = useUserInfoQuery(userId);
+  const [nicknameVerification, setNicknameVerification] = useState("");
+  const [passVerification, setPassVerification] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-  const { mutate: updateUserInfoMutation } = useUpdateUserMutation(userId);
+  const { userId } = useUserDataStore();
+  const { data, isPending } = useUserInfoQuery(userId);
+
   const { mutate: nicknameMutation, data: duplicateData } =
     useValidateDuplicateNickname();
 
-  const { register, watch, handleSubmit, getValues } = useForm<UserEditField>();
+  const { register, handleSubmit, getValues, formState } =
+    useForm<UserEditField>();
 
+  const { mutate: updateUserInfoMutation } = useUpdateUserMutation(
+    userId,
+    setPassVerification,
+    setNicknameVerification,
+    setNewPassword,
+    setConfirmNewPassword
+  );
+
+  const removeEmptyFields = (data: UserEditField) => {
+    Object.entries(data).forEach(([key, value]) => {
+      if (value === "") {
+        delete data[key as keyof UserEditField];
+      }
+    });
+  };
   const onSubmit = (userData: UserEditField) => {
+    removeEmptyFields(userData);
     updateUserInfoMutation(userData);
-    console.log(userData);
   };
 
   if (isPending) {
     return <LoadingPage />;
-  }
-  if (isError) {
-    return <p>Error..</p>;
   }
 
   const handleValidateNick = () => {
     const nickname = { nickname: getValues("nickname") };
     nicknameMutation(nickname);
   };
-
-  const passwordLength = watch("password")?.length;
 
   return (
     <section className="mt-4">
@@ -90,6 +106,11 @@ export const EditProfilePage = () => {
                 중복확인
               </button>
             </div>
+            {nicknameVerification && (
+              <p className="text-[#E92C2C] text-[13px]">
+                {nicknameVerification}
+              </p>
+            )}
             {duplicateData?.data.nickname.is_duplicated === true && (
               <p className="text-[#E92C2C] text-[13px]">
                 이미 사용중인 닉네임입니다.
@@ -113,11 +134,14 @@ export const EditProfilePage = () => {
               role="input-password"
               className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
               placeholder="기존 비밀번호를 입력해주세요"
-              {...register("password")}
-              // {...register("password", {
-              //   required: true,
-              // })}
+              // {...register("password")}
+              {...register("password", {
+                required: true,
+              })}
             />
+            {passVerification && (
+              <p className="text-[#E92C2C] text-[13px]">{passVerification}</p>
+            )}
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
@@ -148,19 +172,19 @@ export const EditProfilePage = () => {
             </div>
           </div>
         </div>
-        {passwordLength >= 8 ||
-        duplicateData?.data.nickname.is_duplicated === false ? (
+        {formState.isValid ? (
           <button
             type="submit"
             className="h-[56px] w-full rounded-lg bg-[#4065F6] text-white "
           >
+            {" "}
             저장하기
           </button>
         ) : (
           <button disabled className="h-[56px] w-full rounded-lg bg-[#E8E8E8] ">
             저장하기
           </button>
-        )}
+        )}{" "}
       </form>
     </section>
   );

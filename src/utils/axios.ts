@@ -29,13 +29,12 @@ axiosUrl.interceptors.request.use((config) => {
 axiosUrl.interceptors.response.use(
     (response) => response,
     async (error) => {
-        if (error.response && error.response.status === 401) {
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('userLoginStatus')
-            console.log('401 token expired');
-        } else {
-            console.log(error.response);
+        if (error.response && error.response.status) {
+            // localStorage.removeItem('accessToken');
+            // localStorage.removeItem('userLoginStatus')
 
+            console.log(error.response);
+            return error.response
         }
     }
 )

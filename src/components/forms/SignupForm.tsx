@@ -250,9 +250,7 @@ export const SignupForm = () => {
       )}
 
       <SubmitButton
-        // disabled={
-        //   !formState.isValid || !validEmail || !validNickname || isDuplicated
-        // }
+        disabled={!formState.isValid}
         type="submit"
         role="submit"
         children="가입하기"
