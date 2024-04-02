@@ -24,9 +24,9 @@ export const useUpdateUserMutation = (
           if (
             errorMsg === "이 필드의 글자 수가  적어도 3 이상인지 확인하십시오."
           ) {
-            setNicknameVerification("유효한 닉네임이 아닙니다.");
+            return setNicknameVerification("유효한 닉네임이 아닙니다.");
           } else {
-            setNicknameVerification("이미 사용중인 닉네임입니다.");
+            return setNicknameVerification("이미 사용중인 닉네임입니다.");
           }
         });
         // password verification
@@ -37,10 +37,9 @@ export const useUpdateUserMutation = (
             errorMsg ===
             "비밀번호는 8자 이상의 영문 대소문자와 숫자, 특수문자를 포함하여야 합니다."
           ) {
-            console.log("true");
-            setPassVerification("유효한 비밀번호가 아닙니다.");
+            return setPassVerification("유효한 비밀번호가 아닙니다.");
           } else {
-            setPassVerification("비밀번호가 일치하지 않습니다.");
+            return setPassVerification("비밀번호가 일치하지 않습니다.");
           }
         });
         // new assword verification
@@ -52,11 +51,15 @@ export const useUpdateUserMutation = (
             "비밀번호는 8자 이상의 영문 대소문자와 숫자, 특수문자를 포함하여야 합니다."
           ) {
             console.log("true");
-            setNewPassword("유효한 비밀번호가 아닙니다.");
+            return setNewPassword("유효한 비밀번호가 아닙니다.");
           } else {
-            setNewPassword("비밀번호가 일치하지 않습니다.");
+            return setNewPassword("비밀번호가 일치하지 않습니다.");
           }
         });
+      } else if (response.data && response.data.data.detail) {
+        if (response.data.data.detail === "사용자 비밀번호가 틀립니다.") {
+          return setPassVerification("비밀번호가 일치하지 않습니다.");
+        }
       }
     },
   });
