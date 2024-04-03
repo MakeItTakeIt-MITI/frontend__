@@ -70,7 +70,7 @@ export const HomePage = () => {
               : null}
           </div>
         </div>{" "}
-        <NaverMapEL allGamesData={allGamesData} searchAddress={searchAddress}  />
+        <NaverMapEL />
         {/* <KakaoMapV2 allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         {/* <KakaoMap allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         <MobileViewDatesList setSelectedDate={setSelectedDate} />
