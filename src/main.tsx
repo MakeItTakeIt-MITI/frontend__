@@ -30,6 +30,7 @@ import { MyReviewDetailPage } from "./pages/user/MyReviewDetailPage.tsx";
 import { UserReviewsPage } from "./pages/user/UserReviewsPage.tsx";
 import { WrittenReviewDetailPage } from "./pages/user/WrittenReviewDetailPage.tsx";
 import { SignupIntroPage } from "./pages/auth/SignupIntroPage.tsx";
+import { SMSVerifiedSuccessPage } from "./pages/auth/SMSVerifiedSuccessPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "/sms-authentication",
         element: <SMSAuthenticationPage />,
+      },
+      {
+        path: "/sms-authentication-verified",
+        element: <SMSVerifiedSuccessPage />,
       },
       {
         path: "/find-user-info",

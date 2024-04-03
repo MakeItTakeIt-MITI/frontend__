@@ -15,7 +15,7 @@ export const useVerifySmsMutation = (
       console.log(response);
 
       if (response.status_code === 200) {
-        return navigate("/auth/login");
+        return navigate("/sms-authentication-verified");
       }
 
       if (response.error_code && response.error_code === 102) {
