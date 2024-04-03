@@ -62,7 +62,7 @@ export const UserLoginPage = () => {
         <div className="absolute  w-full left-0 right-0 laptop:bottom-8  mobile:bottom-0 flex  justify-center  gap-4 text-[#8c8c8c] text-[13px] ">
           <Link to="/customer-service">고객센터</Link>
           <p>|</p>
-          <Link to="/find-user-info">
+          <Link to="/find-email">
             <button>ID / PW를 잊으셨나요?</button>
           </Link>
         </div>

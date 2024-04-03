@@ -19,7 +19,7 @@ import { UserGamesListPage } from "./pages/UserGamesListPage.tsx";
 import { PrivateRoute } from "./pages/PrivateRoute.tsx";
 import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
 import { ManageParticipantsPage } from "./pages/games/ManageParticipantsPage.tsx";
-import { FindUserInfoPage } from "./pages/user/FindUserInfoPage.tsx";
+import { FindEmailPage } from "./pages/user/FindEmailPage.tsx";
 import { UserMyPage } from "./pages/user/UserMyPage.tsx";
 import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
 import { CustomerServicePage } from "./pages/user/CustomerServicePage.tsx";
@@ -74,8 +74,8 @@ const router = createBrowserRouter([
         element: <SMSVerifiedSuccessPage />,
       },
       {
-        path: "/find-user-info",
-        element: <FindUserInfoPage />,
+        path: "/find-email",
+        element: <FindEmailPage />,
       },
       {
         path: "/faq",
