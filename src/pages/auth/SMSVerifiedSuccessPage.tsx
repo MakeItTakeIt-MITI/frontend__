@@ -1,6 +1,19 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export const SMSVerifiedSuccessPage = () => {
+  const navigate = useNavigate();
+  const authentication_token = localStorage.getItem("authentication_token");
+
+  const handleRemoveAuthCode = () => {
+    localStorage.removeItem("authentication_token");
+  };
+
+  useEffect(() => {
+    if (!authentication_token) {
+      navigate("/");
+    }
+  }, []);
   return (
     <section className="laptop:mt-4 mobile:mt-0 h-full ">
       <div className="bg-[#E2F1FF] laptop:w-[500px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-6  justify-between">
@@ -11,6 +24,7 @@ export const SMSVerifiedSuccessPage = () => {
           </p>
         </div>
         <Link
+          onClick={handleRemoveAuthCode}
           to="/auth/login"
           className="h-11 bg-[#4065F6] text-white flex items-center justify-center rounded-lg text-[14px]"
         >
