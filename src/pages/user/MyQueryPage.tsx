@@ -25,7 +25,7 @@ export const MyQueryPage = () => {
   };
 
   return (
-    <section className="mt-4 ">
+    <section className="laptop:my-4 mobile:my-0 ">
       <NavigateToPrevContainer children="문의하기" />
       {modal && (
         <DisplayModal

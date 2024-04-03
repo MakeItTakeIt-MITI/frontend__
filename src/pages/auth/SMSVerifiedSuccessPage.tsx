@@ -15,7 +15,7 @@ export const SMSVerifiedSuccessPage = () => {
     }
   }, []);
   return (
-    <section className="laptop:mt-4 mobile:mt-0 h-full ">
+    <section className="laptop:my-4 mobile:my-0 h-full ">
       <div className="bg-[#E2F1FF] laptop:w-[500px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-6  justify-between">
         <div className="h-full w-full flex items-center flex-col justify-center my-auto">
           <h1 className="font-bold text-[24px]">🎉 사용자 인증 완료!</h1>

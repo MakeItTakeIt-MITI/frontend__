@@ -1,6 +1,6 @@
-import { SignupForm } from "../components/forms/SignupForm";
-import mitiLogo from "../assets/MITI_logo.svg";
-import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
+import { SignupForm } from "../../components/forms/SignupForm";
+import mitiLogo from "../../assets/MITI_logo.svg";
+import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 
 export const UserSignup = () => {
   return (

@@ -7,7 +7,6 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 import { useForm } from "react-hook-form";
 
 import { UserEditField } from "../../interface/user-edit-interface";
-import { useValidateDuplicateNickname } from "../../hooks/useUserValidationMutation";
 import { useUpdateUserMutation } from "../../hooks/useUpdateUserMutation";
 import { useState } from "react";
 
@@ -19,8 +18,8 @@ export const EditProfilePage = () => {
   const { userId } = useUserDataStore();
   const { data, isPending } = useUserInfoQuery(userId);
 
-  const { mutate: nicknameMutation, data: duplicateData } =
-    useValidateDuplicateNickname();
+  // const { mutate: nicknameMutation, data: duplicateData } =
+  //   useValidateDuplicateNickname(setNicknameVerification);
 
   const { register, handleSubmit, getValues, formState } =
     useForm<UserEditField>();
@@ -49,12 +48,12 @@ export const EditProfilePage = () => {
   }
 
   const handleValidateNick = () => {
-    const nickname = { nickname: getValues("nickname") };
-    nicknameMutation(nickname);
+    // const nickname = { nickname: getValues("nickname") };
+    // nicknameMutation(nickname);
   };
 
   return (
-    <section className="mt-4">
+    <section className="laptop:my-4 mobile:my-0">
       <NavigateToPrevContainer children="내 정보" />
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -75,11 +74,11 @@ export const EditProfilePage = () => {
               <input
                 type="text"
                 id="nickname"
-                readOnly={
-                  duplicateData?.data.nickname.is_duplicated === false
-                    ? true
-                    : false
-                }
+                // readOnly={
+                //   duplicateData?.data.nickname.is_duplicated === false
+                //     ? true
+                //     : false
+                // }
                 role="input-nickname"
                 className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full relative"
                 placeholder={data?.data.nickname}
@@ -90,16 +89,16 @@ export const EditProfilePage = () => {
                 type="button"
                 role="change-nickname"
                 onClick={handleValidateNick}
-                style={{
-                  backgroundColor:
-                    duplicateData?.data.nickname.is_duplicated === false
-                      ? "#E8E8E8"
-                      : "#4065F6",
-                  color:
-                    duplicateData?.data.nickname.is_duplicated === false
-                      ? "black"
-                      : "white",
-                }}
+                // style={{
+                //   backgroundColor:
+                //     duplicateData?.data.nickname.is_duplicated === false
+                //       ? "#E8E8E8"
+                //       : "#4065F6",
+                //   color:
+                //     duplicateData?.data.nickname.is_duplicated === false
+                //       ? "black"
+                //       : "white",
+                // }}
               >
                 중복확인
               </button>
@@ -109,7 +108,7 @@ export const EditProfilePage = () => {
                 {nicknameVerification}
               </p>
             )}
-            {duplicateData?.data.nickname.is_duplicated === true && (
+            {/* {duplicateData?.data.nickname.is_duplicated === true && (
               <p className="text-[#E92C2C] text-[13px]">
                 이미 사용중인 닉네임입니다.
               </p>
@@ -118,7 +117,7 @@ export const EditProfilePage = () => {
               <p className="text-green-400 text-[13px]">
                 사용 가능한 닉네임입니다.
               </p>
-            )}
+            )} */}
           </div>
 
           {/* passworld field */}

@@ -4,7 +4,7 @@ import groupIcon from "../../assets/people.svg";
 
 export const WrittenReviewDetailPage = () => {
   return (
-    <section className="my-4">
+    <section className="laptop:my-4 mobile:my-0">
       <NavigateToPrevContainer children="작성 리뷰" />
       <hr className="mobile:block tablet:hidden h-[7px] bg-[#F6F6F6]" />
       <div className="flex flex-col gap-4 laptop:w-[500px] min-h-[735px]    mobile:w-full mx-auto laptop:border laptop:border-gray-300  laptop:py-10 laptop:px-6 mobile:p-4 rounded-lg">

@@ -7,7 +7,7 @@ import chevron_right from "../../assets/Chevron_Right_MD.svg";
 
 export const SignupIntroPage = () => {
   return (
-    <section className="laptop:mt-4 mobile:mt-0 ">
+    <section className="laptop:my-4 mobile:my-0 ">
       <NavigateToPrevContainer children="" />
       <div className="laptop:w-[500px] h-[735px]   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:p-4 rounded-lg flex flex-col justify-between ">
         <div className="flex flex-col gap-8 justify-center items-center h-full">

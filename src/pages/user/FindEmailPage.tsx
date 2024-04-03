@@ -3,7 +3,7 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 
 export const FindEmailPage = () => {
   return (
-    <section className="laptop:mt-4 mobile:mt-0 h-full ">
+    <section className="laptop:my-4 mobile:my-0 h-full ">
       <NavigateToPrevContainer children="회원 정보 찾기" />
       <div className="laptop:w-[500px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-6  justify-between">
         <div className="w-full flex items-center ">

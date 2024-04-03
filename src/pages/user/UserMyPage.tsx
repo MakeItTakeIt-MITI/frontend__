@@ -17,7 +17,7 @@ export const UserMyPage = () => {
   }
 
   return (
-    <section className="mt-4">
+    <section className="laptop:my-4 mobile:my-0">
       {/* <div className=" w-full tablet:max-w-[90rem] laptop:px-[13rem] tablet:px-[2rem] tablet:mb-0 mx-auto  mobile:mb-[4rem] py-3"> */}
       {/* // <div className=" mobile:w-full mx-auto h-full "> */}
       {/* FAQ  */}
