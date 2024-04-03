@@ -6,8 +6,12 @@ export const useRegisterMutation = () => {
   const navigate = useNavigate();
   return useMutation({
     mutationFn: userSignup,
-    onSuccess: () => {
-      navigate("/sms-authentication");
+    onSuccess: (response) => {
+      if (response.status_code === 201) {
+        const auth_code = response.authentication_token;
+        localStorage.setItem("authentication", auth_code);
+        navigate("/sms-authentication");
+      }
     },
   });
 };
