@@ -49,7 +49,7 @@ export const SignupIntroPage = () => {
           </div>
           {/* custom serivce + find into */}
           <div className=" flex  gap-4 text-[#8c8c8c] text-[13px]">
-            <button onClick={() => alert("not available")}>고객센터</button>
+            <Link to="/customer-service">고객센터</Link>
             <p>|</p>
             <Link to="/find-user-info">
               <button>ID / PW를 잊으셨나요?</button>

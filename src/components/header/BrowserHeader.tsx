@@ -22,9 +22,6 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
         <Link to="/">
           <img src={mitiLogo} alt="miti logo" />
         </Link>
-        {/* <Link to="/" className="text-[#000] font-bold text-[20px]">
-          빠른 매칭
-        </Link> */}
       </div>
       <div className="flex items-center gap-4  ">
         {isLoggedIn ? (
@@ -44,18 +41,12 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
             >
               로그인
             </Link>
-            <Link to="/auth/signup" className="text-[#707070]">
+            <Link to="/auth/signup-option" className="text-[#707070]">
               회원가입
             </Link>
           </>
         )}
 
-        {/* <Link
-          to="/games/host"
-          className=" p-2 bg-[#4065F6] text-white rounded-lg"
-        >
-          경기 만들기
-        </Link> */}
         <div className="" onClick={displayTab}>
           <img src={bars} alt="tab icon" className="hover:cursor-pointer" />
           {displayTabItems && (
@@ -83,11 +74,11 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
                 </div>
                 <div className="flex flex-col gap-4">
                   <h2 className="font-bold ">내 정보</h2>
-                  <Link to="/">🗒️ 작성 리뷰</Link>
-                  <Link to="/">📪 내 리뷰</Link>
-                  <Link to={`/profile/${userId}`}>🏀 프로필 수정</Link>
-                  <Link to="/">⁉️ FAQ</Link>
-                  <Link to="/">📢 고객센터</Link>
+                  <Link to="/users-reviews">🗒️ 작성 리뷰</Link>
+                  <Link to="/my-reviews">📪 내 리뷰</Link>
+                  <Link to="/mypage">🏀 프로필 수정</Link>
+                  <Link to="/faq">⁉️ FAQ</Link>
+                  <Link to="/customer-service">📢 고객센터</Link>
                 </div>
               </div>
             </div>

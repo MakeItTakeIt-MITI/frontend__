@@ -42,12 +42,6 @@ export const UserLoginPage = () => {
           </Link>
         </div>
       </div>
-
-      {/* <FindMyEmailModal
-        findEmailModal={findEmailModal}
-        displayFindEmailModal={displayFindEmailModal}
-      /> */}
-      {/* </div> */}
     </section>
   );
 };
