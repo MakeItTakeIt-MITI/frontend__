@@ -2,8 +2,7 @@ import { useForm } from "react-hook-form";
 import { userRegisterSchema } from "../../modals/userSignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterField } from "../../interface/usersInterface";
-import alertPass from "../../assets/alert_check.svg";
-import alertFail from "../../assets/alert_failure.svg";
+import questionIcon from "../../assets/question_icon.svg";
 
 import { useState } from "react";
 import { useRegisterMutation } from "../../hooks/useRegisterMutation";
@@ -13,10 +12,13 @@ import {
 } from "../../hooks/useUserValidationMutation";
 import { SubmitButton } from "../common/SubmitButtons";
 import { ValidateInputButton } from "../common/ValidationButtons";
+import { ErrorMessage } from "../common/ErrorMessage";
+import { SuccessMessage } from "../common/SuccessMessage";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [validNickname, setValidNickname] = useState(false);
+  const [displayPasswordMark, setDisplayPasswordMark] = useState(false);
 
   const {
     register,
@@ -24,14 +26,16 @@ export const SignupForm = () => {
     getValues,
     formState: { errors },
     formState,
-  } = useForm<RegisterField>({ resolver: zodResolver(userRegisterSchema) });
+  } = useForm<RegisterField>({
+    resolver: zodResolver(userRegisterSchema),
+    mode: "onBlur",
+  });
 
   const { mutate: registerMutation, isError } = useRegisterMutation();
-  const { mutate: emailMutation, data: emailData } = useValidateDuplicateEmail({
-    setValidEmail,
-  });
+  const { mutate: emailMutation, data: emailData } =
+    useValidateDuplicateEmail(setValidEmail);
   const { mutate: nicknameMutation, data: nickData } =
-    useValidateDuplicateNickname({ setValidNickname });
+    useValidateDuplicateNickname(setValidNickname);
 
   const onSubmit = (data: RegisterField) => registerMutation(data);
 
@@ -41,9 +45,9 @@ export const SignupForm = () => {
   const handleValidateNick = () =>
     nicknameMutation({ nickname: getValues("nickname") });
 
-  const isDuplicated =
-    emailData?.data?.email?.is_duplicated === true &&
-    nickData?.data?.nickname?.is_duplicated === true;
+  const handleDisplayVerificationBox = () => {
+    setDisplayPasswordMark(!displayPasswordMark);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -78,29 +82,37 @@ export const SignupForm = () => {
         />
       </div>
       {errors.email?.message && (
-        <p className=" text-red-500">{errors.email?.message}</p>
+        <ErrorMessage children={errors.email?.message} />
       )}
       {emailData?.data.email.is_duplicated === false && (
-        <div className="flex items-center gap-1">
-          <img src={alertPass} alt="email approved icon" className="w-4" />
-          <p className="text-green-400 text-[13px] font-[400]">
-            사용 가능한 이메일이에요!
-          </p>
-        </div>
+        <SuccessMessage children=" 사용 가능한 이메일이에요!" />
       )}
       {emailData?.data.email.is_duplicated === true && (
-        <div className="flex items-center gap-1">
-          <img src={alertFail} alt="email approved icon" className="w-4" />
-          <p className="text-[#E92C2C] text-[13px] font-[400]">
-            해당 이메일은 이미 회원으로 등록된 이메일입니다.
-          </p>
-        </div>
+        <ErrorMessage children="이미 회원으로 등록된 이메일이에요." />
       )}
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="password" className="text-[12px] text-[#1c1c1c]">
-          비빌번호
-        </label>
+        <div
+          onMouseOut={() => setDisplayPasswordMark(false)}
+          className="flex items-center gap-1 relative"
+        >
+          <label htmlFor="password" className="text-[12px] text-[#1c1c1c]">
+            비빌번호
+          </label>
+          <button
+            className="relative"
+            type="button"
+            onMouseOver={handleDisplayVerificationBox}
+          >
+            <img src={questionIcon} alt="question icon" />
+          </button>
+          {displayPasswordMark && (
+            <div className="absolute left-16 bottom-2 w-[300px] h-[60px]   text-[13px] text-center rounded-lg bg-gray-400 text-white flex items-center justify-center p-4 ">
+              비밀번호는 특수문자(!@#$%^&), 숫자, 영어 대소문자를 반드시
+              포함해야 합니다.
+            </div>
+          )}
+        </div>
         <input
           className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
           type="password"
@@ -113,7 +125,7 @@ export const SignupForm = () => {
         />
       </div>
       {errors.password?.message && (
-        <p className=" text-red-500">{errors.password?.message}</p>
+        <ErrorMessage children={errors.password.message} />
       )}
 
       <div className="flex flex-col gap-2">
@@ -132,7 +144,7 @@ export const SignupForm = () => {
         />
       </div>
       {errors.password_check?.message && (
-        <p className=" text-red-500">{errors.password_check?.message}</p>
+        <ErrorMessage children={errors.password_check.message} />
       )}
       <div className="flex flex-col gap-2 ">
         <label htmlFor="name" className="text-[12px] text-[#1c1c1c]">
@@ -149,7 +161,7 @@ export const SignupForm = () => {
           })}
         />
         {errors.name?.message && (
-          <p className=" text-red-500">유효한 이름을 입력해주세요.</p>
+          <ErrorMessage children={errors.name.message} />
         )}
       </div>
       <div className="flex flex-col gap-2 relative">
@@ -178,23 +190,13 @@ export const SignupForm = () => {
         />
       </div>
       {errors.nickname?.message && (
-        <p className=" text-red-500">{errors.nickname?.message}</p>
+        <ErrorMessage children={errors.nickname.message} />
       )}
       {nickData?.data.nickname.is_duplicated === false && (
-        <div className="flex items-center gap-1">
-          <img src={alertPass} alt="email approved icon" className="w-4" />
-          <p className="text-green-400 text-[13px] font-[400]">
-            사용 가능한 닉네임이에요!
-          </p>
-        </div>
+        <SuccessMessage children="사용 가능한 닉네임이에요!" />
       )}
       {nickData?.data.nickname.is_duplicated === true && (
-        <div className="flex items-center gap-1">
-          <img src={alertFail} alt="email approved icon" className="w-4" />
-          <p className="text-[#E92C2C] text-[13px] font-[400]">
-            해당 닉네임은 이미 회원으로 등록된 닉네임입니다.
-          </p>
-        </div>
+        <ErrorMessage children="다른 회원님이 사용중인 닉네임이에요." />
       )}
 
       <div className="flex flex-col gap-2">
@@ -211,7 +213,7 @@ export const SignupForm = () => {
           })}
         />
         {errors.birthday?.message && (
-          <p className=" text-red-500">유효한 생년월일을 입력해주세요.</p>
+          <ErrorMessage children={errors.birthday.message} />
         )}
       </div>
       <div className="flex flex-col gap-2 relative">
@@ -229,7 +231,7 @@ export const SignupForm = () => {
         />
       </div>
       {errors.phone?.message && (
-        <p className=" text-red-500">{errors.phone?.message}</p>
+        <ErrorMessage children={errors.phone.message} />
       )}
 
       <SubmitButton

@@ -7,6 +7,8 @@ export const useRegisterMutation = () => {
   return useMutation({
     mutationFn: userSignup,
     onSuccess: (response) => {
+      console.log(response);
+
       if (response.status_code === 201) {
         const auth_code = response.authentication_token;
         localStorage.setItem("authentication", auth_code);
