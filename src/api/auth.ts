@@ -62,7 +62,7 @@ export const findEmail = async (phone: FindEmailField) => {
 
 export const requestPasswordReset = async (data: ResetPassField) => {
     try {
-        const response = await axiosUrl.post(`/auth/password-reset-email`, data);
+        const response = await axiosUrl.post(`/auth/send-sms/reset-password`, data);
         return response.data
     } catch {
         throw new Error

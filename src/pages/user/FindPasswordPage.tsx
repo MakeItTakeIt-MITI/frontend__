@@ -1,13 +1,26 @@
 import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { usePasswordResetMutation } from "../../hooks/usePasswordResetMutation";
+import { useState } from "react";
+import { ErrorMessage } from "../../components/common/ErrorMessage";
+import { SuccessMessage } from "../../components/common/SuccessMessage";
 
 export const FindPasswordPage = () => {
-  const { mutate } = usePasswordResetMutation();
+  const [phone, setPhone] = useState("");
+  const [errorCode, setErrorCode] = useState(0);
+  const [success, setSuccess] = useState(false);
+  const { mutate } = usePasswordResetMutation(setErrorCode, setSuccess);
+
+  const handleRequestCode = () => {
+    const phonedata = { phone: phone };
+    mutate(phonedata);
+    console.log(phonedata);
+  };
+
   return (
-    <section className="laptop:mt-4 mobile:mt-0 h-full ">
+    <section className="laptop:my-4 mobile:mt-0   h-full ">
       <NavigateToPrevContainer children="회원 정보 찾기" />
-      <div className="laptop:w-[500px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-6  justify-between">
+      <div className="laptop:w-[500px] laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-6  justify-between">
         <div className="w-full flex items-center ">
           <Link
             to="/find-email"
@@ -33,23 +46,41 @@ export const FindPasswordPage = () => {
             <div className="relative">
               <input
                 type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 placeholder="핸드폰 번호를 입력해주세요."
                 className="w-full h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
               />
-              <button className="absolute right-2 top-2 bottom-2 text-[12px] p-2 bg-[#E8E8E8] rounded-lg text-[#969696]">
+              <button
+                onClick={handleRequestCode}
+                type="button"
+                className="absolute right-2 top-2 bottom-2 text-[12px] p-2 bg-[#E8E8E8] rounded-lg text-[#969696]"
+              >
                 인증번호 전송
               </button>
             </div>
+
             <div className="relative">
               <input
                 type="text"
                 placeholder="인증번호를 입력해주세요."
                 className="w-full h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
               />
-              <button className="absolute right-2 top-2 bottom-2 text-[12px] p-2 bg-[#E8E8E8] rounded-lg text-[#969696]">
+              <button
+                type="button"
+                className="absolute right-2 top-2 bottom-2 text-[12px] p-2 bg-[#E8E8E8] rounded-lg text-[#969696]"
+              >
                 인증번호 확인
               </button>
             </div>
+
+            {errorCode === 101 && (
+              <ErrorMessage children="해당 번호로 가입한 사용자가 없습니다." />
+            )}
+
+            {success && (
+              <SuccessMessage children="인증번호가 발송되었습니다." />
+            )}
           </form>
         </div>
         <button className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg">
