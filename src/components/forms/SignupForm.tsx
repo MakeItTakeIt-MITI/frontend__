@@ -13,20 +13,6 @@ import {
 } from "../../hooks/useUserValidationMutation";
 import { SubmitButton } from "../common/SubmitButtons";
 import { ValidateInputButton } from "../common/ValidationButtons";
-import {
-  DisabledSignupButton,
-  EnabledSignupButton,
-} from "../../stories/SubmitButtons.stories";
-import { FormInput } from "../common/FormInput";
-import {
-  SignupConfirmPasswordField,
-  SignupDateField,
-  SignupEmailField,
-  SignupNameField,
-  SignupNicknameField,
-  SignupPasswordField,
-  SignupPhoneField,
-} from "../../stories/Input.stories";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -56,14 +42,11 @@ export const SignupForm = () => {
     nicknameMutation({ nickname: getValues("nickname") });
 
   const isDuplicated =
-    emailData?.data?.email?.is_duplicated === true ||
+    emailData?.data?.email?.is_duplicated === true &&
     nickData?.data?.nickname?.is_duplicated === true;
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6  mobile:w-full tablet:w-[600px]"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       {isError && (
         <p className="text-[#E92C2C] text-[13px] font-[400] text-center">
           회원가입에 실패하셨습니다. 다시 시도해주세요.
@@ -74,7 +57,7 @@ export const SignupForm = () => {
           이메일
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
           type="email"
           id="email"
           role="input-email"
@@ -119,7 +102,7 @@ export const SignupForm = () => {
           비빌번호
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
           type="password"
           placeholder="비밀번호를 입력해주세요."
           id="password"
@@ -138,7 +121,7 @@ export const SignupForm = () => {
           비빌번호 확인
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
           type="password"
           placeholder="비밀번호를 한번 더 입력해주세요."
           id="password_check"
@@ -156,7 +139,7 @@ export const SignupForm = () => {
           이름
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
           type="text"
           id="name"
           role="input-name"
@@ -174,7 +157,7 @@ export const SignupForm = () => {
           닉네임
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
           type="text"
           id="nickname"
           role="input-nickname"
@@ -219,7 +202,7 @@ export const SignupForm = () => {
           생년월일
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
           type="date"
           id="birthday"
           role="user-birthday"
@@ -236,7 +219,7 @@ export const SignupForm = () => {
           핸드폰 번호
         </label>
         <input
-          className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
           type="string"
           id="phone"
           placeholder="'-'을 제외한 휴대폰번호를 입력해주세요."
