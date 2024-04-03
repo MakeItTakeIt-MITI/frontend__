@@ -7,14 +7,15 @@ import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
 
 export const UserLoginPage = () => {
   return (
-    <section className="laptop:mt-4 mobile:mt-0 ">
+    <section className="laptop:mt-4 mobile:mt-0 h-full ">
       <NavigateToPrevContainer children="" />
 
-      <div className="relative laptop:w-[500px] h-[735px]   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:p-4 rounded-lg flex flex-col justify-center gap-10 ">
+      <div className="relative laptop:w-[500px]  laptop:h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col laptop:justify-center gap-10 mobile:justify-between">
         <div className=" flex flex-col gap-2 justify-center items-center">
           <img src={mitiLogo} alt="miti logo" className="w-[88px]" />
           <h5 className="text-[14px] text-[#1c1c1c]">Make it, Take it!</h5>
         </div>
+
         {/* button */}
         <div className="flex flex-col gap-3">
           <LoginForm />
@@ -34,7 +35,7 @@ export const UserLoginPage = () => {
             </div>
           </div>
         </div>
-        <div className="absolute w-full left-0 right-0 bottom-8  flex  justify-center  gap-4 text-[#8c8c8c] text-[13px] ">
+        <div className="absolute  w-full left-0 right-0 laptop:bottom-8  mobile:bottom-0 flex  justify-center  gap-4 text-[#8c8c8c] text-[13px] ">
           <Link to="/customer-service">고객센터</Link>
           <p>|</p>
           <Link to="/find-user-info">
