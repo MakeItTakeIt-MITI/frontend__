@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 
-export const FindEmailPage = () => {
+export const FindPasswordPage = () => {
   return (
     <section className="laptop:mt-4 mobile:mt-0 h-full ">
       <NavigateToPrevContainer children="회원 정보 찾기" />
@@ -9,20 +9,20 @@ export const FindEmailPage = () => {
         <div className="w-full flex items-center ">
           <Link
             to="/find-email"
-            className="flex-1  border-b border-[#4065F6] h-[44px] flex items-center justify-center text-[12px] py-3 text-[#4065F6]"
+            className="flex-1  border-b border-gray-300 h-[44px] flex items-center justify-center text-[12px] py-3 "
           >
             아이디 찾기
           </Link>
           <Link
             to="/find-password"
-            className="flex-1  border-b border-gray-300 h-[44px] flex items-center justify-center text-[12px] py-3"
+            className="flex-1  border-b border-[#4065F6] h-[44px] flex items-center justify-center text-[12px] py-3 text-[#4065F6]"
           >
             비밀번호 찾기
           </Link>
         </div>
         <div className="h-full w-full flex flex-col gap-4 justify-center my-auto">
           <div className="flex flex-col gap-2">
-            <h1 className="font-bold text-[24px]">아이디 찾기</h1>
+            <h1 className="font-bold text-[24px]">비밀번호 재설정</h1>
             <p className="text-[#333] text-[14px] font-[400]">
               회원가입시 입력한 휴대폰 번호를 입력해주세요.
             </p>
@@ -51,7 +51,7 @@ export const FindEmailPage = () => {
           </form>
         </div>
         <button className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg">
-          이메일 찾기
+          비밀번호 재설정
         </button>
       </div>
       {/* <DisplayModal 
