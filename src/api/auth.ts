@@ -1,5 +1,5 @@
 import { KakaoLoginField } from "../components/forms/KakaoAuthHandler";
-import { EmailAuth, SMSAuth } from "../interface/authInterface";
+import { CodeVerificationField, ResetPassField } from "../interface/authInterface";
 import { LoginField, RegisterField } from "../interface/usersInterface";
 import { FindEmailField } from "../user/FindMyEmailModal";
 import axiosUrl from "../utils/axios"
@@ -60,7 +60,7 @@ export const findEmail = async (phone: FindEmailField) => {
     }
 }
 
-export const requestPasswordReset = async (data: EmailAuth) => {
+export const requestPasswordReset = async (data: ResetPassField) => {
     try {
         const response = await axiosUrl.post(`/auth/password-reset-email`, data);
         return response.data
@@ -69,7 +69,7 @@ export const requestPasswordReset = async (data: EmailAuth) => {
     }
 }
 
-export const verifySignupSMS = async (user_token: string | null, data: SMSAuth) => {
+export const verifySignupSMS = async (user_token: string | null, data: CodeVerificationField) => {
     try {
         const response = await axiosUrl.post(`/auth/${user_token}/authenticate`, data)
         return response.data

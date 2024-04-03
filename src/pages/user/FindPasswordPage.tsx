@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
+import { usePasswordResetMutation } from "../../hooks/usePasswordResetMutation";
 
 export const FindPasswordPage = () => {
+  const { mutate } = usePasswordResetMutation();
   return (
     <section className="laptop:mt-4 mobile:mt-0 h-full ">
       <NavigateToPrevContainer children="회원 정보 찾기" />

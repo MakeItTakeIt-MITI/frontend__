@@ -6,8 +6,8 @@ export interface EmailAuth {
     email: string;
 }
 
-export interface ResetPassField {
-    data: EmailAuth;
+export type ResetPassField = {
+    phone: string;
 }
 
 export interface LoginFormProps {
