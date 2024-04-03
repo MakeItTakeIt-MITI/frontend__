@@ -13,8 +13,20 @@ import {
   DisabledLoginButton,
   EnabledLoginButton,
 } from "../../stories/SubmitButtons.stories";
+import { FormInput } from "../common/FormInput";
+import {
+  EmailInputField,
+  PasswordInputField,
+} from "../../stories/Input.stories";
+import { LoginFormProps } from "../../interface/authInterface";
 
-export const LoginForm = () => {
+export const LoginForm = ({
+  setDisplayModal,
+  setErrorCode,
+  setErrorMsg,
+}: LoginFormProps) => {
+  // console.log(errorCode);
+
   const [displayPassword, setDisplayPassword] = useState(false);
   const {
     register,
@@ -27,7 +39,11 @@ export const LoginForm = () => {
     resolver: zodResolver(useLoginSchema),
   });
 
-  const { mutate: loginMutation, isError } = useLoginMutation();
+  const { mutate: loginMutation } = useLoginMutation(
+    setDisplayModal,
+    setErrorCode,
+    setErrorMsg
+  );
 
   const emailValue = watch("email");
 
@@ -43,30 +59,22 @@ export const LoginForm = () => {
 
   return (
     <form
-      className="flex flex-col gap-6  mobile:w-full tablet:w-[600px]"
+      // className="flex flex-col gap-6  mobile:w-full tablet:w-[600px]"
+      className="flex flex-col gap-4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {isError && (
+      {/* {isError && (
         <p className="text-[#E92C2C] text-[13px] font-[400] text-center">
           사용자 정보가 유효하지 않습니다. 다시 시도해주세요.
         </p>
-      )}
+      )} */}
 
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
           이메일
         </label>
         <div className="relative">
-          <input
-            type="email"
-            id="email"
-            role="user-email-input"
-            className=" h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
-            placeholder="이메일을 입력해주세요."
-            {...register("email", {
-              required: true,
-            })}
-          />
+          <FormInput register={register} {...EmailInputField.args} />
 
           {emailValue && (
             <button
@@ -92,15 +100,10 @@ export const LoginForm = () => {
           비밀번호
         </label>
         <div className="relative">
-          <input
-            type={`${displayPassword ? "text" : "password"}`}
-            id="password"
-            role="user-password-input"
-            className="h-[58px] p-4 bg-[#F7F7F7] rounded-lg w-full "
-            placeholder="8자리 이상의 PW를 입력해주세요."
-            {...register("password", {
-              required: true,
-            })}
+          <FormInput
+            type={displayPassword ? "text" : "password"}
+            register={register}
+            {...PasswordInputField.args}
           />
 
           <button

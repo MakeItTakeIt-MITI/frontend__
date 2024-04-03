@@ -1,7 +1,8 @@
 import axios, { AxiosInstance } from "axios";
 // import { useNavigate } from "react-router-dom";
 
-const baseUrl = 'https://api.makeittakeit.kr'
+// const baseUrl = 'https://api.makeittakeit.kr'
+const baseUrl = 'https://dev.makeittakeit.kr'
 
 
 
@@ -28,34 +29,12 @@ axiosUrl.interceptors.request.use((config) => {
 axiosUrl.interceptors.response.use(
     (response) => response,
     async (error) => {
-        // console.log(error);
-        if (error.response && error.response.status === 401) {
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('userLoginStatus')
+        if (error.response && error.response.status) {
+            // localStorage.removeItem('accessToken');
+            // localStorage.removeItem('userLoginStatus')
 
-            console.log('401 token expired');
-
-            // const refreshToken = localStorage.getItem("refreshToken")
-            // const response = await axios.post(`${baseUrl}/auth/refresh-token`, null, {
-            //     headers: {
-            //         "refresh": refreshToken
-            //     }
-            // })
-            // const newToken = response.data.data.access
-            // localStorage.setItem('accessToken', newToken)
-            // console.log(response, 'response!!');
-            // return response.data
-
-
-
-            // localStorage.removeItem('userLoginStatus');
-            // console.log('token expired');
-
-
-
-
-
-
+            // console.log(error.response);
+            return error.response
         }
     }
 )

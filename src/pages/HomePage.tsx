@@ -10,13 +10,15 @@ import { useEffect, useState } from "react";
 import { MobileViewGameList } from "../components/home/mobile/MobileViewGameList";
 import { LoadingPage } from "./LoadingPage";
 // import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
-import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
-import { NaverMapEL } from "../components/naver/NaverMap";
+// import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
+// import { NaverMapEL } from "../components/naver/NaverMap";
 
 export const HomePage = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
   const [searchAddress, setSearchAddress] = useState("");
   // const [displyModal, setDisplayModal] = useState(false);
+
+  console.log(searchAddress);
 
   const formatDate = selectingDate.toISOString().split("T")[0];
   const {
@@ -67,7 +69,6 @@ export const HomePage = () => {
               : null}
           </div>
         </div>{" "}
-        <NaverMapEL allGamesData={allGamesData} searchAddress={searchAddress} />
         {/* <KakaoMapV2 allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         {/* <KakaoMap allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         <MobileViewDatesList setSelectedDate={setSelectedDate} />

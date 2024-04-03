@@ -3,8 +3,6 @@ import { useUpdatePassSchema } from "../../modals/useUpdatePassSchema";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-import close from "../../assets/clarity_eye-hide-line.svg";
-import open from "../../assets/clarity_eye-show-line.svg";
 import {
   PasswordChangeProps,
   PasswordField,
@@ -38,14 +36,17 @@ export const PasswordEditForm = ({ id }: PasswordChangeProps) => {
       className="flex flex-col gap-6 py-4 w-full"
       onSubmit={handleSubmit(handleChangePassword)}
     >
-      <h4 className="font-bold">비밀번호 변경</h4>
+      {/* <h4 className="font-bold">비밀번호 변경</h4> */}
+      <label htmlFor="" className="text-[14px[ text-[#999999]">
+        기존 비밀번호
+      </label>
       <div className="relative">
         <input
           type={`${displayPassword ? "text" : "password"}`}
           id="password"
           role="input-password"
           className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          placeholder="새로운 비밀번호를 입력해주세요."
+          placeholder="기존 비밀번호를 입력해주세요"
           {...register("password")}
         />
 
@@ -55,20 +56,49 @@ export const PasswordEditForm = ({ id }: PasswordChangeProps) => {
           onClick={handleViewMainPassword}
           className="absolute right-2 top-4 hover:cursor-pointer"
         >
-          <img
+          {/* <img
             src={`${displayPassword ? open : close}`}
             alt="hide password"
             className="w-[24px] cursor-pointer "
-          />
+          /> */}
         </button>
       </div>
+      <label htmlFor="" className="text-[14px[ text-[#999999]">
+        새로운 비밀번호
+      </label>
+      <div className="relative">
+        <input
+          type={`${displayPassword ? "text" : "password"}`}
+          id="password"
+          role="input-password"
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
+          placeholder="변경할 비밀번호를 입력해주세요."
+          {...register("password")}
+        />
+
+        <button
+          type="button"
+          role="show-password-btn"
+          onClick={handleViewMainPassword}
+          className="absolute right-2 top-4 hover:cursor-pointer"
+        >
+          {/* <img
+            src={`${displayPassword ? open : close}`}
+            alt="hide password"
+            className="w-[24px] cursor-pointer "
+          /> */}
+        </button>
+      </div>
+      <label htmlFor="" className="text-[14px[ text-[#999999]">
+        새로운 비밀번호 확인
+      </label>
       <div className="relative">
         <input
           type={`${displayConfirmPassword ? "text" : "password"}`}
           id="password_check"
           role="input-password-confirm"
           className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          placeholder="확인 비밀번호를 입력해주세요."
+          placeholder="변경할 비밀번호를 입력해주세요."
           {...register("password_check")}
         />
         <button
@@ -77,20 +107,20 @@ export const PasswordEditForm = ({ id }: PasswordChangeProps) => {
           onClick={handleViewSecondaryPassword}
           className="absolute right-2 top-4 hover:cursor-pointer"
         >
-          <img
+          {/* <img
             src={`${displayConfirmPassword ? open : close}`}
             alt="hide password"
             className="w-[24px] cursor-pointer "
-          />
+          /> */}
         </button>
       </div>
 
-      <button
+      {/* <button
         role="change-password"
         className="rounded-xl w-full  h-[50px] bg-[#4065f6] text-white"
       >
         비밀번호 수정
-      </button>
+      </button> */}
       {isError && (
         <p className="text-center text-red-400 font-bold text-sm">
           비밀번호 변경에 실패했습니다.

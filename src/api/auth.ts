@@ -1,16 +1,16 @@
 import { KakaoLoginField } from "../components/forms/KakaoAuthHandler";
-import { EmailAuth, SMSAuth } from "../interface/authInterface";
+import { CodeVerificationField, ResetPassField } from "../interface/authInterface";
 import { LoginField, RegisterField } from "../interface/usersInterface";
-import { FindEmailField } from "../user/FindMyEmailModal";
 import axiosUrl from "../utils/axios"
 
 
 export const userLogin = async (data: LoginField) => {
     try {
         const response = await axiosUrl.post('/auth/login', data)
-        if (response.data.status_code === 200) {
-            return response.data
-        }
+        // if (response.data.status_code === 200) {
+        //     return response.data
+        // }
+        return response.data
     } catch {
         throw new Error
     }
@@ -28,7 +28,7 @@ export const userLogout = async () => {
 
 export const userSignup = async (data: RegisterField) => {
     try {
-        const response = await axiosUrl.post('/auth/signup/', data)
+        const response = await axiosUrl.post('/auth/signup', data)
         if (response.data.status_code === 201) {
             localStorage.setItem("authentication_token", response.data.data.authentication_token)
             localStorage.setItem("nickname", response.data.data.nickname)
@@ -50,7 +50,7 @@ export const kakaoAuth = async (data: KakaoLoginField) => {
     }
 }
 
-export const findEmail = async (phone: FindEmailField) => {
+export const findEmail = async (phone: string) => {
     try {
         const response = await axiosUrl.post('/auth/find-email', phone)
         return response.data
@@ -59,16 +59,16 @@ export const findEmail = async (phone: FindEmailField) => {
     }
 }
 
-export const requestPasswordReset = async (data: EmailAuth) => {
+export const requestPasswordReset = async (data: ResetPassField) => {
     try {
-        const response = await axiosUrl.post(`/auth/password-reset-email`, data);
+        const response = await axiosUrl.post(`/auth/send-sms/reset-password`, data);
         return response.data
     } catch {
         throw new Error
     }
 }
 
-export const verifySignupSMS = async (user_token: string | null, data: SMSAuth) => {
+export const verifySignupSMS = async (user_token: string | null, data: CodeVerificationField) => {
     try {
         const response = await axiosUrl.post(`/auth/${user_token}/authenticate`, data)
         return response.data

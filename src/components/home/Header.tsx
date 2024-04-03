@@ -25,9 +25,9 @@ export const Header = () => {
   };
 
   return (
-    <>
+    <header className="relative">
       <MobileHeader />
       <BrowserHeader handleLogout={handleLogout} />
-    </>
+    </header>
   );
 };
