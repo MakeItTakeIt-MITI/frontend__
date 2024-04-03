@@ -5,7 +5,7 @@ import { CodeVerificationField } from "../interface/authInterface";
 export const useVerifySmsMutation = (
   auth_token: string | null,
   setError: (arg: boolean) => void,
-  navigate
+  navigate: (arg: string) => void
 ) => {
   // const navigate = useNavigate();
   return useMutation({
