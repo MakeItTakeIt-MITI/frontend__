@@ -18,7 +18,7 @@ export const useVerifySmsMutation = (
         return navigate("/auth/login");
       }
 
-      if (response.error_code && response.error_code === 401) {
+      if (response.error_code && response.error_code === 102) {
         return setError(true);
       } else if (response.error_code === 901) {
         console.log("TOKEN ACCESS ERROR");

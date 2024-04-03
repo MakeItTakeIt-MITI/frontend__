@@ -127,6 +127,9 @@ export const SignupForm = () => {
       {errors.password?.message && (
         <ErrorMessage children={errors.password.message} />
       )}
+      {!errors.password?.message && getValues("password") && (
+        <SuccessMessage children="안전한 비밀번호에요!" />
+      )}
 
       <div className="flex flex-col gap-2">
         <label htmlFor="password_check" className="text-[12px] text-[#1c1c1c]">
@@ -145,6 +148,9 @@ export const SignupForm = () => {
       </div>
       {errors.password_check?.message && (
         <ErrorMessage children={errors.password_check.message} />
+      )}
+      {!errors.password?.message && getValues("password_check") && (
+        <SuccessMessage children="안전한 비밀번호에요!" />
       )}
       <div className="flex flex-col gap-2 ">
         <label htmlFor="name" className="text-[12px] text-[#1c1c1c]">
@@ -193,7 +199,7 @@ export const SignupForm = () => {
         <ErrorMessage children={errors.nickname.message} />
       )}
       {nickData?.data.nickname.is_duplicated === false && (
-        <SuccessMessage children="사용 가능한 닉네임이에요!" />
+        <SuccessMessage children="멋진 닉네임이에요!" />
       )}
       {nickData?.data.nickname.is_duplicated === true && (
         <ErrorMessage children="다른 회원님이 사용중인 닉네임이에요." />
@@ -235,7 +241,7 @@ export const SignupForm = () => {
       )}
 
       <SubmitButton
-        disabled={!formState.isValid}
+        disabled={!formState.isValid || !validEmail || !validNickname}
         type="submit"
         role="submit"
         children="가입하기"
