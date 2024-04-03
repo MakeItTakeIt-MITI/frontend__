@@ -1,4 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
+
+declare global {
+  interface Window {
+    naver: any;
+  }
+}
 const { naver } = window;
 
 export const NaverMapEL = () => {
