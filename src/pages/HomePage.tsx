@@ -9,12 +9,14 @@ import { MatchListDetail } from "../components/game/MatchesListContainer";
 import { useEffect, useState } from "react";
 import { MobileViewGameList } from "../components/home/mobile/MobileViewGameList";
 import { LoadingPage } from "./LoadingPage";
-import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
+// import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
 
 export const HomePage = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
   const [searchAddress, setSearchAddress] = useState("");
   // const [displyModal, setDisplayModal] = useState(false);
+
+  console.log(searchAddress);
 
   const formatDate = selectingDate.toISOString().split("T")[0];
   const {

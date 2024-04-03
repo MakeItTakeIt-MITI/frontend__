@@ -1,7 +1,6 @@
 import { KakaoLoginField } from "../components/forms/KakaoAuthHandler";
 import { CodeVerificationField, ResetPassField } from "../interface/authInterface";
 import { LoginField, RegisterField } from "../interface/usersInterface";
-import { FindEmailField } from "../user/FindMyEmailModal";
 import axiosUrl from "../utils/axios"
 
 
@@ -51,7 +50,7 @@ export const kakaoAuth = async (data: KakaoLoginField) => {
     }
 }
 
-export const findEmail = async (phone: FindEmailField) => {
+export const findEmail = async (phone: string) => {
     try {
         const response = await axiosUrl.post('/auth/find-email', phone)
         return response.data
