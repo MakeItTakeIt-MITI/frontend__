@@ -1,13 +1,29 @@
 import { useMutation } from "@tanstack/react-query";
 import { verifySignupSMS } from "../api/auth";
-import { SMSAuth } from "../interface/authInterface";
+import { CodeVerificationField } from "../interface/authInterface";
 
-export const useVerifySmsMutation = (auth_token: string | null) => {
+export const useVerifySmsMutation = (
+  auth_token: string | null,
+  setError: (arg: boolean) => void,
+  navigate
+) => {
   // const navigate = useNavigate();
   return useMutation({
-    mutationFn: (data: SMSAuth) => verifySignupSMS(auth_token, data),
-    onSuccess: () => {
-      localStorage.removeItem("authentication_token");
+    mutationFn: (data: CodeVerificationField) =>
+      verifySignupSMS(auth_token, data),
+    onSuccess: (response) => {
+      console.log(response);
+
+      if (response.status_code === 200) {
+        return navigate("/auth/login");
+      }
+
+      if (response.error_code && response.error_code === 401) {
+        return setError(true);
+      } else if (response.error_code === 901) {
+        console.log("TOKEN ACCESS ERROR");
+        return setError(true);
+      }
     },
   });
 };

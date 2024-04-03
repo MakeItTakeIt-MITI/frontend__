@@ -1,4 +1,4 @@
-export interface SMSAuth {
+export interface CodeVerificationField {
     code: string
 }
 

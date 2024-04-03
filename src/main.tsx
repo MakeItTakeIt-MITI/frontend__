@@ -11,7 +11,7 @@ import { NotFoundPage } from "./pages/NotFoundPage.tsx";
 import { MatchDetailsPage } from "./pages/MatchDetailsPage.tsx";
 import { UserJoinMatchPage } from "./pages/UserJoinMatchPage.tsx";
 import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
-import { SMSAuthenticationPage } from "./pages/SMSAuthenticationPage.tsx";
+import { SMSAuthenticationPage } from "./pages/auth/SMSAuthenticationPage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { KakaoAuthHandler } from "./components/forms/KakaoAuthHandler.tsx";
