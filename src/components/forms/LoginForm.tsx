@@ -18,8 +18,15 @@ import {
   EmailInputField,
   PasswordInputField,
 } from "../../stories/Input.stories";
+import { LoginFormProps } from "../../interface/authInterface";
 
-export const LoginForm = () => {
+export const LoginForm = ({
+  setDisplayModal,
+  setErrorCode,
+  setErrorMsg,
+}: LoginFormProps) => {
+  // console.log(errorCode);
+
   const [displayPassword, setDisplayPassword] = useState(false);
   const {
     register,
@@ -32,7 +39,11 @@ export const LoginForm = () => {
     resolver: zodResolver(useLoginSchema),
   });
 
-  const { mutate: loginMutation, isError } = useLoginMutation();
+  const { mutate: loginMutation } = useLoginMutation(
+    setDisplayModal,
+    setErrorCode,
+    setErrorMsg
+  );
 
   const emailValue = watch("email");
 
@@ -52,11 +63,11 @@ export const LoginForm = () => {
       className="flex flex-col gap-4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {isError && (
+      {/* {isError && (
         <p className="text-[#E92C2C] text-[13px] font-[400] text-center">
           사용자 정보가 유효하지 않습니다. 다시 시도해주세요.
         </p>
-      )}
+      )} */}
 
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">

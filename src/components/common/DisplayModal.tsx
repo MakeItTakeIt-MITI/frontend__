@@ -27,10 +27,9 @@ export const DisplayModal = ({
   return (
     <Modal
       isOpen={modal}
-      // onAfterOpen={afterOpenModal}
       onRequestClose={closeModal}
       style={customStyles}
-      contentLabel="Example Modal"
+      ariaHideApp={false}
     >
       <div className="w-[361px] h-[185px] p-4 flex flex-col justify-between rounded-lg">
         <h1 className="p-8 text-center font-bold">{title}</h1>

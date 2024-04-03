@@ -4,13 +4,33 @@ import mitiLogo from "../assets/MITI_logo.svg";
 import chevron_right from "../assets/Chevron_Right_MD.svg";
 import { KakaoLoginButton } from "../components/kakao/KakaoLoginButton";
 import { NavigateToPrevContainer } from "../components/NavigateToPrevContainer";
+import { useState } from "react";
+import { DisplayModal } from "../components/common/DisplayModal";
 
 export const UserLoginPage = () => {
+  const [displayModal, setDisplayModal] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [errorCode, setErrorCode] = useState(0);
+
+  const handleCloseModal = () => {
+    setDisplayModal(false);
+  };
+
+  console.log(errorCode);
+
   return (
     <section className="laptop:mt-4 mobile:mt-0 h-full ">
       <NavigateToPrevContainer children="" />
 
       <div className="relative laptop:w-[500px]  laptop:h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col laptop:justify-center gap-10 mobile:justify-between">
+        {displayModal && (
+          <DisplayModal
+            modal={displayModal}
+            closeModal={handleCloseModal}
+            title={errorMsg}
+            content="확인"
+          />
+        )}
         <div className=" flex flex-col gap-2 justify-center items-center">
           <img src={mitiLogo} alt="miti logo" className="w-[88px]" />
           <h5 className="text-[14px] text-[#1c1c1c]">Make it, Take it!</h5>
@@ -18,7 +38,11 @@ export const UserLoginPage = () => {
 
         {/* button */}
         <div className="flex flex-col gap-3">
-          <LoginForm />
+          <LoginForm
+            setDisplayModal={setDisplayModal}
+            setErrorCode={setErrorCode}
+            setErrorMsg={setErrorMsg}
+          />
           <p className="text-center text-[#8C8C8C] text-[12px]">또는</p>
           <KakaoLoginButton children="카카오로 3초만에 시작하기" />
           <div className="flex flex-col gap-2">

@@ -8,9 +8,10 @@ import axiosUrl from "../utils/axios"
 export const userLogin = async (data: LoginField) => {
     try {
         const response = await axiosUrl.post('/auth/login', data)
-        if (response.data.status_code === 200) {
-            return response.data
-        }
+        // if (response.data.status_code === 200) {
+        //     return response.data
+        // }
+        return response.data
     } catch {
         throw new Error
     }
