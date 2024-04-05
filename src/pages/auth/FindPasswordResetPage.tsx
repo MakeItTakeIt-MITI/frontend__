@@ -2,9 +2,14 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 import eraseX from "../../assets/delete_button.png";
 import { useForm } from "react-hook-form";
 import { NewPassworldField } from "../../interface/user-edit-interface";
+import { useResetPasswordSchema } from "../../modals/useResetPasswordSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const FindPasswordResetPage = () => {
-  const { register, watch, handleSubmit } = useForm<NewPassworldField>();
+  const { register, watch, handleSubmit } = useForm<NewPassworldField>({
+    mode: "onBlur",
+    resolver: zodResolver(useResetPasswordSchema),
+  });
 
   const handleResetPassword = (data: NewPassworldField) => {
     console.log(data);
