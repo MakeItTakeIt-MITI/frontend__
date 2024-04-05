@@ -22,8 +22,8 @@ export const usePasswordCodeMutation = (
         localStorage.removeItem("auth");
         const authen_code = response.data.authentication_token;
         localStorage.setItem("new_auth", authen_code);
+        setModal(true);
       }
-      e;
 
       if (response.status_code === 400) {
         console.log("400");

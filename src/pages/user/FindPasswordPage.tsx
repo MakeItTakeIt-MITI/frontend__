@@ -52,19 +52,21 @@ export const FindPasswordPage = () => {
   return (
     <section className="laptop:my-4 mobile:my-0   h-full ">
       <NavigateToPrevContainer children="회원 정보 찾기" />
-      {modal && smsCodeError === 401 && (
+      {smsCodeError === 401 && modal && (
         <DisplayModal
           modal={modal}
           closeModal={handleCloseModal}
-          title="탈퇴한 사용자입니다. 고객센터에 문의해주세요."
+          title="탈퇴한 사용자입니다."
+          titleTwo="고객센터에 문의해주세요."
           content="확인"
         />
       )}
-      {modal && smsCodeError === 402 && (
+      {smsCodeError === 402 && modal && (
         <DisplayModal
           modal={modal}
           closeModal={handleCloseModal}
-          title="탈퇴한 사용자입니다. 고객센터에 문의해주세요."
+          title="해당 사용자는 카카오 로그인을 통해 가입하셨습니다."
+          titleTwo="카카오로 로그인하시겠습니까?"
           content="확인"
         />
       )}
@@ -142,16 +144,18 @@ export const FindPasswordPage = () => {
             )}
           </form>
         </div>
-        <button
-          disabled={!smsSuccessStatus ? true : false}
-          style={{
-            backgroundColor: !smsSuccessStatus ? "#E8E8E8" : "#4065F5",
-            color: !smsSuccessStatus ? "#969696" : "#fff",
-          }}
-          className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg"
-        >
-          비밀번호 재설정
-        </button>
+        <Link to="/">
+          <button
+            disabled={!smsSuccessStatus ? true : false}
+            style={{
+              backgroundColor: !smsSuccessStatus ? "#E8E8E8" : "#4065F5",
+              color: !smsSuccessStatus ? "#969696" : "#fff",
+            }}
+            className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg"
+          >
+            비밀번호 재설정
+          </button>
+        </Link>
       </div>
       {/* <DisplayModal 
       

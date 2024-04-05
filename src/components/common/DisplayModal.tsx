@@ -4,6 +4,7 @@ interface ModalProp {
   modal: boolean;
   closeModal: () => void;
   title: string;
+  titleTwo?: string;
   content: string;
 }
 
@@ -22,6 +23,7 @@ export const DisplayModal = ({
   modal,
   closeModal,
   title,
+  titleTwo,
   content,
 }: ModalProp) => {
   return (
@@ -31,8 +33,11 @@ export const DisplayModal = ({
       style={customStyles}
       ariaHideApp={false}
     >
-      <div className="w-[361px] h-[185px] p-4 flex flex-col justify-between rounded-lg">
-        <h1 className="p-8 text-center font-bold">{title}</h1>
+      <div className="w-[361px] h-[185px] p-6 flex flex-col justify-between rounded-lg">
+        <div>
+          <h1 className=" text-center font-bold">{title}</h1>
+          <h1 className=" text-center font-bold">{titleTwo}</h1>
+        </div>
         <div className="flex justify-center">
           <button
             onClick={closeModal}
