@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import eraseX from "../../assets/delete_button.png";
 import { useForm } from "react-hook-form";
+import { NewPassworldField } from "../../interface/user-edit-interface";
 
 export const FindPasswordResetPage = () => {
-  const { register, watch } = useForm();
+  const { register, watch, handleSubmit } = useForm<NewPassworldField>();
+
+  const handleResetPassword = (data: NewPassworldField) => {
+    console.log(data);
+  };
 
   const watchPassword = watch("new_password");
   const watchPasswordCheck = watch("new_password_check");
@@ -32,7 +36,7 @@ export const FindPasswordResetPage = () => {
                 className="w-full h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
               />
 
-              {watchPassword.length >= 1 && (
+              {watchPassword?.length >= 1 && (
                 <button
                   type="button"
                   className="absolute right-2 top-2 bottom-2 text-[12px] p-2 rounded-lg text-[#969696]"
@@ -51,7 +55,7 @@ export const FindPasswordResetPage = () => {
                 placeholder="비밀번호를 한번 더 입력해주세요."
                 className="w-full h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
               />
-              {watchPasswordCheck.length >= 1 && (
+              {watchPasswordCheck?.length >= 1 && (
                 <button
                   type="button"
                   className="absolute right-2 top-2 bottom-2 text-[12px] p-2 rounded-lg text-[#969696]"
@@ -63,7 +67,7 @@ export const FindPasswordResetPage = () => {
           </form>
         </div>
         <button
-          disabled
+          onClick={handleSubmit(handleResetPassword)}
           className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg"
         >
           비밀번호 재설정

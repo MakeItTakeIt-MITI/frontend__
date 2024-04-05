@@ -50,6 +50,7 @@ export const usePasswordCodeMutation = (
           setSmsCodeError(401);
         } else if (response.error_code === 402) {
           setModal(true);
+
           setSmsCodeError(402);
         } else if (
           response.status_code === 403 &&
