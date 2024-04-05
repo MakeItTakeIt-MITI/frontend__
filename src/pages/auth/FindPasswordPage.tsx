@@ -144,7 +144,7 @@ export const FindPasswordPage = () => {
             )}
           </form>
         </div>
-        <Link to="/">
+        <Link to="/reset-password">
           <button
             disabled={!smsSuccessStatus ? true : false}
             style={{

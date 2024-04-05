@@ -11,6 +11,6 @@ export const useResetPasswordSchema = z
     })
     .refine((data) => data.new_password === data.new_password_check, {
         message: "비밀번호가 일치하지 않아요.",
-        path: ["password_check"],
+        path: ["new_password_check"],
     });
 

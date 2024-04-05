@@ -4,15 +4,29 @@ import { useForm } from "react-hook-form";
 import { NewPassworldField } from "../../interface/user-edit-interface";
 import { useResetPasswordSchema } from "../../modals/useResetPasswordSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNewPasswordMutation } from "../../hooks/useNewPasswordMutation";
+import { ErrorMessage } from "../../components/common/ErrorMessage";
+import { useState } from "react";
 
 export const FindPasswordResetPage = () => {
-  const { register, watch, handleSubmit } = useForm<NewPassworldField>({
+  const [success, isSuccess] = useState(false);
+  const [errorCode, setErrorCode] = useState(0);
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<NewPassworldField>({
     mode: "onBlur",
     resolver: zodResolver(useResetPasswordSchema),
   });
 
+  const auth_token = localStorage.getItem("new_auth");
+  const { mutate } = useNewPasswordMutation(auth_token, isSuccess);
+
   const handleResetPassword = (data: NewPassworldField) => {
-    console.log(data);
+    mutate(data);
+    // console.log(data);
   };
 
   const watchPassword = watch("new_password");
@@ -30,7 +44,7 @@ export const FindPasswordResetPage = () => {
             비밀번호는 특수문자(!@#$%^&), 숫자, 영어 대소문자를 반드시 포함해야
             합니다.
           </div>
-          <form className="flex flex-col gap-6">
+          <form className="flex flex-col gap-2">
             <div className="relative">
               <input
                 type="password"
@@ -50,6 +64,9 @@ export const FindPasswordResetPage = () => {
                 </button>
               )}
             </div>
+            {errors.new_password?.message && (
+              <ErrorMessage children={errors.new_password.message} />
+            )}
 
             <div className="relative">
               <input
@@ -69,6 +86,9 @@ export const FindPasswordResetPage = () => {
                 </button>
               )}
             </div>
+            {errors.new_password_check?.message && (
+              <ErrorMessage children={errors.new_password_check.message} />
+            )}
           </form>
         </div>
         <button

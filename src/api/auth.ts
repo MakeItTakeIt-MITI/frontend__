@@ -79,7 +79,7 @@ export const verifySignupSMS = async (user_token: string | null, data: CodeVerif
     }
 }
 
-export const updateNewPassword = async (user_info_token: string, data: NewPassworldField) => {
+export const updateNewPassword = async (user_info_token: string | null, data: NewPassworldField) => {
     try {
         const response = await axiosUrl.post(`/auth/reset-password/${user_info_token}`, data)
         return response.data
