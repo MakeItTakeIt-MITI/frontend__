@@ -157,9 +157,6 @@ export const FindPasswordPage = () => {
           </button>
         </Link>
       </div>
-      {/* <DisplayModal 
-      
-      /> */}
     </section>
   );
 };

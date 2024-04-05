@@ -19,7 +19,7 @@ import { UserGamesListPage } from "./pages/UserGamesListPage.tsx";
 import { PrivateRoute } from "./pages/PrivateRoute.tsx";
 import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
 import { ManageParticipantsPage } from "./pages/games/ManageParticipantsPage.tsx";
-import { FindEmailPage } from "./pages/user/FindEmailPage.tsx";
+import { FindEmailPage } from "./pages/auth/FindEmailPage.tsx";
 import { UserMyPage } from "./pages/user/UserMyPage.tsx";
 import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
 import { CustomerServicePage } from "./pages/user/CustomerServicePage.tsx";
@@ -31,7 +31,8 @@ import { UserReviewsPage } from "./pages/user/UserReviewsPage.tsx";
 import { WrittenReviewDetailPage } from "./pages/user/WrittenReviewDetailPage.tsx";
 import { SignupIntroPage } from "./pages/auth/SignupIntroPage.tsx";
 import { SMSVerifiedSuccessPage } from "./pages/auth/SMSVerifiedSuccessPage.tsx";
-import { FindPasswordPage } from "./pages/user/FindPasswordPage.tsx";
+import { FindPasswordPage } from "./pages/auth/FindPasswordPage.tsx";
+import { FindPasswordResetPage } from "./pages/auth/FindPasswordResetPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "/find-password",
         element: <FindPasswordPage />,
+      },
+      {
+        path: "/reset-password",
+        element: <FindPasswordResetPage />,
       },
       {
         path: "/faq",
