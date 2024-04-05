@@ -7,7 +7,8 @@ export const usePasswordCodeMutation = (
   setSmsCodeError: (arg: number) => void,
   setSmsSuccessStatus: (arg: boolean) => void,
   setAuthorizationFailureMsg: (arg: string) => void,
-  setmModal: (arg: boolean) => void
+  setModal: (arg: boolean) => void,
+  setSmsFailureStatus: (arg: boolean) => void
 ) => {
   return useMutation({
     mutationKey: ["requestPasswordSMS"],
@@ -17,13 +18,18 @@ export const usePasswordCodeMutation = (
 
       if (response.status_code === 200) {
         setSmsSuccessStatus(true);
-        localStorage.removeItem("password_reset_auth");
+        setSmsFailureStatus(false);
+        localStorage.removeItem("auth");
         const authen_code = response.data.authentication_token;
         localStorage.setItem("new_auth", authen_code);
       }
+      e;
 
       if (response.status_code === 400) {
         console.log("400");
+        setSmsFailureStatus(true);
+        setSmsSuccessStatus(false);
+        setAuthorizationFailureMsg("유효한 인증번호가 아니에요.");
         if (response.error_code === 101) {
           setAuthorizationFailureMsg("유효한 인증번호가 아니에요.");
         } else if (response.error_code === 401) {
@@ -36,14 +42,19 @@ export const usePasswordCodeMutation = (
       }
 
       if (response.status_code === 403) {
+        setSmsFailureStatus(true);
+        setSmsSuccessStatus(false);
         console.log("403");
         if (response.error_code === 401) {
-          setmModal(true);
+          setModal(true);
           setSmsCodeError(401);
         } else if (response.error_code === 402) {
-          setmModal(true);
+          setModal(true);
           setSmsCodeError(402);
-        } else if (response.error_code === 403) {
+        } else if (
+          response.status_code === 403 &&
+          response.error_code === 403
+        ) {
           setAuthorizationFailureMsg(
             "인증 시도 횟수를 초과하셨어요. 다시 요청해주세요."
           );

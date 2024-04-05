@@ -17,7 +17,10 @@ export const FindPasswordPage = () => {
   const [modal, setModal] = useState(false);
   const [smsCodeError, setSmsCodeError] = useState(0);
   const [smsSuccessStatus, setSmsSuccessStatus] = useState(false);
+  const [smsFailureStatus, setSmsFailureStatus] = useState(false);
   const [authorizationFailureMsg, setAuthorizationFailureMsg] = useState("");
+
+  console.log(authorizationFailureMsg);
 
   const { mutate } = usePasswordResetMutation(setErrorCode, setSuccess);
   const auth_token = localStorage.getItem("auth");
@@ -26,7 +29,8 @@ export const FindPasswordPage = () => {
     setSmsCodeError,
     setSmsSuccessStatus,
     setAuthorizationFailureMsg,
-    setModal
+    setModal,
+    setSmsFailureStatus
   );
 
   const handleCloseModal = () => {
@@ -129,9 +133,10 @@ export const FindPasswordPage = () => {
               <SuccessMessage children="인증번호가 발송되었습니다." />
             )}
 
-            {authorizationFailureMsg && (
+            {smsFailureStatus && (
               <ErrorMessage children={authorizationFailureMsg} />
             )}
+
             {smsSuccessStatus && (
               <SuccessMessage children="인증번호가 일치해요." />
             )}
