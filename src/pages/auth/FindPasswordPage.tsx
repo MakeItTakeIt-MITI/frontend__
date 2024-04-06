@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { usePasswordResetMutation } from "../../hooks/usePasswordResetMutation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
 import { SuccessMessage } from "../../components/common/SuccessMessage";
 import { usePasswordCodeMutation } from "../../hooks/usePasswordCodeMutation";
@@ -20,7 +20,8 @@ export const FindPasswordPage = () => {
   const [smsFailureStatus, setSmsFailureStatus] = useState(false);
   const [authorizationFailureMsg, setAuthorizationFailureMsg] = useState("");
 
-  console.log(authorizationFailureMsg);
+  const [phoneRegexError, setPhoneRegexError] = useState(false);
+  const [codeRegexError, setCodeRegexError] = useState(false);
 
   const { mutate } = usePasswordResetMutation(setErrorCode, setSuccess);
   const auth_token = localStorage.getItem("auth");
@@ -40,14 +41,34 @@ export const FindPasswordPage = () => {
   const handleRequestCode = () => {
     const phonedata = { phone: phone };
     mutate(phonedata);
+    if (success) {
+      setPhoneRegexError(true);
+    }
     console.log(phonedata);
   };
 
   const handleAuthorizeCode = () => {
     const codeData = { code: code };
     codeMutation(codeData);
+    if (smsSuccessStatus) {
+      setCodeRegexError(true);
+    }
     // codeMutation
   };
+
+  useEffect(() => {
+    if (phone.length !== 11) {
+      setPhoneRegexError(true);
+    } else {
+      setPhoneRegexError(false);
+    }
+
+    if (code.length !== 6) {
+      setCodeRegexError(true);
+    } else {
+      setCodeRegexError(false);
+    }
+  }, [phone, code]);
 
   return (
     <section className="laptop:my-4 mobile:my-0   h-full ">
@@ -100,16 +121,25 @@ export const FindPasswordPage = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="핸드폰 번호를 입력해주세요."
                 className="w-full h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+                onBlur={() => {
+                  phone.length !== 11
+                    ? setPhoneRegexError(true)
+                    : setPhoneRegexError(false);
+                }}
               />
               <button
                 onClick={handleRequestCode}
                 type="button"
-                className="absolute right-2 top-2 bottom-2 text-[12px] p-2 bg-[#E8E8E8] rounded-lg text-[#969696]"
+                disabled={phoneRegexError ? true : false}
+                style={{
+                  backgroundColor: phoneRegexError ? "#E8E8E8" : "#4065F5",
+                  color: phoneRegexError ? "#969696" : "#fff",
+                }}
+                className="absolute right-2 top-2 bottom-2 text-[12px] p-2  rounded-lg "
               >
                 인증번호 전송
               </button>
             </div>
-
             <div className="relative">
               <input
                 type="text"
@@ -117,11 +147,21 @@ export const FindPasswordPage = () => {
                 onChange={(e) => setCode(e.target.value)}
                 placeholder="인증번호를 입력해주세요."
                 className="w-full h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
+                onBlur={() => {
+                  code.length !== 6
+                    ? setCodeRegexError(true)
+                    : setCodeRegexError(false);
+                }}
               />
               <button
                 onClick={handleAuthorizeCode}
                 type="button"
-                className="absolute right-2 top-2 bottom-2 text-[12px] p-2 bg-[#E8E8E8] rounded-lg text-[#969696]"
+                className="absolute right-2 top-2 bottom-2 text-[12px] p-2 rounded-lg "
+                disabled={codeRegexError ? true : false}
+                style={{
+                  backgroundColor: codeRegexError ? "#E8E8E8" : "#4065F5",
+                  color: codeRegexError ? "#969696" : "#fff",
+                }}
               >
                 인증번호 확인
               </button>

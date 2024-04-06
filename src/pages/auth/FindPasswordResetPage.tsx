@@ -8,6 +8,10 @@ import { useNewPasswordMutation } from "../../hooks/useNewPasswordMutation";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
 import { useState } from "react";
 
+/**
+ * TODO: ERROR MESSAGE 처리
+ */
+
 export const FindPasswordResetPage = () => {
   const [success, isSuccess] = useState(false);
   const [errorCode, setErrorCode] = useState(0);
