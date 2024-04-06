@@ -1,19 +1,33 @@
 import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const FindEmailPage = () => {
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
 
-  const [emailAuthSuccess, setEmailAuthSucces] = useState(false);
+  const [phoneAuthAccess, setPhoneAuthSuccess] = useState(false);
   const [codeAuthSuccess, setCodeAuthSuccess] = useState(false);
 
-  const [emailRegexError, setEnailRegexError] = useState(false);
+  const [phoneRegexError, setPhoneRegexError] = useState(false);
   const [codeRegexError, setCodeRegexError] = useState(false);
 
-  const [emailAuthFailureMsg, setEmailAuthFailureMsg] = useState("");
+  const [emailAuthFailureMsg, setPhoneAuthFailureMsg] = useState("");
   const [codeAuthFailureMsg, setCodeAuthFailureMsg] = useState("");
+
+  useEffect(() => {
+    if (phone.length !== 11) {
+      setPhoneRegexError(true);
+    } else {
+      setPhoneRegexError(false);
+    }
+
+    if (code.length !== 6) {
+      setCodeRegexError(true);
+    } else {
+      setCodeRegexError(false);
+    }
+  }, [phone, code]);
 
   return (
     <section className="laptop:my-4 mobile:my-0 h-full ">
@@ -44,18 +58,18 @@ export const FindEmailPage = () => {
             <div className="relative">
               <input
                 type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 placeholder="핸드폰 번호를 입력해주세요."
                 className="w-full h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
               />
               <button
                 type="button"
                 // onClick={handleRequestCode}
-                disabled={!emailRegexError ? true : false}
+                disabled={phoneRegexError ? true : false}
                 style={{
-                  backgroundColor: !emailRegexError ? "#E8E8E8" : "#4065F5",
-                  color: !emailRegexError ? "#969696" : "#fff",
+                  backgroundColor: phoneRegexError ? "#E8E8E8" : "#4065F5",
+                  color: phoneRegexError ? "#969696" : "#fff",
                 }}
                 className="absolute right-2 top-2 bottom-2 text-[12px] p-2  rounded-lg "
               >
@@ -73,10 +87,10 @@ export const FindEmailPage = () => {
               <button
                 type="button"
                 className="absolute right-2 top-2 bottom-2 text-[12px] p-2 rounded-lg "
-                disabled={!codeRegexError ? true : false}
+                disabled={codeRegexError ? true : false}
                 style={{
-                  backgroundColor: !codeRegexError ? "#E8E8E8" : "#4065F5",
-                  color: !codeRegexError ? "#969696" : "#fff",
+                  backgroundColor: codeRegexError ? "#E8E8E8" : "#4065F5",
+                  color: codeRegexError ? "#969696" : "#fff",
                 }}
               >
                 인증번호 확인
