@@ -1,7 +1,20 @@
 import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
+import { useState } from "react";
 
 export const FindEmailPage = () => {
+  const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
+
+  const [emailAuthSuccess, setEmailAuthSucces] = useState(false);
+  const [codeAuthSuccess, setCodeAuthSuccess] = useState(false);
+
+  const [emailRegexError, setEnailRegexError] = useState(false);
+  const [codeRegexError, setCodeRegexError] = useState(false);
+
+  const [emailAuthFailureMsg, setEmailAuthFailureMsg] = useState("");
+  const [codeAuthFailureMsg, setCodeAuthFailureMsg] = useState("");
+
   return (
     <section className="laptop:my-4 mobile:my-0 h-full ">
       <NavigateToPrevContainer children="회원 정보 찾기" />
@@ -31,28 +44,58 @@ export const FindEmailPage = () => {
             <div className="relative">
               <input
                 type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="핸드폰 번호를 입력해주세요."
                 className="w-full h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
               />
-              <button className="absolute right-2 top-2 bottom-2 text-[12px] p-2 bg-[#E8E8E8] rounded-lg text-[#969696]">
+              <button
+                type="button"
+                // onClick={handleRequestCode}
+                disabled={!emailRegexError ? true : false}
+                style={{
+                  backgroundColor: !emailRegexError ? "#E8E8E8" : "#4065F5",
+                  color: !emailRegexError ? "#969696" : "#fff",
+                }}
+                className="absolute right-2 top-2 bottom-2 text-[12px] p-2  rounded-lg "
+              >
                 인증번호 전송
               </button>
             </div>
             <div className="relative">
               <input
                 type="text"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
                 placeholder="인증번호를 입력해주세요."
                 className="w-full h-[58px] p-4 bg-[#F7F7F7] rounded-lg"
               />
-              <button className="absolute right-2 top-2 bottom-2 text-[12px] p-2 bg-[#E8E8E8] rounded-lg text-[#969696]">
+              <button
+                type="button"
+                className="absolute right-2 top-2 bottom-2 text-[12px] p-2 rounded-lg "
+                disabled={!codeRegexError ? true : false}
+                style={{
+                  backgroundColor: !codeRegexError ? "#E8E8E8" : "#4065F5",
+                  color: !codeRegexError ? "#969696" : "#fff",
+                }}
+              >
                 인증번호 확인
               </button>
             </div>
           </form>
         </div>
-        <button className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg">
-          이메일 찾기
-        </button>
+        <Link to="/reset-password">
+          <button
+            disabled={!codeAuthSuccess ? true : false}
+            style={{
+              backgroundColor: !codeAuthSuccess ? "#E8E8E8" : "#4065F5",
+              color: !codeAuthSuccess ? "#969696" : "#fff",
+            }}
+            className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg"
+          >
+            이메일 찾기
+          </button>
+        </Link>
       </div>
       {/* <DisplayModal 
       
