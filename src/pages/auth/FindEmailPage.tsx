@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { useEffect, useState } from "react";
+import { ErrorMessage } from "../../components/common/ErrorMessage";
 
 export const FindEmailPage = () => {
   const [phone, setPhone] = useState("");
@@ -16,16 +17,20 @@ export const FindEmailPage = () => {
   const [codeAuthFailureMsg, setCodeAuthFailureMsg] = useState("");
 
   useEffect(() => {
+    const codeRegex = /^\d{6}$/;
+
     if (phone.length !== 11) {
       setPhoneRegexError(true);
     } else {
       setPhoneRegexError(false);
     }
 
-    if (code.length !== 6) {
+    if (!codeRegex.test(code)) {
       setCodeRegexError(true);
+      setCodeAuthFailureMsg("유효한 인증번호가 아니에요.");
     } else {
       setCodeRegexError(false);
+      setCodeAuthFailureMsg("");
     }
   }, [phone, code]);
 
@@ -96,6 +101,9 @@ export const FindEmailPage = () => {
                 인증번호 확인
               </button>
             </div>
+            {code.length >= 6 && codeRegexError && (
+              <ErrorMessage children={codeAuthFailureMsg} />
+            )}
           </form>
         </div>
         <Link to="/reset-password">

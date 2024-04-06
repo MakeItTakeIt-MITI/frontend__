@@ -23,6 +23,8 @@ export const FindPasswordPage = () => {
   const [phoneRegexError, setPhoneRegexError] = useState(false);
   const [codeRegexError, setCodeRegexError] = useState(false);
 
+  const [codeAuthFailureMsg, setCodeAuthFailureMsg] = useState("");
+
   const { mutate } = usePasswordResetMutation(setErrorCode, setSuccess);
   const auth_token = localStorage.getItem("auth");
   const { mutate: codeMutation } = usePasswordCodeMutation(
@@ -57,16 +59,20 @@ export const FindPasswordPage = () => {
   };
 
   useEffect(() => {
+    const codeRegex = /^\d{6}$/;
+
     if (phone.length !== 11) {
       setPhoneRegexError(true);
     } else {
       setPhoneRegexError(false);
     }
 
-    if (code.length !== 6) {
+    if (!codeRegex.test(code)) {
       setCodeRegexError(true);
+      setCodeAuthFailureMsg("유효한 인증번호가 아니에요.");
     } else {
       setCodeRegexError(false);
+      setCodeAuthFailureMsg("");
     }
   }, [phone, code]);
 
@@ -181,6 +187,9 @@ export const FindPasswordPage = () => {
 
             {smsSuccessStatus && (
               <SuccessMessage children="인증번호가 일치해요." />
+            )}
+            {code.length >= 6 && codeRegexError && (
+              <ErrorMessage children={codeAuthFailureMsg} />
             )}
           </form>
         </div>
