@@ -11,6 +11,8 @@ export const useFindEmailMutation = (
     mutationFn: (data: FindEmailField) => requestLostEmail(data),
     onSuccess: (response) => {
       console.log(response);
+      const email_auth = response.data.authentication_token;
+      localStorage.setItem("email_auth", email_auth);
 
       // 201
       if (response.status_code === 201) {
@@ -20,8 +22,6 @@ export const useFindEmailMutation = (
       } else if (response.status_code === 404) {
         setStatusCode(404);
         return setPhoneAuthSuccess(false);
-      } else {
-        return;
       }
 
       // 404

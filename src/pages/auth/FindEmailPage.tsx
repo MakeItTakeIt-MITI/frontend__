@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
 import { useFindEmailMutation } from "../../hooks/useFindEmailMutation";
 import { SuccessMessage } from "../../components/common/SuccessMessage";
+import { useRequestEmailCode } from "../../hooks/useRequestEmailCode";
 
 export const FindEmailPage = () => {
   const [phone, setPhone] = useState("");
@@ -13,14 +14,25 @@ export const FindEmailPage = () => {
   const [codeAuthSuccess, setCodeAuthSuccess] = useState(false);
 
   const [statusCode, setStatusCode] = useState(0);
+  const [codeStatus, setCodeStatus] = useState(0);
 
   const [phoneRegexError, setPhoneRegexError] = useState(false);
   const [codeRegexError, setCodeRegexError] = useState(false);
 
-  const [phoneAuthStatusMsg, setPhoneAuthStatusMsg] = useState("");
+  // const [phoneAuthStatusMsg, setPhoneAuthStatusMsg] = useState("");
   const [codeAuthFailureMsg, setCodeAuthFailureMsg] = useState("");
 
+  if (codeStatus > 1) {
+    console.log(codeStatus);
+  }
+
+  const email_token = localStorage.getItem("email_auth");
+
   const { mutate } = useFindEmailMutation(setPhoneAuthSuccess, setStatusCode);
+  const { mutate: codeMutate } = useRequestEmailCode(
+    email_token,
+    setCodeStatus
+  );
 
   const handleRequestCode = () => {
     console.log(phone);
@@ -29,6 +41,8 @@ export const FindEmailPage = () => {
   };
 
   const handleSubmitCode = () => {
+    const codeData = { code: code };
+    codeMutate(codeData);
     console.log(code);
   };
 
@@ -103,6 +117,7 @@ export const FindEmailPage = () => {
             {statusCode === 201 && phoneAuthAccess && (
               <SuccessMessage children="인증번호가 발송되었습니다." />
             )}
+
             <div className="relative">
               <input
                 type="text"
@@ -124,6 +139,12 @@ export const FindEmailPage = () => {
                 인증번호 확인
               </button>
             </div>
+            {codeStatus === 200 && (
+              <SuccessMessage children="인증번호가 일치해요." />
+            )}
+            {codeStatus === 102 && (
+              <ErrorMessage children="유효한 인증번호가 아니에요." />
+            )}
             {code.length >= 6 && codeRegexError && (
               <ErrorMessage children={codeAuthFailureMsg} />
             )}
