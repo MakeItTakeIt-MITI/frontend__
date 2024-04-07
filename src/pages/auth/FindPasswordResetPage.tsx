@@ -25,7 +25,10 @@ export const FindPasswordResetPage = () => {
     resolver: zodResolver(useResetPasswordSchema),
   });
 
+  // const auth_token = localStorage.getItem("auth");
   const auth_token = localStorage.getItem("new_auth");
+  console.log(auth_token);
+
   const { mutate } = useNewPasswordMutation(auth_token, isSuccess);
 
   const handleResetPassword = (data: NewPassworldField) => {

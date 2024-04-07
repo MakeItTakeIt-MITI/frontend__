@@ -1,8 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
-import { findEmail } from "../api/auth";
+import { requestLostEmail } from "../api/auth";
+import { FindEmailField } from "../interface/user-edit-interface";
 
 export const useFindEmailMutation = () => {
   return useMutation({
-    mutationFn: findEmail,
+    mutationKey: ["find_email"],
+    mutationFn: (data: FindEmailField) => requestLostEmail(data),
+    onSuccess: (response) => {
+      console.log(response);
+    },
   });
 };

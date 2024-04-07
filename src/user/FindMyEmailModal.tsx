@@ -3,10 +3,6 @@ import { FindEmailAuthCode } from "../components/forms/EmailAuthCodeForm";
 import { useFindEmailMutation } from "../hooks/useFindEmailMutation";
 import { useForm } from "react-hook-form";
 
-export interface FindEmailField {
-  phone: string;
-}
-
 interface EmailModalProp {
   findEmailModal: boolean;
   displayFindEmailModal: (arg: boolean) => void;

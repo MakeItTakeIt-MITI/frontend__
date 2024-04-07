@@ -19,7 +19,7 @@ export const usePasswordCodeMutation = (
       if (response.status_code === 200) {
         setSmsSuccessStatus(true);
         setSmsFailureStatus(false);
-        localStorage.removeItem("auth");
+        // localStorage.removeItem("auth");
         const authen_code = response.data.authentication_token;
         localStorage.setItem("new_auth", authen_code);
         setModal(true);

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { useEffect, useState } from "react";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
+import { useFindEmailMutation } from "../../hooks/useFindEmailMutation";
 
 export const FindEmailPage = () => {
   const [phone, setPhone] = useState("");
@@ -15,6 +16,18 @@ export const FindEmailPage = () => {
 
   const [emailAuthFailureMsg, setPhoneAuthFailureMsg] = useState("");
   const [codeAuthFailureMsg, setCodeAuthFailureMsg] = useState("");
+
+  const { mutate } = useFindEmailMutation();
+
+  const handleRequestCode = () => {
+    console.log(phone);
+    const phoneData = { phone: phone };
+    mutate(phoneData);
+  };
+
+  const handleSubmitCode = () => {
+    console.log(code);
+  };
 
   useEffect(() => {
     const codeRegex = /^\d{6}$/;
@@ -70,7 +83,7 @@ export const FindEmailPage = () => {
               />
               <button
                 type="button"
-                // onClick={handleRequestCode}
+                onClick={handleRequestCode}
                 disabled={phoneRegexError ? true : false}
                 style={{
                   backgroundColor: phoneRegexError ? "#E8E8E8" : "#4065F5",
@@ -91,6 +104,7 @@ export const FindEmailPage = () => {
               />
               <button
                 type="button"
+                onClick={handleSubmitCode}
                 className="absolute right-2 top-2 bottom-2 text-[12px] p-2 rounded-lg "
                 disabled={codeRegexError ? true : false}
                 style={{
@@ -119,9 +133,6 @@ export const FindEmailPage = () => {
           </button>
         </Link>
       </div>
-      {/* <DisplayModal 
-      
-      /> */}
     </section>
   );
 };
