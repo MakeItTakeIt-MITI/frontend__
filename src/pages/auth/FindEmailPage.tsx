@@ -3,6 +3,7 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 import { useEffect, useState } from "react";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
 import { useFindEmailMutation } from "../../hooks/useFindEmailMutation";
+import { SuccessMessage } from "../../components/common/SuccessMessage";
 
 export const FindEmailPage = () => {
   const [phone, setPhone] = useState("");
@@ -11,13 +12,15 @@ export const FindEmailPage = () => {
   const [phoneAuthAccess, setPhoneAuthSuccess] = useState(false);
   const [codeAuthSuccess, setCodeAuthSuccess] = useState(false);
 
+  const [statusCode, setStatusCode] = useState(0);
+
   const [phoneRegexError, setPhoneRegexError] = useState(false);
   const [codeRegexError, setCodeRegexError] = useState(false);
 
-  const [emailAuthFailureMsg, setPhoneAuthFailureMsg] = useState("");
+  const [phoneAuthStatusMsg, setPhoneAuthStatusMsg] = useState("");
   const [codeAuthFailureMsg, setCodeAuthFailureMsg] = useState("");
 
-  const { mutate } = useFindEmailMutation();
+  const { mutate } = useFindEmailMutation(setPhoneAuthSuccess, setStatusCode);
 
   const handleRequestCode = () => {
     console.log(phone);
@@ -94,6 +97,12 @@ export const FindEmailPage = () => {
                 인증번호 전송
               </button>
             </div>
+            {statusCode === 404 && !phoneAuthAccess && (
+              <ErrorMessage children="해당 번호로 가입한 사용자가 없습니다." />
+            )}
+            {statusCode === 201 && phoneAuthAccess && (
+              <SuccessMessage children="인증번호가 발송되었습니다." />
+            )}
             <div className="relative">
               <input
                 type="text"
