@@ -19,6 +19,7 @@ export const useRequestEmailCode = (
       if (response.status_code === 200) {
         const new_email_auth = response.data.authentication_token;
         localStorage.setItem("new_email_auth", new_email_auth);
+        localStorage.setItem("user_email", response.data.email);
         setCodeStatus(200);
         setCodeAuthSuccess(true);
 

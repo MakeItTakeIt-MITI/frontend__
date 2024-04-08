@@ -6,9 +6,6 @@ import { useFindEmailMutation } from "../../hooks/useFindEmailMutation";
 import { SuccessMessage } from "../../components/common/SuccessMessage";
 import { useRequestEmailCode } from "../../hooks/useRequestEmailCode";
 import { DisplayModal } from "../../components/common/DisplayModal";
-/**
- * TODO confirmation code and move to next page
- */
 
 export const FindEmailPage = () => {
   const [phone, setPhone] = useState("");
