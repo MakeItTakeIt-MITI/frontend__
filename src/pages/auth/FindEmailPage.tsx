@@ -5,10 +5,15 @@ import { ErrorMessage } from "../../components/common/ErrorMessage";
 import { useFindEmailMutation } from "../../hooks/useFindEmailMutation";
 import { SuccessMessage } from "../../components/common/SuccessMessage";
 import { useRequestEmailCode } from "../../hooks/useRequestEmailCode";
+import { DisplayModal } from "../../components/common/DisplayModal";
+/**
+ * TODO confirmation code and move to next page
+ */
 
 export const FindEmailPage = () => {
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
+  const [modal, setModal] = useState(false);
 
   const [phoneAuthAccess, setPhoneAuthSuccess] = useState(false);
   const [codeAuthSuccess, setCodeAuthSuccess] = useState(false);
@@ -18,6 +23,9 @@ export const FindEmailPage = () => {
 
   const [phoneRegexError, setPhoneRegexError] = useState(false);
   const [codeRegexError, setCodeRegexError] = useState(false);
+
+  const [oAuthUser, isOAuthUser] = useState(false);
+  const [deletedAccount, isDeletedAccount] = useState(false);
 
   // const [phoneAuthStatusMsg, setPhoneAuthStatusMsg] = useState("");
   const [codeAuthFailureMsg, setCodeAuthFailureMsg] = useState("");
@@ -31,7 +39,10 @@ export const FindEmailPage = () => {
   const { mutate } = useFindEmailMutation(setPhoneAuthSuccess, setStatusCode);
   const { mutate: codeMutate } = useRequestEmailCode(
     email_token,
-    setCodeStatus
+    setCodeStatus,
+    setCodeAuthSuccess,
+    isOAuthUser,
+    isDeletedAccount
   );
 
   const handleRequestCode = () => {
@@ -44,6 +55,10 @@ export const FindEmailPage = () => {
     const codeData = { code: code };
     codeMutate(codeData);
     console.log(code);
+  };
+
+  const handleCloseModal = () => {
+    setModal(false);
   };
 
   useEffect(() => {
@@ -62,11 +77,24 @@ export const FindEmailPage = () => {
       setCodeRegexError(false);
       setCodeAuthFailureMsg("");
     }
-  }, [phone, code]);
+
+    if (deletedAccount) {
+      setModal(true);
+    }
+  }, [phone, code, deletedAccount]);
 
   return (
     <section className="laptop:my-4 mobile:my-0 h-full ">
       <NavigateToPrevContainer children="회원 정보 찾기" />
+      {deletedAccount && modal && (
+        <DisplayModal
+          modal={modal}
+          closeModal={handleCloseModal}
+          title="탈퇴한 사용자입니다."
+          titleTwo="고객센터에 문의해주세요."
+          content="확인"
+        />
+      )}
       <div className="laptop:w-[500px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-6  justify-between">
         <div className="w-full flex items-center ">
           <Link
@@ -92,6 +120,7 @@ export const FindEmailPage = () => {
           <form className="flex flex-col gap-2">
             <div className="relative">
               <input
+                readOnly={phoneAuthAccess ? true : false}
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -121,6 +150,7 @@ export const FindEmailPage = () => {
             <div className="relative">
               <input
                 type="text"
+                readOnly={codeAuthSuccess ? true : false}
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 placeholder="인증번호를 입력해주세요."
@@ -132,8 +162,10 @@ export const FindEmailPage = () => {
                 className="absolute right-2 top-2 bottom-2 text-[12px] p-2 rounded-lg "
                 disabled={codeRegexError ? true : false}
                 style={{
-                  backgroundColor: codeRegexError ? "#E8E8E8" : "#4065F5",
-                  color: codeRegexError ? "#969696" : "#fff",
+                  backgroundColor:
+                    codeRegexError || !phoneAuthAccess ? "#E8E8E8" : "#4065F5",
+                  color:
+                    codeRegexError || !phoneAuthAccess ? "#969696" : "#fff",
                 }}
               >
                 인증번호 확인
@@ -150,18 +182,37 @@ export const FindEmailPage = () => {
             )}
           </form>
         </div>
-        <Link to="/reset-password">
-          <button
-            disabled={!codeAuthSuccess ? true : false}
-            style={{
-              backgroundColor: !codeAuthSuccess ? "#E8E8E8" : "#4065F5",
-              color: !codeAuthSuccess ? "#969696" : "#fff",
-            }}
-            className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg"
-          >
-            이메일 찾기
-          </button>
-        </Link>
+        {oAuthUser ? (
+          <Link to="/user-oauth-info">
+            <button
+              disabled={!codeAuthSuccess || !phoneAuthAccess ? true : false}
+              style={{
+                backgroundColor:
+                  !codeAuthSuccess || !phoneAuthAccess ? "#E8E8E8" : "#4065F5",
+                color:
+                  !codeAuthSuccess || !phoneAuthAccess ? "#969696" : "#fff",
+              }}
+              className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg"
+            >
+              이메일 찾기
+            </button>
+          </Link>
+        ) : (
+          <Link to="/user-info">
+            <button
+              disabled={!codeAuthSuccess || !phoneAuthAccess ? true : false}
+              style={{
+                backgroundColor:
+                  !codeAuthSuccess || !phoneAuthAccess ? "#E8E8E8" : "#4065F5",
+                color:
+                  !codeAuthSuccess || !phoneAuthAccess ? "#969696" : "#fff",
+              }}
+              className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg"
+            >
+              이메일 찾기
+            </button>
+          </Link>
+        )}
       </div>
     </section>
   );

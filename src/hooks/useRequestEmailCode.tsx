@@ -4,7 +4,10 @@ import { CodeVerificationField } from "../interface/authInterface";
 
 export const useRequestEmailCode = (
   auth_token: string | null,
-  setCodeStatus: (arg: number) => void
+  setCodeStatus: (arg: number) => void,
+  setCodeAuthSuccess: (arg: boolean) => void,
+  isOAuthUser: (arg: boolean) => void,
+  isDeletedAccount: (arg: boolean) => void
 ) => {
   return useMutation({
     mutationKey: ["email_sms"],
@@ -17,6 +20,11 @@ export const useRequestEmailCode = (
         const new_email_auth = response.data.authentication_token;
         localStorage.setItem("new_email_auth", new_email_auth);
         setCodeStatus(200);
+        setCodeAuthSuccess(true);
+
+        if (response.data.is_oauth === true) {
+          isOAuthUser(true);
+        }
       }
 
       if (response.status_code === 400) {
@@ -39,6 +47,7 @@ export const useRequestEmailCode = (
         if (response.error_code === 401) {
           setCodeStatus(401);
           console.log("401");
+          isDeletedAccount(true);
         } else if (response.error_code === 402) {
           setCodeStatus(402);
           console.log("402");
