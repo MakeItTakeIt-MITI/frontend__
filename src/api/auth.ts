@@ -1,5 +1,5 @@
-import { KakaoLoginField } from "../components/forms/KakaoAuthHandler";
 import { CodeVerificationField, ResetPassField } from "../interface/authInterface";
+import { FindEmailField, NewPassworldField } from "../interface/user-edit-interface";
 import { LoginField, RegisterField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
@@ -41,18 +41,18 @@ export const userSignup = async (data: RegisterField) => {
 }
 
 
-export const kakaoAuth = async (data: KakaoLoginField) => {
+export const kakaoAuthLogin = async (code: string | null) => {
     try {
-        const response = await axiosUrl.post("/auth/oauth/kakao/login", data)
+        const response = await axiosUrl.get(`/auth/oauth/kakao/authorize?code=${code}`)
         return response.data
     } catch {
         throw new Error
     }
 }
 
-export const findEmail = async (phone: string) => {
+export const findEmail = async (phone: FindEmailField) => {
     try {
-        const response = await axiosUrl.post('/auth/find-email', phone)
+        const response = await axiosUrl.post('/auth/send-sms/reset-password', phone)
         return response.data
     } catch {
         throw new Error
@@ -76,6 +76,17 @@ export const verifySignupSMS = async (user_token: string | null, data: CodeVerif
         throw new Error
     }
 }
+
+export const updateNewPassword = async (user_info_token: string | null, data: NewPassworldField) => {
+    try {
+        const response = await axiosUrl.post(`/auth/reset-password/${user_info_token}`, data)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
+
+
 
 export const requestResetPassword = async (data: string) => {
     try {
