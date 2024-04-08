@@ -33,6 +33,7 @@ import { SignupIntroPage } from "./pages/auth/SignupIntroPage.tsx";
 import { SMSVerifiedSuccessPage } from "./pages/auth/SMSVerifiedSuccessPage.tsx";
 import { FindPasswordPage } from "./pages/auth/FindPasswordPage.tsx";
 import { FindPasswordResetPage } from "./pages/auth/FindPasswordResetPage.tsx";
+import { FindEmailDisplayPage } from "./pages/auth/FindEmailDisplayPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "/find-email",
         element: <FindEmailPage />,
+      },
+      {
+        path: "/user-info-email",
+        element: <FindEmailDisplayPage />,
       },
       {
         path: "/find-password",

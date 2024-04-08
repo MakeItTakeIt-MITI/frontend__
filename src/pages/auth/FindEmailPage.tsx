@@ -198,7 +198,7 @@ export const FindEmailPage = () => {
             </button>
           </Link>
         ) : (
-          <Link to="/user-info">
+          <Link to="/user-info-email">
             <button
               disabled={!codeAuthSuccess || !phoneAuthAccess ? true : false}
               style={{
