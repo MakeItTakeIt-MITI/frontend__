@@ -14,7 +14,9 @@ import { useState } from "react";
 
 export const FindPasswordResetPage = () => {
   const [success, isSuccess] = useState(false);
-  const [errorCode, setErrorCode] = useState(0);
+  // const [errorCode, setErrorCode] = useState(0);
+  console.log(success);
+
   const {
     register,
     watch,
