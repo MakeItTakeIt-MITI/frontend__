@@ -1,31 +1,23 @@
 import { useEffect } from "react";
-import { useOAuthLoginMutation } from "../../hooks/useOAuthLoginMutation";
-
-export interface KakaoLoginField {
-  code: string | null;
-}
+import { useKakaoLoginQuery } from "../../hooks/useOAuthLoginMutation";
 
 export const KakaoAuthHandler = () => {
-  const {
-    mutate: kakaoLoginAuth,
-    isPending,
-    isError,
-  } = useOAuthLoginMutation();
-
   const code = new URL(document.location.toString()).searchParams.get("code");
+  // const codeFormat = { code: code };
+
+  const { data, status } = useKakaoLoginQuery(code);
+  console.log(data);
+  if (status === "success") {
+    console.log("login success");
+  }
+
   useEffect(() => {
-    kakaoLoginAuth({ code: code });
     // kakaoLoginAuth(code);
+    if (code) {
+      console.log(typeof code);
+    }
     console.log(code);
-  }, [code, kakaoLoginAuth]);
-
-  if (isPending) {
-    return <p> ...</p>;
-  }
-
-  if (isError) {
-    return <p>Error...</p>;
-  }
+  }, [code]);
 
   return <div>KakaoAuth</div>;
 };

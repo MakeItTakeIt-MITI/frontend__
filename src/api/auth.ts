@@ -1,4 +1,3 @@
-import { KakaoLoginField } from "../components/forms/KakaoAuthHandler";
 import { CodeVerificationField, ResetPassField } from "../interface/authInterface";
 import { FindEmailField, NewPassworldField } from "../interface/user-edit-interface";
 import { LoginField, RegisterField } from "../interface/usersInterface";
@@ -42,9 +41,9 @@ export const userSignup = async (data: RegisterField) => {
 }
 
 
-export const kakaoAuth = async (data: KakaoLoginField) => {
+export const kakaoAuthLogin = async (code: string | null) => {
     try {
-        const response = await axiosUrl.post("/auth/oauth/kakao/login", data)
+        const response = await axiosUrl.get(`/auth/oauth/kakao/authorize?code=${code}`)
         return response.data
     } catch {
         throw new Error

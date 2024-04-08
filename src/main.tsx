@@ -63,7 +63,7 @@ const router = createBrowserRouter([
             element: <UserSignup />,
           },
           {
-            path: "kakao",
+            path: "/auth/oauth/kakao/login",
             element: <KakaoAuthHandler />,
           },
         ],
