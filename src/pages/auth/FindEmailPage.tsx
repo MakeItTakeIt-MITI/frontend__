@@ -180,7 +180,7 @@ export const FindEmailPage = () => {
           </form>
         </div>
         {oAuthUser ? (
-          <Link to="/user-oauth-info">
+          <Link to="/user-info-oauth">
             <button
               disabled={!codeAuthSuccess || !phoneAuthAccess ? true : false}
               style={{
