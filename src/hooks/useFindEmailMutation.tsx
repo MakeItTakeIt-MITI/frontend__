@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { requestLostEmail } from "../api/auth";
 import { FindEmailField } from "../interface/user-edit-interface";
+import { requestLostEmail } from "../api/auth";
 
 export const useFindEmailMutation = (
   setPhoneAuthSuccess: (arg: boolean) => void,

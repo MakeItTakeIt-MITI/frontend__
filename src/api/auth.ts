@@ -50,7 +50,7 @@ export const kakaoAuthLogin = async (code: string | null) => {
     }
 }
 
-export const findEmail = async (phone: FindEmailField) => {
+export const requestLostEmail = async (phone: FindEmailField) => {
     try {
         const response = await axiosUrl.post('/auth/send-sms/reset-password', phone)
         return response.data
