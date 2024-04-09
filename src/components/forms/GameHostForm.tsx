@@ -15,7 +15,7 @@ export const GameHostForm = () => {
   const courtAddress = watch("court.address") || "";
   const { data: getAddressDetail, refetch } =
     useCourtDetailsQuery(courtAddress);
-  const { mutate: hostGameMutation, isError } = useHostGameMutation();
+  const { mutate: hostGameMutation } = useHostGameMutation();
 
   //
   useEffect(() => {
@@ -81,18 +81,7 @@ export const GameHostForm = () => {
   };
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-      <h4 className="font-bold tablet:text-2xl tablet:text-center">
-        경기 정보
-      </h4>
-      {isError && (
-        <div>
-          <p className="text-red-500 text-center">매치 생성에 실패했습니다.</p>
-          <p className="text-red-500 text-center">
-            입력한 정보를 다시 한번 확인해주세요.
-          </p>
-        </div>
-      )}
+    <form className="flex flex-col gap-4 " onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-2">
         <label htmlFor="title" className=" text-[#999] ">
           경기 제목
@@ -101,34 +90,22 @@ export const GameHostForm = () => {
         <input
           type="text"
           id="title"
-          placeholder="ex.) 수원 매탄 공원 4 vs 4 (주차 12자리)"
+          placeholder="경기 제목을 입력해주세요."
           className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
           {...register("title", {
             required: true,
           })}
         />
       </div>
+      {/* Game start date and time */}
       <div className="flex flex-col gap-2">
-        <label htmlFor="title" className=" text-[#999]">
-          경기장 이름
-        </label>
-
-        <input
-          type="text"
-          id="title"
-          placeholder="경기장 이름을 입력해주세요"
-          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          {...register("court.name", {
-            required: true,
-          })}
-        />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <label className="text-[#999]">경기 시작</label>
+        <label className="text-[#999]">경기 시작 시간</label>
         <div className="flex gap-2 w-full">
-          <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg ">
-            {startDateTime.split("T")[0]} {startDateTime.split("T")[1]}
+          <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
+            {startDateTime.length > 1 ? startDateTime.split("T")[0] : null}{" "}
+            {startDateTime.length > 1
+              ? startDateTime.split("T")[1]
+              : "경기 시간을 선택해주세요."}
           </div>
           <input
             type="datetime-local"
@@ -154,13 +131,17 @@ export const GameHostForm = () => {
           />
         </div>
       </div>
-
+      {/* 경기 종료 */}
       <div className="flex flex-col gap-2 justify-center ">
         <label className="text-[#999]">경기 종료</label>
 
         <div className="flex items-center gap-2 w-full">
-          <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg ">
-            {endDateTime.split("T")[0]} {endDateTime.split("T")[1]}
+          <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
+            {/* {endDateTime.split("T")[0]} {endDateTime.split("T")[1]} */}
+            {endDateTime.length > 1 ? endDateTime.split("T")[0] : null}{" "}
+            {endDateTime.length > 1
+              ? startDateTime.split("T")[1]
+              : "경기 시간을 선택해주세요."}
           </div>
           <input
             type="datetime-local"
@@ -187,29 +168,44 @@ export const GameHostForm = () => {
           />
         </div>
       </div>
-
+      {/* game address */}
       <div className="flex flex-col gap-2 relative">
         <label htmlFor="address" className=" text-[#999]">
           경기 주소
         </label>
 
         <input
-          className="input-primary pr-[99px]"
+          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
           type="text"
           {...register("court.address")}
           value={watch("court.address")}
           readOnly
-          placeholder="경기장 주소를 입력해주세요."
+          placeholder="주소를 검색해주세요."
         />
         <button
           type="button"
           onClick={handleClick}
-          className=" w-[81px] h-9 absolute  right-2 bottom-2.5 text-[14px] bg-[#4065f6] text-[#FFF] font-[400]  rounded-lg"
+          className=" w-[81px] h-9 absolute  right-2 bottom-2 text-[14px] bg-[#4065f6] text-[#FFF] font-[400]  rounded-lg"
         >
           주소찾기
         </button>
       </div>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="title" className=" text-[#999]">
+          경기장 이름
+        </label>
 
+        <input
+          type="text"
+          id="title"
+          placeholder="경기장 이름을 입력해주세요"
+          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
+          {...register("court.name", {
+            required: true,
+          })}
+        />
+      </div>
+      {/* address detail */}
       <div className="flex flex-col gap-2">
         <label htmlFor="address_detail" className=" text-[#999]">
           상세 주소
@@ -222,7 +218,7 @@ export const GameHostForm = () => {
           {...register("court.address_detail")}
         />
       </div>
-
+      {/* max participants */}
       <div className="flex gap-4  items-center mobile:justify-between ">
         <div className="flex flex-col gap-2 tablet:w-full">
           <label htmlFor="max_players" className=" text-[#999]">
@@ -231,22 +227,23 @@ export const GameHostForm = () => {
           <input
             type="number"
             id="max_players"
-            placeholder="00명"
+            placeholder="00 명"
             className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg  w-full text-center font-bold"
             {...register("max_invitation", {
               required: true,
             })}
           />
         </div>
+
+        {/* recruiting participants */}
         <div className="flex flex-col gap-2 tablet:w-full">
           <label htmlFor="min_players" className=" text-[#999]">
             최소 모집 인원
           </label>
-
           <input
             type="number"
             id="min_players"
-            placeholder="00명"
+            placeholder="00 명"
             className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
             {...register("min_invitation", {
               required: true,
@@ -255,6 +252,22 @@ export const GameHostForm = () => {
         </div>
       </div>
 
+      {/* participation fee */}
+      <div className="flex w-full px-0 flex-col gap-2">
+        <label htmlFor="fee" className=" text-[#999]">
+          참가비
+        </label>
+        <input
+          type="number"
+          id="fee"
+          placeholder="경기 참여비를 입력해주세요."
+          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
+          {...register("fee", {
+            required: true,
+          })}
+        />
+      </div>
+      {/* information */}
       <div className="flex flex-col gap-2">
         <label htmlFor="announcement" className=" text-[#999]">
           추가 정보
@@ -269,61 +282,9 @@ export const GameHostForm = () => {
         />
       </div>
 
-      <hr className="h-[8px] w-full bg-gray-200" />
+      {/* <hr className="h-[8px] w-full bg-gray-200" /> */}
 
-      <h4 className="font-bold">경기 정보</h4>
-      <div className="flex w-full px-0 flex-col gap-2">
-        <label htmlFor="fee" className=" text-[#999]">
-          참여비
-        </label>
-        <input
-          type="number"
-          id="fee"
-          placeholder="경기 참여비를 입력해주세요."
-          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
-          {...register("fee", {
-            required: true,
-          })}
-        />
-      </div>
-
-      <div className="flex items-center mobile:justify-between tablet:justify-center gap-4 tablet:w-full">
-        <div className="flex flex-col gap-2 tablet:w-full">
-          <h5 className="text-[#969696] ">예금 은행</h5>
-          <input
-            placeholder="우리은행"
-            {...register("account_bank", {
-              required: true,
-            })}
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg text-center font-[500]"
-          />
-        </div>
-        <div className="flex flex-col gap-2 tablet:w-full">
-          <h5 className="text-[#969696]">예금주</h5>
-          <input
-            placeholder="홍길동"
-            {...register("account_holder", {
-              required: true,
-            })}
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg text-center font-[500]"
-          />
-        </div>
-      </div>
-
-      <div className="flex w-full px-0 flex-col gap-2">
-        <label htmlFor="account_number" className=" text-[#999]">
-          계좌번호
-        </label>
-        <input
-          type="text"
-          id="account_number"
-          placeholder="'-'을 제외한 계좌번호를 입력해주세요."
-          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
-          {...register("account_number", {
-            required: true,
-          })}
-        />
-      </div>
+      {/* <h4 className="font-bold">경기 정보</h4> */}
 
       <button
         disabled={!formState.isValid}
