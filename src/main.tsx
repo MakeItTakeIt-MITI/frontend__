@@ -6,7 +6,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/HomePage.tsx";
 import { UserLoginPage } from "./pages/auth/UserLoginPage.tsx";
 import { UserSignup } from "./pages/auth/UserSignupPage.tsx";
-import { GameHostContainer } from "./pages/GameHostContainer.tsx";
 import { NotFoundPage } from "./pages/NotFoundPage.tsx";
 import { MatchDetailsPage } from "./pages/MatchDetailsPage.tsx";
 import { UserJoinMatchPage } from "./pages/UserJoinMatchPage.tsx";
@@ -35,6 +34,7 @@ import { FindPasswordPage } from "./pages/auth/FindPasswordPage.tsx";
 import { FindPasswordResetPage } from "./pages/auth/FindPasswordResetPage.tsx";
 import { FindEmailDisplayPage } from "./pages/auth/FindEmailDisplayPage.tsx";
 import { FindEmailOAuthDisplayPage } from "./pages/auth/FindEmailOAuthDisplayPage.tsx";
+import { HostGamePage } from "./pages/games/HostGamePage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -138,7 +138,7 @@ const router = createBrowserRouter([
           {
             path: "/games",
             children: [
-              { path: "host", element: <GameHostContainer /> },
+              { path: "host", element: <HostGamePage /> },
               // { path: "history", element: <UserGameHistoryPage /> },
 
               {

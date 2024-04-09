@@ -18,10 +18,10 @@ interface GuestGameProps {
   guestHistory: GuestGameField;
 }
 
-export const HostGameHistory = ({ hostHistory }: HostGameProps) => {
+export const HostGameHistory = () => {
   return (
     <>
-      {hostHistory?.data.map((hostGame: GameDetailField) => {
+      {/* {hostHistory?.data.map((hostGame: GameDetailField) => {
         return (
           <Link
             to={`/games/detail/${hostGame.id}`}
@@ -50,7 +50,7 @@ export const HostGameHistory = ({ hostHistory }: HostGameProps) => {
             </div>
           </Link>
         );
-      })}
+      })} */}
     </>
   );
 };

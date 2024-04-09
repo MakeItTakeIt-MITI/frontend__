@@ -1,9 +1,5 @@
 import { useForm } from "react-hook-form";
-import {
-  AddressField,
-  Court,
-  GameHostField,
-} from "../../interface/gameInterface";
+import { AddressField, GameHostField } from "../../interface/gameInterface";
 import { useEffect, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useHostGameMutation } from "../../hooks/useHostGameMutation";
@@ -27,7 +23,7 @@ export const GameHostForm = () => {
     const startTime = startDateTime.split("T")[1];
     const endDate = endDateTime.split("T")[0];
     const endTime = endDateTime.split("T")[1];
-    const fullAddress = courtAddress;
+    // const fullAddress = courtAddress;
 
     setValue("starttime", startTime);
     setValue("startdate", startDate);
@@ -35,13 +31,13 @@ export const GameHostForm = () => {
     setValue("endtime", endTime);
 
     // if address already exists, automatically add address_detail
-    getAddressDetail?.data.map((address: Court) => {
-      if (fullAddress === address.address) {
-        setValue("court.address_detail", address.address_detail);
-      } else {
-        setValue("court.address_detail", "");
-      }
-    });
+    // getAddressDetail?.data.map((address: Court) => {
+    //   if (fullAddress === address.address) {
+    //     setValue("court.address_detail", address.address_detail);
+    //   } else {
+    //     setValue("court.address_detail", "");
+    //   }
+    // });
 
     refetch();
   }, [
@@ -85,10 +81,7 @@ export const GameHostForm = () => {
   };
 
   return (
-    <form
-      className="flex flex-col gap-4  justify-between mobile:w-full  mobile:text-[14px] tablet:text-lg"
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
       <h4 className="font-bold tablet:text-2xl tablet:text-center">
         경기 정보
       </h4>
