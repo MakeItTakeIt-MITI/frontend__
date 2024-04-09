@@ -29,17 +29,31 @@ export const GuestTag: Story = {
         textColor: "#FDB446",
     },
 };
-export const RecrutingTag: Story = {
+export const RecruitingTag: Story = {
     args: {
         children: "모집 중",
-        backgroundColor: "#E5F8EB",
-        textColor: "#00BA34",
+        backgroundColor: "#C0DDFF",
+        textColor: "#0019FF",
     },
 };
-export const CompletedTag: Story = {
+export const RecruitingCompletedTag: Story = {
     args: {
-        children: "매치 종료",
-        backgroundColor: "#F7F7F7",
-        textColor: "#999999",
+        children: "모집 종료",
+        backgroundColor: "#DBFFDF",
+        textColor: "#33FF00",
+    },
+};
+export const GameCancelledTag: Story = {
+    args: {
+        children: "경기 취소",
+        backgroundColor: "#FFC0C0",
+        textColor: "#FC0201",
+    },
+};
+export const GameFinishedTag: Story = {
+    args: {
+        children: "경기 취소",
+        backgroundColor: "#FFC0C0",
+        textColor: "#FC0201",
     },
 };
