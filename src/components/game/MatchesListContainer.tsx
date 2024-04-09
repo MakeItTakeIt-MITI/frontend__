@@ -1,5 +1,5 @@
 // import { Link } from "react-router-dom";
-import { GameDetailField } from "../../interface/gameInterface";
+import groupIcon from "../../assets/people.svg";
 import {
   GameCancelledTag,
   GameFinishedTag,
@@ -9,21 +9,18 @@ import {
 
 import { MatchTags } from "./MatchTags";
 
-interface GameDetailProp {
-  game: GameDetailField;
-  handleSearchAddress: (arg: string) => void;
-}
+// interface GameDetailProp {
+//   game: GameDetailField;
+//   handleSearchAddress: (arg: string) => void;
+// }
 
-export const MatchListDetail = ({
-  game,
-  handleSearchAddress,
-}: GameDetailProp) => {
+export const MatchListDetail = ({ game, handleSearchAddress }) => {
   return (
     <div
       onClick={() => handleSearchAddress(game?.court.address)}
       className="hover:cursor-pointer"
     >
-      <div className="flex flex-col gap-1  ">
+      <div className="flex flex-col   gap-1">
         {game.game_status === "open" && <MatchTags {...RecruitingTag.args} />}
         {game.game_status === "cancelled" && (
           <MatchTags {...GameCancelledTag.args} />
@@ -37,17 +34,22 @@ export const MatchListDetail = ({
 
         <h2 className="font-bold text-[18px] truncate">{game.title} </h2>
         <p className="text-[14px] text-gray-500">
-          {`${game.startdate} ${game.starttime.slice(
-            0,
-            -3
-          )} ~ ${game.endtime.slice(0, -3)}`}
+          {`${game.starttime.slice(0, -3)} ~ ${game.endtime.slice(0, -3)}`}
         </p>
-        <p className="text-[14px] text-red-500 font-bold">
-          {game.fee.toLocaleString("ko-KR", {
-            style: "currency",
-            currency: "KRW",
-          })}
-        </p>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1">
+            <img src={groupIcon} alt="group icon" className="w-5" />
+            <p className="text-sm">
+              {game.num_of_participations} / {game.max_invitation}
+            </p>
+          </div>
+          <p className="text-[14px] text-[#4065F6] font-bold">
+            {game.fee.toLocaleString("ko-KR", {
+              style: "currency",
+              currency: "KRW",
+            })}
+          </p>
+        </div>
       </div>
     </div>
   );
