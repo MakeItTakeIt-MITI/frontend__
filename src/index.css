@@ -13,17 +13,13 @@
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  display: block;
+  background: url("./assets//calender_icon_vector.svg") no-repeat;
+}
+
 li:hover {
   text-decoration: underline;
 }
 
 /* mobile:h-[48px] tablet:w-[600px] tablet:h-[45px] mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:text-[15px] " */
-
-@layer components {
-  .btn-primary {
-    /* @apply h-12 tablet:w-[600px]  mx-auto flex items-center justify-center p-4  rounded-lg text-white mobile:w-full tablet:text-[15px]; */
-  }
-  .input-primary {
-    /* @apply h-[58px] p-4 bg-[#F7F7F7] rounded-lg; */
-  }
-}

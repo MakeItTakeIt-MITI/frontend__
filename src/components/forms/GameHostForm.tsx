@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useHostGameMutation } from "../../hooks/useHostGameMutation";
 import { useCourtDetailsQuery } from "../../hooks/useCourtDetailsQuery";
+import calender_icon from "../../assets/calender_icon_vector.svg";
 
 export const GameHostForm = () => {
   const { handleSubmit, register, setValue, watch, formState } =
@@ -13,8 +14,10 @@ export const GameHostForm = () => {
 
   // tanstack query
   const courtAddress = watch("court.address") || "";
-  const { data: getAddressDetail, refetch } =
+  const { data: getCourtInformation, refetch } =
     useCourtDetailsQuery(courtAddress);
+  console.log(getCourtInformation);
+
   const { mutate: hostGameMutation } = useHostGameMutation();
 
   //
@@ -42,12 +45,11 @@ export const GameHostForm = () => {
     refetch();
   }, [
     courtAddress,
-
     refetch,
     setValue,
     startDateTime,
     endDateTime,
-    getAddressDetail,
+    // getAddressDetail,
   ]);
 
   const handleOpenAddressBox = useDaumPostcodePopup();
@@ -99,7 +101,7 @@ export const GameHostForm = () => {
       </div>
       {/* Game start date and time */}
       <div className="flex flex-col gap-2">
-        <label className="text-[#999]">경기 시작 시간</label>
+        <label className="text-[#999]">경기 시작</label>
         <div className="flex gap-2 w-full">
           <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
             {startDateTime.length > 1 ? startDateTime.split("T")[0] : null}{" "}
@@ -107,11 +109,12 @@ export const GameHostForm = () => {
               ? startDateTime.split("T")[1]
               : "경기 시간을 선택해주세요."}
           </div>
+
           <input
             type="datetime-local"
             id="start_date"
             required
-            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#F7F7F7] text-[#999] rounded-lg "
+            className=" w-[54px] h-[50px] p-4 py-[17px] bg-[#DFEFFE] text-[#999] rounded-lg "
             onChange={(e) => setStartDateTime(e.target.value)}
           />
 
@@ -148,7 +151,7 @@ export const GameHostForm = () => {
             placeholder="Select date and time"
             required
             onChange={(e) => setEndDateTime(e.target.value)}
-            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#F7F7F7] text-[#999] rounded-lg "
+            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#DFEFFE] text-[#999] rounded-lg "
           />
 
           <input
@@ -174,11 +177,15 @@ export const GameHostForm = () => {
           경기 주소
         </label>
 
+        <div className=" h-[50px] p-4 truncate   bg-[#F7F7F7] text-[#969696]  w-full rounded-lg ">
+          {watch("court.address")}
+        </div>
         <input
-          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
+          hidden
+          // className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
           type="text"
           {...register("court.address")}
-          value={watch("court.address")}
+          // value={watch("court.address")}
           readOnly
           placeholder="주소를 검색해주세요."
         />
@@ -190,6 +197,20 @@ export const GameHostForm = () => {
           주소찾기
         </button>
       </div>
+      {/* address detail */}
+      <div className="flex flex-col gap-2">
+        <label htmlFor="address_detail" className=" text-[#999]">
+          상세 주소
+        </label>
+        <input
+          type="text"
+          id="address_detail"
+          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
+          placeholder="상세 주소를 입력해주세요."
+          {...register("court.address_detail")}
+        />
+      </div>
+      {/* court name */}
       <div className="flex flex-col gap-2">
         <label htmlFor="title" className=" text-[#999]">
           경기장 이름
@@ -205,19 +226,7 @@ export const GameHostForm = () => {
           })}
         />
       </div>
-      {/* address detail */}
-      <div className="flex flex-col gap-2">
-        <label htmlFor="address_detail" className=" text-[#999]">
-          상세 주소
-        </label>
-        <input
-          type="text"
-          id="address_detail"
-          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
-          placeholder="상세 주소를 입력해주세요."
-          {...register("court.address_detail")}
-        />
-      </div>
+
       {/* max participants */}
       <div className="flex gap-4  items-center mobile:justify-between ">
         <div className="flex flex-col gap-2 tablet:w-full">

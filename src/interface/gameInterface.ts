@@ -11,13 +11,10 @@ export interface GameHostField {
     starttime: string;
     enddate: string;
     endtime: string;
-    min_invitation: number;
-    max_invitation: number;
     info: string;
     fee: number;
-    account_bank: string;
-    account_holder: string;
-    account_number: string;
+    min_invitation: number;
+    max_invitation: number;
     court: Court;
 }
 
