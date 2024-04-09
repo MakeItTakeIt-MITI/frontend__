@@ -1,7 +1,12 @@
 import cardImg from "../../../assets/court.svg";
 import { useGetGamesDataQuery } from "../../../hooks/useGetGamesDataQuery";
 import { GameDetailField } from "../../../interface/gameInterface";
-import { CompletedTag, RecrutingTag } from "../../../stories/Tags.stories";
+import {
+  GameCancelledTag,
+  GameFinishedTag,
+  RecruitingCompletedTag,
+  RecruitingTag,
+} from "../../../stories/Tags.stories";
 import { MatchTags } from "../../game/MatchTags";
 
 interface GameDetailProp {
@@ -29,10 +34,17 @@ export const MobileViewGameList = ({
               <img src={cardImg} alt="game card" />
             </div>
             <div className="flex flex-col gap-1 p-3">
-              {game.game_status === "cancelled" ? (
-                <MatchTags {...CompletedTag.args} />
-              ) : (
-                <MatchTags {...RecrutingTag.args} />
+              {game.game_status === "open" && (
+                <MatchTags {...RecruitingTag.args} />
+              )}
+              {game.game_status === "cancelled" && (
+                <MatchTags {...GameCancelledTag.args} />
+              )}
+              {game.game_status === "closed" && (
+                <MatchTags {...RecruitingCompletedTag.args} />
+              )}
+              {game.game_status === "completed" && (
+                <MatchTags {...GameFinishedTag.args} />
               )}
               <h2 className="font-bold text-[18px] truncate">{game.title} </h2>
               <p className="text-[14px] text-gray-500">

@@ -1,6 +1,12 @@
 // import { Link } from "react-router-dom";
 import { GameDetailField } from "../../interface/gameInterface";
-import { CompletedTag, RecrutingTag } from "../../stories/Tags.stories";
+import {
+  GameCancelledTag,
+  GameFinishedTag,
+  RecruitingCompletedTag,
+  RecruitingTag,
+} from "../../stories/Tags.stories";
+
 import { MatchTags } from "./MatchTags";
 
 interface GameDetailProp {
@@ -17,13 +23,18 @@ export const MatchListDetail = ({
       onClick={() => handleSearchAddress(game?.court.address)}
       className="hover:cursor-pointer"
     >
-      {/* <Link to={`/games/detail/${game.id}`} className=""> */}
       <div className="flex flex-col gap-1  ">
-        {game.game_status === "cancelled" ? (
-          <MatchTags {...CompletedTag.args} />
-        ) : (
-          <MatchTags {...RecrutingTag.args} />
+        {game.game_status === "open" && <MatchTags {...RecruitingTag.args} />}
+        {game.game_status === "cancelled" && (
+          <MatchTags {...GameCancelledTag.args} />
         )}
+        {game.game_status === "closed" && (
+          <MatchTags {...RecruitingCompletedTag.args} />
+        )}
+        {game.game_status === "completed" && (
+          <MatchTags {...GameFinishedTag.args} />
+        )}
+
         <h2 className="font-bold text-[18px] truncate">{game.title} </h2>
         <p className="text-[14px] text-gray-500">
           {`${game.startdate} ${game.starttime.slice(

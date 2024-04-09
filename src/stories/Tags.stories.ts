@@ -52,8 +52,8 @@ export const GameCancelledTag: Story = {
 };
 export const GameFinishedTag: Story = {
     args: {
-        children: "경기 취소",
-        backgroundColor: "#FFC0C0",
-        textColor: "#FC0201",
+        children: "경기 완료",
+        backgroundColor: "#F5CCFF",
+        textColor: "#CA03FC",
     },
 };
