@@ -7,6 +7,8 @@ export const useHostGameMutation = () => {
   return useMutation({
     mutationFn: hostGame,
     onSuccess: (response) => {
+      console.log(response);
+
       // navigate("/");
       if (response.status_code === 201) {
         console.log("created");

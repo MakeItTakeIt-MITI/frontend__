@@ -14,6 +14,7 @@ export const GameHostForm = ({ setShowModal }) => {
     useForm<GameHostField>();
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
+  // const [exisitingAddresses, setExistingAddresses] = useState("");
 
   // tanstack query
   const courtAddress = watch("court.address") || "";
@@ -42,14 +43,20 @@ export const GameHostForm = ({ setShowModal }) => {
     setValue("enddate", endDate);
     setValue("endtime", endTime);
 
+    const emptyAddressList: string[] = [];
     // if address already exists, automatically add address_detail
     getCourtInformation?.data.page_content.map((address: Court) => {
       if (courtAddress === address.address) {
-        setValue("court.address_detail", address.address_detail);
+        // setValue("court.address_detail", address.address_detail);
+        console.log("true");
+        emptyAddressList.push(address.address_detail);
+        setShowModal(true);
       } else {
-        setValue("court.address_detail", "");
+        // setValue("court.address_detail", "");
+        console.log("false");
       }
     });
+    console.log(emptyAddressList);
 
     refetch();
   }, [
