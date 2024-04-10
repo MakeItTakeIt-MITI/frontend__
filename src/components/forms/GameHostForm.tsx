@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
-import { AddressField, GameHostField } from "../../interface/gameInterface";
+import {
+  AddressField,
+  Court,
+  GameHostField,
+} from "../../interface/gameInterface";
 import { useEffect, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useHostGameMutation } from "../../hooks/useHostGameMutation";
 import { useCourtDetailsQuery } from "../../hooks/useCourtDetailsQuery";
-import calender_icon from "../../assets/calender_icon_vector.svg";
 
-export const GameHostForm = () => {
+export const GameHostForm = ({ setShowModal }) => {
   const { handleSubmit, register, setValue, watch, formState } =
     useForm<GameHostField>();
   const [startDateTime, setStartDateTime] = useState("");
@@ -14,13 +17,19 @@ export const GameHostForm = () => {
 
   // tanstack query
   const courtAddress = watch("court.address") || "";
+  console.log(courtAddress);
   const { data: getCourtInformation, refetch } =
     useCourtDetailsQuery(courtAddress);
-  console.log(getCourtInformation);
+  // console.log(getCourtInformation);
 
   const { mutate: hostGameMutation } = useHostGameMutation();
 
-  //
+  if (getCourtInformation) {
+    console.log(getCourtInformation.data.page_content);
+  }
+
+  // useEffect to check address when component mounts or existingCourtAddresses change
+
   useEffect(() => {
     const startDate = startDateTime.split("T")[0];
     const startTime = startDateTime.split("T")[1];
@@ -34,13 +43,13 @@ export const GameHostForm = () => {
     setValue("endtime", endTime);
 
     // if address already exists, automatically add address_detail
-    // getAddressDetail?.data.map((address: Court) => {
-    //   if (fullAddress === address.address) {
-    //     setValue("court.address_detail", address.address_detail);
-    //   } else {
-    //     setValue("court.address_detail", "");
-    //   }
-    // });
+    getCourtInformation?.data.page_content.map((address: Court) => {
+      if (courtAddress === address.address) {
+        setValue("court.address_detail", address.address_detail);
+      } else {
+        setValue("court.address_detail", "");
+      }
+    });
 
     refetch();
   }, [
@@ -49,7 +58,8 @@ export const GameHostForm = () => {
     setValue,
     startDateTime,
     endDateTime,
-    // getAddressDetail,
+    getCourtInformation,
+    setShowModal,
   ]);
 
   const handleOpenAddressBox = useDaumPostcodePopup();
@@ -77,8 +87,6 @@ export const GameHostForm = () => {
   };
 
   const onSubmit = (data: GameHostField) => {
-    console.log(data);
-
     hostGameMutation(data);
   };
 
@@ -143,7 +151,7 @@ export const GameHostForm = () => {
             {/* {endDateTime.split("T")[0]} {endDateTime.split("T")[1]} */}
             {endDateTime.length > 1 ? endDateTime.split("T")[0] : null}{" "}
             {endDateTime.length > 1
-              ? startDateTime.split("T")[1]
+              ? endDateTime.split("T")[1]
               : "경기 시간을 선택해주세요."}
           </div>
           <input
@@ -173,11 +181,11 @@ export const GameHostForm = () => {
       </div>
       {/* game address */}
       <div className="flex flex-col gap-2 relative">
-        <label htmlFor="address" className=" text-[#999]">
+        <label htmlFor="address" className=" text-[#999] ">
           경기 주소
         </label>
 
-        <div className=" h-[50px] p-4 truncate   bg-[#F7F7F7] text-[#969696]  w-full rounded-lg ">
+        <div className=" h-[50px] p-4 truncate   bg-[#F7F7F7] text-[#969696]  w-full rounded-lg  pr-[120px]">
           {watch("court.address")}
         </div>
         <input
@@ -285,9 +293,7 @@ export const GameHostForm = () => {
           id="announcement"
           placeholder="주차 4자리 가능, 샤워 불가, 4 vs 4, 파란 유니폼 지참, 남녀 모두 참가 가능한 매치입니다"
           className="w-full   mobile:text-[14px] tablet:text-[16px] px-4 py-3 bg-[#F7F7F7] rounded-lg "
-          {...register("info", {
-            required: true,
-          })}
+          {...register("info")}
         />
       </div>
 

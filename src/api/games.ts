@@ -24,8 +24,12 @@ export const getAllGames = async (date: string) => {
 }
 
 export const getGameDetail = async (gameId: number) => {
-    const response = await axiosUrl.get(`/games/${gameId}`)
-    return response.data
+    try {
+        const response = await axiosUrl.get(`/games/${gameId}`)
+        return response.data
+    } catch {
+        throw new Error
+    }
 }
 
 export const userParticipateGame = async (gameId: number, data: JoinGameField) => {
@@ -34,21 +38,37 @@ export const userParticipateGame = async (gameId: number, data: JoinGameField) =
 }
 
 export const getParticipatingUsers = async (gameId: number) => {
-    const response = await axiosUrl.get(`/games/${gameId}/participations`)
-    return response.data
+    try {
+        const response = await axiosUrl.get(`/games/${gameId}/participations`)
+        return response.data
+    } catch {
+        throw new Error
+    }
 }
 
 export const getGameCourtDetails = async (address: string) => {
-    const response = await axiosUrl.get(`/courts?address=${address}`)
-    return response.data
+    try {
+        const response = await axiosUrl.get(`/courts?address=${address}`)
+        return response.data
+    } catch {
+        throw new Error
+    }
 
 }
 
 export const getMyGameHistory = async (userId: number) => {
-    const response = await axiosUrl(`/users/${userId}/participations`)
-    return response.data
+    try {
+        const response = await axiosUrl(`/users/${userId}/participations`)
+        return response.data
+    } catch {
+        throw new Error
+    }
 }
 export const getMyHostHistory = async (userId: number) => {
-    const response = await axiosUrl(`/users/${userId}/hostings`)
-    return response.data
+    try {
+        const response = await axiosUrl(`/users/${userId}/hostings`)
+        return response.data
+    } catch {
+        throw new Error
+    }
 }

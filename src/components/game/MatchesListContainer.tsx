@@ -1,5 +1,6 @@
 // import { Link } from "react-router-dom";
 import groupIcon from "../../assets/people.svg";
+import { GameDetailField } from "../../interface/gameInterface";
 import {
   GameCancelledTag,
   GameFinishedTag,
@@ -9,12 +10,15 @@ import {
 
 import { MatchTags } from "./MatchTags";
 
-// interface GameDetailProp {
-//   game: GameDetailField;
-//   handleSearchAddress: (arg: string) => void;
-// }
+interface GameDetailProp {
+  game: GameDetailField;
+  handleSearchAddress: (arg: string) => void;
+}
 
-export const MatchListDetail = ({ game, handleSearchAddress }) => {
+export const MatchListDetail = ({
+  game,
+  handleSearchAddress,
+}: GameDetailProp) => {
   return (
     <div
       onClick={() => handleSearchAddress(game?.court.address)}
@@ -22,7 +26,7 @@ export const MatchListDetail = ({ game, handleSearchAddress }) => {
     >
       <div className="flex flex-col   gap-1">
         {game.game_status === "open" && <MatchTags {...RecruitingTag.args} />}
-        {game.game_status === "cancelled" && (
+        {game.game_status === "canceled" && (
           <MatchTags {...GameCancelledTag.args} />
         )}
         {game.game_status === "closed" && (

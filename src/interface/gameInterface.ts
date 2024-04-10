@@ -37,6 +37,7 @@ export interface GameDetailField {
     enddate: string;
     endtime: string;
     fee: number;
+    num_of_participations: number;
     court: Court;
     // address: string
 }

@@ -32,6 +32,10 @@ export const HomePage = () => {
     setSearchAddress(address);
   };
 
+  if (allGamesData) {
+    console.log("allGamesData:", allGamesData);
+  }
+
   useEffect(() => {
     refetch();
   }, [selectingDate, refetch, formatDate]);
