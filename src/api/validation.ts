@@ -6,7 +6,6 @@ export const userValidation = async (data: ValidationField) => {
         const response = await axiosUrl.post("/auth/signup-check", data);
         return response.data
     } catch (error) {
-        console.log(error)
         throw new Error
     }
 };

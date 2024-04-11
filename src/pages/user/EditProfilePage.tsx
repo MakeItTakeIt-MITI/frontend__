@@ -9,17 +9,19 @@ import { useForm } from "react-hook-form";
 import { UserEditField } from "../../interface/user-edit-interface";
 import { useUpdateUserMutation } from "../../hooks/auth/useUpdateUserMutation";
 import { useState } from "react";
+import { useCheckNicknameDuplicateMutation } from "../../hooks/auth/useCheckNicknameDuplicateMutation";
+import { SuccessMessage } from "../../components/common/SuccessMessage";
+import { ErrorMessage } from "../../components/common/ErrorMessage";
 
 export const EditProfilePage = () => {
-  const [nicknameVerification, setNicknameVerification] = useState("");
+  const [verifyNicknameStatus, setVerifyNicknameStatus] = useState(false);
+  const [nicknameVerifyMsg, setNicknameVerifyMsg] = useState("");
+
   const [passVerification, setPassVerification] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
   const { userId } = useUserDataStore();
   const { data, isPending } = useUserInfoQuery(userId);
-
-  // const { mutate: nicknameMutation, data: duplicateData } =
-  //   useValidateDuplicateNickname(setNicknameVerification);
 
   const { register, handleSubmit, getValues, formState } =
     useForm<UserEditField>();
@@ -27,8 +29,13 @@ export const EditProfilePage = () => {
   const { mutate: updateUserInfoMutation } = useUpdateUserMutation(
     userId,
     setPassVerification,
-    setNicknameVerification,
+    // setNicknameVerification,
     setNewPassword
+  );
+
+  const { mutate: verifyNickname } = useCheckNicknameDuplicateMutation(
+    setVerifyNicknameStatus,
+    setNicknameVerifyMsg
   );
 
   const removeEmptyFields = (data: UserEditField) => {
@@ -48,8 +55,8 @@ export const EditProfilePage = () => {
   }
 
   const handleValidateNick = () => {
-    // const nickname = { nickname: getValues("nickname") };
-    // nicknameMutation(nickname);
+    const nicknameData = { nickname: getValues("nickname") };
+    verifyNickname(nicknameData);
   };
 
   return (
@@ -74,12 +81,8 @@ export const EditProfilePage = () => {
               <input
                 type="text"
                 id="nickname"
-                // readOnly={
-                //   duplicateData?.data.nickname.is_duplicated === false
-                //     ? true
-                //     : false
-                // }
                 role="input-nickname"
+                readOnly={verifyNicknameStatus ? true : false}
                 className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full relative"
                 placeholder={data?.data.nickname}
                 {...register("nickname")}
@@ -88,36 +91,24 @@ export const EditProfilePage = () => {
                 className="text-sm absolute right-2 bottom-2 ml-2 w-[81px] rounded-xl tablet:mx-auto h-[36px] "
                 type="button"
                 role="change-nickname"
+                disabled={verifyNicknameStatus ? true : false}
+                style={{
+                  backgroundColor: !verifyNicknameStatus
+                    ? "#4065F0"
+                    : "#f7f7f7",
+                  color: !verifyNicknameStatus ? "#fff" : "#d9d9d9",
+                }}
                 onClick={handleValidateNick}
-                // style={{
-                //   backgroundColor:
-                //     duplicateData?.data.nickname.is_duplicated === false
-                //       ? "#E8E8E8"
-                //       : "#4065F6",
-                //   color:
-                //     duplicateData?.data.nickname.is_duplicated === false
-                //       ? "black"
-                //       : "white",
-                // }}
               >
                 중복확인
               </button>
             </div>
-            {nicknameVerification && (
-              <p className="text-[#E92C2C] text-[13px]">
-                {nicknameVerification}
-              </p>
+            {nicknameVerifyMsg.length > 4 && verifyNicknameStatus && (
+              <SuccessMessage children={nicknameVerifyMsg} />
             )}
-            {/* {duplicateData?.data.nickname.is_duplicated === true && (
-              <p className="text-[#E92C2C] text-[13px]">
-                이미 사용중인 닉네임입니다.
-              </p>
+            {nicknameVerifyMsg.length > 4 && !verifyNicknameStatus && (
+              <ErrorMessage children={nicknameVerifyMsg} />
             )}
-            {duplicateData?.data.nickname.is_duplicated === false && (
-              <p className="text-green-400 text-[13px]">
-                사용 가능한 닉네임입니다.
-              </p>
-            )} */}
           </div>
 
           {/* passworld field */}
@@ -131,7 +122,6 @@ export const EditProfilePage = () => {
               role="input-password"
               className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
               placeholder="기존 비밀번호를 입력해주세요"
-              // {...register("password")}
               {...register("password", {
                 required: true,
               })}

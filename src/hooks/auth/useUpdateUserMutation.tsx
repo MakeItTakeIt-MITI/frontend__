@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const useUpdateUserMutation = (
   userId: number | null,
   setPassVerification: (arg: string) => void,
-  setNicknameVerification: (arg: string) => void,
+  // setNicknameVerification: (arg: string) => void,
   setNewPassword: (arg: string) => void
 ) => {
   const navigate = useNavigate();
@@ -24,9 +24,9 @@ export const useUpdateUserMutation = (
           if (
             errorMsg === "이 필드의 글자 수가  적어도 3 이상인지 확인하십시오."
           ) {
-            return setNicknameVerification("유효한 닉네임이 아닙니다.");
+            // return setNicknameVerification("유효한 닉네임이 아닙니다.");
           } else {
-            return setNicknameVerification("이미 사용중인 닉네임입니다.");
+            // return setNicknameVerification("이미 사용중인 닉네임입니다.");
           }
         });
         // password verification
