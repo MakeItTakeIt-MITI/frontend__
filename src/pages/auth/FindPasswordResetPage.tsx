@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNewPasswordMutation } from "../../hooks/useNewPasswordMutation";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
 import { useState } from "react";
+import { useGetPassAuthCodeQuery } from "../../hooks/auth/useGetPassAuthCodeQuery";
 
 /**
  * TODO: ERROR MESSAGE 처리
@@ -30,6 +31,20 @@ export const FindPasswordResetPage = () => {
   // const auth_token = localStorage.getItem("auth");
   const auth_token = localStorage.getItem("new_auth");
   console.log(auth_token);
+
+  const {
+    data,
+    isSuccess: datasuccess,
+    isError,
+  } = useGetPassAuthCodeQuery(auth_token);
+
+  if (datasuccess) {
+    console.log(data);
+  }
+
+  if (isError) {
+    console.log(data);
+  }
 
   const { mutate } = useNewPasswordMutation(auth_token, isSuccess);
 

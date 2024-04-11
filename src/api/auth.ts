@@ -68,6 +68,15 @@ export const requestPasswordReset = async (data: ResetPassField) => {
     }
 }
 
+export const requestPasswordAuthenCode = async (auth_token: string | null) => {
+    try {
+        const response = await axiosUrl.get(`/auth/token-issuement/${auth_token}`);
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
+
 export const verifySignupSMS = async (user_token: string | null, data: CodeVerificationField) => {
     try {
         const response = await axiosUrl.post(`/auth/${user_token}/authenticate`, data)
