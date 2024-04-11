@@ -6,23 +6,20 @@ import { ErrorMessage } from "../../components/common/ErrorMessage";
 import { SuccessMessage } from "../../components/common/SuccessMessage";
 import { usePasswordCodeMutation } from "../../hooks/auth/usePasswordCodeMutation";
 import { DisplayModal } from "../../components/common/DisplayModal";
+import { phoneNumberAutoFormat } from "../../utils/phone_format";
 
 export const FindPasswordPage = () => {
   const [phone, setPhone] = useState("");
   const [errorCode, setErrorCode] = useState(0);
   const [success, setSuccess] = useState(false);
-
   const [code, setCode] = useState("");
-
   const [modal, setModal] = useState(false);
   const [smsCodeError, setSmsCodeError] = useState(0);
   const [smsSuccessStatus, setSmsSuccessStatus] = useState(false);
   const [smsFailureStatus, setSmsFailureStatus] = useState(false);
   const [authorizationFailureMsg, setAuthorizationFailureMsg] = useState("");
-
   const [phoneRegexError, setPhoneRegexError] = useState(false);
   const [codeRegexError, setCodeRegexError] = useState(false);
-
   const [codeAuthFailureMsg, setCodeAuthFailureMsg] = useState("");
 
   const { mutate } = usePasswordResetMutation(setErrorCode, setSuccess);
@@ -59,6 +56,7 @@ export const FindPasswordPage = () => {
   };
 
   useEffect(() => {
+    phoneNumberAutoFormat(phone);
     const codeRegex = /^\d{6}$/;
 
     if (phone.length !== 11) {

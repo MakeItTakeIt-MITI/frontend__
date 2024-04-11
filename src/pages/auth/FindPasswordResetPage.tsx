@@ -6,55 +6,41 @@ import { useResetPasswordSchema } from "../../modals/useResetPasswordSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNewPasswordMutation } from "../../hooks/auth/useNewPasswordMutation";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
-import { useState } from "react";
 import { useGetPassAuthCodeQuery } from "../../hooks/auth/useGetPassAuthCodeQuery";
+import { SuccessMessage } from "../../components/common/SuccessMessage";
 
 /**
  * TODO: ERROR MESSAGE 처리
  */
 
 export const FindPasswordResetPage = () => {
-  const [success, isSuccess] = useState(false);
-  // const [errorCode, setErrorCode] = useState(0);
-  console.log(success);
-
   const {
     register,
     watch,
     handleSubmit,
+    getValues,
+    resetField,
     formState: { errors },
   } = useForm<NewPassworldField>({
     mode: "onBlur",
     resolver: zodResolver(useResetPasswordSchema),
   });
 
-  // const auth_token = localStorage.getItem("auth");
   const auth_token = localStorage.getItem("new_auth");
-  console.log(auth_token);
+  const { data: new_auth_code } = useGetPassAuthCodeQuery(auth_token);
 
-  const {
-    data,
-    isSuccess: datasuccess,
-    isError,
-  } = useGetPassAuthCodeQuery(auth_token);
-
-  if (datasuccess) {
-    console.log(data);
-  }
-
-  if (isError) {
-    console.log(data);
-  }
-
-  const { mutate } = useNewPasswordMutation(auth_token, isSuccess);
+  const password_auth = new_auth_code?.data.authentication_token;
+  const { mutate } = useNewPasswordMutation(password_auth);
 
   const handleResetPassword = (data: NewPassworldField) => {
     mutate(data);
-    // console.log(data);
   };
 
   const watchPassword = watch("new_password");
+  const getValuePassword = getValues("new_password");
   const watchPasswordCheck = watch("new_password_check");
+  const getValuePasswordCheck = getValues("new_password_check");
+
   return (
     <section className="laptop:my-4 mobile:my-0   h-full ">
       <NavigateToPrevContainer children="비밀번호 재설정" />
@@ -82,14 +68,18 @@ export const FindPasswordResetPage = () => {
               {watchPassword?.length >= 1 && (
                 <button
                   type="button"
+                  onClick={() => resetField("new_password")}
                   className="absolute right-2 top-2 bottom-2 text-[12px] p-2 rounded-lg text-[#969696]"
                 >
                   <img src={eraseX} alt="x icon" />
                 </button>
               )}
             </div>
-            {errors.new_password?.message && (
+            {errors.new_password?.message && getValues("new_password") && (
               <ErrorMessage children={errors.new_password.message} />
+            )}
+            {!errors.new_password?.message && getValuePassword?.length > 8 && (
+              <SuccessMessage children="안전한 비밀번호에요!" />
             )}
 
             <div className="relative">
@@ -104,20 +94,26 @@ export const FindPasswordResetPage = () => {
               {watchPasswordCheck?.length >= 1 && (
                 <button
                   type="button"
+                  onClick={() => resetField("new_password_check")}
                   className="absolute right-2 top-2 bottom-2 text-[12px] p-2 rounded-lg text-[#969696]"
                 >
                   <img src={eraseX} alt="x icon" />
                 </button>
               )}
             </div>
-            {errors.new_password_check?.message && (
-              <ErrorMessage children={errors.new_password_check.message} />
-            )}
+            {errors.new_password_check?.message &&
+              getValues("new_password") && (
+                <ErrorMessage children={errors.new_password_check.message} />
+              )}
+            {!errors.new_password_check?.message &&
+              getValuePasswordCheck?.length > 8 && (
+                <SuccessMessage children="안전한 비밀번호에요!" />
+              )}
           </form>
         </div>
         <button
           onClick={handleSubmit(handleResetPassword)}
-          className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg"
+          className="h-[48px] w-full rounded-lg bg-[#4065f5] text-white"
         >
           비밀번호 재설정
         </button>

@@ -29,7 +29,6 @@ export const EditProfilePage = () => {
   const { mutate: updateUserInfoMutation } = useUpdateUserMutation(
     userId,
     setPassVerification,
-    // setNicknameVerification,
     setNewPassword
   );
 
@@ -54,7 +53,7 @@ export const EditProfilePage = () => {
     return <LoadingPage />;
   }
 
-  const handleValidateNick = () => {
+  const handleValidateNickname = () => {
     const nicknameData = { nickname: getValues("nickname") };
     verifyNickname(nicknameData);
   };
@@ -98,15 +97,15 @@ export const EditProfilePage = () => {
                     : "#f7f7f7",
                   color: !verifyNicknameStatus ? "#fff" : "#d9d9d9",
                 }}
-                onClick={handleValidateNick}
+                onClick={handleValidateNickname}
               >
                 중복확인
               </button>
             </div>
-            {nicknameVerifyMsg.length > 4 && verifyNicknameStatus && (
+            {nicknameVerifyMsg.length > 2 && verifyNicknameStatus && (
               <SuccessMessage children={nicknameVerifyMsg} />
             )}
-            {nicknameVerifyMsg.length > 4 && !verifyNicknameStatus && (
+            {nicknameVerifyMsg.length > 2 && !verifyNicknameStatus && (
               <ErrorMessage children={nicknameVerifyMsg} />
             )}
           </div>
