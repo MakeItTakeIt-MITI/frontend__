@@ -7,7 +7,7 @@ import {
   PasswordChangeProps,
   PasswordField,
 } from "../../interface/usersInterface";
-import { usePasswordChangeMutation } from "../../hooks/usePasswordChangeMutation";
+import { usePasswordChangeMutation } from "../../hooks/user/usePasswordChangeMutation";
 
 export const PasswordEditForm = ({ id }: PasswordChangeProps) => {
   const [displayPassword, setDisplayPassword] = useState(false);

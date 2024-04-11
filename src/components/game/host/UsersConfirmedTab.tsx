@@ -4,7 +4,7 @@ import profile from "../../../assets/profile_circle (1).svg";
 import { ModalRemoveUserFromMatch } from "../../modal_box/ModalRemoveUserFromMatch";
 
 import { ParticipantActionProps } from "../../../interface/participant_types";
-import { useRejectParticipantMutation } from "../../../hooks/useUpdateParticipantStatusMutation";
+import { useRejectParticipantMutation } from "../../../hooks/games/useUpdateParticipantStatusMutation";
 
 export const UsersConfirmedTab = ({
   refetch,

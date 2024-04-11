@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { NewPassworldField } from "../../interface/user-edit-interface";
 import { useResetPasswordSchema } from "../../modals/useResetPasswordSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNewPasswordMutation } from "../../hooks/useNewPasswordMutation";
+import { useNewPasswordMutation } from "../../hooks/auth/useNewPasswordMutation";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
 import { useState } from "react";
 import { useGetPassAuthCodeQuery } from "../../hooks/auth/useGetPassAuthCodeQuery";

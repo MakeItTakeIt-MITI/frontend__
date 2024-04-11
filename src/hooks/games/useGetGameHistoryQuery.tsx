@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMyGameHistory } from "../api/games";
+import { getMyGameHistory } from "../../api/games";
 
 export const useGetGameHistoryQuery = (userId: number) => {
   return useQuery({

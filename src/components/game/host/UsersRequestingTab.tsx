@@ -1,4 +1,4 @@
-import { useConfirmParticipantMutation } from "../../../hooks/useUpdateParticipantStatusMutation";
+import { useConfirmParticipantMutation } from "../../../hooks/games/useUpdateParticipantStatusMutation";
 import { ParticipantActionProps } from "../../../interface/participant_types";
 import profile from "../../../assets/profile_circle (1).svg";
 

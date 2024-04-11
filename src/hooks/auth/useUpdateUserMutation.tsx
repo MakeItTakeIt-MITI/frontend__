@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { updateUserInfo } from "../api/validation";
-import { UserEditField } from "../interface/user-edit-interface";
+import { updateUserInfo } from "../../api/validation";
+import { UserEditField } from "../../interface/user-edit-interface";
 import { useNavigate } from "react-router-dom";
 
 export const useUpdateUserMutation = (

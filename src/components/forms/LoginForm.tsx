@@ -6,7 +6,7 @@ import { LoginField } from "../../interface/usersInterface";
 import closeBtn from "../../assets/x_button.svg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginSchema } from "../../modals/useLoginSchema";
-import { useLoginMutation } from "../../hooks/useLoginMutation";
+import { useLoginMutation } from "../../hooks/auth/useLoginMutation";
 import alertFail from "../../assets/alert_failure.svg";
 import { SubmitButton } from "../common/SubmitButtons";
 import {

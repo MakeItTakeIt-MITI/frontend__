@@ -6,8 +6,8 @@ import {
 } from "../../interface/gameInterface";
 import { useEffect, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
-import { useHostGameMutation } from "../../hooks/useHostGameMutation";
-import { useCourtDetailsQuery } from "../../hooks/useCourtDetailsQuery";
+import { useHostGameMutation } from "../../hooks/games/useHostGameMutation";
+import { useCourtDetailsQuery } from "../../hooks/games/useCourtDetailsQuery";
 
 export const GameHostForm = ({ setShowModal }) => {
   const { handleSubmit, register, setValue, watch, formState } =

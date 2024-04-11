@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNicknameSchema } from "../../modals/useNicknameSchema";
 import { NicknameField, NicknameProps } from "../../interface/usersInterface";
-import { useNicknameChangeMutation } from "../../hooks/useNicknameChangeMutation";
+import { useNicknameChangeMutation } from "../../hooks/user/useNicknameChangeMutation";
 import errorIcon from "../../assets/alert_failure.svg";
 
 export const NicknameEditForm = ({ id, data }: NicknameProps) => {

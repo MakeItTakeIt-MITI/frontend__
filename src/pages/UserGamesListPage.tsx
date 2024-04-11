@@ -3,8 +3,8 @@ import downarrow from "../assets/Chevron_Down_MD.svg";
 import { useState } from "react";
 import { MyGamesTabFilterButton } from "../components/game/MyGamesTabFilterButton";
 import { useParams } from "react-router-dom";
-import { useGetHostHistoryQuery } from "../hooks/useGetHostHistoryQuery";
-import { useGetGameHistoryQuery } from "../hooks/useGetGameHistoryQuery";
+import { useGetHostHistoryQuery } from "../hooks/games/useGetHostHistoryQuery";
+import { useGetGameHistoryQuery } from "../hooks/games/useGetGameHistoryQuery";
 import { NoGameHistoryBox } from "../components/game/NoGameHistoryBox";
 import {
   GuestGameHistory,

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { ResetPassField } from "../interface/authInterface";
-import { requestPasswordReset } from "../api/auth";
+import { ResetPassField } from "../../interface/authInterface";
+import { requestPasswordReset } from "../../api/auth";
 
 export const usePasswordResetMutation = (
   setErrorCode: (arg: number) => void,

@@ -1,4 +1,4 @@
-import { getGameCourtDetails } from "../api/games";
+import { getGameCourtDetails } from "../../api/games";
 import { useQuery } from "@tanstack/react-query";
 
 export const useCourtDetailsQuery = (address: string) => {

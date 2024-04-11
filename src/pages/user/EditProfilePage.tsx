@@ -1,13 +1,13 @@
 // import { useNavigate } from "react-router-dom";
 import useUserDataStore from "../../store/useUserDataStore";
-import { useUserInfoQuery } from "../../hooks/useUserInfoQuery";
+import { useUserInfoQuery } from "../../hooks/games/useUserInfoQuery";
 
 import { LoadingPage } from "../LoadingPage";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { useForm } from "react-hook-form";
 
 import { UserEditField } from "../../interface/user-edit-interface";
-import { useUpdateUserMutation } from "../../hooks/useUpdateUserMutation";
+import { useUpdateUserMutation } from "../../hooks/auth/useUpdateUserMutation";
 import { useState } from "react";
 
 export const EditProfilePage = () => {

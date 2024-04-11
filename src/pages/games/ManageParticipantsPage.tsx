@@ -4,8 +4,8 @@ import backArrow from "../../assets/Chevron_Left.png";
 import { UsersConfirmedTab } from "../../components/game/host/UsersConfirmedTab";
 import { UsersRequestingTab } from "../../components/game/host/UsersRequestingTab";
 import { UsersRefundTab } from "../../components/game/host/UsersRefundTab";
-import { useParticipatingUsersQuery } from "../../hooks/useParticipatingUsersQuery";
-import { useGetGameDetailQuery } from "../../hooks/useGetGameDetailQuery";
+import { useParticipatingUsersQuery } from "../../hooks/games/useParticipatingUsersQuery";
+import { useGetGameDetailQuery } from "../../hooks/games/useGetGameDetailQuery";
 
 export const ManageParticipantsPage = () => {
   const navigate = useNavigate();

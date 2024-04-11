@@ -1,6 +1,6 @@
 // import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { kakaoAuthLogin } from "../api/auth";
+import { kakaoAuthLogin } from "../../api/auth";
 
 export const useKakaoLoginQuery = (code: string | null) => {
   return useQuery({

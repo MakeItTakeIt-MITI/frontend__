@@ -5,9 +5,9 @@ import peopleSvg from "../assets/people.svg";
 import badge from "../assets/authentication-badge.svg";
 import reviewStar from "../assets/star-review.png";
 import { Link, useParams } from "react-router-dom";
-import { useGetGameDetailQuery } from "../hooks/useGetGameDetailQuery";
+import { useGetGameDetailQuery } from "../hooks/games/useGetGameDetailQuery";
 import { LoadingPage } from "./LoadingPage";
-import { useUserInfoQuery } from "../hooks/useUserInfoQuery";
+import { useUserInfoQuery } from "../hooks/games/useUserInfoQuery";
 import useUserDataStore from "../store/useUserDataStore";
 import { MatchInfoParticipantsBox } from "../components/game/host/MatchInfoParticipantsBox";
 export const MatchDetailsPage = () => {

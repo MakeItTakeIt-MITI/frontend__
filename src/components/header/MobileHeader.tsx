@@ -11,7 +11,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import useUserDataStore from "../../store/useUserDataStore";
-import { useUserInfoQuery } from "../../hooks/useUserInfoQuery";
+import { useUserInfoQuery } from "../../hooks/games/useUserInfoQuery";
 import useAuthStore from "../../store/useAuthStore";
 
 export const MobileHeader = () => {

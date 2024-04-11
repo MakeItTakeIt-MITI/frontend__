@@ -1,6 +1,6 @@
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import useUserDataStore from "../../store/useUserDataStore";
-import { useUserInfoQuery } from "../../hooks/useUserInfoQuery";
+import { useUserInfoQuery } from "../../hooks/games/useUserInfoQuery";
 import { LoadingPage } from "../LoadingPage";
 import profileImg from "../../assets/profile_circle (1).svg";
 import { Link } from "react-router-dom";

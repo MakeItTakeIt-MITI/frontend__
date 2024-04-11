@@ -1,9 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import rightArrow from "../../../assets/Chevron_Down_MD.svg";
 import { ParticipantCard } from "./ParticipantCard";
-import { useParticipatingUsersQuery } from "../../../hooks/useParticipatingUsersQuery";
+import { useParticipatingUsersQuery } from "../../../hooks/games/useParticipatingUsersQuery";
 import { ParticipantField } from "../../../interface/gameInterface";
-import { useGetGameDetailQuery } from "../../../hooks/useGetGameDetailQuery";
+import { useGetGameDetailQuery } from "../../../hooks/games/useGetGameDetailQuery";
 
 export const MatchInfoParticipantsBox = () => {
   const { id } = useParams();

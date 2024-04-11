@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { userValidation } from "../api/validation";
+import { userValidation } from "../../api/validation";
 
 type SetValidFunction = (value: boolean) => void;
 
@@ -9,6 +9,7 @@ export const useValidateDuplicateEmail = (setValidEmail: SetValidFunction) => {
     onSuccess: () => setValidEmail(true),
   });
 };
+
 export const useValidateDuplicateNickname = (
   setValidNickname: SetValidFunction
 ) => {

@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import useAuthStore from "../store/useAuthStore";
+import useAuthStore from "../../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
-import useUserDataStore from "../store/useUserDataStore";
-import { userLogin } from "../api/auth";
+import useUserDataStore from "../../store/useUserDataStore";
+import { userLogin } from "../../api/auth";
 
 export const useLoginMutation = (
   displayModal: (arg: boolean) => void,

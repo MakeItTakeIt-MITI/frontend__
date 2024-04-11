@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { verifySignupSMS } from "../api/auth";
-import { CodeVerificationField } from "../interface/authInterface";
+import { verifySignupSMS } from "../../api/auth";
+import { CodeVerificationField } from "../../interface/authInterface";
 
 export const useRequestEmailCode = (
   auth_token: string | null,

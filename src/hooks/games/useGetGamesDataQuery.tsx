@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllGames } from "../api/games";
+import { getAllGames } from "../../api/games";
 
 export const useGetGamesDataQuery = (date: string) => {
   return useQuery({

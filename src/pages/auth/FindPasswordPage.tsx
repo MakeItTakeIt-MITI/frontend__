@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
-import { usePasswordResetMutation } from "../../hooks/usePasswordResetMutation";
+import { usePasswordResetMutation } from "../../hooks/auth/usePasswordResetMutation";
 import { useEffect, useState } from "react";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
 import { SuccessMessage } from "../../components/common/SuccessMessage";
-import { usePasswordCodeMutation } from "../../hooks/usePasswordCodeMutation";
+import { usePasswordCodeMutation } from "../../hooks/auth/usePasswordCodeMutation";
 import { DisplayModal } from "../../components/common/DisplayModal";
 
 export const FindPasswordPage = () => {

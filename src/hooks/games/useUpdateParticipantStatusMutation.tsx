@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import {
   cancelParticipationStatus,
   updateParticipationStatus,
-} from "../api/participants";
+} from "../../api/participants";
 
 export const useConfirmParticipantMutation = (gameId: number) => {
   return useMutation({

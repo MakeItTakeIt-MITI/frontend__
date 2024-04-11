@@ -5,11 +5,11 @@ import { RegisterField } from "../../interface/usersInterface";
 import questionIcon from "../../assets/question_icon.svg";
 
 import { useState } from "react";
-import { useRegisterMutation } from "../../hooks/useRegisterMutation";
+import { useRegisterMutation } from "../../hooks/auth/useRegisterMutation";
 import {
   useValidateDuplicateEmail,
   useValidateDuplicateNickname,
-} from "../../hooks/useUserValidationMutation";
+} from "../../hooks/auth/useUserValidationMutation";
 import { SubmitButton } from "../common/SubmitButtons";
 import { ValidateInputButton } from "../common/ValidationButtons";
 import { ErrorMessage } from "../common/ErrorMessage";

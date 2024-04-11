@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useGetGameDetailQuery } from "../../../hooks/useGetGameDetailQuery";
+import { useGetGameDetailQuery } from "../../../hooks/games/useGetGameDetailQuery";
 import closeButton from "../../../assets/x_button.svg";
 
 interface JoinMatchModalProp {

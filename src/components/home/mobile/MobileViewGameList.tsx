@@ -1,5 +1,5 @@
 import cardImg from "../../../assets/court.svg";
-import { useGetGamesDataQuery } from "../../../hooks/useGetGamesDataQuery";
+import { useGetGamesDataQuery } from "../../../hooks/games/useGetGamesDataQuery";
 import { GameDetailField } from "../../../interface/gameInterface";
 import {
   GameCancelledTag,

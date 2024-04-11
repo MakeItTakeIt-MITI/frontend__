@@ -5,7 +5,7 @@ import closeButton from "../../assets/x_button.svg";
 import homeIcon from "../../assets/header_home_icon.svg";
 import gamesIcon from "../../assets/header_games_icon.svg";
 import profileIcon from "../../assets/header_profile_icon.svg";
-import { useUserInfoQuery } from "../../hooks/useUserInfoQuery";
+import { useUserInfoQuery } from "../../hooks/games/useUserInfoQuery";
 import "./sidebar.css";
 import useUserDataStore from "../../store/useUserDataStore";
 

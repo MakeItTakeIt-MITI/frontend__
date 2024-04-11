@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { useEffect, useState } from "react";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
-import { useFindEmailMutation } from "../../hooks/useFindEmailMutation";
+import { useFindEmailMutation } from "../../hooks/auth/useFindEmailMutation";
 import { SuccessMessage } from "../../components/common/SuccessMessage";
-import { useRequestEmailCode } from "../../hooks/useRequestEmailCode";
+import { useRequestEmailCode } from "../../hooks/auth/useRequestEmailCode";
 import { DisplayModal } from "../../components/common/DisplayModal";
 
 export const FindEmailPage = () => {

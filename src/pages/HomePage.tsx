@@ -2,7 +2,7 @@ import banner from "../assets/banner-2.svg";
 import { Hero } from "../components/home/Hero";
 import { AdvertisementBanner } from "../components/AdvertisementBanner";
 import { MobileViewDatesList } from "../components/home/MobileViewDatesList";
-import { useGetGamesDataQuery } from "../hooks/useGetGamesDataQuery";
+import { useGetGamesDataQuery } from "../hooks/games/useGetGamesDataQuery";
 import { DesktopViewDatesList } from "../components/home/DesktopViewDatesList";
 import { GameDetailField } from "../interface/gameInterface";
 import { MatchListDetail } from "../components/game/MatchesListContainer";

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useKakaoLoginQuery } from "../../hooks/useOAuthLoginMutation";
+import { useKakaoLoginQuery } from "../../hooks/auth/useOAuthLoginMutation";
 
 export const KakaoAuthHandler = () => {
   const code = new URL(document.location.toString()).searchParams.get("code");

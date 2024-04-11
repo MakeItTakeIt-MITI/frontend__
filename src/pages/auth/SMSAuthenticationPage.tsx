@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useVerifySmsMutation } from "../../hooks/useVerifySmsMutation";
+import { useVerifySmsMutation } from "../../hooks/auth/useVerifySmsMutation";
 import { CodeVerificationField } from "../../interface/authInterface";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
 
