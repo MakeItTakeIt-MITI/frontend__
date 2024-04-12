@@ -64,9 +64,9 @@ export const getMyGameHistory = async (userId: number) => {
         throw new Error
     }
 }
-export const getHostGameHistory = async (userId: number | null) => {
+export const getHostGameHistory = async (userId: number | null, page_number: number) => {
     try {
-        const response = await axiosUrl(`/users/${userId}/hostings`)
+        const response = await axiosUrl(`/users/${userId}/hostings?page=${page_number}`)
         return response.data
     } catch {
         throw new Error
