@@ -5,11 +5,8 @@ export const KakaoAuthHandler = () => {
   const code = new URL(document.location.toString()).searchParams.get("code");
   // const codeFormat = { code: code };
 
-  const { data, status } = useKakaoLoginQuery(code);
+  const { data } = useKakaoLoginQuery(code);
   console.log(data);
-  if (status === "success") {
-    console.log("login success");
-  }
 
   useEffect(() => {
     // kakaoLoginAuth(code);
