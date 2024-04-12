@@ -27,7 +27,13 @@ export interface AddressField {
     bname: string;
     buildingName: string;
 }
-
+export interface GameCourtData {
+    address: string;
+    address_detail: string;
+    id: number;
+    latitude: string;
+    longitude: string;
+}
 export interface GameDetailField {
     id: number;
     game_status: string;
@@ -38,7 +44,7 @@ export interface GameDetailField {
     endtime: string;
     fee: number;
     num_of_participations: number;
-    court: Court;
+    court: GameCourtData;
     // address: string
 }
 

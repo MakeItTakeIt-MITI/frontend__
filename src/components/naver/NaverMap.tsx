@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
+import { GameDetailField } from "../../interface/gameInterface";
+import { setMarkers } from "./naver_map_controls";
 
 declare global {
   interface Window {
@@ -8,14 +10,17 @@ declare global {
 }
 const { naver } = window;
 
-export const NaverMapEL = ({ allGamesData }) => {
-  const allGamesArray = allGamesData.data;
+interface NaverMapProp {
+  allGamesData: { data: GameDetailField; message: string; status_code: number };
+}
 
+export const NaverMapEL = ({ allGamesData }: NaverMapProp) => {
   useEffect(() => {
     // map create
-    const map = new naver.maps.Map("map", {
+    const naverMap = new naver.maps.Map("map", {
       center: new naver.maps.LatLng(37.3595704, 127.105399),
       zoom: 10,
+      zoomControl: true,
       zoomControlOptions: {
         style: naver.maps.ZoomControlStyle.SMALL,
         position: naver.maps.Position.TOP_RIGHT,
@@ -23,21 +28,14 @@ export const NaverMapEL = ({ allGamesData }) => {
     });
     // marker
 
-    // const coords = [];
-    allGamesArray.map((data) => {
-      const lat = data.court.latitude;
-      const long = data.court.longitude;
-      // coords.push({ lat, long });
-      // console.log(coords);
+    allGamesData?.data.map((data) => {
+      const { latitude, longitude } = data.court;
+      // const latitude = data.court.latitude;
+      // const longtitude = data.court.longitude;
 
-      new naver.maps.Marker({
-        position: new naver.maps.LatLng(lat, long),
-        //4번에서 생성한 지도 세팅
-        map: map,
-      });
+      const markers = setMarkers(latitude, longitude, naverMap, data);
     });
-  }, [allGamesArray]);
+  }, []);
 
-  return <div id="map" className="w-full  h-[473px]"></div>;
-  // <section id="map" className="w-full  h-[473px] relative" />;
+  return <section id="map" className="w-full  h-[473px]" />;
 };
