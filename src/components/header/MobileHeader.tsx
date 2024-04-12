@@ -24,7 +24,7 @@ export const MobileHeader = () => {
 
   return (
     <>
-      {pathname === "/auth/signup" || pathname === "/auth/login" ? null : (
+      {pathname === "/auth/signups" || pathname === "/auth/logins" ? null : (
         <nav className="tablet:hidden mobile:flex fixed bottom-0 left-0 right-0 w-full bg-white h-[4rem] border border-t-gray-200 z-10 rounded-t-2xl">
           <div className="flex items-center w-full justify-center gap-16  p-4">
             <Link to="/" className="flex flex-col gap-1 items-center ">
