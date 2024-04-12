@@ -35,6 +35,7 @@ import { FindEmailDisplayPage } from "./pages/auth/FindEmailDisplayPage.tsx";
 import { FindEmailOAuthDisplayPage } from "./pages/auth/FindEmailOAuthDisplayPage.tsx";
 import { HostGamePage } from "./pages/games/HostGamePage.tsx";
 import { HostGameHistoryPage } from "./pages/games/HostGameHistoryPage.tsx";
+import { GuestGameHistoryPage } from "./pages/games/GuestGameHistoryPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -155,8 +156,12 @@ const router = createBrowserRouter([
                 element: <ManageParticipantsPage />,
               },
               {
-                path: "hosted-games",
+                path: "hosted-games-history",
                 element: <HostGameHistoryPage />,
+              },
+              {
+                path: "guest-games-history",
+                element: <GuestGameHistoryPage />,
               },
 
               { path: "join/submitted", element: <MatchSubmittedPage /> },

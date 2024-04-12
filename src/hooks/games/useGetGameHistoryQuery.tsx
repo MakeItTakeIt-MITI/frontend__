@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMyGameHistory } from "../../api/games";
+import { getGuestGameHistory } from "../../api/games";
 
-export const useGetGameHistoryQuery = (userId: number) => {
+export const useGetGuestGameHistory = (userId: number | null) => {
   return useQuery({
     queryKey: ["Guest Game History"],
-    queryFn: () => getMyGameHistory(userId),
+    queryFn: () => getGuestGameHistory(userId),
   });
 };

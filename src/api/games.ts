@@ -56,9 +56,9 @@ export const getGameCourtDetails = async (address: string) => {
 
 }
 
-export const getMyGameHistory = async (userId: number) => {
+export const getGuestGameHistory = async (userId: number | null) => {
     try {
-        const response = await axiosUrl(`/users/${userId}/participations`)
+        const response = await axiosUrl(`/users/${userId}/participated-games`)
         return response.data
     } catch {
         throw new Error
