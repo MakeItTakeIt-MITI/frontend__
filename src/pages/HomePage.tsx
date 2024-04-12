@@ -74,7 +74,7 @@ export const HomePage = () => {
               : null}
           </div>
         </div>{" "}
-        <NaverMapEL />
+        <NaverMapEL allGamesData={allGamesData} />
         {/* <KakaoMapV2 allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         {/* <KakaoMap allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         <MobileViewDatesList setSelectedDate={setSelectedDate} />
