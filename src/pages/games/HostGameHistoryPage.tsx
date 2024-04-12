@@ -86,7 +86,7 @@ export const HostGameHistoryPage = () => {
           {/* <h2 className="font-bold">2024년 4월 2일</h2> */}
           {gameData.map((game) => {
             return (
-              <div key={game.id}>
+              <div key={game.id} className="flex flex-col gap-2">
                 <h2 className="font-bold">{game.startdate}</h2>
                 <Link to="/">
                   <div className="py-2 px-3 rounded-lg border border-gray-300 w-full">
