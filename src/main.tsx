@@ -7,14 +7,13 @@ import { HomePage } from "./pages/HomePage.tsx";
 import { UserLoginPage } from "./pages/auth/UserLoginPage.tsx";
 import { UserSignup } from "./pages/auth/UserSignupPage.tsx";
 import { NotFoundPage } from "./pages/NotFoundPage.tsx";
-import { MatchDetailsPage } from "./pages/MatchDetailsPage.tsx";
+import { MatchDetailsPage } from "./pages/games/MatchDetailsPage.tsx";
 import { UserJoinMatchPage } from "./pages/UserJoinMatchPage.tsx";
 import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
 import { SMSAuthenticationPage } from "./pages/auth/SMSAuthenticationPage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { KakaoAuthHandler } from "./components/forms/KakaoAuthHandler.tsx";
-import { UserGamesListPage } from "./pages/UserGamesListPage.tsx";
 import { PrivateRoute } from "./pages/PrivateRoute.tsx";
 import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
 import { ManageParticipantsPage } from "./pages/games/ManageParticipantsPage.tsx";
@@ -35,6 +34,7 @@ import { FindPasswordResetPage } from "./pages/auth/FindPasswordResetPage.tsx";
 import { FindEmailDisplayPage } from "./pages/auth/FindEmailDisplayPage.tsx";
 import { FindEmailOAuthDisplayPage } from "./pages/auth/FindEmailOAuthDisplayPage.tsx";
 import { HostGamePage } from "./pages/games/HostGamePage.tsx";
+import { HostGameHistoryPage } from "./pages/games/HostGameHistoryPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -155,8 +155,8 @@ const router = createBrowserRouter([
                 element: <ManageParticipantsPage />,
               },
               {
-                path: "mygames/:id",
-                element: <UserGamesListPage />,
+                path: "hosted-games",
+                element: <HostGameHistoryPage />,
               },
 
               { path: "join/submitted", element: <MatchSubmittedPage /> },

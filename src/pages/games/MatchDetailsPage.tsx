@@ -1,15 +1,15 @@
-import courtbg from "../assets/court.svg";
-import markerSvg from "../assets/Map_Pin.svg";
-import phoneSvg from "../assets/Phone.svg";
-import peopleSvg from "../assets/people.svg";
-import badge from "../assets/authentication-badge.svg";
-import reviewStar from "../assets/star-review.png";
+import courtbg from "../../assets/court.svg";
+import markerSvg from "../../assets/Map_Pin.svg";
+import phoneSvg from "../../assets/Phone.svg";
+import peopleSvg from "../../assets/people.svg";
+import badge from "../../assets/authentication-badge.svg";
+import reviewStar from "../../assets/star-review.png";
 import { Link, useParams } from "react-router-dom";
-import { useGetGameDetailQuery } from "../hooks/games/useGetGameDetailQuery";
-import { LoadingPage } from "./LoadingPage";
-import { useUserInfoQuery } from "../hooks/games/useUserInfoQuery";
-import useUserDataStore from "../store/useUserDataStore";
-import { MatchInfoParticipantsBox } from "../components/game/host/MatchInfoParticipantsBox";
+import { useGetGameDetailQuery } from "../../hooks/games/useGetGameDetailQuery";
+import { LoadingPage } from "../LoadingPage";
+import { useUserInfoQuery } from "../../hooks/games/useUserInfoQuery";
+import useUserDataStore from "../../store/useUserDataStore";
+import { MatchInfoParticipantsBox } from "../../components/game/host/MatchInfoParticipantsBox";
 export const MatchDetailsPage = () => {
   const { id } = useParams();
   const { userId } = useUserDataStore();
