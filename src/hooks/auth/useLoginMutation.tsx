@@ -37,13 +37,12 @@ export const useLoginMutation = (
       }
 
       if (response?.status_code === 200) {
-        const accessToken = response.data.token.access;
-        const refreshToken = response.data.token.refresh;
+        const { access, refresh } = response.data.token;
         const userId = response.data.id;
         setUserId(userId);
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
-        localStorage.setItem("id", userId);
+        localStorage.setItem("accessToken", access);
+        localStorage.setItem("refreshToken", refresh);
+        // localStorage.setItem("id", userId);
         login();
         navigate("/");
       }
