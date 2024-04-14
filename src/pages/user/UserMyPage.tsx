@@ -4,6 +4,7 @@ import { useUserInfoQuery } from "../../hooks/games/useUserInfoQuery";
 import { LoadingPage } from "../LoadingPage";
 import profileImg from "../../assets/profile_circle (1).svg";
 import { Link } from "react-router-dom";
+import { NotFoundPage } from "../NotFoundPage";
 
 export const UserMyPage = () => {
   const { userId } = useUserDataStore();
@@ -13,8 +14,9 @@ export const UserMyPage = () => {
     return <LoadingPage />;
   }
   if (isError) {
-    return <p>Error..</p>;
+    return <NotFoundPage />;
   }
+  // console.log(data);
 
   return (
     <section className="laptop:my-4 mobile:my-0">
