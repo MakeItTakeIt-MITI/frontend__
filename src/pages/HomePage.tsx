@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { MobileViewGameList } from "../components/home/mobile/MobileViewGameList";
 import { LoadingPage } from "./LoadingPage";
 import { NaverMapEL } from "../components/naver/NaverMap";
+import { NotFoundPage } from "./NotFoundPage";
 // import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
 // import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
 // import { NaverMapEL } from "../components/naver/NaverMap";
@@ -26,6 +27,7 @@ export const HomePage = () => {
     data: allGamesData,
     isPending,
     refetch,
+    isError,
   } = useGetGamesDataQuery(formatDate);
 
   const handleSearchAddress = (address: string) => {
@@ -42,6 +44,10 @@ export const HomePage = () => {
 
   if (isPending) {
     return <LoadingPage />;
+  }
+
+  if (isError) {
+    return <NotFoundPage />;
   }
 
   return (
