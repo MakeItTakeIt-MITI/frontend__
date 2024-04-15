@@ -36,6 +36,7 @@ import { FindEmailOAuthDisplayPage } from "./pages/auth/FindEmailOAuthDisplayPag
 import { HostGamePage } from "./pages/games/HostGamePage.tsx";
 import { HostGameHistoryPage } from "./pages/games/HostGameHistoryPage.tsx";
 import { GuestGameHistoryPage } from "./pages/games/GuestGameHistoryPage.tsx";
+import { MyGamesPage } from "./pages/games/MyGamesPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -150,6 +151,10 @@ const router = createBrowserRouter([
               {
                 path: "detail/:id/join",
                 element: <UserJoinMatchPage />,
+              },
+              {
+                path: "my-games",
+                element: <MyGamesPage />,
               },
               {
                 path: "detail/:id/manage_participants",

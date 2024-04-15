@@ -2,14 +2,12 @@ import { Link } from "react-router-dom";
 import mitiLogo from "../../assets/MITI_logo.svg";
 import useAuthStore from "../../store/useAuthStore";
 import { HeaderField } from "../home/Header";
-import useUserDataStore from "../../store/useUserDataStore";
 import bars from "../../assets/tab-bars.svg";
 import { useState } from "react";
 import tabImg from "../../assets/all-items-tab-img.jpg";
 
 export const BrowserHeader = ({ handleLogout }: HeaderField) => {
   const { isLoggedIn } = useAuthStore();
-  const { userId } = useUserDataStore();
   const [displayTabItems, setDisplayTabItems] = useState(false);
 
   const displayTab = () => {
@@ -26,9 +24,7 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
       <div className="flex items-center gap-4  ">
         {isLoggedIn ? (
           <>
-            <Link to={`/games/mygames/${userId}`} className=" ">
-              나의 경기
-            </Link>
+            <Link to={`/games/my-games`}>나의 경기</Link>
             <Link to={`/mypage`}>마이페이지</Link>
             <button onClick={handleLogout}>로그아웃</button>
           </>
@@ -64,8 +60,10 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
                 </div>
                 <div className="flex flex-col gap-4">
                   <h2 className="font-bold ">경기</h2>
-                  <Link to="/">🏀 나의 참여 경기</Link>
-                  <Link to="/">🏁 나의 호스팅 경기</Link>
+                  <Link to="/games/guest-games-history">🏀 나의 참여 경기</Link>
+                  <Link to="/games/hosted-games-history">
+                    🏁 나의 호스팅 경기
+                  </Link>
                   <Link to="/games/host">✉️ 경기 생성하기</Link>
                 </div>
                 <div className="flex flex-col gap-4">
