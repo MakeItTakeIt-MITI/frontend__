@@ -16,11 +16,13 @@ axiosUrl.interceptors.request.use((config) => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
+    } else {
+        console.log('NO ACCESS TOKEN');
+
     }
     return config;
 }, error => {
-    console.log(error.data.response, 'fail');
-
+    console.log(error);
     return Promise.reject(error);
 }
 
@@ -30,26 +32,35 @@ axiosUrl.interceptors.response.use(
     (response) => response,
     async (error) => {
         // const originalRequest = error.config;
-        console.log(error.data);
-        console.log(error.data.error_code === 501);
-        if (error.response.status === 401 && error.data.error_code === 501) {
-            console.log('401');
-            console.log('--------------');
-            try {
-                const refreshToken = localStorage.getItem('refreshToken'); // Retrieve the stored refresh token.
-                const response = await axios.post('https://dev.makeittakeit.kr/auth/refresh-token', {
-                    refresh: refreshToken,
-                });
-                const { access, refresh } = response.data.data
-                localStorage.setItem('accessToken', access)
-                localStorage.setItem('refreshToken', refresh)
-                console.log(response, 'succeed in refrshing token');
-                return response.data
-            } catch (newError) {
-                console.log('refresh token failed:', newError);
-                return Promise.reject(newError);
+        localStorage.removeItem('accessToken')
+        console.log('ERROR', error.response)
+
+
+        try {
+            const refreshToken = localStorage.getItem('refreshToken');
+            if (!refreshToken) {
+                console.log('Refresh token not found');
+
+                return Promise.reject(error);
             }
+            const response = await axios.post('https://dev.makeittakeit.kr/auth/refresh-token', {}, {
+                headers: {
+                    'refresh': refreshToken,
+                }
+            });
+            const { access, refresh } = response.data.data
+            localStorage.setItem('accessToken', access)
+            localStorage.setItem('refreshToken', refresh)
+            console.log(response, 'succeed in refrshing token');
+            const originalRequest = error.config;
+            originalRequest.headers.Authorization = `Bearer ${access}`;
+            return axios(originalRequest);
+        } catch (newError) {
+            console.log('refresh token failed:', newError);
+            return Promise.reject(newError);
         }
+
+        // return Promise.reject(error);
     }
 )
 
