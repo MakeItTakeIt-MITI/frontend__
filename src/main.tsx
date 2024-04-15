@@ -161,11 +161,11 @@ const router = createBrowserRouter([
                 element: <ManageParticipantsPage />,
               },
               {
-                path: "hosted-games-history",
+                path: "host-history",
                 element: <HostGameHistoryPage />,
               },
               {
-                path: "guest-games-history",
+                path: "guest-history",
                 element: <GuestGameHistoryPage />,
               },
 

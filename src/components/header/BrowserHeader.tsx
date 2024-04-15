@@ -60,10 +60,8 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
                 </div>
                 <div className="flex flex-col gap-4">
                   <h2 className="font-bold ">경기</h2>
-                  <Link to="/games/guest-games-history">🏀 나의 참여 경기</Link>
-                  <Link to="/games/hosted-games-history">
-                    🏁 나의 호스팅 경기
-                  </Link>
+                  <Link to="/games/guest-history">🏀 나의 참여 경기</Link>
+                  <Link to="/games/host-history">🏁 나의 호스팅 경기</Link>
                   <Link to="/games/host">✉️ 경기 생성하기</Link>
                 </div>
                 <div className="flex flex-col gap-4">
