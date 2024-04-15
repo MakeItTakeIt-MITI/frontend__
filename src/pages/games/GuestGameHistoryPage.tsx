@@ -1,6 +1,6 @@
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import downarrow from "../../assets/Chevron_Down_MD.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useUserDataStore from "../../store/useUserDataStore";
 import { LoadingPage } from "../LoadingPage";
 import { MatchTags } from "../../components/game/MatchTags";
@@ -19,6 +19,7 @@ import { useGetGuestGameHistory } from "../../hooks/games/useGetGameHistoryQuery
 
 export const GuestGameHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
+  const [gameStatusQuery, setGameStatusQuery] = useState("");
   const [openList, setOpenList] = useState(false);
 
   const handleOpenList = () => setOpenList(!openList);
@@ -26,9 +27,15 @@ export const GuestGameHistoryPage = () => {
 
   const { userId } = useUserDataStore();
 
-  const { data: guestHistory, isPending } = useGetGuestGameHistory(userId);
+  const {
+    data: guestHistory,
+    isPending,
+    isError,
+    refetch,
+  } = useGetGuestGameHistory(userId, "", 1);
   console.log(guestHistory);
   const gameData = guestHistory?.data.page_content;
+  console.log(guestHistory);
 
   const tabList = [
     { id: 1, name: "모집중" },
@@ -38,7 +45,28 @@ export const GuestGameHistoryPage = () => {
     { id: 5, name: "전체 보기" },
   ];
 
+  useEffect(() => {
+    if (defaultTabName === "전체 보기") {
+      setGameStatusQuery("");
+    } else if (defaultTabName === "모집중") {
+      setGameStatusQuery("open");
+    } else if (defaultTabName === "모집 완료") {
+      setGameStatusQuery("closed");
+    } else if (defaultTabName === "경기 취소") {
+      setGameStatusQuery("canceled");
+    } else if (defaultTabName === "경기 완료") {
+      setGameStatusQuery("completed");
+    }
+
+    // console.log(gameStatusQuery);
+    refetch();
+  }, [refetch, defaultTabName, gameStatusQuery]);
+
   if (isPending) {
+    return <LoadingPage />;
+  }
+
+  if (isError) {
     return <LoadingPage />;
   }
   return (
