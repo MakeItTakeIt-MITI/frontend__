@@ -198,3 +198,4 @@ export interface ParticipantsField {
 export interface GameDetailProp {
     gameData: ParticipantsField;
 }
+

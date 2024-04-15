@@ -12,9 +12,10 @@ import {
   RecruitingTag,
 } from "../../stories/Tags.stories";
 import { Link } from "react-router-dom";
+import { GameDetailField } from "../../interface/gameInterface";
 /**
  * TODO Group each game by date
- * TODO Group each game by filter category (create components for each)
+ * TODO Group each game by filter category (create components for each) DONE
  */
 
 export const HostGameHistoryPage = () => {
@@ -30,6 +31,8 @@ export const HostGameHistoryPage = () => {
   console.log(hostHistory);
   const gameData = hostHistory?.data.page_content;
 
+  // console.log(filterData);
+
   const tabList = [
     { id: 1, name: "모집중" },
     { id: 2, name: "모집 완료" },
@@ -37,6 +40,30 @@ export const HostGameHistoryPage = () => {
     { id: 4, name: "경기 완료" },
     { id: 5, name: "전체 보기" },
   ];
+
+  const filterGameDataTab = () => {
+    if (defaultTabName === "모집중") {
+      return gameData.filter(
+        (game: GameDetailField) => game.game_status === "open"
+      );
+    } else if (defaultTabName === "모집 완료") {
+      return gameData.filter(
+        (game: GameDetailField) => game.game_status === "closed"
+      );
+    } else if (defaultTabName === "경기 취소") {
+      return gameData.filter(
+        (game: GameDetailField) => game.game_status === "canceled"
+      );
+    } else if (defaultTabName === "경기 완료") {
+      return gameData.filter(
+        (game: GameDetailField) => game.game_status === "completed"
+      );
+    } else if (defaultTabName === "전체 보기") {
+      return gameData;
+    }
+  };
+
+  console.log(hostHistory);
 
   if (isPending) {
     return <LoadingPage />;
@@ -53,7 +80,7 @@ export const HostGameHistoryPage = () => {
         <div className="flex justify-end w-full ">
           <div
             onClick={handleOpenList}
-            className="flex items-center  w-[100px] h-[32px] p-2.5 bg-[#f7f7f7]  relative "
+            className="flex items-center  w-[100px] h-[32px] p-2.5 bg-[#f7f7f7]  relative hover:cursor-pointer"
           >
             <p className="text-[14px]">{defaultTabName}</p>
             <img
@@ -84,7 +111,7 @@ export const HostGameHistoryPage = () => {
 
         <div className="flex flex-col gap-2.5">
           {/* <h2 className="font-bold">2024년 4월 2일</h2> */}
-          {gameData.map((game) => {
+          {filterGameDataTab()?.map((game: GameDetailField) => {
             return (
               <div key={game.id} className="flex flex-col gap-2">
                 <h2 className="font-bold">{game.startdate}</h2>
