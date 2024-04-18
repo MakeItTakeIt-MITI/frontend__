@@ -32,41 +32,40 @@ axiosUrl.interceptors.response.use(
     (response) => response,
     async (error) => {
         // const originalRequest = error.config;
-        console.log('ERROR', error.response.data)
-        console.log('STATUS_CODE', error.response.data.status_code)
-        console.log('ERROR_CODE', error.response.data.error_code)
+        // console.log('ERROR', error.response.data)
+        // console.log('STATUS_CODE', error.response.data.status_code)
+        // console.log('ERROR_CODE', error.response.data.error_code)
         localStorage.removeItem('accessToken')
 
         const statusCode = error.response.data.status_code
         const errorCode = error.response.data.error_code
 
-        if (statusCode === 401 && errorCode === 501) {
-            try {
-                const refreshToken = localStorage.getItem('refreshToken');
-                if (!refreshToken) {
-                    console.log('Refresh token not found');
-                    return Promise.reject(error);
-                }
-                const response = await axios.post('https://dev.makeittakeit.kr/auth/refresh-token', {}, {
-                    headers: {
-                        'refresh': refreshToken,
-                    }
-                });
-                const { access, refresh } = response.data.data
-                localStorage.setItem('accessToken', access)
-                localStorage.setItem('refreshToken', refresh)
-                console.log(response, 'succeed in refrshing token');
-                const originalRequest = error.config;
-                originalRequest.headers.Authorization = `Bearer ${access}`;
-                return axios(originalRequest);
-            } catch (newError) {
-                console.log('refresh token failed:');
-                console.log(newError);
-                return Promise.reject(newError);
-            }
-        }
-
-
+        // if (statusCode === 401 && errorCode === 501) {
+        //     try {
+        //         const refreshToken = localStorage.getItem('refreshToken');
+        //         if (!refreshToken) {
+        //             console.log('Refresh token not found');
+        //             return Promise.reject(error);
+        //         }
+        //         const response = await axios.post('https://dev.makeittakeit.kr/auth/refresh-token', {}, {
+        //             headers: {
+        //                 'refresh': refreshToken,
+        //             }
+        //         });
+        //         const { access, refresh } = response.data.data
+        //         localStorage.setItem('accessToken', access)
+        //         localStorage.setItem('refreshToken', refresh)
+        //         console.log(response, 'succeed in refrshing token');
+        //         const originalRequest = error.config;
+        //         originalRequest.headers.Authorization = `Bearer ${access}`;
+        //         return axios(originalRequest);
+        //     } catch (newError) {
+        //         console.log('refresh token failed:');
+        //         console.log(newError);
+        //         return Promise.reject(newError);
+        //     }
+        // }
+        return error.response
     }
 )
 
