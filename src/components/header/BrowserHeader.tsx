@@ -24,7 +24,9 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
         {
           headers: {
             refresh: localStorage.getItem("refreshToken"),
+            "Content-Type": "application/json",
           },
+          withCredentials: true,
         }
       );
       console.log(response);

@@ -30,10 +30,7 @@ export const NaverMapEL = ({ allGamesData }: NaverMapProp) => {
 
     allGamesData?.data.map((data) => {
       const { latitude, longitude } = data.court;
-      // const latitude = data.court.latitude;
-      // const longtitude = data.court.longitude;
-
-      const markers = setMarkers(latitude, longitude, naverMap, data);
+      setMarkers(latitude, longitude, naverMap, data);
     });
   }, []);
 

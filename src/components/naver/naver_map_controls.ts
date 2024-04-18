@@ -1,5 +1,5 @@
 import { GameDetailField } from "../../interface/gameInterface";
-
+import basketballIcon from "../../assets/map_basketball_icon.png"
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
     interface Window {
@@ -15,30 +15,47 @@ export const setMarkers = (latitude: string, longitude: string, map: any, data: 
         map: map,
         title: data.title,
         clickable: true,
-        // icon: {
-        //     //html element를 반환하는 CustomMapMarker 컴포넌트 할당
-        //     // content: <div>hello wolrd</ div >
-        //     //마커의 크기 지정
-        //     size: new naver.maps.Size(24, 24),
-        //     //마커의 기준위치 지정
-        //     anchor: new naver.maps.Point(19, 58),
-        // },
+        icon: {
+            content: createCustomMapMarker(data)
+
+        }
+
     });
 }
 
-export const CustomMapMarker = () => {
+function createCustomMapMarker(data: GameDetailField) {
+    // Create elements
+    const link = document.createElement('a');
+    const img = document.createElement('img');
+    const container = document.createElement('div');
+    const startTime = document.createElement('p');
+    const fee = document.createElement('p');
 
-    // const mobileContentArray = [
-    //     '<div style="margin: 0; display: table; padding: 0.5rem; table-layout: auto; border-radius: 2.3rem; border: 0.2rem solid var(--color--darkgreen); background: white; cursor: pointer; position: relative; z-index: 2">',
-    //     '<div style="display: table-cell; display: inline-block; width: 2.5rem; height: 2.5rem; background-image: url(Images/markerIcon.svg); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>',
-    //     '<span style="position: absolute; border-style: solid; border-width: 1rem 1rem 0 1rem; border-color: #ffffff transparent; display: block; width: 0; z-index: 1; top: 3.1rem; left: 0.75rem;"></span>',
-    //     '<span style="position: absolute; border-style: solid; border-width: 1rem 1rem 0 1rem; border-color: var(--color--darkgreen) transparent; display: block; width: 0; z-index: 0; top: 3.35rem; left: 0.75rem;"></span>',
-    //     '</div>',
-    // ];
+    link.href = `/games/detail/${data.id}`;
+    link.classList.add('bg-white', 'flex', 'items-center', 'gap-2', 'w-[125px]', 'h-[44px]', 'border', 'border-[#FF4A4A]', 'rounded-2xl', 'hover:bg-[#4065F5]', 'hover:text-white', 'hover:border-black');
+    img.src = basketballIcon;
+    img.alt = 'bktball';
+    img.classList.add('size-1px', 'absolute', 'left-2',);
+    container.classList.add('flex', 'flex-col', 'justify-center', 'items-center', 'text-[12px]', 'text-center', 'w-full');
+    startTime.textContent = `${data.starttime.slice(0, -3)}-${data.endtime.slice(0, -3)}`;
+    fee.textContent = `₩${data.fee.toLocaleString("ko-KR", { currency: "KRW" })}`;
+    fee.classList.add('font-bold');
+
+    link.appendChild(img);
+    container.appendChild(startTime);
+    container.appendChild(fee);
+    link.appendChild(container);
+
+    return link;
+}
 
 
-    // if (windowWidth < 768) return mobileContentArray.join('');
-
-    // return PCContentArray.join('');
-};
-
+// export const CustomMapMarker = (data) => {
+//     return `<a href="/games/detail/${data.id}" class=" bg-white flex items-center gap-2 w-[125px] h-[44px] border border-[#FF4A4A] rounded-2xl hover:bg-[#4065F5] hover:text-white hover:border-black">
+//    <img src={basketballIcon}  alt="bktball" class="size-1px absolute left-0" />
+//     <div class="flex flex-col justify-center items-center text-[12px] text-center w-full ">
+//     <p>${data.starttime.slice(0, -3)}-${data.endtime.slice(0, -3)}</p>
+//     <p class="font-bold" >₩${data.fee.toLocaleString("ko-KR", { currency: "KRW" })}</p>
+//     </div>
+//     </a>`
+// };
