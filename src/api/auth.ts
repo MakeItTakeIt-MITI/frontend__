@@ -38,14 +38,15 @@ export const userSignup = async (data: RegisterField) => {
 }
 
 
-export const kakaoAuthLogin = async (code: string | null) => {
+export const oAuthKakaoLogin = async (data: { access_token: string | null }) => {
     try {
-        const response = await axiosUrl.get(`/auth/oauth/kakao/authorize?code=${code}`)
-        return response.data
-    } catch {
-        throw new Error
+        const response = await axiosUrl.post("/auth/oauth/kakao/login", data);
+        return response.data;
+    } catch (error) {
+        throw new Error();
     }
-}
+};
+
 
 export const requestLostEmail = async (phone: FindEmailField) => {
     try {
