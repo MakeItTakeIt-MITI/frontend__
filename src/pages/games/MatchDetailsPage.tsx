@@ -1,6 +1,4 @@
-import courtbg from "../../assets/court.svg";
 import markerSvg from "../../assets/Map_Pin.svg";
-import phoneSvg from "../../assets/Phone.svg";
 import peopleSvg from "../../assets/people.svg";
 import badge from "../../assets/authentication-badge.svg";
 import reviewStar from "../../assets/star-review.png";
@@ -10,40 +8,60 @@ import { LoadingPage } from "../LoadingPage";
 import { useUserInfoQuery } from "../../hooks/games/useUserInfoQuery";
 import useUserDataStore from "../../store/useUserDataStore";
 import { MatchInfoParticipantsBox } from "../../components/game/host/MatchInfoParticipantsBox";
+import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
+import { MatchTags } from "../../components/game/MatchTags";
+import {
+  GameCancelledTag,
+  GameFinishedTag,
+  RecruitingCompletedTag,
+  RecruitingTag,
+} from "../../stories/Tags.stories";
+import { NotFoundPage } from "../NotFoundPage";
 export const MatchDetailsPage = () => {
   const { id } = useParams();
   const { userId } = useUserDataStore();
   const gameIdParam = Number(id);
-  const { data: gameDetail, isLoading } = useGetGameDetailQuery(gameIdParam);
+  const {
+    data: gameDetail,
+    isLoading,
+    isError,
+  } = useGetGameDetailQuery(gameIdParam);
 
-  const { data: userData } = useUserInfoQuery(userId);
-  const userEmail = userData?.data.email;
+  const { data: gameData } = useUserInfoQuery(userId);
+  const userEmail = gameData?.data.email;
   const hostEmail = gameDetail?.data.host.email;
 
   if (isLoading) {
     return <LoadingPage />;
   }
 
-  return (
-    <div className="w-full laptop:px-[13rem] tablet:px-[2rem]  tablet:max-w-[90rem] tablet:mb-0 mx-auto mobile:mb-[4rem] pt-10 pb-4 ">
-      {/* <div className=" mobile:w-full tablet:w-[560px] tablet:mb-0 mx-auto mobile:mb-[4rem] py-3"> */}
-      <hr className="h-[8px] w-full bg-gray-200 mobile:hidden tablet:block" />
+  if (isError) {
+    return <NotFoundPage />;
+  }
 
-      <div className="flex mobile:flex-col tablet:flex-row  ">
-        <div className="tablet:min-w-[400px] ">
-          <img
-            src={courtbg}
-            alt="basketball court"
-            className="mobile:w-full tablet:hidden"
-          />
-          <div className="mobile:px-[16px] mobile:py-[18px] ">
+  return (
+    <section className="laptop:my-4 mobile:my-0 h-full ">
+      <NavigateToPrevContainer children="경기 상세" />
+
+      <div className="relative laptop:w-[500px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4  rounded-lg flex flex-col gap-5 ">
+        {/* <div className="w-full laptop:px-[13rem] tablet:px-[2rem]  tablet:max-w-[90rem] tablet:mb-0 mx-auto mobile:mb-[4rem] pt-10 pb-4 "> */}
+        {/* <div className=" mobile:w-full tablet:w-[560px] tablet:mb-0 mx-auto mobile:mb-[4rem] py-3"> */}
+
+        <div className="flex  flex-col ">
+          <div className=" ">
             <div className="tablet:flex tablet:flex-col tablet:gap-1 tablet:items-start">
-              <span className="mobile:text-[11px] tablet:text-[14px] text-[#4065F6] bg-[#C1e1ff] p-[3px] rounded-sm font-[500]">
-                {/* 2명 모집 */}
-                {gameDetail?.data.max_invitation -
-                  gameDetail?.data.confimed_participations}
-                명 모집
-              </span>
+              {gameDetail.data.game_status === "open" && (
+                <MatchTags {...RecruitingTag.args} />
+              )}
+              {gameDetail.data.game_status === "canceled" && (
+                <MatchTags {...GameCancelledTag.args} />
+              )}
+              {gameDetail.data.game_status === "closed" && (
+                <MatchTags {...RecruitingCompletedTag.args} />
+              )}
+              {gameDetail.data.game_status === "completed" && (
+                <MatchTags {...GameFinishedTag.args} />
+              )}
               <p className="font-bold text-[#222] tablet:text-[20px]">
                 {gameDetail?.data.title}
               </p>
@@ -66,14 +84,7 @@ export const MatchDetailsPage = () => {
                   {gameDetail?.data.court.address_detail}
                 </p>
               </div>
-              <div className="flex gap-1">
-                <img
-                  src={phoneSvg}
-                  alt="phone icon"
-                  className="tablet:w-[20px]"
-                />
-                <p>{gameDetail?.data.host.phone}</p>
-              </div>
+
               <div className="flex gap-1">
                 <img
                   src={peopleSvg}
@@ -82,7 +93,7 @@ export const MatchDetailsPage = () => {
                 />
                 <p>
                   총 {gameDetail?.data.max_invitation}명 중{" "}
-                  {gameDetail?.data.confimed_participations}명 모집
+                  {gameDetail?.data.num_of_confirmed_participations}명 모집 완료
                 </p>
               </div>
             </div>
@@ -92,46 +103,6 @@ export const MatchDetailsPage = () => {
                 currency: "KRW",
               })}
             </p>
-          </div>
-          <div className="px-2 tablet:block mobile:hidden">
-            {userEmail === hostEmail ? (
-              // <Link to={`/games/detail/${gameIdParam}/join`}>
-              <button
-                onClick={() => alert("In progress")}
-                disabled={
-                  gameDetail?.data.game_status === "cancelled" ? true : false
-                }
-                style={{
-                  backgroundColor:
-                    gameDetail?.data.game_status === "cancelled"
-                      ? "#E8E8E8"
-                      : "#4065F6",
-                }}
-                className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white "
-              >
-                {" "}
-                매치 상태 변경
-              </button>
-            ) : (
-              // </Link>
-              <Link to={`/games/detail/${gameIdParam}/join`}>
-                <button
-                  disabled={
-                    gameDetail?.data.game_status === "cancelled" ? true : false
-                  }
-                  style={{
-                    backgroundColor:
-                      gameDetail?.data.game_status === "cancelled"
-                        ? "#E8E8E8"
-                        : "#4065F6",
-                  }}
-                  className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white "
-                >
-                  {" "}
-                  매치 참가하기
-                </button>
-              </Link>
-            )}
           </div>
         </div>
         <div>
@@ -207,27 +178,26 @@ export const MatchDetailsPage = () => {
               </p>
             </div>
           </div>
-          <div className="mobile:px-2 tablet:px-10 tablet:hidden mobile:block">
-            {userEmail === hostEmail ? (
-              <Link to={`/games/detail/${gameIdParam}/join`}>
-                <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white ">
-                  {" "}
-                  매치 상태 변경
-                </button>
-              </Link>
-            ) : (
-              <Link to={`/games/detail/${gameIdParam}/join`}>
-                <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white ">
-                  {" "}
-                  매치 참가하기
-                </button>
-              </Link>
-            )}
-          </div>
-        </div>
-      </div>
 
-      {/* <AdvertisementBanner /> */}
-    </div>
+          {gameDetail.data.is_host === true ? (
+            <Link to={`/games/detail/${gameIdParam}/join`}>
+              <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white ">
+                {" "}
+                매치 상태 변경
+              </button>
+            </Link>
+          ) : (
+            <Link to={`/games/detail/${gameIdParam}/join`}>
+              <button className=" w-full h-[50px] bg-[#4065F6] rounded-[8px] text-white ">
+                {" "}
+                매치 참가하기
+              </button>
+            </Link>
+          )}
+        </div>
+
+        {/* <AdvertisementBanner /> */}
+      </div>
+    </section>
   );
 };
