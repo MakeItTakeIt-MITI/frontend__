@@ -37,6 +37,8 @@ import { HostGamePage } from "./pages/games/HostGamePage.tsx";
 import { HostGameHistoryPage } from "./pages/games/HostGameHistoryPage.tsx";
 import { GuestGameHistoryPage } from "./pages/games/GuestGameHistoryPage.tsx";
 import { MyGamesPage } from "./pages/games/MyGamesPage.tsx";
+import { NotVerifiedUserPage } from "./pages/auth/NotVerifiedUserPage.tsx";
+import { NotVerifiedInputDetailPage } from "./pages/auth/NotVerifiedInputDetailPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +57,14 @@ const router = createBrowserRouter([
           {
             path: "login",
             element: <UserLoginPage />,
+          },
+          {
+            path: "authenticate-user",
+            element: <NotVerifiedUserPage />,
+          },
+          {
+            path: "authenticate-user-info",
+            element: <NotVerifiedInputDetailPage />,
           },
           {
             path: "signup-option",

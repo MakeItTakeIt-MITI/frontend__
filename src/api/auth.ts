@@ -7,9 +7,6 @@ import axiosUrl from "../utils/axios"
 export const userLogin = async (data: LoginField) => {
     try {
         const response = await axiosUrl.post('/auth/login', data)
-        // if (response.data.status_code === 200) {
-        //     return response.data
-        // }
         return response.data
     } catch {
         throw new Error
@@ -100,6 +97,15 @@ export const updateNewPassword = async (user_info_token: string | null, data: Ne
 export const requestResetPassword = async (data: string) => {
     try {
         const response = await axiosUrl.post('/auth/password-reset-email', data)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
+
+export const authorizeExistingUser = async (data: LoginField) => {
+    try {
+        const response = await axiosUrl.post(`/auth/send-sms/authentication`, data)
         return response.data
     } catch {
         throw new Error
