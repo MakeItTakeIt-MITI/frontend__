@@ -19,7 +19,6 @@ export const useKakaoLoginMutation = (setModal: (arg: boolean) => void) => {
 
       if (response.status_code === 200) {
         console.log(response);
-
         const { access, refresh } = response.data.token;
         localStorage.setItem("accessToken", access);
         localStorage.setItem("refreshToken", refresh);
