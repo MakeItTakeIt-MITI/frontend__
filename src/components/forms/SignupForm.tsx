@@ -17,7 +17,13 @@ import { SuccessMessage } from "../common/SuccessMessage";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
+  const [successEmailMsg, setSuccessEmailMsg] = useState("");
+  const [errorEmailMsg, setErrorEmailMsg] = useState("");
+
   const [validNickname, setValidNickname] = useState(false);
+  const [successNicknameMsg, setSuccessNicknameMsg] = useState("");
+  const [errorNicknameMsg, setErrorNicknameMsg] = useState("");
+
   const [displayPasswordMark, setDisplayPasswordMark] = useState(false);
 
   const {
@@ -32,10 +38,16 @@ export const SignupForm = () => {
   });
 
   const { mutate: registerMutation, isError } = useRegisterMutation();
-  const { mutate: emailMutation, data: emailData } =
-    useValidateDuplicateEmail(setValidEmail);
-  const { mutate: nicknameMutation, data: nickData } =
-    useValidateDuplicateNickname(setValidNickname);
+  const { mutate: emailMutation } = useValidateDuplicateEmail(
+    setValidEmail,
+    setSuccessEmailMsg,
+    setErrorEmailMsg
+  );
+  const { mutate: nicknameMutation } = useValidateDuplicateNickname(
+    setValidNickname,
+    setSuccessNicknameMsg,
+    setErrorNicknameMsg
+  );
 
   const onSubmit = (data: RegisterField) => registerMutation(data);
 
@@ -65,7 +77,7 @@ export const SignupForm = () => {
           type="email"
           id="email"
           role="input-email"
-          disabled={validEmail ? true : false}
+          disabled={validEmail && !errors.email ? true : false}
           placeholder="이메일을 입력해주세요."
           {...register("email", {
             required: true,
@@ -76,7 +88,7 @@ export const SignupForm = () => {
           validation={
             !validEmail ? handleValidateEmail : () => setValidEmail(false)
           }
-          isValid={validEmail}
+          isValid={validEmail && !errors.email}
           validateFunction={handleValidateEmail}
           role={"validate-email"}
         />
@@ -84,11 +96,11 @@ export const SignupForm = () => {
       {errors.email?.message && (
         <ErrorMessage children={errors.email?.message} />
       )}
-      {emailData?.data.email.is_duplicated === false && (
-        <SuccessMessage children=" 사용 가능한 이메일이에요!" />
+      {validEmail && !errors.email && (
+        <SuccessMessage children={successEmailMsg} />
       )}
-      {emailData?.data.email.is_duplicated === true && (
-        <ErrorMessage children="이미 회원으로 등록된 이메일이에요." />
+      {!validEmail && errorEmailMsg && (
+        <ErrorMessage children={errorEmailMsg} />
       )}
 
       <div className="flex flex-col gap-2">
@@ -179,7 +191,7 @@ export const SignupForm = () => {
           type="text"
           id="nickname"
           role="input-nickname"
-          disabled={validNickname ? true : false}
+          disabled={validNickname && !errors.nickname ? true : false}
           placeholder="닉네임을 입력해주세요."
           {...register("nickname", {
             required: true,
@@ -190,7 +202,7 @@ export const SignupForm = () => {
           validation={
             !validNickname ? handleValidateNick : () => setValidNickname(false)
           }
-          isValid={validNickname}
+          isValid={validNickname && !errors.nickname}
           validateFunction={handleValidateNick}
           role={"validate-nickname"}
         />
@@ -198,12 +210,19 @@ export const SignupForm = () => {
       {errors.nickname?.message && (
         <ErrorMessage children={errors.nickname.message} />
       )}
-      {nickData?.data.nickname.is_duplicated === false && (
+      {validNickname && !errors.nickname && (
+        <SuccessMessage children={successNicknameMsg} />
+      )}
+      {!validNickname && errorNicknameMsg && (
+        <ErrorMessage children={errorNicknameMsg} />
+      )}
+
+      {/* {nickData?.data.nickname.is_duplicated === false && (
         <SuccessMessage children="멋진 닉네임이에요!" />
       )}
       {nickData?.data.nickname.is_duplicated === true && (
         <ErrorMessage children="다른 회원님이 사용중인 닉네임이에요." />
-      )}
+      )} */}
 
       <div className="flex flex-col gap-2">
         <label htmlFor="birthday" className="text-[12px] text-[#1c1c1c]">
