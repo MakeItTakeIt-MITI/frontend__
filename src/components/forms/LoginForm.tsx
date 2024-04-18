@@ -25,9 +25,8 @@ export const LoginForm = ({
   setErrorCode,
   setErrorMsg,
 }: LoginFormProps) => {
-  // console.log(errorCode);
-
   const [displayPassword, setDisplayPassword] = useState(false);
+
   const {
     register,
     handleSubmit,

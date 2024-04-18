@@ -15,14 +15,16 @@ export const useVerifySmsMutation = (
       console.log(response);
 
       if (response.status_code === 200) {
-        return navigate("/sms-authentication-verified");
+        navigate("/sms-authentication-verified");
       }
 
-      if (response.error_code && response.error_code === 102) {
-        return setError(true);
-      } else if (response.error_code === 901) {
-        console.log("TOKEN ACCESS ERROR");
-        return setError(true);
+      if (response.status_code === 400) {
+        if (response.error_code === 102) {
+          setError(true);
+        } else if (response.error_code === 901) {
+          console.log("TOKEN ACCESS ERROR");
+          setError(true);
+        }
       }
     },
   });
