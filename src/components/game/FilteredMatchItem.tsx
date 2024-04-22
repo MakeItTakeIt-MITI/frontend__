@@ -1,4 +1,3 @@
-// import { Link } from "react-router-dom";
 import groupIcon from "../../assets/people.svg";
 import { GameDetailField } from "../../interface/gameInterface";
 import {
@@ -15,7 +14,7 @@ interface GameDetailProp {
   handleSearchCoords: (argOne: number, argTwo: number) => void;
 }
 
-export const MatchListDetail = ({
+export const FilteredMatchItem = ({
   game,
   handleSearchCoords,
 }: GameDetailProp) => {
@@ -25,7 +24,7 @@ export const MatchListDetail = ({
         const { latitude, longitude } = game.court;
         handleSearchCoords(Number(latitude), Number(longitude));
       }}
-      className="hover:cursor-pointer"
+      className="hover:cursor-pointer hover:bg-gray-200 px-4 py-2 "
     >
       <div className="flex flex-col   gap-1">
         {game.game_status === "open" && <MatchTags {...RecruitingTag.args} />}
