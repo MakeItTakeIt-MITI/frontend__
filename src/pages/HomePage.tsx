@@ -111,6 +111,8 @@ export const HomePage = () => {
       <MobileViewGameList
         formatDate={formatDate}
         handleSearchCoords={handleSearchCoords}
+        displayCollapsedList={displayCollapsedList}
+        filteredGames={filteredGames}
       />
       <div className="mobile:px-4 tablet:px-0 mb-2">
         <AdvertisementBanner />
