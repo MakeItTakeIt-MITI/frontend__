@@ -16,9 +16,6 @@ axiosUrl.interceptors.request.use((config) => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
-    } else {
-        console.log('NO ACCESS TOKEN');
-
     }
     return config;
 }, error => {
@@ -37,8 +34,8 @@ axiosUrl.interceptors.response.use(
         // console.log('ERROR_CODE', error.response.data.error_code)
         localStorage.removeItem('accessToken')
 
-        const statusCode = error.response.data.status_code
-        const errorCode = error.response.data.error_code
+        // const statusCode = error.response.data.status_code
+        // const errorCode = error.response.data.error_code
 
         // if (statusCode === 401 && errorCode === 501) {
         //     try {

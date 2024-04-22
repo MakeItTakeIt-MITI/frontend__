@@ -11,13 +11,13 @@ import { MatchTags } from "../../game/MatchTags";
 
 interface GameDetailProp {
   formatDate: string;
-  handleSearchAddress: (arg: string) => void;
+  handleSearchCoords: (arg: number, argTwo: number) => void;
 }
 
 export const MobileViewGameList = ({
   formatDate,
 
-  handleSearchAddress,
+  handleSearchCoords,
 }: GameDetailProp) => {
   const { data } = useGetGamesDataQuery(formatDate);
 
@@ -26,7 +26,10 @@ export const MobileViewGameList = ({
       {data?.data.map((game: GameDetailField) => {
         return (
           <div
-            onClick={() => handleSearchAddress(game?.court.address)}
+            onClick={() => {
+              const { latitude, longitude } = game.court;
+              handleSearchCoords(Number(latitude), Number(longitude));
+            }}
             key={game.id}
             className="  border border-b-gray-200  rounded-xl  hover:cursor-pointer  "
           >

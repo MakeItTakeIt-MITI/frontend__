@@ -44,27 +44,16 @@ export interface GameDetailField {
     endtime: string;
     fee: number;
     num_of_participations: number;
+    max_invitation: number;
     court: GameCourtData;
-    // address: string
+
 }
 
-export interface Game {
-    game: {
-        id: number;
-        game_status: string;
-        title: string;
-        startdate: string;
-        starttime: string;
-        enddate: string;
-        endtime: string;
-        fee: number;
-        court: Court;
-    }
-}
+
 
 export interface GuestGameField {
     id: number;
-    data: Game[]
+    // data: Game[]
 }
 
 export interface GameDetailProp {

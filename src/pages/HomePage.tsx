@@ -17,10 +17,12 @@ import { NotFoundPage } from "./NotFoundPage";
 
 export const HomePage = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
-  const [searchAddress, setSearchAddress] = useState("");
-  // const [displyModal, setDisplayModal] = useState(false);
+  const [gameLatitude, setGameLatitude] = useState(0);
+  const [gameLongitude, setGameLongitude] = useState(0);
+  const [gameSearched, isGameSearched] = useState(false);
 
-  console.log(searchAddress);
+  // const [gameClicked, isGameClicked] = useState(false);
+  // const [displyModal, setDisplayModal] = useState(false);
 
   const formatDate = selectingDate.toISOString().split("T")[0];
   const {
@@ -30,13 +32,13 @@ export const HomePage = () => {
     isError,
   } = useGetGamesDataQuery(formatDate);
 
-  const handleSearchAddress = (address: string) => {
-    setSearchAddress(address);
+  const handleSearchCoords = (latitude: number, longitude: number) => {
+    isGameSearched(true);
+    setGameLatitude(latitude);
+    setGameLongitude(longitude);
+    refetch();
+    console.log(gameLatitude, gameLongitude);
   };
-
-  if (allGamesData) {
-    console.log("allGamesData:", allGamesData);
-  }
 
   useEffect(() => {
     refetch();
@@ -71,7 +73,7 @@ export const HomePage = () => {
                     <div key={game.id}>
                       <MatchListDetail
                         game={game}
-                        handleSearchAddress={handleSearchAddress}
+                        handleSearchCoords={handleSearchCoords}
                       />
                       <hr className="w-full bg-[#ECECEC] my-2" />
                     </div>
@@ -80,14 +82,21 @@ export const HomePage = () => {
               : null}
           </div>
         </div>{" "}
-        <NaverMapEL allGamesData={allGamesData} />
+        <NaverMapEL
+          allGamesData={allGamesData}
+          gameLatitude={gameLatitude}
+          gameLongitude={gameLongitude}
+          refetch={refetch}
+          gameSearched={gameSearched}
+          isGameSearched={isGameSearched}
+        />
         {/* <KakaoMapV2 allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         {/* <KakaoMap allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         <MobileViewDatesList setSelectedDate={setSelectedDate} />
       </div>
       <MobileViewGameList
         formatDate={formatDate}
-        handleSearchAddress={handleSearchAddress}
+        handleSearchCoords={handleSearchCoords}
       />
       <div className="mobile:px-4 tablet:px-0 mb-2">
         <AdvertisementBanner />

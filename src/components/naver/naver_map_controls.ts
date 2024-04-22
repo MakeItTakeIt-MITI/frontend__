@@ -1,5 +1,6 @@
 import { GameDetailField } from "../../interface/gameInterface";
 import basketballIcon from "../../assets/map_basketball_icon.png"
+import { getCurrentLocation } from "./geolocation";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
     interface Window {
@@ -9,18 +10,25 @@ declare global {
 const { naver } = window;
 
 
-export const setMarkers = (latitude: string, longitude: string, map: any, data: GameDetailField) => {
-    new naver.maps.Marker({
-        position: new naver.maps.LatLng(latitude, longitude),
-        map: map,
-        title: data.title,
-        clickable: true,
-        icon: {
-            content: createCustomMapMarker(data)
 
-        }
+export function setCustomMarkers(map: any, allGamesData: GameDetailField[]) {
+    allGamesData.map((data) => {
+        const { latitude, longitude } = data.court;
 
-    });
+        new naver.maps.Marker({
+            position: new naver.maps.LatLng(latitude, longitude),
+            map: map,
+            title: data.title,
+            clickable: true,
+            icon: {
+                content: createCustomMapMarker(data)
+            }
+
+        });
+
+    })
+
+
 }
 
 function createCustomMapMarker(data: GameDetailField) {
@@ -50,12 +58,17 @@ function createCustomMapMarker(data: GameDetailField) {
 }
 
 
-// export const CustomMapMarker = (data) => {
-//     return `<a href="/games/detail/${data.id}" class=" bg-white flex items-center gap-2 w-[125px] h-[44px] border border-[#FF4A4A] rounded-2xl hover:bg-[#4065F5] hover:text-white hover:border-black">
-//    <img src={basketballIcon}  alt="bktball" class="size-1px absolute left-0" />
-//     <div class="flex flex-col justify-center items-center text-[12px] text-center w-full ">
-//     <p>${data.starttime.slice(0, -3)}-${data.endtime.slice(0, -3)}</p>
-//     <p class="font-bold" >₩${data.fee.toLocaleString("ko-KR", { currency: "KRW" })}</p>
-//     </div>
-//     </a>`
-// };
+export function setCoordsToSelectedGame(naverMap: any, gameLatitude: number, gameLongitude: number, gameSearched: boolean, setCurrentMyLocation: (arg: number, arg2: number) => void) {
+    if (gameSearched) {
+        navigator.geolocation.getCurrentPosition(function () {
+            const setLatLong = naver.maps.LatLng(gameLatitude, gameLongitude);
+            naverMap.setCenter(setLatLong);
+            naverMap.setZoom(16);
+            // isGameSearched(true);
+            // refetch();
+        });
+    } else if (gameSearched === false) {
+        getCurrentLocation(setCurrentMyLocation)
+    }
+}
+

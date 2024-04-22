@@ -12,16 +12,19 @@ import { MatchTags } from "./MatchTags";
 
 interface GameDetailProp {
   game: GameDetailField;
-  handleSearchAddress: (arg: string) => void;
+  handleSearchCoords: (argOne: number, argTwo: number) => void;
 }
 
 export const MatchListDetail = ({
   game,
-  handleSearchAddress,
+  handleSearchCoords,
 }: GameDetailProp) => {
   return (
     <div
-      onClick={() => handleSearchAddress(game?.court.address)}
+      onClick={() => {
+        const { latitude, longitude } = game.court;
+        handleSearchCoords(Number(latitude), Number(longitude));
+      }}
       className="hover:cursor-pointer"
     >
       <div className="flex flex-col   gap-1">

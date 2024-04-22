@@ -39,6 +39,7 @@ import { GuestGameHistoryPage } from "./pages/games/GuestGameHistoryPage.tsx";
 import { MyGamesPage } from "./pages/games/MyGamesPage.tsx";
 import { NotVerifiedUserPage } from "./pages/auth/NotVerifiedUserPage.tsx";
 import { NotVerifiedInputDetailPage } from "./pages/auth/NotVerifiedInputDetailPage.tsx";
+import React from "react";
 
 const queryClient = new QueryClient();
 
