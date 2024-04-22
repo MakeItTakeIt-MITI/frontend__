@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { GameDetailField } from "../../interface/gameInterface";
 import {
   setCoordsToSelectedGame,
@@ -21,20 +21,13 @@ interface NaverMapProp {
     message: string;
     status_code: number;
   };
-  gameLatitude: number;
-  gameLongitude: number;
+
   refetch: () => void;
   gameSearched: boolean;
   isGameSearched: (arg: boolean) => void;
 }
 
-export const NaverMapEL = ({
-  allGamesData,
-  gameLatitude,
-  gameLongitude,
-  gameSearched,
-  isGameSearched,
-}: NaverMapProp) => {
+export const NaverMapEL = ({ allGamesData, gameSearched }: NaverMapProp) => {
   const { setCurrentMyLocation, location } = useGeolocationStore();
 
   const { latitude, longitude } = location;
@@ -54,15 +47,9 @@ export const NaverMapEL = ({
       },
     });
     setCustomMarkers(naverMap, allGamesData.data);
-    // getCurrentLocation(setCurrentMyLocation);
-    setCoordsToSelectedGame(
-      naverMap,
-      gameLatitude,
-      gameLongitude,
-      isGameSearched,
-      setCurrentMyLocation
-    );
-  }, [allGamesData, gameLatitude, gameLongitude]);
+    getCurrentLocation(setCurrentMyLocation, gameSearched);
+    setCoordsToSelectedGame(naverMap, latitude, longitude, gameSearched);
+  }, [allGamesData, latitude, longitude, gameSearched, setCurrentMyLocation]);
 
   return <section id="map" className="w-full  h-[473px]" />;
 };

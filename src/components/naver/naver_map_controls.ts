@@ -1,6 +1,5 @@
 import { GameDetailField } from "../../interface/gameInterface";
 import basketballIcon from "../../assets/map_basketball_icon.png"
-import { getCurrentLocation } from "./geolocation";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
     interface Window {
@@ -32,7 +31,6 @@ export function setCustomMarkers(map: any, allGamesData: GameDetailField[]) {
 }
 
 function createCustomMapMarker(data: GameDetailField) {
-    // Create elements
     const link = document.createElement('a');
     const img = document.createElement('img');
     const container = document.createElement('div');
@@ -58,17 +56,13 @@ function createCustomMapMarker(data: GameDetailField) {
 }
 
 
-export function setCoordsToSelectedGame(naverMap: any, gameLatitude: number, gameLongitude: number, gameSearched: boolean, setCurrentMyLocation: (arg: number, arg2: number) => void) {
+export function setCoordsToSelectedGame(naverMap: any, gameLatitude: number, gameLongitude: number, gameSearched: boolean) {
     if (gameSearched) {
-        navigator.geolocation.getCurrentPosition(function () {
-            const setLatLong = naver.maps.LatLng(gameLatitude, gameLongitude);
-            naverMap.setCenter(setLatLong);
-            naverMap.setZoom(16);
-            // isGameSearched(true);
-            // refetch();
-        });
-    } else if (gameSearched === false) {
-        getCurrentLocation(setCurrentMyLocation)
+        // navigator.geolocation.getCurrentPosition(function () {
+        const setLatLong = naver.maps.LatLng(gameLatitude, gameLongitude);
+        naverMap.setCenter(setLatLong);
+        naverMap.setZoom(16);
+        // });
     }
 }
 

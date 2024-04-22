@@ -11,15 +11,16 @@ import { MobileViewGameList } from "../components/home/mobile/MobileViewGameList
 import { LoadingPage } from "./LoadingPage";
 import { NaverMapEL } from "../components/naver/NaverMap";
 import { NotFoundPage } from "./NotFoundPage";
+import useGeolocationStore from "../store/useGeolocationStore";
 // import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
 // import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
 // import { NaverMapEL } from "../components/naver/NaverMap";
 
 export const HomePage = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
-  const [gameLatitude, setGameLatitude] = useState(0);
-  const [gameLongitude, setGameLongitude] = useState(0);
+
   const [gameSearched, isGameSearched] = useState(false);
+  const { setCurrentMyLocation } = useGeolocationStore();
 
   // const [gameClicked, isGameClicked] = useState(false);
   // const [displyModal, setDisplayModal] = useState(false);
@@ -34,10 +35,10 @@ export const HomePage = () => {
 
   const handleSearchCoords = (latitude: number, longitude: number) => {
     isGameSearched(true);
-    setGameLatitude(latitude);
-    setGameLongitude(longitude);
+    // setGameLatitude(latitude);
+    // setGameLongitude(longitude);
+    setCurrentMyLocation(latitude, longitude);
     refetch();
-    console.log(gameLatitude, gameLongitude);
   };
 
   useEffect(() => {
@@ -84,14 +85,10 @@ export const HomePage = () => {
         </div>{" "}
         <NaverMapEL
           allGamesData={allGamesData}
-          gameLatitude={gameLatitude}
-          gameLongitude={gameLongitude}
           refetch={refetch}
           gameSearched={gameSearched}
           isGameSearched={isGameSearched}
         />
-        {/* <KakaoMapV2 allGamesData={allGamesData} searchAddress={searchAddress} /> */}
-        {/* <KakaoMap allGamesData={allGamesData} searchAddress={searchAddress} /> */}
         <MobileViewDatesList setSelectedDate={setSelectedDate} />
       </div>
       <MobileViewGameList
