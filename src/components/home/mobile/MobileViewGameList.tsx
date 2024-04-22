@@ -25,6 +25,7 @@ export const MobileViewGameList = ({
         data?.data.map((game: GameDetailField) => {
           return (
             <MobileMatchItem
+              key={game.id}
               game={game}
               handleSearchCoords={handleSearchCoords}
             />
@@ -36,6 +37,7 @@ export const MobileViewGameList = ({
             if (address === game.court.address) {
               return (
                 <MobileFilteredMatchItem
+                  key={game.id}
                   game={game}
                   handleSearchCoords={handleSearchCoords}
                 />

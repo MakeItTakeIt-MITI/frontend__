@@ -18,13 +18,12 @@ export const MobileFilteredMatchItem = ({
   handleSearchCoords,
 }: MobileMatchItemProp) => {
   return (
-    <Link to={`/games/detail/${game.id}`} key={game.id}>
+    <Link to={`/games/detail/${game.id}`}>
       <div
         onClick={() => {
           const { latitude, longitude } = game.court;
           handleSearchCoords(Number(latitude), Number(longitude));
         }}
-        key={game.id}
         className="border border-b-gray-200  rounded-xl  hover:cursor-pointer  "
       >
         <div className="flex flex-col gap-1 p-3">

@@ -49,7 +49,8 @@ axiosUrl.interceptors.response.use(
                 const { access, refresh } = response.data.data
                 localStorage.setItem('accessToken', access)
                 localStorage.setItem('refreshToken', refresh)
-                console.log(response, 'succeed in refrshing token');
+                window.location.reload()
+                console.log(response, 'succeed in refreshing token');
                 const originalRequest = error.config;
                 originalRequest.headers.Authorization = `Bearer ${access}`;
                 return axios(originalRequest);
