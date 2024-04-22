@@ -12,6 +12,16 @@ import { LoadingPage } from "./LoadingPage";
 import { NaverMapEL } from "../components/naver/NaverMap";
 import { NotFoundPage } from "./NotFoundPage";
 import useGeolocationStore from "../store/useGeolocationStore";
+import { MatchTags } from "../components/game/MatchTags";
+
+import groupIcon from "../assets/people.svg";
+import {
+  GameCancelledTag,
+  GameFinishedTag,
+  RecruitingCompletedTag,
+  RecruitingTag,
+} from "../stories/Tags.stories";
+import { Link } from "react-router-dom";
 // import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
 // import { KakaoMapV2 } from "../components/kakao/KakaoMapV2";
 // import { NaverMapEL } from "../components/naver/NaverMap";
@@ -22,10 +32,12 @@ export const HomePage = () => {
   const [gameSearched, isGameSearched] = useState(false);
   const { setCurrentMyLocation } = useGeolocationStore();
 
-  const [allAddressesArr, setAllAddressessArr] = useState(null);
+  const [filteredGames, setFilteredGames] = useState<string[]>([]);
+  const [displayCollapsedList, setDisplayCollapsedList] = useState(false);
 
   // const [gameClicked, isGameClicked] = useState(false);
   // const [displyModal, setDisplayModal] = useState(false);
+  // console.log(filteredGames);
 
   const formatDate = selectingDate.toISOString().split("T")[0];
   const {
@@ -37,8 +49,7 @@ export const HomePage = () => {
 
   const handleSearchCoords = (latitude: number, longitude: number) => {
     isGameSearched(true);
-    // setGameLatitude(latitude);
-    // setGameLongitude(longitude);
+
     setCurrentMyLocation(latitude, longitude);
     refetch();
   };
@@ -69,20 +80,86 @@ export const HomePage = () => {
             selectingDate={selectingDate}
             setSelectedDate={setSelectedDate}
           />
-          <div className="mobile:hidden tablet:block px-4 py-2 flex flex-col gap-4 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll">
-            {allGamesData
-              ? allGamesData?.data.map((game: GameDetailField) => {
-                  return (
-                    <div key={game.id}>
-                      <MatchListDetail
-                        game={game}
-                        handleSearchCoords={handleSearchCoords}
-                      />
-                      <hr className="w-full bg-[#ECECEC] my-2" />
-                    </div>
-                  );
-                })
-              : null}
+          <div className=" mobile:hidden tablet:block px-4 py-2 flex flex-col gap-4 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll">
+            {!displayCollapsedList &&
+              allGamesData &&
+              allGamesData?.data.map((game: GameDetailField) => {
+                return (
+                  <div key={game.id}>
+                    <MatchListDetail
+                      game={game}
+                      handleSearchCoords={handleSearchCoords}
+                    />
+                    <hr className="w-full bg-[#ECECEC] my-2" />
+                  </div>
+                );
+              })}
+            {displayCollapsedList &&
+              allGamesData.data.map((game: GameDetailField) => {
+                for (const address of filteredGames) {
+                  if (address === game.court.address) {
+                    return (
+                      <Link to={`/games/detail/${game.id}`} key={game.id}>
+                        <div
+                          onClick={() => {
+                            const { latitude, longitude } = game.court;
+                            handleSearchCoords(
+                              Number(latitude),
+                              Number(longitude)
+                            );
+                          }}
+                          className="hover:cursor-pointer"
+                        >
+                          <div className="flex flex-col   gap-1">
+                            {game.game_status === "open" && (
+                              <MatchTags {...RecruitingTag.args} />
+                            )}
+                            {game.game_status === "canceled" && (
+                              <MatchTags {...GameCancelledTag.args} />
+                            )}
+                            {game.game_status === "closed" && (
+                              <MatchTags {...RecruitingCompletedTag.args} />
+                            )}
+                            {game.game_status === "completed" && (
+                              <MatchTags {...GameFinishedTag.args} />
+                            )}
+
+                            <h2 className="font-bold text-[18px] truncate">
+                              {game.title}{" "}
+                            </h2>
+                            <p className="text-[14px] text-gray-500">
+                              {`${game.starttime.slice(
+                                0,
+                                -3
+                              )} ~ ${game.endtime.slice(0, -3)}`}
+                            </p>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-1">
+                                <img
+                                  src={groupIcon}
+                                  alt="group icon"
+                                  className="w-5"
+                                />
+                                <p className="text-sm">
+                                  {game.num_of_participations} /{" "}
+                                  {game.max_invitation}
+                                </p>
+                              </div>
+                              <p className="text-[14px] text-[#4065F6] font-bold">
+                                {game.fee.toLocaleString("ko-KR", {
+                                  style: "currency",
+                                  currency: "KRW",
+                                })}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <hr className="w-full bg-[#ECECEC] my-2" />
+                      </Link>
+                    );
+                  }
+                }
+              })}
           </div>
         </div>{" "}
         <NaverMapEL
@@ -90,6 +167,8 @@ export const HomePage = () => {
           refetch={refetch}
           gameSearched={gameSearched}
           isGameSearched={isGameSearched}
+          setFilteredGames={setFilteredGames}
+          setDisplayCollapsedList={setDisplayCollapsedList}
         />
         <MobileViewDatesList setSelectedDate={setSelectedDate} />
       </div>

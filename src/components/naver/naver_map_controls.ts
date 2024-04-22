@@ -10,7 +10,7 @@ const { naver } = window;
 
 
 
-export function setCustomMarkers(map: any, allGamesData: GameDetailField[], addressesList) {
+export function setCustomMarkers(map: any, allGamesData: GameDetailField[], addressesList: string[], setFilteredGames: (arg: string[]) => void, setDisplayCollapsedList: (arg: boolean) => void) {
     allGamesData.map((data) => {
         const { latitude, longitude } = data.court;
 
@@ -20,7 +20,7 @@ export function setCustomMarkers(map: any, allGamesData: GameDetailField[], addr
             title: data.title,
             clickable: true,
             icon: {
-                content: createCustomMapMarker(data, addressesList)
+                content: createCustomMapMarker(data, addressesList, setFilteredGames, setDisplayCollapsedList)
             }
 
         });
@@ -30,7 +30,7 @@ export function setCustomMarkers(map: any, allGamesData: GameDetailField[], addr
 
 }
 
-function createCustomMapMarker(data: GameDetailField, addressesList) {
+function createCustomMapMarker(data: GameDetailField, addressesList: string[], setFilteredGames: (arg: string[]) => void, setDisplayCollapsedList: (arg: boolean) => void) {
     const link = document.createElement('a');
     const img = document.createElement('img');
     const container = document.createElement('div');
@@ -38,7 +38,7 @@ function createCustomMapMarker(data: GameDetailField, addressesList) {
     const fee = document.createElement('p');
     const plusIcon = document.createElement('d');
 
-    link.href = `/games/detail/${data.id}`;
+    // link.href = `/games/detail/${data.id}`;
     link.setAttribute('key', ` ${data.id}`);
     link.setAttribute('id', 'game')
     link.classList.add('relative', 'bg-white', 'flex', 'pl-2', 'items-center', 'gap-2', 'w-[125px]', 'h-[44px]', 'border', 'border-[#FF4A4A]', 'rounded-2xl',);
@@ -52,21 +52,34 @@ function createCustomMapMarker(data: GameDetailField, addressesList) {
 
 
     const occurrences = addressesList.filter(address => address === data.court.address);
+
     if (occurrences.length > 1) {
         plusIcon.classList.add('absolute', 'flex', 'items-center', 'justify-center', '-top-2', '-right-2', 'w-5', 'h-5', 'rounded-full', 'bg-white', 'border', 'border-[#FF4A4A]', 'text-black', 'text-[15px]', 'font-bold', 'z-10')
         link.appendChild(plusIcon);
         plusIcon.textContent = '+'
+        // link.href = ;
+
+        link.addEventListener('click', () => {
+            setFilteredGames(occurrences)
+            setDisplayCollapsedList(true)
+
+        })
+
+    } else { //겹침 마커가 아닌 경우 path 설정
+        link.href = `/games/detail/${data.id}`;
 
     }
+
+
 
 
     link.addEventListener('mouseover', () => {
         plusIcon.style.backgroundColor = '#4065F5';
         plusIcon.style.color = 'white';
-        plusIcon.style.border = '1px solid black';
+        plusIcon.style.border = '1px solid #fff';
         link.style.backgroundColor = '#4065F5';
         link.style.color = 'white';
-        plusIcon.style.border = '1px solid black';
+        link.style.border = '1px solid #fff';
 
     })
     link.addEventListener('mouseout', () => {
