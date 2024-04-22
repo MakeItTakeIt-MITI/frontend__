@@ -22,6 +22,8 @@ export const HomePage = () => {
   const [gameSearched, isGameSearched] = useState(false);
   const { setCurrentMyLocation } = useGeolocationStore();
 
+  const [allAddressesArr, setAllAddressessArr] = useState(null);
+
   // const [gameClicked, isGameClicked] = useState(false);
   // const [displyModal, setDisplayModal] = useState(false);
 
