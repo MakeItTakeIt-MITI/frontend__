@@ -5,7 +5,6 @@ import { HeaderField } from "../home/Header";
 import bars from "../../assets/tab-bars.svg";
 import { useState } from "react";
 import tabImg from "../../assets/all-items-tab-img.jpg";
-import axios from "axios";
 
 export const BrowserHeader = ({ handleLogout }: HeaderField) => {
   const { isLoggedIn } = useAuthStore();
@@ -15,34 +14,12 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
     setDisplayTabItems(!displayTabItems);
   };
 
-  const refreshTest = async () => {
-    try {
-      // const refreshToken = localStorage.getItem("refreshToken");
-      const response = await axios.post(
-        "https://dev.makeittakeit.kr/auth/refresh-token",
-        {},
-        {
-          headers: {
-            refresh: localStorage.getItem("refreshToken"),
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
-      console.log(response);
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <nav className="relative  z-[999] mobile:hidden tablet:flex tablet:h-[3.75rem] items-center  justify-between max-w-[90rem] w-full laptop:px-[13rem] tablet:px-[2rem] mx-auto">
       <div className="flex gap-4 items-center">
         <Link to="/">
           <img src={mitiLogo} alt="miti logo" />
         </Link>
-        <button onClick={refreshTest}>refresh test</button>
       </div>
       <div className="flex items-center gap-4  ">
         {isLoggedIn ? (
