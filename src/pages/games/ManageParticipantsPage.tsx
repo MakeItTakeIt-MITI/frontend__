@@ -19,16 +19,6 @@ export const ManageParticipantsPage = () => {
 
   const navigateHome = () => navigate(-1);
 
-  // function phoneFormatter(number: string) {
-  //   const cleanedNumber = number.replace(/\D/g, "");
-  //   const formattedNumber = `010-${cleanedNumber.slice(
-  //     3,
-  //     7
-  //   )}-${cleanedNumber.slice(7)}`;
-
-  //   return formattedNumber;
-  // }
-
   return (
     <div className="h-screen ">
       <div className="mobile:block tablet:hidden">

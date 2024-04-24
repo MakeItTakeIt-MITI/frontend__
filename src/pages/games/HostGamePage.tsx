@@ -11,8 +11,8 @@ export const HostGamePage = () => {
   };
 
   return (
-    <section className="laptop:my-4 mobile:my-0 h-full ">
-      <NavigateToPrevContainer children="" />
+    <>
+      <NavigateToPrevContainer children="경기 생성하기" />
 
       <div className="relative laptop:w-[500px]  pb-[80px]   laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col laptop:justify-center gap-10 mobile:justify-between">
         {showModal && (
@@ -28,6 +28,6 @@ export const HostGamePage = () => {
           <GameHostForm setShowModal={setShowModal} />
         </div>
       </div>
-    </section>
+    </>
   );
 };

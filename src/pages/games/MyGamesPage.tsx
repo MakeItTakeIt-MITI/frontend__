@@ -3,7 +3,7 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 
 export const MyGamesPage = () => {
   return (
-    <section className="laptop:my-4 mobile:my-0 h-full ">
+    <>
       <NavigateToPrevContainer children="나의 경기" />
 
       <div className="relative laptop:w-[500px]  laptop:h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-5 ">
@@ -12,6 +12,6 @@ export const MyGamesPage = () => {
         <Link to="/games/host-history">🏁 나의 호스팅 경기</Link>
         <Link to="/games/host">✉️ 경기 생성하기</Link>
       </div>
-    </section>
+    </>
   );
 };

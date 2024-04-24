@@ -40,7 +40,7 @@ export const MatchDetailsPage = () => {
   }
 
   return (
-    <section className="laptop:my-4 mobile:my-0 h-full ">
+    <>
       <NavigateToPrevContainer children="경기 상세" />
 
       <div className="relative laptop:w-[500px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4  rounded-lg flex flex-col gap-5 ">
@@ -198,6 +198,6 @@ export const MatchDetailsPage = () => {
 
         {/* <AdvertisementBanner /> */}
       </div>
-    </section>
+    </>
   );
 };

@@ -12,6 +12,7 @@ import {
 } from "../../stories/Tags.stories";
 import { Link } from "react-router-dom";
 import { useGetGuestGameHistory } from "../../hooks/games/useGetGameHistoryQuery";
+import { GameDetailField } from "../../interface/gameInterface";
 /**
  * TODO Group each game by date
  * TODO Group each game by filter category (create components for each)
@@ -58,7 +59,6 @@ export const GuestGameHistoryPage = () => {
       setGameStatusQuery("completed");
     }
 
-    // console.log(gameStatusQuery);
     refetch();
   }, [refetch, defaultTabName, gameStatusQuery]);
 
@@ -70,7 +70,7 @@ export const GuestGameHistoryPage = () => {
     return <LoadingPage />;
   }
   return (
-    <section className="laptop:my-4 mobile:my-0 h-full ">
+    <>
       <NavigateToPrevContainer children="나의 참여 경기" />
 
       <div className="relative laptop:w-[500px]  laptop:h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-10 ">
@@ -111,8 +111,7 @@ export const GuestGameHistoryPage = () => {
         {/* date */}
 
         <div className="flex flex-col gap-2.5">
-          {/* <h2 className="font-bold">2024년 4월 2일</h2> */}
-          {gameData.map((game) => {
+          {gameData.map((game: GameDetailField) => {
             return (
               <div key={game.id} className="flex flex-col gap-2">
                 <h2 className="font-bold">{game.startdate}</h2>
@@ -142,6 +141,6 @@ export const GuestGameHistoryPage = () => {
           })}
         </div>
       </div>
-    </section>
+    </>
   );
 };
