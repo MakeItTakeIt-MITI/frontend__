@@ -35,8 +35,6 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
     const endDate = endDateTime.split("T")[0];
     const endTime = endDateTime.split("T")[1];
 
-    // const fullAddress = courtAddress;
-
     setValue("starttime", startTime);
     setValue("startdate", startDate);
     setValue("enddate", endDate);
@@ -46,7 +44,6 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
     // if address already exists, automatically add address_detail
     getCourtInformation?.data.page_content.map((address: Court) => {
       if (courtAddress === address.address) {
-        // setValue("court.address_detail", address.address_detail);
         emptyAddressList.push(address.address_detail);
         setShowModal(true);
       }
