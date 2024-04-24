@@ -23,6 +23,7 @@ export interface GameHostField {
 
 export interface AddressField {
     address: string;
+    roadAddress: string;
     addressType: string;
     bname: string;
     buildingName: string;

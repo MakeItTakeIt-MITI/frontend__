@@ -5,10 +5,11 @@ import {
   GameHostField,
 } from "../../interface/gameInterface";
 import { useEffect, useState } from "react";
-import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useHostGameMutation } from "../../hooks/games/useHostGameMutation";
 import { useCourtDetailsQuery } from "../../hooks/games/useCourtDetailsQuery";
 import { LabelInputBox } from "./LabelInputBox";
+
+import { useDaumPostcodePopup } from "react-daum-postcode";
 
 interface GameHostFormProps {
   setShowModal: (arg: boolean) => void;
@@ -23,15 +24,10 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
 
   // tanstack query
   const courtAddress = watch("court.address") || "";
-  console.log(courtAddress);
   const { data: getCourtInformation, refetch } =
     useCourtDetailsQuery(courtAddress);
 
   const { mutate: hostGameMutation } = useHostGameMutation();
-
-  if (getCourtInformation) {
-    console.log(getCourtInformation.data.page_content);
-  }
 
   useEffect(() => {
     const startDate = startDateTime.split("T")[0];
@@ -51,11 +47,8 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
     getCourtInformation?.data.page_content.map((address: Court) => {
       if (courtAddress === address.address) {
         // setValue("court.address_detail", address.address_detail);
-        console.log("true");
         emptyAddressList.push(address.address_detail);
         setShowModal(true);
-      } else {
-        console.log("false");
       }
     });
 
@@ -70,10 +63,12 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
     setShowModal,
   ]);
 
+  // const handleOpenAddressBox = useDaumPostcodePopup();
   const handleOpenAddressBox = useDaumPostcodePopup();
 
   const handleComplete = (data: AddressField) => {
-    let fullAddress = data.address;
+    // 결가는 항상 도로명 주소로 변환
+    let fullAddress = data.roadAddress;
     let extraAddress = "";
 
     if (data.addressType === "R") {
@@ -94,12 +89,15 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
     handleOpenAddressBox({ onComplete: handleComplete });
   };
 
-  const onSubmit = (data: GameHostField) => {
+  const onSubmitForm = (data: GameHostField) => {
     hostGameMutation(data);
   };
 
   return (
-    <form className="flex flex-col gap-4 " onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="flex flex-col gap-4 "
+      onSubmit={handleSubmit(onSubmitForm)}
+    >
       <LabelInputBox
         id="title"
         label="경기 제목"
@@ -111,7 +109,9 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
       />
       {/* Game start date and time */}
       <div className="flex flex-col gap-2">
-        <label className="text-[#999]">경기 시작</label>
+        <label htmlFor="start_date" className="text-[#999]">
+          경기 시작
+        </label>
         <div className="flex gap-2 w-full">
           <div className=" h-[50px] p-4  bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
             {startDateTime.length > 1 ? startDateTime.split("T")[0] : null}{" "}
@@ -132,7 +132,7 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
             hidden
             type="text"
             id="start_date"
-            className=" h-[50px] p-4  bg-[#F7F7F7] w-full"
+            className=""
             {...register("startdate", {})}
           />
           <input
@@ -146,7 +146,9 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
       </div>
       {/* 경기 종료 */}
       <div className="flex flex-col gap-2 justify-center ">
-        <label className="text-[#999]">경기 종료</label>
+        <label htmlFor="end_date" className="text-[#999]">
+          경기 종료
+        </label>
 
         <div className="flex items-center gap-2 w-full">
           <div className=" h-[50px] p-4  bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
@@ -160,6 +162,7 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
             type="datetime-local"
             placeholder="Select date and time"
             required
+            id="end_date"
             onChange={(e) => setEndDateTime(e.target.value)}
             className="w-[54px] h-[50px] p-4  bg-[#DFEFFE] text-[#999] rounded-lg "
           />
@@ -167,8 +170,7 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
           <input
             hidden
             type="text"
-            id="end_date"
-            className=" h-[50px] p-4  bg-[#F7F7F7] "
+            // className="input-primary"
             {...register("enddate", {})}
           />
           <input
@@ -183,17 +185,17 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
       </div>
       {/* game address */}
       <div className="flex flex-col gap-2">
-        <label htmlFor="address" className=" text-[#999] ">
+        <label htmlFor="address" className=" text-[#999] ]">
           경기 주소
         </label>
 
-        <div className=" h-[50px] p-4 truncate   bg-[#F7F7F7] text-[#969696]  w-full rounded-lg  pr-[120px] relative">
-          <p> {watch("court.address")}</p>
+        <div className=" h-[50px] p-4     bg-[#F7F7F7] text-[#969696] ] rounded-lg  relative ">
+          <p className=" max-w-[300px] truncate"> {watch("court.address")}</p>
 
           <button
             type="button"
             onClick={handleClick}
-            className=" w-[81px] h-9 absolute  right-2 top-2  text-[14px] bg-[#4065f6] text-[#FFF] font-[400]  rounded-lg"
+            className=" w-[81px] h-9 absolute  right-2 top-2   text-[14px] bg-[#4065f6] text-[#FFF] font-[400]  rounded-lg"
           >
             주소찾기
           </button>
@@ -241,7 +243,7 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
         </div>
 
         {/* recruiting participants */}
-        <div className="flex flex-col gap-2 tablet:w-full">
+        <div className="flex flex-col gap-2 tablet:w-full ">
           <label htmlFor="min_players" className=" text-[#999]">
             최소 모집 인원
           </label>
