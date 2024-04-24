@@ -8,8 +8,13 @@ import { useEffect, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useHostGameMutation } from "../../hooks/games/useHostGameMutation";
 import { useCourtDetailsQuery } from "../../hooks/games/useCourtDetailsQuery";
+import { LabelInputBox } from "./LabelInputBox";
 
-export const GameHostForm = ({ setShowModal }) => {
+interface GameHostFormProps {
+  setShowModal: (arg: boolean) => void;
+}
+
+export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
   const { handleSubmit, register, setValue, watch, formState } =
     useForm<GameHostField>();
   const [startDateTime, setStartDateTime] = useState("");
@@ -21,7 +26,6 @@ export const GameHostForm = ({ setShowModal }) => {
   console.log(courtAddress);
   const { data: getCourtInformation, refetch } =
     useCourtDetailsQuery(courtAddress);
-  // console.log(getCourtInformation);
 
   const { mutate: hostGameMutation } = useHostGameMutation();
 
@@ -29,13 +33,12 @@ export const GameHostForm = ({ setShowModal }) => {
     console.log(getCourtInformation.data.page_content);
   }
 
-  // useEffect to check address when component mounts or existingCourtAddresses change
-
   useEffect(() => {
     const startDate = startDateTime.split("T")[0];
     const startTime = startDateTime.split("T")[1];
     const endDate = endDateTime.split("T")[0];
     const endTime = endDateTime.split("T")[1];
+
     // const fullAddress = courtAddress;
 
     setValue("starttime", startTime);
@@ -52,11 +55,9 @@ export const GameHostForm = ({ setShowModal }) => {
         emptyAddressList.push(address.address_detail);
         setShowModal(true);
       } else {
-        // setValue("court.address_detail", "");
         console.log("false");
       }
     });
-    console.log(emptyAddressList);
 
     refetch();
   }, [
@@ -99,26 +100,20 @@ export const GameHostForm = ({ setShowModal }) => {
 
   return (
     <form className="flex flex-col gap-4 " onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-2">
-        <label htmlFor="title" className=" text-[#999] ">
-          경기 제목
-        </label>
-
-        <input
-          type="text"
-          id="title"
-          placeholder="경기 제목을 입력해주세요."
-          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          {...register("title", {
-            required: true,
-          })}
-        />
-      </div>
+      <LabelInputBox
+        id="title"
+        label="경기 제목"
+        type="text"
+        placeholder="경기 제목을 입력해주세요."
+        register={register}
+        register_type="title"
+        requiredValue={true}
+      />
       {/* Game start date and time */}
       <div className="flex flex-col gap-2">
         <label className="text-[#999]">경기 시작</label>
         <div className="flex gap-2 w-full">
-          <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
+          <div className=" h-[50px] p-4  bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
             {startDateTime.length > 1 ? startDateTime.split("T")[0] : null}{" "}
             {startDateTime.length > 1
               ? startDateTime.split("T")[1]
@@ -129,7 +124,7 @@ export const GameHostForm = ({ setShowModal }) => {
             type="datetime-local"
             id="start_date"
             required
-            className=" w-[54px] h-[50px] p-4 py-[17px] bg-[#DFEFFE] text-[#999] rounded-lg "
+            className=" w-[54px] h-[50px] p-4  bg-[#DFEFFE] text-[#999] rounded-lg "
             onChange={(e) => setStartDateTime(e.target.value)}
           />
 
@@ -137,14 +132,14 @@ export const GameHostForm = ({ setShowModal }) => {
             hidden
             type="text"
             id="start_date"
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full"
+            className=" h-[50px] p-4  bg-[#F7F7F7] w-full"
             {...register("startdate", {})}
           />
           <input
             hidden
             type="text"
             id="start_time"
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
+            className=" input-primary"
             {...register("starttime", {})}
           />
         </div>
@@ -154,7 +149,7 @@ export const GameHostForm = ({ setShowModal }) => {
         <label className="text-[#999]">경기 종료</label>
 
         <div className="flex items-center gap-2 w-full">
-          <div className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
+          <div className=" h-[50px] p-4  bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
             {/* {endDateTime.split("T")[0]} {endDateTime.split("T")[1]} */}
             {endDateTime.length > 1 ? endDateTime.split("T")[0] : null}{" "}
             {endDateTime.length > 1
@@ -166,83 +161,69 @@ export const GameHostForm = ({ setShowModal }) => {
             placeholder="Select date and time"
             required
             onChange={(e) => setEndDateTime(e.target.value)}
-            className="w-[54px] h-[50px] p-4 py-[17px] bg-[#DFEFFE] text-[#999] rounded-lg "
+            className="w-[54px] h-[50px] p-4  bg-[#DFEFFE] text-[#999] rounded-lg "
           />
 
           <input
             hidden
             type="text"
             id="end_date"
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] "
+            className=" h-[50px] p-4  bg-[#F7F7F7] "
             {...register("enddate", {})}
           />
           <input
             hidden
             type="text"
             id="endtime"
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
+            className=" input-primary"
             step={900}
             {...register("endtime", {})}
           />
         </div>
       </div>
       {/* game address */}
-      <div className="flex flex-col gap-2 relative">
+      <div className="flex flex-col gap-2">
         <label htmlFor="address" className=" text-[#999] ">
           경기 주소
         </label>
 
-        <div className=" h-[50px] p-4 truncate   bg-[#F7F7F7] text-[#969696]  w-full rounded-lg  pr-[120px]">
-          {watch("court.address")}
+        <div className=" h-[50px] p-4 truncate   bg-[#F7F7F7] text-[#969696]  w-full rounded-lg  pr-[120px] relative">
+          <p> {watch("court.address")}</p>
+
+          <button
+            type="button"
+            onClick={handleClick}
+            className=" w-[81px] h-9 absolute  right-2 top-2  text-[14px] bg-[#4065f6] text-[#FFF] font-[400]  rounded-lg"
+          >
+            주소찾기
+          </button>
         </div>
-        <input
-          hidden
-          // className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
-          type="text"
-          {...register("court.address")}
-          // value={watch("court.address")}
-          readOnly
-          placeholder="주소를 검색해주세요."
-        />
-        <button
-          type="button"
-          onClick={handleClick}
-          className=" w-[81px] h-9 absolute  right-2 bottom-2 text-[14px] bg-[#4065f6] text-[#FFF] font-[400]  rounded-lg"
-        >
-          주소찾기
-        </button>
+
+        <input hidden type="text" {...register("court.address")} readOnly />
       </div>
       {/* address detail */}
-      <div className="flex flex-col gap-2">
-        <label htmlFor="address_detail" className=" text-[#999]">
-          상세 주소
-        </label>
-        <input
-          type="text"
-          id="address_detail"
-          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
-          placeholder="상세 주소를 입력해주세요."
-          {...register("court.address_detail")}
-        />
-      </div>
+      <LabelInputBox
+        id="address_detail"
+        label="상세 주소"
+        type="text"
+        placeholder="상세 주소를 입력해주세요."
+        register={register}
+        register_type="court.address_detail"
+        requiredValue={true}
+      />
       {/* court name */}
-      <div className="flex flex-col gap-2">
-        <label htmlFor="title" className=" text-[#999]">
-          경기장 이름
-        </label>
-
-        <input
-          type="text"
-          id="title"
-          placeholder="경기장 이름을 입력해주세요"
-          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          {...register("court.name", {
-            required: true,
-          })}
-        />
-      </div>
+      <LabelInputBox
+        id="title"
+        label="경기장 이름"
+        type="text"
+        placeholder="경기장 이름을 입력해주세요"
+        register={register}
+        register_type="court.name"
+        requiredValue={true}
+      />
 
       {/* max participants */}
+
       <div className="flex gap-4  items-center mobile:justify-between ">
         <div className="flex flex-col gap-2 tablet:w-full">
           <label htmlFor="max_players" className=" text-[#999]">
@@ -252,7 +233,7 @@ export const GameHostForm = ({ setShowModal }) => {
             type="number"
             id="max_players"
             placeholder="00 명"
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg  w-full text-center font-bold"
+            className=" input-primary  w-full text-center font-bold"
             {...register("max_invitation", {
               required: true,
             })}
@@ -268,7 +249,7 @@ export const GameHostForm = ({ setShowModal }) => {
             type="number"
             id="min_players"
             placeholder="00 명"
-            className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
+            className=" h-[50px] p-4  bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
             {...register("min_invitation", {
               required: true,
             })}
@@ -281,19 +262,25 @@ export const GameHostForm = ({ setShowModal }) => {
         <label htmlFor="fee" className=" text-[#999]">
           참가비
         </label>
-        <input
-          type="number"
-          id="fee"
-          placeholder="경기 참여비를 입력해주세요."
-          className=" h-[50px] p-4 py-[17px] bg-[#F7F7F7] rounded-lg"
-          {...register("fee", {
-            required: true,
-          })}
-        />
+
+        <div className="relative ">
+          <input
+            type="string"
+            id="fee"
+            placeholder="경기 참여비를 입력해주세요."
+            className=" input-primary w-full"
+            {...register("fee", {
+              required: true,
+            })}
+          />
+          <span className="absolute top-4 botom-4 right-4 text-[14px] text-[#999]">
+            ₩
+          </span>
+        </div>
       </div>
       {/* information */}
       <div className="flex flex-col gap-2">
-        <label htmlFor="announcement" className=" text-[#999]">
+        <label htmlFor="announcement" className=" text-[#999] ">
           추가 정보
         </label>
         <textarea
@@ -303,10 +290,6 @@ export const GameHostForm = ({ setShowModal }) => {
           {...register("info")}
         />
       </div>
-
-      {/* <hr className="h-[8px] w-full bg-gray-200" /> */}
-
-      {/* <h4 className="font-bold">경기 정보</h4> */}
 
       <button
         disabled={!formState.isValid}
