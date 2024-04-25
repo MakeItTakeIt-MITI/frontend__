@@ -35,7 +35,7 @@ export const SignupIntroPage = () => {
               />
             </Link>
             {/* kakao button */}
-            <KakaoLoginButton children="카카오로 3초만에 시작하기" />
+            <KakaoLoginButton />
           </div>
           {/* login text */}
           <div className="flex gap-2  text-[14px] ">
