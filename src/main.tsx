@@ -7,7 +7,7 @@ import { HomePage } from "./pages/HomePage.tsx";
 import { UserLoginPage } from "./pages/auth/UserLoginPage.tsx";
 import { UserSignup } from "./pages/auth/UserSignupPage.tsx";
 import { NotFoundPage } from "./pages/NotFoundPage.tsx";
-import { MatchDetailsPage } from "./pages/games/MatchDetailsPage.tsx";
+import { GameDetailPage } from "./pages/games/GameDetailPage.tsx";
 import { UserJoinMatchPage } from "./pages/UserJoinMatchPage.tsx";
 import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
 import { SMSAuthenticationPage } from "./pages/auth/SMSAuthenticationPage.tsx";
@@ -156,7 +156,7 @@ const router = createBrowserRouter([
 
               {
                 path: "detail/:id",
-                element: <MatchDetailsPage />,
+                element: <GameDetailPage />,
               },
 
               {

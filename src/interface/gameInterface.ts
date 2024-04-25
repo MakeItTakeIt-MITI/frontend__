@@ -35,6 +35,19 @@ export interface GameCourtData {
     latitude: string;
     longitude: string;
 }
+
+export interface GameHostData {
+    id: number;
+    nickname: string
+    rating: RatingsField;
+    reviews: []
+}
+
+export interface RatingsField {
+    id: number;
+    num_of_reviews: number;
+    average_rating: number;
+}
 export interface GameDetailField {
     id: number;
     game_status: string;
@@ -47,6 +60,9 @@ export interface GameDetailField {
     num_of_participations: number;
     max_invitation: number;
     court: GameCourtData;
+    host: GameHostData;
+    is_participated: boolean;
+    is_host: boolean;
 
 }
 
@@ -189,3 +205,7 @@ export interface GameDetailProp {
     gameData: ParticipantsField;
 }
 
+
+export interface GameDetailBoxProp {
+    gameDetail: GameDetailField
+}
