@@ -1,8 +1,9 @@
-import { useGetGamesDataQuery } from "../../../hooks/games/useGetGamesDataQuery";
-import { GameDetailField } from "../../../interface/gameInterface";
+import { useGetGamesDataQuery } from "../../hooks/games/useGetGamesDataQuery";
+import { GameDetailField } from "../../interface/gameInterface";
 
-import { MobileFilteredMatchItem } from "../../game/MobileFilteredMatchItem";
-import { MobileMatchItem } from "../../game/MobileMatchItem";
+import { MobileFilteredMatchItem } from "../game/MobileFilteredMatchItem";
+import { MobileMatchItem } from "../game/MobileMatchItem";
+import { NoGamesAvailableBox } from "./NoGamesAvailableBox";
 
 interface GameDetailProp {
   formatDate: string;
@@ -31,6 +32,9 @@ export const MobileViewGameList = ({
             />
           );
         })}
+
+      {!displayCollapsedList ||
+        (data?.data.length < 1 && <NoGamesAvailableBox data={data} />)}
       {displayCollapsedList &&
         data?.data.map((game: GameDetailField) => {
           for (const address of filteredGames) {

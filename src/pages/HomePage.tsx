@@ -7,7 +7,7 @@ import { DesktopViewDatesList } from "../components/home/DesktopViewDatesList";
 import { GameDetailField } from "../interface/gameInterface";
 import { MatchItem } from "../components/game/MatchItem";
 import { useEffect, useState } from "react";
-import { MobileViewGameList } from "../components/home/mobile/MobileViewGameList";
+import { MobileViewGameList } from "../components/home/MobileViewGameList";
 import { LoadingPage } from "./LoadingPage";
 import { NaverMapEL } from "../components/naver/NaverMap";
 import { NotFoundPage } from "./NotFoundPage";
@@ -15,6 +15,7 @@ import useGeolocationStore from "../store/useGeolocationStore";
 
 import { Link } from "react-router-dom";
 import { FilteredMatchItem } from "../components/game/FilteredMatchItem";
+import { NoGamesAvailableBox } from "../components/home/NoGamesAvailableBox";
 
 export const HomePage = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
@@ -68,7 +69,6 @@ export const HomePage = () => {
           />
           <div className=" mobile:hidden tablet:block flex flex-col gap-4 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll">
             {!displayCollapsedList &&
-              allGamesData &&
               allGamesData?.data.map((game: GameDetailField) => {
                 return (
                   <div key={game.id}>
@@ -80,6 +80,11 @@ export const HomePage = () => {
                   </div>
                 );
               })}
+            {/* // /> */}
+            {!displayCollapsedList ||
+              (allGamesData?.data.length < 1 && (
+                <NoGamesAvailableBox data={allGamesData} />
+              ))}
             {displayCollapsedList &&
               allGamesData.data.map((game: GameDetailField) => {
                 for (const address of filteredGames) {
