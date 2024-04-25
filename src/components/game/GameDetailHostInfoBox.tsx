@@ -7,7 +7,7 @@ import { GameDetailBoxProp } from "../../interface/gameInterface";
 
 export const GameDetailHostInfoBox = ({ gameDetail }: GameDetailBoxProp) => {
   return (
-    <div className="p-3 space-y-[19px]">
+    <div className="laptop:p-6 mobile:p-3 space-y-[19px]">
       <p className="text-[#222] font-bold tablet:text-[18px]">호스트 소개</p>
 
       <div className="flex items-center gap-2">

@@ -1,5 +1,5 @@
 import { GameHostField } from "../interface/gameInterface";
-import { JoinGameField } from "../pages/UserJoinMatchPage";
+import { JoinGameField } from "../pages/games/ParticipateGamePage";
 import axiosUrl from "../utils/axios"
 
 

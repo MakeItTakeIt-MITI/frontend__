@@ -6,7 +6,7 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailBoxProp) => {
   const gameIdParam = Number(id);
 
   return (
-    <div className="p-3 text-[14px]">
+    <div className="laptop:p-6 mobile:p-3 text-[14px]">
       {gameDetail.is_host && (
         <Link to={`/games/detail/${gameIdParam}/join`}>
           <button className=" w-full h-[48px] bg-[#52A2D0] rounded-lg text-white ">
