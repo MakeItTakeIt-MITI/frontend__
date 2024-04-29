@@ -4,7 +4,7 @@ import useAuthStore from "../../store/useAuthStore";
 import useUserDataStore from "../../store/useUserDataStore";
 import { useNavigate } from "react-router-dom";
 
-export const useKakaoLoginMutation = (setModal: (arg: boolean) => void) => {
+export const useKakaoLoginMutation = () => {
   const { login } = useAuthStore();
   const { setUserId } = useUserDataStore();
   const navigate = useNavigate();
@@ -14,7 +14,9 @@ export const useKakaoLoginMutation = (setModal: (arg: boolean) => void) => {
     mutationFn: oAuthKakaoLogin,
     onSuccess: (response) => {
       if (response.error_code === 302) {
-        setModal(true);
+        // setModal(true);
+        alert("oAuth 사용자가 아닙니다.");
+        navigate("/auth/login");
       }
 
       if (response.status_code === 200) {
