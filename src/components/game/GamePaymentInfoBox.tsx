@@ -71,7 +71,7 @@ export const GamePaymentInfoBox = () => {
       <div className="flex justify-between font-bold text-[#222]">
         <span>총 결제 금액</span>
         <span>
-          ₩{" "}
+          ₩
           {paymentDetails?.data.payment_amount.game_fee_amount.toLocaleString(
             "ko-KR",
             {

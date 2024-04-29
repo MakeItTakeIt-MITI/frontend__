@@ -33,19 +33,19 @@ export const DisplayModal = ({
       style={customStyles}
       ariaHideApp={false}
     >
-      <div className="w-[361px] h-[185px] p-6 flex flex-col justify-between rounded-lg">
+      <div className=" w-[348px] h-[166px] p-4 flex flex-col justify-between rounded-lg">
+        <h1 className="text-[18px] font-bold">로그인 실패</h1>
         <div>
-          <h1 className=" text-center font-bold">{title}</h1>
-          <h1 className=" text-center font-bold">{titleTwo}</h1>
+          <h2 className=" ">{title}</h2>
+          <h2 className=" ">{titleTwo}</h2>
         </div>
-        <div className="flex justify-center">
-          <button
-            onClick={closeModal}
-            className="bg-[#4065F6] text-white w-[100px] h-[36px] rounded-lg"
-          >
-            {content}
-          </button>
-        </div>
+
+        <button
+          onClick={closeModal}
+          className="bg-[#4065F6] font-bold text-white w-full h-[34px] rounded-lg"
+        >
+          {content}
+        </button>
       </div>
     </Modal>
   );

@@ -19,7 +19,6 @@ import { NoGamesAvailableBox } from "../components/home/NoGamesAvailableBox";
 
 export const HomePage = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
-
   const [gameSearched, isGameSearched] = useState(false);
   const { setCurrentMyLocation } = useGeolocationStore();
 

@@ -17,20 +17,20 @@ export const useLoginMutation = (
     mutationKey: ["login"],
     mutationFn: userLogin,
     onSuccess: (response) => {
-      console.log(response.data.status_code);
+      console.log(response.status_code);
       console.log("-------------");
 
       const errorCode = response.error_code;
 
       if (errorCode) {
         displayModal(true);
-        if (errorCode === 101) {
+        if (errorCode === 140) {
           setErrorCode(101);
           setErrorMsg("사용자 정보가 일치하지 않습니다.");
-        } else if (errorCode === 201) {
+        } else if (errorCode === 145) {
           setErrorCode(201);
           setErrorMsg("탈퇴한 사용자입니다. 고겍센터에 문의해주세요.");
-        } else if (errorCode === 301) {
+        } else if (errorCode === 141) {
           setErrorCode(301);
           setErrorMsg("미인증 사용자입니다.");
           navigate("/auth/authenticate-user");

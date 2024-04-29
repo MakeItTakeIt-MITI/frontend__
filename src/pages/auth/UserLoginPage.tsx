@@ -19,18 +19,17 @@ export const UserLoginPage = () => {
   console.log(errorCode);
 
   return (
-    <>
+    <section>
       <NavigateToPrevContainer children="" />
-
+      {displayModal && (
+        <DisplayModal
+          modal={displayModal}
+          closeModal={handleCloseModal}
+          title={errorMsg}
+          content="확인"
+        />
+      )}
       <div className="relative laptop:w-[500px]  laptop:h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col laptop:justify-center gap-10 mobile:justify-between">
-        {displayModal && (
-          <DisplayModal
-            modal={displayModal}
-            closeModal={handleCloseModal}
-            title={errorMsg}
-            content="확인"
-          />
-        )}
         <div className=" flex flex-col gap-2 justify-center items-center">
           <img src={mitiLogo} alt="miti logo" className="w-[88px]" />
           <h5 className="text-[14px] text-[#1c1c1c]">Make it, Take it!</h5>
@@ -67,6 +66,6 @@ export const UserLoginPage = () => {
           </Link>
         </div>
       </div>
-    </>
+    </section>
   );
 };
