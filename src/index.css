@@ -7,10 +7,22 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Pretendard Variable", Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    "Segoe UI",
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    "Malgun Gothic",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    sans-serif;
 }
 
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
@@ -25,5 +37,9 @@ li:hover {
 @layer components {
   .input-primary {
     @apply h-[50px] px-4  rounded-lg bg-[#F7F7F7] w-full;
+  }
+
+  .section-layer {
+    @apply relative laptop:w-[500px]  laptop:h-[735px] laptop:mt-[3.75rem] mobile:mt-0 mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col;
   }
 }
