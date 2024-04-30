@@ -14,6 +14,7 @@ export const useKakaoLoginMutation = () => {
     mutationFn: oAuthKakaoLogin,
     onSuccess: (response) => {
       console.log(response.status_code);
+      console.log(response);
 
       if (response.error_code === 302) {
         // setModal(true);
