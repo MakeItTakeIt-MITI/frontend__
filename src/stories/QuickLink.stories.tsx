@@ -1,10 +1,18 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { QuickLinkTitle } from "../components/common/QuickLinkTitle";
+import { MemoryRouter } from "react-router-dom";
 
 export default {
   title: "Links",
   component: QuickLinkTitle,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
   parameters: {
     layout: "centered",
   },
