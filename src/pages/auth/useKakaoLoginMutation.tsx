@@ -13,6 +13,8 @@ export const useKakaoLoginMutation = () => {
     mutationKey: ["kakao_login"],
     mutationFn: oAuthKakaoLogin,
     onSuccess: (response) => {
+      console.log(response.status_code);
+
       if (response.error_code === 302) {
         // setModal(true);
         alert("oAuth 사용자가 아닙니다.");
