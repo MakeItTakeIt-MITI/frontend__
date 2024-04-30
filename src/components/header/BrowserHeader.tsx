@@ -4,7 +4,6 @@ import useAuthStore from "../../store/useAuthStore";
 import { HeaderField } from "../home/Header";
 import bars from "../../assets/tab-bars.svg";
 import { useState } from "react";
-import tabImg from "../../assets/all-items-tab-img.jpg";
 import { HeaderTabContainer } from "../common/HeaderTabContainer";
 
 export const BrowserHeader = ({ handleLogout }: HeaderField) => {
