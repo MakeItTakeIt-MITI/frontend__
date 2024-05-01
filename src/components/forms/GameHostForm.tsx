@@ -7,7 +7,6 @@ import {
 import { useEffect, useState } from "react";
 import { useHostGameMutation } from "../../hooks/games/useHostGameMutation";
 import { useCourtDetailsQuery } from "../../hooks/games/useCourtDetailsQuery";
-import { LabelInputBox } from "./LabelInputBox";
 
 import { useDaumPostcodePopup } from "react-daum-postcode";
 
@@ -95,7 +94,7 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
       className="flex flex-col gap-4 "
       onSubmit={handleSubmit(onSubmitForm)}
     >
-      <LabelInputBox
+      {/* <InputField
         id="title"
         label="경기 제목"
         type="text"
@@ -103,7 +102,7 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
         register={register}
         register_type="title"
         requiredValue={true}
-      />
+      /> */}
       {/* Game start date and time */}
       <div className="flex flex-col gap-2">
         <label htmlFor="start_date" className="text-[#999]">
@@ -201,7 +200,7 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
         <input hidden type="text" {...register("court.address")} readOnly />
       </div>
       {/* address detail */}
-      <LabelInputBox
+      <InputField
         id="address_detail"
         label="상세 주소"
         type="text"
@@ -211,7 +210,7 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
         requiredValue={true}
       />
       {/* court name */}
-      <LabelInputBox
+      <InputField
         id="title"
         label="경기장 이름"
         type="text"

@@ -2,9 +2,8 @@ import { useForm } from "react-hook-form";
 import { userRegisterSchema } from "../../modals/userSignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterField } from "../../interface/usersInterface";
-import questionIcon from "../../assets/question_icon.svg";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRegisterMutation } from "../../hooks/auth/useRegisterMutation";
 import {
   useValidateDuplicateEmail,
@@ -14,12 +13,12 @@ import { SubmitButton } from "../common/SubmitButtons";
 import { ValidateInputButton } from "../common/ValidationButtons";
 import { ErrorMessage } from "../common/ErrorMessage";
 import { SuccessMessage } from "../common/SuccessMessage";
+import { RegisterInputField } from "./FormInputContainer";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [successEmailMsg, setSuccessEmailMsg] = useState("");
   const [errorEmailMsg, setErrorEmailMsg] = useState("");
-
   const [validNickname, setValidNickname] = useState(false);
   const [successNicknameMsg, setSuccessNicknameMsg] = useState("");
   const [errorNicknameMsg, setErrorNicknameMsg] = useState("");
@@ -61,38 +60,25 @@ export const SignupForm = () => {
     setDisplayPasswordMark(!displayPasswordMark);
   };
 
+  useEffect(() => {}, []);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      {isError && (
-        <p className="text-[#E92C2C] text-[13px] font-[400] text-center">
-          회원가입에 실패하셨습니다. 다시 시도해주세요.
-        </p>
-      )}
-      <div className="flex flex-col gap-2 relative">
-        <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
-          이메일
-        </label>
-        <input
-          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          type="email"
-          id="email"
-          role="input-email"
-          disabled={validEmail && !errors.email ? true : false}
-          placeholder="이메일을 입력해주세요."
-          {...register("email", {
-            required: true,
-          })}
-        />
+      <RegisterInputField
+        type="email"
+        id="email"
+        label="이메일"
+        placeholder="이메일을 입력해주세요."
+        register_value="email"
+        isRequired={true}
+        register={register}
+        isValidatorField={true}
+        isValid={validEmail}
+        handleValidation={
+          !validEmail ? () => handleValidateEmail() : () => setValidEmail(false)
+        }
+      />
 
-        <ValidateInputButton
-          validation={
-            !validEmail ? handleValidateEmail : () => setValidEmail(false)
-          }
-          isValid={validEmail && !errors.email}
-          validateFunction={handleValidateEmail}
-          role={"validate-email"}
-        />
-      </div>
       {errors.email?.message && (
         <ErrorMessage children={errors.email?.message} />
       )}
@@ -103,39 +89,32 @@ export const SignupForm = () => {
         <ErrorMessage children={errorEmailMsg} />
       )}
 
-      <div className="flex flex-col gap-2">
-        <div
-          onMouseOut={() => setDisplayPasswordMark(false)}
-          className="flex items-center gap-1 relative"
-        >
-          <label htmlFor="password" className="text-[12px] text-[#1c1c1c]">
-            비빌번호
-          </label>
-          <button
-            className="relative"
-            type="button"
-            onMouseOver={handleDisplayVerificationBox}
-          >
-            <img src={questionIcon} alt="question icon" />
-          </button>
-          {displayPasswordMark && (
-            <div className="absolute left-16 bottom-2 w-[300px] h-[60px]   text-[13px] text-center rounded-lg bg-gray-400 text-white flex items-center justify-center p-4 ">
-              비밀번호는 특수문자(!@#$%^&), 숫자, 영어 대소문자를 반드시
-              포함해야 합니다.
-            </div>
-          )}
-        </div>
-        <input
-          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          type="password"
-          placeholder="비밀번호를 입력해주세요."
-          id="password"
-          role="input-password"
-          {...register("password", {
-            required: true,
-          })}
-        />
+      <div className="space-y-2">
+        <span className=" text-[14px] text-[#1C1C1C]">비밀번호</span>
+        <p className="w-full h-[65px] p-4 text-center text-[13px] bg-[#f7f7f7] text-[#040000]">
+          비밀번호는 특수문자(!@#$%^&), 숫자, 영어 대소문자를 반드시 포함해야
+          합니다.
+        </p>
       </div>
+      <RegisterInputField
+        type="password"
+        id="password"
+        label=""
+        placeholder="비밀번호를 입력해주세요."
+        register_value="password"
+        isRequired={true}
+        register={register}
+      />
+      <RegisterInputField
+        type="password_check"
+        id="password_check"
+        label=""
+        placeholder="비밀번호를 다시 입력해주세요."
+        register_value="password_check"
+        isRequired={true}
+        register={register}
+      />
+
       {errors.password?.message && (
         <ErrorMessage children={errors.password.message} />
       )}
@@ -143,70 +122,38 @@ export const SignupForm = () => {
         <SuccessMessage children="안전한 비밀번호에요!" />
       )}
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor="password_check" className="text-[12px] text-[#1c1c1c]">
-          비빌번호 확인
-        </label>
-        <input
-          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          type="password"
-          placeholder="비밀번호를 한번 더 입력해주세요."
-          id="password_check"
-          role="input-password-check"
-          {...register("password_check", {
-            required: true,
-          })}
-        />
-      </div>
       {errors.password_check?.message && (
         <ErrorMessage children={errors.password_check.message} />
       )}
       {!errors.password?.message && getValues("password_check") && (
         <SuccessMessage children="안전한 비밀번호에요!" />
       )}
-      <div className="flex flex-col gap-2 ">
-        <label htmlFor="name" className="text-[12px] text-[#1c1c1c]">
-          이름
-        </label>
-        <input
-          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          type="text"
-          id="name"
-          role="input-name"
-          placeholder="이름을 입력해주세요."
-          {...register("name", {
-            required: true,
-          })}
-        />
-        {errors.name?.message && (
-          <ErrorMessage children={errors.name.message} />
-        )}
-      </div>
-      <div className="flex flex-col gap-2 relative">
-        <label htmlFor="nickname" className="text-[12px] text-[#1c1c1c]">
-          닉네임
-        </label>
-        <input
-          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          type="text"
-          id="nickname"
-          role="input-nickname"
-          disabled={validNickname && !errors.nickname ? true : false}
-          placeholder="닉네임을 입력해주세요."
-          {...register("nickname", {
-            required: true,
-          })}
-        />
 
-        <ValidateInputButton
-          validation={
-            !validNickname ? handleValidateNick : () => setValidNickname(false)
-          }
-          isValid={validNickname && !errors.nickname}
-          validateFunction={handleValidateNick}
-          role={"validate-nickname"}
-        />
-      </div>
+      <RegisterInputField
+        type="name"
+        id="name"
+        label="이름"
+        placeholder="이름을 입력해주세요."
+        register_value="name"
+        isRequired={true}
+        register={register}
+      />
+
+      <RegisterInputField
+        type="nickname"
+        id="nickname"
+        label="닉네임"
+        placeholder="닉네임을 입력해주세요."
+        register_value="nickname"
+        isRequired={true}
+        register={register}
+        isValidatorField={true}
+        isValid={validNickname}
+        handleValidation={
+          !validNickname ? handleValidateNick : () => setValidNickname(false)
+        }
+      />
+
       {errors.nickname?.message && (
         <ErrorMessage children={errors.nickname.message} />
       )}
@@ -217,44 +164,30 @@ export const SignupForm = () => {
         <ErrorMessage children={errorNicknameMsg} />
       )}
 
-      {/* {nickData?.data.nickname.is_duplicated === false && (
-        <SuccessMessage children="멋진 닉네임이에요!" />
-      )}
-      {nickData?.data.nickname.is_duplicated === true && (
-        <ErrorMessage children="다른 회원님이 사용중인 닉네임이에요." />
-      )} */}
+      <RegisterInputField
+        type="date"
+        id="birthday"
+        label="생년월일"
+        placeholder="이름을 입력해주세요."
+        register_value="birthday"
+        isRequired={true}
+        register={register}
+      />
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor="birthday" className="text-[12px] text-[#1c1c1c]">
-          생년월일
-        </label>
-        <input
-          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          type="date"
-          id="birthday"
-          role="user-birthday"
-          {...register("birthday", {
-            required: true,
-          })}
-        />
-        {errors.birthday?.message && (
-          <ErrorMessage children={errors.birthday.message} />
-        )}
-      </div>
-      <div className="flex flex-col gap-2 relative">
-        <label htmlFor="phone" className="text-[12px] text-[#1c1c1c]">
-          핸드폰 번호
-        </label>
-        <input
-          className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-          type="string"
-          id="phone"
-          placeholder="'-'을 제외한 휴대폰번호를 입력해주세요."
-          {...register("phone", {
-            required: true,
-          })}
-        />
-      </div>
+      {errors.birthday?.message && (
+        <ErrorMessage children={errors.birthday.message} />
+      )}
+
+      <RegisterInputField
+        type="string"
+        id="phone"
+        label="핸드폰 번호"
+        placeholder="핸드폰 번호를 입력해주세요."
+        register_value="phone"
+        isRequired={true}
+        register={register}
+      />
+
       {errors.phone?.message && (
         <ErrorMessage children={errors.phone.message} />
       )}

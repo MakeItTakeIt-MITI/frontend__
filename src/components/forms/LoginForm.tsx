@@ -1,39 +1,30 @@
 import { useForm } from "react-hook-form";
-import close from "../../assets/clarity_eye-hide-line.svg";
-import open from "../../assets/clarity_eye-show-line.svg";
-import { useState } from "react";
+
 import { LoginField } from "../../interface/usersInterface";
-import closeBtn from "../../assets/x_button.svg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginSchema } from "../../modals/useLoginSchema";
 import { useLoginMutation } from "../../hooks/auth/useLoginMutation";
-import alertFail from "../../assets/alert_failure.svg";
 import { SubmitButton } from "../common/SubmitButtons";
 import {
   DisabledLoginButton,
   EnabledLoginButton,
 } from "../../stories/SubmitButtons.stories";
-import { FormInput } from "../common/FormInput";
-import {
-  EmailInputField,
-  PasswordInputField,
-} from "../../stories/Input.stories";
 import { LoginFormProps } from "../../interface/authInterface";
+import { LoginInputField } from "./FormInputContainer";
+import { ErrorMessage } from "../common/ErrorMessage";
+import useDisplayPwStore from "../../store/useDisplayPwStore";
 
 export const LoginForm = ({
   setDisplayModal,
   setErrorCode,
   setErrorMsg,
 }: LoginFormProps) => {
-  const [displayPassword, setDisplayPassword] = useState(false);
-
+  const { displayPassword, setDisplayPassword } = useDisplayPwStore();
   const {
-    register,
     handleSubmit,
-    watch,
-    setValue,
     formState: { errors },
     formState,
+    register,
   } = useForm<LoginField>({
     resolver: zodResolver(useLoginSchema),
   });
@@ -44,12 +35,6 @@ export const LoginForm = ({
     setErrorMsg
   );
 
-  const emailValue = watch("email");
-
-  const handleEraseInput = () => {
-    return setValue("email", "");
-  };
-
   const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
 
   const onSubmit = (data: LoginField) => {
@@ -57,76 +42,35 @@ export const LoginForm = ({
   };
 
   return (
-    <form
-      // className="flex flex-col gap-6  mobile:w-full tablet:w-[600px]"
-      className="flex flex-col gap-4"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      {/* {isError && (
-        <p className="text-[#E92C2C] text-[13px] font-[400] text-center">
-          사용자 정보가 유효하지 않습니다. 다시 시도해주세요.
-        </p>
-      )} */}
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <LoginInputField
+        type="email"
+        id="email"
+        label="이메일"
+        placeholder="이메일을 입력해주세요."
+        register_value="email"
+        isRequired={true}
+        register={register}
+      />
+      {errors.email && (
+        <ErrorMessage children="이메일 형식이 올바르지 않습니다." />
+      )}
+      <LoginInputField
+        type={displayPassword ? "text" : "password"}
+        id="password"
+        label="비밀번호"
+        placeholder="비밀번호를 입력해주세요."
+        isRequired={false}
+        handleDisplayPassword={handleDisplayPassword}
+        passwordImg={displayPassword}
+        register_value="password"
+        isPasswordField={true}
+        register={register}
+      />
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
-          이메일
-        </label>
-        <div className="relative">
-          <FormInput register={register} {...EmailInputField.args} />
-
-          {emailValue && (
-            <button
-              type="button"
-              className="absolute right-2 top-4 hover:cursor-pointer"
-              onClick={handleEraseInput}
-            >
-              <img src={closeBtn} alt="erase input" className="w-[24px]   " />
-            </button>
-          )}
-        </div>
-        {errors.email && (
-          <div className="flex items-center gap-1">
-            <img src={alertFail} alt="alert icon" />
-            <p className="text-[#E92C2C] text-[13px] font-[400]">
-              {errors.email.message}
-            </p>
-          </div>
-        )}
-      </div>
-      <div className="flex flex-col gap-2">
-        <label htmlFor="password" className="text-[12px] text-[#1c1c1c]">
-          비밀번호
-        </label>
-        <div className="relative">
-          <FormInput
-            type={displayPassword ? "text" : "password"}
-            register={register}
-            {...PasswordInputField.args}
-          />
-
-          <button
-            type="button"
-            role="show-password-btn"
-            onClick={handleDisplayPassword}
-            className="absolute right-2 top-4 hover:cursor-pointer"
-          >
-            <img
-              src={`${displayPassword ? open : close}`}
-              alt="hide password"
-              className="w-[24px] cursor-pointer "
-            />
-          </button>
-        </div>
-        {errors.password && (
-          <div className="flex items-center gap-1">
-            <img src={alertFail} alt="alert icon" />
-            <p className="text-[#E92C2C] text-[13px] font-[400]">
-              {errors.password.message}
-            </p>
-          </div>
-        )}
-      </div>
+      {errors.password && (
+        <ErrorMessage children="올바른 비밀번호 양식이 아니에요." />
+      )}
 
       {!formState.isValid ? (
         <SubmitButton {...DisabledLoginButton.args} />
