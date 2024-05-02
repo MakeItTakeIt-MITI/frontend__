@@ -80,6 +80,31 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "/support",
+        children: [
+          {
+            path: "faq",
+            element: <FAQPage />,
+          },
+          {
+            path: "my-reviews",
+            element: <MyReviewPage />,
+          },
+          {
+            path: "users-reviews",
+            element: <UserReviewsPage />,
+          },
+          {
+            path: "review/:id",
+            element: <WrittenReviewDetailPage />,
+          },
+          {
+            path: "customer-service",
+            element: <CustomerServicePage />,
+          },
+        ],
+      },
 
       {
         path: "/sms-authentication",
@@ -109,26 +134,7 @@ const router = createBrowserRouter([
         path: "/reset-password",
         element: <FindPasswordResetPage />,
       },
-      {
-        path: "/faq",
-        element: <FAQPage />,
-      },
-      {
-        path: "/my-reviews",
-        element: <MyReviewPage />,
-      },
-      {
-        path: "/users-reviews",
-        element: <UserReviewsPage />,
-      },
-      {
-        path: "/review/:id",
-        element: <WrittenReviewDetailPage />,
-      },
-      {
-        path: "/customer-service",
-        element: <CustomerServicePage />,
-      },
+
       {
         element: <PrivateRoute />,
         children: [

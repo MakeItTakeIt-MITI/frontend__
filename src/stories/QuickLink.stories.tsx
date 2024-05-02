@@ -47,12 +47,12 @@ FindCourts.args = {
 };
 export const ReviewsAboutMe = Template.bind({});
 ReviewsAboutMe.args = {
-  path: "/users-reviews",
+  path: "/support/users-reviews",
   context: "🗒️ 작성 리뷰",
 };
 export const MyReviews = Template.bind({});
 MyReviews.args = {
-  path: "/my-reviews",
+  path: "/support/my-reviews",
   context: "📪 내 리뷰",
 };
 export const EditProfile = Template.bind({});
@@ -62,11 +62,11 @@ EditProfile.args = {
 };
 export const Faq = Template.bind({});
 Faq.args = {
-  path: "/faq",
+  path: "/support/faq",
   context: "⁉️ FAQ",
 };
 export const CustomerSupport = Template.bind({});
 CustomerSupport.args = {
-  path: "/customer-service",
+  path: "/support/customer-service",
   context: "📢 고객센터",
 };
