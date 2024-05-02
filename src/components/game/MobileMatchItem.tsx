@@ -1,4 +1,5 @@
 import { GameDetailField } from "../../interface/gameInterface";
+import groupIcon from "../../assets/people.svg";
 import {
   GameCancelledTag,
   GameFinishedTag,
@@ -16,6 +17,8 @@ export const MobileMatchItem = ({
   game,
   handleSearchCoords,
 }: MobileMatchItemProp) => {
+  console.log(game);
+
   return (
     <div
       onClick={() => {
@@ -25,29 +28,38 @@ export const MobileMatchItem = ({
       className="border border-b-gray-200  rounded-xl  hover:cursor-pointer  "
     >
       <div className="flex flex-col gap-1 p-3">
-        {game.game_status === "open" && <MatchTags {...RecruitingTag.args} />}
-        {game.game_status === "cancelled" && (
-          <MatchTags {...GameCancelledTag.args} />
-        )}
-        {game.game_status === "closed" && (
-          <MatchTags {...RecruitingCompletedTag.args} />
-        )}
-        {game.game_status === "completed" && (
-          <MatchTags {...GameFinishedTag.args} />
-        )}
-        <h2 className="font-bold text-[18px] truncate">{game.title} </h2>
-        <p className="text-[14px] text-gray-500">
-          {`${game.startdate} ${game.starttime.slice(
-            0,
-            -3
-          )} ~ ${game.endtime.slice(0, -3)}`}
-        </p>
-        <p className="text-[14px] text-red-500 font-bold">
-          {game.fee.toLocaleString("ko-KR", {
-            style: "currency",
-            currency: "KRW",
-          })}
-        </p>
+        <div className="flex justify-between">
+          <h2 className="font-bold text-[14px] truncate">{game.title} </h2>
+
+          {game.game_status === "open" && <MatchTags {...RecruitingTag.args} />}
+          {game.game_status === "canceled" && (
+            <MatchTags {...GameCancelledTag.args} />
+          )}
+          {game.game_status === "closed" && (
+            <MatchTags {...RecruitingCompletedTag.args} />
+          )}
+          {game.game_status === "completed" && (
+            <MatchTags {...GameFinishedTag.args} />
+          )}
+        </div>
+
+        <div className="flex items-center gap-1.5">
+          <img src={groupIcon} alt="group icon" className="w-5" />
+          <p className="text-[14px] text-[##444444]">
+            {game.num_of_participations} / {game.max_invitation}
+          </p>
+        </div>
+        <div className="flex justify-between">
+          <p className="text-[14px] text-gray-500">
+            {`${game.starttime.slice(0, -3)} ~ ${game.endtime.slice(0, -3)}`}
+          </p>
+          <p className=" text-[#4065F6] font-bold">
+            {game.fee.toLocaleString("ko-KR", {
+              style: "currency",
+              currency: "KRW",
+            })}
+          </p>
+        </div>
       </div>
       <hr className="block " />
     </div>
