@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
 import { BrowserHeader } from "../header/BrowserHeader";
 import { MobileHeader } from "../header/MobileHeader";
@@ -11,7 +10,6 @@ export interface HeaderField {
 
 export const Header = () => {
   const { logout } = useAuthStore();
-  const navigate = useNavigate();
   const accessToken = localStorage.getItem("accessToken");
   const refreshToken = localStorage.getItem("refreshToken");
 

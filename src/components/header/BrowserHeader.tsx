@@ -14,11 +14,6 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
     setDisplayTabItems(!displayTabItems);
   };
 
-  const oAuthLoggedIn = localStorage.getItem("oAuth_user");
-  const kakaoLogoutHandler = () => {
-    alert("개발중");
-  };
-
   return (
     <nav className="relative  z-[999] mobile:hidden tablet:flex tablet:h-[3.75rem] items-center  justify-between max-w-[90rem] w-full laptop:px-[13rem] tablet:px-[2rem] mx-auto">
       <div className="flex gap-4 items-center">
@@ -31,12 +26,8 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
           <>
             {/* <Link to={`/games/my-games`}>나의 경기</Link> */}
 
-            {oAuthLoggedIn ? (
-              // <button onClick={kakaoLogoutHandler}>카카오 로그아웃</button>
-              <button onClick={handleLogout}>로그아웃</button>
-            ) : (
-              <button onClick={handleLogout}>로그아웃</button>
-            )}
+            <button onClick={handleLogout}>로그아웃</button>
+
             <Link to={`/mypage`}>내 정보</Link>
           </>
         ) : (
