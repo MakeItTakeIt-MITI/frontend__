@@ -20,6 +20,16 @@ InactiveUserNotification.args = {
   buttonContext: "확인",
 };
 
+export const NotAuthroizedUser = Template.bind({});
+NotAuthroizedUser.args = {
+  title: "로그인 실패",
+  context: "인증이 완료되지 않은 회원입니다.",
+  contextTwo: "인증 완료 후 서비스를 이용해주세요.",
+  buttonContext: "인증하기",
+  isLink: true,
+  path: "/auth/authenticate-user",
+};
+
 export const NotFoundInactiveUser = Template.bind({});
 NotFoundInactiveUser.args = {
   title: "계정 조회 실패",

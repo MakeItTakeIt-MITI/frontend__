@@ -11,7 +11,6 @@ export type ResetPassField = {
 }
 
 export interface LoginFormProps {
-    setDisplayModal: (arg: boolean) => void;
     setErrorCode: (arg: number) => void;
-    setErrorMsg: (arg: string) => void;
+    errorCode: number;
 }

@@ -9,17 +9,20 @@ import {
   DisabledLoginButton,
   EnabledLoginButton,
 } from "../../stories/SubmitButtons.stories";
-import { LoginFormProps } from "../../interface/authInterface";
 import { LoginInputField } from "./FormInputContainer";
 import { ErrorMessage } from "../common/ErrorMessage";
 import useDisplayPwStore from "../../store/useDisplayPwStore";
+import { useEffect, useState } from "react";
+import { AlertModal } from "../common/AlertModal";
+import {
+  InactiveUserNotification,
+  NotAuthroizedUser,
+} from "../../stories/Modal.stories";
 
-export const LoginForm = ({
-  setDisplayModal,
-  setErrorCode,
-  setErrorMsg,
-}: LoginFormProps) => {
+export const LoginForm = () => {
   const { displayPassword, setDisplayPassword } = useDisplayPwStore();
+  const [displayModal, setDisplayModal] = useState(true);
+
   const {
     handleSubmit,
     formState: { errors },
@@ -29,17 +32,20 @@ export const LoginForm = ({
     resolver: zodResolver(useLoginSchema),
   });
 
-  const { mutate: loginMutation } = useLoginMutation(
-    setDisplayModal,
-    setErrorCode,
-    setErrorMsg
-  );
-
+  const { mutate: loginMutation, data } = useLoginMutation();
   const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
-
+  const handleCloseModal = () => {
+    setDisplayModal(false);
+  };
   const onSubmit = (data: LoginField) => {
     loginMutation(data);
   };
+
+  useEffect(() => {
+    if (data?.status_code === 403) {
+      setDisplayModal(true);
+    }
+  }, [data?.status_code]);
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
@@ -70,6 +76,24 @@ export const LoginForm = ({
 
       {errors.password && (
         <ErrorMessage children="올바른 비밀번호 양식이 아니에요." />
+      )}
+
+      {data?.status_code === 401 && data?.error_code === 140 && (
+        <ErrorMessage children="사용자 정보가 일치하지 않습니다" />
+      )}
+      {data?.status_code === 403 && data?.error_code === 140 && (
+        <AlertModal
+          modal={displayModal}
+          handleCloseModal={handleCloseModal}
+          {...InactiveUserNotification.args}
+        />
+      )}
+      {data?.status_code === 403 && data?.error_code === 141 && (
+        <AlertModal
+          modal={displayModal}
+          handleCloseModal={handleCloseModal}
+          {...NotAuthroizedUser.args}
+        />
       )}
 
       {!formState.isValid ? (

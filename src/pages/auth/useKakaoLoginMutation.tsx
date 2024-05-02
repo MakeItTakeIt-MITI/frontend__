@@ -16,12 +16,6 @@ export const useKakaoLoginMutation = () => {
       console.log(response.status_code);
       console.log(response);
 
-      if (response.error_code === 302) {
-        // setModal(true);
-        alert("oAuth 사용자가 아닙니다.");
-        navigate("/auth/login");
-      }
-
       if (response.status_code === 200) {
         console.log(response);
         const { access, refresh } = response.data.token;
