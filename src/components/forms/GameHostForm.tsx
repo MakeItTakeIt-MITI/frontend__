@@ -1,9 +1,5 @@
 import { useForm } from "react-hook-form";
-import {
-  AddressField,
-  Court,
-  GameHostField,
-} from "../../interface/gameInterface";
+import { AddressField, GameHostField } from "../../interface/gameInterface";
 import { useEffect, useState } from "react";
 import { useHostGameMutation } from "../../hooks/games/useHostGameMutation";
 import { useCourtDetailsQuery } from "../../hooks/games/useCourtDetailsQuery";
@@ -30,8 +26,7 @@ export const GameHostForm = ({
 
   // tanstack query
   const courtAddress = watch("court.address") || "";
-  const { data: getCourtInformation, refetch } =
-    useCourtDetailsQuery(courtAddress);
+  const { data: getCourtInformation, refetch } = useCourtDetailsQuery();
 
   const { mutate: hostGameMutation } = useHostGameMutation();
   const maxParticipants = watch("max_invitation");

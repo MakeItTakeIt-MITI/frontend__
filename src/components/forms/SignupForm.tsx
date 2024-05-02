@@ -10,7 +10,6 @@ import {
   useValidateDuplicateNickname,
 } from "../../hooks/auth/useUserValidationMutation";
 import { SubmitButton } from "../common/SubmitButtons";
-import { ValidateInputButton } from "../common/ValidationButtons";
 import { ErrorMessage } from "../common/ErrorMessage";
 import { SuccessMessage } from "../common/SuccessMessage";
 import { RegisterInputField } from "./FormInputContainer";
@@ -23,7 +22,7 @@ export const SignupForm = () => {
   const [successNicknameMsg, setSuccessNicknameMsg] = useState("");
   const [errorNicknameMsg, setErrorNicknameMsg] = useState("");
 
-  const [displayPasswordMark, setDisplayPasswordMark] = useState(false);
+  // const [displayPasswordMark, setDisplayPasswordMark] = useState(false);
 
   const {
     register,
@@ -36,7 +35,7 @@ export const SignupForm = () => {
     mode: "onBlur",
   });
 
-  const { mutate: registerMutation, isError } = useRegisterMutation();
+  const { mutate: registerMutation } = useRegisterMutation();
   const { mutate: emailMutation } = useValidateDuplicateEmail(
     setValidEmail,
     setSuccessEmailMsg,
@@ -56,9 +55,9 @@ export const SignupForm = () => {
   const handleValidateNick = () =>
     nicknameMutation({ nickname: getValues("nickname") });
 
-  const handleDisplayVerificationBox = () => {
-    setDisplayPasswordMark(!displayPasswordMark);
-  };
+  // const handleDisplayVerificationBox = () => {
+  //   setDisplayPasswordMark(!displayPasswordMark);
+  // };
 
   useEffect(() => {}, []);
 

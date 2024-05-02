@@ -1,9 +1,9 @@
 import { getGameCourtDetails } from "../../api/games";
 import { useQuery } from "@tanstack/react-query";
 
-export const useCourtDetailsQuery = (address: string) => {
+export const useCourtDetailsQuery = () => {
   return useQuery({
     queryKey: ["court_details"],
-    queryFn: () => getGameCourtDetails(address),
+    queryFn: () => getGameCourtDetails(),
   });
 };

@@ -5,16 +5,18 @@ import chevron_right from "../../assets/Chevron_Right_MD.svg";
 import { KakaoLoginButton } from "../../components/kakao/KakaoLoginButton";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { useState } from "react";
-import { DisplayModal } from "../../components/common/DisplayModal";
 
 export const UserLoginPage = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [errorCode, setErrorCode] = useState(0);
 
-  const handleCloseModal = () => {
-    setDisplayModal(false);
-  };
+  console.log(displayModal);
+  console.log(errorMsg);
+
+  // const handleCloseModal = () => {
+  //   setDisplayModal(false);
+  // };
 
   console.log(errorCode);
 
