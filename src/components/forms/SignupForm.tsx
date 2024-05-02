@@ -63,7 +63,10 @@ export const SignupForm = () => {
   useEffect(() => {}, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-[30px]"
+    >
       <RegisterInputField
         type="email"
         id="email"

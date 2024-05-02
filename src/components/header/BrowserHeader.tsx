@@ -15,7 +15,7 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
   };
 
   const oAuthLoggedIn = localStorage.getItem("oAuth_user");
-  const kakaoLogoutHandler = async () => {
+  const kakaoLogoutHandler = () => {
     alert("개발중");
   };
 
@@ -40,11 +40,7 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
           </>
         ) : (
           <>
-            <Link
-              to="/auth/login"
-              className="text-[#707070]"
-              data-testid="login-link"
-            >
+            <Link to="/auth/login" className="text-[#707070]">
               로그인
             </Link>
             <Link to="/auth/signup-option" className="text-[#707070]">

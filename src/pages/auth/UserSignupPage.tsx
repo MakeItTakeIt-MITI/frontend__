@@ -2,11 +2,11 @@ import { SignupForm } from "../../components/forms/SignupForm";
 import mitiLogo from "../../assets/MITI_logo.svg";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 
-export const UserSignup = () => {
+export const UserSignupPage = () => {
   return (
-    <section className="my-[69px]">
+    <section className="laptop:my-[69px] mobile:my-0">
       <NavigateToPrevContainer children="회원가입" />
-      <div className="relative laptop:w-[495px]  min-h-[735px] pb-[80px]   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-[50px] laptop:px-[76px] mobile:px-4 py-9 rounded-lg flex flex-col laptop:justify-center gap-10 mobile:justify-between">
+      <div className="relative laptop:w-[495px]  min-h-[735px]  mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-[50px] laptop:px-[76px] mobile:px-4 py-9 rounded-lg flex flex-col laptop:justify-center gap-[35px] mobile:justify-between">
         <div className="">
           <div
             role="miti-logo"

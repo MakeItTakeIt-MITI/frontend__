@@ -40,6 +40,18 @@ li:hover {
   }
 
   .section-layer {
-    @apply relative laptop:w-[500px]  laptop:h-[735px] laptop:mt-[3.75rem] mobile:mt-0 mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col;
+    @apply laptop:my-[69px] mobile:my-0;
   }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

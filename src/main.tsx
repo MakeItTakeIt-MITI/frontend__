@@ -5,7 +5,7 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/HomePage.tsx";
 import { UserLoginPage } from "./pages/auth/UserLoginPage.tsx";
-import { UserSignup } from "./pages/auth/UserSignup.tsx";
+import { UserSignupPage } from "./pages/auth/UserSignupPage.tsx";
 import { NotFoundPage } from "./pages/NotFoundPage.tsx";
 import { GameDetailPage } from "./pages/games/GameDetailPage.tsx";
 import { ParticipateGamePage } from "./pages/games/ParticipateGamePage.tsx";
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
           },
           {
             path: "signup",
-            element: <UserSignup />,
+            element: <UserSignupPage />,
           },
           {
             path: "oauth/kakao/login",

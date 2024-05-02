@@ -9,12 +9,19 @@ import { useHostGameMutation } from "../../hooks/games/useHostGameMutation";
 import { useCourtDetailsQuery } from "../../hooks/games/useCourtDetailsQuery";
 
 import { useDaumPostcodePopup } from "react-daum-postcode";
+import { GameHostInputField } from "./FormInputContainer";
+import { FormLabel } from "./FormLabel";
+import { ErrorMessage } from "../common/ErrorMessage";
 
 interface GameHostFormProps {
   setShowModal: (arg: boolean) => void;
+  setSuccessfulSubmission: (arg: boolean) => void;
 }
 
-export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
+export const GameHostForm = ({
+  setShowModal,
+  setSuccessfulSubmission,
+}: GameHostFormProps) => {
   const { handleSubmit, register, setValue, watch, formState } =
     useForm<GameHostField>();
   const [startDateTime, setStartDateTime] = useState("");
@@ -27,6 +34,9 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
     useCourtDetailsQuery(courtAddress);
 
   const { mutate: hostGameMutation } = useHostGameMutation();
+  const maxParticipants = watch("max_invitation");
+  const minParticipants = watch("min_invitation");
+  const gameFee = watch("fee");
 
   useEffect(() => {
     const startDate = startDateTime.split("T")[0];
@@ -89,27 +99,31 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
     hostGameMutation(data);
   };
 
+  const watchValueLength = (value: any) => watch(value);
+  const handleEraseValue = (value: any) => setValue(value, "");
   return (
     <form
-      className="flex flex-col gap-4 "
+      className="flex flex-col laptop:gap-[35px] mobile:gap-4 text-[14px]"
       onSubmit={handleSubmit(onSubmitForm)}
     >
-      {/* <InputField
+      <GameHostInputField
+        type="string"
         id="title"
         label="경기 제목"
-        type="text"
         placeholder="경기 제목을 입력해주세요."
+        register_value="title"
+        isRequired={true}
         register={register}
-        register_type="title"
-        requiredValue={true}
-      /> */}
+        handleEraseValue={() => handleEraseValue("title")}
+        gameHostValue={watchValueLength("title")}
+      />
+
       {/* Game start date and time */}
       <div className="flex flex-col gap-2">
-        <label htmlFor="start_date" className="text-[#999]">
-          경기 시작
-        </label>
+        <FormLabel id="start_date" children="경기 시작" />
+
         <div className="flex gap-2 w-full">
-          <div className=" h-[50px] p-4  bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
+          <div className="flex items-center  h-[50px] p-4  bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
             {startDateTime.length > 1 ? startDateTime.split("T")[0] : null}{" "}
             {startDateTime.length > 1
               ? startDateTime.split("T")[1]
@@ -120,7 +134,7 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
             type="datetime-local"
             id="start_date"
             required
-            className=" w-[54px] h-[50px] p-4  bg-[#DFEFFE] text-[#999] rounded-lg "
+            className="w-[54px] h-[54px] p-4  bg-[#DFEFFE] text-[#999] rounded-lg "
             onChange={(e) => setStartDateTime(e.target.value)}
           />
 
@@ -142,12 +156,10 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
       </div>
       {/* 경기 종료 */}
       <div className="flex flex-col gap-2 justify-center ">
-        <label htmlFor="end_date" className="text-[#999]">
-          경기 종료
-        </label>
+        <FormLabel id="end_date" children="경기 종료" />
 
         <div className="flex items-center gap-2 w-full">
-          <div className=" h-[50px] p-4  bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
+          <div className="flex items-center  h-[50px] p-4  bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
             {/* {endDateTime.split("T")[0]} {endDateTime.split("T")[1]} */}
             {endDateTime.length > 1 ? endDateTime.split("T")[0] : null}{" "}
             {endDateTime.length > 1
@@ -160,7 +172,7 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
             required
             id="end_date"
             onChange={(e) => setEndDateTime(e.target.value)}
-            className="w-[54px] h-[50px] p-4  bg-[#DFEFFE] text-[#999] rounded-lg "
+            className=" w-[54px] h-[54px] p-4  bg-[#DFEFFE] text-[#999] rounded-lg "
           />
 
           <input
@@ -180,119 +192,113 @@ export const GameHostForm = ({ setShowModal }: GameHostFormProps) => {
         </div>
       </div>
       {/* game address */}
-      <div className="flex flex-col gap-2">
-        <label htmlFor="address" className=" text-[#999] ]">
-          경기 주소
-        </label>
-
-        <div className=" h-[50px] p-4     bg-[#F7F7F7] text-[#969696] ] rounded-lg  relative ">
-          <p className=" max-w-[300px] truncate"> {watch("court.address")}</p>
-
-          <button
-            type="button"
-            onClick={handleClick}
-            className=" w-[81px] h-9 absolute  right-2 top-2   text-[14px] bg-[#4065f6] text-[#FFF] font-[400]  rounded-lg"
-          >
-            주소찾기
-          </button>
-        </div>
-
-        <input hidden type="text" {...register("court.address")} readOnly />
-      </div>
-      {/* address detail */}
-      <InputField
-        id="address_detail"
-        label="상세 주소"
-        type="text"
-        placeholder="상세 주소를 입력해주세요."
+      <GameHostInputField
+        type="string"
+        id="address"
+        label=" 경기 주소"
+        placeholder="주소를 검색해주세요."
+        register_value="court.address"
+        isRequired={true}
         register={register}
-        register_type="court.address_detail"
-        requiredValue={true}
+        gameHostValue={false}
+        buttonField={true}
+        handleFindAddress={handleClick}
       />
-      {/* court name */}
-      <InputField
-        id="title"
-        label="경기장 이름"
-        type="text"
-        placeholder="경기장 이름을 입력해주세요"
+      <GameHostInputField
+        type="string"
+        id="address"
+        label=" 경기 상세 주소"
+        placeholder="상세 주소를 입해주세요."
+        register_value="court.address_detail"
+        isRequired={true}
         register={register}
-        register_type="court.name"
-        requiredValue={true}
+        handleFindAddress={handleClick}
+        handleEraseValue={() => handleEraseValue("court.address_detail")}
+        gameHostValue={watchValueLength("court.address_detail")}
       />
 
       {/* max participants */}
 
-      <div className="flex gap-4  items-center mobile:justify-between ">
-        <div className="flex flex-col gap-2 tablet:w-full">
-          <label htmlFor="max_players" className=" text-[#999]">
-            총 모집 인원
-          </label>
-          <input
-            type="number"
-            id="max_players"
-            placeholder="00 명"
-            className=" input-primary  w-full text-center font-bold"
-            {...register("max_invitation", {
-              required: true,
-            })}
-          />
-        </div>
+      <div className="flex flex-col gap-2   mobile:justify-between ">
+        <div className="flex items-center gap-4 h-full">
+          <div className="flex flex-col gap-2 tablet:w-full">
+            <FormLabel id="max_players" children="총 인원 모집" />
+            <input
+              type="number"
+              id="max_players"
+              placeholder="00 명"
+              className=" h-[50px] p-4  bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
+              {...register("max_invitation", {
+                required: true,
+              })}
+            />
+          </div>
 
-        {/* recruiting participants */}
-        <div className="flex flex-col gap-2 tablet:w-full ">
-          <label htmlFor="min_players" className=" text-[#999]">
-            최소 모집 인원
-          </label>
-          <input
-            type="number"
-            id="min_players"
-            placeholder="00 명"
-            className=" h-[50px] p-4  bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
-            {...register("min_invitation", {
-              required: true,
-            })}
-          />
+          {/* recruiting participants */}
+          <div className="flex flex-col gap-2 tablet:w-full ">
+            <FormLabel
+              id="min_players"
+              children=" 최소 모집 인원
+"
+            />
+
+            <input
+              type="number"
+              id="min_players"
+              placeholder="00 명"
+              className=" h-[50px] p-4  bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
+              {...register("min_invitation", {
+                required: true,
+              })}
+            />
+          </div>
         </div>
+        {minParticipants > maxParticipants && (
+          <ErrorMessage children="총 모집 인원은 최소 모집 인원보다 많아야해요." />
+        )}
       </div>
 
       {/* participation fee */}
-      <div className="flex w-full px-0 flex-col gap-2">
-        <label htmlFor="fee" className=" text-[#999]">
-          참가비
-        </label>
-
-        <div className="relative ">
-          <input
-            type="string"
-            id="fee"
-            placeholder="경기 참여비를 입력해주세요."
-            className=" input-primary w-full"
-            {...register("fee", {
-              required: true,
-            })}
-          />
-          <span className="absolute top-4 botom-4 right-4 text-[14px] text-[#999]">
-            ₩
-          </span>
-        </div>
+      <div className="space-y-2">
+        <GameHostInputField
+          type="string"
+          id="string"
+          label="참가비"
+          placeholder="경기 참가비를 입해주세요."
+          register_value="fee"
+          isRequired={true}
+          register={register}
+          feeField={true}
+        />
+        {gameFee < 0 && (
+          <ErrorMessage children="경기 참가비는 0 이상의 정수이어야합니다." />
+        )}
       </div>
+
       {/* information */}
       <div className="flex flex-col gap-2">
-        <label htmlFor="announcement" className=" text-[#999] ">
-          추가 정보
-        </label>
+        <FormLabel id="" children=" 추가 정보" />
         <textarea
-          id="announcement"
-          placeholder="주차 4자리 가능, 샤워 불가, 4 vs 4, 파란 유니폼 지참, 남녀 모두 참가 가능한 매치입니다"
-          className="w-full   mobile:text-[14px] tablet:text-[16px] px-4 py-3 bg-[#F7F7F7] rounded-lg "
+          id="info"
+          style={{ resize: "none" }}
+          placeholder="주차, 샤워 가능 여부, 경기 진행 방식, 필요한 유니폼 색상 등 참가들에게 공지할 정보들을 입력해주세요."
+          className="w-full h-[150px]   mobile:text-[14px] tablet:text-[16px] px-4 py-3 bg-[#F7F7F7] rounded-lg "
           {...register("info")}
         />
       </div>
 
       <button
-        disabled={!formState.isValid}
+        disabled={
+          !formState.isValid || gameFee < 0 || maxParticipants < minParticipants
+        }
+        onClick={() => setSuccessfulSubmission(true)}
         style={{
-          backgroundColor: !formState.isValid ? "#969696" : "#4065F6",
+          backgroundColor:
+            !formState.isValid ||
+            gameFee < 0 ||
+            maxParticipants < minParticipants
+              ? "#969696"
+              : "#4065F6",
         }}
         type="submit"
         className=" w-full h-[50px] rounded-[8px] text-white"
