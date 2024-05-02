@@ -54,7 +54,7 @@ export const NaverMapEL = ({
     });
 
     const addressesList: string[] = [];
-    allGamesData.data.map((game) => {
+    allGamesData?.data.map((game) => {
       addressesList.push(game.court.address);
       return addressesList;
     });

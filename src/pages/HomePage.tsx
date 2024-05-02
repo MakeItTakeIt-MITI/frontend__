@@ -82,7 +82,7 @@ export const HomePage = () => {
                   <NoGamesAvailableBox data={allGamesData} />
                 ))}
               {displayCollapsedList &&
-                allGamesData.data.map((game: GameDetailField) => {
+                allGamesData?.data.map((game: GameDetailField) => {
                   for (const address of filteredGames) {
                     if (address === game.court.address) {
                       return (
