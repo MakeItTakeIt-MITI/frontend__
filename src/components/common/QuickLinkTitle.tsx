@@ -9,5 +9,9 @@ export const QuickLinkTitle: React.FC<QuickLinkProps> = ({
   path = "/",
   context,
 }) => {
-  return <Link to={path}>{context}</Link>;
+  return (
+    <Link className="text-[14px]" to={path}>
+      {context}
+    </Link>
+  );
 };

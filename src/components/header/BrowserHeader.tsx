@@ -26,17 +26,17 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
           <img src={mitiLogo} alt="miti logo" />
         </Link>
       </div>
-      <div className="flex items-center gap-4  ">
+      <div className="flex items-center gap-6 text-[16px] font-[500]  ">
         {isLoggedIn ? (
           <>
-            <Link to={`/games/my-games`}>나의 경기</Link>
-            <Link to={`/mypage`}>마이페이지</Link>
+            {/* <Link to={`/games/my-games`}>나의 경기</Link> */}
 
             {oAuthLoggedIn ? (
               <button onClick={kakaoLogoutHandler}>카카오 로그아웃</button>
             ) : (
               <button onClick={handleLogout}>로그아웃</button>
             )}
+            <Link to={`/mypage`}>내 정보</Link>
           </>
         ) : (
           <>

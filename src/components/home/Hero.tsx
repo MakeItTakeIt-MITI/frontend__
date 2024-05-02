@@ -33,7 +33,7 @@ export const HeroCarousel = () => {
     cssEase: "linear",
   };
   return (
-    <section className="mb-10relative">
+    <section className="mb-10 relative laptop:block mobile:hidden">
       <Slider {...settings}>
         {data.map((hero) => {
           return (
