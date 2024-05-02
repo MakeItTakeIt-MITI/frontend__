@@ -39,6 +39,7 @@ import { GuestGameHistoryPage } from "./pages/games/GuestGameHistoryPage.tsx";
 import { MyGamesPage } from "./pages/games/MyGamesPage.tsx";
 import { NotVerifiedUserPage } from "./pages/auth/NotVerifiedUserPage.tsx";
 import { NotVerifiedInputDetailPage } from "./pages/auth/NotVerifiedInputDetailPage.tsx";
+import { MobileViewItemsTab } from "./pages/MobileViewItemsTab.tsx";
 
 const queryClient = new QueryClient();
 
@@ -133,6 +134,10 @@ const router = createBrowserRouter([
       {
         path: "/reset-password",
         element: <FindPasswordResetPage />,
+      },
+      {
+        path: "/all-items",
+        element: <MobileViewItemsTab />,
       },
 
       {

@@ -8,14 +8,11 @@ import gamesIconColor from "../../assets/header_game_color.svg";
 import profileIconColor from "../../assets/header_profile_color.svg";
 
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
-import { Sidebar } from "./Sidebar";
 import useUserDataStore from "../../store/useUserDataStore";
 import { useUserInfoQuery } from "../../hooks/games/useUserInfoQuery";
 import useAuthStore from "../../store/useAuthStore";
 
 export const MobileHeader = () => {
-  const [displayTab, setDisplayTab] = useState(false);
   const { userId } = useUserDataStore();
   const { isLoggedIn } = useAuthStore();
   const { data } = useUserInfoQuery(userId);
@@ -63,16 +60,12 @@ export const MobileHeader = () => {
               </Link>
             )}
 
-            <button
-              type="button"
-              onClick={() => setDisplayTab(true)}
-              className="flex flex-col gap-1 items-center"
-            >
+            <Link to="all-items" className="flex flex-col gap-1 items-center">
               <img src={viewAllIcon} alt="view all icon" />
               <span className="text-[13px] text-[#969696]">전체</span>
-            </button>
+            </Link>
           </div>
-          {displayTab && <Sidebar setDisplayTab={setDisplayTab} />}
+          {/* {displayTab && <MobileDisplayaAllTab setDisplayTab={setDisplayTab} />} */}
         </nav>
       )}
     </>
