@@ -1,3 +1,4 @@
+import axios from "axios";
 import { CodeVerificationField, ResetPassField } from "../interface/authInterface";
 import { FindEmailField, NewPassworldField } from "../interface/user-edit-interface";
 import { LoginField, RegisterField } from "../interface/usersInterface";
@@ -13,9 +14,15 @@ export const userLogin = async (data: LoginField) => {
     }
 }
 
-export const userLogout = async () => {
+export const userLogout = async (accessToken: string | null, refreshToken: string | null) => {
     try {
-        const response = await axiosUrl.post('/auth/logout');
+        const response = await axios.post('https://dev.makeittakeit.kr/auth/logout', {}, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                refresh: refreshToken
+
+            }
+        });
         return response.data;
     } catch {
         throw new Error

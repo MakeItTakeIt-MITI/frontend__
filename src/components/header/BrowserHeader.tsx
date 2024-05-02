@@ -32,7 +32,8 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
             {/* <Link to={`/games/my-games`}>나의 경기</Link> */}
 
             {oAuthLoggedIn ? (
-              <button onClick={kakaoLogoutHandler}>카카오 로그아웃</button>
+              // <button onClick={kakaoLogoutHandler}>카카오 로그아웃</button>
+              <button onClick={handleLogout}>로그아웃</button>
             ) : (
               <button onClick={handleLogout}>로그아웃</button>
             )}
