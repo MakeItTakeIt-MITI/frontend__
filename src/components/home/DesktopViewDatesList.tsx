@@ -27,12 +27,12 @@ export const DesktopViewDatesList = ({
   };
 
   return (
-    <div className="tablet:block mobile:hidden w-[307px] ">
+    <div className="relative tablet:block mobile:hidden ">
       <div
         onClick={handleDisplayDates}
-        className="relative hover:cursor-pointer flex items-center justify-between p-4   rounded-lg bg-[#FBFBFB]"
+        className="  flex items-center justify-between p-4   rounded-lg bg-[#FBFBFB]"
       >
-        <span className="font-bold leading-[20.8px]">
+        <span className="font-bold leading-[20.8px]  hover:cursor-pointer">
           {selectingDate.toLocaleDateString("ko-KR", {
             timeZone: "Asia/Seoul",
             year: "numeric",
@@ -53,16 +53,19 @@ export const DesktopViewDatesList = ({
             fill="#454545"
           />
         </svg>
-        <div className="absolute top-full left-0 w-full rounded-lg bg-white  ">
+        <div
+          onMouseLeave={() => setDisplayDates(false)}
+          className=" absolute right-0 top-[56px] py-2 px-4 left-0 w-full rounded-lg bg-[#FBFBFB]  "
+        >
           {availableDates &&
             availableDates.map((date, index) => {
               return (
                 <div
-                  className="bg-white w-full h-full px-[1.1rem] hover:font-bold text-gray-400 hover:text-black rounded-2 "
+                  className=" z-999  w-full h-full hover:font-bold text-gray-400 hover:text-black rounded-2 "
                   key={index}
                   onClick={() => handleSelectDate(date)}
                 >
-                  <p className="mb-2 ">
+                  <p className="mb-2 hover:text-[16px]  hover:cursor-pointer">
                     {displayDates &&
                       date.toLocaleDateString("ko-KR", {
                         timeZone: "Asia/Seoul",

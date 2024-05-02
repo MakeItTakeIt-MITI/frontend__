@@ -55,3 +55,10 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+#gameListBox::-webkit-scrollbar-thumb {
+  background-color: skyblue;
+}
+
+.crsl {
+}

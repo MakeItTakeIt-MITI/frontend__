@@ -19,7 +19,7 @@ export const HostTag: Story = {
     args: {
         children: "호스트",
         backgroundColor: "#C1E1FF",
-        textColor: "#4065F6",
+        textColor: "#0019FF",
     },
 };
 export const GuestTag: Story = {
@@ -40,20 +40,20 @@ export const RecruitingCompletedTag: Story = {
     args: {
         children: "모집 종료",
         backgroundColor: "#DBFFDF",
-        textColor: "#33FF00",
+        textColor: "#3F0",
     },
 };
 export const GameCancelledTag: Story = {
     args: {
         children: "경기 취소",
         backgroundColor: "#FFC0C0",
-        textColor: "#FC0201",
+        textColor: "#FC0000",
     },
 };
 export const GameFinishedTag: Story = {
     args: {
         children: "경기 완료",
         backgroundColor: "#F5CCFF",
-        textColor: "#CA03FC",
+        textColor: "#CA00FC",
     },
 };

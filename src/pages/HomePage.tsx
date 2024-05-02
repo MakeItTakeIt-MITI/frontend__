@@ -1,6 +1,4 @@
-import banner from "../assets/banner-2.svg";
-import { Hero } from "../components/home/Hero";
-import { AdvertisementBanner } from "../components/AdvertisementBanner";
+import { HeroCarousel } from "../components/home/Hero";
 import { MobileViewDatesList } from "../components/home/MobileViewDatesList";
 import { useGetGamesDataQuery } from "../hooks/games/useGetGamesDataQuery";
 import { DesktopViewDatesList } from "../components/home/DesktopViewDatesList";
@@ -53,71 +51,71 @@ export const HomePage = () => {
   }
 
   return (
-    <div className="  flex flex-col gap-6  w-full laptop:px-[13rem] tablet:px-[2rem] mx-auto  max-w-[90rem] tablet:mb-4 mobile:mb-16">
-      <Hero
-        backgroundImage={banner}
-        launchText="MITI 서비스 런칭"
-        recruitText="MITI와 함께, 경기 모집부터"
-        managementText="관리, 결제, 매칭까지 한번에."
-      />
-      <div className="flex  tablet:flex-row mobile:flex-col tablet:gap-10 mobile:gap-4 mobile:-mt-4 ">
-        <div className="flex flex-col gap-4">
-          <DesktopViewDatesList
-            selectingDate={selectingDate}
-            setSelectedDate={setSelectedDate}
-          />
-          <div className=" mobile:hidden tablet:block flex flex-col gap-4 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll">
-            {!displayCollapsedList &&
-              allGamesData?.data.map((game: GameDetailField) => {
-                return (
-                  <div key={game.id}>
-                    <MatchItem
-                      game={game}
-                      handleSearchCoords={handleSearchCoords}
-                    />
-                    <hr className="w-full bg-[#ECECEC] my-2" />
-                  </div>
-                );
-              })}
-            {/* // /> */}
-            {!displayCollapsedList ||
-              (allGamesData?.data.length < 1 && (
-                <NoGamesAvailableBox data={allGamesData} />
-              ))}
-            {displayCollapsedList &&
-              allGamesData.data.map((game: GameDetailField) => {
-                for (const address of filteredGames) {
-                  if (address === game.court.address) {
-                    return (
-                      <Link to={`/games/detail/${game.id}`} key={game.id}>
-                        <FilteredMatchItem
-                          game={game}
-                          handleSearchCoords={handleSearchCoords}
-                        />
-                        <hr className="w-full bg-[#ECECEC] my-2" />
-                      </Link>
-                    );
+    <main className="laptop:mb-[69px] mobile:my-0">
+      <div className="  flex flex-col gap-6  w-full laptop:px-[13rem]  mx-auto  max-w-[90rem] ">
+        <HeroCarousel />
+        <div className="flex   tablet:flex-row mobile:flex-col tablet:gap-10 mobile:gap-4 mobile:-mt-4 ">
+          <div className="space-y-4">
+            <DesktopViewDatesList
+              selectingDate={selectingDate}
+              setSelectedDate={setSelectedDate}
+            />
+            <div
+              style={{ scrollbarWidth: "thin" }}
+              id="gameListBox"
+              className=" w-[371px] p-3  mobile:hidden tablet:block space-y-3 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll"
+            >
+              {!displayCollapsedList &&
+                allGamesData?.data.map((game: GameDetailField) => {
+                  return (
+                    <div key={game.id}>
+                      <MatchItem
+                        game={game}
+                        handleSearchCoords={handleSearchCoords}
+                      />
+                    </div>
+                  );
+                })}
+              {/* // /> */}
+              {!displayCollapsedList ||
+                (allGamesData?.data.length < 1 && (
+                  <NoGamesAvailableBox data={allGamesData} />
+                ))}
+              {displayCollapsedList &&
+                allGamesData.data.map((game: GameDetailField) => {
+                  for (const address of filteredGames) {
+                    if (address === game.court.address) {
+                      return (
+                        <Link to={`/games/detail/${game.id}`} key={game.id}>
+                          <FilteredMatchItem
+                            game={game}
+                            handleSearchCoords={handleSearchCoords}
+                          />
+                          <hr className="w-full bg-[#ECECEC] my-2" />
+                        </Link>
+                      );
+                    }
                   }
-                }
-              })}
-          </div>
-        </div>{" "}
-        <NaverMapEL
-          allGamesData={allGamesData}
-          refetch={refetch}
-          gameSearched={gameSearched}
-          isGameSearched={isGameSearched}
-          setFilteredGames={setFilteredGames}
-          setDisplayCollapsedList={setDisplayCollapsedList}
+                })}
+            </div>
+          </div>{" "}
+          <NaverMapEL
+            allGamesData={allGamesData}
+            refetch={refetch}
+            gameSearched={gameSearched}
+            isGameSearched={isGameSearched}
+            setFilteredGames={setFilteredGames}
+            setDisplayCollapsedList={setDisplayCollapsedList}
+          />
+          <MobileViewDatesList setSelectedDate={setSelectedDate} />
+        </div>
+        <MobileViewGameList
+          formatDate={formatDate}
+          handleSearchCoords={handleSearchCoords}
+          displayCollapsedList={displayCollapsedList}
+          filteredGames={filteredGames}
         />
-        <MobileViewDatesList setSelectedDate={setSelectedDate} />
       </div>
-      <MobileViewGameList
-        formatDate={formatDate}
-        handleSearchCoords={handleSearchCoords}
-        displayCollapsedList={displayCollapsedList}
-        filteredGames={filteredGames}
-      />
-    </div>
+    </main>
   );
 };

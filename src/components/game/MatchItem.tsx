@@ -22,32 +22,37 @@ export const MatchItem = ({ game, handleSearchCoords }: GameDetailProp) => {
         const { latitude, longitude } = game.court;
         handleSearchCoords(Number(latitude), Number(longitude));
       }}
-      className="hover:cursor-pointer px-4 py-2 hover:bg-gray-200"
+      className="hover:cursor-pointer p-3 bg-white rounded-lg border border-gray-200 "
     >
       <div className="flex flex-col   gap-1">
-        {game.game_status === "open" && <MatchTags {...RecruitingTag.args} />}
-        {game.game_status === "canceled" && (
-          <MatchTags {...GameCancelledTag.args} />
-        )}
-        {game.game_status === "closed" && (
-          <MatchTags {...RecruitingCompletedTag.args} />
-        )}
-        {game.game_status === "completed" && (
-          <MatchTags {...GameFinishedTag.args} />
-        )}
+        <div className="flex justify-between items-center">
+          <h2 className="font-bold text-[14px] truncate">{game.title} </h2>
 
-        <h2 className="font-bold text-[18px] truncate">{game.title} </h2>
-        <p className="text-[14px] text-gray-500">
-          {`${game.starttime.slice(0, -3)} ~ ${game.endtime.slice(0, -3)}`}
-        </p>
+          {game.game_status === "open" && <MatchTags {...RecruitingTag.args} />}
+          {game.game_status === "canceled" && (
+            <MatchTags {...GameCancelledTag.args} />
+          )}
+          {game.game_status === "closed" && (
+            <MatchTags {...RecruitingCompletedTag.args} />
+          )}
+          {game.game_status === "completed" && (
+            <MatchTags {...GameFinishedTag.args} />
+          )}
+        </div>
+
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1.5">
             <img src={groupIcon} alt="group icon" className="w-5" />
-            <p className="text-sm">
+            <p className="text-[14px] text-[##444444]">
               {game.num_of_participations} / {game.max_invitation}
             </p>
           </div>
-          <p className="text-[14px] text-[#4065F6] font-bold">
+        </div>
+        <div className="flex items-center justify-between">
+          <p className="text-[14px] text-gray-500">
+            {`${game.starttime.slice(0, -3)} ~ ${game.endtime.slice(0, -3)}`}
+          </p>
+          <p className=" text-[#4065F6] font-bold">
             {game.fee.toLocaleString("ko-KR", {
               style: "currency",
               currency: "KRW",
