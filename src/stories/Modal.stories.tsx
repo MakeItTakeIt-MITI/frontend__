@@ -1,10 +1,18 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { AlertModal } from "../components/common/AlertModal";
+import { MemoryRouter } from "react-router-dom";
 
 export default {
   title: "Modal Popups",
   component: AlertModal,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
   parameters: {
     layout: "centered",
   },

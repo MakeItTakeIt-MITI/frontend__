@@ -12,7 +12,7 @@ export interface PopModalProps {
 }
 
 export const AlertModal: React.FC<PopModalProps> = ({
-  modal,
+  modal = true,
   handleCloseModal,
   title,
   context,
