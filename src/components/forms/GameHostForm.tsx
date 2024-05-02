@@ -49,14 +49,25 @@ export const GameHostForm = ({
     setValue("enddate", endDate);
     setValue("endtime", endTime);
 
-    const emptyAddressList: string[] = [];
+    // const emptyAddressList: Array[] = [];
+
     // if address already exists, automatically add address_detail
-    getCourtInformation?.data.page_content.map((address: Court) => {
-      if (courtAddress === address.address) {
-        emptyAddressList.push(address.address_detail);
-        setShowModal(true);
-      }
-    });
+    // getCourtInformation?.data.page_content.map((address: Court) => {
+    //   if (courtAddress === address.address) {
+    //     emptyAddressList.push(address.address_detail);
+    //     setShowModal(true);
+    //   }
+    // });
+    console.log(getCourtInformation);
+
+    // console.log(courtAddress);
+    // getCourtInformation?.data.map((data) => {
+    // emptyAddressList.push({
+    //   address: data.address,
+    //   address_detail: data.address_detail,
+    // });
+    // });
+    // console.log(emptyAddressList);
 
     refetch();
   }, [
@@ -215,6 +226,18 @@ export const GameHostForm = ({
         handleFindAddress={handleClick}
         handleEraseValue={() => handleEraseValue("court.address_detail")}
         gameHostValue={watchValueLength("court.address_detail")}
+      />
+
+      <GameHostInputField
+        type="string"
+        id="title"
+        label="경기장 이름"
+        placeholder="경기 이름을 입력해주세요."
+        register_value="court.name"
+        isRequired={true}
+        register={register}
+        handleEraseValue={() => handleEraseValue("court.name")}
+        gameHostValue={watchValueLength("court.name")}
       />
 
       {/* max participants */}
