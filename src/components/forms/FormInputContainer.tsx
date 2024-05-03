@@ -96,6 +96,7 @@ export const LoginInputField: React.FC<LoginInputProps> = ({
           <button
             onClick={handleDisplayPassword}
             className="absolute right-2 top-2 bottom-2"
+            type="button"
           >
             <img
               src={displayPassword ? open : close}

@@ -17,11 +17,7 @@ export const FindEmailPage = () => {
   const [displayModal, setDisplayModal] = useState(true);
   const [phoneAuthAccess, setPhoneAuthSuccess] = useState(false);
   const [codeAuthSuccess, setCodeAuthSuccess] = useState(false);
-  const [phoneRegexError, setPhoneRegexError] = useState(false);
-  const [codeRegexError, setCodeRegexError] = useState(false);
   const [oAuthUser, isOAuthUser] = useState(false);
-
-  const [codeAuthFailureMsg, setCodeAuthFailureMsg] = useState("");
 
   const email_token = localStorage.getItem("email_auth");
 
@@ -45,26 +41,7 @@ export const FindEmailPage = () => {
 
   const handleCloseModal = () => setDisplayModal(false);
 
-  console.log(emailResponse?.status_code);
-  console.log(emailResponse?.error_code);
-
   useEffect(() => {
-    const codeRegex = /^\d{6}$/;
-
-    if (phone.length !== 11) {
-      setPhoneRegexError(true);
-    } else {
-      setPhoneRegexError(false);
-    }
-
-    if (!codeRegex.test(code)) {
-      setCodeRegexError(true);
-      setCodeAuthFailureMsg("유효한 인증번호가 아니에요.");
-    } else {
-      setCodeRegexError(false);
-      setCodeAuthFailureMsg("");
-    }
-
     if (codeResponse?.status_code === 403 && codeResponse?.error_code === 461) {
       isOAuthUser(true);
     }
@@ -74,11 +51,13 @@ export const FindEmailPage = () => {
   }, [phone, code, codeResponse?.status_code]);
 
   return (
-    <section className="laptop:my-[69px] mobile:mb-12">
+    <section className="laptop:my-[69px] mobile:m-0">
       <NavigateToPrevContainer children="회원 정보 찾기" />
       {codeResponse?.status_code === 403 &&
         codeResponse?.error_code === 461 && (
           <AlertModal
+            isLink={true}
+            path="/auth/login"
             modal={displayModal}
             handleCloseModal={handleCloseModal}
             {...KakaoAccountFound.args}
@@ -93,22 +72,22 @@ export const FindEmailPage = () => {
           />
         )}
 
-      <div className="laptop:w-[500px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-6  justify-between">
+      <div className="laptop:w-[495px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300   rounded-lg flex flex-col gap-6  justify-between">
         <div className="w-full flex items-center ">
           <Link
-            to="/find-email"
+            to="/support/find-email"
             className="flex-1  border-b border-[#4065F6] h-[44px] flex items-center justify-center text-[12px] py-3 text-[#4065F6]"
           >
             아이디 찾기
           </Link>
           <Link
-            to="/find-password"
+            to="/support/find-password"
             className="flex-1  border-b border-gray-300 h-[44px] flex items-center justify-center text-[12px] py-3"
           >
             비밀번호 찾기
           </Link>
         </div>
-        <div className="h-full w-full flex flex-col gap-4 justify-center my-auto">
+        <div className="h-full w-full flex flex-col gap-4 justify-center my-auto laptop:px-[76px] mobile:px-4">
           <div className="flex flex-col gap-2">
             <h1 className="font-bold text-[24px]">아이디 찾기</h1>
             <p className="text-[#333] text-[14px] font-[400]">
@@ -128,10 +107,12 @@ export const FindEmailPage = () => {
               <button
                 type="button"
                 onClick={handleRequestCode}
-                disabled={phoneRegexError ? true : false}
+                disabled={emailResponse?.status_code === 201}
                 style={{
-                  backgroundColor: phoneRegexError ? "#E8E8E8" : "#4065F5",
-                  color: phoneRegexError ? "#969696" : "#fff",
+                  backgroundColor:
+                    emailResponse?.status_code === 201 ? "#E8E8E8" : "#4065F5",
+                  color:
+                    emailResponse?.status_code === 201 ? "#969696" : "#fff",
                 }}
                 className="absolute right-2 top-2 bottom-2 text-[12px] p-2  rounded-lg "
               >
@@ -163,26 +144,17 @@ export const FindEmailPage = () => {
                 type="button"
                 onClick={handleSubmitCode}
                 className="absolute right-2 top-2 bottom-2 text-[12px] p-2 rounded-lg "
-                disabled={codeRegexError ? true : false}
+                disabled={codeResponse?.status_code === 200}
                 style={{
                   backgroundColor:
-                    codeRegexError || !phoneAuthAccess ? "#E8E8E8" : "#4065F5",
-                  color:
-                    codeRegexError || !phoneAuthAccess ? "#969696" : "#fff",
+                    codeResponse?.status_code === 200 ? "#E8E8E8" : "#4065F5",
+                  color: codeResponse?.status_code === 200 ? "#969696" : "#fff",
                 }}
               >
                 인증번호 확인
               </button>
             </div>
-            {/* {codeStatus === 200 && (
-              <SuccessMessage children="인증번호가 일치해요." />
-            )} */}
-            {/* {codeStatus === 102 && (
-              <ErrorMessage children="유효한 인증번호가 아니에요." />
-            )} */}
-            {code.length >= 6 && codeRegexError && (
-              <ErrorMessage children={codeAuthFailureMsg} />
-            )}
+
             {codeResponse?.status_code === 200 && (
               <SuccessMessage children="인증번호가 일치해요." />
             )}
@@ -199,43 +171,50 @@ export const FindEmailPage = () => {
               codeResponse?.error_code === 462 && (
                 <ErrorMessage children="요청 횟수를 초과하셨어요." />
               )}
+
             {codeResponse?.status_code === 400 &&
               codeResponse?.error_code === 480 && (
                 <ErrorMessage children="요청 횟수를 초과하셨어요." />
               )}
           </form>
         </div>
-        {oAuthUser ? (
-          <Link to="/user-info-oauth">
-            <button
-              disabled={!codeAuthSuccess || !phoneAuthAccess ? true : false}
-              style={{
-                backgroundColor:
-                  !codeAuthSuccess || !phoneAuthAccess ? "#E8E8E8" : "#4065F5",
-                color:
-                  !codeAuthSuccess || !phoneAuthAccess ? "#969696" : "#fff",
-              }}
-              className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg"
-            >
-              이메일 찾기
-            </button>
-          </Link>
-        ) : (
-          <Link to="/user-info-email">
-            <button
-              disabled={!codeAuthSuccess || !phoneAuthAccess ? true : false}
-              style={{
-                backgroundColor:
-                  !codeAuthSuccess || !phoneAuthAccess ? "#E8E8E8" : "#4065F5",
-                color:
-                  !codeAuthSuccess || !phoneAuthAccess ? "#969696" : "#fff",
-              }}
-              className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg"
-            >
-              이메일 찾기
-            </button>
-          </Link>
-        )}
+        <div className="laptop:px-[76px] mobile:px-4 laptop:pb-[74px] mobile:pb-0">
+          {oAuthUser ? (
+            <Link to="/support/user-info-oauth">
+              <button
+                disabled={!codeAuthSuccess || !phoneAuthAccess ? true : false}
+                style={{
+                  backgroundColor:
+                    !codeAuthSuccess || !phoneAuthAccess
+                      ? "#E8E8E8"
+                      : "#4065F5",
+                  color:
+                    !codeAuthSuccess || !phoneAuthAccess ? "#969696" : "#fff",
+                }}
+                className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg "
+              >
+                이메일 찾기
+              </button>
+            </Link>
+          ) : (
+            <Link to="/support/user-info-email">
+              <button
+                disabled={!codeAuthSuccess || !phoneAuthAccess ? true : false}
+                style={{
+                  backgroundColor:
+                    !codeAuthSuccess || !phoneAuthAccess
+                      ? "#E8E8E8"
+                      : "#4065F5",
+                  color:
+                    !codeAuthSuccess || !phoneAuthAccess ? "#969696" : "#fff",
+                }}
+                className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg "
+              >
+                이메일 찾기
+              </button>
+            </Link>
+          )}
+        </div>
       </div>
     </section>
   );

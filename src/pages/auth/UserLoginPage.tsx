@@ -8,10 +8,10 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 
 export const UserLoginPage = () => {
   return (
-    <section>
+    <section className="laptop:my-[69px] mobile:mb-12">
       <NavigateToPrevContainer children="" />
 
-      <div className="relative laptop:w-[500px]  laptop:h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col laptop:justify-center gap-10 mobile:justify-between">
+      <div className="relative laptop:w-[495px]  min-h-[735px]  mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-[50px] laptop:px-[76px] mobile:px-4 py-9 rounded-lg flex flex-col laptop:justify-center gap-[35px] mobile:justify-between">
         <div className=" flex flex-col gap-2 justify-center items-center">
           <img src={mitiLogo} alt="miti logo" className="w-[88px]" />
           <h5 className="text-[14px] text-[#1c1c1c]">Make it, Take it!</h5>
@@ -27,7 +27,7 @@ export const UserLoginPage = () => {
               <p className="">아직 회원이 아니신가요? </p>
               <Link
                 role="to-signup"
-                to="/auth/signup-option"
+                to="/auth/signup"
                 className="text-[#4065F6] hover:font-bold flex gap-1 items-center "
               >
                 회원가입하기
@@ -37,9 +37,9 @@ export const UserLoginPage = () => {
           </div>
         </div>
         <div className="absolute  w-full left-0 right-0 laptop:bottom-8  mobile:bottom-0 flex  justify-center  gap-4 text-[#8c8c8c] text-[13px] ">
-          <Link to="/customer-service">고객센터</Link>
+          <Link to="/support/customer-service">고객센터</Link>
           <p>|</p>
-          <Link to="/find-email">
+          <Link to="/support/find-email">
             <button>ID / PW를 잊으셨나요?</button>
           </Link>
         </div>

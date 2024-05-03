@@ -4,35 +4,28 @@ import { LoginField } from "../../interface/usersInterface";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginSchema } from "../../modals/useLoginSchema";
 
-import closeIcon from "../../assets/x_button.svg";
-import open from "../../assets/clarity_eye-show-line.svg";
-import close from "../../assets/clarity_eye-hide-line.svg";
 import { useState } from "react";
-import { ErrorMessage } from "../../components/common/ErrorMessage";
 import { useAuthorizeExistingUserMutation } from "../../hooks/auth/useAuthorizeExistingUserMutation";
+import { LoginInputField } from "../../components/forms/FormInputContainer";
+import { ErrorMessage } from "../../components/common/ErrorMessage";
 
 export const NotVerifiedInputDetailPage = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
-  const [errorResponseMsg, setErrorResponseMsg] = useState("");
 
   const {
     register,
     handleSubmit,
-    watch,
-    setValue,
     getValues,
-    formState: { errors },
     formState,
+    formState: { errors },
   } = useForm<LoginField>({
     mode: "onBlur",
     resolver: zodResolver(useLoginSchema),
   });
 
-  const { mutate: authorize } =
-    useAuthorizeExistingUserMutation(setErrorResponseMsg);
-  const emailValue = watch("email");
+  const { mutate: authorize, data: authenticateUserResponse } =
+    useAuthorizeExistingUserMutation();
 
-  const handleEraseInput = () => setValue("email", "");
   const handleDisplayPassword = () => setDisplayPassword(!displayPassword);
   const handleSubmitForm = () => {
     const data = { email: getValues("email"), password: getValues("password") };
@@ -40,102 +33,70 @@ export const NotVerifiedInputDetailPage = () => {
     authorize(data);
   };
 
+  console.log(authenticateUserResponse?.status_code);
+  console.log(authenticateUserResponse?.error_code);
+
   return (
-    <section className="laptop:my-4 mobile:my-0   h-full ">
+    <section className="laptop:my-[69px] mobile:m-0">
       <NavigateToPrevContainer children="" />
 
-      <div className="laptop:w-[500px] laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-6  justify-between">
-        <div className="h-full w-full flex flex-col gap-4 justify-center my-auto">
+      <div className="laptop:w-[495px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300   rounded-lg flex flex-col gap-6  justify-between">
+        <div className="h-full w-full flex flex-col gap-4 justify-center my-auto laptop:px-[76px] mobile:px-4">
           <div className="flex flex-col gap-2">
-            <h1 className="font-bold text-[24px]">로그인 정보 입력</h1>
+            <h1 className="font-bold text-[24px]">사용자 인증</h1>
           </div>
           <form className="flex flex-col gap-2">
-            <div className="relative space-y-2">
-              <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
-                이메일
-              </label>
-              <div className="relative">
-                <input
-                  type="email"
-                  id="email"
-                  // role={role}
-                  className=" h-[58px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-                  placeholder="이메일을 입력해주세요"
-                  {...register("email", {
-                    required: true,
-                  })}
-                />
-
-                {emailValue && (
-                  <button
-                    type="button"
-                    className="absolute right-2 top-4 hover:cursor-pointer"
-                    onClick={handleEraseInput}
-                  >
-                    <img
-                      src={closeIcon}
-                      alt="erase input"
-                      className="w-[24px]   "
-                    />
-                  </button>
-                )}
-              </div>
+            <div className="space-y-2">
+              <LoginInputField
+                type="email"
+                id="email"
+                label="이메일"
+                placeholder="이메일을 입력해주세요."
+                register_value="email"
+                isRequired={true}
+                register={register}
+              />{" "}
               {errors.email && (
                 <ErrorMessage children="이메일 형식으로 입력해주세요." />
               )}
             </div>
-            <div className="relative space-y-2">
-              <label htmlFor="email" className="text-[12px] text-[#1c1c1c]">
-                비밀번호
-              </label>
-              <div className="relative">
-                <input
-                  type={displayPassword ? "text" : "password"}
-                  id="password"
-                  // role={role}
-                  className=" h-[58px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-                  placeholder="비밀번호를 입력해주세요"
-                  {...register("password", {
-                    required: true,
-                  })}
-                />
-
-                <button
-                  type="button"
-                  role="show-password-btn"
-                  onClick={handleDisplayPassword}
-                  className="absolute right-2 top-4 hover:cursor-pointer"
-                >
-                  <img
-                    src={`${displayPassword ? open : close}`}
-                    alt="hide password"
-                    className="w-[24px] cursor-pointer "
-                  />
-                </button>
-              </div>
+            <div className="space-y-2">
+              <LoginInputField
+                type={displayPassword ? "text" : "password"}
+                id="password"
+                label="비밀번호"
+                placeholder="비밀번호를 입력해주세요."
+                isRequired={false}
+                handleDisplayPassword={handleDisplayPassword}
+                passwordImg={displayPassword}
+                register_value="password"
+                isPasswordField={true}
+                register={register}
+              />
+              {authenticateUserResponse?.status_code === 401 &&
+                authenticateUserResponse?.error_code === 140 && (
+                  <ErrorMessage children="일치하는 사용자가 없습니다." />
+                )}
               {errors.password && (
                 <ErrorMessage children="올바른 비밀번호 양식이 아니에요." />
               )}
-              {errorResponseMsg && <ErrorMessage children={errorResponseMsg} />}
             </div>
           </form>
         </div>
-        <button
-          onClick={handleSubmit(handleSubmitForm)}
-          disabled={formState.isValid ? false : true}
-          style={{
-            backgroundColor: formState.isValid ? "#4065F6" : "#E8E8E8",
-            color: formState.isValid ? "#fff" : "#969696",
-          }}
-          className=" h-[48px] w-full rounded-lg"
-        >
-          인증 메세지 전송
-        </button>
+        <div className="laptop:px-[76px] mobile:px-4 laptop:pb-[74px] mobile:pb-0">
+          <button
+            onClick={handleSubmit(handleSubmitForm)}
+            disabled={formState.isValid ? false : true}
+            style={{
+              backgroundColor: formState.isValid ? "#4065F6" : "#E8E8E8",
+              color: formState.isValid ? "#fff" : "#969696",
+            }}
+            className=" h-[48px] w-full rounded-lg"
+          >
+            인증번호 전송
+          </button>
+        </div>
       </div>
     </section>
   );
 };
-
-{
-  /* <FormInput register={register} {...EmailInputField.args} /> */
-}

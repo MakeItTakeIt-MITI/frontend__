@@ -32,7 +32,6 @@ import { SMSVerifiedSuccessPage } from "./pages/auth/SMSVerifiedSuccessPage.tsx"
 import { FindPasswordPage } from "./pages/auth/FindPasswordPage.tsx";
 import { FindPasswordResetPage } from "./pages/auth/FindPasswordResetPage.tsx";
 import { FindEmailDisplayPage } from "./pages/auth/FindEmailDisplayPage.tsx";
-import { FindEmailOAuthDisplayPage } from "./pages/auth/FindEmailOAuthDisplayPage.tsx";
 import { HostGamePage } from "./pages/games/HostGamePage.tsx";
 import { HostGameHistoryPage } from "./pages/games/HostGameHistoryPage.tsx";
 import { GuestGameHistoryPage } from "./pages/games/GuestGameHistoryPage.tsx";
@@ -66,6 +65,15 @@ const router = createBrowserRouter([
           {
             path: "authenticate-user-info",
             element: <NotVerifiedInputDetailPage />,
+          },
+
+          {
+            path: "sms-authentication",
+            element: <SMSAuthenticationPage />,
+          },
+          {
+            path: "sms-authentication-verified",
+            element: <SMSVerifiedSuccessPage />,
           },
           {
             path: "signup-option",
@@ -104,37 +112,25 @@ const router = createBrowserRouter([
             path: "customer-service",
             element: <CustomerServicePage />,
           },
+          {
+            path: "find-email",
+            element: <FindEmailPage />,
+          },
+          {
+            path: "user-info-email",
+            element: <FindEmailDisplayPage />,
+          },
+          {
+            path: "find-password",
+            element: <FindPasswordPage />,
+          },
+          {
+            path: "reset-password",
+            element: <FindPasswordResetPage />,
+          },
         ],
       },
 
-      {
-        path: "/sms-authentication",
-        element: <SMSAuthenticationPage />,
-      },
-      {
-        path: "/sms-authentication-verified",
-        element: <SMSVerifiedSuccessPage />,
-      },
-      {
-        path: "/find-email",
-        element: <FindEmailPage />,
-      },
-      {
-        path: "/user-info-email",
-        element: <FindEmailDisplayPage />,
-      },
-      {
-        path: "/user-info-oauth",
-        element: <FindEmailOAuthDisplayPage />,
-      },
-      {
-        path: "/find-password",
-        element: <FindPasswordPage />,
-      },
-      {
-        path: "/reset-password",
-        element: <FindPasswordResetPage />,
-      },
       {
         path: "/all-items",
         element: <MobileViewItemsTab />,
