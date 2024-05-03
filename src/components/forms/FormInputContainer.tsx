@@ -121,10 +121,10 @@ export const RegisterInputField: React.FC<RegisterInputProps> = ({
   handleValidation,
   isValid,
 }) => {
+  console.log(isValid);
   return (
     <div className="space-y-2">
       <FormLabel id={id} children={label} />
-
       <div className="relative">
         <input
           type={type}
