@@ -2,48 +2,37 @@ import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { useEffect, useState } from "react";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
-import { useFindEmailMutation } from "../../hooks/auth/useFindEmailMutation";
+import { useFindEmailPhoneMutation } from "../../hooks/auth/useFindEmailPhoneMutation";
 import { SuccessMessage } from "../../components/common/SuccessMessage";
 import { useRequestEmailCode } from "../../hooks/auth/useRequestEmailCode";
-import { DisplayModal } from "../../components/common/DisplayModal";
+import { AlertModal } from "../../components/common/AlertModal";
+import {
+  KakaoAccountFound,
+  NotFoundInactiveUser,
+} from "../../stories/Modal.stories";
 
 export const FindEmailPage = () => {
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
-  const [modal, setModal] = useState(false);
-
+  const [displayModal, setDisplayModal] = useState(true);
   const [phoneAuthAccess, setPhoneAuthSuccess] = useState(false);
   const [codeAuthSuccess, setCodeAuthSuccess] = useState(false);
-
-  const [statusCode, setStatusCode] = useState(0);
-  const [codeStatus, setCodeStatus] = useState(0);
-
   const [phoneRegexError, setPhoneRegexError] = useState(false);
   const [codeRegexError, setCodeRegexError] = useState(false);
-
   const [oAuthUser, isOAuthUser] = useState(false);
-  const [deletedAccount, isDeletedAccount] = useState(false);
 
-  // const [phoneAuthStatusMsg, setPhoneAuthStatusMsg] = useState("");
   const [codeAuthFailureMsg, setCodeAuthFailureMsg] = useState("");
-
-  if (codeStatus > 1) {
-    console.log(codeStatus);
-  }
 
   const email_token = localStorage.getItem("email_auth");
 
-  const { mutate } = useFindEmailMutation(setPhoneAuthSuccess, setStatusCode);
-  const { mutate: codeMutate } = useRequestEmailCode(
+  const { mutate, data: emailResponse } =
+    useFindEmailPhoneMutation(setPhoneAuthSuccess);
+  const { mutate: codeMutate, data: codeResponse } = useRequestEmailCode(
     email_token,
-    setCodeStatus,
-    setCodeAuthSuccess,
-    isOAuthUser,
-    isDeletedAccount
+    setCodeAuthSuccess
   );
 
   const handleRequestCode = () => {
-    console.log(phone);
     const phoneData = { phone: phone };
     mutate(phoneData);
   };
@@ -54,9 +43,10 @@ export const FindEmailPage = () => {
     console.log(code);
   };
 
-  const handleCloseModal = () => {
-    setModal(false);
-  };
+  const handleCloseModal = () => setDisplayModal(false);
+
+  console.log(emailResponse?.status_code);
+  console.log(emailResponse?.error_code);
 
   useEffect(() => {
     const codeRegex = /^\d{6}$/;
@@ -75,23 +65,34 @@ export const FindEmailPage = () => {
       setCodeAuthFailureMsg("");
     }
 
-    if (deletedAccount) {
-      setModal(true);
+    if (codeResponse?.status_code === 403 && codeResponse?.error_code === 461) {
+      isOAuthUser(true);
     }
-  }, [phone, code, deletedAccount]);
+    if (codeResponse?.status_code === 403) {
+      setDisplayModal(true);
+    }
+  }, [phone, code, codeResponse?.status_code]);
 
   return (
-    <section className="laptop:my-4 mobile:my-0 h-full ">
+    <section className="laptop:my-[69px] mobile:mb-12">
       <NavigateToPrevContainer children="회원 정보 찾기" />
-      {deletedAccount && modal && (
-        <DisplayModal
-          modal={modal}
-          closeModal={handleCloseModal}
-          title="탈퇴한 사용자입니다."
-          titleTwo="고객센터에 문의해주세요."
-          content="확인"
-        />
-      )}
+      {codeResponse?.status_code === 403 &&
+        codeResponse?.error_code === 461 && (
+          <AlertModal
+            modal={displayModal}
+            handleCloseModal={handleCloseModal}
+            {...KakaoAccountFound.args}
+          />
+        )}
+      {codeResponse?.status_code === 403 &&
+        codeResponse?.error_code === 460 && (
+          <AlertModal
+            modal={displayModal}
+            handleCloseModal={handleCloseModal}
+            {...NotFoundInactiveUser.args}
+          />
+        )}
+
       <div className="laptop:w-[500px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-6  justify-between">
         <div className="w-full flex items-center ">
           <Link
@@ -137,10 +138,15 @@ export const FindEmailPage = () => {
                 인증번호 전송
               </button>
             </div>
-            {statusCode === 404 && !phoneAuthAccess && (
-              <ErrorMessage children="해당 번호로 가입한 사용자가 없습니다." />
-            )}
-            {statusCode === 201 && phoneAuthAccess && (
+            {emailResponse?.status_code === 404 &&
+              emailResponse?.error_code === 140 && (
+                <ErrorMessage children="해당 번호로 가입한 사용자가 없습니다." />
+              )}
+            {emailResponse?.status_code === 400 &&
+              emailResponse?.error_code === 101 && (
+                <ErrorMessage children="올바른 양식의 전화번호가 아니에요." />
+              )}
+            {emailResponse?.status_code === 201 && (
               <SuccessMessage children="인증번호가 발송되었습니다." />
             )}
 
@@ -168,15 +174,35 @@ export const FindEmailPage = () => {
                 인증번호 확인
               </button>
             </div>
-            {codeStatus === 200 && (
+            {/* {codeStatus === 200 && (
               <SuccessMessage children="인증번호가 일치해요." />
-            )}
-            {codeStatus === 102 && (
+            )} */}
+            {/* {codeStatus === 102 && (
               <ErrorMessage children="유효한 인증번호가 아니에요." />
-            )}
+            )} */}
             {code.length >= 6 && codeRegexError && (
               <ErrorMessage children={codeAuthFailureMsg} />
             )}
+            {codeResponse?.status_code === 200 && (
+              <SuccessMessage children="인증번호가 일치해요." />
+            )}
+            {codeResponse?.status_code === 400 &&
+              codeResponse?.error_code === 102 && (
+                <ErrorMessage children="유효한 인증번호가 아니에요." />
+              )}
+
+            {codeResponse?.status_code === 400 &&
+              codeResponse?.error_code === 420 && (
+                <ErrorMessage children="인증 유효시간이 지났어요." />
+              )}
+            {codeResponse?.status_code === 403 &&
+              codeResponse?.error_code === 462 && (
+                <ErrorMessage children="요청 횟수를 초과하셨어요." />
+              )}
+            {codeResponse?.status_code === 400 &&
+              codeResponse?.error_code === 480 && (
+                <ErrorMessage children="요청 횟수를 초과하셨어요." />
+              )}
           </form>
         </div>
         {oAuthUser ? (

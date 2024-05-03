@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { FindEmailField } from "../../interface/user-edit-interface";
 import { requestLostEmail } from "../../api/auth";
 
-export const useFindEmailMutation = (
+export const useFindEmailPhoneMutation = (
   setPhoneAuthSuccess: (arg: boolean) => void,
   setStatusCode: (arg: number) => void
 ) => {
@@ -10,21 +10,12 @@ export const useFindEmailMutation = (
     mutationKey: ["find_email"],
     mutationFn: (data: FindEmailField) => requestLostEmail(data),
     onSuccess: (response) => {
-      console.log(response);
-      const email_auth = response.data.authentication_token;
-      localStorage.setItem("email_auth", email_auth);
-
-      // 201
       if (response.status_code === 201) {
-        console.log(response);
         setStatusCode(201);
+        const email_auth = response.data.authentication_token;
+        localStorage.setItem("email_auth", email_auth);
         return setPhoneAuthSuccess(true);
-      } else if (response.status_code === 404) {
-        setStatusCode(404);
-        return setPhoneAuthSuccess(false);
       }
-
-      // 404
     },
   });
 };
