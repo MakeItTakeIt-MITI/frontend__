@@ -4,7 +4,7 @@ interface ErrorProp {
   children: string;
 }
 
-export const ErrorMessage = ({ children }: ErrorProp) => {
+export const ErrorMessage: React.FC<ErrorProp> = ({ children }) => {
   return (
     <div className="flex gap-2 items-center">
       <img src={errorIcon} alt="error icon" />

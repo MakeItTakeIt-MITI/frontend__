@@ -1,10 +1,11 @@
+import React from "react";
 import successIcon from "../../assets/alert_check.svg";
 
 interface SuccessProp {
   children: string;
 }
 
-export const SuccessMessage = ({ children }: SuccessProp) => {
+export const SuccessMessage: React.FC<SuccessProp> = ({ children }) => {
   return (
     <div className="flex gap-2 items-center">
       <img src={successIcon} alt="success icon" />
