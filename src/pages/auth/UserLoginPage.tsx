@@ -4,7 +4,7 @@ import mitiLogo from "../../assets/MITI_logo.svg";
 import chevron_right from "../../assets/Chevron_Right_MD.svg";
 import { KakaoLoginButton } from "../../components/kakao/KakaoLoginButton";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
-import { useState } from "react";
+// import { useState } from "react";
 
 export const UserLoginPage = () => {
   return (
