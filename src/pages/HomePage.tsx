@@ -52,7 +52,8 @@ export const HomePage = () => {
 
   return (
     <main className="laptop:mb-[69px] mobile:my-0">
-      <div className="  flex flex-col gap-6  w-full laptop:px-[13rem]  mx-auto  max-w-[90rem] ">
+      {/* <div className="  flex flex-col gap-6  w-full laptop:px-[13rem]  mx-auto  max-w-[90rem] "> */}
+      <div className="  flex flex-col gap-6  w-full   mx-auto  max-w-[1024px] ">
         <HeroCarousel />
         <div className="flex   tablet:flex-row mobile:flex-col tablet:gap-10 mobile:gap-4 mobile:-mt-4 ">
           <div className="space-y-4">
