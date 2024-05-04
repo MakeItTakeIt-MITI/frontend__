@@ -57,7 +57,7 @@ MyReviews.args = {
 };
 export const EditProfile = Template.bind({});
 EditProfile.args = {
-  path: "/mypage",
+  path: "/user-profile/edit",
   context: "🏀 프로필 수정",
 };
 export const Faq = Template.bind({});

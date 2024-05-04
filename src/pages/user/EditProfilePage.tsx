@@ -12,6 +12,12 @@ import { useState } from "react";
 import { useCheckNicknameDuplicateMutation } from "../../hooks/auth/useCheckNicknameDuplicateMutation";
 import { SuccessMessage } from "../../components/common/SuccessMessage";
 import { ErrorMessage } from "../../components/common/ErrorMessage";
+import { FormLabel } from "../../components/forms/FormLabel";
+
+/**
+ *
+ * TODO
+ */
 
 export const EditProfilePage = () => {
   const [verifyNicknameStatus, setVerifyNicknameStatus] = useState(false);
@@ -73,41 +79,68 @@ export const EditProfilePage = () => {
         {/* nickname field */}
         <div className="flex flex-col justify-between gap-10">
           <div className="flex flex-col gap-1">
-            <div className="relative flex flex-col gap-2">
-              <label htmlFor="nickname" className="text-[#999]">
-                닉네임
-              </label>
-              <input
-                type="text"
-                id="nickname"
-                role="input-nickname"
-                readOnly={verifyNicknameStatus ? true : false}
-                className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full relative"
-                placeholder={data?.data.nickname}
-                {...register("nickname")}
-              />
-              <button
-                className="text-sm absolute right-2 bottom-2 ml-2 w-[81px] rounded-xl tablet:mx-auto h-[36px] "
-                type="button"
-                role="change-nickname"
-                disabled={verifyNicknameStatus ? true : false}
-                style={{
-                  backgroundColor: !verifyNicknameStatus
-                    ? "#4065F0"
-                    : "#f7f7f7",
-                  color: !verifyNicknameStatus ? "#fff" : "#d9d9d9",
-                }}
-                onClick={handleValidateNickname}
-              >
-                중복확인
-              </button>
+            <div className="space-y-2">
+              <FormLabel id="nickname" children="닉네임" />
+              <div className="relative">
+                <input
+                  type="text"
+                  id="nickname"
+                  // readOnly={isValid ? true : false}
+                  className="input-primary"
+                  placeholder={data?.data.nickname}
+                  {...register("nickname")}
+                />
+
+                <button
+                  onClick={handleValidateNickname}
+                  type="button"
+                  style={{
+                    backgroundColor: !verifyNicknameStatus
+                      ? "#4065F0"
+                      : "#f7f7f7",
+                    color: !verifyNicknameStatus ? "#fff" : "#d9d9d9",
+                  }}
+                  className="w-[81px] absolute right-4 bottom-[11px] top-[11px] text-[12px] text-white  rounded-lg"
+                >
+                  중복확인
+                </button>
+              </div>
             </div>
-            {nicknameVerifyMsg.length > 2 && verifyNicknameStatus && (
+            {/* <div className="relative space-y-2">
+              <FormLabel id="nickname" children="닉네임" />
+              <div>
+                <input
+                  type="text"
+                  id="nickname"
+                  role="input-nickname"
+                  readOnly={verifyNicknameStatus ? true : false}
+                  className="w-[81px] absolute right-4 bottom-[11px] top-[11px] text-[12px] text-white  rounded-lg"
+                  placeholder={data?.data.nickname}
+                  {...register("nickname")}
+                />
+                <button
+                  className="text-sm absolute right-2 bottom-2 ml-2 w-[81px] rounded-xl tablet:mx-auto h-[36px] "
+                  type="button"
+                  role="change-nickname"
+                  disabled={verifyNicknameStatus ? true : false}
+                  style={{
+                    backgroundColor: !verifyNicknameStatus
+                      ? "#4065F0"
+                      : "#f7f7f7",
+                    color: !verifyNicknameStatus ? "#fff" : "#d9d9d9",
+                  }}
+                  onClick={handleValidateNickname}
+                >
+                  중복확인
+                </button>
+              </div>
+            </div> */}
+            {/* {nicknameVerifyMsg.length > 2 && verifyNicknameStatus && (
               <SuccessMessage children={nicknameVerifyMsg} />
             )}
             {nicknameVerifyMsg.length > 2 && !verifyNicknameStatus && (
               <ErrorMessage children={nicknameVerifyMsg} />
-            )}
+            )} */}
           </div>
 
           {/* passworld field */}
