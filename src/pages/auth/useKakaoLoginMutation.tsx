@@ -25,6 +25,20 @@ export const useKakaoLoginMutation = () => {
         setUserId(response.data.id);
         navigate("/");
       }
+
+      if (response.status_code === 400) {
+        alert("토큰 유효성 검증 실패");
+      } else if (response.status_code === 403 && response.error_code === 360) {
+        alert("타 oauth 서비스 사용자");
+      } else if (response.status_code === 403 && response.error_code === 361) {
+        alert("일반 로그인 사용자");
+      } else if (response.status_code === 404) {
+        alert("지원하지 않는 oAuth 서비스");
+      } else if (response.status_code === 500 && response.error_code === 40) {
+        alert("카카오 인증실패");
+      } else if (response.status_code === 403 && response.error_code === 461) {
+        alert("카카오 사용자 정보 변환 실패");
+      }
     },
   });
 };
