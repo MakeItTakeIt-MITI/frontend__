@@ -28,7 +28,6 @@ axiosUrl.interceptors.request.use((config) => {
 axiosUrl.interceptors.response.use(
     (response) => response,
     async (error) => {
-
         localStorage.removeItem('accessToken')
 
         const statusCode = error.response.data.status_code
@@ -49,7 +48,9 @@ axiosUrl.interceptors.response.use(
                 const { access, refresh } = response.data.data
                 localStorage.setItem('accessToken', access)
                 localStorage.setItem('refreshToken', refresh)
-                window.location.reload()
+                if (!localStorage.getItem("accessToken")) {
+                    window.location.reload()
+                }
                 console.log(response, 'succeed in refreshing token');
                 const originalRequest = error.config;
                 originalRequest.headers.Authorization = `Bearer ${access}`;

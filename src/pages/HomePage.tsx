@@ -67,7 +67,7 @@ export const HomePage = () => {
               className=" w-[371px] p-3  mobile:hidden tablet:block space-y-3 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll"
             >
               {!displayCollapsedList &&
-                allGamesData?.data.map((game: GameDetailField) => {
+                allGamesData?.data?.map((game: GameDetailField) => {
                   return (
                     <div key={game.id}>
                       <MatchItem
@@ -77,7 +77,6 @@ export const HomePage = () => {
                     </div>
                   );
                 })}
-              {/* // /> */}
               {!displayCollapsedList ||
                 (allGamesData?.data.length < 1 && (
                   <NoGamesAvailableBox data={allGamesData} />

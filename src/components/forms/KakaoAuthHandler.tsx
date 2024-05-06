@@ -1,22 +1,22 @@
-// import { useEffect } from "react";
-// import { useKakaoLoginQuery } from "../../hooks/auth/useOAuthLoginMutation";
-
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useKakaoLoginMutation } from "../../pages/auth/useKakaoLoginMutation";
-import { useNavigate } from "react-router-dom";
 import { LoadingPage } from "../../pages/LoadingPage";
+import { AlertModal } from "../common/AlertModal";
+import { NotFoundPage } from "../../pages/NotFoundPage";
+import { KakaoAuthFailure, NotKakaoUser } from "../../stories/Modal.stories";
 
 export const KakaoAuthHandler = () => {
+  const [displayModal, setDisplayModal] = useState(false);
   const AUTHORIZE_CODE = new URL(document.location.toString()).searchParams.get(
     "code"
   );
   const GRANT_TYPE: string = "authorization_code";
   const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
   const REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
-  const navigate = useNavigate();
 
-  const { mutate: kakaoLogin } = useKakaoLoginMutation();
+  const { mutate: kakaoLogin, data, isError } = useKakaoLoginMutation();
+  const handleCloseModal = () => setDisplayModal(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,12 +39,43 @@ export const KakaoAuthHandler = () => {
         const accessToken = { access_token: response.data.access_token };
         kakaoLogin(accessToken);
       } catch (error) {
-        navigate("/");
+        console.log(error);
       }
     };
 
     fetchData();
   }, []);
 
-  return <LoadingPage />;
+  if (isError) {
+    return <NotFoundPage />;
+  }
+
+  return (
+    <>
+      {data?.status_code === 400 && (
+        <AlertModal
+          modal={displayModal}
+          handleCloseModal={handleCloseModal}
+          isLink={true}
+          path="/auth/login"
+        />
+      )}{" "}
+      {data?.status_code === 403 && data?.error_code === 361 && (
+        <AlertModal
+          modal={displayModal}
+          handleCloseModal={handleCloseModal}
+          {...NotKakaoUser.args}
+        />
+      )}
+      {(data?.status_code === 500 && data?.error_code === 460) ||
+        (data?.error_code === 461 && (
+          <AlertModal
+            modal={displayModal}
+            handleCloseModal={handleCloseModal}
+            {...KakaoAuthFailure.args}
+          />
+        ))}
+      <LoadingPage />
+    </>
+  );
 };

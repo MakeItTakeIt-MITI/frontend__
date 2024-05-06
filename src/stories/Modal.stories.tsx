@@ -52,6 +52,28 @@ KakaoAccountFound.args = {
   context: "카카오 계정을 사용하여 가입하셨습니다.",
   contextTwo: "카카오 로그인을 통해 로그인해주세요.",
   buttonContext: "확인",
+  isLink: true,
+  path: "/auth/login",
+};
+
+export const NotKakaoUser = Template.bind({});
+KakaoAccountFound.args = {
+  title: "카카오 로그인 실패",
+  context: "카카오 계정을 사용하여 가입하지 않았습니다.",
+  contextTwo: "일반 로그인을 통해 로그인해주세요.",
+  buttonContext: "확인",
+  isLink: true,
+  path: "/auth/login",
+};
+
+export const KakaoAuthFailure = Template.bind({});
+KakaoAccountFound.args = {
+  title: "카카오 로그인 실패",
+  context: "카카오 로그인 정보를 받아오지 못했습니다.",
+  contextTwo: "고객센터에 문의해주세요",
+  buttonContext: "확인",
+  isLink: true,
+  path: "/auth/login",
 };
 
 export const KakaoPaymentFailure = Template.bind({});

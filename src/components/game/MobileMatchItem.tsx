@@ -17,8 +17,6 @@ export const MobileMatchItem = ({
   game,
   handleSearchCoords,
 }: MobileMatchItemProp) => {
-  console.log(game);
-
   return (
     <div
       onClick={() => {
