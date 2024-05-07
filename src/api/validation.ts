@@ -13,10 +13,9 @@ export const userValidation = async (data: ValidationField) => {
 export const updateUserInfo = async (userId: number | null, data: UserEditField) => {
     try {
         const response = await axiosUrl.patch(`/users/${userId}`, data)
-        return response
+        return response.data
     }
     catch (error) {
         throw new Error
-
     }
 }

@@ -10,9 +10,15 @@ import { UserEditField } from "../../interface/user-edit-interface";
 import { useUpdateUserMutation } from "../../hooks/auth/useUpdateUserMutation";
 import { useState } from "react";
 import { useCheckNicknameDuplicateMutation } from "../../hooks/auth/useCheckNicknameDuplicateMutation";
-import { SuccessMessage } from "../../components/common/SuccessMessage";
-import { ErrorMessage } from "../../components/common/ErrorMessage";
+
 import { FormLabel } from "../../components/forms/FormLabel";
+import { ErrorMessage } from "../../components/common/ErrorMessage";
+import {
+  ExistingNickname,
+  NicknameRegexFailure,
+} from "../../stories/ErrorMessage.stories";
+import { SuccessMessage } from "../../components/common/SuccessMessage";
+import { NicknameAllowed } from "../../stories/SuccessMessage.stories";
 
 /**
  *
@@ -20,9 +26,6 @@ import { FormLabel } from "../../components/forms/FormLabel";
  */
 
 export const EditProfilePage = () => {
-  const [verifyNicknameStatus, setVerifyNicknameStatus] = useState(false);
-  const [nicknameVerifyMsg, setNicknameVerifyMsg] = useState("");
-
   const [passVerification, setPassVerification] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
@@ -32,16 +35,11 @@ export const EditProfilePage = () => {
   const { register, handleSubmit, getValues, formState } =
     useForm<UserEditField>();
 
-  const { mutate: updateUserInfoMutation } = useUpdateUserMutation(
-    userId,
-    setPassVerification,
-    setNewPassword
-  );
+  const { mutate: updateUserInfoMutation, updateUserResponse } =
+    useUpdateUserMutation(userId);
 
-  const { mutate: verifyNickname } = useCheckNicknameDuplicateMutation(
-    setVerifyNicknameStatus,
-    setNicknameVerifyMsg
-  );
+  const { mutate: verifyNickname, data: nicknameDuplicateResponse } =
+    useCheckNicknameDuplicateMutation();
 
   const removeEmptyFields = (data: UserEditField) => {
     Object.entries(data).forEach(([key, value]) => {
@@ -64,6 +62,8 @@ export const EditProfilePage = () => {
     verifyNickname(nicknameData);
   };
 
+  console.log(updateUserResponse);
+
   return (
     <section className="laptop:my-4 mobile:my-0">
       <NavigateToPrevContainer children="내 정보" />
@@ -85,7 +85,7 @@ export const EditProfilePage = () => {
                 <input
                   type="text"
                   id="nickname"
-                  // readOnly={isValid ? true : false}
+                  autoComplete="disabled"
                   className="input-primary"
                   placeholder={data?.data.nickname}
                   {...register("nickname")}
@@ -95,59 +95,37 @@ export const EditProfilePage = () => {
                   onClick={handleValidateNickname}
                   type="button"
                   style={{
-                    backgroundColor: !verifyNicknameStatus
-                      ? "#4065F0"
-                      : "#f7f7f7",
-                    color: !verifyNicknameStatus ? "#fff" : "#d9d9d9",
+                    backgroundColor: nicknameDuplicateResponse?.data.nickname
+                      .is_duplicated
+                      ? "#f7f7f7"
+                      : "#4065F0",
+                    color: nicknameDuplicateResponse?.data.nickname
+                      .is_duplicated
+                      ? "#d9d9d9"
+                      : "#fff",
                   }}
-                  className="w-[81px] absolute right-4 bottom-[11px] top-[11px] text-[12px] text-white  rounded-lg"
+                  className="w-[81px] absolute right-4 bottom-[11px] top-[11px] text-[12px]  rounded-lg"
                 >
                   중복확인
                 </button>
               </div>
             </div>
-            {/* <div className="relative space-y-2">
-              <FormLabel id="nickname" children="닉네임" />
-              <div>
-                <input
-                  type="text"
-                  id="nickname"
-                  role="input-nickname"
-                  readOnly={verifyNicknameStatus ? true : false}
-                  className="w-[81px] absolute right-4 bottom-[11px] top-[11px] text-[12px] text-white  rounded-lg"
-                  placeholder={data?.data.nickname}
-                  {...register("nickname")}
-                />
-                <button
-                  className="text-sm absolute right-2 bottom-2 ml-2 w-[81px] rounded-xl tablet:mx-auto h-[36px] "
-                  type="button"
-                  role="change-nickname"
-                  disabled={verifyNicknameStatus ? true : false}
-                  style={{
-                    backgroundColor: !verifyNicknameStatus
-                      ? "#4065F0"
-                      : "#f7f7f7",
-                    color: !verifyNicknameStatus ? "#fff" : "#d9d9d9",
-                  }}
-                  onClick={handleValidateNickname}
-                >
-                  중복확인
-                </button>
-              </div>
-            </div> */}
-            {/* {nicknameVerifyMsg.length > 2 && verifyNicknameStatus && (
-              <SuccessMessage children={nicknameVerifyMsg} />
+            {nicknameDuplicateResponse?.data.nickname.is_duplicated && (
+              <ErrorMessage {...ExistingNickname.args} />
             )}
-            {nicknameVerifyMsg.length > 2 && !verifyNicknameStatus && (
-              <ErrorMessage children={nicknameVerifyMsg} />
-            )} */}
+            {nicknameDuplicateResponse?.status_code === 400 &&
+              nicknameDuplicateResponse?.error_code === 101 && (
+                <ErrorMessage {...NicknameRegexFailure.args} />
+              )}
+            {nicknameDuplicateResponse?.status_code === 200 &&
+              !nicknameDuplicateResponse?.data.nickname.is_duplicated && (
+                <SuccessMessage {...NicknameAllowed.args} />
+              )}
           </div>
 
           {/* passworld field */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="password" className="text-[#999]">
-              기존 비밀번호
-            </label>
+            <FormLabel id="password" children="기존 비밀번호" />
             <input
               type="password"
               id="password"
