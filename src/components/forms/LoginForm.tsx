@@ -18,6 +18,11 @@ import {
   InactiveUserNotification,
   NotAuthroizedUser,
 } from "../../stories/Modal.stories";
+import {
+  EmailRegexFailure,
+  PasswordRegexFailure,
+  UserNotFound,
+} from "../../stories/ErrorMessage.stories";
 
 export const LoginForm = () => {
   const { displayPassword, setDisplayPassword } = useDisplayPwStore();
@@ -58,9 +63,7 @@ export const LoginForm = () => {
         isRequired={true}
         register={register}
       />
-      {errors.email && (
-        <ErrorMessage children="이메일 형식이 올바르지 않습니다." />
-      )}
+      {errors.email && <ErrorMessage {...EmailRegexFailure.args} />}
       <LoginInputField
         type={displayPassword ? "text" : "password"}
         id="password"
@@ -74,12 +77,10 @@ export const LoginForm = () => {
         register={register}
       />
 
-      {errors.password && (
-        <ErrorMessage children="올바른 비밀번호 양식이 아니에요." />
-      )}
+      {errors.password && <ErrorMessage {...PasswordRegexFailure.args} />}
 
       {data?.status_code === 401 && data?.error_code === 140 && (
-        <ErrorMessage children="사용자 정보가 일치하지 않습니다" />
+        <ErrorMessage {...UserNotFound.args} />
       )}
       {data?.status_code === 403 && data?.error_code === 140 && (
         <AlertModal

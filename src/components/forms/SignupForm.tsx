@@ -13,6 +13,21 @@ import { ErrorMessage } from "../common/ErrorMessage";
 import { SuccessMessage } from "../common/SuccessMessage";
 import { RegisterInputField } from "./FormInputContainer";
 import { CheckBox } from "./CheckBox";
+import {
+  EmailRegexFailure,
+  ExistingEmail,
+  ExistingNickname,
+  NameRegexFailure,
+  NicknameRegexFailure,
+  PasswordConfirmNotMatching,
+  PasswordRegexFailure,
+  PhoneRegexFailure,
+} from "../../stories/ErrorMessage.stories";
+import {
+  EmailAllowed,
+  NicknameAllowed,
+  SafePassword,
+} from "../../stories/SuccessMessage.stories";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -69,21 +84,15 @@ export const SignupForm = () => {
           }
         />
 
-        {errors.email?.message && (
-          <ErrorMessage children={errors.email?.message} />
+        {errors.email?.message && <ErrorMessage {...EmailRegexFailure.args} />}
+
+        {emailValidationData?.data.email.is_duplicated && (
+          <ErrorMessage {...ExistingEmail.args} />
         )}
         {emailValidationData?.status_code === 200 &&
-        emailValidationData?.data.email.is_duplicated ? (
-          <ErrorMessage children="이미 회원으로 등록된 이메일이에요." />
-        ) : (
-          false
-        )}
-        {emailValidationData?.status_code === 200 &&
-        !emailValidationData?.data.email.is_duplicated ? (
-          <SuccessMessage children="사용 가능한 이메일이에요!" />
-        ) : (
-          false
-        )}
+          !emailValidationData?.data.email.is_duplicated && (
+            <SuccessMessage {...EmailAllowed.args} />
+          )}
       </div>
       <div className="space-y-2">
         <RegisterInputField
@@ -101,15 +110,14 @@ export const SignupForm = () => {
           }
         />
         {errors.nickname?.message && (
-          <ErrorMessage children={errors.nickname.message} />
+          <ErrorMessage {...NicknameRegexFailure.args} />
+        )}
+        {nicknameValidationData?.data.nickname.is_duplicated && (
+          <ErrorMessage {...ExistingNickname.args} />
         )}
         {nicknameValidationData?.status_code === 200 &&
-          nicknameValidationData?.data.nickname.is_duplicated && (
-            <ErrorMessage children="이미 사용중인 닉네임이에요." />
-          )}
-        {nicknameValidationData?.status_code === 200 &&
           !nicknameValidationData?.data.nickname.is_duplicated && (
-            <SuccessMessage children="멋진 닉네임이에요!" />
+            <SuccessMessage {...NicknameAllowed.args} />
           )}
       </div>
 
@@ -132,10 +140,10 @@ export const SignupForm = () => {
         />
 
         {errors.password?.message && (
-          <ErrorMessage children={errors.password.message} />
+          <ErrorMessage {...PasswordRegexFailure.args} />
         )}
         {!errors.password?.message && getValues("password") && (
-          <SuccessMessage children="안전한 비밀번호에요!" />
+          <SuccessMessage {...SafePassword.args} />
         )}
       </div>
       <div className="space-y-2">
@@ -149,10 +157,10 @@ export const SignupForm = () => {
           register={register}
         />
         {errors.password_check?.message && (
-          <ErrorMessage children={errors.password_check.message} />
+          <ErrorMessage {...PasswordConfirmNotMatching.args} />
         )}
         {!errors.password_check?.message && getValues("password_check") && (
-          <SuccessMessage children="안전한 비밀번호에요!" />
+          <SuccessMessage {...SafePassword.args} />
         )}
       </div>
       <div className="space-y-2">
@@ -165,9 +173,7 @@ export const SignupForm = () => {
           isRequired={true}
           register={register}
         />
-        {errors.name?.message && (
-          <ErrorMessage children={errors.name.message} />
-        )}
+        {errors.name?.message && <ErrorMessage {...NameRegexFailure.args} />}
       </div>
 
       <RegisterInputField
@@ -191,9 +197,7 @@ export const SignupForm = () => {
           register={register}
         />
 
-        {errors.phone?.message && (
-          <ErrorMessage children={errors.phone.message} />
-        )}
+        {errors.phone?.message && <ErrorMessage {...PhoneRegexFailure.args} />}
       </div>
       <CheckBox />
 

@@ -14,6 +14,16 @@ const Template: StoryFn<typeof ErrorMessage> = (args) => (
   <ErrorMessage {...args} />
 );
 
+export const UserNotFound = Template.bind({});
+UserNotFound.args = {
+  children: "일치하는 사용자가 없습니다.",
+};
+
+export const WrongPassword = Template.bind({});
+WrongPassword.args = {
+  children: "비밀번호가 일치하지 않아요.",
+};
+
 // email
 export const EmailRegexFailure = Template.bind({});
 EmailRegexFailure.args = {
