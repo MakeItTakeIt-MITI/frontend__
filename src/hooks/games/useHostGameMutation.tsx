@@ -2,7 +2,9 @@ import { useMutation } from "@tanstack/react-query";
 // import { useNavigate } from "react-router-dom";
 import { hostGame } from "../../api/games";
 
-export const useHostGameMutation = () => {
+export const useHostGameMutation = (
+  setSuccessfulSubmission: (arg: boolean) => void
+) => {
   // const navigate = useNavigate();
   return useMutation({
     mutationFn: hostGame,
@@ -12,7 +14,7 @@ export const useHostGameMutation = () => {
       // navigate("/");
       if (response.status_code === 201) {
         console.log("created");
-        console.log(response.data);
+        setSuccessfulSubmission(true);
       }
       if (response.status_code === 400) {
         console.log("401 : 경기 정보 유효성 검증 실패");

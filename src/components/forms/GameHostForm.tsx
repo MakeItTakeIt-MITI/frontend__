@@ -28,10 +28,12 @@ export const GameHostForm = ({
   const courtAddress = watch("court.address") || "";
   const { data: getCourtInformation, refetch } = useCourtDetailsQuery();
 
-  const { mutate: hostGameMutation } = useHostGameMutation();
-  const maxParticipants = watch("max_invitation");
-  const minParticipants = watch("min_invitation");
-  const gameFee = watch("fee");
+  const { mutate: hostGameMutation } = useHostGameMutation(
+    setSuccessfulSubmission
+  );
+  const maxParticipants = Number(watch("max_invitation"));
+  const minParticipants = Number(watch("min_invitation"));
+  const gameFee = Number(watch("fee"));
 
   useEffect(() => {
     const startDate = startDateTime.split("T")[0];
@@ -53,7 +55,6 @@ export const GameHostForm = ({
     //     setShowModal(true);
     //   }
     // });
-    console.log(getCourtInformation);
 
     // console.log(courtAddress);
     // getCourtInformation?.data.map((data) => {
@@ -77,7 +78,6 @@ export const GameHostForm = ({
 
   // const handleOpenAddressBox = useDaumPostcodePopup();
   const handleOpenAddressBox = useDaumPostcodePopup();
-
   const handleComplete = (data: AddressField) => {
     // 결가는 항상 도로명 주소로 변환
     let fullAddress = data.roadAddress;
@@ -96,7 +96,6 @@ export const GameHostForm = ({
 
     setValue("court.address", fullAddress);
   };
-
   const handleClick = () => {
     handleOpenAddressBox({ onComplete: handleComplete });
   };
@@ -201,7 +200,7 @@ export const GameHostForm = ({
       <GameHostInputField
         type="string"
         id="address"
-        label=" 경기 주소"
+        label="경기 주소"
         placeholder="주소를 검색해주세요."
         register_value="court.address"
         isRequired={true}
@@ -213,7 +212,7 @@ export const GameHostForm = ({
       <GameHostInputField
         type="string"
         id="address"
-        label=" 경기 상세 주소"
+        label="경기 상세 주소"
         placeholder="상세 주소를 입해주세요."
         register_value="court.address_detail"
         isRequired={true}
@@ -254,11 +253,7 @@ export const GameHostForm = ({
 
           {/* recruiting participants */}
           <div className="flex flex-col gap-2 tablet:w-full ">
-            <FormLabel
-              id="min_players"
-              children=" 최소 모집 인원
-"
-            />
+            <FormLabel id="min_players" children=" 최소 모집 인원" />
 
             <input
               type="number"
@@ -271,7 +266,7 @@ export const GameHostForm = ({
             />
           </div>
         </div>
-        {minParticipants > maxParticipants && (
+        {maxParticipants < minParticipants && (
           <ErrorMessage children="총 모집 인원은 최소 모집 인원보다 많아야해요." />
         )}
       </div>
@@ -309,12 +304,9 @@ export const GameHostForm = ({
         disabled={
           !formState.isValid || gameFee < 0 || maxParticipants < minParticipants
         }
-        onClick={() => setSuccessfulSubmission(true)}
         style={{
           backgroundColor:
-            !formState.isValid ||
-            gameFee < 0 ||
-            maxParticipants < minParticipants
+            !formState.isValid || maxParticipants < minParticipants
               ? "#969696"
               : "#4065F6",
         }}
