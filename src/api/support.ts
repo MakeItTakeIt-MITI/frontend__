@@ -1,3 +1,4 @@
+import { PostQuestionProps } from "../interface/supportInterace"
 import axiosUrl from "../utils/axios"
 
 export const viewQuestions = async () => {
@@ -9,7 +10,7 @@ export const viewQuestions = async () => {
     }
 }
 
-export const postQuestion = async (data: any) => {
+export const postQuestion = async (data: PostQuestionProps) => {
     try {
         const response = await axiosUrl.post('/support/qna', data)
         return response.data

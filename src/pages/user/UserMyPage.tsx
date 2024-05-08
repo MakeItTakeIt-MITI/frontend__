@@ -47,8 +47,8 @@ export const UserMyPage = () => {
             <div className="flex  gap-2 h-[54px] ">
               <div className="bg-[#74BCFF] w-full py-1 px-2 rounded-lg">
                 <p className="text-sm">⭐️ 리뷰 평점</p>
-                <div className="text-right font-bold">
-                  <span>4.5</span>
+                <div className="space-x-1 text-right font-bold">
+                  <span>{data?.data.rating.average_rating}</span>
                   <span>/</span>
                   <span>5.0</span>
                 </div>
@@ -64,7 +64,9 @@ export const UserMyPage = () => {
             </div>
             <div className="bg-[#FFC774] h-[54px] py-1 px-2 rounded-lg">
               <p className="text-sm">💰 나의 지갑</p>
-              <p className="text-right font-bold">₩ 130,000</p>
+              <p className="text-right font-bold">
+                ₩ {data?.data.account.balance}
+              </p>
             </div>
           </div>
           <hr className="w-full bg-[#fff] my-5" />

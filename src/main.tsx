@@ -20,7 +20,7 @@ import { FindEmailPage } from "./pages/auth/FindEmailPage.tsx";
 import { UserMyPage } from "./pages/user/UserMyPage.tsx";
 import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
 import { CustomerServicePage } from "./pages/user/CustomerServicePage.tsx";
-import { MyQueryPage } from "./pages/user/MyQueryPage.tsx";
+import { UserInquiryPage } from "./pages/user/UserInquiryPage.tsx";
 import { FAQPage } from "./pages/user/FAQPage.tsx";
 import { MyReviewPage } from "./pages/user/MyReviewPage.tsx";
 import { MyReviewDetailPage } from "./pages/user/MyReviewDetailPage.tsx";
@@ -39,6 +39,7 @@ import { NotVerifiedUserPage } from "./pages/auth/NotVerifiedUserPage.tsx";
 import { NotVerifiedInputDetailPage } from "./pages/auth/NotVerifiedInputDetailPage.tsx";
 import { MobileViewItemsTab } from "./pages/MobileViewItemsTab.tsx";
 import { GameJoinPage } from "./pages/games/GameJoinPage.tsx";
+import { UserInquiryDetailPage } from "./pages/user/UserInquiryDetailPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -112,6 +113,8 @@ const router = createBrowserRouter([
             path: "customer-service",
             element: <CustomerServicePage />,
           },
+          { path: "quiry/:id", element: <UserInquiryDetailPage /> },
+
           {
             path: "find-email",
             element: <FindEmailPage />,
@@ -149,8 +152,8 @@ const router = createBrowserRouter([
           },
 
           {
-            path: "/user-query",
-            element: <MyQueryPage />,
+            path: "/user-inquiry",
+            element: <UserInquiryPage />,
           },
           { path: "/my-reviews-detail", element: <MyReviewDetailPage /> },
 

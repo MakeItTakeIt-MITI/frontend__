@@ -20,6 +20,14 @@ export default {
 
 const Template: StoryFn<typeof AlertModal> = (args) => <AlertModal {...args} />;
 
+export const InquirySubmitted = Template.bind({});
+InquirySubmitted.args = {
+  title: "문의 작성을 완료하였습니다",
+  buttonContext: "확인",
+  isLink: true,
+  path: "/support/customer-service",
+};
+
 export const InactiveUserNotification = Template.bind({});
 InactiveUserNotification.args = {
   title: "로그인 실패",
