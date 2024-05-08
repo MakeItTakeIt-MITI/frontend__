@@ -177,6 +177,7 @@ export interface GameDetailField {
     created_at: string;
     modified_at: string;
     confimed_participations: number;
+    num_of_confirmed_participations: number;
 }
 
 export interface HostField {

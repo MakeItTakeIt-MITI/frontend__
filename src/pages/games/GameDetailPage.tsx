@@ -10,6 +10,7 @@ import { GameDetailParticipantsBox } from "../../components/game/GameDetailParti
 import { GameDetailHostInfoBox } from "../../components/game/GameDetailHostInfoBox";
 import { GameDetailExtraInfoBox } from "../../components/game/GameDetailExtraInfoBox";
 import { GameDetailButtonsBox } from "../../components/game/GameDetailButtonsBox";
+import { GameDetailMap } from "../../components/naver/GameDetailMap";
 export const GameDetailPage = () => {
   const { id } = useParams();
   const gameIdParam = Number(id);
@@ -27,25 +28,35 @@ export const GameDetailPage = () => {
     return <NotFoundPage />;
   }
 
+  /**
+   * TODO ADD REVIEW PAGE
+   */
+
   return (
-    <>
+    <section className="laptop:my-[30px] ">
       <NavigateToPrevContainer children="경기 상세" />
 
-      <div className=" relative laptop:w-[500px]  laptop:min-h-[735px] h-full mb-16   mobile:w-full mx-auto  laptop:border border-gray-300   rounded-lg flex flex-col gap-1.5 ">
-        <div className="space-y-2 laptop:p-6 mobile:p-3">
-          <GameDetailHeader gameDetail={gameDetail.data} />
-          <GameDetailInfoBox gameDetail={gameDetail.data} />
+      <div className=" relative laptop:w-[915px]  laptop:min-h-[735px] h-full mb-16   mobile:w-full mx-auto laptop:mb-0  mobile:mb-[140px]  rounded-lg flex flex-col gap-1.5 ">
+        <GameDetailMap gameDetail={gameDetail.data} />
+        <div className="flex laptop:flex-row laptop:space-x-2 mobile:space-x-0 mobile:flex-col">
+          <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
+            <div className="space-y-2 p-3 laptop:border border-gray-200 rounded-lg">
+              <GameDetailHeader gameDetail={gameDetail.data} />
+              <GameDetailInfoBox gameDetail={gameDetail.data} />
+            </div>
+            <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />
+            <GameDetailParticipantsBox gameDetail={gameDetail.data} />
+            <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />
+            <GameDetailButtonsBox gameDetail={gameDetail.data} />
+          </div>
+          <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
+            <GameDetailHostInfoBox gameDetail={gameDetail.data} />
+            <GameDetailExtraInfoBox gameDetail={gameDetail.data} />
+          </div>
         </div>
-        <hr className="w-full h-[8px] bg-gray-100" />
-        <GameDetailParticipantsBox gameDetail={gameDetail.data} />
-        <hr className="w-full h-[8px] bg-gray-100" />
-        <GameDetailHostInfoBox gameDetail={gameDetail.data} />
-        <hr className="w-full h-[8px] bg-gray-100" />
-        <GameDetailExtraInfoBox gameDetail={gameDetail.data} />
-        <GameDetailButtonsBox gameDetail={gameDetail.data} />
 
-        {/* <AdvertisementBanner /> */}
+        {/* <hr className="w-full h-[8px] bg-gray-100" /> */}
       </div>
-    </>
+    </section>
   );
 };

@@ -49,7 +49,7 @@ export const NaverMapEL = ({
       scrollWheel: true,
       zoomControlOptions: {
         style: naver.maps.ZoomControlStyle.MEDIUM,
-        // position: naver.maps.Position.RIGHT,
+        position: naver.maps.Position.TOP_RIGHT,
       },
     });
 
