@@ -8,7 +8,6 @@ import { UserLoginPage } from "./pages/auth/UserLoginPage.tsx";
 import { UserSignupPage } from "./pages/auth/UserSignupPage.tsx";
 import { NotFoundPage } from "./pages/NotFoundPage.tsx";
 import { GameDetailPage } from "./pages/games/GameDetailPage.tsx";
-import { ParticipateGamePage } from "./pages/games/ParticipateGamePage.tsx";
 import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
 import { SMSAuthenticationPage } from "./pages/auth/SMSAuthenticationPage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -39,6 +38,7 @@ import { MyGamesPage } from "./pages/games/MyGamesPage.tsx";
 import { NotVerifiedUserPage } from "./pages/auth/NotVerifiedUserPage.tsx";
 import { NotVerifiedInputDetailPage } from "./pages/auth/NotVerifiedInputDetailPage.tsx";
 import { MobileViewItemsTab } from "./pages/MobileViewItemsTab.tsx";
+import { GameJoinPage } from "./pages/games/GameJoinPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -167,7 +167,7 @@ const router = createBrowserRouter([
 
               {
                 path: "detail/:id/join",
-                element: <ParticipateGamePage />,
+                element: <GameJoinPage />,
               },
               {
                 path: "my-games",

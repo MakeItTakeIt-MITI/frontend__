@@ -1,5 +1,6 @@
 import { GameDetailField } from "../../interface/gameInterface";
-import basketballIcon from "../../assets/map_basketball_icon.png"
+import markerIcon from "../../assets/new_map_marker.svg";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
     interface Window {
@@ -30,6 +31,38 @@ export function setCustomMarkers(map: any, allGamesData: GameDetailField[], addr
 
 }
 
+
+export function newCustomMarker() {
+    const markerLayer = document.createElement("div");
+    const marker = document.createElement("img");
+    const triangle = document.createElement("span");
+
+    marker.setAttribute("src", markerIcon);
+    marker.setAttribute("alt", "marker");
+    markerLayer.classList.add(
+        "relative",
+        "size-9",
+        "bg-white",
+        "rounded-full",
+        "border",
+        "border-[#4065F5]",
+        "flex",
+        "items-center",
+        "justify-center"
+    );
+
+    triangle.classList.add(
+
+        "absolute",
+        "-bottom-1.5", "bg-black", 'h-0', "w-4",
+        "border", "border-b-[10px]"
+    )
+
+
+    markerLayer.append(marker, triangle);
+    return markerLayer;
+}
+
 function createCustomMapMarker(data: GameDetailField, addressesList: string[], setFilteredGames: (arg: string[]) => void, setDisplayCollapsedList: (arg: boolean) => void) {
     const link = document.createElement('a');
     const img = document.createElement('img');
@@ -41,8 +74,8 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
     // link.href = `/games/detail/${data.id}`;
     link.setAttribute('key', ` ${data.id}`);
     link.setAttribute('id', 'game')
-    link.classList.add('relative', 'bg-white', 'flex', 'pl-2', 'items-center', 'gap-2', 'w-[125px]', 'h-[44px]', 'border', 'border-[#FF4A4A]', 'rounded-2xl',);
-    img.src = basketballIcon;
+    link.classList.add('relative', 'bg-white', 'flex', 'pl-2', 'items-center', 'gap-2', 'w-[125px]', 'h-[44px]', 'border', 'border-[#4065F5]', 'rounded-2xl',);
+    img.src = markerIcon;
     img.alt = 'basketball';
     img.classList.add('size-1px', 'absolute', 'left-1.5',);
     container.classList.add('flex', 'flex-col', 'justify-center', 'items-center', 'text-[12px]', 'text-center', 'w-full');
@@ -54,7 +87,7 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
     const occurrences = addressesList.filter(address => address === data.court.address);
 
     if (occurrences.length > 1) {
-        plusIcon.classList.add('absolute', 'flex', 'items-center', 'justify-center', '-top-2', '-right-2', 'w-5', 'h-5', 'rounded-full', 'bg-white', 'border', 'border-[#FF4A4A]', 'text-black', 'text-[15px]', 'font-bold', 'z-10')
+        plusIcon.classList.add('absolute', 'flex', 'items-center', 'justify-center', '-top-2', '-right-2', 'w-5', 'h-5', 'rounded-full', 'bg-white', 'border', 'border-[#4065F5]', 'text-black', 'text-[15px]', 'font-bold', 'z-10')
         link.appendChild(plusIcon);
         plusIcon.textContent = '+'
         // link.href = ;
@@ -71,13 +104,11 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
     }
 
 
-
-
     link.addEventListener('mouseover', () => {
-        plusIcon.style.backgroundColor = '#4065F5';
+        plusIcon.style.backgroundColor = '#003049';
         plusIcon.style.color = 'white';
         plusIcon.style.border = '1px solid #fff';
-        link.style.backgroundColor = '#4065F5';
+        link.style.backgroundColor = '#003049';
         link.style.color = 'white';
         link.style.border = '1px solid #fff';
 
@@ -85,10 +116,10 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
     link.addEventListener('mouseout', () => {
         plusIcon.style.backgroundColor = '#fff';
         plusIcon.style.color = 'black';
-        plusIcon.style.border = '1px solid #FF4A4A';
+        plusIcon.style.border = '1px solid #4065F5';
         link.style.backgroundColor = '#fff';
         link.style.color = 'black';
-        link.style.border = '1px solid #FF4A4A';
+        link.style.border = '1px solid #4065F5';
 
     })
 

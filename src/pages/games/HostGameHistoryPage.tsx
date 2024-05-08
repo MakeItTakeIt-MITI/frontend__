@@ -114,25 +114,26 @@ export const HostGameHistoryPage = () => {
           {gameData.map((game: GameDetailField) => {
             return (
               <div key={game.id} className="flex flex-col gap-2">
-                <h2 className="font-bold">{game.startdate}</h2>
+                <h2 className="font-bold">{game?.startdate}</h2>
                 <Link to="/">
                   <div className="py-2 px-3 rounded-lg border border-gray-300 w-full">
-                    {game.game_status === "open" && (
+                    {game?.game_status === "open" && (
                       <MatchTags {...RecruitingTag.args} />
                     )}
-                    {game.game_status === "canceled" && (
+                    {game?.game_status === "canceled" && (
                       <MatchTags {...GameCancelledTag.args} />
                     )}
-                    {game.game_status === "closed" && (
+                    {game?.game_status === "closed" && (
                       <MatchTags {...RecruitingCompletedTag.args} />
                     )}
-                    {game.game_status === "completed" && (
+                    {game?.game_status === "completed" && (
                       <MatchTags {...GameFinishedTag.args} />
                     )}
-                    <h2 className="font-bold">{game.title}</h2>
-                    <p className="text-[#999]">{game.court.address}</p>
+                    <h2 className="font-bold">{game?.title}</h2>
+                    {/* <p className="text-[#999]">{game?.court.address}</p> */}
                     <p className="text-[#999]">
-                      {game.starttime.slice(0, -3)}~{game.endtime.slice(0, -3)}
+                      {/* {game?.starttime.slice(0, -3)}~
+                      {game?.endtime.slice(0, -3)} */}
                     </p>
                   </div>
                 </Link>
