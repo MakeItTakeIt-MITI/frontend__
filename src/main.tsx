@@ -40,6 +40,7 @@ import { NotVerifiedInputDetailPage } from "./pages/auth/NotVerifiedInputDetailP
 import { MobileViewItemsTab } from "./pages/MobileViewItemsTab.tsx";
 import { GameJoinPage } from "./pages/games/GameJoinPage.tsx";
 import { UserInquiryDetailPage } from "./pages/user/UserInquiryDetailPage.tsx";
+import { GameDetailEditPage } from "./pages/games/GameDetailEditPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -166,6 +167,11 @@ const router = createBrowserRouter([
               {
                 path: "detail/:id",
                 element: <GameDetailPage />,
+              },
+
+              {
+                path: "detail/:id/edit",
+                element: <GameDetailEditPage />,
               },
 
               {

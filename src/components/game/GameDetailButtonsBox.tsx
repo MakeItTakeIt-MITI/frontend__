@@ -10,7 +10,7 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailBoxProp) => {
   return (
     <div className="laptop:static mobile:fixed mobile:bottom-[80px]  mobile:w-full mobile:px-6  text-[14px]">
       {gameDetail.game_status === "open" && gameDetail?.is_host && (
-        <Link to={`/games/detail/${gameIdParam}/join`}>
+        <Link to={`/games/detail/${gameIdParam}/edit`}>
           <button className=" w-full h-[48px] bg-[#52A2D0] rounded-lg text-white ">
             {" "}
             경기 수정하기
