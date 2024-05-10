@@ -69,7 +69,7 @@ export const HostGameHistoryPage = () => {
     return <NotFoundPage />;
   }
   return (
-    <>
+    <section className="laptop:my-[69px] mobile:my-0">
       <NavigateToPrevContainer children="나의 호스팅 경기" />
 
       <div className="relative laptop:w-[500px]  laptop:h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-10 ">
@@ -115,33 +115,33 @@ export const HostGameHistoryPage = () => {
             return (
               <div key={game.id} className="flex flex-col gap-2">
                 <h2 className="font-bold">{game?.startdate}</h2>
-                <Link to="/">
-                  <div className="py-2 px-3 rounded-lg border border-gray-300 w-full">
-                    {game?.game_status === "open" && (
-                      <MatchTags {...RecruitingTag.args} />
-                    )}
-                    {game?.game_status === "canceled" && (
-                      <MatchTags {...GameCancelledTag.args} />
-                    )}
-                    {game?.game_status === "closed" && (
-                      <MatchTags {...RecruitingCompletedTag.args} />
-                    )}
-                    {game?.game_status === "completed" && (
-                      <MatchTags {...GameFinishedTag.args} />
-                    )}
-                    <h2 className="font-bold">{game?.title}</h2>
-                    {/* <p className="text-[#999]">{game?.court.address}</p> */}
-                    <p className="text-[#999]">
-                      {/* {game?.starttime.slice(0, -3)}~
-                      {game?.endtime.slice(0, -3)} */}
-                    </p>
-                  </div>
-                </Link>
+                {game?.games.map((detail) => {
+                  return (
+                    <Link to="/">
+                      <div className="py-2 px-3 rounded-lg border border-gray-300 w-full">
+                        <h2>{detail?.title}</h2>
+                        {detail?.game_status === "open" && (
+                          <MatchTags {...RecruitingTag.args} />
+                        )}
+                        {detail?.game_status === "canceled" && (
+                          <MatchTags {...GameCancelledTag.args} />
+                        )}
+                        {detail?.game_status === "closed" && (
+                          <MatchTags {...RecruitingCompletedTag.args} />
+                        )}
+                        {detail?.game_status === "completed" && (
+                          <MatchTags {...GameFinishedTag.args} />
+                        )}
+                      </div>
+                    </Link>
+                  );
+                })}
+                <Link to="/"></Link>
               </div>
             );
           })}
         </div>
       </div>
-    </>
+    </section>
   );
 };

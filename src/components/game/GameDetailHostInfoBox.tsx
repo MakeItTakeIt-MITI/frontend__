@@ -1,5 +1,4 @@
 import badge from "../../assets/authentication-badge.svg";
-import grayStar from "../../assets/empty_star_icon.svg";
 import profile from "../../assets/game_detail_profile.svg";
 
 import { GameDetailBoxProp } from "../../interface/gameInterface";
@@ -37,18 +36,22 @@ export const GameDetailHostInfoBox = ({ gameDetail }: GameDetailBoxProp) => {
               {gameDetail?.host.rating.average_rating === 5 && (
                 <ReviewRating {...FiveStars.args} />
               )}
-              {gameDetail?.host.rating.average_rating === 4 && (
-                <ReviewRating {...FourStars.args} />
-              )}
-              {gameDetail?.host.rating.average_rating === 3 && (
-                <ReviewRating {...ThreeStars.args} />
-              )}
-              {gameDetail?.host.rating.average_rating === 2 && (
-                <ReviewRating {...TwoStars.args} />
-              )}
-              {gameDetail?.host.rating.average_rating === 1 && (
-                <ReviewRating {...OneStar.args} />
-              )}
+              {gameDetail?.host.rating.average_rating === 4 ||
+                (gameDetail?.host.rating.average_rating === 4.5 && (
+                  <ReviewRating {...FourStars.args} />
+                ))}
+              {gameDetail?.host.rating.average_rating === 3 ||
+                (gameDetail?.host.rating.average_rating === 3.5 && (
+                  <ReviewRating {...ThreeStars.args} />
+                ))}
+              {gameDetail?.host.rating.average_rating === 2 ||
+                (gameDetail?.host.rating.average_rating === 2.5 && (
+                  <ReviewRating {...TwoStars.args} />
+                ))}
+              {gameDetail?.host.rating.average_rating === 1 ||
+                (gameDetail?.host.rating.average_rating === 1.5 && (
+                  <ReviewRating {...OneStar.args} />
+                ))}
               {gameDetail?.host.rating.average_rating === 0 && (
                 <ReviewRating {...NoReviews.args} />
               )}

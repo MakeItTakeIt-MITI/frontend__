@@ -1,4 +1,12 @@
+import { useState } from "react";
+import checked_box from "../../assets/games/refund_agreement_checked.svg";
+import unchecked_box from "../../assets/games/refund_agreement_unchecked.svg";
+
 export const GameRefundInfoBox = () => {
+  const [isChecked, setIsChecked] = useState(false);
+  const handleCheckAgreement = () => {
+    setIsChecked(!isChecked);
+  };
   return (
     <div className="p-3 space-y-3 laptop:border border-gray-200 rounded-lg">
       <h2 className="font-bold">결제 및 환불 정책</h2>
@@ -14,6 +22,33 @@ export const GameRefundInfoBox = () => {
           유의해주세요!
         </li>
       </ul>
+      <h2 className="font-bold">모집 실패로 인한 환불</h2>
+      <ul className="text-[12px] space-y-2 pl-2">
+        <li>
+          경기 시작전까지 최소 모집 인원이 모집되지 않은경우 해당 경기는
+          취소됩니다.
+        </li>
+        <li>
+          모집 실패로 인한 경기 취소시, 결제한 금액은 자동 환불처리되며 포인트
+          및 할인을 제외한 금액이 환불됩니다.
+        </li>
+      </ul>
+      <div className="flex gap-[7px]">
+        <h3
+          style={{ color: !isChecked ? "#333" : "#4065F5" }}
+          className=" text-[16px] font-bold"
+        >
+          결제 및 환불 정책을 확인하였으며, 동의합니다.{" "}
+        </h3>
+        <button onClick={handleCheckAgreement}>
+          {!isChecked ? (
+            <img src={unchecked_box} alt="checkbox" />
+          ) : (
+            <img src={checked_box} alt="checkbox" />
+          )}
+        </button>
+        {/* <input type="checkbox" name="" id="" className="rounded-full" /> */}
+      </div>
     </div>
   );
 };

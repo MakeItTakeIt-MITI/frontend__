@@ -18,14 +18,16 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailBoxProp) => {
         </Link>
       )}
 
-      {gameDetail.game_status === "open" && !gameDetail?.is_participated && (
-        <Link to={`/games/detail/${gameIdParam}/join`}>
-          <button className=" w-full h-[48px] bg-[#4065F6] rounded-lg text-white ">
-            {" "}
-            경기 참가하기
-          </button>
-        </Link>
-      )}
+      {gameDetail.game_status === "open" &&
+        !gameDetail?.is_participated &&
+        !gameDetail?.is_host && (
+          <Link to={`/games/detail/${gameIdParam}/join`}>
+            <button className=" w-full h-[48px] bg-[#4065F6] rounded-lg text-white ">
+              {" "}
+              경기 참가하기
+            </button>
+          </Link>
+        )}
       {gameDetail.game_status === "open" && gameDetail?.is_participated && (
         <Link to={`/games/detail/${gameIdParam}/join`}>
           <button className=" w-full h-[48px] bg-[#F64061] rounded-lg text-white ">

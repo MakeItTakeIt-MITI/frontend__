@@ -8,11 +8,16 @@ interface ReviewRatingProp {
 export const ReviewRating: React.FC<ReviewRatingProp> = ({ reviewRating }) => {
   return (
     <div className="flex items-center gap-[2px]">
-      {reviewRating?.map((i) =>
+      {reviewRating?.map((i, index) =>
         i === 1 ? (
-          <img src={star} alt="star" className="size-4" />
+          <img key={index} src={star} alt="star" className="size-4" />
         ) : (
-          <img src={emptyStar} alt="empty star" className="size-4" />
+          <img
+            key={index}
+            src={emptyStar}
+            alt="empty star"
+            className="size-4"
+          />
         )
       )}
     </div>

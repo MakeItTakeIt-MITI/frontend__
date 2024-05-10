@@ -20,32 +20,40 @@ export const GamePaymentInfoBox = () => {
     return <NotFoundPage />;
   }
 
+  console.log(paymentDetails);
+
+  const gameFee =
+    paymentDetails?.data.payment_information.payment_amount.game_fee_amount;
+  const commissionFee =
+    paymentDetails?.data.payment_information.payment_amount.commission_amount;
+  // const totalAmount =
+  //   paymentDetails?.data.payment_information.payment_amount.game_fee_amount;
+  const vatFee =
+    paymentDetails?.data.payment_information.payment_amount.vat_amount;
+  const promotionDiscount =
+    paymentDetails?.data.payment_information.discount_amount.promotion_amount;
+  const finalPaymentAmount =
+    paymentDetails?.data.payment_information.final_payment_amount;
+
   return (
-    <div className="laptop:p-6 mobile:p-3 space-y-[14px]">
+    <div className="p-3 space-y-[14px] border-gray-200">
       <h1 className="font-bold text-[hsl(0,0%,13%)]">결제 및 할인 정보</h1>
       <div className="flex justify-between text-[14px] text-[#666]">
         <span>경기 참여비</span>
         <span>
-          ₩ {/* */}
-          {paymentDetails?.data.payment_amount.game_fee_amount.toLocaleString(
-            "ko-KR",
-            {
-              currency: "KRW",
-            }
-          )}
+          {gameFee.toLocaleString("ko-KR", {
+            currency: "KRW",
+            style: "currency",
+          })}
         </span>
       </div>
       <div className="flex justify-between text-[14px] text-[#666]">
         <span>결제 수수료</span>
         <span>
-          {" "}
-          {paymentDetails?.data.payment_amount.miti_commission_amount.toLocaleString(
-            "ko-KR",
-            {
-              style: "currency",
-              currency: "KRW",
-            }
-          )}
+          {commissionFee.toLocaleString("ko-KR", {
+            currency: "KRW",
+            style: "currency",
+          })}
         </span>
       </div>
       <hr className="bg-[#E8E8E8] h-[1px] w-full" />
@@ -53,31 +61,30 @@ export const GamePaymentInfoBox = () => {
         <span>VAT</span>
         <span>
           {" "}
-          {paymentDetails?.data.payment_amount.vat_amount.toLocaleString(
-            "ko-KR",
-            {
-              style: "currency",
-              currency: "KRW",
-            }
-          )}
+          {vatFee.toLocaleString("ko-KR", {
+            style: "currency",
+            currency: "KRW",
+          })}
         </span>
       </div>
       <hr className="bg-[#E8E8E8] h-[1px] w-full" />
-      <div className="flex justify-between text-[14px] text-[#4065F5]">
+      <div className="flex justify-between text-[14px] font-[400] text-[#4065F5]">
         <span>프로모션 할인</span>
-        <span>₩0</span>
+        <span>
+          {promotionDiscount.toLocaleString("ko-KR", {
+            currency: "KRW",
+            style: "currency",
+          })}
+        </span>
       </div>
       <hr className="bg-[#E8E8E8] h-[1px] w-full" />
-      <div className="flex justify-between font-bold text-[#222]">
+      <div className="flex justify-between font-bold text-black">
         <span>총 결제 금액</span>
-        <span>
-          ₩
-          {paymentDetails?.data.payment_amount.game_fee_amount.toLocaleString(
-            "ko-KR",
-            {
-              currency: "KRW",
-            }
-          )}
+        <span className="text-[#F45858]">
+          {finalPaymentAmount.toLocaleString("ko-KR", {
+            currency: "KRW",
+            style: "currency",
+          })}
         </span>
       </div>
     </div>
