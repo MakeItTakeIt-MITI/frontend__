@@ -210,3 +210,9 @@ export interface GameDetailProp {
 export interface GameDetailBoxProp {
     gameDetail: GameDetailField
 }
+
+export interface GameEditParameters {
+    min_invitation?: number;
+    max_invitation?: number;
+    info?: string;
+}

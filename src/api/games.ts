@@ -1,4 +1,4 @@
-import { GameHostField, ParticipantField } from "../interface/gameInterface";
+import { GameEditParameters, GameHostField, ParticipantField } from "../interface/gameInterface";
 import axiosUrl from "../utils/axios"
 
 
@@ -66,6 +66,15 @@ export const getGuestGameHistory = async (userId: number | null, gameStatus: str
 export const getHostGameHistory = async (userId: number | null, page_number: number, game_status?: string | null) => {
     try {
         const response = await axiosUrl(`/users/${userId}/hostings?page=${page_number}&game_status=${game_status}`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
+
+export const editGameDetail = async (game_id: number | null, options: GameEditParameters) => {
+    try {
+        const response = await axiosUrl.patch(`/games/${game_id}`, options)
         return response.data
     } catch {
         throw new Error
