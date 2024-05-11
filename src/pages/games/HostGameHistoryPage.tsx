@@ -5,6 +5,7 @@ import useUserDataStore from "../../store/useUserDataStore";
 import { useGetHostHistoryQuery } from "../../hooks/games/useGetHostHistoryQuery";
 import { LoadingPage } from "../LoadingPage";
 import { MatchTags } from "../../components/game/MatchTags";
+import rightArrow from "../../assets/Chevron_Right_MD.svg";
 import {
   GameCancelledTag,
   GameFinishedTag,
@@ -14,9 +15,6 @@ import {
 import { Link } from "react-router-dom";
 import { GameDetailField } from "../../interface/gameInterface";
 import { NotFoundPage } from "../NotFoundPage";
-/**
- * TODO Group each game by date
- */
 
 export const HostGameHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -57,7 +55,6 @@ export const HostGameHistoryPage = () => {
       setGameStatusQuery("completed");
     }
 
-    // console.log(gameStatusQuery);
     refetch();
   }, [refetch, defaultTabName, gameStatusQuery]);
 
@@ -72,41 +69,43 @@ export const HostGameHistoryPage = () => {
     <section className="laptop:my-[69px] mobile:my-0">
       <NavigateToPrevContainer children="나의 호스팅 경기" />
 
-      <div className="relative laptop:w-[500px]  laptop:h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-10 ">
-        <h1 className="text-center font-bold laptop:block mobile:hidden">
-          나의 호스팅 경기
-        </h1>
-        {/* tab */}
-        <div className="flex justify-end w-full ">
-          <div
-            onClick={handleOpenList}
-            style={{
-              borderRadius: !openList ? "8px 8px 8px 8px" : "8px 8px 0px 0px",
-            }}
-            className="flex items-center  w-[90px] h-[32px] py-2.5 px-1.5 bg-[#f7f7f7]  relative hover:cursor-pointer"
-          >
-            <p className="text-[14px]">{defaultTabName}</p>
-            <img
-              src={downarrow}
-              alt="open tab icon"
-              style={{ rotate: openList ? "180deg" : "0deg" }}
-            />
+      <div className="relative laptop:w-[500px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-10 ">
+        <div className="flex justify-between">
+          <h1 className="text-[26px] w-full font-bold laptop:block mobile:hidden">
+            나의 호스팅 경기
+          </h1>
+          {/* tab */}
+          <div className="flex justify-end w-full ">
+            <div
+              onClick={handleOpenList}
+              style={{
+                borderRadius: !openList ? "8px 8px 8px 8px" : "8px 8px 0px 0px",
+              }}
+              className="flex items-center  w-[90px] h-[32px] py-2.5 px-1.5 bg-[#f7f7f7]  relative hover:cursor-pointer"
+            >
+              <p className="text-[14px]">{defaultTabName}</p>
+              <img
+                src={downarrow}
+                alt="open tab icon"
+                style={{ rotate: openList ? "180deg" : "0deg" }}
+              />
 
-            {openList && (
-              <ul className="absolute left-0 top-8 w-full bg-[#f7f7f7] text-[#969696] text-[14px]  px-2 py-1 flex flex-col gap-1 rounded-br-lg">
-                {tabList.map((tab) => {
-                  return (
-                    <li
-                      onClick={() => handleChangeTab(tab.name)}
-                      className="hover:cursor-pointer"
-                      key={tab.id}
-                    >
-                      {tab.name}
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
+              {openList && (
+                <ul className="absolute left-0 top-8 w-full bg-[#f7f7f7] text-[#969696] text-[14px]  px-2 py-1 flex flex-col gap-1 rounded-br-lg">
+                  {tabList.map((tab) => {
+                    return (
+                      <li
+                        onClick={() => handleChangeTab(tab.name)}
+                        className="hover:cursor-pointer"
+                        key={tab.id}
+                      >
+                        {tab.name}
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </div>
           </div>
         </div>
 
@@ -115,28 +114,42 @@ export const HostGameHistoryPage = () => {
             return (
               <div key={game.id} className="flex flex-col gap-2">
                 <h2 className="font-bold">{game?.startdate}</h2>
-                {game?.games.map((detail) => {
-                  return (
-                    <Link to="/">
-                      <div className="py-2 px-3 rounded-lg border border-gray-300 w-full">
-                        <h2>{detail?.title}</h2>
-                        {detail?.game_status === "open" && (
-                          <MatchTags {...RecruitingTag.args} />
-                        )}
-                        {detail?.game_status === "canceled" && (
-                          <MatchTags {...GameCancelledTag.args} />
-                        )}
-                        {detail?.game_status === "closed" && (
-                          <MatchTags {...RecruitingCompletedTag.args} />
-                        )}
-                        {detail?.game_status === "completed" && (
-                          <MatchTags {...GameFinishedTag.args} />
-                        )}
-                      </div>
-                    </Link>
-                  );
-                })}
-                <Link to="/"></Link>
+                <div className="space-y-[15px]">
+                  {game?.games.map((detail: GameDetailField) => {
+                    return (
+                      <Link
+                        key={detail.id}
+                        to={`/games/detail/${detail?.id}`}
+                        className="flex gap-2.5 justify-between p-2 text-xs font-medium tracking-tight leading-4 whitespace-nowrap bg-white rounded-lg border border-gray-200 border-solid max-w-[551px] text-neutral-400 max-md:flex-wrap"
+                      >
+                        <div className="flex flex-col ">
+                          {detail?.game_status === "open" && (
+                            <MatchTags {...RecruitingTag.args} />
+                          )}
+                          {detail?.game_status === "canceled" && (
+                            <MatchTags {...GameCancelledTag.args} />
+                          )}
+                          {detail?.game_status === "closed" && (
+                            <MatchTags {...RecruitingCompletedTag.args} />
+                          )}
+                          {detail?.game_status === "completed" && (
+                            <MatchTags {...GameFinishedTag.args} />
+                          )}
+                          <div className="mt-1.5 text-base font-bold leading-5 text-ellipsis text-zinc-800 max-md:max-w-full">
+                            {detail?.title}
+                          </div>
+                          <div className="mt-1.5 text-ellipsis max-md:max-w-full">
+                            서울특별시 한국동 한국로 123-456
+                          </div>
+                          <div className="text-ellipsis max-md:max-w-full">
+                            10:00 ~ 13:00
+                          </div>
+                        </div>
+                        <img loading="lazy" src={rightArrow} />
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
             );
           })}

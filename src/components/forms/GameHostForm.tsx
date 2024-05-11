@@ -10,12 +10,10 @@ import { FormLabel } from "./FormLabel";
 import { ErrorMessage } from "../common/ErrorMessage";
 
 interface GameHostFormProps {
-  setShowModal: (arg: boolean) => void;
   setSuccessfulSubmission: (arg: boolean) => void;
 }
 
 export const GameHostForm = ({
-  setShowModal,
   setSuccessfulSubmission,
 }: GameHostFormProps) => {
   const { handleSubmit, register, setValue, watch, formState } =
@@ -46,25 +44,6 @@ export const GameHostForm = ({
     setValue("enddate", endDate);
     setValue("endtime", endTime);
 
-    // const emptyAddressList: Array[] = [];
-
-    // if address already exists, automatically add address_detail
-    // getCourtInformation?.data.page_content.map((address: Court) => {
-    //   if (courtAddress === address.address) {
-    //     emptyAddressList.push(address.address_detail);
-    //     setShowModal(true);
-    //   }
-    // });
-
-    // console.log(courtAddress);
-    // getCourtInformation?.data.map((data) => {
-    // emptyAddressList.push({
-    //   address: data.address,
-    //   address_detail: data.address_detail,
-    // });
-    // });
-    // console.log(emptyAddressList);
-
     refetch();
   }, [
     courtAddress,
@@ -73,7 +52,6 @@ export const GameHostForm = ({
     startDateTime,
     endDateTime,
     getCourtInformation,
-    setShowModal,
   ]);
 
   // const handleOpenAddressBox = useDaumPostcodePopup();
