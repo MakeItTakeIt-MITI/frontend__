@@ -46,6 +46,7 @@ export const EditGameDetailsBox = ({
             ) : (
               <input
                 id="max_invitation"
+                autoFocus
                 className="w-[142px] h-[44px] bg-[#F7F7F7] text-center flex items-center justify-center"
                 type="number"
                 value={maxParticipants ? undefined : gameDetail?.max_invitation}
@@ -71,6 +72,7 @@ export const EditGameDetailsBox = ({
             ) : (
               <input
                 id="min_invitation"
+                autoFocus
                 className="w-[142px] h-[44px] bg-[#F7F7F7] text-center flex items-center justify-center"
                 type="number"
                 value={minParticipants ? undefined : gameDetail?.min_invitation}
@@ -85,14 +87,15 @@ export const EditGameDetailsBox = ({
         <h3 className="font-bold text-[12px] text-[#040000]">모집 정보</h3>
 
         {!editInfo ? (
-          <button
+          <div
             className="p-4 bg-[#f7f7f7] h-[218px] w-full overflow-y-auto"
             onClick={() => setEditInfo(true)}
           >
             {gameDetail?.info}
-          </button>
+          </div>
         ) : (
           <textarea
+            autoFocus
             style={{ resize: "none" }}
             placeholder={gameDetail?.info}
             className="p-4 bg-[#f7f7f7] h-[218px] w-full overflow-y-auto"
