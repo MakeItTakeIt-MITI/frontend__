@@ -13,7 +13,10 @@ import {
   RecruitingTag,
 } from "../../stories/Tags.stories";
 import { Link } from "react-router-dom";
-import { GameDetailField } from "../../interface/gameInterface";
+import {
+  GameDetailField,
+  GameHostHistoryField,
+} from "../../interface/gameInterface";
 import { NotFoundPage } from "../NotFoundPage";
 
 export const HostGameHistoryPage = () => {
@@ -110,7 +113,7 @@ export const HostGameHistoryPage = () => {
         </div>
 
         <div className="flex flex-col gap-2.5">
-          {gameData.map((game: GameDetailField) => {
+          {gameData.map((game: GameHostHistoryField) => {
             return (
               <div key={game.id} className="flex flex-col gap-2">
                 <h2 className="font-bold">{game?.startdate}</h2>
@@ -120,9 +123,9 @@ export const HostGameHistoryPage = () => {
                       <Link
                         key={detail.id}
                         to={`/games/detail/${detail?.id}`}
-                        className="flex gap-2.5 justify-between p-2 text-xs font-medium tracking-tight leading-4 whitespace-nowrap bg-white rounded-lg border border-gray-200 border-solid max-w-[551px] text-neutral-400 max-md:flex-wrap"
+                        className="flex gap-2.5 justify-between items-center p-2 text-xs font-medium    bg-white rounded-lg border border-gray-200 border-solid max-w-[551px] text-neutral-400 "
                       >
-                        <div className="flex flex-col ">
+                        <div className="flex flex-col justify-center h-full ">
                           {detail?.game_status === "open" && (
                             <MatchTags {...RecruitingTag.args} />
                           )}

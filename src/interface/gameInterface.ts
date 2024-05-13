@@ -18,6 +18,12 @@ export interface GameHostField {
     court: Court;
 }
 
+export interface GameHostHistoryField {
+    id: number;
+    startdate: string;
+    games: GameDetailField[]
+}
+
 
 
 
