@@ -4,7 +4,6 @@ export function getCurrentLocation(setCurrentMyLocation: (arg: number, arg2: num
             (position) => {
                 const { latitude, longitude } = position.coords
                 setCurrentMyLocation(latitude, longitude)
-                console.log('geolocation stored', longitude, latitude);
 
             },
             (error) => {

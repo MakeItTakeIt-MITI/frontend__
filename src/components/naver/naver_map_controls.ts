@@ -52,10 +52,11 @@ export function newCustomMarker() {
     );
 
     triangle.classList.add(
+        // "absolute",
+        // "-bottom-2", 'h-0', "w-4",
+        // "border", "border-b-[10px]"
+        'arrow'
 
-        "absolute",
-        "-bottom-1.5", "bg-black", 'h-0', "w-4",
-        "border", "border-b-[10px]"
     )
 
 
@@ -85,17 +86,28 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
 
 
     const occurrences = addressesList.filter(address => address === data.court.address);
-
+    let clickCount = 0;
     if (occurrences.length > 1) {
         plusIcon.classList.add('absolute', 'flex', 'items-center', 'justify-center', '-top-2', '-right-2', 'w-5', 'h-5', 'rounded-full', 'bg-white', 'border', 'border-[#4065F5]', 'text-black', 'text-[15px]', 'font-bold', 'z-10')
         link.appendChild(plusIcon);
         plusIcon.textContent = '+'
         // link.href = ;
 
-        link.addEventListener('click', () => {
-            setFilteredGames(occurrences)
-            setDisplayCollapsedList(true)
+        // link.addEventListener('click', () => {
+        //     setFilteredGames(occurrences)
+        //     setDisplayCollapsedList(true)
 
+        // })
+
+        link.addEventListener('click', () => {
+            clickCount++; // Increment click count
+            if (clickCount === 2) {
+                setDisplayCollapsedList(false); // Set displayCollapsedList to false
+                clickCount = 0; // Reset click count
+            } else {
+                setFilteredGames(occurrences);
+                setDisplayCollapsedList(true);
+            }
         })
 
     } else { //겹침 마커가 아닌 경우 path 설정

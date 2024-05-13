@@ -25,7 +25,10 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
 
   return (
     <div
-      style={{ overflow: "auto", scrollbarWidth: "thin" }}
+      style={{
+        overflowY: "auto",
+        scrollbarWidth: "thin",
+      }}
       id="gameListBox"
       className="h-[409px] w-[371px] p-3  mobile:hidden tablet:block space-y-3 rounded-lg bg-[#FBFBFB]   "
     >
@@ -46,13 +49,13 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
           for (const address of filteredGames) {
             if (address === game.court.address) {
               return (
-                <div className="space-y-2">
-                  <Link to={`/games/detail/${game.id}`} key={game.id}>
+                <div key={game.id} className="space-y-2">
+                  <Link to={`/games/detail/${game.id}`}>
                     <MatchItem
                       game={game}
                       handleSearchCoords={handleSearchCoords}
                     />
-                  </Link>{" "}
+                  </Link>
                 </div>
               );
             }
