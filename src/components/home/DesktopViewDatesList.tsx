@@ -30,9 +30,9 @@ export const DesktopViewDatesList = ({
     <div className="relative tablet:block mobile:hidden ">
       <div
         onClick={handleDisplayDates}
-        className="  flex items-center justify-between p-4   rounded-lg bg-[#FBFBFB]"
+        className="  flex items-center justify-between p-4   rounded-lg bg-[#FBFBFB]  hover:cursor-pointer"
       >
-        <span className="font-bold leading-[20.8px]  hover:cursor-pointer">
+        <span className="font-bold leading-[20.8px] ">
           {selectingDate.toLocaleDateString("ko-KR", {
             timeZone: "Asia/Seoul",
             year: "numeric",

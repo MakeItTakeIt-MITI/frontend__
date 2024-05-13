@@ -21,7 +21,7 @@ export const MobileViewGameList = ({
   const { data } = useGetGamesDataQuery(formatDate);
 
   return (
-    <div className="tablet:hidden flex flex-col  gap-4  flex-nowrap  px-2 w-full">
+    <div className="tablet:hidden flex flex-col  gap-4  flex-nowrap  px-2 w-full pb-20">
       {!displayCollapsedList &&
         data?.data.map((game: GameDetailField) => {
           return (

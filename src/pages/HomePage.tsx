@@ -2,8 +2,7 @@ import { HeroCarousel } from "../components/home/Hero";
 import { MobileViewDatesList } from "../components/home/MobileViewDatesList";
 import { useGetGamesDataQuery } from "../hooks/games/useGetGamesDataQuery";
 import { DesktopViewDatesList } from "../components/home/DesktopViewDatesList";
-import { GameDetailField } from "../interface/gameInterface";
-import { MatchItem } from "../components/game/MatchItem";
+
 import { useEffect, useState } from "react";
 import { MobileViewGameList } from "../components/home/MobileViewGameList";
 import { LoadingPage } from "./LoadingPage";
@@ -11,9 +10,7 @@ import { NaverMapEL } from "../components/naver/NaverMap";
 import { NotFoundPage } from "./NotFoundPage";
 import useGeolocationStore from "../store/useGeolocationStore";
 
-import { Link } from "react-router-dom";
-import { FilteredMatchItem } from "../components/game/FilteredMatchItem";
-import { NoGamesAvailableBox } from "../components/home/NoGamesAvailableBox";
+import { DesktopGameListContainer } from "../components/home/DesktopGameListContainer";
 
 export const HomePage = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
@@ -37,7 +34,6 @@ export const HomePage = () => {
     setCurrentMyLocation(latitude, longitude);
     refetch();
   };
-
   useEffect(() => {
     refetch();
   }, [selectingDate, refetch, formatDate]);
@@ -52,53 +48,20 @@ export const HomePage = () => {
 
   return (
     <main className="laptop:mb-[69px] mobile:my-0">
-      {/* <div className="  flex flex-col gap-6  w-full laptop:px-[13rem]  mx-auto  max-w-[90rem] "> */}
       <div className="  flex flex-col gap-6  w-full   mx-auto  max-w-[1024px] ">
         <HeroCarousel />
-        <div className="flex   tablet:flex-row mobile:flex-col tablet:gap-10 mobile:gap-4 mobile:-mt-4 ">
+        <div className="flex   tablet:flex-row mobile:flex-col tablet:gap-10 mobile:gap-4 mobile:-mt-4  ">
           <div className="space-y-4">
             <DesktopViewDatesList
               selectingDate={selectingDate}
               setSelectedDate={setSelectedDate}
             />
-            <div
-              style={{ scrollbarWidth: "thin" }}
-              id="gameListBox"
-              className=" w-[371px] p-3  mobile:hidden tablet:block space-y-3 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll"
-            >
-              {!displayCollapsedList &&
-                allGamesData &&
-                allGamesData?.data?.map((game: GameDetailField) => {
-                  return (
-                    <div key={game.id}>
-                      <MatchItem
-                        game={game}
-                        handleSearchCoords={handleSearchCoords}
-                      />
-                    </div>
-                  );
-                })}
-              {!displayCollapsedList ||
-                (allGamesData?.data.length < 1 && (
-                  <NoGamesAvailableBox data={allGamesData} />
-                ))}
-              {displayCollapsedList &&
-                allGamesData?.data.map((game: GameDetailField) => {
-                  for (const address of filteredGames) {
-                    if (address === game.court.address) {
-                      return (
-                        <Link to={`/games/detail/${game.id}`} key={game.id}>
-                          <FilteredMatchItem
-                            game={game}
-                            handleSearchCoords={handleSearchCoords}
-                          />
-                          <hr className="w-full bg-[#ECECEC] my-2" />
-                        </Link>
-                      );
-                    }
-                  }
-                })}
-            </div>
+            <DesktopGameListContainer
+              allGamesData={allGamesData}
+              displayCollapsedList={displayCollapsedList}
+              handleSearchCoords={handleSearchCoords}
+              filteredGames={filteredGames}
+            />
           </div>{" "}
           <NaverMapEL
             allGamesData={allGamesData}
@@ -108,8 +71,9 @@ export const HomePage = () => {
             setFilteredGames={setFilteredGames}
             setDisplayCollapsedList={setDisplayCollapsedList}
           />
-          <MobileViewDatesList setSelectedDate={setSelectedDate} />
         </div>
+        <MobileViewDatesList setSelectedDate={setSelectedDate} />
+
         <MobileViewGameList
           formatDate={formatDate}
           handleSearchCoords={handleSearchCoords}

@@ -35,7 +35,6 @@ export const HostGameHistoryPage = () => {
     isPending,
     isError,
   } = useGetHostHistoryQuery(userId, 1, gameStatusQuery);
-  const gameData = hostHistory?.data.page_content;
 
   const tabList = [
     { id: 1, name: "모집중" },
@@ -113,15 +112,15 @@ export const HostGameHistoryPage = () => {
         </div>
 
         <div className="flex flex-col gap-2.5">
-          {gameData.map((game: GameHostHistoryField) => {
+          {hostHistory?.data.page_content?.map((game: GameHostHistoryField) => {
             return (
-              <div key={game.id} className="flex flex-col gap-2">
+              <div key={game.startdate} className="flex flex-col gap-2">
                 <h2 className="font-bold">{game?.startdate}</h2>
                 <div className="space-y-[15px]">
                   {game?.games.map((detail: GameDetailField) => {
                     return (
                       <Link
-                        key={detail.id}
+                        key={detail?.id}
                         to={`/games/detail/${detail?.id}`}
                         className="flex gap-2.5 justify-between items-center p-2 text-xs font-medium    bg-white rounded-lg border border-gray-200 border-solid max-w-[551px] text-neutral-400 "
                       >
