@@ -2,22 +2,10 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 import downarrow from "../../assets/Chevron_Down_MD.svg";
 import { useEffect, useState } from "react";
 import useUserDataStore from "../../store/useUserDataStore";
-import { useGetHostHistoryQuery } from "../../hooks/games/useGetHostHistoryQuery";
+import { useHostHistoryInfiniteQuery } from "../../hooks/games/useHostHistoryInfiniteQuery";
+
 import { LoadingPage } from "../LoadingPage";
-import { MatchTags } from "../../components/game/MatchTags";
-import rightArrow from "../../assets/Chevron_Right_MD.svg";
-import {
-  GameCancelledTag,
-  GameFinishedTag,
-  RecruitingCompletedTag,
-  RecruitingTag,
-} from "../../stories/Tags.stories";
-import { Link } from "react-router-dom";
-import {
-  GameDetailField,
-  GameHostHistoryField,
-} from "../../interface/gameInterface";
-import { NotFoundPage } from "../NotFoundPage";
+import { HostGameHistoryContainer } from "../../components/game/host/HostGameHistoryContainer";
 
 export const HostGameHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -30,11 +18,15 @@ export const HostGameHistoryPage = () => {
   const { userId } = useUserDataStore();
 
   const {
-    data: hostHistory,
+    data: historyData,
+    status,
+    error,
+    fetchNextPage,
+
+    hasNextPage,
     refetch,
-    isPending,
-    isError,
-  } = useGetHostHistoryQuery(userId, 1, gameStatusQuery);
+  } = useHostHistoryInfiniteQuery(userId, gameStatusQuery);
+  console.log(historyData);
 
   const tabList = [
     { id: 1, name: "모집중" },
@@ -60,18 +52,21 @@ export const HostGameHistoryPage = () => {
     refetch();
   }, [refetch, defaultTabName, gameStatusQuery]);
 
-  if (isPending) {
+  if (status === "pending") {
     return <LoadingPage />;
   }
 
-  if (isError) {
-    return <NotFoundPage />;
+  if (status === "error") {
+    return <p>Error...{error.message}</p>;
   }
   return (
     <section className="laptop:my-[69px] mobile:my-0">
       <NavigateToPrevContainer children="나의 호스팅 경기" />
 
-      <div className="relative laptop:w-[500px]  laptop:min-h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-10 ">
+      <div
+        style={{ scrollbarWidth: "thin" }}
+        className="relative laptop:w-[500px]  laptop:h-[735px] mobile:h-full   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-8 laptop:px-9 mobile:px-4 py-9 rounded-lg flex flex-col gap-10 "
+      >
         <div className="flex justify-between">
           <h1 className="text-[26px] w-full font-bold laptop:block mobile:hidden">
             나의 호스팅 경기
@@ -110,52 +105,11 @@ export const HostGameHistoryPage = () => {
             </div>
           </div>
         </div>
-
-        <div className="flex flex-col gap-2.5">
-          {hostHistory?.data.page_content?.map((game: GameHostHistoryField) => {
-            return (
-              <div key={game.startdate} className="flex flex-col gap-2">
-                <h2 className="font-bold">{game?.startdate}</h2>
-                <div className="space-y-[15px]">
-                  {game?.games.map((detail: GameDetailField) => {
-                    return (
-                      <Link
-                        key={detail?.id}
-                        to={`/games/detail/${detail?.id}`}
-                        className="flex gap-2.5 justify-between items-center p-2 text-xs font-medium    bg-white rounded-lg border border-gray-200 border-solid max-w-[551px] text-neutral-400 "
-                      >
-                        <div className="flex flex-col justify-center h-full ">
-                          {detail?.game_status === "open" && (
-                            <MatchTags {...RecruitingTag.args} />
-                          )}
-                          {detail?.game_status === "canceled" && (
-                            <MatchTags {...GameCancelledTag.args} />
-                          )}
-                          {detail?.game_status === "closed" && (
-                            <MatchTags {...RecruitingCompletedTag.args} />
-                          )}
-                          {detail?.game_status === "completed" && (
-                            <MatchTags {...GameFinishedTag.args} />
-                          )}
-                          <div className="mt-1.5 text-base font-bold leading-5 text-ellipsis text-zinc-800 max-md:max-w-full">
-                            {detail?.title}
-                          </div>
-                          <div className="mt-1.5 text-ellipsis max-md:max-w-full">
-                            서울특별시 한국동 한국로 123-456
-                          </div>
-                          <div className="text-ellipsis max-md:max-w-full">
-                            10:00 ~ 13:00
-                          </div>
-                        </div>
-                        <img loading="lazy" src={rightArrow} />
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <HostGameHistoryContainer
+          historyData={historyData}
+          fetchNextPage={fetchNextPage}
+          hasNextPage={hasNextPage}
+        />
       </div>
     </section>
   );
