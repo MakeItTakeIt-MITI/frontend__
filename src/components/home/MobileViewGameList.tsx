@@ -3,7 +3,7 @@ import { GameDetailField } from "../../interface/gameInterface";
 
 import { MobileFilteredMatchItem } from "../game/MobileFilteredMatchItem";
 import { MobileMatchItem } from "../game/MobileMatchItem";
-import { NoGamesAvailableBox } from "./NoGamesAvailableBox";
+import { NoGamesAvailableInfoBox } from "./NoGamesAvailableInfoBox";
 
 interface GameDetailProp {
   formatDate: string;
@@ -33,8 +33,7 @@ export const MobileViewGameList = ({
           );
         })}
 
-      {!displayCollapsedList ||
-        (data?.data.length < 1 && <NoGamesAvailableBox data={data} />)}
+      {data?.data.length === 0 && <NoGamesAvailableInfoBox />}
       {displayCollapsedList &&
         data?.data.map((game: GameDetailField) => {
           for (const address of filteredGames) {

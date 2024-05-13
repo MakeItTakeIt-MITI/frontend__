@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { GameDetailField } from "../../interface/gameInterface";
-import { NoGamesAvailableBox } from "./NoGamesAvailableBox";
 import { MatchItem } from "../game/MatchItem";
 import React from "react";
+import { NoGamesAvailableInfoBox } from "./NoGamesAvailableInfoBox";
 
 interface DesktopGameListProps {
   allGamesData: {
@@ -21,15 +21,17 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
   handleSearchCoords,
   filteredGames,
 }) => {
+  const games = allGamesData?.data;
+
   return (
     <div
-      style={{ scrollbarWidth: "thin" }}
+      style={{ overflow: "auto", scrollbarWidth: "thin" }}
       id="gameListBox"
-      className=" w-[371px] p-3  mobile:hidden tablet:block space-y-3 rounded-lg bg-[#FBFBFB]  h-[409px] overflow-y-scroll"
+      className="h-[409px] w-[371px] p-3  mobile:hidden tablet:block space-y-3 rounded-lg bg-[#FBFBFB]   "
     >
       {!displayCollapsedList &&
         allGamesData &&
-        allGamesData?.data?.map((game: GameDetailField) => {
+        games?.map((game: GameDetailField) => {
           return (
             <MatchItem
               key={game.id}
@@ -38,12 +40,9 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
             />
           );
         })}
-      {!displayCollapsedList ||
-        (allGamesData?.data.length < 1 && (
-          <NoGamesAvailableBox data={allGamesData} />
-        ))}
+      {games.length === 0 && <NoGamesAvailableInfoBox />}
       {displayCollapsedList &&
-        allGamesData?.data.map((game: GameDetailField) => {
+        games.map((game: GameDetailField) => {
           for (const address of filteredGames) {
             if (address === game.court.address) {
               return (

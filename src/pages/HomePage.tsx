@@ -2,14 +2,12 @@ import { HeroCarousel } from "../components/home/Hero";
 import { MobileViewDatesList } from "../components/home/MobileViewDatesList";
 import { useGetGamesDataQuery } from "../hooks/games/useGetGamesDataQuery";
 import { DesktopViewDatesList } from "../components/home/DesktopViewDatesList";
-
 import { useEffect, useState } from "react";
 import { MobileViewGameList } from "../components/home/MobileViewGameList";
 import { LoadingPage } from "./LoadingPage";
 import { NaverMapEL } from "../components/naver/NaverMap";
 import { NotFoundPage } from "./NotFoundPage";
 import useGeolocationStore from "../store/useGeolocationStore";
-
 import { DesktopGameListContainer } from "../components/home/DesktopGameListContainer";
 
 export const HomePage = () => {
@@ -47,10 +45,10 @@ export const HomePage = () => {
   }
 
   return (
-    <main className="laptop:mb-[69px] mobile:my-0">
+    <section className="laptop:mb-[69px] mobile:my-0">
       <div className="  flex flex-col gap-6  w-full   mx-auto  max-w-[1024px] ">
         <HeroCarousel />
-        <div className="flex   tablet:flex-row mobile:flex-col tablet:gap-10 mobile:gap-4 mobile:-mt-4  ">
+        <div className="flex   tablet:gap-10   ">
           <div className="space-y-4">
             <DesktopViewDatesList
               selectingDate={selectingDate}
@@ -81,6 +79,6 @@ export const HomePage = () => {
           filteredGames={filteredGames}
         />
       </div>
-    </main>
+    </section>
   );
 };
