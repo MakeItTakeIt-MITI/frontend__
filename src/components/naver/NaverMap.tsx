@@ -42,10 +42,9 @@ export const NaverMapEL = ({
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
       center: new naver.maps.LatLng(latitude, longitude),
-      zoom: 15,
+      zoom: 14,
       zoomControl: true,
       pinchZoom: true,
-      draggable: true,
       scrollWheel: true,
       zoomControlOptions: {
         style: naver.maps.ZoomControlStyle.MEDIUM,

@@ -18,7 +18,9 @@ export function setCustomMarkers(map: any, allGamesData: GameDetailField[], addr
 
         new naver.maps.Marker({
             position: new naver.maps.LatLng(latitude, longitude),
+            zoom: 12,
             map: map,
+            pinchZoom: true,
             title: data.title,
             clickable: true,
             icon: {
