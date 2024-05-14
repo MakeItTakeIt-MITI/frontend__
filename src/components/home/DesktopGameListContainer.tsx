@@ -22,6 +22,7 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
   filteredGames,
 }) => {
   const games = allGamesData?.data;
+  console.log(games);
 
   return (
     <div
@@ -45,6 +46,7 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
         })}
       {games.length === 0 && <NoGamesAvailableInfoBox />}
       {displayCollapsedList &&
+        allGamesData &&
         games.map((game: GameDetailField) => {
           for (const address of filteredGames) {
             if (address === game.court.address) {

@@ -73,7 +73,7 @@ input[type="number"] {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
-
+/* 
 .arrow {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
@@ -84,4 +84,4 @@ input[type="number"] {
   background-color: #fff;
   border: 1px solid black;
   z-index: -99;
-}
+} */

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GameDetailField } from "../../interface/gameInterface";
 import {
   setCoordsToSelectedGame,
@@ -42,7 +42,7 @@ export const NaverMapEL = ({
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
       center: new naver.maps.LatLng(latitude, longitude),
-      zoom: 14,
+      zoom: 15,
       zoomControl: true,
       pinchZoom: true,
       draggable: true,
@@ -61,7 +61,7 @@ export const NaverMapEL = ({
 
     setCustomMarkers(
       naverMap,
-      allGamesData.data,
+      allGamesData?.data,
       addressesList,
       setFilteredGames,
       setDisplayCollapsedList

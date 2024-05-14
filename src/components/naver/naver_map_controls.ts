@@ -1,5 +1,6 @@
 import { GameDetailField } from "../../interface/gameInterface";
 import markerIcon from "../../assets/new_map_marker.svg";
+import markerContainerImg from "../../assets/games/game_detail_map_icon.svg"
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
@@ -33,35 +34,13 @@ export function setCustomMarkers(map: any, allGamesData: GameDetailField[], addr
 
 
 export function newCustomMarker() {
-    const markerLayer = document.createElement("div");
-    const marker = document.createElement("img");
-    const triangle = document.createElement("span");
+    return `
+    <div class="relative">
+    <img src=${markerContainerImg} alt="marker container" />
+    <img src=${markerIcon} alt="marker container" class="absolute top-0 right-0 bottom-2 left-0 flex items-center justify-center m-auto" />
+    </div>
+    `
 
-    marker.setAttribute("src", markerIcon);
-    marker.setAttribute("alt", "marker");
-    markerLayer.classList.add(
-        "relative",
-        "size-9",
-        "bg-white",
-        "rounded-full",
-        "border",
-        "border-[#4065F5]",
-        "flex",
-        "items-center",
-        "justify-center"
-    );
-
-    triangle.classList.add(
-        // "absolute",
-        // "-bottom-2", 'h-0', "w-4",
-        // "border", "border-b-[10px]"
-        'arrow'
-
-    )
-
-
-    markerLayer.append(marker, triangle);
-    return markerLayer;
 }
 
 function createCustomMapMarker(data: GameDetailField, addressesList: string[], setFilteredGames: (arg: string[]) => void, setDisplayCollapsedList: (arg: boolean) => void) {
@@ -91,13 +70,7 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
         plusIcon.classList.add('absolute', 'flex', 'items-center', 'justify-center', '-top-2', '-right-2', 'w-5', 'h-5', 'rounded-full', 'bg-white', 'border', 'border-[#4065F5]', 'text-black', 'text-[15px]', 'font-bold', 'z-10')
         link.appendChild(plusIcon);
         plusIcon.textContent = '+'
-        // link.href = ;
 
-        // link.addEventListener('click', () => {
-        //     setFilteredGames(occurrences)
-        //     setDisplayCollapsedList(true)
-
-        // })
 
         link.addEventListener('click', () => {
             clickCount++; // Increment click count
