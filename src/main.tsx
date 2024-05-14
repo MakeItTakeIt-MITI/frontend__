@@ -41,6 +41,7 @@ import { MobileViewItemsTab } from "./pages/MobileViewItemsTab.tsx";
 import { GameJoinPage } from "./pages/games/GameJoinPage.tsx";
 import { UserInquiryDetailPage } from "./pages/user/UserInquiryDetailPage.tsx";
 import { GameDetailEditPage } from "./pages/games/GameDetailEditPage.tsx";
+import { FindCourtsPage } from "./pages/games/FindCourtsPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -196,6 +197,7 @@ const router = createBrowserRouter([
               },
 
               { path: "join/submitted", element: <MatchSubmittedPage /> },
+              { path: "courts", element: <FindCourtsPage /> },
             ],
           },
         ],
