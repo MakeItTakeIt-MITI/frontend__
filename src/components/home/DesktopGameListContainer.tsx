@@ -22,7 +22,6 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
   filteredGames,
 }) => {
   const games = allGamesData?.data;
-  console.log(games);
 
   return (
     <div

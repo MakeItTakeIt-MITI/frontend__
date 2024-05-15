@@ -52,7 +52,7 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailBoxProp) => {
         <div>
           <button
             disabled
-            className=" w-full h-[48px] bg-[#969696] rounded-lg text-[#E8E8E8] "
+            className="hidden w-full h-[48px] bg-[#969696] rounded-lg text-[#E8E8E8] "
           >
             {" "}
             취소된 경기입니다.
@@ -71,15 +71,12 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailBoxProp) => {
         </div>
       )}
       {gameDetail.game_status === "completed" && (
-        <div>
-          <button
-            disabled
-            className=" w-full h-[48px] bg-[#969696] rounded-lg text-[#E8E8E8] "
-          >
+        <Link to="/">
+          <button className=" w-full h-[48px] bg-[#4065F6] rounded-lg text-white ">
             {" "}
-            이미 종료된 경기입니다.
+            리뷰 작성하기
           </button>
-        </div>
+        </Link>
       )}
     </div>
   );
