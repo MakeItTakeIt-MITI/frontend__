@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import axiosUrl from "../../utils/axios";
+import { kakaoPayStatusApproved } from "../../api/payment";
 
 export const useKakaoPayApprovedMutation = (
   request_id: string | null,
@@ -7,18 +7,6 @@ export const useKakaoPayApprovedMutation = (
 ) => {
   return useMutation({
     mutationKey: ["Kakao payment approved"],
-    mutationFn: async () => {
-      try {
-        const response = await axiosUrl.post(
-          `/payments/kakao/approve/${request_id}?pg_token=${pg_token}`
-        );
-        return response.data;
-      } catch {
-        throw new Error();
-      }
-    },
-    onSuccess: (response) => {
-      console.log(response);
-    },
+    mutationFn: () => kakaoPayStatusApproved(request_id, pg_token),
   });
 };

@@ -21,7 +21,7 @@ export const GameDetailParticipantsBox = ({
           </div>
         ) : (
           <div
-            className="flex gap-4 overflow-x-scroll "
+            className="flex gap-4 overflow-x-auto "
             style={{ scrollbarWidth: "thin", scrollbarColor: "#fff" }}
           >
             <div className="flex flex-col items-center gap-1">

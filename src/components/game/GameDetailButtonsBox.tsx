@@ -5,8 +5,6 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailBoxProp) => {
   const { id } = useParams();
   const gameIdParam = Number(id);
 
-  console.log();
-
   return (
     <div className="laptop:static mobile:fixed mobile:bottom-[80px] mobile:px-4 laptop:px-0  mobile:w-full text-[14px]">
       {gameDetail.game_status === "open" && gameDetail?.is_host && (
