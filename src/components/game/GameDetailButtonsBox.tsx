@@ -1,9 +1,21 @@
 import { Link, useParams } from "react-router-dom";
 import { GameDetailBoxProp } from "../../interface/gameInterface";
+import useUserDataStore from "../../store/useUserDataStore";
+import { useCancelParticipationMutation } from "../../hooks/games/useCancelParticipationMutation";
 
 export const GameDetailButtonsBox = ({ gameDetail }: GameDetailBoxProp) => {
+  const { userId } = useUserDataStore();
   const { id } = useParams();
   const gameIdParam = Number(id);
+
+  const { mutate: cancelParticipation } = useCancelParticipationMutation(
+    gameIdParam,
+    userId
+  );
+
+  const handleCancelParticipation = () => {
+    cancelParticipation();
+  };
 
   return (
     <div className="laptop:static mobile:fixed mobile:bottom-[80px] mobile:px-4 laptop:px-0  mobile:w-full text-[14px]">
@@ -27,12 +39,13 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailBoxProp) => {
           </Link>
         )}
       {gameDetail.game_status === "open" && gameDetail?.is_participated && (
-        <Link to={`/games/detail/${gameIdParam}/join`}>
-          <button className=" w-full h-[48px] bg-[#F64061] rounded-lg text-white ">
-            {" "}
-            참여 취소하기
-          </button>
-        </Link>
+        <button
+          onClick={handleCancelParticipation}
+          className=" w-full h-[48px] bg-[#F64061] rounded-lg text-white "
+        >
+          {" "}
+          참여 취소하기
+        </button>
       )}
 
       {gameDetail.game_status === "canceled" && (

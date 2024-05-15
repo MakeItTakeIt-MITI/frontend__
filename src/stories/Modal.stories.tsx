@@ -127,3 +127,12 @@ UserRegisterSuccess.args = {
   contextTwo: "로그인을 통해 경기에 참여해보세요!",
   buttonContext: "확인",
 };
+
+export const ParticipationCancelled = Template.bind({});
+ParticipationCancelled.args = {
+  title: "경기 참여 취소",
+  context: "경기 참여가 정상적으로 취소되었습니다.",
+  buttonContext: "확인",
+  isLink: true,
+  path: "/",
+};

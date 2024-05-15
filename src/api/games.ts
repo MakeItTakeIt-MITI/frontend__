@@ -73,3 +73,12 @@ export const editGameDetail = async (game_id: number | null, options: GameEditPa
         throw new Error
     }
 }
+
+export const cancelGameParticipation = async (gameId: number | null, userId: number | null) => {
+    try {
+        const response = await axiosUrl.delete(`games/${gameId}/participations/${userId}`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
