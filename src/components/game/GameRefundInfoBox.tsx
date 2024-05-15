@@ -1,9 +1,15 @@
-import { useState } from "react";
 import checked_box from "../../assets/games/refund_agreement_checked.svg";
 import unchecked_box from "../../assets/games/refund_agreement_unchecked.svg";
 
-export const GameRefundInfoBox = () => {
-  const [isChecked, setIsChecked] = useState(false);
+interface RefundInfoBoxProp {
+  isChecked: boolean;
+  setIsChecked: (arg: boolean) => void;
+}
+
+export const GameRefundInfoBox: React.FC<RefundInfoBoxProp> = ({
+  isChecked,
+  setIsChecked,
+}) => {
   const handleCheckAgreement = () => {
     setIsChecked(!isChecked);
   };

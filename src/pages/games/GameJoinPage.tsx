@@ -3,15 +3,18 @@ import { useGetGameDetailQuery } from "../../hooks/games/useGetGameDetailQuery";
 import { LoadingPage } from "../LoadingPage";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { NotFoundPage } from "../NotFoundPage";
-
 import { GameDetailHostInfoBox } from "../../components/game/GameDetailHostInfoBox";
 import { GameDetailExtraInfoBox } from "../../components/game/GameDetailExtraInfoBox";
 import { GameDetailMap } from "../../components/naver/GameDetailMap";
 import { GamePaymentInfoBox } from "../../components/game/GamePaymentInfoBox";
 import { KakaoPayButton } from "../../components/kakao/KakaoPayButton";
 import { GameRefundInfoBox } from "../../components/game/GameRefundInfoBox";
+import { useState } from "react";
+import { GamePaymentButton } from "../../components/payment/GamePaymentButton";
 
 export const GameJoinPage = () => {
+  const [isChecked, setIsChecked] = useState(false);
+
   const { id } = useParams();
   const gameIdParam = Number(id);
   const {
@@ -43,10 +46,11 @@ export const GameJoinPage = () => {
               <h2 className="font-bold">결제 수단</h2>
               <KakaoPayButton />
             </div>
-            <GameRefundInfoBox />
-            <button className="h-[48px] w-full rounded-lg bg-[#E8E8E8] text-[#969696]">
-              결제하기
-            </button>
+            <GameRefundInfoBox
+              isChecked={isChecked}
+              setIsChecked={setIsChecked}
+            />
+            <GamePaymentButton isChecked={isChecked} />
           </div>
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
             <GameDetailHostInfoBox gameDetail={gameDetail.data} />
