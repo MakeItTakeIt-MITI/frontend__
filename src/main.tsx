@@ -42,6 +42,7 @@ import { GameJoinPage } from "./pages/games/GameJoinPage.tsx";
 import { UserInquiryDetailPage } from "./pages/user/UserInquiryDetailPage.tsx";
 import { GameDetailEditPage } from "./pages/games/GameDetailEditPage.tsx";
 import { FindCourtsPage } from "./pages/games/FindCourtsPage.tsx";
+import { KakaoPaymentHandler } from "./pages/games/KakaoPaymentHandler.tsx";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <HomePage /> },
+      {
+        path: "/payments/kakao/approve",
+        element: <KakaoPaymentHandler />,
+      },
 
       {
         path: "/auth",

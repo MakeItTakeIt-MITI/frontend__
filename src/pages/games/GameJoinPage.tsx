@@ -14,6 +14,7 @@ import { GamePaymentButton } from "../../components/payment/GamePaymentButton";
 
 export const GameJoinPage = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const [paymentMethodSelected, setPaymentMethodSelected] = useState(false);
 
   const { id } = useParams();
   const gameIdParam = Number(id);
@@ -44,13 +45,19 @@ export const GameJoinPage = () => {
             </div>
             <div className="p-3 space-y-3 border border-gray-200 rounded-lg">
               <h2 className="font-bold">결제 수단</h2>
-              <KakaoPayButton />
+              <KakaoPayButton
+                setPaymentMethodSelected={setPaymentMethodSelected}
+                paymentMethodSelected={paymentMethodSelected}
+              />
             </div>
             <GameRefundInfoBox
               isChecked={isChecked}
               setIsChecked={setIsChecked}
             />
-            <GamePaymentButton isChecked={isChecked} />
+            <GamePaymentButton
+              isChecked={isChecked}
+              paymentMethodSelected={paymentMethodSelected}
+            />
           </div>
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
             <GameDetailHostInfoBox gameDetail={gameDetail.data} />

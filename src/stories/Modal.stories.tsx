@@ -90,6 +90,18 @@ KakaoPaymentFailure.args = {
   context: "결제가 정상적으로 완료되지 않았습니다.",
   contextTwo: "다시 결제를 진행해주세요.",
   buttonContext: "확인",
+  isLink: true,
+  path: "/",
+};
+
+export const KakaoPayFailureToJoin = Template.bind({});
+KakaoPayFailureToJoin.args = {
+  title: "카카오 결제 실패",
+  context: "모집이 마감된 경기입니다.",
+  contextTwo: "홈페이지로 이동합니다.",
+  buttonContext: "확인",
+  isLink: true,
+  path: "/",
 };
 
 export const DeletedAccountUser = Template.bind({});
