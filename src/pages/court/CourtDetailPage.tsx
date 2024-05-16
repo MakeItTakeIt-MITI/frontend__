@@ -6,6 +6,8 @@ import useUserDataStore from "../../store/useUserDataStore";
 import { CourtDetailMap } from "../../components/naver/CourtDetailMap";
 import { getCourtDetailQuery } from "../../hooks/courts/getCourtDetailQuery";
 import { useParams } from "react-router-dom";
+import { useGetCourtListInfiniteQuery } from "../../hooks/courts/useGetCourtListInfiniteQuery";
+import { CourtHistoryListContainer } from "../../components/court/CourtHistoryListContainer";
 
 export const CourtDetailPage = () => {
   const [gameStatusQuery, _setGameStatusQuery] = useState("");
@@ -13,16 +15,23 @@ export const CourtDetailPage = () => {
   const { id } = useParams();
   const courtIdParam = Number(id);
 
-  const {
-    data: gameHistory,
+  // const {
+  //   data: gameHistory,
 
-    fetchNextPage,
-    hasNextPage,
-  } = useParticipationHistoryInfiniteQuery(userId, gameStatusQuery);
+  //   fetchNextPage,
+  //   hasNextPage,
+  // } = useParticipationHistoryInfiniteQuery(userId, gameStatusQuery);
 
   const { data: courtDetailData } = getCourtDetailQuery(courtIdParam);
 
-  console.log(courtDetailData);
+  const courtId = courtDetailData?.data.id;
+  const {
+    data: courtListData,
+    fetchNextPage,
+    hasNextPage,
+  } = useGetCourtListInfiniteQuery(courtIdParam);
+
+  console.log(courtListData);
 
   return (
     <section className="laptop:my-[69px] mobile:mb-16">
@@ -58,8 +67,8 @@ export const CourtDetailPage = () => {
           style={{ scrollbarWidth: "thin" }}
           className=" laptop:w-[530px] bg-[#FBFBFB]  laptop:h-[738px] mobile:h-full   mobile:w-full mx-auto   p-3 rounded-lg flex flex-col gap-10 "
         >
-          <GameHistoryContainer
-            data={gameHistory}
+          <CourtHistoryListContainer
+            data={courtListData}
             fetchNextPage={fetchNextPage}
             hasNextPage={hasNextPage}
           />

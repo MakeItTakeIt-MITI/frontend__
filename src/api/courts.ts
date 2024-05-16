@@ -17,3 +17,11 @@ export const getCourtDetail = async (courtId: number | null) => {
         throw new Error
     }
 }
+export const getProceededCourtList = async (courtId: number | null, pageParam: number | null) => {
+    try {
+        const response = await axiosUrl.get(`/courts/${courtId}/games`, { params: { pageParam } })
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
