@@ -4,15 +4,10 @@ import { useState } from "react";
 import { PostQuestionProps } from "../../interface/supportInterace";
 import { usePostQuestionMutation } from "../../hooks/support/usePostQuestionMutation";
 import { FormLabel } from "../../components/forms/FormLabel";
-import { AlertModal } from "../../components/common/AlertModal";
-import {
-  InactiveUserNotification,
-  InquirySubmitted,
-} from "../../stories/Modal.stories";
 import { useNavigate } from "react-router-dom";
 
 export const UserInquiryPage = () => {
-  const [displayModal, setDisplayModal] = useState(false);
+  const [_displayModal, _setDisplayModal] = useState(false);
   const navigate = useNavigate();
 
   const { register, formState, handleSubmit } = useForm<PostQuestionProps>();
@@ -27,16 +22,9 @@ export const UserInquiryPage = () => {
     postQuestionMutate(data);
   };
 
-  const handleCloseModal = () => setDisplayModal(false);
+  // const handleCloseModal = () => setDisplayModal(false);
 
   if (postResponse?.status_code === 201) {
-    // return (
-    //   <AlertModal
-    //     modal={displayModal}
-    //     handleCloseModal={handleCloseModal}
-    //     {...InactiveUserNotification.args}
-    //   />
-    // );
     alert("문의 작성을 완료하였습니다");
     navigate("/support/customer-service");
   }

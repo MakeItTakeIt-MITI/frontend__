@@ -18,10 +18,7 @@ export const GameDetailInfoBox = ({ gameDetail }: GameDetailBoxProp) => {
           <img src={peopleSvg} alt="peoples icon" className="tablet:w-[20px]" />
           <p>
             총 {gameDetail?.max_invitation}명 중{" "}
-            {gameDetail?.confimed_participations
-              ? gameDetail?.confimed_participations
-              : 0}
-            명 모집 완료
+            {gameDetail?.num_of_confirmed_participations}명 모집 완료
           </p>
         </div>
       </div>

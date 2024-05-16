@@ -182,8 +182,8 @@ export interface GameDetailField {
     account_number: string;
     created_at: string;
     modified_at: string;
-    confirmed_participations: ConfirmedParticipation[];
-    num_of_confirmed_participations: number;
+    confirmed_participations: any;
+    num_of_confirmed_participations: any;
 
 }
 

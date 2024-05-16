@@ -26,8 +26,8 @@ import { NicknameAllowed } from "../../stories/SuccessMessage.stories";
  */
 
 export const EditProfilePage = () => {
-  const [passVerification, setPassVerification] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  const [passVerification, _setPassVerification] = useState("");
+  const [newPassword, _setNewPassword] = useState("");
 
   const { userId } = useUserDataStore();
   const { data, isPending } = useUserInfoQuery(userId);
@@ -35,8 +35,7 @@ export const EditProfilePage = () => {
   const { register, handleSubmit, getValues, formState } =
     useForm<UserEditField>();
 
-  const { mutate: updateUserInfoMutation, updateUserResponse } =
-    useUpdateUserMutation(userId);
+  const { mutate: updateUserInfoMutation } = useUpdateUserMutation(userId);
 
   const { mutate: verifyNickname, data: nicknameDuplicateResponse } =
     useCheckNicknameDuplicateMutation();
@@ -61,8 +60,6 @@ export const EditProfilePage = () => {
     const nicknameData = { nickname: getValues("nickname") };
     verifyNickname(nicknameData);
   };
-
-  console.log(updateUserResponse);
 
   return (
     <section className="laptop:my-4 mobile:my-0">

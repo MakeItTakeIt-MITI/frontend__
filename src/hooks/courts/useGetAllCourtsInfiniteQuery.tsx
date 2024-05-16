@@ -9,7 +9,7 @@ export const useGetAllCourtsInfiniteQuery = (
     queryKey: ["all courts data"],
     queryFn: ({ pageParam = 1 }) => getAllCourts(search, pageParam, district),
     initialPageParam: 1,
-    getNextPageParam: (lastPage, pages) => {
+    getNextPageParam: (lastPage) => {
       const nextPage = lastPage.current_index + 1;
       const hasNextPage = nextPage <= lastPage.end_index;
 

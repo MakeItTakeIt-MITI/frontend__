@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import useUserDataStore from "../../store/useUserDataStore";
 import { useCancelParticipationMutation } from "../../hooks/games/useCancelParticipationMutation";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { useGetGameDetailQuery } from "../../hooks/games/useGetGameDetailQuery";

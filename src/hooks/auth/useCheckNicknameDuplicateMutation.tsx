@@ -6,6 +6,5 @@ export const useCheckNicknameDuplicateMutation = () => {
   return useMutation({
     mutationKey: ["update_user_info"],
     mutationFn: (data: ValidationField) => userValidation(data),
-    onSuccess: (response) => {},
   });
 };

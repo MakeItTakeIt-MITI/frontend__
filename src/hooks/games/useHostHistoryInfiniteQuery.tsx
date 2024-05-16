@@ -15,7 +15,7 @@ export const useHostHistoryInfiniteQuery = (
       return response.data.data;
     },
     initialPageParam: 1,
-    getNextPageParam: (lastPage, pages) => {
+    getNextPageParam: (lastPage) => {
       const nextPage = lastPage.current_index + 1;
       const hasNextPage = nextPage <= lastPage.end_index;
 

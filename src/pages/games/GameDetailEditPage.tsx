@@ -1,5 +1,4 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import useUserDataStore from "../../store/useUserDataStore";
 import { useGetGameDetailQuery } from "../../hooks/games/useGetGameDetailQuery";
 import { LoadingPage } from "../LoadingPage";
 import { NotFoundPage } from "../NotFoundPage";
@@ -8,9 +7,6 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 import { GameDetailMap } from "../../components/naver/GameDetailMap";
 import { GameDetailHeader } from "../../components/game/GameDetailStatusBox";
 import { GameDetailInfoBox } from "../../components/game/GameDetailInfoBox";
-import { GameDetailParticipantsBox } from "../../components/game/GameDetailParticipantsBox";
-import { GameDetailButtonsBox } from "../../components/game/GameDetailButtonsBox";
-import { GameDetailHostInfoBox } from "../../components/game/GameDetailHostInfoBox";
 import { GameDetailExtraInfoBox } from "../../components/game/GameDetailExtraInfoBox";
 import { EditGameDetailsBox } from "../../components/game/EditGameDetailsBox";
 import { useForm } from "react-hook-form";
@@ -18,7 +14,6 @@ import { GameEditParameters } from "../../interface/gameInterface";
 import { useEditGameDetailMutation } from "../../hooks/games/useEditGameDetailMutation";
 
 export const GameDetailEditPage = () => {
-  const { userId } = useUserDataStore();
   const { id } = useParams();
   const gameIdParam = Number(id);
   const navigate = useNavigate();

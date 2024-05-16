@@ -7,7 +7,7 @@ export const TabFilterList = ({
   openList,
   handleOpenList,
   handleChangeTab,
-}) => {
+}: any) => {
   useEffect(() => {
     if (defaultTabName === "전체 보기") {
       setGameStatusQuery("");
