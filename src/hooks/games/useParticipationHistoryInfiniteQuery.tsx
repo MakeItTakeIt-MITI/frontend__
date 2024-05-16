@@ -1,15 +1,15 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axiosUrl from "../../utils/axios";
 
-export const useHostHistoryInfiniteQuery = (
+export const useParticipationHistoryInfiniteQuery = (
   userId: number | null,
   gameStatus?: string | null
 ) => {
   return useInfiniteQuery({
-    queryKey: ["host history"],
+    queryKey: ["participation history"],
     queryFn: async ({ pageParam = 1 }) => {
       const response = await axiosUrl.get(
-        `/users/${userId}/hostings?page=${pageParam}&game_status=${gameStatus}`
+        `/users/${userId}/participated-games?page=${pageParam}&game_status=${gameStatus}`
       );
 
       return response.data.data;

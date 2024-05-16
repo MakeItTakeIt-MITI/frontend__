@@ -1,13 +1,13 @@
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { useEffect, useState } from "react";
 import useUserDataStore from "../../store/useUserDataStore";
-import { useHostHistoryInfiniteQuery } from "../../hooks/games/useHostHistoryInfiniteQuery";
 
 import { LoadingPage } from "../LoadingPage";
 import { GameHistoryContainer } from "../../components/game/host/GameHistoryContainer";
 import { TabFilterList } from "../../components/game/TabFilterList";
+import { useParticipationHistoryInfiniteQuery } from "../../hooks/games/useParticipationHistoryInfiniteQuery";
 
-export const HostGameHistoryPage = () => {
+export const GameJoinedHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
   const [gameStatusQuery, setGameStatusQuery] = useState("");
   const [openList, setOpenList] = useState(false);
@@ -18,14 +18,14 @@ export const HostGameHistoryPage = () => {
   const { userId } = useUserDataStore();
 
   const {
-    data: historyData,
+    data: guesHistory,
     status,
     error,
     fetchNextPage,
 
     hasNextPage,
     refetch,
-  } = useHostHistoryInfiniteQuery(userId, gameStatusQuery);
+  } = useParticipationHistoryInfiniteQuery(userId, gameStatusQuery);
 
   useEffect(() => {
     if (defaultTabName === "전체 보기") {
@@ -53,12 +53,11 @@ export const HostGameHistoryPage = () => {
     <section className="laptop:my-[69px] mobile:mb-16">
       <NavigateToPrevContainer children="나의 호스팅 경기" />
 
-      <div className="laptop:space-y-8 mobile:mt-8 laptop:mt-0">
-        <div className="laptop:w-[593px] mobile:w-full mx-auto flex justify-between">
+      <div className="laptop:space-y-8 mobile:mt-8  laptop:mt-0">
+        <div className="laptop:w-[593px] mx-auto flex justify-between">
           <h1 className="text-[26px] w-full font-bold laptop:block mobile:hidden">
-            나의 호스팅 경기
+            나의 참여 경기
           </h1>
-          {/* tab */}
           <TabFilterList
             defaultTabName={defaultTabName}
             setGameStatusQuery={setGameStatusQuery}
@@ -67,13 +66,12 @@ export const HostGameHistoryPage = () => {
             handleChangeTab={handleChangeTab}
           />
         </div>
-
         <div
           style={{ scrollbarWidth: "thin" }}
           className=" laptop:w-[593px] bg-[#FBFBFB]  laptop:h-[653px] mobile:h-full   mobile:w-full mx-auto   p-3 rounded-lg flex flex-col gap-10 "
         >
           <GameHistoryContainer
-            data={historyData}
+            data={guesHistory}
             fetchNextPage={fetchNextPage}
             hasNextPage={hasNextPage}
           />

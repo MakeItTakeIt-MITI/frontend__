@@ -14,14 +14,14 @@ import {
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
-interface HostGameHistoryProp {
-  historyData: any;
+interface GameHistoryProps {
+  data: any;
   fetchNextPage: () => void;
   hasNextPage: boolean;
 }
 
-export const HostGameHistoryContainer: React.FC<HostGameHistoryProp> = ({
-  historyData,
+export const GameHistoryContainer: React.FC<GameHistoryProps> = ({
+  data,
   fetchNextPage,
   hasNextPage,
 }) => {
@@ -40,8 +40,8 @@ export const HostGameHistoryContainer: React.FC<HostGameHistoryProp> = ({
       style={{ overflowY: "auto", scrollbarWidth: "thin" }}
       className="flex flex-col gap-2.5 "
     >
-      {historyData &&
-        historyData.pages.map(
+      {data &&
+        data.pages.map(
           (page: any) =>
             page.page_content &&
             page.page_content.map((newData: GameHostHistoryField) => (

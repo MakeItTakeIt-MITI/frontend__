@@ -33,7 +33,6 @@ import { FindPasswordResetPage } from "./pages/auth/FindPasswordResetPage.tsx";
 import { FindEmailDisplayPage } from "./pages/auth/FindEmailDisplayPage.tsx";
 import { HostGamePage } from "./pages/games/HostGamePage.tsx";
 import { HostGameHistoryPage } from "./pages/games/HostGameHistoryPage.tsx";
-import { GuestGameHistoryPage } from "./pages/games/GuestGameHistoryPage.tsx";
 import { MyGamesPage } from "./pages/games/MyGamesPage.tsx";
 import { NotVerifiedUserPage } from "./pages/auth/NotVerifiedUserPage.tsx";
 import { NotVerifiedInputDetailPage } from "./pages/auth/NotVerifiedInputDetailPage.tsx";
@@ -44,6 +43,7 @@ import { GameDetailEditPage } from "./pages/games/GameDetailEditPage.tsx";
 import { FindCourtsPage } from "./pages/games/FindCourtsPage.tsx";
 import { KakaoPaymentHandler } from "./pages/games/KakaoPaymentHandler.tsx";
 import { GameCancelParticipationPage } from "./pages/games/GameCancelParticipationPage.tsx";
+import { GameJoinedHistoryPage } from "./pages/games/GameJoinedHistoryPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -199,7 +199,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "guest-history",
-                element: <GuestGameHistoryPage />,
+                element: <GameJoinedHistoryPage />,
               },
 
               { path: "join/submitted", element: <MatchSubmittedPage /> },
