@@ -15,7 +15,7 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
   };
 
   return (
-    <nav className="relative  z-[999] mobile:hidden tablet:flex tablet:h-[3.75rem] items-center  justify-between max-w-[1024px] w-full tablet:px-[4rem] laptop:px-[0px]   mx-auto">
+    <nav className="relative  z-[999] mobile:hidden tablet:flex h-[80px] items-center  justify-between w-[1024px]  tablet:px-[4rem] laptop:px-[0px]   mx-auto">
       <div className="flex gap-4 items-center">
         <Link to="/">
           <img src={mitiLogo} alt="miti logo" />

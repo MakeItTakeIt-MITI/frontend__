@@ -26,7 +26,7 @@ export const FAQPage = () => {
         </h1>
         <div className="flex flex-col gap-4 my-4 relative">
           <div className="space-y-6">
-            {faqData?.data.page_objects.map(
+            {faqData?.data.page_content.map(
               (
                 faq: { id: number; title: string; content: string },
                 index: number
@@ -34,24 +34,24 @@ export const FAQPage = () => {
                 return (
                   <div key={faq.id}>
                     {!openFaqs[index] && (
-                      <div className=" w-full min-h-[50px] text-[#545454] border border-gray-300 rounded-lg flex items-center justify-between py-1 px-3">
+                      <div
+                        onClick={() => handleOpenFaq(index)}
+                        className="hover:cursor-pointer w-full min-h-[50px] text-[#545454] border border-gray-300 rounded-lg flex items-center justify-between py-1 px-3"
+                      >
                         <h2 className="font-bold">{faq.title}</h2>
-                        <button
-                          onClick={() => handleOpenFaq(index)}
-                          className="hover:cursor-pointer"
-                        >
+                        <button className="">
                           <img src={downArrow} alt="down arrow" />
                         </button>
                       </div>
                     )}
                     {openFaqs[index] && (
                       <div className="  w-full min-h-[155px] border text-[#545454] border-gray-300 rounded-lg flex flex-col py-1 px-3">
-                        <div className="flex justify-between">
-                          <h2 className="font-bold">{faq.title}</h2>
-                          <button
-                            onClick={() => handleOpenFaq(index)}
-                            className="hover:cursor-pointer"
-                          >
+                        <div
+                          onClick={() => handleOpenFaq(index)}
+                          className="hover:cursor-pointer flex justify-between"
+                        >
+                          <h2 className="font-bold">{faq?.title}</h2>
+                          <button className="">
                             <img
                               src={downArrow}
                               alt="down arrow"
@@ -62,7 +62,7 @@ export const FAQPage = () => {
                         <hr className="w-full bg-gray-300 " />
                         <div className="flex flex-col gap-2 h-full py-2">
                           <h2 className="font-bold">관리자 답변</h2>
-                          <p className="h-full">{faq.content}</p>
+                          <p className="h-full">{faq?.content}</p>
                         </div>
                       </div>
                     )}

@@ -25,48 +25,59 @@ const Template: StoryFn<typeof QuickLinkTitle> = (args) => (
 export const GuestHistory = Template.bind({});
 GuestHistory.args = {
   path: "/games/guest-history",
-  context: "🏀 나의 참여 경기",
+  context: "나의 참여 경기",
 };
 
 export const HostHistory = Template.bind({});
 HostHistory.args = {
   path: "/games/host-history",
-  context: "🏁 나의 호스팅 경기",
+  context: "나의 호스팅 경기",
 };
 
 export const HostGame = Template.bind({});
 HostGame.args = {
   path: "/games/host",
-  context: "✉️ 경기 생성하기",
+  context: "경기 생성하기",
 };
 
 export const FindCourts = Template.bind({});
 FindCourts.args = {
   path: "/games/courts",
-  context: "🔍 경기장 조회",
+  context: "경기장 조회",
 };
 export const ReviewsAboutMe = Template.bind({});
 ReviewsAboutMe.args = {
   path: "/support/users-reviews",
-  context: "🗒️ 작성 리뷰",
+  context: "작성 리뷰",
 };
 export const MyReviews = Template.bind({});
 MyReviews.args = {
   path: "/support/my-reviews",
-  context: "📪 내 리뷰",
+  context: "내 리뷰",
 };
 export const EditProfile = Template.bind({});
 EditProfile.args = {
   path: "/user-profile/edit",
-  context: "🏀 프로필 수정",
+  context: "프로필 수정",
 };
 export const Faq = Template.bind({});
 Faq.args = {
   path: "/support/faq",
-  context: "⁉️ FAQ",
+  context: "FAQ",
 };
 export const CustomerSupport = Template.bind({});
 CustomerSupport.args = {
   path: "/support/customer-service",
-  context: "📢 고객센터",
+  context: "고객센터",
+};
+
+export const SettlementDetails = Template.bind({});
+SettlementDetails.args = {
+  path: "/settlement",
+  context: "정산내역",
+};
+export const TranscationHistory = Template.bind({});
+TranscationHistory.args = {
+  path: "/transactions-history",
+  context: "송금내역",
 };
