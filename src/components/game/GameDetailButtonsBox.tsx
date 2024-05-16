@@ -1,25 +1,21 @@
 import { Link, useParams } from "react-router-dom";
-import { GameDetailBoxProp } from "../../interface/gameInterface";
-import useUserDataStore from "../../store/useUserDataStore";
-import { useCancelParticipationMutation } from "../../hooks/games/useCancelParticipationMutation";
+import { GameDetailField } from "../../interface/gameInterface";
 
-export const GameDetailButtonsBox = ({ gameDetail }: GameDetailBoxProp) => {
-  const { userId } = useUserDataStore();
+interface GameDetailButtonProps {
+  gameDetail: GameDetailField;
+  currentGameCancelAvailibility: string | number;
+}
+
+export const GameDetailButtonsBox = ({
+  gameDetail,
+  currentGameCancelAvailibility,
+}: GameDetailButtonProps) => {
   const { id } = useParams();
   const gameIdParam = Number(id);
 
-  const { mutate: cancelParticipation } = useCancelParticipationMutation(
-    gameIdParam,
-    userId
-  );
-
-  const handleCancelParticipation = () => {
-    cancelParticipation();
-  };
-
   return (
     <div className="laptop:static mobile:fixed mobile:bottom-[80px] mobile:px-4 laptop:px-0  mobile:w-full text-[14px]">
-      {gameDetail.game_status === "open" && gameDetail?.is_host && (
+      {gameDetail?.game_status === "open" && gameDetail?.is_host && (
         <Link to={`/games/detail/${gameIdParam}/edit`}>
           <button className=" w-full h-[48px] bg-[#52A2D0] rounded-lg text-white ">
             {" "}
@@ -28,7 +24,7 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailBoxProp) => {
         </Link>
       )}
 
-      {gameDetail.game_status === "open" &&
+      {gameDetail?.game_status === "open" &&
         !gameDetail?.is_participated &&
         !gameDetail?.is_host && (
           <Link to={`/games/detail/${gameIdParam}/join`}>
@@ -38,28 +34,26 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailBoxProp) => {
             </button>
           </Link>
         )}
-      {gameDetail.game_status === "open" && gameDetail?.is_participated && (
-        <button
-          onClick={handleCancelParticipation}
-          className=" w-full h-[48px] bg-[#F64061] rounded-lg text-white "
-        >
-          {" "}
-          참여 취소하기
-        </button>
-      )}
-
-      {gameDetail.game_status === "canceled" && (
-        <div>
+      {gameDetail?.game_status === "open" && gameDetail?.is_participated && (
+        <Link to={`/games/cancel-participation/${gameDetail?.id}`}>
           <button
-            disabled
-            className="hidden w-full h-[48px] bg-[#969696] rounded-lg text-[#E8E8E8] "
+            disabled={currentGameCancelAvailibility !== 200 ? true : false}
+            style={{
+              backgroundColor:
+                currentGameCancelAvailibility !== 200 ? "#E8E8E8" : "#F64061",
+            }}
+            className=" w-full h-[48px] b rounded-lg text-white "
           >
             {" "}
-            취소된 경기입니다.
+            {currentGameCancelAvailibility !== 200
+              ? "참여를 취소할 수 없습니다"
+              : "참여 취소하기"}
           </button>
-        </div>
+        </Link>
       )}
-      {gameDetail.game_status === "closed" && (
+
+      {gameDetail?.game_status === "canceled" && null}
+      {gameDetail?.game_status === "closed" && (
         <div>
           <button
             disabled
@@ -70,7 +64,7 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailBoxProp) => {
           </button>
         </div>
       )}
-      {gameDetail.game_status === "completed" && (
+      {gameDetail?.game_status === "completed" && (
         <Link to="/">
           <button className=" w-full h-[48px] bg-[#4065F6] rounded-lg text-white ">
             {" "}

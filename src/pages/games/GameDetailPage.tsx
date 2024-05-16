@@ -10,6 +10,7 @@ import { GameDetailHostInfoBox } from "../../components/game/GameDetailHostInfoB
 import { GameDetailExtraInfoBox } from "../../components/game/GameDetailExtraInfoBox";
 import { GameDetailButtonsBox } from "../../components/game/GameDetailButtonsBox";
 import { GameDetailMap } from "../../components/naver/GameDetailMap";
+import { useGetRefundFeeDetailsQuery } from "../../hooks/games/useGetRefundFeeDetailsQuery";
 
 export const GameDetailPage = () => {
   const { id } = useParams();
@@ -19,6 +20,13 @@ export const GameDetailPage = () => {
     isLoading,
     isError,
   } = useGetGameDetailQuery(gameIdParam);
+  const participationId = gameDetail?.data?.participation?.id;
+
+  const { data: refundDetails } = useGetRefundFeeDetailsQuery(
+    gameIdParam,
+    participationId
+  );
+  const currentGameCancelAvailibility = refundDetails?.status_code;
 
   if (isLoading) {
     return <LoadingPage />;
@@ -43,7 +51,10 @@ export const GameDetailPage = () => {
             <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />
             <GameDetailParticipantsBox gameDetail={gameDetail.data} />
             <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />
-            <GameDetailButtonsBox gameDetail={gameDetail.data} />
+            <GameDetailButtonsBox
+              currentGameCancelAvailibility={currentGameCancelAvailibility}
+              gameDetail={gameDetail.data}
+            />
           </div>
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
             <GameDetailHostInfoBox gameDetail={gameDetail.data} />

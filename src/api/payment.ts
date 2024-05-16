@@ -9,6 +9,14 @@ export const gamePaymentDetails = async (gameId: number) => {
     }
 }
 
+export const getRefundFeeDetails = async (gameId: number | null, userId: number | null) => {
+    try {
+        const response = await axiosUrl.get(`/games/${gameId}/participations/${userId}/refund-info`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
 
 export const kakaoPayStatusReady = async (gameId: number | null) => {
     try {

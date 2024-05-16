@@ -43,6 +43,7 @@ import { UserInquiryDetailPage } from "./pages/user/UserInquiryDetailPage.tsx";
 import { GameDetailEditPage } from "./pages/games/GameDetailEditPage.tsx";
 import { FindCourtsPage } from "./pages/games/FindCourtsPage.tsx";
 import { KakaoPaymentHandler } from "./pages/games/KakaoPaymentHandler.tsx";
+import { GameCancelParticipationPage } from "./pages/games/GameCancelParticipationPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -203,6 +204,10 @@ const router = createBrowserRouter([
 
               { path: "join/submitted", element: <MatchSubmittedPage /> },
               { path: "courts", element: <FindCourtsPage /> },
+              {
+                path: "cancel-participation/:id",
+                element: <GameCancelParticipationPage />,
+              },
             ],
           },
         ],
