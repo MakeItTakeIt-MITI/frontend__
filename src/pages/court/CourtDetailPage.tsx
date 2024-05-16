@@ -8,7 +8,7 @@ import { getCourtDetailQuery } from "../../hooks/courts/getCourtDetailQuery";
 import { useParams } from "react-router-dom";
 
 export const CourtDetailPage = () => {
-  const [gameStatusQuery, setGameStatusQuery] = useState("");
+  const [gameStatusQuery, _setGameStatusQuery] = useState("");
   const { userId } = useUserDataStore();
   const { id } = useParams();
   const courtIdParam = Number(id);
