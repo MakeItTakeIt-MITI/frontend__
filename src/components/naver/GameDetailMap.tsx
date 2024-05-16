@@ -16,14 +16,8 @@ export const GameDetailMap: React.FC<GameDetailBoxProp> = ({ gameDetail }) => {
         gameDetail?.court.longitude
       ),
       zoom: 14,
-      zoomControl: true,
       pinchZoom: true,
-      draggable: true,
       scrollWheel: true,
-      zoomControlOptions: {
-        style: naver.maps.ZoomControlStyle.MEDIUM,
-        position: naver.maps.Position.TOP_RIGHT,
-      },
     });
 
     new naver.maps.Marker({
@@ -36,7 +30,7 @@ export const GameDetailMap: React.FC<GameDetailBoxProp> = ({ gameDetail }) => {
         content: newCustomMarker(),
       },
     });
-  }, []);
+  }, [gameDetail]);
   return (
     <section
       id="map"
