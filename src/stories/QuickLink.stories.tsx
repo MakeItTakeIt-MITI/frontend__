@@ -42,7 +42,7 @@ HostGame.args = {
 
 export const FindCourts = Template.bind({});
 FindCourts.args = {
-  path: "/games/courts",
+  path: "/games/courts/search",
   context: "경기장 조회",
 };
 export const ReviewsAboutMe = Template.bind({});

@@ -40,10 +40,11 @@ import { MobileViewItemsTab } from "./pages/MobileViewItemsTab.tsx";
 import { GameJoinPage } from "./pages/games/GameJoinPage.tsx";
 import { UserInquiryDetailPage } from "./pages/user/UserInquiryDetailPage.tsx";
 import { GameDetailEditPage } from "./pages/games/GameDetailEditPage.tsx";
-import { FindCourtsPage } from "./pages/games/FindCourtsPage.tsx";
+import { FindCourtsPage } from "./pages/court/FindCourtsPage.tsx";
 import { KakaoPaymentHandler } from "./pages/games/KakaoPaymentHandler.tsx";
 import { GameCancelParticipationPage } from "./pages/games/GameCancelParticipationPage.tsx";
-import { GameJoinedHistoryPage } from "./pages/games/GameJoinedHistoryPage.tsx";
+import { GameParticipationHistoryPage } from "./pages/games/GameParticipationHistoryPage.tsx";
+import { CourtDetailPage } from "./pages/court/CourtDetailPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -199,11 +200,17 @@ const router = createBrowserRouter([
               },
               {
                 path: "guest-history",
-                element: <GameJoinedHistoryPage />,
+                element: <GameParticipationHistoryPage />,
               },
 
               { path: "join/submitted", element: <MatchSubmittedPage /> },
-              { path: "courts", element: <FindCourtsPage /> },
+              {
+                path: "courts",
+                children: [
+                  { path: "search", element: <FindCourtsPage /> },
+                  { path: "detail/:id", element: <CourtDetailPage /> },
+                ],
+              },
               {
                 path: "cancel-participation/:id",
                 element: <GameCancelParticipationPage />,

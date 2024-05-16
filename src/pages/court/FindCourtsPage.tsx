@@ -5,6 +5,7 @@ import rightArrow from "../../assets/Chevron_Right_MD.svg";
 import searchIcon from "../../assets/court/search_icon.svg";
 import { RegionFilterBox } from "../../components/game/RegionFilterBox";
 import { useGetAllCourtsInfiniteQuery } from "../../hooks/courts/useGetAllCourtsInfiniteQuery";
+import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
 
 export const FindCourtsPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -75,11 +76,11 @@ export const FindCourtsPage = () => {
         >
           <h2 className="text-[20px] font-[500]">조회 결과</h2>
           {courtsData?.pages.map((page) => {
-            return page.data.page_content.map((court: any) => {
-              return (
+            return page.data.page_content.length > 0 ? (
+              page.data.page_content.map((court: any) => (
                 <Link
                   key={court.id}
-                  to={`/games/detail/${court.id}`}
+                  to={`/games/courts/detail/${court.id}`}
                   className="w-full flex justify-between p-3 bg-white border border-gray-200 rounded-lg"
                 >
                   <div className="space-y-[9px]">
@@ -88,8 +89,13 @@ export const FindCourtsPage = () => {
                   </div>
                   <img loading="lazy" src={rightArrow} alt="right arrow" />
                 </Link>
-              );
-            });
+              ))
+            ) : (
+              <NoListFoundMessageBox
+                title="조회 결과가 없습니다."
+                content="다른 검색어로 검색해보세요!"
+              />
+            );
           })}
         </div>
       </div>

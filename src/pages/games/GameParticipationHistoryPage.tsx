@@ -7,7 +7,7 @@ import { GameHistoryContainer } from "../../components/game/host/GameHistoryCont
 import { TabFilterList } from "../../components/game/TabFilterList";
 import { useParticipationHistoryInfiniteQuery } from "../../hooks/games/useParticipationHistoryInfiniteQuery";
 
-export const GameJoinedHistoryPage = () => {
+export const GameParticipationHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
   const [gameStatusQuery, setGameStatusQuery] = useState("");
   const [openList, setOpenList] = useState(false);
