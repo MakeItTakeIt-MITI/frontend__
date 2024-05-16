@@ -22,7 +22,7 @@ export const MobileViewGameList = ({
 
   return (
     <div className="tablet:hidden flex flex-col  gap-4  flex-nowrap  px-2 w-full pb-20">
-      {!displayCollapsedList &&
+      {!displayCollapsedList && data?.data ? (
         data?.data.map((game: GameDetailField) => {
           return (
             <MobileMatchItem
@@ -31,10 +31,13 @@ export const MobileViewGameList = ({
               handleSearchCoords={handleSearchCoords}
             />
           );
-        })}
+        })
+      ) : (
+        <NoGamesAvailableInfoBox />
+      )}
 
       {data?.data.length === 0 && <NoGamesAvailableInfoBox />}
-      {displayCollapsedList &&
+      {displayCollapsedList && data?.data ? (
         data?.data.map((game: GameDetailField) => {
           for (const address of filteredGames) {
             if (address === game.court.address) {
@@ -47,7 +50,10 @@ export const MobileViewGameList = ({
               );
             }
           }
-        })}
+        })
+      ) : (
+        <NoGamesAvailableInfoBox />
+      )}
     </div>
   );
 };

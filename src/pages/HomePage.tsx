@@ -18,7 +18,7 @@ export const HomePage = () => {
   const [filteredGames, setFilteredGames] = useState<string[]>([]);
   const [displayCollapsedList, setDisplayCollapsedList] = useState(false);
 
-  const formatDate = selectingDate.toISOString().split("T")[0];
+  const formatDate = selectingDate?.toISOString().split("T")[0];
   const {
     data: allGamesData,
     isPending,
