@@ -18,11 +18,14 @@ export const MobileViewGameList = ({
   handleSearchCoords,
   displayCollapsedList,
 }: GameDetailProp) => {
-  const { data } = useGetGamesDataQuery(formatDate);
+  const today = new Date().toISOString().split("T")[0];
+
+  const { data } = useGetGamesDataQuery(formatDate ? formatDate : today);
 
   return (
     <div className="tablet:hidden flex flex-col  gap-4  flex-nowrap  px-2 w-full pb-20">
-      {!displayCollapsedList && data?.data ? (
+      {!displayCollapsedList &&
+        data?.data &&
         data?.data.map((game: GameDetailField) => {
           return (
             <MobileMatchItem
@@ -31,13 +34,10 @@ export const MobileViewGameList = ({
               handleSearchCoords={handleSearchCoords}
             />
           );
-        })
-      ) : (
-        <NoGamesAvailableInfoBox />
-      )}
+        })}
 
       {data?.data.length === 0 && <NoGamesAvailableInfoBox />}
-      {displayCollapsedList && data?.data ? (
+      {displayCollapsedList &&
         data?.data.map((game: GameDetailField) => {
           for (const address of filteredGames) {
             if (address === game.court.address) {
@@ -50,10 +50,7 @@ export const MobileViewGameList = ({
               );
             }
           }
-        })
-      ) : (
-        <NoGamesAvailableInfoBox />
-      )}
+        })}
     </div>
   );
 };

@@ -32,7 +32,8 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
       id="gameListBox"
       className="h-[409px] w-[371px] p-3  mobile:hidden tablet:block space-y-3 rounded-lg bg-[#FBFBFB]   "
     >
-      {!displayCollapsedList && allGamesData ? (
+      {!displayCollapsedList &&
+        allGamesData &&
         games?.map((game: GameDetailField) => {
           return (
             <MatchItem
@@ -41,12 +42,10 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
               handleSearchCoords={handleSearchCoords}
             />
           );
-        })
-      ) : (
-        <NoGamesAvailableInfoBox />
-      )}
+        })}
       {games.length === 0 && <NoGamesAvailableInfoBox />}
-      {displayCollapsedList && allGamesData ? (
+      {displayCollapsedList &&
+        allGamesData &&
         games.map((game: GameDetailField) => {
           for (const address of filteredGames) {
             if (address === game.court.address) {
@@ -62,10 +61,7 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
               );
             }
           }
-        })
-      ) : (
-        <NoGamesAvailableInfoBox />
-      )}
+        })}
     </div>
   );
 };

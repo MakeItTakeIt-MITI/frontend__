@@ -20,12 +20,14 @@ export const HomePage = () => {
   const [displayCollapsedList, setDisplayCollapsedList] = useState(false);
 
   const formatDate = selectingDate?.toISOString().split("T")[0];
+  const today = new Date().toISOString().split("T")[0];
+
   const {
     data: allGamesData,
     isPending,
     refetch,
     isError,
-  } = useGetGamesDataQuery(formatDate);
+  } = useGetGamesDataQuery(formatDate ? formatDate : today);
 
   const handleSearchCoords = (latitude: number, longitude: number) => {
     isGameSearched(true);
@@ -34,6 +36,8 @@ export const HomePage = () => {
     refetch();
   };
   useEffect(() => {
+    console.log(formatDate);
+
     refetch();
   }, [selectingDate, refetch, formatDate]);
 
