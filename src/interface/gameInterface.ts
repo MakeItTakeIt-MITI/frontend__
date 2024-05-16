@@ -182,8 +182,16 @@ export interface GameDetailField {
     account_number: string;
     created_at: string;
     modified_at: string;
-    confimed_participations: number;
+    confirmed_participations: ConfirmedParticipation[];
     num_of_confirmed_participations: number;
+
+}
+
+export type ConfirmedParticipation = {
+    id: number;
+    nickname: string;
+    participation_status: string
+
 }
 
 export interface HostField {

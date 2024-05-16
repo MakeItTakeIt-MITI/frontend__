@@ -20,8 +20,6 @@ export const GamePaymentInfoBox = () => {
     return <NotFoundPage />;
   }
 
-  console.log(paymentDetails);
-
   const gameFee =
     paymentDetails?.data.payment_information.payment_amount.game_fee_amount;
   const commissionFee =
