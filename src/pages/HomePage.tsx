@@ -4,7 +4,6 @@ import { useGetGamesDataQuery } from "../hooks/games/useGetGamesDataQuery";
 import { DesktopViewDatesList } from "../components/home/DesktopViewDatesList";
 import { useEffect, useState } from "react";
 import { MobileViewGameList } from "../components/home/MobileViewGameList";
-import { LoadingPage } from "./LoadingPage";
 import { NaverMapEL } from "../components/naver/NaverMap";
 import { NotFoundPage } from "./NotFoundPage";
 import useGeolocationStore from "../store/useGeolocationStore";
@@ -36,8 +35,6 @@ export const HomePage = () => {
     refetch();
   };
   useEffect(() => {
-    console.log(formatDate);
-
     refetch();
   }, [selectingDate, refetch, formatDate]);
 

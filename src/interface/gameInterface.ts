@@ -55,6 +55,7 @@ export interface RatingsField {
     average_rating: number;
 }
 export interface GameDetailField {
+    [x: string]: any;
     id: number;
     game_status: string;
     title: string;

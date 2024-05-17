@@ -20,13 +20,18 @@ export const MobileViewGameList = ({
 }: GameDetailProp) => {
   const today = new Date().toISOString().split("T")[0];
 
-  const { data } = useGetGamesDataQuery(formatDate ? formatDate : today);
+  const { data: allGamesData } = useGetGamesDataQuery(
+    formatDate ? formatDate : today
+  );
+
+  const isDataAvailable = allGamesData && Array.isArray(allGamesData.data);
 
   return (
     <div className="tablet:hidden flex flex-col  gap-4  flex-nowrap  px-2 w-full pb-20">
       {!displayCollapsedList &&
-        data?.data &&
-        data?.data.map((game: GameDetailField) => {
+        isDataAvailable &&
+        allGamesData?.data &&
+        allGamesData?.data.map((game: GameDetailField) => {
           return (
             <MobileMatchItem
               key={game.id}
@@ -36,9 +41,12 @@ export const MobileViewGameList = ({
           );
         })}
 
-      {data?.data.length === 0 && <NoGamesAvailableInfoBox />}
+      {isDataAvailable && allGamesData?.data.length === 0 && (
+        <NoGamesAvailableInfoBox />
+      )}
       {displayCollapsedList &&
-        data?.data.map((game: GameDetailField) => {
+        isDataAvailable &&
+        allGamesData?.data.map((game: GameDetailField) => {
           for (const address of filteredGames) {
             if (address === game.court.address) {
               return (

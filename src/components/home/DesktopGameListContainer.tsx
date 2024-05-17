@@ -21,7 +21,7 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
   handleSearchCoords,
   filteredGames,
 }) => {
-  const games = allGamesData?.data;
+  const isDataAvailable = allGamesData && Array.isArray(allGamesData.data);
 
   return (
     <div
@@ -33,34 +33,35 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
       className="h-[409px] w-[371px] p-3  mobile:hidden tablet:block space-y-3 rounded-lg bg-[#FBFBFB]   "
     >
       {!displayCollapsedList &&
-        allGamesData &&
-        games?.map((game: GameDetailField) => {
-          return (
-            <MatchItem
-              key={game.id}
-              game={game}
-              handleSearchCoords={handleSearchCoords}
-            />
-          );
-        })}
-      {games.length === 0 && <NoGamesAvailableInfoBox />}
+        isDataAvailable &&
+        allGamesData?.data.map((game: GameDetailField) => (
+          <MatchItem
+            key={game.id}
+            game={game}
+            handleSearchCoords={handleSearchCoords}
+          />
+        ))}
+
+      {isDataAvailable && allGamesData.data.length === 0 && (
+        <NoGamesAvailableInfoBox />
+      )}
+
       {displayCollapsedList &&
-        allGamesData &&
-        games.map((game: GameDetailField) => {
-          for (const address of filteredGames) {
-            if (address === game.court.address) {
-              return (
-                <div key={game.id} className="space-y-2">
-                  <Link to={`/games/detail/${game.id}`}>
-                    <MatchItem
-                      game={game}
-                      handleSearchCoords={handleSearchCoords}
-                    />
-                  </Link>
-                </div>
-              );
-            }
+        isDataAvailable &&
+        allGamesData?.data.map((game: GameDetailField) => {
+          if (filteredGames.includes(game.court.address)) {
+            return (
+              <div key={game.id} className="space-y-2">
+                <Link to={`/games/detail/${game.id}`}>
+                  <MatchItem
+                    game={game}
+                    handleSearchCoords={handleSearchCoords}
+                  />
+                </Link>
+              </div>
+            );
           }
+          return null;
         })}
     </div>
   );
