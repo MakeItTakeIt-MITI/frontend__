@@ -53,10 +53,12 @@ export const NaverMapEL = ({
     });
 
     const addressesList: string[] = [];
-    allGamesData?.data.map((game) => {
-      addressesList.push(game.court.address);
-      return addressesList;
-    });
+    if (allGamesData && Array.isArray(allGamesData.data)) {
+      allGamesData?.data.map((game) => {
+        addressesList.push(game.court.address);
+        return addressesList;
+      });
+    }
 
     setCustomMarkers(
       naverMap,

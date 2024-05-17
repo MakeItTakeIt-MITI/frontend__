@@ -28,7 +28,7 @@ export const ShareCourtDetailBox = ({ courtDetailData }) => {
             {courtDetailData?.data.name}
           </h2>
           <p className=" text-xs font-medium leading-4 text-ellipsis text-neutral-400">
-            {courtDetailData?.data.address}
+            {courtDetailData?.data.address}{" "}
             {courtDetailData?.data.address_detail}
           </p>
         </div>
