@@ -1,66 +1,49 @@
-import { useState } from "react";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
-import { GameHistoryContainer } from "../../components/game/host/GameHistoryContainer";
-import { useParticipationHistoryInfiniteQuery } from "../../hooks/games/useParticipationHistoryInfiniteQuery";
-import useUserDataStore from "../../store/useUserDataStore";
 import { CourtDetailMap } from "../../components/naver/CourtDetailMap";
 import { getCourtDetailQuery } from "../../hooks/courts/getCourtDetailQuery";
 import { useParams } from "react-router-dom";
 import { useGetCourtListInfiniteQuery } from "../../hooks/courts/useGetCourtListInfiniteQuery";
 import { CourtHistoryListContainer } from "../../components/court/CourtHistoryListContainer";
+import shareIcon from "../../assets/court/share_icon.svg";
 
 export const CourtDetailPage = () => {
-  const [gameStatusQuery, _setGameStatusQuery] = useState("");
-  const { userId } = useUserDataStore();
   const { id } = useParams();
   const courtIdParam = Number(id);
-
-  // const {
-  //   data: gameHistory,
-
-  //   fetchNextPage,
-  //   hasNextPage,
-  // } = useParticipationHistoryInfiniteQuery(userId, gameStatusQuery);
-
   const { data: courtDetailData } = getCourtDetailQuery(courtIdParam);
 
-  const courtId = courtDetailData?.data.id;
   const {
     data: courtListData,
     fetchNextPage,
     hasNextPage,
   } = useGetCourtListInfiniteQuery(courtIdParam);
 
-  console.log(courtListData);
-
   return (
-    <section className="laptop:my-[69px] mobile:mb-16">
+    <section className="laptop:my-[20px] mobile:mb-16 ">
       <NavigateToPrevContainer children="경기장 상세 정보" />
 
-      <div className="flex laptop:flex-row mobile:flex-col  justify-between   laptop:max-w-[1024px] mobile:w-full mx-auto">
-        {" "}
-        <div className="laptop:max-w-[431px]  space-y-[25px]">
+      <div className="flex laptop:flex-row mobile:flex-col gap-5 laptop:px-3 mobile:px-1 laptop:w-[981px] laptop:h-[745px]  mx-auto ">
+        <div className="laptop:max-w-[431px]  mobile:w-full gap-[25px] w-full flex flex-col">
           <CourtDetailMap courtData={courtDetailData} />
-          <div className="flex flex-col justify-center laptop:mx-0 mobile:mx-3 p-3 tracking-tight rounded-lg border border-gray-200 border-solid ">
-            <div className="flex gap-5 justify-between whitespace-wrap">
-              <div className="flex flex-col justify-center py-px">
-                <div className="text-lg font-bold leading-5 text-ellipsis text-zinc-800">
+          <div
+            style={{ scrollbarWidth: "thin" }}
+            className="w-full space-y-[16.5px] h-[177px] border border-[#E8E8E8] p-3 rounded-lg  overflow-y-auto"
+          >
+            <div className="flex justify-between items-center">
+              <div className="space-y-[12.5px]">
+                {" "}
+                <h2 className="text-lg font-bold leading-5 text-ellipsis text-zinc-800">
                   {courtDetailData?.data.name}
-                </div>
-                <div className="mt-4 text-xs font-medium leading-4 text-ellipsis text-neutral-400">
-                  경기도 용인시 수지구 동천로 417-1
+                </h2>
+                <p className=" text-xs font-medium leading-4 text-ellipsis text-neutral-400">
                   {courtDetailData?.data.address}
                   {courtDetailData?.data.address_detail}
-                </div>
+                </p>
               </div>
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/9a4e445f2d7ab7fee90edf0dff720f5c6c472c2e4e0c5f950d928ff869629c4f?"
-              />
+              <img src={shareIcon} alt="share icon" />
             </div>
-            <div className="mt-5 text-xs font-medium leading-5 text-zinc-900">
+            <p className=" text-xs font-medium leading-5 text-zinc-900">
               {courtDetailData?.data.info}
-            </div>
+            </p>
           </div>
         </div>
         <div

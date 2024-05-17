@@ -6,21 +6,18 @@ import {
   RecruitingCompletedTag,
   RecruitingTag,
 } from "../../stories/Tags.stories";
-import {
-  GameDetailField,
-  GameHostHistoryField,
-} from "../../interface/gameInterface";
+
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { MatchTags } from "../game/MatchTags";
 
-interface GameHistoryProps {
+interface CourtHistoryProp {
   data: any;
   fetchNextPage: () => void;
   hasNextPage: boolean;
 }
 
-export const CourtHistoryListContainer = ({
+export const CourtHistoryListContainer: React.FC<CourtHistoryProp> = ({
   data,
   fetchNextPage,
   hasNextPage,
@@ -28,21 +25,21 @@ export const CourtHistoryListContainer = ({
   const { ref, inView } = useInView({
     threshold: 0.2,
   });
-  // console.log(data);
 
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
     }
   }, [inView, fetchNextPage]);
+
   return (
     <div
       ref={ref}
       style={{ overflowY: "auto", scrollbarWidth: "thin" }}
-      className="flex flex-col gap-2.5 "
+      className=" flex flex-col gap-2.5 "
     >
       {data?.pages.map((page) =>
-        page.page_content.map((newData) => (
+        page.data.page_content.map((newData) => (
           <div key={newData.startdate}>
             <h2 className="font-bold">{newData.startdate}</h2>
             <div className="space-y-[15px]">

@@ -15,14 +15,8 @@ export const CourtDetailMap = ({ courtData }: any) => {
         courtData?.data.longitude
       ),
       zoom: 14,
-      zoomControl: true,
       pinchZoom: true,
-      draggable: true,
       scrollWheel: true,
-      zoomControlOptions: {
-        style: naver.maps.ZoomControlStyle.MEDIUM,
-        position: naver.maps.Position.TOP_RIGHT,
-      },
     });
 
     new naver.maps.Marker({
@@ -35,6 +29,6 @@ export const CourtDetailMap = ({ courtData }: any) => {
         content: newCustomMarker(),
       },
     });
-  }, []);
+  }, [courtData]);
   return <section id="map" className="w-full h-[303px] rounded-lg" />;
 };
