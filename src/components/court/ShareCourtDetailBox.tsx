@@ -1,6 +1,6 @@
 import shareIcon from "../../assets/court/share_icon.svg";
 
-export const ShareCourtDetailBox = ({ courtDetailData }) => {
+export const ShareCourtDetailBox = ({ courtDetailData }: any) => {
   const handleSharePage = async () => {
     if (navigator.share) {
       try {
