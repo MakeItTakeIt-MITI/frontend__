@@ -4,7 +4,6 @@ import { getCourtDetailQuery } from "../../hooks/courts/getCourtDetailQuery";
 import { useParams } from "react-router-dom";
 import { useGetCourtListInfiniteQuery } from "../../hooks/courts/useGetCourtListInfiniteQuery";
 import { CourtHistoryListContainer } from "../../components/court/CourtHistoryListContainer";
-import shareIcon from "../../assets/court/share_icon.svg";
 import { ShareCourtDetailBox } from "../../components/court/ShareCourtDetailBox";
 
 export const CourtDetailPage = () => {

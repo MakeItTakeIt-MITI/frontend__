@@ -11,22 +11,27 @@ export const FindCourtsPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
   const [gameStatusQuery, setGameStatusQuery] = useState("");
   const [openList, setOpenList] = useState(false);
+  const [enumType, setEnumType] = useState<null | undefined | string>("");
 
   const handleOpenList = () => setOpenList(!openList);
   const handleChangeTab = (tab: string) => setDefaultTabName(tab);
 
-  const { data: courtsData } = useGetAllCourtsInfiniteQuery();
-  console.log(
-    courtsData?.pages.map((page) => {
-      page.data.page_content.map((court: any) => {
-        console.log(court);
-      });
-    })
-  );
+  console.log(defaultTabName);
+
+  const { data: courtsData, refetch } = useGetAllCourtsInfiniteQuery(enumType);
+  // console.log(
+  //   courtsData?.pages.map((page) => {
+  //     page.data.page_content.map((court: any) => {
+  //       console.log(court);
+  //     });
+  //   })
+  // );
+  console.log(enumType);
 
   useEffect(() => {
     if (defaultTabName === "전체 보기") {
       setGameStatusQuery("");
+      setEnumType(undefined);
     } else if (defaultTabName === "모집중") {
       setGameStatusQuery("open");
     } else if (defaultTabName === "모집 완료") {
@@ -36,7 +41,7 @@ export const FindCourtsPage = () => {
     } else if (defaultTabName === "경기 완료") {
       setGameStatusQuery("completed");
     }
-    // refetch();
+    refetch();
   }, [defaultTabName, gameStatusQuery]);
 
   return (
@@ -46,7 +51,7 @@ export const FindCourtsPage = () => {
       <div className="laptop:space-y-8 mobile:mt-8 laptop:mt-0">
         <div className="laptop:w-[593px] mobile:w-full mx-auto flex justify-between">
           <h1 className="text-[26px] w-full font-bold laptop:block mobile:hidden">
-            나의 호스팅 경기
+            경기장 조회
           </h1>
 
           <div className="flex space-x-3">
@@ -66,6 +71,8 @@ export const FindCourtsPage = () => {
               openList={openList}
               handleOpenList={handleOpenList}
               handleChangeTab={handleChangeTab}
+              setEnumType={setEnumType}
+              enumType={enumType}
             />
           </div>
         </div>

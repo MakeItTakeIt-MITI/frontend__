@@ -38,12 +38,12 @@ export const CourtHistoryListContainer: React.FC<CourtHistoryProp> = ({
       style={{ overflowY: "auto", scrollbarWidth: "thin" }}
       className=" flex flex-col gap-2.5 "
     >
-      {data?.pages.map((page) =>
-        page.data.page_content.map((newData) => (
+      {data?.pages.map((page: any) =>
+        page.data.page_content.map((newData: any) => (
           <div key={newData.startdate}>
             <h2 className="font-bold">{newData.startdate}</h2>
             <div className="space-y-[15px]">
-              {newData.games.map((detail) => (
+              {newData.games.map((detail: any) => (
                 <Link
                   key={detail.id}
                   to={`/games/detail/${detail.id}`}
