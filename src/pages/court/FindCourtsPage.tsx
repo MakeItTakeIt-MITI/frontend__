@@ -12,37 +12,23 @@ export const FindCourtsPage = () => {
   const [gameStatusQuery, setGameStatusQuery] = useState("");
   const [openList, setOpenList] = useState(false);
   const [enumType, setEnumType] = useState<null | undefined | string>("");
+  const [searchValue, setSearchValue] = useState<string | null>("");
 
   const handleOpenList = () => setOpenList(!openList);
   const handleChangeTab = (tab: string) => setDefaultTabName(tab);
 
-  console.log(defaultTabName);
+  const { data: courtsData, refetch } = useGetAllCourtsInfiniteQuery(
+    searchValue,
+    enumType
+  );
 
-  const { data: courtsData, refetch } = useGetAllCourtsInfiniteQuery(enumType);
-  // console.log(
-  //   courtsData?.pages.map((page) => {
-  //     page.data.page_content.map((court: any) => {
-  //       console.log(court);
-  //     });
-  //   })
-  // );
-  console.log(enumType);
+  const handleSearchField = () => {
+    setSearchValue(searchValue);
+  };
 
   useEffect(() => {
-    if (defaultTabName === "전체 보기") {
-      setGameStatusQuery("");
-      setEnumType(undefined);
-    } else if (defaultTabName === "모집중") {
-      setGameStatusQuery("open");
-    } else if (defaultTabName === "모집 완료") {
-      setGameStatusQuery("closed");
-    } else if (defaultTabName === "경기 취소") {
-      setGameStatusQuery("canceled");
-    } else if (defaultTabName === "경기 완료") {
-      setGameStatusQuery("completed");
-    }
     refetch();
-  }, [defaultTabName, gameStatusQuery]);
+  }, [defaultTabName, searchValue, gameStatusQuery]);
 
   return (
     <section className="laptop:my-[69px] mobile:mb-16">
@@ -58,10 +44,14 @@ export const FindCourtsPage = () => {
             <div className="relative">
               <input
                 type="text"
+                onChange={(e) => setSearchValue(e.target.value)}
                 className=" w-[243px] h-[39px] px-4 py-[17px] bg-[#F7F7F7] text-[14px] pr-10 rounded-lg"
                 placeholder="경기장 검색어(주소/경기장 명)"
               />
-              <button className="absolute right-3.5 top-2.5 bottom-2.5  m-auto">
+              <button
+                onClick={handleSearchField}
+                className="absolute right-3.5 top-2.5 bottom-2.5  m-auto"
+              >
                 <img src={searchIcon} alt="search icon" />
               </button>
             </div>
