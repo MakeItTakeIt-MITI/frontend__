@@ -13,25 +13,26 @@ const { naver } = window;
 
 
 export function setCustomMarkers(map: any, allGamesData: GameDetailField[], addressesList: string[], setFilteredGames: (arg: string[]) => void, setDisplayCollapsedList: (arg: boolean) => void) {
-    allGamesData.map((data) => {
-        const { latitude, longitude } = data.court;
 
-        new naver.maps.Marker({
-            position: new naver.maps.LatLng(latitude, longitude),
-            zoom: 12,
-            map: map,
-            pinchZoom: true,
-            title: data.title,
-            clickable: true,
-            icon: {
-                content: createCustomMapMarker(data, addressesList, setFilteredGames, setDisplayCollapsedList)
-            }
+    if (allGamesData && Array.isArray(allGamesData)) {
+        allGamesData.map((data) => {
+            const { latitude, longitude } = data.court;
 
-        });
+            new naver.maps.Marker({
+                position: new naver.maps.LatLng(latitude, longitude),
+                zoom: 12,
+                map: map,
+                pinchZoom: true,
+                title: data.title,
+                clickable: true,
+                icon: {
+                    content: createCustomMapMarker(data, addressesList, setFilteredGames, setDisplayCollapsedList)
+                }
+            });
 
-    })
+        })
 
-
+    }
 }
 
 
