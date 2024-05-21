@@ -2,20 +2,15 @@ import homeIcon from "../../assets/header_home_icon.svg";
 import gamesIcon from "../../assets/header_games_icon.svg";
 import profileIcon from "../../assets/header_profile_icon.svg";
 import viewAllIcon from "../../assets/header_all_icon.svg";
-
+import viewAllIconColor from "../../assets/header_view_color.svg";
 import homeIconColor from "../../assets/header_home_color.svg";
 import gamesIconColor from "../../assets/header_game_color.svg";
 import profileIconColor from "../../assets/header_profile_color.svg";
-
 import { Link, useLocation } from "react-router-dom";
-import useUserDataStore from "../../store/useUserDataStore";
-import { useUserInfoQuery } from "../../hooks/games/useUserInfoQuery";
 import useAuthStore from "../../store/useAuthStore";
 
 export const MobileHeader = () => {
-  const { userId } = useUserDataStore();
   const { isLoggedIn } = useAuthStore();
-  const { data } = useUserInfoQuery(userId);
 
   const { pathname } = useLocation();
 
@@ -50,8 +45,11 @@ export const MobileHeader = () => {
                 <span className="text-[13px] text-[#969696]">프로필</span>
               </Link>
             ) : (
-              <Link to={`/mypage`} className="flex flex-col gap-1 items-center">
-                {pathname === `/profile/${data?.data.id}` ? (
+              <Link
+                to={`/user/profile`}
+                className="flex flex-col gap-1 items-center"
+              >
+                {pathname === `/user/profile` ? (
                   <img src={profileIconColor} alt="profile icon" />
                 ) : (
                   <img src={profileIcon} alt="profile icon" />
@@ -60,8 +58,12 @@ export const MobileHeader = () => {
               </Link>
             )}
 
-            <Link to="all-items" className="flex flex-col gap-1 items-center">
-              <img src={viewAllIcon} alt="view all icon" />
+            <Link to="mobile-tab" className="flex flex-col gap-1 items-center">
+              {pathname === `/mobile-tab` ? (
+                <img src={viewAllIconColor} alt="tab icon" />
+              ) : (
+                <img src={viewAllIcon} alt="tab icon" />
+              )}
               <span className="text-[13px] text-[#969696]">전체</span>
             </Link>
           </div>

@@ -9,7 +9,7 @@ interface InquiryProp {
 export const UserInquiryBox: React.FC<InquiryProp> = ({ question }) => {
   return (
     <Link
-      to={`/support/quiry/${question.id}`}
+      to={`/user/inquries/detail/${question.id}`}
       className=" w-full p-4 flex justify-between items-center  rounded-xl border border-gray-300"
     >
       <div className="flex flex-col gap-1 max-w-[90%]">

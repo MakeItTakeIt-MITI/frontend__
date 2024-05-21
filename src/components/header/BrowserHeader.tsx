@@ -28,7 +28,7 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
 
             <button onClick={handleLogout}>로그아웃</button>
 
-            <Link to={`/mypage`}>내 정보</Link>
+            <Link to={`/user/profile`}>내 정보</Link>
           </>
         ) : (
           <>

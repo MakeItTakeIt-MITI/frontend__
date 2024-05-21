@@ -47,17 +47,17 @@ FindCourts.args = {
 };
 export const ReviewsAboutMe = Template.bind({});
 ReviewsAboutMe.args = {
-  path: "/support/users-reviews",
+  path: "/user/reviews",
   context: "작성 리뷰",
 };
 export const MyReviews = Template.bind({});
 MyReviews.args = {
-  path: "/support/my-reviews",
+  path: "/user/my-reviews",
   context: "내 리뷰",
 };
 export const EditProfile = Template.bind({});
 EditProfile.args = {
-  path: "/user-profile/edit",
+  path: "/user/profile/edit",
   context: "프로필 수정",
 };
 export const Faq = Template.bind({});
@@ -73,16 +73,16 @@ CustomerSupport.args = {
 
 export const SettlementDetails = Template.bind({});
 SettlementDetails.args = {
-  path: "/settlement-history",
+  path: "/user/settlement-history",
   context: "정산내역",
 };
 export const TranscationHistory = Template.bind({});
 TranscationHistory.args = {
-  path: "/transaction-history",
+  path: "/user/transaction-history",
   context: "송금내역",
 };
 export const DeleteAccount = Template.bind({});
 DeleteAccount.args = {
-  path: "/user/delete-account",
+  path: "/account/delete",
   context: "회원 탈퇴",
 };

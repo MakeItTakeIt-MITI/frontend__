@@ -6,7 +6,6 @@ export const UserInquiryDetailPage = () => {
   const { id } = useParams();
   const inquiryId = Number(id);
   const { data } = useGetQuestionDetailQuery(inquiryId);
-  console.log(data);
 
   return (
     <section className="laptop:my-4 mobile:my-0">

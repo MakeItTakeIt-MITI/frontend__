@@ -24,7 +24,6 @@ import { FAQPage } from "./pages/user/FAQPage.tsx";
 import { MyReviewPage } from "./pages/user/MyReviewPage.tsx";
 import { MyReviewDetailPage } from "./pages/user/MyReviewDetailPage.tsx";
 import { UserReviewsPage } from "./pages/user/UserReviewsPage.tsx";
-import { WrittenReviewDetailPage } from "./pages/user/WrittenReviewDetailPage.tsx";
 import { SignupIntroPage } from "./pages/auth/SignupIntroPage.tsx";
 import { SMSVerifiedSuccessPage } from "./pages/auth/SMSVerifiedSuccessPage.tsx";
 import { FindPasswordPage } from "./pages/auth/FindPasswordPage.tsx";
@@ -62,14 +61,14 @@ const router = createBrowserRouter([
         element: <KakaoPaymentHandler />,
       },
       {
-        path: "/user",
+        path: "/account",
         children: [
           {
-            path: "delete-account",
+            path: "delete",
             element: <DeleteAccountPage />,
           },
           {
-            path: "delete-account-success",
+            path: "delete/success",
             element: <DeleteAccountSuccessPage />,
           },
         ],
@@ -123,23 +122,11 @@ const router = createBrowserRouter([
             path: "faq",
             element: <FAQPage />,
           },
-          {
-            path: "my-reviews",
-            element: <MyReviewPage />,
-          },
-          {
-            path: "users-reviews",
-            element: <UserReviewsPage />,
-          },
-          {
-            path: "review/:id",
-            element: <WrittenReviewDetailPage />,
-          },
+
           {
             path: "customer-service",
             element: <CustomerServicePage />,
           },
-          { path: "quiry/:id", element: <UserInquiryDetailPage /> },
 
           {
             path: "find-email",
@@ -161,7 +148,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/all-items",
+        path: "/mobile-tab",
         element: <MobileViewItemsTab />,
       },
 
@@ -169,26 +156,46 @@ const router = createBrowserRouter([
         element: <PrivateRoute />,
         children: [
           {
-            path: "/user-profile/edit",
-            element: <EditProfilePage />,
-          },
-          {
-            path: "/mypage",
-            element: <UserMyPage />,
-          },
+            path: "/user",
+            children: [
+              {
+                path: "profile/edit",
+                element: <EditProfilePage />,
+              },
+              {
+                path: "profile",
+                element: <UserMyPage />,
+              },
 
-          {
-            path: "/user-inquiry",
-            element: <UserInquiryPage />,
+              {
+                path: "inquries",
+                element: <UserInquiryPage />,
+              },
+              {
+                path: "inquries/detail/:id",
+                element: <UserInquiryDetailPage />,
+              },
+
+              {
+                path: "reviews",
+                element: <UserReviewsPage />,
+              },
+              {
+                path: "my-reviews",
+                element: <MyReviewPage />,
+              },
+              { path: "my-reviews/detail", element: <MyReviewDetailPage /> },
+              { path: "settlement-history", element: <PaymentHistoryPage /> },
+              {
+                path: "transaction-history",
+                element: <TransactionHistoryPage />,
+              },
+            ],
           },
-          { path: "/my-reviews-detail", element: <MyReviewDetailPage /> },
-          { path: "/settlement-history", element: <PaymentHistoryPage /> },
-          { path: "/transaction-history", element: <TransactionHistoryPage /> },
           {
             path: "/games",
             children: [
               { path: "host", element: <HostGamePage /> },
-              // { path: "history", element: <UserGameHistoryPage /> },
 
               {
                 path: "detail/:id",
