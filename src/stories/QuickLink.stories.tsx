@@ -73,7 +73,7 @@ CustomerSupport.args = {
 
 export const SettlementDetails = Template.bind({});
 SettlementDetails.args = {
-  path: "/settlement",
+  path: "/settlement-history",
   context: "정산내역",
 };
 export const TranscationHistory = Template.bind({});

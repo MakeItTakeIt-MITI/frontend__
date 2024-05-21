@@ -1,4 +1,3 @@
-// import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
@@ -45,6 +44,7 @@ import { KakaoPaymentHandler } from "./pages/games/KakaoPaymentHandler.tsx";
 import { GameCancelParticipationPage } from "./pages/games/GameCancelParticipationPage.tsx";
 import { GameParticipationHistoryPage } from "./pages/games/GameParticipationHistoryPage.tsx";
 import { CourtDetailPage } from "./pages/court/CourtDetailPage.tsx";
+import { PaymentHistoryPage } from "./pages/payments/PaymentHistoryPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -165,7 +165,7 @@ const router = createBrowserRouter([
             element: <UserInquiryPage />,
           },
           { path: "/my-reviews-detail", element: <MyReviewDetailPage /> },
-
+          { path: "/settlement-history", element: <PaymentHistoryPage /> },
           {
             path: "/games",
             children: [

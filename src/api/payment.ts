@@ -1,5 +1,14 @@
 import axiosUrl from "../utils/axios"
 
+export const getUserPaymentHistory = async (userId: number | null) => {
+    try {
+        const response = await axiosUrl.get(`/users/${userId}/accounts/game-hosting-settlements`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
+
 export const gamePaymentDetails = async (gameId: number) => {
     try {
         const response = await axiosUrl.get(`/games/${gameId}/payment-info`)
@@ -37,4 +46,5 @@ export const kakaoPayStatusApproved = async (request_id: string | null, pg_token
         throw new Error
     }
 }
+
 
