@@ -62,12 +62,17 @@ const router = createBrowserRouter([
         element: <KakaoPaymentHandler />,
       },
       {
-        path: "/delete-account",
-        element: <DeleteAccountPage />,
-      },
-      {
-        path: "/delete-account-success",
-        element: <DeleteAccountSuccessPage />,
+        path: "/user",
+        children: [
+          {
+            path: "delete-account",
+            element: <DeleteAccountPage />,
+          },
+          {
+            path: "delete-account-success",
+            element: <DeleteAccountSuccessPage />,
+          },
+        ],
       },
 
       {

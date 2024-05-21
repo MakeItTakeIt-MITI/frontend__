@@ -26,7 +26,7 @@ export const DeleteAccountPage = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate("/delete-account-success");
+      navigate("/user/delete-account-success");
     }
 
     if (data?.status_code === 403) {

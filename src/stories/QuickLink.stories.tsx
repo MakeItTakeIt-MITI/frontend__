@@ -83,6 +83,6 @@ TranscationHistory.args = {
 };
 export const DeleteAccount = Template.bind({});
 DeleteAccount.args = {
-  path: "/delete-account",
+  path: "/user/delete-account",
   context: "회원 탈퇴",
 };
