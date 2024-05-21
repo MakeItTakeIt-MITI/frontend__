@@ -4,7 +4,7 @@ import downArrow from "../../assets/Chevron_Down_MD.svg";
 import useUserDataStore from "../../store/useUserDataStore";
 import { getUserPaymentHistoryQuery } from "../../hooks/payments/getUserPaymentHistoryQuery";
 
-export const PaymentHistoryPage = () => {
+export const TransactionHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
   const [gameStatusQuery, setGameStatusQuery] = useState("");
   const [openList, setOpenList] = useState(false);
@@ -31,13 +31,13 @@ export const PaymentHistoryPage = () => {
 
   return (
     <section className="laptop:my-[69px] mobile:mb-16">
-      <NavigateToPrevContainer children="정산 내역" />
+      <NavigateToPrevContainer children="송금 내역" />
 
       {/* <div className="laptop:space-y-8 mobile:mt-8 laptop:mt-0"> */}
-      <div className="laptop:w-[593px] mobile:w-full mx-auto flex flex-col gap-[22px]">
+      <div className="laptop:w-[593px] mobile:w-full mx-auto flex flex-col gap-[22px] ">
         <div className="flex justify-between">
           <h1 className="text-[26px] w-full font-bold laptop:block mobile:hidden">
-            정산 내역
+            송금 내역
           </h1>
           <div className="flex justify-end w-full ">
             <div

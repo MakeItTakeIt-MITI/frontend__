@@ -78,6 +78,6 @@ SettlementDetails.args = {
 };
 export const TranscationHistory = Template.bind({});
 TranscationHistory.args = {
-  path: "/transactions-history",
+  path: "/transaction-history",
   context: "송금내역",
 };

@@ -45,6 +45,7 @@ import { GameCancelParticipationPage } from "./pages/games/GameCancelParticipati
 import { GameParticipationHistoryPage } from "./pages/games/GameParticipationHistoryPage.tsx";
 import { CourtDetailPage } from "./pages/court/CourtDetailPage.tsx";
 import { PaymentHistoryPage } from "./pages/payments/PaymentHistoryPage.tsx";
+import { TransactionHistoryPage } from "./pages/payments/TransactionHistoryPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -166,6 +167,7 @@ const router = createBrowserRouter([
           },
           { path: "/my-reviews-detail", element: <MyReviewDetailPage /> },
           { path: "/settlement-history", element: <PaymentHistoryPage /> },
+          { path: "/transaction-history", element: <TransactionHistoryPage /> },
           {
             path: "/games",
             children: [
