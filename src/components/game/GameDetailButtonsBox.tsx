@@ -65,7 +65,7 @@ export const GameDetailButtonsBox = ({
         </div>
       )}
       {gameDetail?.game_status === "completed" && (
-        <Link to="/">
+        <Link to={`/games/detail/${gameIdParam}/review`}>
           <button className=" w-full h-[48px] bg-[#4065F6] rounded-lg text-white ">
             {" "}
             리뷰 작성하기
