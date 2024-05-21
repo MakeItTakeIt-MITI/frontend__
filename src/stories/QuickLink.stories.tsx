@@ -81,3 +81,8 @@ TranscationHistory.args = {
   path: "/transaction-history",
   context: "송금내역",
 };
+export const DeleteAccount = Template.bind({});
+DeleteAccount.args = {
+  path: "/delete-account",
+  context: "회원 탈퇴",
+};

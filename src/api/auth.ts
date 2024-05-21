@@ -4,6 +4,14 @@ import { FindEmailField, NewPassworldField } from "../interface/user-edit-interf
 import { LoginField, RegisterField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
+export const deleteAccount = async (userId: number | null) => {
+    try {
+        const response = await axiosUrl.delete(`/users/${userId}`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
 
 export const userLogin = async (data: LoginField) => {
     try {

@@ -136,3 +136,19 @@ ParticipationCancelled.args = {
   isLink: true,
   path: "/",
 };
+
+export const DeleteAccountHostingFailure = Template.bind({});
+DeleteAccountHostingFailure.args = {
+  title: "회원탈퇴 실패",
+  context: "완료되지 않은 경기가 있습니다.",
+  contextTwo: "경기 진행을 완료한 뒤에 회원 탈퇴를 진행해주세요.",
+  buttonContext: "확인",
+};
+
+export const DeleteAccountGuestFailure = Template.bind({});
+DeleteAccountGuestFailure.args = {
+  title: "회원탈퇴 실패",
+  context: "완료되지 않은 참가 경기가 있습니다.",
+  contextTwo: "경기 진행을 완료한 뒤에 회원 탈퇴를 진행해주세요.",
+  buttonContext: "확인",
+};

@@ -1,6 +1,7 @@
 import MITI_logo from "../../assets/MITI_logo.svg";
 import {
   CustomerSupport,
+  DeleteAccount,
   EditProfile,
   Faq,
   FindCourts,
@@ -65,6 +66,7 @@ export const HeaderTabContainer: React.FC<TabProps> = ({ displayTab }) => {
                   <QuickLinkTitle {...TranscationHistory.args} />
                   <QuickLinkTitle {...Faq.args} />
                   <QuickLinkTitle {...CustomerSupport.args} />
+                  <QuickLinkTitle {...DeleteAccount.args} />
                 </div>
               </div>
             </div>

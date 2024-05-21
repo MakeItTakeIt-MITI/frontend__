@@ -21,15 +21,6 @@ export const userChangePassword = async (id: number | null, data: PasswordField)
     }
 }
 
-export const deleteAccount = async (id: number | null) => {
-    try {
-        const response = await axiosUrl.delete(`/users/${id}`)
-        return response.data
-    } catch (error) {
-        throw new Error
-    }
-}
-
 
 
 export const getUserData = async (userId: number | null) => {

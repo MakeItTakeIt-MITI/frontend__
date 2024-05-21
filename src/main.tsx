@@ -46,6 +46,8 @@ import { GameParticipationHistoryPage } from "./pages/games/GameParticipationHis
 import { CourtDetailPage } from "./pages/court/CourtDetailPage.tsx";
 import { PaymentHistoryPage } from "./pages/payments/PaymentHistoryPage.tsx";
 import { TransactionHistoryPage } from "./pages/payments/TransactionHistoryPage.tsx";
+import { DeleteAccountPage } from "./pages/auth/DeleteAccountPage.tsx";
+import { DeleteAccountSuccessPage } from "./pages/auth/DeleteAccountSuccessPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +60,14 @@ const router = createBrowserRouter([
       {
         path: "/payments/kakao/approve",
         element: <KakaoPaymentHandler />,
+      },
+      {
+        path: "/delete-account",
+        element: <DeleteAccountPage />,
+      },
+      {
+        path: "/delete-account-success",
+        element: <DeleteAccountSuccessPage />,
       },
 
       {
@@ -94,6 +104,7 @@ const router = createBrowserRouter([
             path: "signup",
             element: <UserSignupPage />,
           },
+
           {
             path: "oauth/kakao/login",
             element: <KakaoAuthHandler />,
