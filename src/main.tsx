@@ -47,6 +47,7 @@ import { TransactionHistoryPage } from "./pages/payments/TransactionHistoryPage.
 import { DeleteAccountPage } from "./pages/auth/DeleteAccountPage.tsx";
 import { DeleteAccountSuccessPage } from "./pages/auth/DeleteAccountSuccessPage.tsx";
 import { GameReviewPage } from "./pages/games/GameReviewPage.tsx";
+import { PostGuestReviewPage } from "./pages/games/PostGuestReviewPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -209,6 +210,10 @@ const router = createBrowserRouter([
               {
                 path: "detail/:id/review",
                 element: <GameReviewPage />,
+              },
+              {
+                path: "detail/:id/review/:ratingId",
+                element: <PostGuestReviewPage />,
               },
               {
                 path: "detail/:id/join",

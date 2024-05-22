@@ -75,7 +75,7 @@ export const UserReviewDetailCard = ({
           </div>
         </div>
       </div>
-      <Link to="/">
+      <Link to={`${participantData?.rating.id}`}>
         <img src={rightArrIcon} alt="right arrow" />
       </Link>{" "}
     </div>

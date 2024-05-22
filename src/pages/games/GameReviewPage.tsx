@@ -3,7 +3,6 @@ import { useState } from "react";
 import { GameReviewSkeleton } from "../../components/skeleton/GameReviewSkeleton";
 import { LoadingPage } from "../LoadingPage";
 import { useParams } from "react-router-dom";
-import { useGetParticipantsDetailsQuery } from "../../hooks/games/useGetParticipantsDetailsQuery";
 import { UserReviewDetailCard } from "../../components/reviews/UserReviewDetailCard";
 import { useGetGameDetailQuery } from "../../hooks/games/useGetGameDetailQuery";
 import { ReviewPageMap } from "../../components/naver/ReviewPageMap";
@@ -12,6 +11,7 @@ import { GameFinishedTag } from "../../stories/Tags.stories";
 
 import markerSvg from "../../assets/Map_Pin.svg";
 import peopleSvg from "../../assets/people.svg";
+import { useGetParticipantsDetailsQuery } from "../../hooks/games/useGetParticipantsDetailsQuery";
 
 export const GameReviewPage = () => {
   const [loading, _setLoading] = useState(false);
