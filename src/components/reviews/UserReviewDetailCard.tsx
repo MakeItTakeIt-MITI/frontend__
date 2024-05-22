@@ -75,9 +75,16 @@ export const UserReviewDetailCard = ({
           </div>
         </div>
       </div>
-      <Link to={`${participantData?.rating.id}`}>
-        <img src={rightArrIcon} alt="right arrow" />
-      </Link>{" "}
+      {!isHost && (
+        <Link to={`guest/${participantData?.rating.id}`}>
+          <img src={rightArrIcon} alt="right arrow" />
+        </Link>
+      )}
+      {isHost && (
+        <Link to={`host/${data?.data.host.id}`}>
+          <img src={rightArrIcon} alt="right arrow" />
+        </Link>
+      )}
     </div>
   );
 };

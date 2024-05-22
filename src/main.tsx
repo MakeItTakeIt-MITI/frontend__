@@ -47,7 +47,8 @@ import { TransactionHistoryPage } from "./pages/payments/TransactionHistoryPage.
 import { DeleteAccountPage } from "./pages/auth/DeleteAccountPage.tsx";
 import { DeleteAccountSuccessPage } from "./pages/auth/DeleteAccountSuccessPage.tsx";
 import { GameReviewPage } from "./pages/games/GameReviewPage.tsx";
-import { PostGuestReviewPage } from "./pages/games/PostGuestReviewPage.tsx";
+import { PostGuestReviewPage } from "./pages/reviews/PostGuestReviewPage.tsx";
+import { PostHostReviewPage } from "./pages/reviews/PostHostReviewPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -212,8 +213,12 @@ const router = createBrowserRouter([
                 element: <GameReviewPage />,
               },
               {
-                path: "detail/:id/review/:ratingId",
+                path: "detail/:id/review/guest/:ratingId",
                 element: <PostGuestReviewPage />,
+              },
+              {
+                path: "detail/:id/review/host/:ratingId",
+                element: <PostHostReviewPage />,
               },
               {
                 path: "detail/:id/join",
