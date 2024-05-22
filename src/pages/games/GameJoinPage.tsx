@@ -3,7 +3,7 @@ import { useGetGameDetailQuery } from "../../hooks/games/useGetGameDetailQuery";
 import { LoadingPage } from "../LoadingPage";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { NotFoundPage } from "../NotFoundPage";
-import { GameDetailHostInfoBox } from "../../components/game/GameDetailHostInfoBox";
+import { UserReviewDetailCard } from "../../components/game/UserReviewDetailCard";
 import { GameDetailExtraInfoBox } from "../../components/game/GameDetailExtraInfoBox";
 import { GameDetailMap } from "../../components/naver/GameDetailMap";
 import { GamePaymentInfoBox } from "../../components/game/GamePaymentInfoBox";
@@ -60,7 +60,7 @@ export const GameJoinPage = () => {
             />
           </div>
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
-            <GameDetailHostInfoBox gameDetail={gameDetail.data} />
+            <UserReviewDetailCard gameDetail={gameDetail.data} />
             <GameDetailExtraInfoBox gameDetail={gameDetail.data} />
           </div>
         </div>

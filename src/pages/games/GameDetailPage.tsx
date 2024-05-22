@@ -6,7 +6,7 @@ import { NotFoundPage } from "../NotFoundPage";
 import { GameDetailHeader } from "../../components/game/GameDetailStatusBox";
 import { GameDetailInfoBox } from "../../components/game/GameDetailInfoBox";
 import { GameDetailParticipantsBox } from "../../components/game/GameDetailParticipantsBox";
-import { GameDetailHostInfoBox } from "../../components/game/GameDetailHostInfoBox";
+import { UserReviewDetailCard } from "../../components/game/UserReviewDetailCard";
 import { GameDetailExtraInfoBox } from "../../components/game/GameDetailExtraInfoBox";
 import { GameDetailButtonsBox } from "../../components/game/GameDetailButtonsBox";
 import { GameDetailMap } from "../../components/naver/GameDetailMap";
@@ -57,7 +57,7 @@ export const GameDetailPage = () => {
             />
           </div>
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
-            <GameDetailHostInfoBox gameDetail={gameDetail.data} />
+            <UserReviewDetailCard gameDetail={gameDetail.data} />
             <GameDetailExtraInfoBox gameDetail={gameDetail.data} />
           </div>
         </div>

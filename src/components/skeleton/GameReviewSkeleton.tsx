@@ -5,6 +5,9 @@ export const GameReviewSkeleton = () => {
     <section className="laptop:my-5 mobile:mb-16 laptop:block mobile:hidden">
       <NavigateToPrevContainer children="리뷰 작성하기" />
 
+      <h1 className=" laptop:w-[981px] mx-auto mobile:hidden laptop:block px-3 mb-[32px] text-[26px] font-bold">
+        <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32"></div>
+      </h1>
       <div className="flex laptop:flex-row mobile:flex-col gap-5 laptop:px-3 mobile:px-1 laptop:w-[981px] laptop:h-[745px]  mx-auto ">
         <div className="laptop:max-w-[431px]  mobile:w-full space-y-5">
           <div className="w-full h-[303px] border border-gray-200 rounded-lg flex items-center justify-center">

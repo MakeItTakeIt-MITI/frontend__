@@ -14,7 +14,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { KakaoAuthHandler } from "./components/forms/KakaoAuthHandler.tsx";
 import { PrivateRoute } from "./pages/PrivateRoute.tsx";
 import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
-import { ManageParticipantsPage } from "./pages/games/ManageParticipantsPage.tsx";
 import { FindEmailPage } from "./pages/auth/FindEmailPage.tsx";
 import { UserMyPage } from "./pages/user/UserMyPage.tsx";
 import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
@@ -219,10 +218,7 @@ const router = createBrowserRouter([
                 path: "my-games",
                 element: <MyGamesPage />,
               },
-              {
-                path: "detail/:id/manage_participants",
-                element: <ManageParticipantsPage />,
-              },
+
               {
                 path: "host-history",
                 element: <HostGameHistoryPage />,

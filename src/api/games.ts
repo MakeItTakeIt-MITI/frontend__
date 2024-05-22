@@ -36,14 +36,14 @@ export const userParticipateGame = async (gameId: number, data: ParticipantField
     return response.data
 }
 
-export const getParticipatingUsers = async (gameId: number) => {
-    try {
-        const response = await axiosUrl.get(`/games/${gameId}/participations`)
-        return response.data
-    } catch {
-        throw new Error
-    }
-}
+// export const getParticipatingUsers = async (gameId: number | null) => {
+//     try {
+//         const response = await axiosUrl.get(`/games/${gameId}/players`)
+//         return response.data
+//     } catch {
+//         throw new Error
+//     }
+// }
 
 export const getGameCourtDetails = async () => {
     try {
@@ -57,7 +57,15 @@ export const getGameCourtDetails = async () => {
 
 export const getGuestGameHistory = async (userId: number | null, gameStatus: string, pageNumber: number) => {
     try {
-        const response = await axiosUrl(`/users/${userId}/participated-games?game_status=${gameStatus}&page=${pageNumber}`)
+        const response = await axiosUrl.get(`/users/${userId}/participated-games?game_status=${gameStatus}&page=${pageNumber}`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
+export const getParticipantsDetails = async (gameId: number | null) => {
+    try {
+        const response = await axiosUrl.get(`/games/${gameId}/players`)
         return response.data
     } catch {
         throw new Error
