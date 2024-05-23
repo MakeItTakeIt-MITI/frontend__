@@ -19,7 +19,6 @@ axiosUrl.interceptors.request.use((config) => {
     }
     return config;
 }, error => {
-    console.log(error);
     return Promise.reject(error);
 }
 
@@ -38,7 +37,6 @@ axiosUrl.interceptors.response.use(
             try {
                 const refreshToken = localStorage.getItem('refreshToken');
                 if (!refreshToken) {
-                    console.log('Refresh token not found');
                     return Promise.reject(error);
                 }
                 const response = await axios.post('https://dev.makeittakeit.kr/auth/refresh-token', {}, {
@@ -52,13 +50,10 @@ axiosUrl.interceptors.response.use(
                 if (!localStorage.getItem("accessToken")) {
                     window.location.reload()
                 }
-                console.log(response, 'succeed in refreshing token');
                 const originalRequest = error.config;
                 originalRequest.headers.Authorization = `Bearer ${access}`;
                 return axios(originalRequest);
             } catch (newError) {
-                console.log('refresh token failed:');
-                console.log(newError);
                 return Promise.reject(newError);
             }
         }

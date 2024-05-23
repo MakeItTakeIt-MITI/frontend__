@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import { ReviewCheckBox } from "../../components/reviews/ReviewCheckBox";
 import { DisplayRatings } from "../../components/reviews/DisplayRatings";
 import { useWriteGuestReviewMutation } from "../../hooks/reviews/useWriteGuestReviewMutation";
-import { useGetGameDetailQuery } from "../../hooks/games/useGetGameDetailQuery";
 import { useGetParticipantsDetailsQuery } from "../../hooks/games/useGetParticipantsDetailsQuery";
 
 interface PostReviewField {
@@ -95,6 +94,7 @@ export const PostGuestReviewPage = () => {
                 </div>
                 <button
                   type="submit"
+                  disabled={rating === 0 ? true : false}
                   onClick={handleSubmitReview}
                   style={{
                     backgroundColor: rating > 0 ? "#4065F5" : "#F7F7F7",

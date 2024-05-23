@@ -13,7 +13,7 @@ import {
 } from "../../stories/Reviews.stories";
 import { Link } from "react-router-dom";
 
-export const DisplayRatings = ({ reviewData }: any) => {
+export const DisplayRatings = ({ reviewData, isHost, gameDetailData }: any) => {
   const getRatingComponent = (rating: number) => {
     if (rating === 5) {
       return <ReviewRating {...FiveStars.args} />;
@@ -42,13 +42,19 @@ export const DisplayRatings = ({ reviewData }: any) => {
 
   return (
     <div className="flex gap-1.5 text-sm text-[#222] font-[500]">
-      {getRatingComponent(reviewData?.data.rating.average_rating)}
+      {/* change gameDetalData when rating is fixed */}
+      {!isHost
+        ? getRatingComponent(reviewData?.data.rating?.average_rating)
+        : getRatingComponent(gameDetailData.host.rating.num_of_reviews)}
 
       {reviewData?.data.rating.average_rating > 0 && (
         <span>{reviewData?.data.rating.average_rating.toFixed(1)}</span>
       )}
       <Link to="/" className="font-bold underline">
-        후기 {reviewData?.data.rating.num_of_reviews}
+        후기{" "}
+        {!isHost
+          ? reviewData?.data.rating.num_of_reviews
+          : gameDetailData.host.rating.num_of_reviews}
       </Link>
     </div>
   );
