@@ -20,7 +20,7 @@ import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
 import { CustomerServicePage } from "./pages/user/CustomerServicePage.tsx";
 import { UserInquiryPage } from "./pages/user/UserInquiryPage.tsx";
 import { FAQPage } from "./pages/user/FAQPage.tsx";
-import { MyReviewPage } from "./pages/user/MyReviewPage.tsx";
+import { UserReviewListPage } from "./pages/user/UserReviewListPage.tsx";
 import { MyReviewDetailPage } from "./pages/user/MyReviewDetailPage.tsx";
 import { UserReviewsPage } from "./pages/user/UserReviewsPage.tsx";
 import { SignupIntroPage } from "./pages/auth/SignupIntroPage.tsx";
@@ -184,7 +184,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "my-reviews",
-                element: <MyReviewPage />,
+                element: <UserReviewListPage />,
               },
               { path: "my-reviews/detail", element: <MyReviewDetailPage /> },
               { path: "settlement-history", element: <PaymentHistoryPage /> },

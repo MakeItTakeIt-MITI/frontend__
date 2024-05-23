@@ -1,6 +1,6 @@
 import axiosUrl from "../utils/axios"
 
-export const getReviewDetails = async (ratingId: number | null) => {
+export const getReviewDetails = async (ratingId: number | null | undefined) => {
     try {
         const response = await axiosUrl.get(`/ratings/${ratingId}`)
         return response.data
