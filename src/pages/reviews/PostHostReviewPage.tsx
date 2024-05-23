@@ -27,7 +27,7 @@ export const PostHostReviewPage = () => {
   const { data: reviewData, isPending } = useGetReviewDetailQuery(
     Number(ratingId)
   );
-  const { data: gameDetail } = useGetGameDetailQuery(Number(id));
+  const { data: gameDetailData } = useGetGameDetailQuery(Number(id));
 
   useEffect(() => {
     if (selectedText === "직접 작성") {
@@ -52,8 +52,8 @@ export const PostHostReviewPage = () => {
                 <div className="flex  gap-2.5">
                   <img src={profileIcon} alt="profile icon" />
                   <div className="text-sm font-bold text-[#444]">
-                    <h4>{reviewData?.data?.nickname}</h4>
-                    {/* <DisplayRatings reviewData={reviewData} /> */}
+                    <h4>{gameDetailData?.data?.host.nickname}</h4>
+                    <DisplayRatings gameDetailData={gameDetailData?.data} />
                   </div>
                 </div>
               </div>
