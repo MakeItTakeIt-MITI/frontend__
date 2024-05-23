@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { ReviewCheckBox } from "../../components/reviews/ReviewCheckBox";
 import { DisplayRatings } from "../../components/reviews/DisplayRatings";
 import { useGetGameDetailQuery } from "../../hooks/games/useGetGameDetailQuery";
+import { useWriteHostReviewMutation } from "../../hooks/reviews/useWriteHostReviewMutation";
 
 interface PostReviewField {
   rating: number;
@@ -24,6 +25,15 @@ export const PostHostReviewPage = () => {
   const { id } = useParams();
 
   const { data: gameDetailData, isPending } = useGetGameDetailQuery(Number(id));
+  const { mutate } = useWriteHostReviewMutation(Number(id));
+
+  const handleSubmitReview = () => {
+    const dataField: PostReviewField = {
+      comment: inputtedReview.length === 0 ? selectedText : inputtedReview,
+      rating: rating,
+    };
+    mutate(dataField);
+  };
 
   useEffect(() => {
     if (selectedText === "직접 작성") {
@@ -73,7 +83,7 @@ export const PostHostReviewPage = () => {
                 <div className="h-[307px] w-full border border-gray-200 p-3 space-y-4">
                   <h4 className="font-bold">호스트 한줄평</h4>
                   <ReviewCheckBox
-                    isHost="true"
+                    isHost={true}
                     checked={checked}
                     isChecked={isChecked}
                     setSelectedText={setSelectedText}
@@ -87,6 +97,7 @@ export const PostHostReviewPage = () => {
                 </div>
                 <button
                   type="submit"
+                  onClick={handleSubmitReview}
                   style={{
                     backgroundColor: rating > 0 ? "#4065F5" : "#F7F7F7",
                     color: rating > 0 ? "#fff" : "#969696",

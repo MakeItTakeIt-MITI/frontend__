@@ -44,7 +44,7 @@ export const PostGuestReviewPage = () => {
       setSelectedText(inputtedReview);
     }
 
-    playersData?.data.participations.map((player) =>
+    playersData?.data.participations.map((player: { id: number }) =>
       setParticipationId(player.id)
     );
   }, [participationId, selectedText, setSelectedText]);

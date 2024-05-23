@@ -6,7 +6,7 @@ interface ReviewCheckBoxProp {
   checked: boolean;
   isChecked: (arg: boolean) => void;
   setSelectedText: (arg: string) => void;
-  isHost: boolean;
+  isHost?: boolean;
 }
 
 export const ReviewCheckBox: React.FC<ReviewCheckBoxProp> = ({
