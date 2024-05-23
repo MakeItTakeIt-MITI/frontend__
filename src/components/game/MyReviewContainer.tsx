@@ -1,9 +1,52 @@
 import { Link } from "react-router-dom";
 import linkArrow from "../../assets/Chevron_Right_MD.svg";
 import { MatchTags } from "./MatchTags";
-import { GuestTag, HostTag } from "../../stories/Tags.stories";
+import {
+  GuestReviewTag,
+  GuestTag,
+  HostReviewTag,
+  HostTag,
+} from "../../stories/Tags.stories";
+import { ReviewRating } from "../common/ReviewRating";
+import {
+  FiveStars,
+  FourAndHalfStars,
+  FourStars,
+  NoReviews,
+  OneAndHalfStar,
+  OneStar,
+  ThreeAndHalfStars,
+  ThreeStars,
+  TwoAndHalfStars,
+  TwoStars,
+} from "../../stories/Reviews.stories";
 
 export const MyReviewContainer = ({ review }) => {
+  const getRatingComponent = (rating: number) => {
+    if (rating === 5) {
+      return <ReviewRating {...FiveStars.args} />;
+    } else if (rating === 4.5) {
+      return <ReviewRating {...FourAndHalfStars.args} />;
+    } else if (rating === 4) {
+      return <ReviewRating {...FourStars.args} />;
+    } else if (rating === 3.5) {
+      return <ReviewRating {...ThreeAndHalfStars.args} />;
+    } else if (rating === 3) {
+      return <ReviewRating {...ThreeStars.args} />;
+    } else if (rating === 2.5) {
+      return <ReviewRating {...TwoAndHalfStars.args} />;
+    } else if (rating === 2) {
+      return <ReviewRating {...TwoStars.args} />;
+    } else if (rating === 1.5) {
+      return <ReviewRating {...OneAndHalfStar.args} />;
+    } else if (rating === 1) {
+      return <ReviewRating {...OneStar.args} />;
+    } else if (rating === 0) {
+      return <ReviewRating {...NoReviews.args} />;
+    } else {
+      return null;
+    }
+  };
   return (
     <Link
       to="/my-reviews-detail"
@@ -12,14 +55,16 @@ export const MyReviewContainer = ({ review }) => {
       <div className="flex flex-col">
         <div className="">
           {review?.review_type === "host_review" && (
-            <MatchTags {...HostTag.args} />
+            <MatchTags {...HostReviewTag.args} />
           )}
           {review?.review_type === "guest_review" && (
-            <MatchTags {...GuestTag.args} />
+            <MatchTags {...GuestReviewTag.args} />
           )}
         </div>
 
         <div className="flex items-center gap-1">
+          {getRatingComponent(review?.rating)}
+
           <span className="text-[14px]">5.0</span>
         </div>
         <p className="text-[9px] text-[#666] ">

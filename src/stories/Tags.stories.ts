@@ -22,9 +22,23 @@ export const HostTag: Story = {
         textColor: "#0019FF",
     },
 };
+export const HostReviewTag: Story = {
+    args: {
+        children: "호스트 리뷰",
+        backgroundColor: "#0087E94D",
+        textColor: "#0087E9",
+    },
+};
 export const GuestTag: Story = {
     args: {
         children: "게스트",
+        backgroundColor: "#43D0004D",
+        textColor: "#43D000",
+    },
+};
+export const GuestReviewTag: Story = {
+    args: {
+        children: "게스트 리뷰",
         backgroundColor: "#FFF7C2",
         textColor: "#FDB446",
     },
