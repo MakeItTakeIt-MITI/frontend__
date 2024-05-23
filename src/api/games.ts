@@ -45,15 +45,6 @@ export const userParticipateGame = async (gameId: number, data: ParticipantField
 //     }
 // }
 
-export const getGameCourtDetails = async () => {
-    try {
-        const response = await axiosUrl.get(`/courts`)
-        return response.data
-    } catch {
-        throw new Error
-    }
-
-}
 
 export const getGuestGameHistory = async (userId: number | null, gameStatus: string, pageNumber: number) => {
     try {
