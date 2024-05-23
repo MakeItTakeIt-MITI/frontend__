@@ -26,15 +26,18 @@ export const CourtDetailPage = () => {
           <CourtDetailMap courtData={courtDetailData} />
           <ShareCourtDetailBox courtDetailData={courtDetailData} />
         </div>
-        <div
-          style={{ scrollbarWidth: "thin" }}
-          className=" laptop:w-[530px] bg-[#FBFBFB]  laptop:h-[738px] mobile:h-full   mobile:w-full mx-auto   p-3 rounded-lg flex flex-col gap-10 "
-        >
-          <CourtHistoryListContainer
-            data={courtListData}
-            fetchNextPage={fetchNextPage}
-            hasNextPage={hasNextPage}
-          />
+        <div>
+          <h1 className="font-bold text-[20px]">모집 경기 목록</h1>
+          <div
+            style={{ scrollbarWidth: "thin" }}
+            className=" laptop:w-[530px] bg-[#FBFBFB]  laptop:h-[738px] mobile:h-full   mobile:w-full mx-auto   p-3 rounded-lg flex flex-col gap-10 "
+          >
+            <CourtHistoryListContainer
+              data={courtListData}
+              fetchNextPage={fetchNextPage}
+              hasNextPage={hasNextPage}
+            />
+          </div>
         </div>
       </div>
     </section>
