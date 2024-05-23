@@ -20,7 +20,7 @@ export const UserReviewDetailCard = ({
   isHost,
   participantData,
 }: any) => {
-  const hostRating = isHost && data?.data.host.rating.average_rating;
+  const hostRating = isHost && data?.data.host.rating?.average_rating;
   const hostDataReviewCount = isHost && data?.data.host.rating.num_of_reviews;
   const hostNickname = isHost && data?.data.host.nickname;
 

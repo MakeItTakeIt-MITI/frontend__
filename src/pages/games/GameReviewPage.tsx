@@ -12,13 +12,16 @@ import { GameFinishedTag } from "../../stories/Tags.stories";
 import markerSvg from "../../assets/Map_Pin.svg";
 import peopleSvg from "../../assets/people.svg";
 import { useGetParticipantsDetailsQuery } from "../../hooks/games/useGetParticipantsDetailsQuery";
+import { NoGamesAvailableInfoBox } from "../../components/home/NoGamesAvailableInfoBox";
+import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
 
 export const GameReviewPage = () => {
   const [loading, _setLoading] = useState(false);
   const { id } = useParams();
   const gameIdParam = Number(id);
 
-  const { data } = useGetParticipantsDetailsQuery(gameIdParam);
+  const { data: participantsData } =
+    useGetParticipantsDetailsQuery(gameIdParam);
   const { data: gameData } = useGetGameDetailQuery(gameIdParam);
 
   return (
@@ -84,7 +87,13 @@ export const GameReviewPage = () => {
               <div className="laptop:w-[464px] space-y-2.5">
                 <h2 className="text-xl font-[600] ">호스트 리뷰</h2>
                 <div className="space-y-5 w-full h-[97px] p-3 rounded-lg border border-gray-200 ">
-                  <UserReviewDetailCard data={data} isHost={true} />
+                  {participantsData?.data.participations.length !== 0 ? (
+                    <UserReviewDetailCard data={gameData} isHost={true} />
+                  ) : (
+                    <div className="h-full flex items-center justify-center text-[#999] text-[14px] ">
+                      호스트 리뷰를 이미 작성하셨습니다!
+                    </div>
+                  )}
                 </div>
               </div>
               {/* bottom right */}
@@ -95,15 +104,24 @@ export const GameReviewPage = () => {
                   style={{ scrollbarWidth: "thin" }}
                   className="space-y-5 h-[509px] p-3 rounded-lg border border-gray-200 overflow-y-auto"
                 >
-                  {data?.data.participations.map((participant: any) => {
-                    return (
-                      <UserReviewDetailCard
-                        key={participant?.user.id}
-                        participantData={participant.user}
-                        isHost={false}
-                      />
-                    );
-                  })}
+                  {participantsData?.data.participations.length !== 0 ? (
+                    participantsData?.data.participations.map(
+                      (participant: any) => {
+                        return (
+                          <UserReviewDetailCard
+                            key={participant?.user.id}
+                            participantData={participant.user}
+                            isHost={false}
+                          />
+                        );
+                      }
+                    )
+                  ) : (
+                    <NoListFoundMessageBox
+                      title="작성할 게스트 리뷰가 없습니다."
+                      content="리뷰 남겨주셔서 감사합니다!"
+                    />
+                  )}
                 </div>
               </div>
             </div>
