@@ -30,3 +30,12 @@ export const writeHostReview = async (gameId: number | null, data: { rating: num
     }
 
 }
+
+export const getUserReviewFeedbackDetails = async (userId: number | null, reviewId: number | null) => {
+    try {
+        const response = await axiosUrl.get(`users/${userId}/reviews/${reviewId}`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}

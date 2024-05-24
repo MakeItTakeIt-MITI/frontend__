@@ -20,7 +20,7 @@ import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
 import { CustomerServicePage } from "./pages/user/CustomerServicePage.tsx";
 import { UserInquiryPage } from "./pages/user/UserInquiryPage.tsx";
 import { FAQPage } from "./pages/user/FAQPage.tsx";
-import { UserReviewListPage } from "./pages/user/UserReviewListPage.tsx";
+import { UserReviewListPage } from "./pages/reviews/UserReviewListPage.tsx";
 import { MyReviewDetailPage } from "./pages/user/MyReviewDetailPage.tsx";
 import { UserReviewsPage } from "./pages/user/UserReviewsPage.tsx";
 import { SignupIntroPage } from "./pages/auth/SignupIntroPage.tsx";
@@ -49,6 +49,7 @@ import { DeleteAccountSuccessPage } from "./pages/auth/DeleteAccountSuccessPage.
 import { GameReviewPage } from "./pages/games/GameReviewPage.tsx";
 import { PostGuestReviewPage } from "./pages/reviews/PostGuestReviewPage.tsx";
 import { PostHostReviewPage } from "./pages/reviews/PostHostReviewPage.tsx";
+import { UserReviewDetailPage } from "./pages/reviews/UserReviewDetailPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -185,6 +186,10 @@ const router = createBrowserRouter([
               {
                 path: "my-reviews",
                 element: <UserReviewListPage />,
+              },
+              {
+                path: "review/detail/:reviewId",
+                element: <UserReviewDetailPage />,
               },
               { path: "my-reviews/detail", element: <MyReviewDetailPage /> },
               { path: "settlement-history", element: <PaymentHistoryPage /> },

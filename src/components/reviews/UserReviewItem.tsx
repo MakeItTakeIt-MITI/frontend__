@@ -1,12 +1,7 @@
 import { Link } from "react-router-dom";
 import linkArrow from "../../assets/Chevron_Right_MD.svg";
-import { MatchTags } from "./MatchTags";
-import {
-  GuestReviewTag,
-  GuestTag,
-  HostReviewTag,
-  HostTag,
-} from "../../stories/Tags.stories";
+import { MatchTags } from "../game/MatchTags";
+import { GuestReviewTag, HostReviewTag } from "../../stories/Tags.stories";
 import { ReviewRating } from "../common/ReviewRating";
 import {
   FiveStars,
@@ -21,7 +16,7 @@ import {
   TwoStars,
 } from "../../stories/Reviews.stories";
 
-export const MyReviewContainer = ({ review }) => {
+export const UserReviewItem = ({ review }: any) => {
   const getRatingComponent = (rating: number) => {
     if (rating === 5) {
       return <ReviewRating {...FiveStars.args} />;
@@ -49,7 +44,7 @@ export const MyReviewContainer = ({ review }) => {
   };
   return (
     <Link
-      to="/my-reviews-detail"
+      to={`/user/review/detail/${review.id}`}
       className="flex items-center  w-full h-[89px] border text-[#545454] border-gray-300 rounded-lg   justify-between p-3"
     >
       <div className="flex flex-col">

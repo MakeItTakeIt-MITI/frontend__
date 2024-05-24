@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
-import { MyReviewContainer } from "../../components/game/MyReviewContainer";
 import { TabFilterList } from "../../components/game/TabFilterList";
 import { useGetReviewDetailQuery } from "../../hooks/reviews/useGetReviewDetailQuery";
 import { useGetUserDataQuery } from "../../hooks/user/useGetUserDataQuery";
 import useUserDataStore from "../../store/useUserDataStore";
 import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
+import { UserReviewItem } from "../../components/reviews/UserReviewItem";
 
 export const UserReviewListPage = () => {
   const { userId } = useUserDataStore();
@@ -32,8 +32,8 @@ export const UserReviewListPage = () => {
         </div>
         <div className="h-[653px] p-3 bg-[#FBFBFB] space-y-[15px] overflow-y-auto border border-gray-200 rounded-lg">
           {reviewData && reviewData?.data?.reviews.length !== 0 ? (
-            reviewData?.data?.reviews.map((review) => {
-              return <MyReviewContainer review={review} />;
+            reviewData?.data?.reviews.map((review: any) => {
+              return <UserReviewItem review={review} />;
             })
           ) : (
             <NoListFoundMessageBox
@@ -41,12 +41,6 @@ export const UserReviewListPage = () => {
               content="경기에 참여하고 리뷰를 받아보세요!"
             />
           )}
-          {/* <MyReviewContainer />
-          <MyReviewContainer />
-          <MyReviewContainer />
-          <MyReviewContainer />
-          <MyReviewContainer />
-          <MyReviewContainer /> */}
         </div>
       </div>
     </section>
