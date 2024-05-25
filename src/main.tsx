@@ -21,8 +21,7 @@ import { CustomerServicePage } from "./pages/user/CustomerServicePage.tsx";
 import { UserInquiryPage } from "./pages/user/UserInquiryPage.tsx";
 import { FAQPage } from "./pages/user/FAQPage.tsx";
 import { ReviewsAboutMePage } from "./pages/reviews/ReviewsAboutMePage.tsx";
-import { MyReviewDetailPage } from "./pages/user/MyReviewDetailPage.tsx";
-import { UserReviewsPage } from "./pages/user/UserReviewsPage.tsx";
+import { UserReviewsPage } from "./pages/reviews/UserReviewsPage.tsx";
 import { SignupIntroPage } from "./pages/auth/SignupIntroPage.tsx";
 import { SMSVerifiedSuccessPage } from "./pages/auth/SMSVerifiedSuccessPage.tsx";
 import { FindPasswordPage } from "./pages/auth/FindPasswordPage.tsx";
@@ -49,7 +48,8 @@ import { DeleteAccountSuccessPage } from "./pages/auth/DeleteAccountSuccessPage.
 import { GameReviewPage } from "./pages/games/GameReviewPage.tsx";
 import { PostGuestReviewPage } from "./pages/reviews/PostGuestReviewPage.tsx";
 import { PostHostReviewPage } from "./pages/reviews/PostHostReviewPage.tsx";
-import { UserReviewDetailPage } from "./pages/reviews/UserReviewDetailPage.tsx";
+import { ReviewsAboutMeDetailPage } from "./pages/reviews/ReviewsAboutMeDetailPage.tsx";
+import { MyReviewDetailPage } from "./pages/reviews/MyReviewDetailPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -159,6 +159,27 @@ const router = createBrowserRouter([
         element: <PrivateRoute />,
         children: [
           {
+            path: "reviews",
+            children: [
+              {
+                path: "user-reviews",
+                element: <ReviewsAboutMePage />,
+              },
+              {
+                path: "user-reviews/detail/:reviewId",
+                element: <ReviewsAboutMeDetailPage />,
+              },
+              {
+                path: "my-reviews",
+                element: <UserReviewsPage />,
+              },
+              {
+                path: "my-reviews/detail/:reviewId",
+                element: <MyReviewDetailPage />,
+              },
+            ],
+          },
+          {
             path: "/user",
             children: [
               {
@@ -179,25 +200,6 @@ const router = createBrowserRouter([
                 element: <UserInquiryDetailPage />,
               },
 
-              {
-                path: "reviews",
-                children: [
-                  {
-                    path: "about-me",
-                    element: <ReviewsAboutMePage />,
-                  },
-                  {
-                    path: "written-by-me",
-                    element: <UserReviewsPage />,
-                  },
-                ],
-              },
-
-              {
-                path: "review/detail/:reviewId",
-                element: <UserReviewDetailPage />,
-              },
-              { path: "my-reviews/detail", element: <MyReviewDetailPage /> },
               { path: "settlement-history", element: <PaymentHistoryPage /> },
               {
                 path: "transaction-history",

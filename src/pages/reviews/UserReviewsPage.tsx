@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { TabFilterList } from "../../components/game/TabFilterList";
-import { useGetReviewDetailQuery } from "../../hooks/reviews/useGetReviewDetailQuery";
 import { useGetUserDataQuery } from "../../hooks/user/useGetUserDataQuery";
 import useUserDataStore from "../../store/useUserDataStore";
 import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
-import { UserReviewItem } from "../../components/reviews/UserReviewItem";
+import { useGetUserWrittenReviewsQuery } from "../../hooks/reviews/useGetUserWrittenReviewsQuery";
 import { Link } from "react-router-dom";
+import { MyReviewItem } from "../../components/reviews/MyReviewItem";
 
-export const ReviewsAboutMePage = () => {
+export const UserReviewsPage = () => {
   const { userId } = useUserDataStore();
 
   const { data: userData, refetch: userDataRefetch } =
@@ -17,7 +17,7 @@ export const ReviewsAboutMePage = () => {
     ? Number(userData.data.rating.id)
     : null;
   const { data: reviewData, refetch: reviewDataRefetch } =
-    useGetReviewDetailQuery(ratingId);
+    useGetUserWrittenReviewsQuery(userId);
 
   useEffect(() => {
     userDataRefetch();
@@ -28,16 +28,19 @@ export const ReviewsAboutMePage = () => {
       <NavigateToPrevContainer children="내 리뷰 조회" />
       <div className="space-y-[34px] laptop:w-[593px]     mobile:w-full mx-auto  ">
         <div className="flex  justify-between">
-          <h1 className="w-[351px] text-[26px] font-bold">내 리뷰 조회</h1>
+          <h1 className="w-[351px] text-[26px] font-bold">작성 리뷰 페이지</h1>
           <TabFilterList />
         </div>
-        <div className="h-[653px] p-3 bg-[#FBFBFB] space-y-[15px] overflow-y-auto border border-gray-200 rounded-lg">
-          {reviewData && reviewData?.data?.reviews.length !== 0 ? (
-            reviewData?.data?.reviews.map((review: any) => {
+        <div
+          style={{ scrollbarWidth: "thin" }}
+          className="h-[653px] p-3 bg-[#FBFBFB] space-y-[15px] overflow-y-auto border border-gray-200 rounded-lg"
+        >
+          {reviewData && reviewData?.data?.page_content.length !== 0 ? (
+            reviewData?.data?.page_content.map((review: any) => {
               return (
                 <div>
                   <Link to={`detail/${review.id}`}>
-                    <UserReviewItem review={review} />
+                    <MyReviewItem review={review} />
                   </Link>
                 </div>
               );

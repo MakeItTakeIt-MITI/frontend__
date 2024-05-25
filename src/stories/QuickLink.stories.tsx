@@ -47,12 +47,12 @@ FindCourts.args = {
 };
 export const ReviewsAboutMe = Template.bind({});
 ReviewsAboutMe.args = {
-  path: "/user/reviews/written-by-me",
+  path: "/reviews/my-reviews",
   context: "작성 리뷰",
 };
 export const MyReviews = Template.bind({});
 MyReviews.args = {
-  path: "/user/reviews/about-me",
+  path: "/reviews/user-reviews",
   context: "내 리뷰",
 };
 export const EditProfile = Template.bind({});

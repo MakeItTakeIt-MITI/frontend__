@@ -39,8 +39,8 @@ export const GuestTag: Story = {
 export const GuestReviewTag: Story = {
     args: {
         children: "게스트 리뷰",
-        backgroundColor: "#FFF7C2",
-        textColor: "#FDB446",
+        backgroundColor: "#43D0004D",
+        textColor: "#43D000",
     },
 };
 export const RecruitingTag: Story = {

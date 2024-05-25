@@ -16,7 +16,7 @@ import {
   TwoStars,
 } from "../../stories/Reviews.stories";
 
-export const UserReviewItem = ({ review }: any) => {
+export const MyReviewItem = ({ review }: any) => {
   const getRatingComponent = (rating: number) => {
     if (rating === 5) {
       return <ReviewRating {...FiveStars.args} />;

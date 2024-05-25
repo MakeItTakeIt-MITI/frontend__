@@ -39,3 +39,22 @@ export const getUserReviewFeedbackDetails = async (userId: number | null, review
         throw new Error
     }
 }
+
+export const getUserWrittenReviews = async (userId: number | null) => {
+    try {
+        const response = await axiosUrl.get(`users/${userId}/my-reviews`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
+
+export const getUserWrittenReviewsDetails = async (userId: number | null, reviewId: number | null) => {
+    try {
+        const response = await axiosUrl.get(`users/${userId}/my-reviews/${reviewId}`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
+

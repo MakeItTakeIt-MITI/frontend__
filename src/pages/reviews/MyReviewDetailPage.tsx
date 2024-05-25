@@ -9,8 +9,9 @@ import { ReviewGameDetailBox } from "../../components/reviews/ReviewGameDetailBo
 import { GuestDetailContainer } from "../../components/reviews/GuestDetailContainer";
 import { useUserInfoQuery } from "../../hooks/games/useUserInfoQuery";
 import { ReviewStars } from "../../components/reviews/ReviewStars";
+import { useGetMyWrittenReviewDetailQuery } from "../../hooks/reviews/useGetMyWrittenReviewDetailQuery";
 
-export const UserReviewDetailPage = () => {
+export const MyReviewDetailPage = () => {
   const { userId } = useUserDataStore();
   const { reviewId } = useParams();
 
@@ -21,6 +22,11 @@ export const UserReviewDetailPage = () => {
     getCourtDetailQuery(reviewIdParam);
 
   const { data: reviewDetailData } = useGetUserDetailReviewQuery(
+    userId,
+    reviewIdParam
+  );
+
+  const { data: myReviewDetailData } = useGetMyWrittenReviewDetailQuery(
     userId,
     reviewIdParam
   );
@@ -36,34 +42,32 @@ export const UserReviewDetailPage = () => {
       <NavigateToPrevContainer children="경기장 상세 정보" />
 
       <div className="laptop:w-[981px] laptop:h-[745px]  mx-auto space-y-[32px]">
-        <h1 className="text-[26px] font-bold px-3">
-          {reviewDetailData?.data.review_type !== "host_review"
-            ? "작성 리뷰 상세"
-            : "내 리뷰 상세"}
-        </h1>
+        <h1 className="text-[26px] font-bold px-3">작성 리뷰 상세</h1>
         <div className="flex laptop:flex-row mobile:flex-col gap-5 laptop:px-3 mobile:px-1  ">
           <div className="laptop:max-w-[431px]  mobile:w-full gap-[20px] w-full flex flex-col">
             <CourtDetailMap courtData={courtDetailData} />
             <div className="space-y-2 p-3 laptop:border border-gray-200 rounded-lg">
-              <ReviewGameDetailBox reviewData={reviewDetailData} />
+              <ReviewGameDetailBox reviewData={myReviewDetailData} />
             </div>
           </div>
           <div className="laptop:w-[464px] space-y-3">
             <GuestDetailContainer
               reviewDetail={userData}
-              reviewDetailData={reviewDetailData}
+              reviewDetailData={myReviewDetailData}
             />
             <div className="w-full h-[270px] p-3 space-y-4 border border-gray-200 rounded-lg">
               <h4 className="font-bold">작성 리뷰</h4>
               <div className="space-y-[10px]">
                 <h4 className="text-xs font-bold">평점</h4>
                 <div className="w-full flex justify-center">
-                  <ReviewStars reviewDetailData={reviewDetailData} />
+                  <ReviewStars reviewDetailData={myReviewDetailData} />
                 </div>
               </div>
               <div className="space-y-[10px]">
                 <h4 className="text-xs font-bold">한줄평</h4>
-                <p className="text-[10px]">{reviewDetailData?.data.comment}</p>
+                <p className="text-[10px]">
+                  {myReviewDetailData?.data.comment}
+                </p>
               </div>
             </div>
           </div>
