@@ -20,7 +20,7 @@ import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
 import { CustomerServicePage } from "./pages/user/CustomerServicePage.tsx";
 import { UserInquiryPage } from "./pages/user/UserInquiryPage.tsx";
 import { FAQPage } from "./pages/user/FAQPage.tsx";
-import { UserReviewListPage } from "./pages/reviews/UserReviewListPage.tsx";
+import { ReviewsAboutMePage } from "./pages/reviews/ReviewsAboutMePage.tsx";
 import { MyReviewDetailPage } from "./pages/user/MyReviewDetailPage.tsx";
 import { UserReviewsPage } from "./pages/user/UserReviewsPage.tsx";
 import { SignupIntroPage } from "./pages/auth/SignupIntroPage.tsx";
@@ -181,12 +181,18 @@ const router = createBrowserRouter([
 
               {
                 path: "reviews",
-                element: <UserReviewsPage />,
+                children: [
+                  {
+                    path: "about-me",
+                    element: <ReviewsAboutMePage />,
+                  },
+                  {
+                    path: "written-by-me",
+                    element: <UserReviewsPage />,
+                  },
+                ],
               },
-              {
-                path: "my-reviews",
-                element: <UserReviewListPage />,
-              },
+
               {
                 path: "review/detail/:reviewId",
                 element: <UserReviewDetailPage />,

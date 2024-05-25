@@ -36,7 +36,7 @@ export const HomePage = () => {
   };
   useEffect(() => {
     refetch();
-  }, [selectingDate, refetch, formatDate]);
+  }, [selectingDate, refetch, formatDate, allGamesData]);
 
   if (isError) {
     return <NotFoundPage />;

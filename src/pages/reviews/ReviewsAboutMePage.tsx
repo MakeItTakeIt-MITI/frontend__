@@ -7,7 +7,7 @@ import useUserDataStore from "../../store/useUserDataStore";
 import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
 import { UserReviewItem } from "../../components/reviews/UserReviewItem";
 
-export const UserReviewListPage = () => {
+export const ReviewsAboutMePage = () => {
   const { userId } = useUserDataStore();
 
   const { data: userData, refetch: userDataRefetch } =
