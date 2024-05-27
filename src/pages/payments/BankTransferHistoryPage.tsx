@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import downArrow from "../../assets/Chevron_Down_MD.svg";
 import useUserDataStore from "../../store/useUserDataStore";
-import { getUserPaymentHistoryQuery } from "../../hooks/payments/getUserPaymentHistoryQuery";
+import { useGetBankTransferHistory } from "../../hooks/account/useGetBankTransferHistory";
+// import { getUserPaymentHistoryQuery } from "../../hooks/payments/getUserPaymentHistoryQuery";
 
-export const TransactionHistoryPage = () => {
+export const BankTransferHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
   const [gameStatusQuery, setGameStatusQuery] = useState("");
   const [openList, setOpenList] = useState(false);
   const { userId } = useUserDataStore();
 
-  const { data: paymentHistoryData } = getUserPaymentHistoryQuery(userId);
-  console.log(paymentHistoryData?.data);
+  const { data: bankTransferHistoryData } = useGetBankTransferHistory(userId);
+  console.log(bankTransferHistoryData?.data);
 
   useEffect(() => {
     if (defaultTabName === "전체 보기") {

@@ -42,7 +42,7 @@ import { GameCancelParticipationPage } from "./pages/games/GameCancelParticipati
 import { GameParticipationHistoryPage } from "./pages/games/GameParticipationHistoryPage.tsx";
 import { CourtDetailPage } from "./pages/court/CourtDetailPage.tsx";
 import { PaymentHistoryPage } from "./pages/payments/PaymentHistoryPage.tsx";
-import { TransactionHistoryPage } from "./pages/payments/TransactionHistoryPage.tsx";
+import { BankTransferHistoryPage } from "./pages/payments/BankTransferHistoryPage.tsx";
 import { DeleteAccountPage } from "./pages/auth/DeleteAccountPage.tsx";
 import { DeleteAccountSuccessPage } from "./pages/auth/DeleteAccountSuccessPage.tsx";
 import { GameReviewPage } from "./pages/games/GameReviewPage.tsx";
@@ -203,7 +203,7 @@ const router = createBrowserRouter([
               { path: "settlement-history", element: <PaymentHistoryPage /> },
               {
                 path: "transaction-history",
-                element: <TransactionHistoryPage />,
+                element: <BankTransferHistoryPage />,
               },
             ],
           },

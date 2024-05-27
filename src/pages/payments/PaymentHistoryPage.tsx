@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import downArrow from "../../assets/Chevron_Down_MD.svg";
 import useUserDataStore from "../../store/useUserDataStore";
-import { getUserPaymentHistoryQuery } from "../../hooks/payments/getUserPaymentHistoryQuery";
+import { useGetPaymentHistory } from "../../hooks/account/useGetPaymentHistory";
 
 export const PaymentHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -10,8 +10,8 @@ export const PaymentHistoryPage = () => {
   const [openList, setOpenList] = useState(false);
   const { userId } = useUserDataStore();
 
-  const { data: paymentHistoryData } = getUserPaymentHistoryQuery(userId);
-  console.log(paymentHistoryData?.data);
+  const { data: paymentHistoryData } = useGetPaymentHistory(userId);
+  console.log(paymentHistoryData);
 
   useEffect(() => {
     if (defaultTabName === "전체 보기") {
@@ -75,81 +75,6 @@ export const PaymentHistoryPage = () => {
           style={{ scrollbarWidth: "thin" }}
           className="overflow-y-auto laptop:w-[593px] bg-[#FBFBFB]  laptop:h-[653px] mobile:h-full   mobile:w-full mx-auto   p-3 rounded-lg flex flex-col gap-[15px] "
         >
-          <div className="p-3 rounded-lg border border-gray-200">
-            <h2 className="text-[10px]">정산 완료</h2>
-            <h3 className="font-bold">
-              [5:5 풀코트]더모스트 바스켓볼 3파전 픽업게임
-            </h3>
-            <p className="text-xs text-[#99999999]">
-              2024.04.20 22:00 ~ 2024.04.21 1:00
-            </p>
-            <div className="flex justify-between">
-              <span className="text-xs text-[#99999999]">
-                경기 오산시 동부대로568번길 87-15
-              </span>
-              <span className="text-[#4065F5] font-bold">₩ 180,000</span>
-            </div>
-          </div>
-          <div className="p-3 rounded-lg border border-gray-200">
-            <h2 className="text-[10px]">정산 완료</h2>
-            <h3 className="font-bold">
-              [5:5 풀코트]더모스트 바스켓볼 3파전 픽업게임
-            </h3>
-            <p className="text-xs text-[#99999999]">
-              2024.04.20 22:00 ~ 2024.04.21 1:00
-            </p>
-            <div className="flex justify-between">
-              <span className="text-xs text-[#99999999]">
-                경기 오산시 동부대로568번길 87-15
-              </span>
-              <span className="text-[#4065F5] font-bold">₩ 180,000</span>
-            </div>
-          </div>
-          <div className="p-3 rounded-lg border border-gray-200">
-            <h2 className="text-[10px]">정산 완료</h2>
-            <h3 className="font-bold">
-              [5:5 풀코트]더모스트 바스켓볼 3파전 픽업게임
-            </h3>
-            <p className="text-xs text-[#99999999]">
-              2024.04.20 22:00 ~ 2024.04.21 1:00
-            </p>
-            <div className="flex justify-between">
-              <span className="text-xs text-[#99999999]">
-                경기 오산시 동부대로568번길 87-15
-              </span>
-              <span className="text-[#4065F5] font-bold">₩ 180,000</span>
-            </div>
-          </div>
-          <div className="p-3 rounded-lg border border-gray-200">
-            <h2 className="text-[10px]">정산 완료</h2>
-            <h3 className="font-bold">
-              [5:5 풀코트]더모스트 바스켓볼 3파전 픽업게임
-            </h3>
-            <p className="text-xs text-[#99999999]">
-              2024.04.20 22:00 ~ 2024.04.21 1:00
-            </p>
-            <div className="flex justify-between">
-              <span className="text-xs text-[#99999999]">
-                경기 오산시 동부대로568번길 87-15
-              </span>
-              <span className="text-[#4065F5] font-bold">₩ 180,000</span>
-            </div>
-          </div>
-          <div className="p-3 rounded-lg border border-gray-200">
-            <h2 className="text-[10px]">정산 완료</h2>
-            <h3 className="font-bold">
-              [5:5 풀코트]더모스트 바스켓볼 3파전 픽업게임
-            </h3>
-            <p className="text-xs text-[#99999999]">
-              2024.04.20 22:00 ~ 2024.04.21 1:00
-            </p>
-            <div className="flex justify-between">
-              <span className="text-xs text-[#99999999]">
-                경기 오산시 동부대로568번길 87-15
-              </span>
-              <span className="text-[#4065F5] font-bold">₩ 180,000</span>
-            </div>
-          </div>
           <div className="p-3 rounded-lg border border-gray-200">
             <h2 className="text-[10px]">정산 완료</h2>
             <h3 className="font-bold">

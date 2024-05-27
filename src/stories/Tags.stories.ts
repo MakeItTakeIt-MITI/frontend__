@@ -71,3 +71,28 @@ export const GameFinishedTag: Story = {
         textColor: "#CA00FC",
     },
 };
+
+
+export const PaymentFulfilled: Story = {
+    args: {
+        children: "정산 완료",
+        backgroundColor: "#DBFFDF",
+        textColor: "#33FF00",
+    },
+};
+
+export const PaymentPartiallyFulfilled: Story = {
+    args: {
+        children: "부분 완료",
+        backgroundColor: "#C0DDFF",
+        textColor: "#0019FF",
+    },
+};
+
+export const AwaitingPayment: Story = {
+    args: {
+        children: "대기중",
+        backgroundColor: "#FFC0C0",
+        textColor: "#FF0000",
+    },
+};
