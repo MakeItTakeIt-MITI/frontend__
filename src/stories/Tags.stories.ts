@@ -96,3 +96,19 @@ export const AwaitingPayment: Story = {
         textColor: "#FF0000",
     },
 };
+
+export const TransferFulfilled: Story = {
+    args: {
+        children: "송금 완료",
+        backgroundColor: "#DBFFDF",
+        textColor: "#33FF00",
+    },
+};
+
+export const TransferAwaiting: Story = {
+    args: {
+        children: "대기중",
+        backgroundColor: "#C0DDFF",
+        textColor: "#0019FF",
+    },
+};

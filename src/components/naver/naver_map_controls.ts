@@ -2,6 +2,11 @@ import { GameDetailField } from "../../interface/gameInterface";
 import markerIcon from "../../assets/new_map_marker.svg";
 import markerContainerImg from "../../assets/games/game_detail_map_icon.svg"
 
+import hoveredMarkerList from "../../assets/map/hovered-item-list.svg"
+import hoveredMarkerNoList from "../../assets/map/hovered-item-nolist.svg"
+import staticMarkerList from "../../assets/map/default-item-list.svg"
+import staticMarkerNoList from "../../assets/map/default-item-nolist.svg"
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
     interface Window {
@@ -76,10 +81,10 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
 
 
         link.addEventListener('click', () => {
-            clickCount++; // Increment click count
+            clickCount++;
             if (clickCount === 2) {
-                setDisplayCollapsedList(false); // Set displayCollapsedList to false
-                clickCount = 0; // Reset click count
+                setDisplayCollapsedList(false);
+                clickCount = 0;
             } else {
                 setFilteredGames(occurrences);
                 setDisplayCollapsedList(true);
