@@ -16,23 +16,23 @@ export const ReviewStars = ({ reviewDetailData }) => {
   const getRatingComponent = (rating: number) => {
     if (rating === 5) {
       return <LargeReviewRating {...LargeFiveStars.args} />;
-    } else if (rating === 4.5) {
+    } else if (rating >= 4.5 && rating < 5) {
       return <LargeReviewRating {...LargeFourAndHalfStars.args} />;
     } else if (rating === 4) {
       return <LargeReviewRating {...LargeFourStars.args} />;
-    } else if (rating === 3.5) {
+    } else if (rating >= 3.5 && rating < 4) {
       return <LargeReviewRating {...LargeThreeAndHalfStars.args} />;
     } else if (rating === 3) {
       return <LargeReviewRating {...LargeThreeStars.args} />;
-    } else if (rating === 2.5) {
+    } else if (rating >= 2.5 && rating < 3) {
       return <LargeReviewRating {...LargeTwoAndHalfStars.args} />;
     } else if (rating === 2) {
       return <LargeReviewRating {...LargeTwoStars.args} />;
-    } else if (rating === 1.5) {
+    } else if (rating >= 1.5 && rating < 2) {
       return <LargeReviewRating {...LargeOneAndHalfStar.args} />;
     } else if (rating === 1) {
       return <LargeReviewRating {...LargeOneStar.args} />;
-    } else if (rating === 0) {
+    } else if (rating > 0 && rating < 1) {
       return <LargeReviewRating {...LargeNoReviews.args} />;
     } else {
       return null;

@@ -24,23 +24,23 @@ export const GuestDetailContainer = ({
   const getRatingComponent = (rating: number) => {
     if (rating === 5) {
       return <ReviewRating {...FiveStars.args} />;
-    } else if (rating === 4.5) {
+    } else if (rating >= 4.5 && rating < 5) {
       return <ReviewRating {...FourAndHalfStars.args} />;
     } else if (rating === 4) {
       return <ReviewRating {...FourStars.args} />;
-    } else if (rating === 3.5) {
+    } else if (rating >= 3.5 && rating < 4) {
       return <ReviewRating {...ThreeAndHalfStars.args} />;
     } else if (rating === 3) {
       return <ReviewRating {...ThreeStars.args} />;
-    } else if (rating === 2.5) {
+    } else if (rating >= 2.5 && rating < 3) {
       return <ReviewRating {...TwoAndHalfStars.args} />;
     } else if (rating === 2) {
       return <ReviewRating {...TwoStars.args} />;
-    } else if (rating === 1.5) {
+    } else if (rating >= 1.5 && rating < 2) {
       return <ReviewRating {...OneAndHalfStar.args} />;
     } else if (rating === 1) {
       return <ReviewRating {...OneStar.args} />;
-    } else if (rating === 0) {
+    } else if (rating > 0 && rating < 1) {
       return <ReviewRating {...NoReviews.args} />;
     } else {
       return null;
