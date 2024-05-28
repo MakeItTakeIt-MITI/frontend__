@@ -2,8 +2,8 @@ import React from "react";
 import noGamesAlertIcon from "../../assets/nogames_alert_cion.svg";
 
 interface NoListFoundMessageBoxProp {
-  title: string;
-  content: string;
+  title?: string;
+  content?: string;
 }
 
 export const NoListFoundMessageBox: React.FC<NoListFoundMessageBoxProp> = ({

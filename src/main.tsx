@@ -201,11 +201,11 @@ const router = createBrowserRouter([
               },
 
               {
-                path: "inquries",
+                path: "inquiry",
                 element: <UserInquiryPage />,
               },
               {
-                path: "inquries/detail/:id",
+                path: "inquiry/detail/:id",
                 element: <UserInquiryDetailPage />,
               },
 
