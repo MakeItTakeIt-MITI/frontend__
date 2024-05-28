@@ -18,9 +18,9 @@ export const gamePaymentDetails = async (gameId: number) => {
     }
 }
 
-export const getRefundFeeDetails = async (gameId: number | null, userId: number | null) => {
+export const getRefundFeeDetails = async (gameId: number | null, participation_id: number | null) => {
     try {
-        const response = await axiosUrl.get(`/games/${gameId}/participations/${userId}/refund-info`)
+        const response = await axiosUrl.get(`/games/${gameId}/participations/${participation_id}/refund-info`)
         return response.data
     } catch {
         throw new Error

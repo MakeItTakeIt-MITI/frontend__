@@ -11,22 +11,23 @@ import { GameDetailExtraInfoBox } from "../../components/game/GameDetailExtraInf
 import { GameDetailButtonsBox } from "../../components/game/GameDetailButtonsBox";
 import { GameDetailMap } from "../../components/naver/GameDetailMap";
 import { useGetRefundFeeDetailsQuery } from "../../hooks/games/useGetRefundFeeDetailsQuery";
+import { useEffect } from "react";
+import { useGetParticipantsDetailsQuery } from "../../hooks/games/useGetParticipantsDetailsQuery";
 
 export const GameDetailPage = () => {
+  // const [participationId, setParticipationId] = useState(0);
   const { id } = useParams();
   const gameIdParam = Number(id);
   const {
     data: gameDetail,
     isLoading,
     isError,
+    refetch: refetchGameData,
   } = useGetGameDetailQuery(gameIdParam);
-  const participationId = gameDetail?.data?.participation?.id;
 
-  const { data: refundDetails } = useGetRefundFeeDetailsQuery(
-    gameIdParam,
-    participationId
-  );
-  const currentGameCancelAvailibility = refundDetails?.status_code;
+  useEffect(() => {
+    refetchGameData();
+  }, [gameDetail]);
 
   if (isLoading) {
     return <LoadingPage />;
@@ -51,10 +52,7 @@ export const GameDetailPage = () => {
             <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />
             <GameDetailParticipantsBox gameDetail={gameDetail.data} />
             <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />
-            <GameDetailButtonsBox
-              currentGameCancelAvailibility={currentGameCancelAvailibility}
-              gameDetail={gameDetail.data}
-            />
+            <GameDetailButtonsBox gameDetail={gameDetail.data} />
           </div>
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
             <UserReviewDetailCard gameDetail={gameDetail.data} />

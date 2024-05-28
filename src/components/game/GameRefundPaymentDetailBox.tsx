@@ -13,6 +13,7 @@ export const GameRefundPaymentDetailBox: React.FC<PaymentDetailProp> = ({
     gameIdParam,
     participationId
   );
+
   return (
     <div className="flex flex-col p-3 text-sm tracking-tight leading-4 bg-white rounded-lg border border-gray-200 border-solid max-w-[453px]">
       <div className="text-base font-bold leading-5 text-neutral-800">

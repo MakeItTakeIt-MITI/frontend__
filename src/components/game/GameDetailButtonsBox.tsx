@@ -3,13 +3,9 @@ import { GameDetailField } from "../../interface/gameInterface";
 
 interface GameDetailButtonProps {
   gameDetail: GameDetailField;
-  currentGameCancelAvailibility: string | number;
 }
 
-export const GameDetailButtonsBox = ({
-  gameDetail,
-  currentGameCancelAvailibility,
-}: GameDetailButtonProps) => {
+export const GameDetailButtonsBox = ({ gameDetail }: GameDetailButtonProps) => {
   const { id } = useParams();
   const gameIdParam = Number(id);
 
@@ -37,17 +33,12 @@ export const GameDetailButtonsBox = ({
       {gameDetail?.game_status === "open" && gameDetail?.is_participated && (
         <Link to={`/games/cancel-participation/${gameDetail?.id}`}>
           <button
-            disabled={currentGameCancelAvailibility !== 200 ? true : false}
             style={{
-              backgroundColor:
-                currentGameCancelAvailibility !== 200 ? "#E8E8E8" : "#F64061",
+              backgroundColor: "#F64061",
             }}
             className=" w-full h-[48px] b rounded-lg text-white "
           >
-            {" "}
-            {currentGameCancelAvailibility !== 200
-              ? "참여를 취소할 수 없습니다"
-              : "참여 취소하기"}
+            참여 취소하기
           </button>
         </Link>
       )}

@@ -13,6 +13,7 @@ import { GameRefundAgreementInfoBox } from "../../components/game/GameRefundAgre
 import { useState } from "react";
 import { AlertModal } from "../../components/common/AlertModal";
 import { ParticipationCancelled } from "../../stories/Modal.stories";
+import { useGetParticipantsDetailsQuery } from "../../hooks/games/useGetParticipantsDetailsQuery";
 
 export const GameCancelParticipationPage = () => {
   const [checked, setChecked] = useState(false);
@@ -25,6 +26,10 @@ export const GameCancelParticipationPage = () => {
     isLoading,
     isError,
   } = useGetGameDetailQuery(gameIdParam);
+
+  const { data: particiationData } =
+    useGetParticipantsDetailsQuery(gameIdParam);
+
   const participationId = gameDetail?.data?.participation?.id;
 
   const { mutate: cancelParticipation, data: cancelResponse } =
@@ -53,10 +58,10 @@ export const GameCancelParticipationPage = () => {
         <GameDetailMap gameDetail={gameDetail?.data} />
         <div className="flex laptop:flex-row laptop:space-x-2 mobile:space-x-0 mobile:flex-col">
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
-            <GameRefundPaymentDetailBox
+            {/* <GameRefundPaymentDetailBox
               gameIdParam={gameIdParam}
               participationId={participationId}
-            />
+            /> */}
             <GameRefundAgreementInfoBox
               checked={checked}
               setChecked={setChecked}

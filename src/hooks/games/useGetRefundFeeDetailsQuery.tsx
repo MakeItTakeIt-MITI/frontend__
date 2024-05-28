@@ -3,10 +3,10 @@ import { getRefundFeeDetails } from "../../api/payment";
 
 export const useGetRefundFeeDetailsQuery = (
   gameId: number | null,
-  userId: number | null
+  participation_id: number | null
 ) => {
   return useQuery({
-    queryKey: ["refund fee details"],
-    queryFn: () => getRefundFeeDetails(gameId, userId),
+    queryKey: ["Refund Payment Details"],
+    queryFn: () => getRefundFeeDetails(gameId, participation_id),
   });
 };
