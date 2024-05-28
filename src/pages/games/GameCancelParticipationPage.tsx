@@ -13,7 +13,7 @@ import { GameRefundAgreementInfoBox } from "../../components/game/GameRefundAgre
 import { useState } from "react";
 import { AlertModal } from "../../components/common/AlertModal";
 import { ParticipationCancelled } from "../../stories/Modal.stories";
-import { useGetParticipantsDetailsQuery } from "../../hooks/games/useGetParticipantsDetailsQuery";
+import { useGetRefundFeeDetailsQuery } from "../../hooks/games/useGetRefundFeeDetailsQuery";
 
 export const GameCancelParticipationPage = () => {
   const [checked, setChecked] = useState(false);
@@ -27,13 +27,16 @@ export const GameCancelParticipationPage = () => {
     isError,
   } = useGetGameDetailQuery(gameIdParam);
 
-  const { data: particiationData } =
-    useGetParticipantsDetailsQuery(gameIdParam);
-
   const participationId = gameDetail?.data?.participation?.id;
+  const game_id = gameDetail?.data.id;
 
   const { mutate: cancelParticipation, data: cancelResponse } =
-    useCancelParticipationMutation(gameIdParam, participationId);
+    useCancelParticipationMutation(game_id, participationId);
+
+  const { data: refundDetails } = useGetRefundFeeDetailsQuery(
+    gameIdParam,
+    participationId
+  );
 
   const handleCancelParticipation = () => {
     cancelParticipation();
@@ -58,23 +61,30 @@ export const GameCancelParticipationPage = () => {
         <GameDetailMap gameDetail={gameDetail?.data} />
         <div className="flex laptop:flex-row laptop:space-x-2 mobile:space-x-0 mobile:flex-col">
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
-            {/* <GameRefundPaymentDetailBox
+            <GameRefundPaymentDetailBox
               gameIdParam={gameIdParam}
               participationId={participationId}
-            /> */}
+            />
             <GameRefundAgreementInfoBox
               checked={checked}
               setChecked={setChecked}
+              refundDetails={refundDetails}
             />
             <div className="laptop:static mobile:fixed mobile:bottom-[80px] mobile:px-4 laptop:px-0  mobile:w-full text-[14px]">
-              <button
-                onClick={handleCancelParticipation}
-                disabled={checked ? false : true}
-                style={{ backgroundColor: checked ? "#F64061" : "#E8E8E8" }}
-                className=" w-full h-[48px]  rounded-lg text-white "
-              >
-                참여 취소하기
-              </button>
+              {refundDetails?.status_code === 200 ? (
+                <button
+                  onClick={handleCancelParticipation}
+                  disabled={checked ? false : true}
+                  style={{ backgroundColor: checked ? "#F64061" : "#E8E8E8" }}
+                  className=" w-full h-[48px]  rounded-lg text-white "
+                >
+                  참여 취소하기
+                </button>
+              ) : (
+                <div className=" w-full h-[48px] bg-[#e8e8e8] flex items-center justify-center  rounded-lg text-[#999] ">
+                  참여 취소가 불가능한 경기입니다.
+                </div>
+              )}
             </div>
           </div>
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
