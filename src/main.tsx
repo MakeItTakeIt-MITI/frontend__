@@ -50,6 +50,7 @@ import { PostGuestReviewPage } from "./pages/reviews/PostGuestReviewPage.tsx";
 import { PostHostReviewPage } from "./pages/reviews/PostHostReviewPage.tsx";
 import { ReviewsAboutMeDetailPage } from "./pages/reviews/ReviewsAboutMeDetailPage.tsx";
 import { MyReviewDetailPage } from "./pages/reviews/MyReviewDetailPage.tsx";
+import { BankTransferPage } from "./pages/payments/BankTransferPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -204,6 +205,10 @@ const router = createBrowserRouter([
               {
                 path: "transaction-history",
                 element: <BankTransferHistoryPage />,
+              },
+              {
+                path: "transaction-history/payment/:paymentId",
+                element: <BankTransferPage />,
               },
             ],
           },

@@ -19,3 +19,15 @@ export const getBankTransferHistory = async (user_id: number | null) => {
         throw new Error
     }
 }
+
+
+export const getAccountBalance = async (account_id: number | null) => {
+    try {
+        const response = await axiosUrl.get(`/accounts/${account_id}`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
+
+

@@ -3,9 +3,7 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 import downArrow from "../../assets/Chevron_Down_MD.svg";
 import useUserDataStore from "../../store/useUserDataStore";
 import { useGetBankTransferHistory } from "../../hooks/account/useGetBankTransferHistory";
-import { NoGamesAvailableInfoBox } from "../../components/home/NoGamesAvailableInfoBox";
 import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
-// import { getUserPaymentHistoryQuery } from "../../hooks/payments/getUserPaymentHistoryQuery";
 
 export const BankTransferHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -14,7 +12,6 @@ export const BankTransferHistoryPage = () => {
   const { userId } = useUserDataStore();
 
   const { data: bankTransferHistoryData } = useGetBankTransferHistory(userId);
-  console.log(bankTransferHistoryData?.data);
 
   useEffect(() => {
     if (defaultTabName === "전체 보기") {
@@ -36,8 +33,19 @@ export const BankTransferHistoryPage = () => {
     <section className="laptop:my-[69px] mobile:mb-16">
       <NavigateToPrevContainer children="송금 내역" />
 
-      {/* <div className="laptop:space-y-8 mobile:mt-8 laptop:mt-0"> */}
       <div className="laptop:w-[593px] mobile:w-full mx-auto flex flex-col gap-[22px] ">
+        <div>
+          <h1 className="text-[26px] w-full font-bold laptop:block mobile:hidden">
+            송금하기
+          </h1>
+          <div className="flex justify-between items-center w-full p-3 border border-gray-200 rounded-lg">
+            <span className="text-xs text-[#333]">💰 나의 지갑</span>
+            <p className="text-end	text-sm  w-[230px] font-bold">₩ 130,000</p>
+            <button className="w-[85px] h-[36px] flex items-center justify-center text-xs bg-[#4065F5] text-white rounded-lg">
+              송금하기
+            </button>
+          </div>
+        </div>
         <div className="flex justify-between">
           <h1 className="text-[26px] w-full font-bold laptop:block mobile:hidden">
             송금 내역
