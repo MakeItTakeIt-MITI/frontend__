@@ -4,6 +4,7 @@ import downArrow from "../../assets/Chevron_Down_MD.svg";
 import useUserDataStore from "../../store/useUserDataStore";
 import { useGetBankTransferHistory } from "../../hooks/account/useGetBankTransferHistory";
 import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
+import { Link } from "react-router-dom";
 
 export const BankTransferHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -41,9 +42,12 @@ export const BankTransferHistoryPage = () => {
           <div className="flex justify-between items-center w-full p-3 border border-gray-200 rounded-lg">
             <span className="text-xs text-[#333]">💰 나의 지갑</span>
             <p className="text-end	text-sm  w-[230px] font-bold">₩ 130,000</p>
-            <button className="w-[85px] h-[36px] flex items-center justify-center text-xs bg-[#4065F5] text-white rounded-lg">
+            <Link
+              to="payment"
+              className="w-[85px] h-[36px] flex items-center justify-center text-xs bg-[#4065F5] text-white rounded-lg"
+            >
               송금하기
-            </button>
+            </Link>
           </div>
         </div>
         <div className="flex justify-between">
@@ -93,7 +97,7 @@ export const BankTransferHistoryPage = () => {
             />
           ) : (
             <>
-              {bankTransferHistoryData?.data.page_content.map((page) => {
+              {bankTransferHistoryData?.data.page_content.map((page: any) => {
                 <div key={page.id}>
                   <div className="flex items-center justify-between py-[15px]">
                     <span className="text-xs text-[#99999999]">

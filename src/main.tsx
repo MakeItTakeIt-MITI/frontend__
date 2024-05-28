@@ -207,7 +207,7 @@ const router = createBrowserRouter([
                 element: <BankTransferHistoryPage />,
               },
               {
-                path: "transaction-history/payment/:paymentId",
+                path: "transaction-history/payment",
                 element: <BankTransferPage />,
               },
             ],

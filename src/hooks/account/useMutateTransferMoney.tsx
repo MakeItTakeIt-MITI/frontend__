@@ -15,5 +15,15 @@ export const useMutateTransferMoney = (user_id: number | null) => {
         throw new Error();
       }
     },
+    onSuccess: (response) => {
+      if (response?.status_code === 200) {
+        alert("송금 신청완료.");
+        window.location.reload();
+      }
+
+      if (response?.status_code === 400) {
+        alert(response?.error_code);
+      }
+    },
   });
 };
