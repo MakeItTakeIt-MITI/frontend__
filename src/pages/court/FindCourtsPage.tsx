@@ -77,7 +77,7 @@ export const FindCourtsPage = () => {
               page.data.page_content.map((court: any) => (
                 <Link
                   key={court.id}
-                  to={`/games/courts/detail/${court.id}`}
+                  to={`/courts/detail/${court.id}`}
                   className="w-full flex justify-between p-3 bg-white border border-gray-200 rounded-lg"
                 >
                   <div className="space-y-[9px]">

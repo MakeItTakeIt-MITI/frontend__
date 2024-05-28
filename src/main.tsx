@@ -157,6 +157,14 @@ const router = createBrowserRouter([
       },
 
       {
+        path: "courts",
+        children: [
+          { path: "search", element: <FindCourtsPage /> },
+          { path: "detail/:id", element: <CourtDetailPage /> },
+        ],
+      },
+
+      {
         element: <PrivateRoute />,
         children: [
           {
@@ -257,13 +265,7 @@ const router = createBrowserRouter([
               },
 
               { path: "join/submitted", element: <MatchSubmittedPage /> },
-              {
-                path: "courts",
-                children: [
-                  { path: "search", element: <FindCourtsPage /> },
-                  { path: "detail/:id", element: <CourtDetailPage /> },
-                ],
-              },
+
               {
                 path: "cancel-participation/:id",
                 element: <GameCancelParticipationPage />,
