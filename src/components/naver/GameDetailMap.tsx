@@ -32,7 +32,7 @@ export const GameDetailMap: React.FC<GameDetailBoxProp> = ({ gameDetail }) => {
     });
   }, [gameDetail]);
   return (
-    <section
+    <div
       id="map"
       className="w-full  laptop:h-[495px] mobile:h-[300px] rounded-lg"
     />

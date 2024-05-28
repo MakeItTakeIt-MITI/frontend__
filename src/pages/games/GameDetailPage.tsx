@@ -10,9 +10,6 @@ import { UserReviewDetailCard } from "../../components/game/UserReviewDetailCard
 import { GameDetailExtraInfoBox } from "../../components/game/GameDetailExtraInfoBox";
 import { GameDetailButtonsBox } from "../../components/game/GameDetailButtonsBox";
 import { GameDetailMap } from "../../components/naver/GameDetailMap";
-import { useGetRefundFeeDetailsQuery } from "../../hooks/games/useGetRefundFeeDetailsQuery";
-import { useEffect } from "react";
-import { useGetParticipantsDetailsQuery } from "../../hooks/games/useGetParticipantsDetailsQuery";
 
 export const GameDetailPage = () => {
   // const [participationId, setParticipationId] = useState(0);
@@ -20,16 +17,11 @@ export const GameDetailPage = () => {
   const gameIdParam = Number(id);
   const {
     data: gameDetail,
-    isLoading,
+    isPending,
     isError,
-    refetch: refetchGameData,
   } = useGetGameDetailQuery(gameIdParam);
 
-  useEffect(() => {
-    refetchGameData();
-  }, [gameDetail]);
-
-  if (isLoading) {
+  if (isPending) {
     return <LoadingPage />;
   }
 
