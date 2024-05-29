@@ -3,6 +3,7 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 import downArrow from "../../assets/Chevron_Down_MD.svg";
 import useUserDataStore from "../../store/useUserDataStore";
 import { useGetPaymentHistory } from "../../hooks/account/useGetPaymentHistory";
+import { Link } from "react-router-dom";
 
 export const PaymentHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -75,7 +76,10 @@ export const PaymentHistoryPage = () => {
           style={{ scrollbarWidth: "thin" }}
           className="overflow-y-auto laptop:w-[593px] bg-[#FBFBFB]  laptop:h-[653px] mobile:h-full   mobile:w-full mx-auto   p-3 rounded-lg flex flex-col gap-[15px] "
         >
-          <div className="p-3 rounded-lg border border-gray-200">
+          <Link
+            to="detail/:id"
+            className="p-3 rounded-lg border border-gray-200"
+          >
             <h2 className="text-[10px]">정산 완료</h2>
             <h3 className="font-bold">
               [5:5 풀코트]더모스트 바스켓볼 3파전 픽업게임
@@ -89,7 +93,7 @@ export const PaymentHistoryPage = () => {
               </span>
               <span className="text-[#4065F5] font-bold">₩ 180,000</span>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
       {/* </div> */}

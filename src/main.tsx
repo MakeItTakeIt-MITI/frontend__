@@ -51,6 +51,7 @@ import { PostHostReviewPage } from "./pages/reviews/PostHostReviewPage.tsx";
 import { ReviewsAboutMeDetailPage } from "./pages/reviews/ReviewsAboutMeDetailPage.tsx";
 import { MyReviewDetailPage } from "./pages/reviews/MyReviewDetailPage.tsx";
 import { BankTransferPage } from "./pages/payments/BankTransferPage.tsx";
+import { PaymentDetailPage } from "./pages/payments/PaymentDetailPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -210,6 +211,10 @@ const router = createBrowserRouter([
               },
 
               { path: "settlement-history", element: <PaymentHistoryPage /> },
+              {
+                path: "settlement-history/detail/:game_id",
+                element: <PaymentDetailPage />,
+              },
               {
                 path: "transaction-history",
                 element: <BankTransferHistoryPage />,
