@@ -80,7 +80,7 @@ export const ReviewsAboutMePage = () => {
             allReviewsData?.data?.page_content.length !== 0 ? (
               allReviewsData?.data?.page_content.map((review: any) => {
                 return (
-                  <div>
+                  <div key={review.id}>
                     <Link to={`detail/${review.id}`}>
                       <UserReviewItem review={review} />
                     </Link>
