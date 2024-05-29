@@ -3,7 +3,7 @@ import { getUserData } from "../../api/users";
 
 export const useGetUserDataQuery = (userId: number | null) => {
   return useQuery({
-    queryKey: ["user info"],
+    queryKey: ["User Data"],
     queryFn: () => getUserData(userId),
   });
 };

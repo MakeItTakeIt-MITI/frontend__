@@ -64,27 +64,7 @@ export const UserReviewDetailCard = ({ gameDetail }: GameDetailBoxProp) => {
           <div className="flex gap-2.5 text-[14px]  text-[#222]">
             <div className="flex items-center gap-1">
               {getRatingComponent(gameDetail?.host.rating.average_rating)}
-              {/* stars */}
-              {/* {gameDetail?.host.rating.average_rating === 5 && (
-                <ReviewRating {...FiveStars.args} />
-              )}
-              {gameDetail?.host.rating.average_rating === 4 && (
-                <ReviewRating {...FourStars.args} />
-              )}
 
-              {gameDetail?.host.rating.average_rating === 3 && (
-                <ReviewRating {...ThreeStars.args} />
-              )}
-
-              {gameDetail?.host.rating.average_rating === 2 && (
-                <ReviewRating {...TwoStars.args} />
-              )}
-              {gameDetail?.host.rating.average_rating === 1 && (
-                <ReviewRating {...OneStar.args} />
-              )}
-              {gameDetail?.host.rating.average_rating === 0 && (
-                <ReviewRating {...NoReviews.args} />
-              )} */}
               <p>
                 {" "}
                 {gameDetail?.host.rating.average_rating > 0

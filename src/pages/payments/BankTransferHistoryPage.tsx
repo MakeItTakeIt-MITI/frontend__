@@ -5,12 +5,15 @@ import useUserDataStore from "../../store/useUserDataStore";
 import { useGetBankTransferHistory } from "../../hooks/account/useGetBankTransferHistory";
 import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
 import { Link } from "react-router-dom";
+import { useGetUserDataQuery } from "../../hooks/user/useGetUserDataQuery";
 
 export const BankTransferHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
   const [gameStatusQuery, setGameStatusQuery] = useState("");
   const [openList, setOpenList] = useState(false);
   const { userId } = useUserDataStore();
+
+  const { data: userData } = useGetUserDataQuery(userId);
 
   const { data: bankTransferHistoryData } = useGetBankTransferHistory(userId);
 
@@ -31,17 +34,22 @@ export const BankTransferHistoryPage = () => {
   const handleChangeTab = (tab: string) => setDefaultTabName(tab);
 
   return (
-    <section className="laptop:my-[69px] mobile:mb-16">
+    <section className="laptop:my-[15px] mobile:mb-16">
       <NavigateToPrevContainer children="송금 내역" />
 
-      <div className="laptop:w-[593px] mobile:w-full mx-auto flex flex-col gap-[22px] ">
-        <div>
+      <div className="laptop:w-[593px] mobile:w-full mx-auto flex flex-col gap-[20px] ">
+        <div className="space-y-5">
           <h1 className="text-[26px] w-full font-bold laptop:block mobile:hidden">
             송금하기
           </h1>
           <div className="flex justify-between items-center w-full p-3 border border-gray-200 rounded-lg">
             <span className="text-xs text-[#333]">💰 나의 지갑</span>
-            <p className="text-end	text-sm  w-[230px] font-bold">₩ 130,000</p>
+            <p className="text-end	text-sm  w-[230px] font-bold">
+              {userData?.data.account.balance.toLocaleString("ko-KR", {
+                style: "currency",
+                currency: "KRW",
+              })}
+            </p>
             <Link
               to="payment"
               className="w-[85px] h-[36px] flex items-center justify-center text-xs bg-[#4065F5] text-white rounded-lg"
