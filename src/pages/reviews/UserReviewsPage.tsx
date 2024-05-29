@@ -7,6 +7,7 @@ import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessag
 import { useGetUserWrittenReviewsQuery } from "../../hooks/reviews/useGetUserWrittenReviewsQuery";
 import { Link } from "react-router-dom";
 import { MyReviewItem } from "../../components/reviews/MyReviewItem";
+import MITI_logo from "../../assets/MITI_logo.svg";
 
 export const UserReviewsPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -22,8 +23,11 @@ export const UserReviewsPage = () => {
   const ratingId = userData?.data?.rating?.id
     ? Number(userData.data.rating.id)
     : null;
-  const { data: reviewData, refetch: reviewDataRefetch } =
-    useGetUserWrittenReviewsQuery(userId, gameStatusQuery);
+  const {
+    data: reviewData,
+    refetch: reviewDataRefetch,
+    isLoading,
+  } = useGetUserWrittenReviewsQuery(userId, gameStatusQuery);
 
   const tabList = [
     { id: 1, name: "호스트 리뷰" },
@@ -43,43 +47,68 @@ export const UserReviewsPage = () => {
     userDataRefetch();
     reviewDataRefetch();
   }, [ratingId, userData, reviewData, gameStatusQuery, defaultTabName]);
+
   return (
     <section className="laptop:mt-[17px] laptop:mb-[55px] mobile:my-0">
       <NavigateToPrevContainer children="내 리뷰 조회" />
-      <div className="space-y-[34px] laptop:w-[593px]     mobile:w-full mx-auto  ">
-        <div className="flex  justify-between">
-          <h1 className="w-[351px] text-[26px] font-bold">작성 리뷰 페이지</h1>
-          <TabFilterList
-            tabList={tabList}
-            defaultTabName={defaultTabName}
-            setGameStatusQuery={setGameStatusQuery}
-            openList={openList}
-            handleOpenList={handleOpenList}
-            handleChangeTab={handleChangeTab}
-          />{" "}
+      {isLoading ? (
+        <div className="space-y-[34px] laptop:w-[593px]     mobile:w-full mx-auto  ">
+          <div className="flex  justify-between">
+            <h1 className="w-[351px] text-[26px] font-bold"></h1>
+            <TabFilterList
+              tabList={tabList}
+              defaultTabName={""}
+              setGameStatusQuery={setGameStatusQuery}
+              openList={openList}
+              handleOpenList={handleOpenList}
+              handleChangeTab={handleChangeTab}
+            />{" "}
+          </div>
+          <div
+            style={{ scrollbarWidth: "thin" }}
+            className="h-[653px] flex items-center justify-center p-3 bg-[#FBFBFB] space-y-[15px] overflow-y-auto border border-gray-200 rounded-lg"
+          >
+            <img src={MITI_logo} alt="MITI logo" />
+          </div>
         </div>
-        <div
-          style={{ scrollbarWidth: "thin" }}
-          className="h-[653px] p-3 bg-[#FBFBFB] space-y-[15px] overflow-y-auto border border-gray-200 rounded-lg"
-        >
-          {reviewData && reviewData?.data?.page_content.length !== 0 ? (
-            reviewData?.data?.page_content.map((review: any) => {
-              return (
-                <div>
-                  <Link to={`detail/${review.id}`}>
-                    <MyReviewItem review={review} />
-                  </Link>
-                </div>
-              );
-            })
-          ) : (
-            <NoListFoundMessageBox
-              title="작성된 리뷰가 없습니다."
-              content="경기에 참여하고 리뷰를 받아보세요!"
-            />
-          )}
+      ) : (
+        <div className="space-y-[34px] laptop:w-[593px]     mobile:w-full mx-auto  ">
+          <div className="flex  justify-between">
+            <h1 className="w-[351px] text-[26px] font-bold">
+              작성 리뷰 페이지
+            </h1>
+            <TabFilterList
+              tabList={tabList}
+              defaultTabName={defaultTabName}
+              setGameStatusQuery={setGameStatusQuery}
+              openList={openList}
+              handleOpenList={handleOpenList}
+              handleChangeTab={handleChangeTab}
+            />{" "}
+          </div>
+          <div
+            style={{ scrollbarWidth: "thin" }}
+            className="h-[653px] p-3 bg-[#FBFBFB] space-y-[15px] overflow-y-auto border border-gray-200 rounded-lg"
+          >
+            {reviewData && reviewData?.data?.page_content.length !== 0 ? (
+              reviewData?.data?.page_content.map((review: any) => {
+                return (
+                  <div>
+                    <Link to={`detail/${review.id}`}>
+                      <MyReviewItem review={review} />
+                    </Link>
+                  </div>
+                );
+              })
+            ) : (
+              <NoListFoundMessageBox
+                title="작성된 리뷰가 없습니다."
+                content="경기에 참여하고 리뷰를 받아보세요!"
+              />
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };
