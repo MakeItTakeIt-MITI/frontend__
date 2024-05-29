@@ -22,13 +22,17 @@ export const GameHostForm = ({
     useForm<GameHostField>();
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
-  const [displayCourts, setDisplayCourts] = useState(false);
-  const [detailAddress, setDetailAddress] = useState<string | null>(null);
 
-  const { displayOptions, showOptions } = useDisplayAddressOptionsStore();
+  const [courtAddress, setCourtAddress] = useState<string | null>(null);
+  const [courtAddressDetail, setCourtAddressDetail] = useState<string | null>(
+    null
+  );
 
-  const { data: matchingAddressData, refetch: matchRefetch } =
-    useGetAllCourtsInfiniteQuery(watch("court.address"));
+  const { displayOptions, showOptions, closeOptions } =
+    useDisplayAddressOptionsStore();
+
+  const { data: matchingAddressData, refetch: refetchCourts } =
+    useGetAllCourtsInfiniteQuery(courtAddress);
 
   const { mutate: hostGameMutation } = useHostGameMutation(
     setSuccessfulSubmission
@@ -43,41 +47,46 @@ export const GameHostForm = ({
     const endDate = endDateTime.split("T")[0];
     const endTime = endDateTime.split("T")[1];
 
-    if (detailAddress !== null) {
-      setValue("court.address_detail", detailAddress);
-    }
-
-    if (matchingAddressData) {
-      const matchedAddress = matchingAddressData.pages.map((page) =>
-        page.data.page_content.some(
-          (detail) => detail.address === watch("court.address")
-        )
-      );
-
-      console.log(matchedAddress);
-
-      if (matchedAddress.length > 0) {
+    matchingAddressData?.pages.map((page) => {
+      if (page.data.page_content.length === 0) {
+        setCourtAddress(null);
+        closeOptions();
+      } else if (
+        page.data.page_content.length >= 1 &&
+        typeof courtAddress === "string"
+      ) {
         showOptions();
       }
+    });
+
+    if (typeof courtAddressDetail === "string") {
+      setValue("court.address_detail", courtAddressDetail);
+    }
+
+    if (watch("court.address_detail")) {
+      closeOptions();
     }
 
     setValue("starttime", startTime);
     setValue("startdate", startDate);
     setValue("enddate", endDate);
     setValue("endtime", endTime);
-    matchRefetch();
+    refetchCourts();
   }, [
     startDateTime,
     endDateTime,
-    detailAddress,
     matchingAddressData,
     setValue,
     watch,
     showOptions,
-    matchRefetch,
+    courtAddress,
+    courtAddressDetail,
+    displayOptions,
   ]);
 
-  // const handleOpenAddressBox = useDaumPostcodePopup();
+  const watchValueLength = (value: any) => watch(value);
+  const handleEraseValue = (value: any) => setValue(value, "");
+
   const handleOpenAddressBox = useDaumPostcodePopup();
   const handleComplete = (data: AddressField) => {
     // 결가는 항상 도로명 주소로 변환
@@ -95,8 +104,12 @@ export const GameHostForm = ({
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
 
+    setCourtAddress(fullAddress);
     setValue("court.address", fullAddress);
+    setCourtAddressDetail("");
+    refetchCourts();
   };
+
   const handleClick = () => {
     handleOpenAddressBox({ onComplete: handleComplete });
   };
@@ -105,16 +118,15 @@ export const GameHostForm = ({
     hostGameMutation(data);
   };
 
-  const watchValueLength = (value: any) => watch(value);
-  const handleEraseValue = (value: any) => setValue(value, "");
   return (
     <>
-      {displayOptions && (
+      {displayOptions && courtAddress !== null && (
         <MatchingCourtModal
-          setDisplayCourts={setDisplayCourts}
           setValue={setValue}
           matchingAddressData={matchingAddressData}
-          setDetailAddress={setDetailAddress}
+          setCourtAddressDetail={setCourtAddressDetail}
+          setCourtAddress={setCourtAddress}
+          refetchCourts={refetchCourts}
         />
       )}
       <form

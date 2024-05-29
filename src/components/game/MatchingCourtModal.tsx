@@ -4,10 +4,11 @@ import unCheckedBtn from "../../assets/games/refund_agreement_unchecked.svg";
 import checkedBtn from "../../assets/games/refund_agreement_checked.svg";
 import useDisplayAddressOptionsStore from "../../store/useDisplayAddressOptionsStore";
 export const MatchingCourtModal = ({
-  setValue,
   matchingAddressData,
-  setDetailAddress,
-}) => {
+  setCourtAddressDetail,
+  setCourtAddress,
+  refetchCourts,
+}: any) => {
   const [mouseOver, setMouseOver] = useState(false);
   const { closeOptions } = useDisplayAddressOptionsStore();
 
@@ -18,8 +19,9 @@ export const MatchingCourtModal = ({
           <h1 className="text-lg font-bold text-[#040000]">경기장 목록</h1>
           <button
             onClick={() => {
+              setCourtAddress(null);
               closeOptions();
-              setValue("court.address", "");
+              refetchCourts();
             }}
           >
             <img src={closeBtn} alt="close btn" />
@@ -29,13 +31,12 @@ export const MatchingCourtModal = ({
           className="space-y-4 overflow-y-auto h-[200px]"
           style={{ scrollbarWidth: "thin" }}
         >
-          {matchingAddressData?.pages.map((page) => {
-            return page.data.page_content.map((detail) => {
+          {matchingAddressData?.pages.map((page: any) => {
+            return page.data.page_content.map((detail: any) => {
               return (
                 <div
                   onClick={() => {
-                    setDetailAddress(detail?.address_detail);
-                    closeOptions();
+                    setCourtAddressDetail(detail?.address_detail);
                   }}
                   key={detail.id}
                   onMouseOver={() => setMouseOver(true)}
