@@ -212,7 +212,7 @@ const router = createBrowserRouter([
 
               { path: "settlement-history", element: <PaymentHistoryPage /> },
               {
-                path: "settlement-history/detail/:game_id",
+                path: "settlement-history/detail/:settlement_id",
                 element: <PaymentDetailPage />,
               },
               {

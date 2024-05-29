@@ -2,8 +2,14 @@ import { useEffect, useState } from "react";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import downArrow from "../../assets/Chevron_Down_MD.svg";
 import useUserDataStore from "../../store/useUserDataStore";
-import { useGetPaymentHistory } from "../../hooks/account/useGetPaymentHistory";
+// import { useGetPaymentHistory } from "../../hooks/account/useGetPaymentHistory";
 import { Link } from "react-router-dom";
+import { MatchTags } from "../../components/game/MatchTags";
+import {
+  AwaitingPayment,
+  PaymentPartiallyFulfilled,
+  TransferFulfilled,
+} from "../../stories/Tags.stories";
 
 export const PaymentHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -11,8 +17,68 @@ export const PaymentHistoryPage = () => {
   const [openList, setOpenList] = useState(false);
   const { userId } = useUserDataStore();
 
-  const { data: paymentHistoryData } = useGetPaymentHistory(userId);
-  console.log(paymentHistoryData);
+  // const { data: paymentHistoryData } = useGetPaymentHistory(userId);
+  const data = {
+    status_code: 200,
+    message: "OK",
+    data: {
+      start_index: 1,
+      end_index: 2,
+      current_index: 1,
+      page_content: [
+        {
+          id: 9,
+          amount: 0,
+          commission: 0,
+          status: "waiting",
+          game: {
+            id: 61,
+            court: {
+              id: 7,
+              address: "인천 동구 보세로 65 B동",
+              address_detail: "왼측 건물",
+              latitude: "37.4854719147071",
+              longitude: "126.617237911346",
+            },
+            game_status: "open",
+            title: "MITI 픽업게임",
+            startdate: "2024-04-17",
+            starttime: "17:34:00",
+            enddate: "2024-04-17",
+            endtime: "18:00:00",
+            max_invitation: 2,
+            min_invitation: 1,
+            fee: 10000,
+          },
+        },
+        {
+          id: 10,
+          amount: 200,
+          commission: 10,
+          status: "confirmed",
+          game: {
+            id: 62,
+            court: {
+              id: 8,
+              address: "서울 강남구 삼성로 508",
+              address_detail: "B1층",
+              latitude: "37.5102843",
+              longitude: "127.066923",
+            },
+            game_status: "closed",
+            title: "주말 배드민턴",
+            startdate: "2024-05-10",
+            starttime: "09:00:00",
+            enddate: "2024-05-10",
+            endtime: "11:00:00",
+            max_invitation: 10,
+            min_invitation: 5,
+            fee: 15000,
+          },
+        },
+      ],
+    },
+  };
 
   useEffect(() => {
     if (defaultTabName === "전체 보기") {
@@ -76,24 +142,46 @@ export const PaymentHistoryPage = () => {
           style={{ scrollbarWidth: "thin" }}
           className="overflow-y-auto laptop:w-[593px] bg-[#FBFBFB]  laptop:h-[653px] mobile:h-full   mobile:w-full mx-auto   p-3 rounded-lg flex flex-col gap-[15px] "
         >
-          <Link
-            to="detail/:id"
-            className="p-3 rounded-lg border border-gray-200"
-          >
-            <h2 className="text-[10px]">정산 완료</h2>
-            <h3 className="font-bold">
-              [5:5 풀코트]더모스트 바스켓볼 3파전 픽업게임
-            </h3>
-            <p className="text-xs text-[#99999999]">
-              2024.04.20 22:00 ~ 2024.04.21 1:00
-            </p>
-            <div className="flex justify-between">
-              <span className="text-xs text-[#99999999]">
-                경기 오산시 동부대로568번길 87-15
-              </span>
-              <span className="text-[#4065F5] font-bold">₩ 180,000</span>
-            </div>
-          </Link>
+          {data?.data.page_content.length !== 0 ? (
+            data?.data.page_content.map((page) => {
+              return (
+                <Link
+                  to={`detail/${page.id}`}
+                  className="p-3 rounded-lg border space-y-[7px] border-gray-200 bg-white"
+                >
+                  <h2 className="text-[10px]">
+                    {page.status === "waiting" && (
+                      <MatchTags {...AwaitingPayment.args} />
+                    )}
+                    {page.status === "confirmed" && (
+                      <MatchTags {...TransferFulfilled.args} />
+                    )}
+                    {page.status === "partial_completed" && (
+                      <MatchTags {...PaymentPartiallyFulfilled.args} />
+                    )}
+                  </h2>
+                  <h3 className="font-bold">{page.game.title}</h3>
+                  <p className="text-xs text-[#99999999]">
+                    {page.game.startdate} {page.game.starttime} ~{" "}
+                    {page.game.enddate} {page.game.endtime}
+                  </p>
+                  <div className="flex justify-between">
+                    <span className="text-xs text-[#99999999]">
+                      {page.game.court.address} {page.game.court.address_detail}
+                    </span>
+                    <span className="text-[#4065F5] font-bold">
+                      {page.game.fee.toLocaleString("ko-KR", {
+                        style: "currency",
+                        currency: "KRW",
+                      })}
+                    </span>
+                  </div>
+                </Link>
+              );
+            })
+          ) : (
+            <div>nolis </div>
+          )}
         </div>
       </div>
       {/* </div> */}
