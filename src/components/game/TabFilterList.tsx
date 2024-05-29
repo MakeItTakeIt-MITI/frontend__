@@ -1,35 +1,12 @@
-import { useEffect } from "react";
 import downArrow from "../../assets/Chevron_Down_MD.svg";
 
 export const TabFilterList = ({
   defaultTabName,
-  setGameStatusQuery,
   openList,
   handleOpenList,
   handleChangeTab,
+  tabList,
 }: any) => {
-  useEffect(() => {
-    if (defaultTabName === "전체 보기") {
-      setGameStatusQuery("");
-    } else if (defaultTabName === "모집중") {
-      setGameStatusQuery("open");
-    } else if (defaultTabName === "모집 완료") {
-      setGameStatusQuery("closed");
-    } else if (defaultTabName === "경기 취소") {
-      setGameStatusQuery("canceled");
-    } else if (defaultTabName === "경기 완료") {
-      setGameStatusQuery("completed");
-    }
-  }, []);
-
-  const tabList = [
-    { id: 1, name: "모집중" },
-    { id: 2, name: "모집 완료" },
-    { id: 3, name: "경기 취소" },
-    { id: 4, name: "경기 완료" },
-    { id: 5, name: "전체 보기" },
-  ];
-
   return (
     <>
       {/* tab */}
@@ -39,9 +16,9 @@ export const TabFilterList = ({
           style={{
             borderRadius: !openList ? "8px 8px 8px 8px" : "8px 8px 0px 0px",
           }}
-          className="flex items-center  w-[90px] h-[32px] py-2.5 px-1.5 bg-[#f7f7f7]  relative hover:cursor-pointer"
+          className="flex items-center justify-between  w-[92px] h-[32px] py-2.5 px-1.5 bg-[#f7f7f7]  relative hover:cursor-pointer"
         >
-          <p className="text-[14px]">{defaultTabName}</p>
+          <p className="text-zinc-800 text-xs font-normal">{defaultTabName}</p>
           <img
             src={downArrow}
             alt="open tab icon"
@@ -49,12 +26,12 @@ export const TabFilterList = ({
           />
 
           {openList && (
-            <ul className="absolute left-0 top-8 w-full bg-[#f7f7f7] text-[#969696] text-[14px]  px-2 py-1 flex flex-col gap-1 rounded-br-lg">
-              {tabList.map((tab) => {
+            <ul className="absolute left-0 top-8 w-full bg-[#f7f7f7] text-neutral-400 text-xs px-2 py-1 flex flex-col gap-1 rounded-br-lg">
+              {tabList.map((tab: any) => {
                 return (
                   <li
                     onClick={() => handleChangeTab(tab.name)}
-                    className="hover:cursor-pointer"
+                    className="hover:cursor-pointer hover:text-black"
                     key={tab.id}
                   >
                     {tab.name}

@@ -17,6 +17,14 @@ export const GameParticipationHistoryPage = () => {
 
   const { userId } = useUserDataStore();
 
+  const tabList = [
+    { id: 1, name: "모집중" },
+    { id: 2, name: "모집 완료" },
+    { id: 3, name: "경기 취소" },
+    { id: 4, name: "경기 완료" },
+    { id: 5, name: "전체 보기" },
+  ];
+
   const {
     data: guesHistory,
     status,
@@ -59,6 +67,7 @@ export const GameParticipationHistoryPage = () => {
             나의 참여 경기
           </h1>
           <TabFilterList
+            tabList={tabList}
             defaultTabName={defaultTabName}
             setGameStatusQuery={setGameStatusQuery}
             openList={openList}

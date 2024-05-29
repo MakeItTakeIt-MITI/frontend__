@@ -17,6 +17,14 @@ export const HostGameHistoryPage = () => {
 
   const { userId } = useUserDataStore();
 
+  const tabList = [
+    { id: 1, name: "모집중" },
+    { id: 2, name: "모집 완료" },
+    { id: 3, name: "경기 취소" },
+    { id: 4, name: "경기 완료" },
+    { id: 5, name: "전체 보기" },
+  ];
+
   const {
     data: historyData,
     status,
@@ -60,6 +68,7 @@ export const HostGameHistoryPage = () => {
           </h1>
           {/* tab */}
           <TabFilterList
+            tabList={tabList}
             defaultTabName={defaultTabName}
             setGameStatusQuery={setGameStatusQuery}
             openList={openList}

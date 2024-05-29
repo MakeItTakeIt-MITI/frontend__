@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { TabFilterList } from "../../components/game/TabFilterList";
 import { useGetUserDataQuery } from "../../hooks/user/useGetUserDataQuery";
@@ -9,7 +9,13 @@ import { Link } from "react-router-dom";
 import { MyReviewItem } from "../../components/reviews/MyReviewItem";
 
 export const UserReviewsPage = () => {
+  const [defaultTabName, setDefaultTabName] = useState("전체 보기");
+  const [gameStatusQuery, setGameStatusQuery] = useState("");
+  const [openList, setOpenList] = useState(false);
   const { userId } = useUserDataStore();
+
+  const handleOpenList = () => setOpenList(!openList);
+  const handleChangeTab = (tab: string) => setDefaultTabName(tab);
 
   const { data: userData, refetch: userDataRefetch } =
     useGetUserDataQuery(userId);
@@ -17,19 +23,40 @@ export const UserReviewsPage = () => {
     ? Number(userData.data.rating.id)
     : null;
   const { data: reviewData, refetch: reviewDataRefetch } =
-    useGetUserWrittenReviewsQuery(userId);
+    useGetUserWrittenReviewsQuery(userId, gameStatusQuery);
+
+  const tabList = [
+    { id: 1, name: "호스트 리뷰" },
+    { id: 2, name: "게스트 리뷰" },
+    { id: 3, name: "전체 보기" },
+  ];
 
   useEffect(() => {
+    if (defaultTabName === "전체 보기") {
+      setGameStatusQuery("");
+    } else if (defaultTabName === "호스트 리뷰") {
+      setGameStatusQuery("host_review");
+    } else if (defaultTabName === "게스트 리뷰") {
+      setGameStatusQuery("guest_review");
+    }
+
     userDataRefetch();
     reviewDataRefetch();
-  }, [ratingId, userData, reviewData]);
+  }, [ratingId, userData, reviewData, gameStatusQuery, defaultTabName]);
   return (
     <section className="laptop:mt-[17px] laptop:mb-[55px] mobile:my-0">
       <NavigateToPrevContainer children="내 리뷰 조회" />
       <div className="space-y-[34px] laptop:w-[593px]     mobile:w-full mx-auto  ">
         <div className="flex  justify-between">
           <h1 className="w-[351px] text-[26px] font-bold">작성 리뷰 페이지</h1>
-          <TabFilterList />
+          <TabFilterList
+            tabList={tabList}
+            defaultTabName={defaultTabName}
+            setGameStatusQuery={setGameStatusQuery}
+            openList={openList}
+            handleOpenList={handleOpenList}
+            handleChangeTab={handleChangeTab}
+          />{" "}
         </div>
         <div
           style={{ scrollbarWidth: "thin" }}
