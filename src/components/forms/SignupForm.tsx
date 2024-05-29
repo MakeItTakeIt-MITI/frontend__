@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { userRegisterSchema } from "../../modals/userSignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterField } from "../../interface/usersInterface";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRegisterMutation } from "../../hooks/auth/useRegisterMutation";
 import {
   useValidateDuplicateEmail,
@@ -33,7 +33,10 @@ export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [validNickname, setValidNickname] = useState(false);
 
-  console.log(validEmail, validNickname);
+  const [checkAll, setCheckAll] = useState(false);
+  const [checkPolicy, setCheckPolicy] = useState(false);
+  const [checkAgreement, setCheckAgreement] = useState(false);
+  const [checkMarketing, setCheckMarketing] = useState(false);
 
   const {
     register,
@@ -46,12 +49,13 @@ export const SignupForm = () => {
     mode: "onBlur",
   });
 
-  const { mutate: registerMutation } = useRegisterMutation();
+  const { mutate: registerMutation, data: registerResult } =
+    useRegisterMutation();
   const { mutate: emailMutation, data: emailValidationData } =
     useValidateDuplicateEmail(setValidEmail);
   const { mutate: nicknameMutation, data: nicknameValidationData } =
     useValidateDuplicateNickname(setValidNickname);
-  console.log(emailValidationData);
+  console.log(registerResult);
 
   const onSubmit = (data: RegisterField) => registerMutation(data);
 
@@ -62,6 +66,16 @@ export const SignupForm = () => {
   const handleValidateNick = () => {
     nicknameMutation({ nickname: getValues("nickname") });
   };
+
+  const handleCheckAll = () => setCheckAll(!checkAll);
+
+  useEffect(() => {
+    if (checkAll) {
+      setCheckPolicy(true);
+      setCheckAgreement(true);
+      setCheckMarketing(true);
+    }
+  }, [checkAll, checkPolicy, checkAgreement, checkMarketing]);
 
   return (
     <form
@@ -199,10 +213,26 @@ export const SignupForm = () => {
 
         {errors.phone?.message && <ErrorMessage {...PhoneRegexFailure.args} />}
       </div>
-      <CheckBox />
+      <CheckBox
+        handleCheckAll={handleCheckAll}
+        checkAll={checkAll}
+        checkPolicy={checkPolicy}
+        checkAgreement={checkAgreement}
+        checkMarketing={checkMarketing}
+        setCheckPolicy={setCheckPolicy}
+        setCheckAgreement={setCheckAgreement}
+        setCheckMarketing={setCheckMarketing}
+      />
 
       <SubmitButton
-        disabled={!formState.isValid || !validEmail || !validNickname}
+        disabled={
+          !formState.isValid ||
+          !validEmail ||
+          !validNickname ||
+          !checkPolicy ||
+          !checkAgreement ||
+          !checkMarketing
+        }
         type="submit"
         role="submit"
         children="가입하기"
