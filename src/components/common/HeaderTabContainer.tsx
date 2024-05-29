@@ -1,4 +1,5 @@
 import MITI_logo from "../../assets/MITI_logo.svg";
+import useAuthStore from "../../store/useAuthStore";
 import {
   CustomerSupport,
   DeleteAccount,
@@ -20,6 +21,8 @@ interface TabProps {
 }
 
 export const HeaderTabContainer: React.FC<TabProps> = ({ displayTab }) => {
+  const { isLoggedIn } = useAuthStore();
+
   return (
     <div
       onMouseLeave={displayTab}
@@ -37,7 +40,7 @@ export const HeaderTabContainer: React.FC<TabProps> = ({ displayTab }) => {
           <div className="grow max-md:mt-10 max-md:max-w-full">
             <div className="flex gap-5 max-md:flex-col max-md:gap-0">
               <div className="flex flex-col w-[33%] max-md:ml-0 max-md:w-full">
-                <div className="flex flex-col text-xs tracking-tight leading-6 text-black max-md:mt-10">
+                <div className="flex flex-col gap-1 text-xs tracking-tight leading-6 text-black max-md:mt-10">
                   <div className="text-lg font-bold leading-6 h-[27px]">
                     경기
                   </div>
@@ -47,7 +50,7 @@ export const HeaderTabContainer: React.FC<TabProps> = ({ displayTab }) => {
                 </div>
               </div>
               <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-                <div className="flex flex-col py-px tracking-tight text-black max-md:mt-10">
+                <div className="flex  flex-col gap-1  py-px tracking-tight text-black max-md:mt-10">
                   <div className="text-lg font-bold leading-6 h-[27px]">
                     경기장
                   </div>
@@ -55,7 +58,7 @@ export const HeaderTabContainer: React.FC<TabProps> = ({ displayTab }) => {
                 </div>
               </div>
               <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-                <div className="flex flex-col grow text-xs tracking-tight leading-6 text-black max-md:mt-10">
+                <div className="flex flex-col gap-1  grow text-xs tracking-tight leading-6 text-black max-md:mt-10">
                   <div className="text-lg font-bold leading-6 h-[27px]">
                     내 정보
                   </div>
@@ -66,7 +69,7 @@ export const HeaderTabContainer: React.FC<TabProps> = ({ displayTab }) => {
                   <QuickLinkTitle {...TranscationHistory.args} />
                   <QuickLinkTitle {...Faq.args} />
                   <QuickLinkTitle {...CustomerSupport.args} />
-                  <QuickLinkTitle {...DeleteAccount.args} />
+                  {isLoggedIn && <QuickLinkTitle {...DeleteAccount.args} />}
                 </div>
               </div>
             </div>
