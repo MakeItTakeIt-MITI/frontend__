@@ -1,11 +1,11 @@
 
-import { NicknameField, PasswordField, RequestCodeField } from "../interface/usersInterface";
+import { PasswordField, RequestCodeField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
 
 
-export const userUpdateNickname = async (id: number | null, nickname: NicknameField) => {
+export const userUpdateNickname = async (user_id: number | null, nickname: string | undefined) => {
     try {
-        const response = await axiosUrl.patch(`/users/${id}`, nickname)
+        const response = await axiosUrl.patch(`/users/${user_id}/update-nickname`, nickname)
         return response.data
     } catch (error) {
         throw new Error
