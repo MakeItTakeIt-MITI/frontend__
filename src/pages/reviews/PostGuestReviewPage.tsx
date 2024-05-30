@@ -10,6 +10,8 @@ import { ReviewCheckBox } from "../../components/reviews/ReviewCheckBox";
 import { DisplayRatings } from "../../components/reviews/DisplayRatings";
 import { useWriteGuestReviewMutation } from "../../hooks/reviews/useWriteGuestReviewMutation";
 import { useGetParticipantsDetailsQuery } from "../../hooks/games/useGetParticipantsDetailsQuery";
+import { SubmitButton } from "../../components/ui/buttons/SubmitButton";
+import { Active, Inactive } from "../../components/ui/buttons/Button.stories";
 
 interface PostReviewField {
   rating: number;
@@ -92,18 +94,17 @@ export const PostGuestReviewPage = () => {
                     placeholder="리뷰를 작성해주세요."
                   />
                 </div>
-                <button
-                  type="submit"
-                  disabled={rating === 0 ? true : false}
-                  onClick={handleSubmitReview}
-                  style={{
-                    backgroundColor: rating > 0 ? "#4065F5" : "#F7F7F7",
-                    color: rating > 0 ? "#fff" : "#969696",
-                  }}
-                  className="w-full h-[48px] bg-[#E8E8E8] rounded-lg  flex items-center justify-center"
-                >
-                  리뷰 작성하기
-                </button>
+
+                {rating === 0 ? (
+                  <SubmitButton children=" 리뷰 작성하기" {...Inactive.args} />
+                ) : (
+                  <SubmitButton
+                    type="submit"
+                    onClick={handleSubmitReview}
+                    children=" 리뷰 작성하기"
+                    {...Active.args}
+                  />
+                )}
               </div>
             </div>
           </div>

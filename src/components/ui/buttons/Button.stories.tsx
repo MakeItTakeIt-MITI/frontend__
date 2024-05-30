@@ -37,3 +37,10 @@ export const RedButton: Story = {
     isDisabled: false,
   },
 };
+export const Edit: Story = {
+  args: {
+    backgroundColor: "#51A2CF",
+    textColor: "#fff",
+    isDisabled: false,
+  },
+};

@@ -5,6 +5,8 @@ import { PostQuestionProps } from "../../interface/supportInterace";
 import { usePostQuestionMutation } from "../../hooks/support/usePostQuestionMutation";
 import { FormLabel } from "../../components/forms/FormLabel";
 import { useNavigate } from "react-router-dom";
+import { SubmitButton } from "../../components/ui/buttons/SubmitButton";
+import { Active, Inactive } from "../../components/ui/buttons/Button.stories";
 
 export const UserInquiryPage = () => {
   const [_displayModal, _setDisplayModal] = useState(false);
@@ -75,19 +77,12 @@ text-[10px]"
             </span>
           </div>
         </div>
-        <button
-          type="submit"
-          disabled={
-            !formState.isValid || watchContent?.length >= 300 ? true : false
-          }
-          className={`w-full h-[55px] rounded-lg ${
-            formState.isValid && watchContent?.length <= 300
-              ? "bg-[#4065F6] text-white"
-              : "bg-[#e8e8e8] text-[#969696]"
-          }`}
-        >
-          문의하기
-        </button>
+
+        {!formState.isValid || watchContent?.length > 300 ? (
+          <SubmitButton children="문의하기" {...Inactive.args} />
+        ) : (
+          <SubmitButton children="문의하기" type="submit" {...Active.args} />
+        )}
       </form>
     </section>
   );

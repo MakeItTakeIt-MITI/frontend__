@@ -8,7 +8,7 @@ import { GameDetailInfoBox } from "../../components/game/GameDetailInfoBox";
 import { GameDetailParticipantsBox } from "../../components/game/GameDetailParticipantsBox";
 import { UserReviewDetailCard } from "../../components/game/UserReviewDetailCard";
 import { GameDetailExtraInfoBox } from "../../components/game/GameDetailExtraInfoBox";
-import { GameDetailButtonsBox } from "../../components/game/GameDetailButtonsBox";
+import { GameDetailButtonsBox } from "../../components/ui/buttons/GameDetailButtonsBox";
 import { GameDetailMap } from "../../components/naver/GameDetailMap";
 
 export const GameDetailPage = () => {
