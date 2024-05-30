@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { ErrorMessage } from "../components/common/ErrorMessage";
+import { ErrorMessage } from "./ErrorMessage";
 
 export default {
   title: "Error Messages",

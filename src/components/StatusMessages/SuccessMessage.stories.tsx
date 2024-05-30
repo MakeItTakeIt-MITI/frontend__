@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { SuccessMessage } from "../components/common/SuccessMessage";
+import { SuccessMessage } from "./SuccessMessage";
 
 export default {
   title: "Success Messages",
