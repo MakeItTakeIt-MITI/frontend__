@@ -40,9 +40,10 @@ export const NaverMapEL = ({
   const { latitude, longitude } = location;
 
   useEffect(() => {
+    const location = new naver.maps.LatLng(latitude, longitude);
     const naverMap = new naver.maps.Map("map", {
-      center: new naver.maps.LatLng(latitude, longitude),
-      zoom: 14,
+      center: location,
+      zoom: 15,
       zoomControl: true,
       pinchZoom: true,
       scrollWheel: true,
@@ -52,6 +53,8 @@ export const NaverMapEL = ({
       },
     });
 
+    console.log(naverMap.getBounds());
+
     const addressesList: string[] = [];
     if (allGamesData && Array.isArray(allGamesData.data)) {
       allGamesData?.data.map((game) => {
@@ -60,6 +63,8 @@ export const NaverMapEL = ({
       });
     }
 
+    let mapBounds = naverMap.getBounds();
+
     setCustomMarkers(
       naverMap,
       allGamesData?.data,
@@ -67,6 +72,7 @@ export const NaverMapEL = ({
       setFilteredGames,
       setDisplayCollapsedList
     );
+
     getCurrentLocation(setCurrentMyLocation, gameSearched);
     setCoordsToSelectedGame(naverMap, latitude, longitude, gameSearched);
   }, [allGamesData, latitude, longitude, gameSearched, setCurrentMyLocation]);

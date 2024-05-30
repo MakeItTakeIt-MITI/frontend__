@@ -2,10 +2,6 @@ import { GameDetailField } from "../../interface/gameInterface";
 import markerIcon from "../../assets/new_map_marker.svg";
 import markerContainerImg from "../../assets/games/game_detail_map_icon.svg"
 
-import hoveredMarkerList from "../../assets/map/hovered-item-list.svg"
-import hoveredMarkerNoList from "../../assets/map/hovered-item-nolist.svg"
-import staticMarkerList from "../../assets/map/default-item-list.svg"
-import staticMarkerNoList from "../../assets/map/default-item-nolist.svg"
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
@@ -19,22 +15,25 @@ const { naver } = window;
 
 export function setCustomMarkers(map: any, allGamesData: GameDetailField[], addressesList: string[], setFilteredGames: (arg: string[]) => void, setDisplayCollapsedList: (arg: boolean) => void) {
 
+
+
     if (allGamesData && Array.isArray(allGamesData)) {
         allGamesData.map((data) => {
             const { latitude, longitude } = data.court;
 
             new naver.maps.Marker({
                 position: new naver.maps.LatLng(latitude, longitude),
-                zoom: 12,
+                // zoom: 2,
                 map: map,
                 pinchZoom: true,
                 title: data.title,
                 clickable: true,
                 icon: {
-                    content: createCustomMapMarker(data, addressesList, setFilteredGames, setDisplayCollapsedList)
+                    content: createCustomMapMarker(data, addressesList, setFilteredGames, setDisplayCollapsedList),
+                    origin: new naver.maps.Point(0, 0),
+                    anchor: new naver.maps.Point(25, 26)
                 }
             });
-
         })
 
     }
@@ -51,6 +50,7 @@ export function newCustomMarker() {
 
 }
 
+
 function createCustomMapMarker(data: GameDetailField, addressesList: string[], setFilteredGames: (arg: string[]) => void, setDisplayCollapsedList: (arg: boolean) => void) {
     const link = document.createElement('a');
     const img = document.createElement('img');
@@ -59,14 +59,19 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
     const fee = document.createElement('p');
     const plusIcon = document.createElement('d');
 
-    // link.href = `/games/detail/${data.id}`;
     link.setAttribute('key', ` ${data.id}`);
     link.setAttribute('id', 'game')
-    link.classList.add('relative', 'bg-white', 'flex', 'pl-2', 'items-center', 'gap-2', 'w-[125px]', 'h-[44px]', 'border', 'border-[#4065F5]', 'rounded-2xl',);
+    link.classList.add('relative', 'bg-white', 'flex', 'pl-2', 'items-center', 'gap-2', 'w-[111px]', 'h-11', 'border', 'border-[#4065F5]', 'rounded-2xl',);
+
     img.src = markerIcon;
     img.alt = 'basketball';
     img.classList.add('size-1px', 'absolute', 'left-1.5',);
-    container.classList.add('flex', 'flex-col', 'justify-center', 'items-center', 'text-[12px]', 'text-center', 'w-full');
+    img.style.width = '16px'; // Adjust the size if needed
+    img.style.height = '16px';
+
+
+
+    container.classList.add('leading-3', 'flex', 'flex-col', 'justify-center', 'items-center', 'text-[10px]', 'text-center', 'w-full');
     startTime.textContent = `${data.starttime.slice(0, -3)}-${data.endtime.slice(0, -3)}`;
     fee.textContent = `₩${data.fee.toLocaleString("ko-KR", { currency: "KRW" })}`;
     fee.classList.add('font-bold');
@@ -75,7 +80,8 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
     const occurrences = addressesList.filter(address => address === data.court.address);
     let clickCount = 0;
     if (occurrences.length > 1) {
-        plusIcon.classList.add('absolute', 'flex', 'items-center', 'justify-center', '-top-2', '-right-2', 'w-5', 'h-5', 'rounded-full', 'bg-white', 'border', 'border-[#4065F5]', 'text-black', 'text-[15px]', 'font-bold', 'z-10')
+
+        plusIcon.classList.add('absolute', 'flex', 'items-center', 'justify-center', '-top-2', '-right-2', 'w-5', 'h-5', 'rounded-full', 'bg-white', 'border', 'border-[#4065F5]', 'text-black', 'text-[15px]', 'font-bold')
         link.appendChild(plusIcon);
         plusIcon.textContent = '+'
 
