@@ -6,7 +6,6 @@ interface NavigationBarProp {
 }
 export const NavigateToPrevContainer = ({ children }: NavigationBarProp) => {
   const navigate = useNavigate();
-
   // const navigatePrev = () => navigate(-1);
   const navigateHome = () => navigate(-1);
 

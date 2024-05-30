@@ -10,7 +10,7 @@ import {
   EnabledLoginButton,
 } from "../../stories/SubmitButtons.stories";
 import { LoginInputField } from "./FormInputContainer";
-import { ErrorMessage } from "../common/ErrorMessage";
+import { ErrorMessage } from "../StatusMessages/ErrorMessage";
 import useDisplayPwStore from "../../store/useDisplayPwStore";
 import { useEffect, useState } from "react";
 import { AlertModal } from "../common/AlertModal";
@@ -22,7 +22,7 @@ import {
   EmailRegexFailure,
   PasswordRegexFailure,
   UserNotFound,
-} from "../../stories/ErrorMessage.stories";
+} from "../StatusMessages/ErrorMessage.stories";
 
 export const LoginForm = () => {
   const { displayPassword, setDisplayPassword } = useDisplayPwStore();

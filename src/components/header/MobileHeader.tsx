@@ -41,7 +41,12 @@ export const MobileHeader = () => {
                 to="/auth/login"
                 className="flex flex-col gap-1 items-center"
               >
-                <img src={profileIcon} alt="profile icon" />
+                {pathname === `/auth/login` || `/auth/signup` ? (
+                  <img src={profileIconColor} alt="profile icon" />
+                ) : (
+                  <img src={profileIcon} alt="profile icon" />
+                )}
+                {/* <img src={profileIcon} alt="profile icon" /> */}
                 <span className="text-[13px] text-[#969696]">프로필</span>
               </Link>
             ) : (

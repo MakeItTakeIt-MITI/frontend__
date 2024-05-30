@@ -1,6 +1,6 @@
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import miti_logo from "../../assets/MITI_logo.svg";
-import { KakaoLoginButton } from "../../components/kakao/KakaoLoginButton";
+import { KakaoLoginButton } from "../../components/(OLD)kakao/KakaoLoginButton";
 import email_icon from "../../assets/Email.svg";
 import { Link } from "react-router-dom";
 import chevron_right from "../../assets/Chevron_Right_MD.svg";

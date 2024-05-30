@@ -7,7 +7,7 @@ import { useLoginSchema } from "../../modals/useLoginSchema";
 import { useState } from "react";
 import { useAuthorizeExistingUserMutation } from "../../hooks/auth/useAuthorizeExistingUserMutation";
 import { LoginInputField } from "../../components/forms/FormInputContainer";
-import { ErrorMessage } from "../../components/common/ErrorMessage";
+import { ErrorMessage } from "../../components/StatusMessages/ErrorMessage";
 
 export const NotVerifiedInputDetailPage = () => {
   const [displayPassword, setDisplayPassword] = useState(false);

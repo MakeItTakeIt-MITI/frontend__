@@ -4,8 +4,8 @@ import { useResetPassCodeMutation } from "../../hooks/auth/usePasswordResetMutat
 import { useEffect, useState } from "react";
 import { usePasswordCodeMutation } from "../../hooks/auth/usePasswordCodeMutation";
 import { phoneNumberAutoFormat } from "../../utils/phone_format";
-import { SuccessMessage } from "../../components/common/SuccessMessage";
-import { ErrorMessage } from "../../components/common/ErrorMessage";
+import { SuccessMessage } from "../../components/StatusMessages/SuccessMessage";
+import { ErrorMessage } from "../../components/StatusMessages/ErrorMessage";
 import { AlertModal } from "../../components/common/AlertModal";
 import {
   KakaoAccountFound,

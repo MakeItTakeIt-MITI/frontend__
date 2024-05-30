@@ -15,7 +15,7 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
   };
 
   return (
-    <nav className="relative  z-[999] mobile:hidden tablet:flex h-[80px] items-center  justify-between w-[1024px]  tablet:px-[4rem] laptop:px-[0px]   mx-auto">
+    <nav className="relative laptop:w-[1024px]  tablet:w-full z-[999] mobile:hidden tablet:flex h-[80px] items-center  justify-between  tablet:px-[4rem] laptop:px-[0px]   mx-auto">
       <div className="flex gap-4 items-center">
         <Link to="/">
           <img src={mitiLogo} alt="miti logo" />
@@ -24,8 +24,6 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
       <div className="flex items-center gap-6 text-[16px] font-[500]  ">
         {isLoggedIn ? (
           <>
-            {/* <Link to={`/games/my-games`}>나의 경기</Link> */}
-
             <button onClick={handleLogout}>로그아웃</button>
 
             <Link to={`/user/profile`}>내 정보</Link>

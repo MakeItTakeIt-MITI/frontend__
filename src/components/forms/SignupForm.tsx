@@ -9,8 +9,8 @@ import {
   useValidateDuplicateNickname,
 } from "../../hooks/auth/useUserValidationMutation";
 import { SubmitButton } from "../common/SubmitButtons";
-import { ErrorMessage } from "../common/ErrorMessage";
-import { SuccessMessage } from "../common/SuccessMessage";
+import { ErrorMessage } from "../StatusMessages/ErrorMessage";
+import { SuccessMessage } from "../StatusMessages/SuccessMessage";
 import { RegisterInputField } from "./FormInputContainer";
 import { CheckBox } from "./CheckBox";
 import {
@@ -22,12 +22,12 @@ import {
   PasswordConfirmNotMatching,
   PasswordRegexFailure,
   PhoneRegexFailure,
-} from "../../stories/ErrorMessage.stories";
+} from "../StatusMessages/ErrorMessage.stories";
 import {
   EmailAllowed,
   NicknameAllowed,
   SafePassword,
-} from "../../stories/SuccessMessage.stories";
+} from "../StatusMessages/SuccessMessage.stories";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);

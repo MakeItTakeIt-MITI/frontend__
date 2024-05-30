@@ -7,7 +7,7 @@ import { UserReviewDetailCard } from "../../components/game/UserReviewDetailCard
 import { GameDetailExtraInfoBox } from "../../components/game/GameDetailExtraInfoBox";
 import { GameDetailMap } from "../../components/naver/GameDetailMap";
 import { GamePaymentInfoBox } from "../../components/game/GamePaymentInfoBox";
-import { KakaoPayButton } from "../../components/kakao/KakaoPayButton";
+import { KakaoPayButton } from "../../components/(OLD)kakao/KakaoPayButton";
 import { GameRefundInfoBox } from "../../components/game/GameRefundInfoBox";
 import { useState } from "react";
 import { GamePaymentButton } from "../../components/payment/GamePaymentButton";

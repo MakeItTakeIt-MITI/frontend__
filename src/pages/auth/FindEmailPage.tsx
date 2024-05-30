@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { useEffect, useState } from "react";
-import { ErrorMessage } from "../../components/common/ErrorMessage";
+import { ErrorMessage } from "../../components/StatusMessages/ErrorMessage";
 import { useFindEmailPhoneMutation } from "../../hooks/auth/useFindEmailPhoneMutation";
-import { SuccessMessage } from "../../components/common/SuccessMessage";
+import { SuccessMessage } from "../../components/StatusMessages/SuccessMessage";
 import { useRequestEmailCode } from "../../hooks/auth/useRequestEmailCode";
 import { AlertModal } from "../../components/common/AlertModal";
 import {

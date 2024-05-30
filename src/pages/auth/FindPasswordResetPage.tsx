@@ -5,9 +5,9 @@ import { NewPassworldField } from "../../interface/user-edit-interface";
 import { useResetPasswordSchema } from "../../modals/useResetPasswordSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNewPasswordMutation } from "../../hooks/auth/useNewPasswordMutation";
-import { ErrorMessage } from "../../components/common/ErrorMessage";
+import { ErrorMessage } from "../../components/StatusMessages/ErrorMessage";
 import { useGetPassAuthCodeQuery } from "../../hooks/auth/useGetPassAuthCodeQuery";
-import { SuccessMessage } from "../../components/common/SuccessMessage";
+import { SuccessMessage } from "../../components/StatusMessages/SuccessMessage";
 
 /**
  * TODO: ERROR MESSAGE 처리

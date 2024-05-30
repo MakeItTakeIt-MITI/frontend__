@@ -2,16 +2,17 @@ import { Link } from "react-router-dom";
 import { LoginForm } from "../../components/forms/LoginForm";
 import mitiLogo from "../../assets/MITI_logo.svg";
 import chevron_right from "../../assets/Chevron_Right_MD.svg";
-import { KakaoLoginButton } from "../../components/kakao/KakaoLoginButton";
+import { KakaoLoginButton } from "../../components/(OLD)kakao/KakaoLoginButton";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
+import { AuthLayout } from "../../components/layouts/AuthLayout";
 // import { useState } from "react";
 
 export const UserLoginPage = () => {
   return (
-    <section className="laptop:my-[69px] mobile:mb-12">
+    <AuthLayout>
       <NavigateToPrevContainer children="" />
 
-      <div className="relative laptop:w-[495px]  min-h-[735px]  mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-[50px] laptop:px-[76px] mobile:px-4 py-9 rounded-lg flex flex-col laptop:justify-center gap-[35px] mobile:justify-between">
+      <div className="relative laptop:w-[495px]  tablet:w-full tablet:px-[9rem]  laptop:min-h-[735px] mobile:h-full  mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-[50px] laptop:px-[76px]  mobile:px-4 mobile:py-9 rounded-lg flex flex-col laptop:justify-center gap-[35px] ">
         <div className=" flex flex-col gap-2 justify-center items-center">
           <img src={mitiLogo} alt="miti logo" className="w-[88px]" />
           <h5 className="text-[14px] text-[#1c1c1c]">Make it, Take it!</h5>
@@ -36,7 +37,7 @@ export const UserLoginPage = () => {
             </div>
           </div>
         </div>
-        <div className="absolute  w-full left-0 right-0 laptop:bottom-8  mobile:bottom-0 flex  justify-center  gap-4 text-[#8c8c8c] text-[13px] ">
+        <div className="laptop:absolute mobile:static   w-full left-0 right-0 laptop:bottom-8  flex  justify-center  gap-4 text-[#8c8c8c] text-[13px] ">
           <Link to="/support/customer-service">고객센터</Link>
           <p>|</p>
           <Link to="/support/find-email">
@@ -44,6 +45,6 @@ export const UserLoginPage = () => {
           </Link>
         </div>
       </div>
-    </section>
+    </AuthLayout>
   );
 };

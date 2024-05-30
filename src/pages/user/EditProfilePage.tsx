@@ -11,10 +11,10 @@ import { UserEditField } from "../../interface/user-edit-interface";
 import { useUpdateUserMutation } from "../../hooks/auth/useUpdateUserMutation";
 
 import { useNicknameChangeMutation } from "../../hooks/user/useNicknameChangeMutation";
-import { ErrorMessage } from "../../components/common/ErrorMessage";
-import { ExistingNickname } from "../../stories/ErrorMessage.stories";
-import { SuccessMessage } from "../../components/common/SuccessMessage";
-import { NicknameAllowed } from "../../stories/SuccessMessage.stories";
+import { ErrorMessage } from "../../components/StatusMessages/ErrorMessage";
+import { ExistingNickname } from "../../components/StatusMessages/ErrorMessage.stories";
+import { SuccessMessage } from "../../components/StatusMessages/SuccessMessage";
+import { NicknameAllowed } from "../../components/StatusMessages/SuccessMessage.stories";
 
 export const EditProfilePage = () => {
   const { userId } = useUserDataStore();

@@ -6,7 +6,7 @@ import { useHostGameMutation } from "../../hooks/games/useHostGameMutation";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { GameHostInputField } from "./FormInputContainer";
 import { FormLabel } from "./FormLabel";
-import { ErrorMessage } from "../common/ErrorMessage";
+import { ErrorMessage } from "../StatusMessages/ErrorMessage";
 import { useGetAllCourtsInfiniteQuery } from "../../hooks/courts/useGetAllCourtsInfiniteQuery";
 import { MatchingCourtModal } from "../game/MatchingCourtModal";
 import useDisplayAddressOptionsStore from "../../store/useDisplayAddressOptionsStore";

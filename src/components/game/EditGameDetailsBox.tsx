@@ -4,8 +4,8 @@ import {
   GameEditParameters,
 } from "../../interface/gameInterface";
 import { UseFormRegister } from "react-hook-form";
-import { ErrorMessage } from "../common/ErrorMessage";
-import { MinParticipants } from "../../stories/ErrorMessage.stories";
+import { ErrorMessage } from "../StatusMessages/ErrorMessage";
+import { MinParticipants } from "../StatusMessages/ErrorMessage.stories";
 
 interface EditGameDetailBoxProp {
   gameDetail: GameDetailField;
