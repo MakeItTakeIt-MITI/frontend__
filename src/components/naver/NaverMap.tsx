@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GameDetailField } from "../../interface/gameInterface";
 import {
   setCoordsToSelectedGame,
@@ -27,6 +27,8 @@ interface NaverMapProp {
   isGameSearched: (arg: boolean) => void;
   setFilteredGames: (arg: string[]) => void;
   setDisplayCollapsedList: (arg: boolean) => void;
+  displayCollapsedList: boolean;
+  filteredGames: string[];
 }
 
 export const NaverMapEL = ({
@@ -34,16 +36,24 @@ export const NaverMapEL = ({
   gameSearched,
   setFilteredGames,
   setDisplayCollapsedList,
+  displayCollapsedList,
+  filteredGames,
 }: NaverMapProp) => {
   const { setCurrentMyLocation, location } = useGeolocationStore();
 
   const { latitude, longitude } = location;
+  const [coordX, setCoordX] = useState<null | number>(null);
+  const [coordY, setCoordY] = useState<null | number>(null);
 
   useEffect(() => {
-    const location = new naver.maps.LatLng(latitude, longitude);
+    if (latitude && longitude) {
+      setCoordX(latitude);
+      setCoordY(longitude);
+    }
+    const location = new naver.maps.LatLng(coordX, coordY);
     const naverMap = new naver.maps.Map("map", {
       center: location,
-      zoom: 15,
+      zoom: 16,
       zoomControl: true,
       pinchZoom: true,
       scrollWheel: true,
@@ -53,8 +63,6 @@ export const NaverMapEL = ({
       },
     });
 
-    console.log(naverMap.getBounds());
-
     const addressesList: string[] = [];
     if (allGamesData && Array.isArray(allGamesData.data)) {
       allGamesData?.data.map((game) => {
@@ -63,19 +71,30 @@ export const NaverMapEL = ({
       });
     }
 
-    let mapBounds = naverMap.getBounds();
-
     setCustomMarkers(
       naverMap,
       allGamesData?.data,
       addressesList,
       setFilteredGames,
-      setDisplayCollapsedList
+      setDisplayCollapsedList,
+      displayCollapsedList,
+      filteredGames,
+      setCoordX,
+      setCoordY
     );
 
     getCurrentLocation(setCurrentMyLocation, gameSearched);
-    setCoordsToSelectedGame(naverMap, latitude, longitude, gameSearched);
-  }, [allGamesData, latitude, longitude, gameSearched, setCurrentMyLocation]);
+    setCoordsToSelectedGame(naverMap, coordX, coordY, gameSearched);
+  }, [
+    allGamesData,
+    latitude,
+    longitude,
+    gameSearched,
+    setCurrentMyLocation,
+    displayCollapsedList,
+    coordX,
+    coordY,
+  ]);
 
   return <section id="map" className="w-full  h-[473px]" />;
 };
