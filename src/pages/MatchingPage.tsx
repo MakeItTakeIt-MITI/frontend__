@@ -1,7 +1,7 @@
 import { useState } from "react";
 import left_arrow from "../assets/Chevron_Left.png";
 import court from "../assets/small-basketball-court.svg";
-import { AdvertisementBanner } from "../components/AdvertisementBanner";
+import { AdvertisementBanner } from "../components/ui/advertisement/AdvertisementBanner";
 
 export const MatchingPage = () => {
   const [modal, setModal] = useState(false);

@@ -97,11 +97,11 @@ export const LoginForm = () => {
         />
       )}
 
-      {!formState.isValid ? (
+      {/* {!formState.isValid ? (
         <SubmitButton {...DisabledLoginButton.args} />
       ) : (
         <SubmitButton {...EnabledLoginButton.args} />
-      )}
+      )} */}
     </form>
   );
 };
