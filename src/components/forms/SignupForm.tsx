@@ -8,7 +8,6 @@ import {
   useValidateDuplicateEmail,
   useValidateDuplicateNickname,
 } from "../../hooks/auth/useUserValidationMutation";
-import { SubmitButton } from "../common/SubmitButtons";
 import { ErrorMessage } from "../StatusMessages/ErrorMessage";
 import { SuccessMessage } from "../StatusMessages/SuccessMessage";
 import { RegisterInputField } from "./FormInputContainer";
@@ -28,6 +27,8 @@ import {
   NicknameAllowed,
   SafePassword,
 } from "../StatusMessages/SuccessMessage.stories";
+import { Active, Inactive } from "../ui/buttons/Button.stories";
+import { SubmitButton } from "../ui/buttons/SubmitButton";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -224,19 +225,16 @@ export const SignupForm = () => {
         setCheckMarketing={setCheckMarketing}
       />
 
-      {/* <SubmitButton
-        disabled={
-          !formState.isValid ||
-          !validEmail ||
-          !validNickname ||
-          !checkPolicy ||
-          !checkAgreement ||
-          !checkMarketing
-        }
-        type="submit"
-        role="submit"
-        children="가입하기"
-      /> */}
+      {!formState.isValid ||
+      !validEmail ||
+      !validNickname ||
+      !checkPolicy ||
+      !checkAgreement ||
+      !checkMarketing ? (
+        <SubmitButton children="가입하기" {...Inactive.args} />
+      ) : (
+        <SubmitButton type="submit" children="가입하기" {...Active.args} />
+      )}
     </form>
   );
 };

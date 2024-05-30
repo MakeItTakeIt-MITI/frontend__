@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { SuccessBadgeContainer } from "../../components/common/SuccessBadgeContainer";
+import { SubmitButton } from "../../components/ui/buttons/SubmitButton";
+import { Active } from "../../components/ui/buttons/Button.stories";
 
 export const SMSVerifiedSuccessPage = () => {
   const navigate = useNavigate();
@@ -26,12 +28,12 @@ export const SMSVerifiedSuccessPage = () => {
           context_two="로그인을 통해 경기에 참여해보세요!"
         />
         <div className="laptop:absolute   bottom-0 left-0 right-0 laptop:px-[76px]   laptop:pb-[74px] mobile:pb-0">
-          <Link
-            onClick={handleRemoveAuthCode}
-            to="/auth/login"
-            className="h-11 bg-[#4065F6] text-white flex items-center justify-center rounded-lg text-[14px]"
-          >
-            <button>로그인하기</button>
+          <Link to="/auth/login">
+            <SubmitButton
+              onClick={handleRemoveAuthCode}
+              children="로그인하기"
+              {...Active.args}
+            />
           </Link>
         </div>
       </div>

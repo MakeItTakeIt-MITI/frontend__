@@ -10,6 +10,8 @@ import { ErrorMessage } from "../StatusMessages/ErrorMessage";
 import { useGetAllCourtsInfiniteQuery } from "../../hooks/courts/useGetAllCourtsInfiniteQuery";
 import { MatchingCourtModal } from "../game/MatchingCourtModal";
 import useDisplayAddressOptionsStore from "../../store/useDisplayAddressOptionsStore";
+import { SubmitButton } from "../ui/buttons/SubmitButton";
+import { Active, Inactive } from "../ui/buttons/Button.stories";
 
 interface GameHostFormProps {
   setSuccessfulSubmission: (arg: boolean) => void;
@@ -322,23 +324,17 @@ export const GameHostForm = ({
           />
         </div>
 
-        <button
-          disabled={
-            !formState.isValid ||
-            gameFee < 0 ||
-            maxParticipants < minParticipants
-          }
-          style={{
-            backgroundColor:
-              !formState.isValid || maxParticipants < minParticipants
-                ? "#969696"
-                : "#4065F6",
-          }}
-          type="submit"
-          className=" w-full h-[50px] rounded-[8px] text-white"
-        >
-          매치 생성하기
-        </button>
+        {!formState.isValid ||
+        gameFee < 0 ||
+        maxParticipants < minParticipants ? (
+          <SubmitButton children="매치 생성하기" {...Inactive.args} />
+        ) : (
+          <SubmitButton
+            children="매치 생성하기"
+            type="submit"
+            {...Active.args}
+          />
+        )}
       </form>
     </>
   );

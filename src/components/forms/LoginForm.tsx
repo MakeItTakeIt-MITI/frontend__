@@ -4,11 +4,7 @@ import { LoginField } from "../../interface/usersInterface";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginSchema } from "../../modals/useLoginSchema";
 import { useLoginMutation } from "../../hooks/auth/useLoginMutation";
-import { SubmitButton } from "../common/SubmitButtons";
-import {
-  DisabledLoginButton,
-  EnabledLoginButton,
-} from "../../stories/SubmitButtons.stories";
+
 import { LoginInputField } from "./FormInputContainer";
 import { ErrorMessage } from "../StatusMessages/ErrorMessage";
 import useDisplayPwStore from "../../store/useDisplayPwStore";
@@ -23,6 +19,8 @@ import {
   PasswordRegexFailure,
   UserNotFound,
 } from "../StatusMessages/ErrorMessage.stories";
+import { Active, Inactive } from "../ui/buttons/Button.stories";
+import { SubmitButton } from "../ui/buttons/SubmitButton";
 
 export const LoginForm = () => {
   const { displayPassword, setDisplayPassword } = useDisplayPwStore();
@@ -97,11 +95,11 @@ export const LoginForm = () => {
         />
       )}
 
-      {/* {!formState.isValid ? (
-        <SubmitButton {...DisabledLoginButton.args} />
+      {!formState.isValid ? (
+        <SubmitButton children="로그인 하기" {...Inactive.args} />
       ) : (
-        <SubmitButton {...EnabledLoginButton.args} />
-      )} */}
+        <SubmitButton children="로그인 하기" {...Active.args} />
+      )}
     </form>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
-import kakao_pay_icon_enabled from "../../assets/payment/kakao_pay_btn_enabled.svg";
-import kakao_pay_icon_disabled from "../../assets/payment/kakao_pay_btn_disabled.svg";
+import kakao_pay_icon_enabled from "../../../assets/payment/kakao_pay_btn_enabled.svg";
+import kakao_pay_icon_disabled from "../../../assets/payment/kakao_pay_btn_disabled.svg";
 
 interface KakaoPayButtonProp {
   setPaymentMethodSelected: (arg: boolean) => void;

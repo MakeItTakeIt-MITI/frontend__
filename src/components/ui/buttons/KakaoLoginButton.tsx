@@ -1,4 +1,4 @@
-import kakaoMsgIcon from "../../assets/kakao_msg_icon.svg";
+import kakaoMsgIcon from "../../../assets/kakao_msg_icon.svg";
 
 export const KakaoLoginButton = () => {
   const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;

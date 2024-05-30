@@ -5,6 +5,8 @@ import { useVerifySmsMutation } from "../../hooks/auth/useVerifySmsMutation";
 import { CodeVerificationField } from "../../interface/authInterface";
 import { ErrorMessage } from "../../components/StatusMessages/ErrorMessage";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
+import { SubmitButton } from "../../components/ui/buttons/SubmitButton";
+import { Active, Inactive } from "../../components/ui/buttons/Button.stories";
 
 export const SMSAuthenticationPage = () => {
   const navigate = useNavigate();
@@ -68,16 +70,15 @@ export const SMSAuthenticationPage = () => {
           )}
         <div className="absolute bottom-0 left-0 right-0 laptop:px-[76px] mobile:px-4 laptop:pb-[74px] mobile:pb-0">
           {" "}
-          <button
-            onClick={submitOTP(onSubmitCode)}
-            disabled={!formState.isValid ? true : false}
-            style={{
-              backgroundColor: !formState.isValid ? "#E8e8e8" : "#4065f6",
-            }}
-            className=" h-12 w-full   mx-auto flex items-center justify-center  rounded-lg text-white  tablet:text-[15px] "
-          >
-            인증하기
-          </button>
+          {!formState.isValid ? (
+            <SubmitButton children="  인증하기" {...Inactive.args} />
+          ) : (
+            <SubmitButton
+              onClick={submitOTP(onSubmitCode)}
+              children="인증하기"
+              {...Active.args}
+            />
+          )}
         </div>
       </div>
     </section>

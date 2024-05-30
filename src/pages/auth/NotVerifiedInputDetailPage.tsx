@@ -8,6 +8,8 @@ import { useState } from "react";
 import { useAuthorizeExistingUserMutation } from "../../hooks/auth/useAuthorizeExistingUserMutation";
 import { LoginInputField } from "../../components/forms/FormInputContainer";
 import { ErrorMessage } from "../../components/StatusMessages/ErrorMessage";
+import { SubmitButton } from "../../components/ui/buttons/SubmitButton";
+import { Active, Inactive } from "../../components/ui/buttons/Button.stories";
 
 export const NotVerifiedInputDetailPage = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
@@ -32,9 +34,6 @@ export const NotVerifiedInputDetailPage = () => {
     console.log(data);
     authorize(data);
   };
-
-  console.log(authenticateUserResponse?.status_code);
-  console.log(authenticateUserResponse?.error_code);
 
   return (
     <section className="laptop:my-[69px] mobile:m-0">
@@ -84,17 +83,15 @@ export const NotVerifiedInputDetailPage = () => {
           </form>
         </div>
         <div className="laptop:px-[76px] mobile:px-4 laptop:pb-[74px] mobile:pb-0">
-          <button
-            onClick={handleSubmit(handleSubmitForm)}
-            disabled={formState.isValid ? false : true}
-            style={{
-              backgroundColor: formState.isValid ? "#4065F6" : "#E8E8E8",
-              color: formState.isValid ? "#fff" : "#969696",
-            }}
-            className=" h-[48px] w-full rounded-lg"
-          >
-            인증번호 전송
-          </button>
+          {!formState.isValid ? (
+            <SubmitButton children="   인증번호 전송" {...Inactive.args} />
+          ) : (
+            <SubmitButton
+              onClick={handleSubmit(handleSubmitForm)}
+              children="   인증번호 전송"
+              {...Active.args}
+            />
+          )}
         </div>
       </div>
     </section>

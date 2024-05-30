@@ -13,10 +13,10 @@ export const SuccessBadgeContainer: React.FC<BadgeContainerProps> = ({
 }) => {
   return (
     <div className="laptop:px-[76px] h-full w-full mobile:px-4 laptop:pb-[74px] mobile:pb-0  flex  flex-col  gap-[25px]">
-      <h1 className="font-bold text-[24px]">{title}</h1>
+      <h1 className="text-black text-[26px] font-bold">{title}</h1>
       <div className="flex items-center gap-2">
         <img src={auth_icon} alt="authentication badge" />
-        <div className="flex flex-col  text-[16px]">
+        <div className="flex flex-col text-black text-sm font-normal leading-[18px]">
           <p>{context_one}</p>
           <p>{context_two}</p>
         </div>

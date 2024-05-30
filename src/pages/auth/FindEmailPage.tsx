@@ -10,6 +10,8 @@ import {
   KakaoAccountFound,
   NotFoundInactiveUser,
 } from "../../stories/Modal.stories";
+import { Active, Inactive } from "../../components/ui/buttons/Button.stories";
+import { SubmitButton } from "../../components/ui/buttons/SubmitButton";
 
 export const FindEmailPage = () => {
   const [phone, setPhone] = useState("");
@@ -198,20 +200,15 @@ export const FindEmailPage = () => {
             </Link>
           ) : (
             <Link to="/support/user-info-email">
-              <button
-                disabled={!codeAuthSuccess || !phoneAuthAccess ? true : false}
-                style={{
-                  backgroundColor:
-                    !codeAuthSuccess || !phoneAuthAccess
-                      ? "#E8E8E8"
-                      : "#4065F5",
-                  color:
-                    !codeAuthSuccess || !phoneAuthAccess ? "#969696" : "#fff",
-                }}
-                className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg "
-              >
-                이메일 찾기
-              </button>
+              {!codeAuthSuccess || !phoneAuthAccess ? (
+                <SubmitButton children=" 비밀번호 재설정" {...Inactive.args} />
+              ) : (
+                <SubmitButton
+                  type="button"
+                  children="    이메일 찾기"
+                  {...Active.args}
+                />
+              )}
             </Link>
           )}
         </div>

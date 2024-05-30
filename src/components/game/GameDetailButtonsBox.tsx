@@ -36,7 +36,7 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailButtonProps) => {
             style={{
               backgroundColor: "#F64061",
             }}
-            className=" w-full h-[48px] b rounded-lg text-white "
+            className=" w-full h-[48px]  rounded-lg text-white "
           >
             참여 취소하기
           </button>

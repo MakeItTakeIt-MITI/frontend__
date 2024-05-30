@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { LoginForm } from "../../components/forms/LoginForm";
 import mitiLogo from "../../assets/MITI_logo.svg";
 import chevron_right from "../../assets/Chevron_Right_MD.svg";
-import { KakaoLoginButton } from "../../components/(OLD)kakao/KakaoLoginButton";
+import { KakaoLoginButton } from "../../components/ui/buttons/KakaoLoginButton";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
 import { AuthLayout } from "../../components/layouts/AuthLayout";
 // import { useState } from "react";

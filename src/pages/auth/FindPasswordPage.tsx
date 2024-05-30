@@ -11,6 +11,8 @@ import {
   KakaoAccountFound,
   NotFoundInactiveUser,
 } from "../../stories/Modal.stories";
+import { SubmitButton } from "../../components/ui/buttons/SubmitButton";
+import { Active, Inactive } from "../../components/ui/buttons/Button.stories";
 
 export const FindPasswordPage = () => {
   const [phone, setPhone] = useState("");
@@ -173,29 +175,16 @@ export const FindPasswordPage = () => {
         </div>
         <div className="laptop:px-[76px] mobile:px-4 laptop:pb-[74px] mobile:pb-0">
           <Link to="/support/reset-password">
-            <button
-              disabled={
-                responseCodeData?.status_code !== 200 &&
-                requestCodeData?.status_code !== 200
-                  ? true
-                  : false
-              }
-              style={{
-                backgroundColor:
-                  responseCodeData?.status_code !== 200 &&
-                  requestCodeData?.status_code !== 200
-                    ? "#E8E8E8"
-                    : "#4065F5",
-                color:
-                  responseCodeData?.status_code !== 200 &&
-                  requestCodeData?.status_code !== 200
-                    ? "#969696"
-                    : "#fff",
-              }}
-              className="bg-[#E8E8E8] text-[#969696] h-[48px] w-full rounded-lg"
-            >
-              비밀번호 재설정
-            </button>
+            {responseCodeData?.status_code !== 200 &&
+            requestCodeData?.status_code !== 200 ? (
+              <SubmitButton children=" 비밀번호 재설정" {...Inactive.args} />
+            ) : (
+              <SubmitButton
+                type="button"
+                children=" 비밀번호 재설정"
+                {...Active.args}
+              />
+            )}
           </Link>
         </div>
       </div>
