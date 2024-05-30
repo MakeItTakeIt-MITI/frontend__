@@ -35,8 +35,17 @@ export const HomePage = () => {
     refetch();
   };
   useEffect(() => {
+    // console.log(filteredGames);
+
     refetch();
-  }, [selectingDate, refetch, formatDate, allGamesData, filteredGames]);
+  }, [
+    selectingDate,
+    refetch,
+    formatDate,
+    allGamesData,
+    displayCollapsedList,
+    filteredGames,
+  ]);
 
   if (isError) {
     return <NotFoundPage />;
@@ -68,10 +77,10 @@ export const HomePage = () => {
                 refetch={refetch}
                 gameSearched={gameSearched}
                 isGameSearched={isGameSearched}
-                filteredGames={filteredGames}
                 setFilteredGames={setFilteredGames}
                 setDisplayCollapsedList={setDisplayCollapsedList}
-                displayCollapsedList={displayCollapsedList}
+                displayCollapsedList={false}
+                filteredGames={filteredGames}
               />
             </div>
             <MobileViewDatesList setSelectedDate={setSelectedDate} />

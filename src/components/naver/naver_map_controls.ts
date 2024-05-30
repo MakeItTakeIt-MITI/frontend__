@@ -13,7 +13,7 @@ const { naver } = window;
 
 
 
-export function setCustomMarkers(map: any, allGamesData: GameDetailField[], addressesList: string[], setFilteredGames: (arg: string[]) => void, setDisplayCollapsedList: (arg: boolean) => void, displayCollapsedList: any, filteredGames: string[], setCoordX, setCoordY) {
+export function setCustomMarkers(map: any, allGamesData: GameDetailField[], addressesList: string[], setFilteredGames: (arg: string[]) => void, setDisplayCollapsedList: (arg: boolean) => void) {
 
 
 
@@ -25,14 +25,13 @@ export function setCustomMarkers(map: any, allGamesData: GameDetailField[], addr
 
             new naver.maps.Marker({
                 position: new naver.maps.LatLng(latitude, longitude),
-                // zoom: 14,
+                zoom: 12,
                 map: map,
                 pinchZoom: true,
                 title: data.title,
                 clickable: true,
                 icon: {
-                    content: createCustomMapMarker(data, addressesList, setFilteredGames, setDisplayCollapsedList, displayCollapsedList, filteredGames, setCoordX,
-                        setCoordY),
+                    content: createCustomMapMarker(data, addressesList, setFilteredGames, setDisplayCollapsedList),
                 }
             });
         })
@@ -51,9 +50,9 @@ export function newCustomMarker() {
 
 }
 
+function createCustomMapMarker(data: GameDetailField, addressesList: string[], setFilteredGames: (arg: string[]) => void, setDisplayCollapsedList: (arg: boolean) => void) {
 
-function createCustomMapMarker(data: GameDetailField, addressesList: string[], setFilteredGames: (arg: string[]) => void, setDisplayCollapsedList: (arg: boolean) => void, displayCollapsedList, filteredGames, setCoordX,
-    setCoordY) {
+
 
     const link = document.createElement('a');
     const img = document.createElement('img');
@@ -79,6 +78,7 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
 
     const occurrences = addressesList.filter(address => address === data.court.address);
 
+    let clickCount = 0;
 
     if (occurrences.length > 1) {
 
@@ -86,22 +86,24 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
         link.appendChild(plusIcon);
         plusIcon.textContent = '+';
 
-        // if (filteredGames[0] === data.court.address) {
-        //     plusIcon.textContent = '-';
-        // } else {
-        //     plusIcon.textContent = '+';
-        // }
-
-        console.log(filteredGames);
-
 
         link.addEventListener('click', () => {
-            setCoordX(data.court.longitude);
-            setCoordY(data.court.latitude);
+            link.classList.add('bg-[#4065F5]')
 
 
-            setDisplayCollapsedList(!displayCollapsedList)
-            setFilteredGames(occurrences);
+            clickCount++;
+            if (clickCount === 2) {
+                setDisplayCollapsedList(false);
+                setFilteredGames([])
+                clickCount = 0;
+
+
+            } else {
+                setDisplayCollapsedList(true);
+                setFilteredGames([])
+                setFilteredGames(occurrences);
+            }
+
         })
 
 
@@ -112,14 +114,6 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
     }
 
 
-    //    if (occurrences[0] === data.court.address) {
-    //             plusIcon.style.backgroundColor = '#003049';
-    //             plusIcon.style.color = 'white';
-    //             plusIcon.style.border = '1px solid #fff';
-    //             link.style.backgroundColor = '#003049';
-    //             link.style.color = 'white';
-    //             link.style.border = '1px solid #fff';
-    //         }
 
     link.addEventListener('mouseover', () => {
         plusIcon.style.backgroundColor = '#003049';
@@ -145,6 +139,9 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
     container.appendChild(startTime);
     container.appendChild(fee);
     link.appendChild(container);
+
+
+
     return link;
 }
 
@@ -154,7 +151,7 @@ export function setCoordsToSelectedGame(naverMap: any, coordX: number | null, co
         // navigator.geolocation.getCurrentPosition(function () {
         const setLatLong = naver.maps.LatLng(coordX, coordY);
         naverMap.setCenter(setLatLong);
-        // naverMap.setZoom(16);
+        naverMap.setZoom(16);
         // });
     }
 }

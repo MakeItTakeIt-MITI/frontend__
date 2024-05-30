@@ -37,7 +37,6 @@ export const NaverMapEL = ({
   setFilteredGames,
   setDisplayCollapsedList,
   displayCollapsedList,
-  filteredGames,
 }: NaverMapProp) => {
   const { setCurrentMyLocation, location } = useGeolocationStore();
 
@@ -50,10 +49,10 @@ export const NaverMapEL = ({
       setCoordX(latitude);
       setCoordY(longitude);
     }
-    const location = new naver.maps.LatLng(coordX, coordY);
+
     const naverMap = new naver.maps.Map("map", {
-      center: location,
-      zoom: 16,
+      center: new naver.maps.LatLng(coordX, coordY),
+      zoom: 14,
       zoomControl: true,
       pinchZoom: true,
       scrollWheel: true,
@@ -76,11 +75,7 @@ export const NaverMapEL = ({
       allGamesData?.data,
       addressesList,
       setFilteredGames,
-      setDisplayCollapsedList,
-      displayCollapsedList,
-      filteredGames,
-      setCoordX,
-      setCoordY
+      setDisplayCollapsedList
     );
 
     getCurrentLocation(setCurrentMyLocation, gameSearched);
@@ -91,6 +86,7 @@ export const NaverMapEL = ({
     longitude,
     gameSearched,
     setCurrentMyLocation,
+    setFilteredGames,
     displayCollapsedList,
     coordX,
     coordY,
