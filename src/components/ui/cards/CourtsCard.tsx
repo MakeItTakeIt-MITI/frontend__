@@ -1,24 +1,17 @@
 import { Link } from "react-router-dom";
-
-/**
- * ! SEPERATE WITH SHARE BUTTON
- */
+import right_arrow_lg from "../../../assets/svg/right-arrow-lg.svg";
 
 interface CourtsCardProps {
   key?: number;
   path?: string;
   address: string;
   address_detail: string;
-  icon?: string;
-  onClick?: () => void;
 }
 
 export const CourtsCard = ({
   path = "",
   address,
   address_detail,
-  icon,
-  onClick,
 }: CourtsCardProps) => {
   return (
     <Link
@@ -33,7 +26,7 @@ export const CourtsCard = ({
           {address_detail}
         </h2>
       </div>
-      <img src={icon} alt="right arrow" />
+      <img src={right_arrow_lg} alt="right arrow" />
     </Link>
   );
 };

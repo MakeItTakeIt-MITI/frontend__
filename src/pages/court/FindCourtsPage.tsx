@@ -81,7 +81,6 @@ export const FindCourtsPage = () => {
                   path={`/courts/detail/${court.id}`}
                   address={court.name}
                   address_detail={court.address}
-                  {...Primary.args}
                 />
               ))
             ) : (
