@@ -1,6 +1,6 @@
 import { useState } from "react";
-import star from "../../assets/star.png";
-import emptyStar from "../../assets/empty_star_icon.svg";
+import star from "../../../assets/star.png";
+import emptyStar from "../../../assets/empty_star_icon.svg";
 
 interface StarsRatingProp {
   rating: number;

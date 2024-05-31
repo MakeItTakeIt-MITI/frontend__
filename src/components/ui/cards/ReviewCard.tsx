@@ -1,8 +1,6 @@
+import right_arrow from "../../../assets/svg/right-arrow-lg.svg";
 import { Link } from "react-router-dom";
-import linkArrow from "../../assets/Chevron_Right_MD.svg";
-import { MatchTags } from "../game/MatchTags";
-import { GuestReviewTag, HostReviewTag } from "../../stories/Tags.stories";
-import { ReviewRating } from "../common/ReviewRating";
+import { ReviewRating } from "../../common/ReviewRating";
 import {
   FiveStars,
   FourAndHalfStars,
@@ -14,9 +12,27 @@ import {
   ThreeStars,
   TwoAndHalfStars,
   TwoStars,
-} from "../../stories/Reviews.stories";
+} from "../../../stories/Reviews.stories";
 
-export const MyReviewItem = ({ review }: any) => {
+interface ReviewCardProps {
+  path: string;
+  key: string;
+  game_status: React.ReactNode;
+  rating: number;
+  review: string;
+  title?: string;
+  reviewee?: string;
+}
+
+export const ReviewCard = ({
+  path = "",
+  key,
+  game_status,
+  rating,
+  review,
+  title,
+  reviewee,
+}: ReviewCardProps) => {
   const getRatingComponent = (rating: number) => {
     if (rating === 5) {
       return <ReviewRating {...FiveStars.args} />;
@@ -43,33 +59,30 @@ export const MyReviewItem = ({ review }: any) => {
     }
   };
   return (
-    <div className="flex items-center  w-full h-[89px] border text-[#545454] border-gray-300 rounded-lg   justify-between p-3">
-      <div className="flex flex-col">
-        <div className="">
-          {review?.review_type === "host_review" && (
-            <MatchTags {...HostReviewTag.args} />
-          )}
-          {review?.review_type === "guest_review" && (
-            <MatchTags {...GuestReviewTag.args} />
-          )}
+    <Link
+      to={path}
+      key={key}
+      className="p-3 h-[89px] w-full rounded-lg border border-gray-200 flex items-center justify-between"
+    >
+      <div className="space-y-[2px]">
+        {game_status}
+        <div className="space-x-[5px] flex items-center">
+          {getRatingComponent(rating)}
+          <span className="text-neutral-800 text-xs font-medium">
+            {rating.toFixed(1)}
+          </span>
         </div>
-
-        <div className="flex items-center gap-1">
-          {getRatingComponent(review?.rating)}
-
-          <span className="text-[14px]">5.0</span>
-        </div>
-        <p className="text-[9px] text-[#666] ">
-          팀 구성을 균형있게 해주셨어요!
+        <p className="text-zinc-800 text-base font-bold font-['Pretendard'] leading-[18px]">
+          {reviewee}
         </p>
-        <p className="font-bold text-[16px] ">
-          수원 매탄 공원 4 vs 4 (주차 12자리)
+        <p className="text-stone-500 text-[9px] font-normal  leading-[11px]">
+          {review}
+        </p>
+        <p className="text-zinc-800 text-base font-bold font-['Pretendard'] leading-[18px]">
+          {title}
         </p>
       </div>
-
-      <button>
-        <img src={linkArrow} alt="right arrow icon" />
-      </button>
-    </div>
+      <img src={right_arrow} alt="right arrow icon" />
+    </Link>
   );
 };

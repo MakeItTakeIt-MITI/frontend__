@@ -4,7 +4,6 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 import { GameReviewDetailSkeleton } from "../../components/skeleton/GameReviewDetailSkeleton";
 import profileIcon from "../../assets/game_detail_profile.svg";
 
-import { StarsRating } from "../../components/reviews/StarsRating";
 import { useEffect, useState } from "react";
 import { ReviewCheckBox } from "../../components/reviews/ReviewCheckBox";
 import { DisplayRatings } from "../../components/reviews/DisplayRatings";
@@ -12,6 +11,7 @@ import { useWriteGuestReviewMutation } from "../../hooks/reviews/useWriteGuestRe
 import { useGetParticipantsDetailsQuery } from "../../hooks/games/useGetParticipantsDetailsQuery";
 import { SubmitButton } from "../../components/ui/buttons/SubmitButton";
 import { Active, Inactive } from "../../components/ui/buttons/Button.stories";
+import { StarsRating } from "../../components/ui/ratings/StarsRating";
 
 interface PostReviewField {
   rating: number;

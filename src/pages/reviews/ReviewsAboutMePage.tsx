@@ -3,10 +3,11 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 import { TabFilterList } from "../../components/game/TabFilterList";
 import useUserDataStore from "../../store/useUserDataStore";
 import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
-import { UserReviewItem } from "../../components/reviews/UserReviewItem";
-import { Link } from "react-router-dom";
 import { useGetMyReviewsQuery } from "../../hooks/reviews/useGetMyReviewsQuery";
 import MITI_logo from "../../assets/MITI_logo.svg";
+import { ReviewCard } from "../../components/ui/cards/ReviewCard";
+import { MatchTags } from "../../components/game/MatchTags";
+import { GuestReviewTag, HostReviewTag } from "../../stories/Tags.stories";
 
 export const ReviewsAboutMePage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -80,11 +81,20 @@ export const ReviewsAboutMePage = () => {
             allReviewsData?.data?.page_content.length !== 0 ? (
               allReviewsData?.data?.page_content.map((review: any) => {
                 return (
-                  <div key={review.id}>
-                    <Link to={`detail/${review.id}`}>
-                      <UserReviewItem review={review} />
-                    </Link>
-                  </div>
+                  <ReviewCard
+                    path={`detail/${review.id}`}
+                    key={review.id}
+                    game_status={
+                      review?.review_type === "host_review" ? (
+                        <MatchTags {...HostReviewTag.args} />
+                      ) : review?.review_type === "guest_review" ? (
+                        <MatchTags {...GuestReviewTag.args} />
+                      ) : null
+                    }
+                    rating={review?.rating}
+                    review={review?.comment}
+                    title={review?.game_title}
+                  />
                 );
               })
             ) : (

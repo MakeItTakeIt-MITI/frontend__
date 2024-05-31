@@ -3,12 +3,12 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 import { GameReviewDetailSkeleton } from "../../components/skeleton/GameReviewDetailSkeleton";
 import profileIcon from "../../assets/game_detail_profile.svg";
 
-import { StarsRating } from "../../components/reviews/StarsRating";
 import { useEffect, useState } from "react";
 import { ReviewCheckBox } from "../../components/reviews/ReviewCheckBox";
 import { DisplayRatings } from "../../components/reviews/DisplayRatings";
 import { useGetGameDetailQuery } from "../../hooks/games/useGetGameDetailQuery";
 import { useWriteHostReviewMutation } from "../../hooks/reviews/useWriteHostReviewMutation";
+import { StarsRating } from "../../components/ui/ratings/StarsRating";
 
 interface PostReviewField {
   rating: number;

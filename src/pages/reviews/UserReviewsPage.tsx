@@ -5,9 +5,10 @@ import { useGetUserDataQuery } from "../../hooks/user/useGetUserDataQuery";
 import useUserDataStore from "../../store/useUserDataStore";
 import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
 import { useGetUserWrittenReviewsQuery } from "../../hooks/reviews/useGetUserWrittenReviewsQuery";
-import { Link } from "react-router-dom";
-import { MyReviewItem } from "../../components/reviews/MyReviewItem";
 import MITI_logo from "../../assets/MITI_logo.svg";
+import { ReviewCard } from "../../components/ui/cards/ReviewCard";
+import { MatchTags } from "../../components/game/MatchTags";
+import { GuestReviewTag, HostReviewTag } from "../../stories/Tags.stories";
 
 export const UserReviewsPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -93,11 +94,20 @@ export const UserReviewsPage = () => {
             {reviewData && reviewData?.data?.page_content.length !== 0 ? (
               reviewData?.data?.page_content.map((review: any) => {
                 return (
-                  <div>
-                    <Link to={`detail/${review.id}`}>
-                      <MyReviewItem review={review} />
-                    </Link>
-                  </div>
+                  <ReviewCard
+                    path={`detail/${review.id}`}
+                    key={review.id}
+                    game_status={
+                      review?.review_type === "host_review" ? (
+                        <MatchTags {...HostReviewTag.args} />
+                      ) : review?.review_type === "guest_review" ? (
+                        <MatchTags {...GuestReviewTag.args} />
+                      ) : null
+                    }
+                    rating={review.rating}
+                    review={review.comment}
+                    reviewee={review.reviewee_nickname}
+                  />
                 );
               })
             ) : (
