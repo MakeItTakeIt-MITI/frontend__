@@ -10,6 +10,8 @@ import {
   PaymentPartiallyFulfilled,
   TransferFulfilled,
 } from "../../stories/Tags.stories";
+import { useGetPaymentHistory } from "../../hooks/account/useGetPaymentHistory";
+import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
 
 export const PaymentHistoryPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -17,82 +19,84 @@ export const PaymentHistoryPage = () => {
   const [openList, setOpenList] = useState(false);
   const { userId } = useUserDataStore();
 
-  // const { data: paymentHistoryData } = useGetPaymentHistory(userId);
-  const data = {
-    status_code: 200,
-    message: "OK",
-    data: {
-      start_index: 1,
-      end_index: 2,
-      current_index: 1,
-      page_content: [
-        {
-          id: 9,
-          amount: 0,
-          commission: 0,
-          status: "waiting",
-          game: {
-            id: 61,
-            court: {
-              id: 7,
-              address: "인천 동구 보세로 65 B동",
-              address_detail: "왼측 건물",
-              latitude: "37.4854719147071",
-              longitude: "126.617237911346",
-            },
-            game_status: "open",
-            title: "MITI 픽업게임",
-            startdate: "2024-04-17",
-            starttime: "17:34:00",
-            enddate: "2024-04-17",
-            endtime: "18:00:00",
-            max_invitation: 2,
-            min_invitation: 1,
-            fee: 10000,
-          },
-        },
-        {
-          id: 10,
-          amount: 200,
-          commission: 10,
-          status: "confirmed",
-          game: {
-            id: 62,
-            court: {
-              id: 8,
-              address: "서울 강남구 삼성로 508",
-              address_detail: "B1층",
-              latitude: "37.5102843",
-              longitude: "127.066923",
-            },
-            game_status: "closed",
-            title: "주말 배드민턴",
-            startdate: "2024-05-10",
-            starttime: "09:00:00",
-            enddate: "2024-05-10",
-            endtime: "11:00:00",
-            max_invitation: 10,
-            min_invitation: 5,
-            fee: 15000,
-          },
-        },
-      ],
-    },
-  };
+  const { data: paymentHistoryData, refetch } = useGetPaymentHistory(
+    userId,
+    gameStatusQuery
+  );
+  // const data = {
+  //   status_code: 200,
+  //   message: "OK",
+  //   data: {
+  //     start_index: 1,
+  //     end_index: 2,
+  //     current_index: 1,
+  //     page_content: [
+  //       {
+  //         id: 9,
+  //         amount: 0,
+  //         commission: 0,
+  //         status: "waiting",
+  //         game: {
+  //           id: 61,
+  //           court: {
+  //             id: 7,
+  //             address: "인천 동구 보세로 65 B동",
+  //             address_detail: "왼측 건물",
+  //             latitude: "37.4854719147071",
+  //             longitude: "126.617237911346",
+  //           },
+  //           game_status: "open",
+  //           title: "MITI 픽업게임",
+  //           startdate: "2024-04-17",
+  //           starttime: "17:34:00",
+  //           enddate: "2024-04-17",
+  //           endtime: "18:00:00",
+  //           max_invitation: 2,
+  //           min_invitation: 1,
+  //           fee: 10000,
+  //         },
+  //       },
+  //       {
+  //         id: 10,
+  //         amount: 200,
+  //         commission: 10,
+  //         status: "confirmed",
+  //         game: {
+  //           id: 62,
+  //           court: {
+  //             id: 8,
+  //             address: "서울 강남구 삼성로 508",
+  //             address_detail: "B1층",
+  //             latitude: "37.5102843",
+  //             longitude: "127.066923",
+  //           },
+  //           game_status: "closed",
+  //           title: "주말 배드민턴",
+  //           startdate: "2024-05-10",
+  //           starttime: "09:00:00",
+  //           enddate: "2024-05-10",
+  //           endtime: "11:00:00",
+  //           max_invitation: 10,
+  //           min_invitation: 5,
+  //           fee: 15000,
+  //         },
+  //       },
+  //     ],
+  //   },
+  // };
 
   useEffect(() => {
     if (defaultTabName === "전체 보기") {
       setGameStatusQuery("");
     } else if (defaultTabName === "정산 완료") {
-      setGameStatusQuery("open");
-    } else if (defaultTabName === "부분 정산") {
-      setGameStatusQuery("closed");
+      setGameStatusQuery("waiting");
     } else if (defaultTabName === "대기중") {
-      setGameStatusQuery("canceled");
+      setGameStatusQuery("completed");
     }
+    refetch();
   }, [defaultTabName, gameStatusQuery]);
 
-  const tabList = ["전체보기", "정산 완료", "부분 정산", "대기중"];
+  const tabList = ["전체보기", "정산 완료", "대기중"];
   const handleOpenList = () => setOpenList(!openList);
   const handleChangeTab = (tab: string) => setDefaultTabName(tab);
 
@@ -142,8 +146,8 @@ export const PaymentHistoryPage = () => {
           style={{ scrollbarWidth: "thin" }}
           className="overflow-y-auto laptop:w-[593px] bg-[#FBFBFB]  laptop:h-[653px] mobile:h-full   mobile:w-full mx-auto   p-3 rounded-lg flex flex-col gap-[15px] "
         >
-          {data?.data.page_content.length !== 0 ? (
-            data?.data.page_content.map((page) => {
+          {paymentHistoryData?.data.page_content.length !== 0 ? (
+            paymentHistoryData?.data.page_content.map((page: any) => {
               return (
                 <Link
                   to={`detail/${page.id}`}
@@ -180,7 +184,10 @@ export const PaymentHistoryPage = () => {
               );
             })
           ) : (
-            <div>nolis </div>
+            <NoListFoundMessageBox
+              title="정산내역이 없습니다."
+              content="경기를 호스팅하고 정산을 받아보세요!"
+            />
           )}
         </div>
       </div>

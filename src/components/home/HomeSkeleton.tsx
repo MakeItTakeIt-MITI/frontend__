@@ -16,7 +16,7 @@ export const HomeSkeleton = () => {
         </div>
         <div className="flex   tablet:gap-10  mt-10  ">
           <div className="space-y-4">
-            <div className="flex flex-col gap-2 items-center justify-center h-[52px] w-full bg-gray-100 animate-pulse dark:bg-gray-900">
+            <div className="flex flex-col gap-2 items-center justify-center h-[52px] w-full bg-gray-100 animate-pulse">
               <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
               <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
             </div>
