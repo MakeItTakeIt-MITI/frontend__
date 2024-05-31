@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { NavigateToPrevContainer } from "../../components/NavigateToPrevContainer";
-import { Link } from "react-router-dom";
-import rightArrow from "../../assets/Chevron_Right_MD.svg";
+
 import searchIcon from "../../assets/court/search_icon.svg";
 import { RegionFilterBox } from "../../components/game/RegionFilterBox";
 import { useGetAllCourtsInfiniteQuery } from "../../hooks/courts/useGetAllCourtsInfiniteQuery";
 import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
+import { CourtsCard } from "../../components/ui/cards/CourtsCard";
+import { Primary } from "../../components/ui/cards/CourtsCard.stories";
 
 export const FindCourtsPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -75,17 +76,13 @@ export const FindCourtsPage = () => {
           {courtsData?.pages.map((page) => {
             return page.data.page_content.length > 0 ? (
               page.data.page_content.map((court: any) => (
-                <Link
+                <CourtsCard
                   key={court.id}
-                  to={`/courts/detail/${court.id}`}
-                  className="w-full flex justify-between p-3 bg-white border border-gray-200 rounded-lg"
-                >
-                  <div className="space-y-[9px]">
-                    <h2 className="text-[#333333] font-bold">{court.name}</h2>
-                    <p className="text-[#999999] text-xs">{court.address}</p>
-                  </div>
-                  <img loading="lazy" src={rightArrow} alt="right arrow" />
-                </Link>
+                  path={`/courts/detail/${court.id}`}
+                  address={court.name}
+                  address_detail={court.address}
+                  {...Primary.args}
+                />
               ))
             ) : (
               <NoListFoundMessageBox
