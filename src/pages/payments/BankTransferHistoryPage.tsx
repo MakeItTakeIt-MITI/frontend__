@@ -15,17 +15,18 @@ export const BankTransferHistoryPage = () => {
 
   const { data: userData } = useGetUserDataQuery(userId);
 
-  const { data: bankTransferHistoryData } = useGetBankTransferHistory(userId);
+  const { data: bankTransferHistoryData } = useGetBankTransferHistory(
+    userId,
+    gameStatusQuery
+  );
 
   useEffect(() => {
     if (defaultTabName === "전체 보기") {
       setGameStatusQuery("");
     } else if (defaultTabName === "정산 완료") {
-      setGameStatusQuery("open");
-    } else if (defaultTabName === "부분 정산") {
-      setGameStatusQuery("closed");
+      setGameStatusQuery("completed");
     } else if (defaultTabName === "대기중") {
-      setGameStatusQuery("canceled");
+      setGameStatusQuery("waiting");
     }
   }, [defaultTabName, gameStatusQuery]);
 

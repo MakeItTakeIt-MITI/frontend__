@@ -20,8 +20,7 @@ export const EditProfilePage = () => {
   const { userId } = useUserDataStore();
   const { data, isPending } = useUserInfoQuery(userId);
 
-  const { register, handleSubmit, getValues, watch, formState } =
-    useForm<UserEditField>();
+  const { register, handleSubmit, getValues, watch } = useForm<UserEditField>();
 
   const { mutate: updateUserInfoMutation } = useUpdateUserMutation(userId);
   const { mutate: mutateNickname, data: nicknameResponse } =
@@ -48,7 +47,7 @@ export const EditProfilePage = () => {
   }
 
   const handleValidateNickname = () => {
-    const nicknameData = { nickname: getValues("nickname") };
+    const nicknameData: any = { nickname: getValues("nickname") };
     if (nicknameData) {
       mutateNickname(nicknameData);
     }

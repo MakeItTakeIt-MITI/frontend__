@@ -2,7 +2,6 @@ import { NavigateToPrevContainer } from "../../components/NavigateToPrevContaine
 import { Link } from "react-router-dom";
 import { UserInquiryBox } from "../../components/support/UserInquiryBox";
 import { useGetQuestionsQuery } from "../../hooks/support/useGetQuestionsQuery";
-import { NoGamesAvailableInfoBox } from "../../components/home/NoGamesAvailableInfoBox";
 import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
 
 export interface QuestionDataProp {

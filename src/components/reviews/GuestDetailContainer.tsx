@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import badge from "../../assets/authentication-badge.svg";
 import profile from "../../assets/game_detail_profile.svg";
 
-import { GameDetailBoxProp } from "../../interface/gameInterface";
 import {
   FiveStars,
   FourAndHalfStars,

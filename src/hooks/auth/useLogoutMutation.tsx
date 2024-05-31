@@ -11,7 +11,7 @@ export const useLogoutMutation = (
   return useMutation({
     mutationKey: ["logout"],
     mutationFn: () => userLogout(accessToken, refreshToken),
-    onSuccess: (response) => {
+    onSuccess: () => {
       logout();
       navigate("/auth/login");
     },

@@ -6,7 +6,6 @@ import { RegionFilterBox } from "../../components/game/RegionFilterBox";
 import { useGetAllCourtsInfiniteQuery } from "../../hooks/courts/useGetAllCourtsInfiniteQuery";
 import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
 import { CourtsCard } from "../../components/ui/cards/CourtsCard";
-import { Primary } from "../../components/ui/cards/CourtsCard.stories";
 
 export const FindCourtsPage = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");

@@ -17,7 +17,7 @@ export const NicknameEditForm = ({ id, data }: NicknameProps) => {
 
   const { mutate: mutateNickname, isError } = useNicknameChangeMutation(id);
 
-  const handleChangeNickname = (data: NicknameField) => {
+  const handleChangeNickname = (data: any) => {
     mutateNickname(data);
   };
 

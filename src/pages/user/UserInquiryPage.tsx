@@ -15,8 +15,8 @@ export const UserInquiryPage = () => {
   const { register, formState, handleSubmit, watch } =
     useForm<PostQuestionProps>();
 
-  const isFormEmpty =
-    !formState.dirtyFields.title || !formState.dirtyFields.content;
+  // const isFormEmpty =
+  //   !formState.dirtyFields.title || !formState.dirtyFields.content;
 
   const { mutate: postQuestionMutate, data: postResponse } =
     usePostQuestionMutation();

@@ -12,7 +12,6 @@ import { GameFinishedTag } from "../../stories/Tags.stories";
 import markerSvg from "../../assets/Map_Pin.svg";
 import peopleSvg from "../../assets/people.svg";
 import { useGetParticipantsDetailsQuery } from "../../hooks/games/useGetParticipantsDetailsQuery";
-import { NoGamesAvailableInfoBox } from "../../components/home/NoGamesAvailableInfoBox";
 import { NoListFoundMessageBox } from "../../components/common/NoListFoundMessageBox";
 
 export const GameReviewPage = () => {

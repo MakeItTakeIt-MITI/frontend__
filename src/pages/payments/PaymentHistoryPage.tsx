@@ -89,9 +89,9 @@ export const PaymentHistoryPage = () => {
     if (defaultTabName === "전체 보기") {
       setGameStatusQuery("");
     } else if (defaultTabName === "정산 완료") {
-      setGameStatusQuery("waiting");
-    } else if (defaultTabName === "대기중") {
       setGameStatusQuery("completed");
+    } else if (defaultTabName === "대기중") {
+      setGameStatusQuery("waiting");
     }
     refetch();
   }, [defaultTabName, gameStatusQuery]);

@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import linkArrow from "../../assets/Chevron_Right_MD.svg";
 import { MatchTags } from "../game/MatchTags";
 import { GuestReviewTag, HostReviewTag } from "../../stories/Tags.stories";

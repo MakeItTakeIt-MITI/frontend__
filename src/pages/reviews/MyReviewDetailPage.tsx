@@ -4,7 +4,6 @@ import { getCourtDetailQuery } from "../../hooks/courts/getCourtDetailQuery";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import useUserDataStore from "../../store/useUserDataStore";
-import { useGetUserDetailReviewQuery } from "../../hooks/reviews/useGetUserDetailReviewQuery";
 import { ReviewGameDetailBox } from "../../components/reviews/ReviewGameDetailBox";
 import { GuestDetailContainer } from "../../components/reviews/GuestDetailContainer";
 import { useUserInfoQuery } from "../../hooks/games/useUserInfoQuery";
@@ -20,11 +19,6 @@ export const MyReviewDetailPage = () => {
   const reviewIdParam = Number(reviewId);
   const { data: courtDetailData, refetch: refetchCourtDetailData } =
     getCourtDetailQuery(reviewIdParam);
-
-  const { data: reviewDetailData } = useGetUserDetailReviewQuery(
-    userId,
-    reviewIdParam
-  );
 
   const { data: myReviewDetailData } = useGetMyWrittenReviewDetailQuery(
     userId,
