@@ -21,7 +21,7 @@ export const CourtDetailPage = () => {
     <section className="laptop:my-[20px] mobile:mb-16 ">
       <NavigateToPrevContainer children="경기장 상세 정보" />
 
-      <div className="flex laptop:flex-row mobile:flex-col gap-5 laptop:px-3 mobile:px-1 laptop:w-[981px] laptop:h-[745px]  mx-auto ">
+      <div className=" flex laptop:flex-row mobile:flex-col gap-5 laptop:px-3 mobile:px-1 laptop:w-[981px] laptop:h-[745px]  mx-auto ">
         <div className="laptop:max-w-[431px]  mobile:w-full gap-[25px] w-full flex flex-col">
           <CourtDetailMap courtData={courtDetailData} />
           <ShareCourtDetailBox courtDetailData={courtDetailData} />
@@ -30,7 +30,7 @@ export const CourtDetailPage = () => {
           <h1 className="font-bold text-[20px]">모집 경기 목록</h1>
           <div
             style={{ scrollbarWidth: "thin" }}
-            className=" laptop:w-[530px] bg-[#FBFBFB]  laptop:h-[738px] mobile:h-full   mobile:w-full mx-auto   p-3 rounded-lg flex flex-col gap-10 "
+            className="overflow-y-auto laptop:w-[530px] bg-[#FBFBFB]  laptop:h-[700px] mobile:h-full   mobile:w-full mx-auto   p-3 rounded-lg flex flex-col gap-10 "
           >
             <CourtHistoryListContainer
               data={courtListData}

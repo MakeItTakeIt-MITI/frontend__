@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import rightArrow from "../../../assets/Chevron_Right_MD.svg";
 import { MatchTags } from "../MatchTags";
 import {
   GameCancelledTag,
@@ -13,6 +11,7 @@ import {
 } from "../../../interface/gameInterface";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
+import { GameStatusCard } from "../../ui/cards/GameStatusCard";
 
 interface GameHistoryProps {
   data: any;
@@ -49,48 +48,29 @@ export const GameHistoryContainer: React.FC<GameHistoryProps> = ({
                 <h2 className="font-bold">{newData?.startdate}</h2>
                 <div className="space-y-[15px]">
                   {newData.games.map((detail: GameDetailField) => (
-                    <Link
-                      key={detail?.id}
-                      to={`/games/detail/${detail?.id}`}
-                      className="flex gap-2.5 justify-between items-center p-2 text-xs font-medium    bg-white rounded-lg border border-gray-200 border-solid max-w-[551px] text-neutral-400 "
-                    >
-                      <div className="flex flex-col justify-center h-full ">
-                        {detail?.game_status === "open" && (
+                    <GameStatusCard
+                      key={detail.id}
+                      path={`/games/detail/${detail.id}`}
+                      game_status={
+                        detail.game_status === "open" ? (
                           <MatchTags {...RecruitingTag.args} />
-                        )}
-                        {detail?.game_status === "canceled" && (
+                        ) : detail.game_status === "canceled" ? (
                           <MatchTags {...GameCancelledTag.args} />
-                        )}
-                        {detail?.game_status === "closed" && (
+                        ) : detail.game_status === "closed" ? (
                           <MatchTags {...RecruitingCompletedTag.args} />
-                        )}
-                        {detail?.game_status === "completed" && (
+                        ) : detail.game_status === "completed" ? (
                           <MatchTags {...GameFinishedTag.args} />
-                        )}
-                        <div className="mt-1.5 text-base font-bold leading-5 text-ellipsis text-zinc-800 max-md:max-w-full">
-                          {detail?.title}
-                        </div>
-                        <div className="mt-1.5 text-ellipsis max-md:max-w-full">
-                          {detail?.court.address}
-                        </div>
-                        <div className="text-ellipsis max-md:max-w-full">
-                          10:00 ~ 13:00
-                        </div>
-                      </div>
-                      <img loading="lazy" src={rightArrow} alt="right arrow" />
-                    </Link>
+                        ) : null
+                      }
+                      title={detail.title}
+                      address={`${detail.court.address} ${detail.court.address_detail}`}
+                      time={`${detail.starttime.slice(0, 5)} ~ ${detail.endtime.slice(0, 5)}`}
+                    />
                   ))}
                 </div>
               </div>
             ))
         )}
-
-      {/* <button
-        onClick={() => fetchNextPage()}
-        className="bg-blue-200 text-white w-full"
-      >
-        Fetch more
-      </button> */}
     </div>
   );
 };

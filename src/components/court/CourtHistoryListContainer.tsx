@@ -11,6 +11,7 @@ import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { MatchTags } from "../game/MatchTags";
 import { NoListFoundMessageBox } from "../common/NoListFoundMessageBox";
+import { GameStatusCard } from "../ui/cards/GameStatusCard";
 
 interface CourtHistoryProp {
   data: any;
@@ -37,45 +38,33 @@ export const CourtHistoryListContainer: React.FC<CourtHistoryProp> = ({
     <div
       ref={ref}
       style={{ overflowY: "auto", scrollbarWidth: "thin" }}
-      className=" flex flex-col gap-2.5 "
+      className="] flex flex-col gap-2.5 overflow-y-auto "
     >
       {data?.pages.map((page: any) =>
         page.data.page_content.length !== 0 ? (
           page.data.page_content.map((newData: any) => (
             <div key={newData.startdate}>
               <h2 className="font-bold">{newData.startdate}</h2>
-              <div className="space-y-[15px]">
+              <div className="space-y-[15px] ">
                 {newData.games.map((detail: any) => (
-                  <Link
+                  <GameStatusCard
                     key={detail.id}
-                    to={`/games/detail/${detail.id}`}
-                    className="flex gap-2.5 justify-between items-center p-2 text-xs font-medium bg-white rounded-lg border border-gray-200 border-solid max-w-[551px] text-neutral-400"
-                  >
-                    <div className="flex flex-col justify-center h-full">
-                      {detail.game_status === "open" && (
+                    path={`/games/detail/${detail.id}`}
+                    game_status={
+                      detail.game_status === "open" ? (
                         <MatchTags {...RecruitingTag.args} />
-                      )}
-                      {detail.game_status === "canceled" && (
+                      ) : detail.game_status === "canceled" ? (
                         <MatchTags {...GameCancelledTag.args} />
-                      )}
-                      {detail.game_status === "closed" && (
+                      ) : detail.game_status === "closed" ? (
                         <MatchTags {...RecruitingCompletedTag.args} />
-                      )}
-                      {detail.game_status === "completed" && (
+                      ) : detail.game_status === "completed" ? (
                         <MatchTags {...GameFinishedTag.args} />
-                      )}
-                      <div className="mt-1.5 text-base font-bold leading-5 text-ellipsis text-zinc-800 max-md:max-w-full">
-                        {detail.title}
-                      </div>
-                      <div className="mt-1.5 text-ellipsis max-md:max-w-full">
-                        {detail.court.address}
-                      </div>
-                      <div className="text-ellipsis max-md:max-w-full">
-                        {`${detail.starttime} ~ ${detail.endtime}`}
-                      </div>
-                    </div>
-                    <img loading="lazy" src={rightArrow} alt="right arrow" />
-                  </Link>
+                      ) : null
+                    }
+                    title={detail.title}
+                    address={`${detail.court.address} ${detail.court.address_detail}`}
+                    time={`${detail.starttime.slice(0, 5)} ~ ${detail.endtime.slice(0, 5)}`}
+                  />
                 ))}
               </div>
             </div>

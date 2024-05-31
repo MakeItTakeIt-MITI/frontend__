@@ -15,7 +15,7 @@ export const MatchTags = ({
           backgroundColor,
           color: textColor,
         }}
-        className="text-[10px] h-[15px] font-bold rounded-sm p-1 "
+        className="text-[10px] h-[15px] text-center  font-semibold rounded-sm p-1  leading-[13px]"
       >
         {children}
       </span>
