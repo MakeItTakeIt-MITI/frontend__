@@ -50,10 +50,9 @@ export function newCustomMarker() {
 
 }
 
+
+
 function createCustomMapMarker(data: GameDetailField, addressesList: string[], setFilteredGames: (arg: string[]) => void, setDisplayCollapsedList: (arg: boolean) => void) {
-
-
-
     const link = document.createElement('a');
     const img = document.createElement('img');
     const container = document.createElement('div');
@@ -79,17 +78,15 @@ function createCustomMapMarker(data: GameDetailField, addressesList: string[], s
     const occurrences = addressesList.filter(address => address === data.court.address);
 
     let clickCount = 0;
-
     if (occurrences.length > 1) {
 
-        plusIcon.classList.add('absolute', 'flex', 'items-center', 'justify-center', '-top-2', '-right-2', 'w-5', 'h-5', 'rounded-full', 'bg-white', 'border', 'border-[#4065F5]', 'text-black', 'text-[15px]', 'font-bold')
+        plusIcon.classList.add('text-sm', 'absolute', 'flex', 'items-center', 'justify-center', '-top-2', '-right-2', 'm-auto', 'w-5', 'h-5', 'rounded-full', 'bg-white', 'border', 'border-[#4065F5]', 'text-black', 'text-[15px]', 'font-bold')
         link.appendChild(plusIcon);
         plusIcon.textContent = '+';
 
 
         link.addEventListener('click', () => {
-            link.classList.add('bg-[#4065F5]')
-
+            console.log(data.id);
 
             clickCount++;
             if (clickCount === 2) {
