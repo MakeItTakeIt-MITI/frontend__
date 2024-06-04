@@ -40,7 +40,7 @@ export const HomePage = () => {
     refetch();
   }, [
     selectingDate,
-    refetch,
+    // refetch,
     formatDate,
     allGamesData,
     displayCollapsedList,
@@ -80,7 +80,6 @@ export const HomePage = () => {
                 setFilteredGames={setFilteredGames}
                 setDisplayCollapsedList={setDisplayCollapsedList}
                 displayCollapsedList={false}
-                filteredGames={filteredGames}
               />
             </div>
             <MobileViewDatesList setSelectedDate={setSelectedDate} />

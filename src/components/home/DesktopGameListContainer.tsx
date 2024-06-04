@@ -3,6 +3,7 @@ import { GameDetailField } from "../../interface/gameInterface";
 import { MatchItem } from "../game/MatchItem";
 import React from "react";
 import { NoGamesAvailableInfoBox } from "./NoGamesAvailableInfoBox";
+import "./animation.css";
 
 interface DesktopGameListProps {
   allGamesData: {
@@ -51,7 +52,10 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
         allGamesData?.data.map((game: GameDetailField) => {
           if (filteredGames.includes(game.court.address)) {
             return (
-              <div key={game.id} className="space-y-2">
+              <div
+                key={game.id}
+                className="space-y-2 cssanimation sequence fadeInBottom"
+              >
                 <Link to={`/games/detail/${game.id}`}>
                   <MatchItem
                     game={game}

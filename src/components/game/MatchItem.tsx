@@ -9,6 +9,7 @@ import {
 } from "../../stories/Tags.stories";
 
 import { MatchTags } from "./MatchTags";
+import "../home/animation.css";
 
 interface GameDetailProp {
   game: GameDetailField;
@@ -22,7 +23,7 @@ export const MatchItem = ({ game, handleSearchCoords }: GameDetailProp) => {
         const { latitude, longitude } = game.court;
         handleSearchCoords(Number(latitude), Number(longitude));
       }}
-      className="hover:cursor-pointer p-3 bg-white rounded-lg border border-gray-200 "
+      className="hover:cursor-pointer p-3 bg-white rounded-lg border border-gray-200 cssanimation sequence fadeInBottom"
     >
       <div className="flex flex-col   gap-1">
         <div className="flex justify-between items-center">
