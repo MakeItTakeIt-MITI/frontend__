@@ -4,7 +4,6 @@ import { GameDetailField } from "../../interface/gameInterface";
 import { setCoordsToSelectedGame } from "./naver_map_controls";
 import useGeolocationStore from "../../store/useGeolocationStore";
 import { getCurrentLocation } from "./geolocation";
-import { useNavigate } from "react-router-dom";
 import markerIcon from "../../assets/new_map_marker.svg";
 import markerIconSelected from "../../assets//svg/map-marker-white.svg";
 
@@ -43,8 +42,6 @@ export const NaverMapEL = ({
   const [coordX, setCoordX] = useState<null | number>(null);
   const [coordY, setCoordY] = useState<null | number>(null);
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     if (latitude && longitude) {
       setCoordX(latitude);
@@ -71,21 +68,19 @@ export const NaverMapEL = ({
       });
     }
 
-    let prevClickedIndex: null | number = null;
-    let prevClickedMarker = null;
     let selectedMarker: any | null = null;
 
     for (let index = 0; index < allGamesData.data.length; index++) {
       const data = allGamesData.data[index];
 
       const { latitude, longitude } = data.court;
-      const markerContent = `<div id="element-${index}" class='relative bg-white flex pl-[5.5px] px-[7px] items-center gap-[5px] w-[125px] h-9 border border-[#4065F5] rounded-2xl'>  
+      const markerContent = `<a href=${`/games/detail/${data.id}`} id="element-${index}" class='relative bg-white flex pl-[5.5px] px-[7px] items-center gap-[5px] w-[125px] h-9 border border-[#4065F5] rounded-2xl'>  
       <img src=${markerIcon} alt="marker icon"/>  
           <div class="flex flex-col justify-center items-center">
                 <h1 class="text-black text-[10px] leading-3">${data.starttime.slice(0, -3)}-${data.endtime.slice(0, -3)}</h1>
                 <h2 class="text-black text-xs font-bold leading-[18px]">${data.fee.toLocaleString("ko-KR", { currency: "KRW" })}</h2>
           </div> 
-      </div>`;
+      </a>`;
       const selectedMarkerContent = `<div id="element-${index}" class='relative bg-[#4065F5] flex pl-[5.5] px-[7px] items-center gap-2 w-[125px] h-9 rounded-2xl'> 
       <img src=${markerIconSelected}  alt='marker icon' />  
          <div class="flex flex-col justify-center items-center">
@@ -135,7 +130,10 @@ export const NaverMapEL = ({
             });
           }
           marker.setIcon({
-            content: selectedMarkerContent,
+            content:
+              filteredAddresses.length > 1
+                ? selectedMarkerContent
+                : markerContent,
           });
           selectedMarker = marker;
         }
