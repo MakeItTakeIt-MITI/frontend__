@@ -1,57 +1,57 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import { Home } from "./app/routes/Home.tsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { HomePage } from "./pages/HomePage.tsx";
-import { UserLoginPage } from "./pages/auth/UserLoginPage.tsx";
-import { UserSignupPage } from "./pages/auth/UserSignupPage.tsx";
-import { NotFoundPage } from "./pages/NotFoundPage.tsx";
-import { GameDetailPage } from "./pages/games/GameDetailPage.tsx";
-import { MatchSubmittedPage } from "./pages/MatchSubmittedPage.tsx";
-import { SMSAuthenticationPage } from "./pages/auth/SMSAuthenticationPage.tsx";
+import { Login } from "./app/routes/auth/Login.tsx";
+import { Signup } from "./app/routes/auth/Signup.tsx";
+import { NotFoundPage } from "./app/routes/NotFoundPage.tsx";
+import { GameDetails } from "./app/routes/games/GameDetails.tsx";
+import { MatchSubmittedPage } from "./app/routes/MatchSubmittedPage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { KakaoAuthHandler } from "./components/forms/KakaoAuthHandler.tsx";
-import { PrivateRoute } from "./pages/PrivateRoute.tsx";
-import { AuthenticateRoutes } from "./pages/AuthenticateRoutes.tsx";
-import { FindEmailPage } from "./pages/auth/FindEmailPage.tsx";
-import { UserMyPage } from "./pages/user/UserMyPage.tsx";
-import { EditProfilePage } from "./pages/user/EditProfilePage.tsx";
-import { CustomerServicePage } from "./pages/user/CustomerServicePage.tsx";
-import { UserInquiryPage } from "./pages/user/UserInquiryPage.tsx";
-import { FAQPage } from "./pages/user/FAQPage.tsx";
-import { ReviewsAboutMePage } from "./pages/reviews/ReviewsAboutMePage.tsx";
-import { UserReviewsPage } from "./pages/reviews/UserReviewsPage.tsx";
-import { SignupIntroPage } from "./pages/auth/SignupIntroPage.tsx";
-import { SMSVerifiedSuccessPage } from "./pages/auth/SMSVerifiedSuccessPage.tsx";
-import { FindPasswordPage } from "./pages/auth/FindPasswordPage.tsx";
-import { FindPasswordResetPage } from "./pages/auth/FindPasswordResetPage.tsx";
-import { FindEmailDisplayPage } from "./pages/auth/FindEmailDisplayPage.tsx";
-import { HostGamePage } from "./pages/games/HostGamePage.tsx";
-import { HostGameHistoryPage } from "./pages/games/HostGameHistoryPage.tsx";
-import { MyGamesPage } from "./pages/games/MyGamesPage.tsx";
-import { NotVerifiedUserPage } from "./pages/auth/NotVerifiedUserPage.tsx";
-import { NotVerifiedInputDetailPage } from "./pages/auth/NotVerifiedInputDetailPage.tsx";
-import { MobileViewItemsTab } from "./pages/MobileViewItemsTab.tsx";
-import { GameJoinPage } from "./pages/games/GameJoinPage.tsx";
-import { UserInquiryDetailPage } from "./pages/user/UserInquiryDetailPage.tsx";
-import { GameDetailEditPage } from "./pages/games/GameDetailEditPage.tsx";
-import { FindCourtsPage } from "./pages/court/FindCourtsPage.tsx";
-import { KakaoPaymentHandler } from "./pages/games/KakaoPaymentHandler.tsx";
-import { GameCancelParticipationPage } from "./pages/games/GameCancelParticipationPage.tsx";
-import { GameParticipationHistoryPage } from "./pages/games/GameParticipationHistoryPage.tsx";
-import { CourtDetailPage } from "./pages/court/CourtDetailPage.tsx";
-import { PaymentHistoryPage } from "./pages/payments/PaymentHistoryPage.tsx";
-import { BankTransferHistoryPage } from "./pages/payments/BankTransferHistoryPage.tsx";
-import { DeleteAccountPage } from "./pages/auth/DeleteAccountPage.tsx";
-import { DeleteAccountSuccessPage } from "./pages/auth/DeleteAccountSuccessPage.tsx";
-import { GameReviewPage } from "./pages/games/GameReviewPage.tsx";
-import { PostGuestReviewPage } from "./pages/reviews/PostGuestReviewPage.tsx";
-import { PostHostReviewPage } from "./pages/reviews/PostHostReviewPage.tsx";
-import { ReviewsAboutMeDetailPage } from "./pages/reviews/ReviewsAboutMeDetailPage.tsx";
-import { MyReviewDetailPage } from "./pages/reviews/MyReviewDetailPage.tsx";
-import { BankTransferPage } from "./pages/payments/BankTransferPage.tsx";
-import { PaymentDetailPage } from "./pages/payments/PaymentDetailPage.tsx";
+import { KakaoAuthHandler } from "./app/routes/auth/KakaoAuthHandler.tsx";
+import { PrivateRoute } from "./app/routes/auth/PrivateRoute.tsx";
+import { AuthenticateRoutes } from "./app/routes/auth/AuthenticateRoutes.tsx";
+import { Profile } from "./app/routes/user/Profile.tsx";
+import { EditProfile } from "./app/routes/user/EditProfile.tsx";
+import { CustomerServicePage } from "./app/routes/support/CustomerServicePage.tsx";
+import { UserInquiryPage } from "./app/routes/support/UserInquiryPage.tsx";
+import { FAQPage } from "./app/routes/support/FAQPage.tsx";
+
+import { HostGame } from "./app/routes/games/HostGame.tsx";
+import { GameHostingHistory } from "./app/routes/games/GameHostingHistory.tsx";
+import { MyGames } from "./app/routes/games/MyGames.tsx";
+import { MobileViewItemsTab } from "./app/routes/MobileViewItemsTab.tsx";
+import { JoinGame } from "./app/routes/games/JoinGame.tsx";
+import { UserInquiryDetailPage } from "./app/routes/support/UserInquiryDetailPage.tsx";
+import { EditGameDetails } from "./app/routes/games/EditGameDetails.tsx";
+import { KakaoPaymentHandler } from "./app/routes/payment/KakaoPaymentHandler.tsx";
+import { CancelParticipation } from "./app/routes/games/CancelParticipation.tsx";
+import { ParticipationHistory } from "./app/routes/games/ParticipationHistory.tsx";
+import { DeleteAccountPage } from "./app/routes/user/DeleteAccountPage.tsx";
+import { DeleteAccountSuccessPage } from "./app/routes/user/DeleteAccountSuccessPage.tsx";
+import { ReviewGame } from "./app/routes/games/ReviewGame.tsx";
+import { PaymentDetail } from "./app/routes/payment/PaymentDetail.tsx";
+import { BankTransferHistory } from "./app/routes/payment/BankTransferHistory.tsx";
+import { BankTransaction } from "./app/routes/payment/BankTransaction.tsx";
+import { PaymentHistory } from "./app/routes/payment/PaymentHistory.tsx";
+import { SearchCourts } from "./app/routes/courts/SearchCourts.tsx";
+import { CourtDetail } from "./app/routes/courts/CourtDetail.tsx";
+import { WriteGuestReview } from "./app/routes/reviews/WriteGuestReview.tsx";
+import { WriteHostReview } from "./app/routes/reviews/WriteHostReview.tsx";
+import { ReviewDetailsAboutUser } from "./app/routes/reviews/ReviewDetailsAboutUser.tsx";
+import { ReviewsAboutUser } from "./app/routes/reviews/ReviewsAboutUser.tsx";
+import { ReviewsByUser } from "./app/routes/reviews/ReviewsByUser.tsx";
+import { ReviewDetailByUser } from "./app/routes/reviews/ReviewDetailByUser.tsx";
+import { FindEmailDisplayPage } from "./app/routes/auth/FindEmailDisplayPage.tsx";
+import { FindPasswordPage } from "./app/routes/auth/FindPasswordPage.tsx";
+import { FindPasswordResetPage } from "./app/routes/auth/FindPasswordResetPage.tsx";
+import { FindEmailPage } from "./app/routes/auth/FindEmailPage.tsx";
+import { NotVerifiedUserPage } from "./app/routes/auth/NotVerifiedUserPage.tsx";
+import { NotVerifiedInputDetailPage } from "./app/routes/auth/NotVerifiedInputDetailPage.tsx";
+import { SMSAuthenticationPage } from "./app/routes/auth/SMSAuthenticationPage.tsx";
+import { SMSVerifiedSuccessPage } from "./app/routes/auth/SMSVerifiedSuccessPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { path: "/", element: <HomePage /> },
+      { path: "/", element: <Home /> },
       {
         path: "/payments/kakao/approve",
         element: <KakaoPaymentHandler />,
@@ -86,7 +86,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "login",
-            element: <UserLoginPage />,
+            element: <Login />,
           },
           {
             path: "authenticate-user",
@@ -106,12 +106,8 @@ const router = createBrowserRouter([
             element: <SMSVerifiedSuccessPage />,
           },
           {
-            path: "signup-option",
-            element: <SignupIntroPage />,
-          },
-          {
             path: "signup",
-            element: <UserSignupPage />,
+            element: <Signup />,
           },
 
           {
@@ -160,8 +156,8 @@ const router = createBrowserRouter([
       {
         path: "courts",
         children: [
-          { path: "search", element: <FindCourtsPage /> },
-          { path: "detail/:id", element: <CourtDetailPage /> },
+          { path: "search", element: <SearchCourts /> },
+          { path: "detail/:id", element: <CourtDetail /> },
         ],
       },
 
@@ -173,19 +169,19 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "user-reviews",
-                element: <ReviewsAboutMePage />,
+                element: <ReviewsByUser />,
               },
               {
                 path: "user-reviews/detail/:reviewId",
-                element: <ReviewsAboutMeDetailPage />,
+                element: <ReviewDetailByUser />,
               },
               {
                 path: "my-reviews",
-                element: <UserReviewsPage />,
+                element: <ReviewsAboutUser />,
               },
               {
                 path: "my-reviews/detail/:reviewId",
-                element: <MyReviewDetailPage />,
+                element: <ReviewDetailsAboutUser />,
               },
             ],
           },
@@ -194,11 +190,11 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "profile/edit",
-                element: <EditProfilePage />,
+                element: <EditProfile />,
               },
               {
                 path: "profile",
-                element: <UserMyPage />,
+                element: <Profile />,
               },
 
               {
@@ -210,70 +206,70 @@ const router = createBrowserRouter([
                 element: <UserInquiryDetailPage />,
               },
 
-              { path: "settlement-history", element: <PaymentHistoryPage /> },
+              { path: "settlement-history", element: <PaymentHistory /> },
               {
                 path: "settlement-history/detail/:settlement_id",
-                element: <PaymentDetailPage />,
+                element: <PaymentDetail />,
               },
               {
                 path: "transaction-history",
-                element: <BankTransferHistoryPage />,
+                element: <BankTransferHistory />,
               },
               {
                 path: "transaction-history/payment",
-                element: <BankTransferPage />,
+                element: <BankTransaction />,
               },
             ],
           },
           {
             path: "/games",
             children: [
-              { path: "host", element: <HostGamePage /> },
+              { path: "host", element: <HostGame /> },
 
               {
                 path: "detail/:id",
-                element: <GameDetailPage />,
+                element: <GameDetails />,
               },
 
               {
                 path: "detail/:id/edit",
-                element: <GameDetailEditPage />,
+                element: <EditGameDetails />,
               },
               {
                 path: "detail/:id/review",
-                element: <GameReviewPage />,
+                element: <ReviewGame />,
               },
               {
                 path: "detail/:id/review/guest/:ratingId",
-                element: <PostGuestReviewPage />,
+                element: <WriteGuestReview />,
               },
               {
                 path: "detail/:id/review/host/:ratingId",
-                element: <PostHostReviewPage />,
+                element: <WriteHostReview />,
               },
               {
                 path: "detail/:id/join",
-                element: <GameJoinPage />,
+                element: <JoinGame />,
               },
               {
                 path: "my-games",
-                element: <MyGamesPage />,
+                element: <MyGames />,
               },
 
               {
                 path: "host-history",
-                element: <HostGameHistoryPage />,
+                element: <GameHostingHistory />,
               },
               {
                 path: "guest-history",
-                element: <GameParticipationHistoryPage />,
+                element: <ParticipationHistory />,
               },
 
               { path: "join/submitted", element: <MatchSubmittedPage /> },
 
               {
                 path: "cancel-participation/:id",
-                element: <GameCancelParticipationPage />,
+                element: <CancelParticipation />,
               },
             ],
           },

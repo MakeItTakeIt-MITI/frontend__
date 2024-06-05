@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useGetPaymentInfoQuery } from "../../hooks/payments/useGetPaymentInfoQuery";
-import { LoadingPage } from "../../pages/LoadingPage";
-import { NotFoundPage } from "../../pages/NotFoundPage";
+import { LoadingPage } from "../../app/routes/LoadingPage";
+import { NotFoundPage } from "../../app/routes/NotFoundPage";
 
 export const GamePaymentInfoBox = () => {
   const { id } = useParams();

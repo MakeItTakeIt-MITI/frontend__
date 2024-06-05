@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import rightArrow from "../../assets/Chevron_Right_MD.svg";
-import { QuestionDataProp } from "../../pages/user/CustomerServicePage";
+import { QuestionDataProp } from "../../app/routes/support/CustomerServicePage";
 
 interface InquiryProp {
   question: QuestionDataProp;
