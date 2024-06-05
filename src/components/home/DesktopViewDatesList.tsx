@@ -30,7 +30,7 @@ export const DesktopViewDatesList = ({
     <div className="relative tablet:block mobile:hidden ">
       <div
         onClick={handleDisplayDates}
-        className="  flex items-center justify-between p-4   rounded-lg bg-[#FBFBFB]  hover:cursor-pointer"
+        className="  flex items-center justify-between p-4   rounded-lg bg-[#FBFBFB] hover:cursor-pointer"
       >
         <span className="font-bold leading-[20.8px] ">
           {selectingDate.toLocaleDateString("ko-KR", {
@@ -55,7 +55,7 @@ export const DesktopViewDatesList = ({
         </svg>
         <div
           onMouseLeave={() => setDisplayDates(false)}
-          className=" absolute right-0 top-[56px] py-2 px-4 left-0 w-full rounded-lg bg-[#FBFBFB]  "
+          className=" absolute right-0 top-[56px] py-2 px-4 left-0 w-full rounded-lg bg-[#FBFBFB] z-[999]  "
         >
           {availableDates &&
             availableDates.map((date, index) => {
