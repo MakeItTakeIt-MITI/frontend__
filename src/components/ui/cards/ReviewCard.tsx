@@ -66,15 +66,16 @@ export const ReviewCard = ({
     >
       <div className="space-y-[2px]">
         {game_status}
+        <p className="text-zinc-800 text-base font-bold font-['Pretendard'] leading-[18px]">
+          {reviewee}
+        </p>
         <div className="space-x-[5px] flex items-center">
           {getRatingComponent(rating)}
           <span className="text-neutral-800 text-xs font-medium">
             {rating.toFixed(1)}
           </span>
         </div>
-        <p className="text-zinc-800 text-base font-bold font-['Pretendard'] leading-[18px]">
-          {reviewee}
-        </p>
+
         <p className="text-stone-500 text-[9px] font-normal  leading-[11px]">
           {review}
         </p>
