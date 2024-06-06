@@ -3,13 +3,12 @@ import { useGetGameDetailQuery } from "../../../hooks/games/useGetGameDetailQuer
 import { LoadingPage } from "../LoadingPage";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
 import { NotFoundPage } from "../NotFoundPage";
-import { GameDetailHeader } from "../../../components/game/GameDetailStatusBox";
-import { GameDetailInfoBox } from "../../../components/game/GameDetailInfoBox";
 import { GameDetailParticipantsBox } from "../../../components/game/GameDetailParticipantsBox";
 import { UserReviewDetailCard } from "../../../components/game/UserReviewDetailCard";
 import { GameDetailExtraInfoBox } from "../../../components/game/GameDetailExtraInfoBox";
 import { GameDetailButtonsBox } from "../../../components/ui/buttons/GameDetailButtonsBox";
 import { GameDetailMap } from "../../../components/naver/GameDetailMap";
+import { GameDetailsCard } from "../../../components/ui/cards/GameDetailsCard";
 
 export const GameDetails = () => {
   // const [participationId, setParticipationId] = useState(0);
@@ -37,10 +36,7 @@ export const GameDetails = () => {
         <GameDetailMap gameDetail={gameDetail.data} />
         <div className="flex laptop:flex-row laptop:space-x-2 mobile:space-x-0 mobile:flex-col">
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
-            <div className="space-y-2 p-3 laptop:border border-gray-200 rounded-lg">
-              <GameDetailHeader gameDetail={gameDetail.data} />
-              <GameDetailInfoBox gameDetail={gameDetail.data} />
-            </div>
+            <GameDetailsCard data={gameDetail?.data} isPending={isPending} />
             <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />
             <GameDetailParticipantsBox gameDetail={gameDetail.data} />
             <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />

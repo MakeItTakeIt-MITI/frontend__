@@ -1,7 +1,7 @@
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
 import useUserDataStore from "../../../store/useUserDataStore";
 import { useUserInfoQuery } from "../../../hooks/games/useUserInfoQuery";
-import profileImg from "../../../assets/profile_circle (1).svg";
+import profileIcon from "../../../assets/svg/profile-icon.svg";
 import { NotFoundPage } from "../NotFoundPage";
 import { QuickLinkTitle } from "../../../components/common/QuickLinkTitle";
 import {
@@ -10,12 +10,70 @@ import {
   Faq,
   MyReviews,
   ReviewsAboutMe,
+  SettlementDetails,
+  TranscationHistory,
 } from "../../../stories/QuickLink.stories";
 import { LoadingPage } from "../LoadingPage";
+import { useLogoutMutation } from "../../../hooks/auth/useLogoutMutation";
+import useAuthStore from "../../../store/useAuthStore";
+import { ReviewRating } from "../../../components/common/ReviewRating";
+import {
+  FiveStars,
+  FourAndHalfStars,
+  FourStars,
+  NoReviews,
+  OneAndHalfStar,
+  OneStar,
+  ThreeAndHalfStars,
+  ThreeStars,
+  TwoAndHalfStars,
+  TwoStars,
+} from "../../../stories/Reviews.stories";
+import { Link } from "react-router-dom";
 
 export const Profile = () => {
   const { userId } = useUserDataStore();
+  const { logout } = useAuthStore();
+
   const { data, isPending, isError } = useUserInfoQuery(userId);
+  const accessToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  const { mutate: logoutMutate } = useLogoutMutation(
+    accessToken,
+    refreshToken,
+    logout
+  );
+
+  const handleLogout = () => {
+    logoutMutate();
+  };
+
+  const getRatingComponent = (rating: number) => {
+    if (rating === 5) {
+      return <ReviewRating {...FiveStars.args} />;
+    } else if (rating >= 4.5 && rating < 5) {
+      return <ReviewRating {...FourAndHalfStars.args} />;
+    } else if (rating >= 4 && rating < 4.5) {
+      return <ReviewRating {...FourStars.args} />;
+    } else if (rating >= 3.5 && rating < 4) {
+      return <ReviewRating {...ThreeAndHalfStars.args} />;
+    } else if (rating >= 3 && rating < 3.5) {
+      return <ReviewRating {...ThreeStars.args} />;
+    } else if (rating >= 2.5 && rating < 3) {
+      return <ReviewRating {...TwoAndHalfStars.args} />;
+    } else if (rating >= 2 && rating < 2.5) {
+      return <ReviewRating {...TwoStars.args} />;
+    } else if (rating >= 1.5 && rating < 2) {
+      return <ReviewRating {...OneAndHalfStar.args} />;
+    } else if (rating >= 1 && rating < 1.5) {
+      return <ReviewRating {...OneStar.args} />;
+    } else if (rating > 0 && rating < 1) {
+      return <ReviewRating {...NoReviews.args} />;
+    } else {
+      return null;
+    }
+  };
 
   if (isPending) {
     return <LoadingPage />;
@@ -28,59 +86,65 @@ export const Profile = () => {
     <section className="laptop:my-4 mobile:my-0">
       <NavigateToPrevContainer children="내 정보" />
 
-      <div className="laptop:w-[500px] min-h-[735px]   mobile:w-full mx-auto laptop:border border-gray-300  laptop:py-10 laptop:px-12 mobile:p-4 rounded-lg">
-        <div className="flex  flex-col mobile:py-6 mobile:p-0">
-          {/* 사용자 정보 */}
-          <div className="w-full tablet:p-0 mobile:p-4">
-            <div className="flex items-center gap-1.5  ">
-              <div>
-                <img src={profileImg} alt="profile icon" />
-              </div>
-              <div className=" flex flex-col ">
-                <p className="text-2xl font-bold">{data?.data.nickname}</p>
-                <p className="text-[12px] text-[#969696]">{data?.data.email}</p>
-              </div>
+      <div className="laptop:w-[500px] min-h-[700px] mobile:w-full mx-auto laptop:border border-gray-200  rounded-lg">
+        {/* 사용자 정보 */}
+        <div className="p-5 flex   gap-3">
+          <img src={profileIcon} alt="profile icon" />
+          <div className="space-y-1">
+            <h1 className="text-neutral-700 text-base font-bold leading-[18px]">
+              {data?.data.nickname}
+            </h1>
+            <h2 className="text-neutral-400 text-xs font-medium font-['Pretendard'] leading-[14px]">
+              {data?.data.email}
+            </h2>
+            <div className="flex gap-1 text-sm text-[#222] font-bold">
+              {getRatingComponent(data?.data.rating.average_rating)}{" "}
+              <span className="text-neutral-800 text-xs font-medium">
+                {data?.data.rating.average_rating.toFixed(1)}
+              </span>
             </div>
           </div>
+        </div>
 
-          <div className="flex flex-col gap-2  my-4 text-white tablet:p-0 mobile:p-4">
-            <div className="flex  gap-2 h-[54px] ">
-              <div className="bg-[#74BCFF] w-full py-1 px-2 rounded-lg">
-                <p className="text-sm">⭐️ 리뷰 평점</p>
-                <div className="space-x-1 text-right font-bold">
-                  <span>{data?.data.rating.average_rating}</span>
-                  <span>/</span>
-                  <span>5.0</span>
-                </div>
-              </div>
-              <div className="bg-[#FFA674] w-full py-1 px-2 rounded-lg">
-                <p className="text-sm">🎯 유저 레벨</p>
-                <div className="text-right font-bold">
-                  <span>상위 10%</span>
-                  <span>-</span>
-                  <span>MVP</span>
-                </div>
-              </div>
-            </div>
-            <div className="bg-[#FFC774] h-[54px] py-1 px-2 rounded-lg">
-              <p className="text-sm">💰 나의 지갑</p>
-              <p className="text-right font-bold">
-                ₩ {data?.data.account.balance}
-              </p>
-            </div>
+        <div className="w-[90%] h-[120px] flex flex-col justify-center gap-6  mx-auto  border border-gray-200 rounded-lg p-3">
+          <div className="flex justify-between">
+            <h2 className="text-zinc-800 text-sm font-normal  leading-[18px]">
+              💰 나의 지갑
+            </h2>
+            <p className="text-zinc-800  font-bold leading-none">
+              {data?.data.account.balance.toLocaleString("ko-KR", {
+                style: "currency",
+                currency: "KRW",
+              })}{" "}
+            </p>
           </div>
-          <hr className="w-full bg-[#fff] my-5" />
-          {/* <EditProfile /> */}
-          <div className="flex flex-col gap-4 tablet:p-0 mobile:p-4">
-            <h2 className="text-[20px] font-bold">메뉴</h2>
+          <Link to="/user/transaction-history/payment">
+            <button className="w-full h-11 rounded-lg bg-[#4065F5] text-white text-sm font-normal leading-tight">
+              송금하기
+            </button>
+          </Link>
+        </div>
+
+        <hr className="w-full bg-[#fff] my-5" />
+
+        <div className="space-y-[15px] p-5">
+          <h2 className="text-black text-base font-bold">내 정보</h2>
+          <div className="flex flex-col gap-5 px-[18px]">
+            <button className="text-xs text-left" onClick={handleLogout}>
+              로그어웃
+            </button>
             <QuickLinkTitle {...ReviewsAboutMe.args} />
             <QuickLinkTitle {...MyReviews.args} />
             <QuickLinkTitle {...EditProfile.args} />
+            <QuickLinkTitle {...SettlementDetails.args} />
+            <QuickLinkTitle {...TranscationHistory.args} />
             <QuickLinkTitle {...Faq.args} />
             <QuickLinkTitle {...CustomerSupport.args} />
           </div>
         </div>
       </div>
+
+      {/* <EditProfile /> */}
     </section>
   );
 };
