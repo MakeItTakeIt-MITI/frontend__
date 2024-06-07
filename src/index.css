@@ -36,7 +36,7 @@ li:hover {
 
 @layer components {
   .input-primary {
-    @apply h-[58px] px-4  rounded-lg bg-[#F7F7F7] w-full text-[16px];
+    @apply h-[58px] p-[17px]  rounded-lg font-medium  bg-[#F7F7F7] w-full text-base;
   }
 
   .section-layer {
