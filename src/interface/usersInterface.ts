@@ -64,7 +64,9 @@ export interface PasswordChangeProps {
 }
 
 export interface PasswordField {
+    nickname?: string;
     id: number | null;
     password: string;
-    password_check: string;
+    new_password: string;
+    new_password_check: string;
 }

@@ -55,14 +55,6 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
-/* 
-#gameListBox::-webkit-scrollbar-thumb {
-  background-color: skyblue;
-} */
-
-/* #gameListBox::-webkit-scrollbar-track {
-  background: hsl(120 50% 50% / 1);
-} */
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -73,15 +65,3 @@ input[type="number"] {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
-/* 
-.arrow {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  position: absolute;
-  bottom: -4px;
-  width: 8px;
-  height: 8px;
-  background-color: #fff;
-  border: 1px solid black;
-  z-index: -99;
-} */

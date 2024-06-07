@@ -30,10 +30,10 @@ axiosUrl.interceptors.response.use(
         // localStorage.removeItem('accessToken')
 
         const statusCode = error.response.data.status_code
-        // const errorCode = error.response.data.error_code
+        const errorCode = error.response.data.error_code
 
         // if (statusCode === 400 && errorCode === 520) {
-        if (statusCode === 401) {
+        if (statusCode === 401 && errorCode === 502) {
             try {
                 const refreshToken = localStorage.getItem('refreshToken');
                 if (!refreshToken) {

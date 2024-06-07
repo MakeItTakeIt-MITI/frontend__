@@ -14,7 +14,7 @@ export const userUpdateNickname = async (user_id: number | null, nickname: strin
 
 export const userChangePassword = async (id: number | null, data: PasswordField) => {
     try {
-        const response = await axiosUrl.patch(`/users/${id}`, data)
+        const response = await axiosUrl.patch(`/users/${id}/update-password`, data)
         return response.data
     } catch (error) {
         throw new Error

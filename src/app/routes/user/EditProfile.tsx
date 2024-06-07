@@ -8,27 +8,35 @@ import { NavigateToPrevContainer } from "../../../components/NavigateToPrevConta
 import { useForm } from "react-hook-form";
 
 import { UserEditField } from "../../../interface/user-edit-interface";
-import { useUpdateUserMutation } from "../../../hooks/auth/useUpdateUserMutation";
 
 import { useNicknameChangeMutation } from "../../../hooks/user/useNicknameChangeMutation";
 import { ErrorMessage } from "../../../components/StatusMessages/ErrorMessage";
-import { ExistingNickname } from "../../../components/StatusMessages/ErrorMessage.stories";
+import {
+  ExistingNickname,
+  PasswordConfirmNotMatching,
+  PasswordRegexFailure,
+  WrongPassword,
+} from "../../../components/StatusMessages/ErrorMessage.stories";
 import { SuccessMessage } from "../../../components/StatusMessages/SuccessMessage";
-import { NicknameAllowed } from "../../../components/StatusMessages/SuccessMessage.stories";
+import {
+  NicknameAllowed,
+  SafePassword,
+} from "../../../components/StatusMessages/SuccessMessage.stories";
+import { usePasswordChangeMutation } from "../../../hooks/user/usePasswordChangeMutation";
+import { PasswordField } from "../../../interface/usersInterface";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useResetPasswordSchema } from "../../../modals/useResetPasswordSchema";
 
 export const EditProfile = () => {
   const { userId } = useUserDataStore();
   const { data, isPending } = useUserInfoQuery(userId);
 
-  const { register, handleSubmit, getValues, watch } = useForm<UserEditField>();
+  const { register, handleSubmit, getValues, watch } = useForm<PasswordField>();
 
-  const { mutate: updateUserInfoMutation } = useUpdateUserMutation(userId);
+  const { mutate: mutatePassword, data: passwordResponse } =
+    usePasswordChangeMutation(userId);
   const { mutate: mutateNickname, data: nicknameResponse } =
     useNicknameChangeMutation(userId);
-  console.log(nicknameResponse);
-
-  // const { mutate: verifyNickname, data: nicknameDuplicateResponse } =
-  //   useCheckNicknameDuplicateMutation();
 
   const removeEmptyFields = (data: UserEditField) => {
     Object.entries(data).forEach(([key, value]) => {
@@ -37,16 +45,17 @@ export const EditProfile = () => {
       }
     });
   };
-  const onSubmit = (userData: UserEditField) => {
+  const onSubmit = (userData: PasswordField) => {
     removeEmptyFields(userData);
-    updateUserInfoMutation(userData);
+    mutatePassword(userData);
+    console.log(passwordResponse);
   };
 
   if (isPending) {
     return <LoadingPage />;
   }
 
-  const handleValidateNickname = () => {
+  const handleChangeNickname = () => {
     const nicknameData: any = { nickname: getValues("nickname") };
     if (nicknameData) {
       mutateNickname(nicknameData);
@@ -54,23 +63,31 @@ export const EditProfile = () => {
   };
 
   const watchNickname = watch("nickname");
+  const watchValidation =
+    !watch("password") ||
+    !watch("new_password") ||
+    !watch("new_password_check");
 
   return (
-    <section className="laptop:mt-[15px] laptop:mb-[667px] mobile:my-0">
+    <section
+      style={{
+        marginBottom: data?.data.oauth === null ? "100px" : "667px",
+      }}
+      className={"laptop:mt-[15px] mobile:my-0"}
+    >
       <NavigateToPrevContainer children="내 정보" />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="laptop:w-[500px] gap-[30px]   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-[50px] laptop:px-[60px] mobile:p-4 rounded-lg flex flex-col justify-between "
+        style={{ minHeight: data?.data.oauth === null ? "700px" : "200px" }}
+        className="laptop:w-[500px]   gap-[30px]   mobile:w-full mx-auto  laptop:border border-gray-300  laptop:py-[50px] laptop:px-[60px] mobile:p-4 rounded-lg flex flex-col  "
       >
         <div className="flex items-center justify-center w-full">
-          {/* empty profile icon  */}
           <img
             src={profileIcon}
             className="h-[64px] w-[64px] rounded-full bg-[#D9D9D9]"
           ></img>
         </div>
-        {/* nickname field */}
-        <div className="flex flex-col justify-between gap-10">
+        <div className="flex flex-col justify-between gap-[30px]">
           <div className="flex flex-col gap-1">
             <div className="space-y-3">
               <label
@@ -83,13 +100,14 @@ export const EditProfile = () => {
                   type="text"
                   id="nickname"
                   autoComplete="disabled"
-                  className="input-primary"
+                  className="h-[50px] w-full p-4 text-neutral-400 text-sm font-medium  leading-none  bg-[#F7F7F7] rounded-lg"
                   placeholder={data?.data.nickname}
-                  {...register("nickname")}
+                  {...register("nickname", {
+                    required: false,
+                  })}
                 />
-                {/* bg-[#4065F0] */}
                 <button
-                  onClick={handleValidateNickname}
+                  onClick={handleChangeNickname}
                   type="button"
                   disabled={watchNickname ? false : true}
                   style={{
@@ -100,23 +118,6 @@ export const EditProfile = () => {
                 >
                   변경하기
                 </button>
-                {/* <button
-                  onClick={handleValidateNickname}
-                  type="button"
-                  style={{
-                    backgroundColor: nicknameDuplicateResponse?.data.nickname
-                      .is_duplicated
-                      ? "#f7f7f7"
-                      : "#4065F0",
-                    color: nicknameDuplicateResponse?.data.nickname
-                      .is_duplicated
-                      ? "#d9d9d9"
-                      : "#fff",
-                  }}
-                  className="w-[81px] absolute right-4 bottom-[11px] top-[11px] text-[12px]  rounded-lg"
-                >
-                  중복확인
-                </button> */}
               </div>
               {nicknameResponse?.status_code === 400 && (
                 <ErrorMessage {...ExistingNickname.args} />
@@ -125,88 +126,101 @@ export const EditProfile = () => {
                 <SuccessMessage {...NicknameAllowed.args} />
               )}
             </div>
-            {/* {nicknameDuplicateResponse?.data.nickname.is_duplicated && (
-              <ErrorMessage {...ExistingNickname.args} />
-            )}
-            {nicknameDuplicateResponse?.status_code === 400 &&
-              nicknameDuplicateResponse?.error_code === 101 && (
-                <ErrorMessage {...NicknameRegexFailure.args} />
-              )}
-            {nicknameDuplicateResponse?.status_code === 200 &&
-              !nicknameDuplicateResponse?.data.nickname.is_duplicated && (
-                <SuccessMessage {...NicknameAllowed.args} />
-              )} */}
           </div>
 
-          {/* passworld field */}
-          {/* <div className="flex flex-col gap-2">
-            <FormLabel id="password" children="기존 비밀번호" />
-            <input
-              type="password"
-              id="password"
-              role="input-password"
-              className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-              placeholder="기존 비밀번호를 입력해주세요"
-              {...register("password", {
-                required: true,
-              })}
-            />
-            {passVerification && (
-              <p className="text-[#E92C2C] text-[13px]">{passVerification}</p>
-            )}
-          </div> */}
-          {/* <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <label htmlFor="new_password" className="text-[#999]">
-                새로운 비밀번호
-              </label>
-              <input
-                type="password"
-                id="new_password"
-                role="input-password"
-                className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-                placeholder="변경할 비밀번호를 입력해주세요."
-                {...register("new_password")}
-              />
-              {newPassword && (
-                <p className="text-[#E92C2C] text-[13px]">{newPassword}</p>
-              )}
-            </div>
+          {data?.data.oauth === null && (
+            <>
+              <div className="flex flex-col gap-1">
+                <div className="space-y-3">
+                  <label
+                    className="text-neutral-400 text-sm font-normal"
+                    id="password"
+                    children="기존 비밀번호"
+                  />
+                  <input
+                    type="password"
+                    id="password"
+                    autoComplete="disabled"
+                    className="h-[50px] w-full p-4 text-neutral-400 text-sm font-medium  leading-none  bg-[#F7F7F7] rounded-lg"
+                    placeholder="기존 비밀번호를 입력해주세요"
+                    {...register("password", {
+                      required: true,
+                    })}
+                  />
 
-            <div className="flex flex-col gap-2">
-              <label htmlFor="new_check_password" className="text-[#999]">
-                새로운 비밀번호 확인
-              </label>
-              <input
-                type="password"
-                id="new_check_password"
-                role="input-password"
-                className=" h-[50px] px-4 py-[17px] rounded-lg bg-[#F7F7F7] w-full"
-                placeholder="변경할 비밀번호를 입력해주세요."
-                {...register("new_password_check")}
-              />
-              {getValues("new_password") !==
-                getValues("new_password_check") && (
-                <p className="text-[#E92C2C] text-[13px]">
-                  비밀번호가 일치하지 않습니다.
-                </p>
-              )}
-            </div>
-          </div> */}
+                  {passwordResponse?.status_code === 401 &&
+                    passwordResponse?.error_code === 940 && (
+                      <ErrorMessage {...WrongPassword.args} />
+                    )}
+                </div>
+              </div>
+              {/* new password */}
+              <div className="flex flex-col gap-1">
+                <div className="space-y-3">
+                  <label
+                    className="text-neutral-400 text-sm font-normal"
+                    id="new_password"
+                    children="새로운 비밀번호"
+                  />
+                  <input
+                    type="password"
+                    id="new_password"
+                    autoComplete="disabled"
+                    className="h-[50px] w-full p-4 text-neutral-400 text-sm font-medium  leading-none  bg-[#F7F7F7] rounded-lg"
+                    placeholder="변경할 비밀번호를 입력해주세요."
+                    {...register("new_password", {
+                      required: true,
+                    })}
+                  />
+
+                  {passwordResponse?.status_code === 400 &&
+                    passwordResponse?.error_code === 101 && (
+                      <ErrorMessage {...PasswordRegexFailure.args} />
+                    )}
+                  {passwordResponse?.status_code === 200 && (
+                    <SuccessMessage {...SafePassword.args} />
+                  )}
+                </div>
+              </div>
+              {/* new pass confirm */}
+              <div className="flex flex-col gap-1">
+                <div className="space-y-3">
+                  <label
+                    className="text-neutral-400 text-sm font-normal"
+                    id="new_password_check"
+                    children="새로운 비밀번호 확인"
+                  />
+                  <input
+                    type="password"
+                    id="new_password_check"
+                    autoComplete="disabled"
+                    className="h-[50px] w-full p-4 text-neutral-400 text-sm font-medium  leading-none bg-[#F7F7F7] rounded-lg"
+                    placeholder="변경할 비밀번호를 입력해주세요."
+                    {...register("new_password_check", {
+                      required: true,
+                    })}
+                  />
+                </div>
+                {watch("new_password") !== watch("new_password_check") && (
+                  <ErrorMessage {...PasswordConfirmNotMatching.args} />
+                )}
+              </div>
+            </>
+          )}
         </div>
-        {/* {formState.isValid ? (
+        {data?.data.oauth === null && (
           <button
             type="submit"
-            className="h-[56px] w-full rounded-lg bg-[#4065F6] text-white "
+            disabled={watchValidation ? true : false}
+            style={{
+              backgroundColor: watchValidation ? "#f7f7f7" : "#4065F6",
+              color: watchValidation ? "#969696" : "#fff",
+            }}
+            className="h-[50px] w-full p-4  rounded-lg text-sm text-[#969696]"
           >
-            {" "}
             저장하기
           </button>
-        ) : (
-          <button disabled className="h-[56px] w-full rounded-lg bg-[#E8E8E8] ">
-            저장하기
-          </button>
-        )}{" "} */}
+        )}
       </form>
     </section>
   );
