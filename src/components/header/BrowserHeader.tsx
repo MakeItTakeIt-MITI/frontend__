@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 import mitiLogo from "../../assets/MITI_logo.svg";
-import useAuthStore from "../../store/useAuthStore";
 import { HeaderField } from "../home/Header";
 import bars from "../../assets/tab-bars.svg";
 import { useState } from "react";
 import { HeaderTabContainer } from "../common/HeaderTabContainer";
 
-export const BrowserHeader = ({ handleLogout }: HeaderField) => {
-  const { isLoggedIn } = useAuthStore();
+const BrowserHeader = ({ handleLogout, isLoggedIn }: HeaderField) => {
   const [displayTabItems, setDisplayTabItems] = useState(false);
 
   const displayTab = () => {
@@ -47,3 +45,5 @@ export const BrowserHeader = ({ handleLogout }: HeaderField) => {
     </nav>
   );
 };
+
+export default BrowserHeader;
