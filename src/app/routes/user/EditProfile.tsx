@@ -24,8 +24,8 @@ import {
 } from "../../../components/StatusMessages/SuccessMessage.stories";
 import { usePasswordChangeMutation } from "../../../hooks/user/usePasswordChangeMutation";
 import { PasswordField } from "../../../interface/usersInterface";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useResetPasswordSchema } from "../../../modals/useResetPasswordSchema";
+import { AlertModal } from "../../../components/common/AlertModal";
+import { ProfileEditSuccess } from "../../../stories/Modal.stories";
 
 export const EditProfile = () => {
   const { userId } = useUserDataStore();
@@ -67,6 +67,10 @@ export const EditProfile = () => {
     !watch("password") ||
     !watch("new_password") ||
     !watch("new_password_check");
+
+  if (passwordResponse?.status_code === 200) {
+    return <AlertModal {...ProfileEditSuccess.args} />;
+  }
 
   return (
     <section

@@ -152,3 +152,12 @@ DeleteAccountGuestFailure.args = {
   contextTwo: "경기 진행을 완료한 뒤에 회원 탈퇴를 진행해주세요.",
   buttonContext: "확인",
 };
+
+export const ProfileEditSuccess = Template.bind({});
+ProfileEditSuccess.args = {
+  title: "프로필 수정 완료",
+  context: "회원 정보가 정상적으로 저장되었습니다.",
+  buttonContext: "확인",
+  isLink: true,
+  path: "/user/profile",
+};
