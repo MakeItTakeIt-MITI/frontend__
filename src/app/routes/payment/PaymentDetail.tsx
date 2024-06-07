@@ -1,6 +1,5 @@
 // import { useParams } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { GameDetailBox } from "../../../components/GameDetailBox";
 import { GameTotalPaymentBox } from "../../../components/GameTotalPaymentBox";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
 import { ParticipantsPaymentStatusBox } from "../../../components/ParticipantsPaymentStatusBox";
