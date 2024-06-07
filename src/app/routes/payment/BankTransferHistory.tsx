@@ -35,7 +35,7 @@ export const BankTransferHistory = () => {
   const handleChangeTab = (tab: string) => setDefaultTabName(tab);
 
   return (
-    <section className="laptop:my-[15px] mobile:mb-16">
+    <section className="laptop:mt-[15px] laptop:mb-[69px] mobile:mb-16">
       <NavigateToPrevContainer children="송금 내역" />
 
       <div className="laptop:w-[593px] mobile:w-full mx-auto flex flex-col gap-[20px] ">
