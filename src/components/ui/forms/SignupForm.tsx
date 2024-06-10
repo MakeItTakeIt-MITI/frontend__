@@ -87,6 +87,7 @@ export const SignupForm = () => {
         <RegisterInputField
           type="email"
           id="email"
+          dataTestid="email-input"
           label="이메일"
           placeholder="이메일을 입력해주세요."
           register_value="email"
@@ -113,6 +114,7 @@ export const SignupForm = () => {
         <RegisterInputField
           type="nickname"
           id="nickname"
+          dataTestid="nickname-input"
           label="닉네임"
           placeholder="닉네임을 입력해주세요."
           register_value="nickname"
@@ -147,6 +149,7 @@ export const SignupForm = () => {
         <RegisterInputField
           type="password"
           id="password"
+          dataTestid="password-input"
           label=""
           placeholder="비밀번호를 입력해주세요."
           register_value="password"
@@ -165,6 +168,7 @@ export const SignupForm = () => {
         <RegisterInputField
           type="password"
           id="password_check"
+          dataTestid="password-check-input"
           label=""
           placeholder="비밀번호를 다시 입력해주세요."
           register_value="password_check"
@@ -182,6 +186,7 @@ export const SignupForm = () => {
         <RegisterInputField
           type="name"
           id="name"
+          dataTestid="name-input"
           label="이름"
           placeholder="이름을 입력해주세요."
           register_value="name"
@@ -194,8 +199,9 @@ export const SignupForm = () => {
       <RegisterInputField
         type="date"
         id="birthday"
+        dataTestid="birthday-input"
         label="생년월일"
-        placeholder="이름을 입력해주세요."
+        placeholder=""
         register_value="birthday"
         isRequired={true}
         register={register}
@@ -205,6 +211,7 @@ export const SignupForm = () => {
         <RegisterInputField
           type="string"
           id="phone"
+          dataTestid="phone-input"
           label="핸드폰 번호"
           placeholder="핸드폰 번호를 입력해주세요."
           register_value="phone"

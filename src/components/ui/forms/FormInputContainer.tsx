@@ -54,6 +54,7 @@ interface RegisterInputProps extends InputProps {
   isValidatorField?: boolean;
   register: UseFormRegister<RegisterField>;
   register_value: SignupValues;
+  dataTestid: string;
 }
 
 interface GameHostInputProps extends InputProps {
@@ -121,14 +122,15 @@ export const RegisterInputField: React.FC<RegisterInputProps> = ({
   register,
   handleValidation,
   isValid,
+  dataTestid,
 }) => {
-  console.log(isValid);
   return (
     <div className="space-y-2">
       <FormLabel id={id} children={label} />
       <div className="relative">
         <input
           type={type}
+          data-testid={dataTestid}
           id={id}
           readOnly={isValid ? true : false}
           className="input-primary"
