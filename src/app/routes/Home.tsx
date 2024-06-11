@@ -8,7 +8,7 @@ import { NaverMapEL } from "../../components/naver/NaverMap";
 import { NotFoundPage } from "./NotFoundPage";
 import useGeolocationStore from "../../store/useGeolocationStore";
 import { DesktopGameListContainer } from "../../components/home/DesktopGameListContainer";
-import { HomeSkeleton } from "../../components/home/HomeSkeleton";
+import { HomeSkeleton } from "../../components/ui/skeleton/HomeSkeleton";
 
 export const Home = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());

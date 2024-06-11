@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useGetPaymentInfoQuery } from "../../hooks/payments/useGetPaymentInfoQuery";
-import { LoadingPage } from "../../app/routes/LoadingPage";
 import { NotFoundPage } from "../../app/routes/NotFoundPage";
 
 export const GamePaymentInfoBox = () => {
@@ -14,7 +13,9 @@ export const GamePaymentInfoBox = () => {
   } = useGetPaymentInfoQuery(gameIdParam);
 
   if (isPending) {
-    return <LoadingPage />;
+    return (
+      <div className="w-full h-[224px] border border-gray-200 rounded-lg"></div>
+    );
   }
   if (isError) {
     return <NotFoundPage />;
@@ -24,8 +25,7 @@ export const GamePaymentInfoBox = () => {
     paymentDetails?.data.payment_information.payment_amount.game_fee_amount;
   const commissionFee =
     paymentDetails?.data.payment_information.payment_amount.commission_amount;
-  // const totalAmount =
-  //   paymentDetails?.data.payment_information.payment_amount.game_fee_amount;
+
   const vatFee =
     paymentDetails?.data.payment_information.payment_amount.vat_amount;
   const promotionDiscount =
@@ -34,7 +34,7 @@ export const GamePaymentInfoBox = () => {
     paymentDetails?.data.payment_information.final_payment_amount;
 
   return (
-    <div className="p-3 space-y-[14px] border-gray-200">
+    <div className=" border-gray-200 space-y-2 p-3 laptop:border  rounded-lg">
       <h1 className="font-bold text-[hsl(0,0%,13%)]">결제 및 할인 정보</h1>
       <div className="flex justify-between text-[14px] text-[#666]">
         <span>경기 참여비</span>

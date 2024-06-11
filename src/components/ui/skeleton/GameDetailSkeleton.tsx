@@ -8,12 +8,12 @@ export const GameDetailSkeleton = () => {
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
             <div className="w-[453px] h-[170px]  border border-gray-200 rounded-lg" />
             <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />
-            <div className="  w-full  laptop:border border-gray-200 rounded-lg" />
+            <div className="  w-full h-[100px]  laptop:border border-gray-200   rounded-lg" />
             <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />
             <div className="laptop:static mobile:fixed mobile:bottom-[80px]  mobile:w-full " />
           </div>
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
-            <div className="laptop:p-3 mobile:p-3 space-y-[19px] laptop:border border-gray-200 rounded-lg" />
+            <div className="h-[130px] laptop:border border-gray-200 rounded-lg" />
 
             <div className=" space-y-4 laptop:p-3 mobile:p-3 laptop:h-[356px] mobile:h-full overflow-y-auto laptop:border border-gray-200 rounded-lg" />
           </div>

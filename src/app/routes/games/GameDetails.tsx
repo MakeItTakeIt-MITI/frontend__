@@ -39,7 +39,7 @@ export const GameDetails = () => {
         />
         <div className="flex laptop:flex-row laptop:space-x-2 mobile:space-x-0 mobile:flex-col">
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
-            <GameDetailsCard data={gameDetail?.data} isPending={isPending} />
+            <GameDetailsCard data={gameDetail?.data} />
             <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />
             <GameDetailParticipantsBox gameDetail={gameDetail.data} />
             <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />

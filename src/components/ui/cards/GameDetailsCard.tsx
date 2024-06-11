@@ -12,16 +12,9 @@ import { GameDetailField } from "../../../interface/gameInterface";
 
 interface GameDetailsCardProps {
   data: GameDetailField;
-  isPending: boolean;
 }
 
-export const GameDetailsCard = ({ data, isPending }: GameDetailsCardProps) => {
-  if (isPending) {
-    return (
-      <div className="w-[453px] h-[170px] p-3 space-y-2 border border-gray-200 rounded-lg"></div>
-    );
-  }
-
+export const GameDetailsCard = ({ data }: GameDetailsCardProps) => {
   return (
     <>
       {data && (
