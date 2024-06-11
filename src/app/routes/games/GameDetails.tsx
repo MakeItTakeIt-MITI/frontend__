@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useGetGameDetailQuery } from "../../../hooks/games/useGetGameDetailQuery";
-import { LoadingPage } from "../LoadingPage";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
 import { NotFoundPage } from "../NotFoundPage";
 import { GameDetailParticipantsBox } from "../../../components/game/GameDetailParticipantsBox";
@@ -9,9 +8,9 @@ import { GameDetailExtraInfoBox } from "../../../components/game/GameDetailExtra
 import { GameDetailButtonsBox } from "../../../components/ui/buttons/GameDetailButtonsBox";
 import { DetailPageMap } from "../../../components/naver/DetailPageMap";
 import { GameDetailsCard } from "../../../components/ui/cards/GameDetailsCard";
+import { GameDetailSkeleton } from "../../../components/ui/skeleton/GameDetailSkeleton";
 
 export const GameDetails = () => {
-  // const [participationId, setParticipationId] = useState(0);
   const { id } = useParams();
   const gameIdParam = Number(id);
   const {
@@ -21,7 +20,7 @@ export const GameDetails = () => {
   } = useGetGameDetailQuery(gameIdParam);
 
   if (isPending) {
-    return <LoadingPage />;
+    return <GameDetailSkeleton />;
   }
 
   if (isError) {
