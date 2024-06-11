@@ -40,7 +40,7 @@ export const Home = () => {
     refetch();
   }, [
     selectingDate,
-    // refetch,
+    refetch,
     formatDate,
     allGamesData,
     displayCollapsedList,

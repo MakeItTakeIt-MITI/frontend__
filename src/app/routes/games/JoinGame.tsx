@@ -5,7 +5,7 @@ import { NavigateToPrevContainer } from "../../../components/NavigateToPrevConta
 import { NotFoundPage } from "../NotFoundPage";
 import { UserReviewDetailCard } from "../../../components/game/UserReviewDetailCard";
 import { GameDetailExtraInfoBox } from "../../../components/game/GameDetailExtraInfoBox";
-import { GameDetailMap } from "../../../components/naver/GameDetailMap";
+import { DetailPageMap } from "../../../components/naver/DetailPageMap";
 import { GamePaymentInfoBox } from "../../../components/game/GamePaymentInfoBox";
 import { KakaoPayButton } from "../../../components/ui/buttons/KakaoPayButton";
 import { GameRefundInfoBox } from "../../../components/game/GameRefundInfoBox";
@@ -37,7 +37,11 @@ export const JoinGame = () => {
       <NavigateToPrevContainer children="경기 상세" />
 
       <div className=" relative laptop:w-[915px]  laptop:min-h-[735px] h-full mb-16   mobile:w-full mx-auto laptop:mb-0  mobile:mb-[140px]  rounded-lg flex flex-col gap-1.5 ">
-        <GameDetailMap gameDetail={gameDetail.data} />
+        <DetailPageMap
+          height="495px"
+          width="100%"
+          gameDetail={gameDetail.data}
+        />{" "}
         <div className="flex laptop:flex-row laptop:space-x-2 mobile:space-x-0 mobile:flex-col">
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
             <div className="space-y-2 p-3 laptop:border  rounded-lg">

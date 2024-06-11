@@ -1,10 +1,8 @@
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
-import { useState } from "react";
 import { LoadingPage } from "../LoadingPage";
 import { useParams } from "react-router-dom";
 import { UserReviewDetailCard } from "../../../components/reviews/UserReviewDetailCard";
 import { useGetGameDetailQuery } from "../../../hooks/games/useGetGameDetailQuery";
-import { ReviewPageMap } from "../../../components/naver/ReviewPageMap";
 import { MatchTags } from "../../../components/game/MatchTags";
 import { GameFinishedTag } from "../../../stories/Tags.stories";
 
@@ -13,19 +11,42 @@ import peopleSvg from "../../../assets/people.svg";
 import { useGetParticipantsDetailsQuery } from "../../../hooks/games/useGetParticipantsDetailsQuery";
 import { NoListFoundMessageBox } from "../../../components/common/NoListFoundMessageBox";
 import { GameReviewSkeleton } from "../../../components/ui/skeleton/GameReviewSkeleton";
+import { DetailPageMap } from "../../../components/naver/DetailPageMap";
+import { NotFoundPage } from "../NotFoundPage";
+
+export interface ParticipantDataField {
+  id: number;
+  participation_status: string;
+  user: {
+    id: number;
+    nickname: string;
+    rating: {
+      id: number;
+      num_of_reviews: number;
+      average_rating: number;
+    };
+  };
+}
 
 export const ReviewGame = () => {
-  const [loading, _setLoading] = useState(false);
   const { id } = useParams();
   const gameIdParam = Number(id);
 
-  const { data: participantsData } =
-    useGetParticipantsDetailsQuery(gameIdParam);
-  const { data: gameData } = useGetGameDetailQuery(gameIdParam);
+  const {
+    data: participantsData,
+    isLoading,
+    isError,
+  } = useGetParticipantsDetailsQuery(gameIdParam);
+  const { data: gameData, isError: gameDataError } =
+    useGetGameDetailQuery(gameIdParam);
+
+  if (isError || gameDataError) {
+    return <NotFoundPage />;
+  }
 
   return (
     <>
-      {loading ? (
+      {isLoading ? (
         <>
           <GameReviewSkeleton />
           <LoadingPage />
@@ -39,7 +60,11 @@ export const ReviewGame = () => {
           </h1>
           <div className="flex laptop:flex-row mobile:flex-col gap-5 laptop:px-3 mobile:px-1 laptop:w-[981px] laptop:h-[745px]  mx-auto ">
             <div className="laptop:max-w-[431px]  mobile:w-full space-y-5">
-              <ReviewPageMap gameDetail={gameData?.data} />
+              <DetailPageMap
+                height="303px"
+                width="100%"
+                gameDetail={gameData?.data}
+              />
               <div className="flex flex-col items-start p-3 text-sm font-medium tracking-tight leading-4 bg-white rounded-lg border border-gray-200 border-solid max-w-[431px]">
                 <MatchTags {...GameFinishedTag.args} />
                 <div className="mt-3.5 text-base font-bold leading-5 text-ellipsis text-neutral-800">
@@ -95,17 +120,15 @@ export const ReviewGame = () => {
                   )}
                 </div>
               </div>
-              {/* bottom right */}
               <div className="space-y-2.5">
                 <h2 className="text-xl font-[600]">게스트 리뷰</h2>
-                {/* guest container list */}
                 <div
                   style={{ scrollbarWidth: "thin" }}
                   className="space-y-5 h-[509px] p-3 rounded-lg border border-gray-200 overflow-y-auto"
                 >
                   {participantsData?.data.participations.length !== 0 ? (
                     participantsData?.data.participations.map(
-                      (participant: any) => {
+                      (participant: ParticipantDataField) => {
                         return (
                           <UserReviewDetailCard
                             key={participant?.user.id}

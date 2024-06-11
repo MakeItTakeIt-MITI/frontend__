@@ -4,7 +4,7 @@ import { LoadingPage } from "../LoadingPage";
 import { NotFoundPage } from "../NotFoundPage";
 import { useEffect } from "react";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
-import { GameDetailMap } from "../../../components/naver/GameDetailMap";
+import { DetailPageMap } from "../../../components/naver/DetailPageMap";
 import { GameDetailHeader } from "../../../components/game/GameDetailStatusBox";
 import { GameDetailInfoBox } from "../../../components/game/GameDetailInfoBox";
 import { GameDetailExtraInfoBox } from "../../../components/game/GameDetailExtraInfoBox";
@@ -51,7 +51,11 @@ export const EditGameDetails = () => {
       <NavigateToPrevContainer children="경기 상세" />
 
       <div className=" relative laptop:w-[915px]  laptop:min-h-[735px] h-full mb-16   mobile:w-full mx-auto laptop:mb-0  mobile:mb-[140px]  rounded-lg flex flex-col gap-1.5 ">
-        <GameDetailMap gameDetail={gameDetail.data} />
+        <DetailPageMap
+          height="495px"
+          width="100%"
+          gameDetail={gameDetail.data}
+        />{" "}
         <div className="flex laptop:flex-row laptop:space-x-2 mobile:space-x-0 mobile:flex-col">
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
             <EditGameDetailsBox

@@ -7,7 +7,7 @@ import { GameDetailParticipantsBox } from "../../../components/game/GameDetailPa
 import { UserReviewDetailCard } from "../../../components/game/UserReviewDetailCard";
 import { GameDetailExtraInfoBox } from "../../../components/game/GameDetailExtraInfoBox";
 import { GameDetailButtonsBox } from "../../../components/ui/buttons/GameDetailButtonsBox";
-import { GameDetailMap } from "../../../components/naver/GameDetailMap";
+import { DetailPageMap } from "../../../components/naver/DetailPageMap";
 import { GameDetailsCard } from "../../../components/ui/cards/GameDetailsCard";
 
 export const GameDetails = () => {
@@ -33,7 +33,11 @@ export const GameDetails = () => {
       <NavigateToPrevContainer children="경기 상세" />
 
       <div className=" relative laptop:w-[915px]  laptop:min-h-[735px] h-full mb-16   mobile:w-full mx-auto laptop:mb-0  mobile:mb-[140px]  rounded-lg flex flex-col gap-1.5 ">
-        <GameDetailMap gameDetail={gameDetail.data} />
+        <DetailPageMap
+          height="495px"
+          width="100%"
+          gameDetail={gameDetail.data}
+        />
         <div className="flex laptop:flex-row laptop:space-x-2 mobile:space-x-0 mobile:flex-col">
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
             <GameDetailsCard data={gameDetail?.data} isPending={isPending} />

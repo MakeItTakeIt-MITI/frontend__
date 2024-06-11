@@ -224,6 +224,8 @@ export interface GameDetailProp {
 
 export interface GameDetailBoxProp {
     gameDetail: GameDetailField
+    height?: string;
+    width?: string;
 }
 
 export interface GameEditParameters {

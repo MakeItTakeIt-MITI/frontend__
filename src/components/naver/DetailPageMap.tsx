@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { GameDetailBoxProp } from "../../interface/gameInterface";
 import { newCustomMarker } from "./naver_map_controls";
-declare global {
-  interface Window {
-    naver: any;
-  }
-}
+
 const { naver } = window;
 
-export const GameDetailMap: React.FC<GameDetailBoxProp> = ({ gameDetail }) => {
+export const DetailPageMap: React.FC<GameDetailBoxProp> = ({
+  gameDetail,
+  width,
+  height,
+}) => {
   useEffect(() => {
     const map = new naver.maps.Map("map", {
       center: new naver.maps.LatLng(
@@ -34,7 +34,11 @@ export const GameDetailMap: React.FC<GameDetailBoxProp> = ({ gameDetail }) => {
   return (
     <div
       id="map"
-      className="w-full  laptop:h-[495px] mobile:h-[300px] rounded-lg"
+      style={{
+        width: width,
+        height: height,
+      }}
+      className=" mobile:h-[300px] rounded-lg"
     />
   );
 };

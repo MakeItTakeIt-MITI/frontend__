@@ -1,6 +1,6 @@
 export const HomeSkeleton = () => {
   return (
-    <section className="laptop:mb-[69px] mobile:my-0">
+    <section className=" mobile:hidden laptop:block laptop:mb-[69px] mobile:my-0">
       <div className="  flex flex-col gap-6  w-full   mx-auto  max-w-[1024px] ">
         <div className="bg-gray-100 animate-pulse dark:bg-gray-200 w-full h-[288px] rounded-2xl flex items-center justify-center">
           <svg
@@ -16,29 +16,11 @@ export const HomeSkeleton = () => {
         </div>
         <div className="flex   tablet:gap-10  mt-10  ">
           <div className="space-y-4">
-            <div className="flex flex-col gap-2 items-center justify-center h-[52px] w-full bg-gray-100 animate-pulse">
-              <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-              <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-            </div>
+            <div className="flex flex-col gap-2 items-center justify-center h-[52px] w-full bg-gray-100 animate-pulse"></div>
             <div className="h-[409px] w-[371px] bg-gray-100 p-3 space-y-3">
-              <div className="animate-pulse dark:bg-gray-300 bg-gray-100 p-3 h-[103px] w-full rounded-lg flex flex-col items-center justify-center gap-2">
-                <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-                <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-                <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-                <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-              </div>
-              <div className="animate-pulse dark:bg-gray-300 bg-gray-100 p-3 h-[103px] w-full rounded-lg flex flex-col items-center justify-center gap-2">
-                <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-                <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-                <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-                <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-              </div>
-              <div className="animate-pulse dark:bg-gray-300 bg-gray-100 p-3 h-[103px] w-full rounded-lg flex flex-col items-center justify-center gap-2">
-                <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-                <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-                <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-                <div className="h-1.5 bg-gray-300 rounded-full dark:bg-gray-600 w-[90%] "></div>
-              </div>
+              <div className="animate-pulse dark:bg-gray-300 bg-gray-100 p-3 h-[103px] w-full rounded-lg flex flex-col items-center justify-center gap-2"></div>
+              <div className="animate-pulse dark:bg-gray-300 bg-gray-100 p-3 h-[103px] w-full rounded-lg flex flex-col items-center justify-center gap-2"></div>
+              <div className="animate-pulse dark:bg-gray-300 bg-gray-100 p-3 h-[103px] w-full rounded-lg flex flex-col items-center justify-center gap-2"></div>
             </div>
           </div>
           <div className="w-full  h-[473px] bg-gray-100 animate-pulse dark:bg-gray-200 flex items-center justify-center">

@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useCancelParticipationMutation } from "../../../hooks/games/useCancelParticipationMutation";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
 import { useGetGameDetailQuery } from "../../../hooks/games/useGetGameDetailQuery";
-import { GameDetailMap } from "../../../components/naver/GameDetailMap";
+import { DetailPageMap } from "../../../components/naver/DetailPageMap";
 import { GameDetailHeader } from "../../../components/game/GameDetailStatusBox";
 import { GameDetailInfoBox } from "../../../components/game/GameDetailInfoBox";
 import { GameDetailExtraInfoBox } from "../../../components/game/GameDetailExtraInfoBox";
@@ -58,7 +58,11 @@ export const CancelParticipation = () => {
         {cancelResponse?.status_code === 200 && (
           <AlertModal {...ParticipationCancelled.args} />
         )}
-        <GameDetailMap gameDetail={gameDetail?.data} />
+        <DetailPageMap
+          height="495px"
+          width="100%"
+          gameDetail={gameDetail.data}
+        />{" "}
         <div className="flex laptop:flex-row laptop:space-x-2 mobile:space-x-0 mobile:flex-col">
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
             <GameRefundPaymentDetailBox

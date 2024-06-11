@@ -14,12 +14,27 @@ import {
   TwoStars,
 } from "../../stories/Reviews.stories";
 import { Link } from "react-router-dom";
+import { GameDetailField } from "../../interface/gameInterface";
+
+interface UserReviewDetailCardProps {
+  data?: GameDetailField;
+  isHost?: boolean;
+  participantData?: {
+    id: number;
+    nickname: string;
+    rating: {
+      id: number;
+      num_of_reviews: number;
+      average_rating: number;
+    };
+  };
+}
 
 export const UserReviewDetailCard = ({
   data,
   isHost,
   participantData,
-}: any) => {
+}: UserReviewDetailCardProps) => {
   const hostRating = isHost && data?.data.host.rating?.average_rating;
   const hostDataReviewCount = isHost && data?.data.host.rating.num_of_reviews;
   const hostNickname = isHost && data?.data.host.nickname;
