@@ -7,6 +7,7 @@ import {
   RecruitingTag,
 } from "../../stories/Tags.stories";
 import { MatchTags } from "./MatchTags";
+import "../home/animation.css";
 
 interface MobileMatchItemProp {
   game: GameDetailField;
@@ -23,7 +24,7 @@ export const MobileMatchItem = ({
         const { latitude, longitude } = game.court;
         handleSearchCoords(Number(latitude), Number(longitude));
       }}
-      className="border border-b-gray-200  rounded-xl  hover:cursor-pointer  "
+      className="border border-b-gray-200  rounded-xl  hover:cursor-pointer  cssanimation sequence fadeInBottom "
     >
       <div className="flex flex-col gap-1 p-3">
         <div className="flex justify-between">
