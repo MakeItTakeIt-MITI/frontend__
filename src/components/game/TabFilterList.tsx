@@ -1,12 +1,20 @@
 import downArrow from "../../assets/Chevron_Down_MD.svg";
 
+interface TabField {
+  defaultTabName: string;
+  openList: boolean;
+  handleOpenList: () => void;
+  handleChangeTab: (arg: string) => void;
+  tabList: { id: number; name: string }[];
+}
+
 export const TabFilterList = ({
   defaultTabName,
   openList,
   handleOpenList,
   handleChangeTab,
   tabList,
-}: any) => {
+}: TabField) => {
   return (
     <>
       {/* tab */}
@@ -27,7 +35,7 @@ export const TabFilterList = ({
 
           {openList && (
             <ul className="absolute left-0 top-8 w-full bg-[#f7f7f7] text-neutral-400 text-xs px-2 py-1 flex flex-col gap-1 rounded-br-lg">
-              {tabList.map((tab: any) => {
+              {tabList.map((tab: { name: string; id: number }) => {
                 return (
                   <li
                     onClick={() => handleChangeTab(tab.name)}

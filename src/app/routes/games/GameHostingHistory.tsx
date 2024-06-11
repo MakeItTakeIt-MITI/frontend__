@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import useUserDataStore from "../../../store/useUserDataStore";
 import { useHostHistoryInfiniteQuery } from "../../../hooks/games/useHostHistoryInfiniteQuery";
 
-import { LoadingPage } from "../LoadingPage";
 import { GameHistoryContainer } from "../../../components/game/host/GameHistoryContainer";
 import { TabFilterList } from "../../../components/game/TabFilterList";
+import { NotFoundPage } from "../NotFoundPage";
+import { ParticipateHistorySkeleton } from "../../../components/ui/skeleton/ParticipateHistorySkeleton";
 
 export const GameHostingHistory = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -27,8 +28,9 @@ export const GameHostingHistory = () => {
 
   const {
     data: historyData,
-    status,
-    error,
+    isPending,
+    isError,
+
     fetchNextPage,
 
     hasNextPage,
@@ -50,12 +52,12 @@ export const GameHostingHistory = () => {
     refetch();
   }, [refetch, defaultTabName, gameStatusQuery]);
 
-  if (status === "pending") {
-    return <LoadingPage />;
+  if (isPending) {
+    return <ParticipateHistorySkeleton title="나의 호스팅 경기" />;
   }
 
-  if (status === "error") {
-    return <p>Error...{error.message}</p>;
+  if (isError) {
+    return <NotFoundPage />;
   }
   return (
     <section className="laptop:my-[69px] mobile:mb-16">
@@ -70,7 +72,6 @@ export const GameHostingHistory = () => {
           <TabFilterList
             tabList={tabList}
             defaultTabName={defaultTabName}
-            setGameStatusQuery={setGameStatusQuery}
             openList={openList}
             handleOpenList={handleOpenList}
             handleChangeTab={handleChangeTab}

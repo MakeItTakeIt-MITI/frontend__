@@ -2,10 +2,15 @@ import { NavigateToPrevContainer } from "../../../components/NavigateToPrevConta
 import { useEffect, useState } from "react";
 import useUserDataStore from "../../../store/useUserDataStore";
 
-import { LoadingPage } from "../LoadingPage";
 import { GameHistoryContainer } from "../../../components/game/host/GameHistoryContainer";
 import { TabFilterList } from "../../../components/game/TabFilterList";
 import { useParticipationHistoryInfiniteQuery } from "../../../hooks/games/useParticipationHistoryInfiniteQuery";
+import { ParticipateHistorySkeleton } from "../../../components/ui/skeleton/ParticipateHistorySkeleton";
+
+export interface TabField {
+  id: number;
+  name: string;
+}
 
 export const ParticipationHistory = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -17,7 +22,7 @@ export const ParticipationHistory = () => {
 
   const { userId } = useUserDataStore();
 
-  const tabList = [
+  const tabList: TabField[] = [
     { id: 1, name: "모집중" },
     { id: 2, name: "모집 완료" },
     { id: 3, name: "경기 취소" },
@@ -27,7 +32,8 @@ export const ParticipationHistory = () => {
 
   const {
     data: guesHistory,
-    status,
+    isPending,
+    isError,
     error,
     fetchNextPage,
 
@@ -50,11 +56,11 @@ export const ParticipationHistory = () => {
     refetch();
   }, [refetch, defaultTabName, gameStatusQuery]);
 
-  if (status === "pending") {
-    return <LoadingPage />;
+  if (isPending) {
+    return <ParticipateHistorySkeleton title="나의 참여 경기" />;
   }
 
-  if (status === "error") {
+  if (isError) {
     return <p>Error...{error.message}</p>;
   }
   return (
@@ -69,7 +75,6 @@ export const ParticipationHistory = () => {
           <TabFilterList
             tabList={tabList}
             defaultTabName={defaultTabName}
-            setGameStatusQuery={setGameStatusQuery}
             openList={openList}
             handleOpenList={handleOpenList}
             handleChangeTab={handleChangeTab}
