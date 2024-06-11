@@ -13,7 +13,6 @@ import {
   SettlementDetails,
   TranscationHistory,
 } from "../../../stories/QuickLink.stories";
-import { LoadingPage } from "../LoadingPage";
 import { useLogoutMutation } from "../../../hooks/auth/useLogoutMutation";
 import useAuthStore from "../../../store/useAuthStore";
 import { ReviewRating } from "../../../components/common/ReviewRating";
@@ -30,6 +29,7 @@ import {
   TwoStars,
 } from "../../../stories/Reviews.stories";
 import { Link } from "react-router-dom";
+import { ProfileSkeleton } from "../../../components/ui/skeleton/ProfileSkeleton";
 
 export const Profile = () => {
   const { userId } = useUserDataStore();
@@ -76,7 +76,7 @@ export const Profile = () => {
   };
 
   if (isPending) {
-    return <LoadingPage />;
+    return <ProfileSkeleton />;
   }
   if (isError) {
     return <NotFoundPage />;
@@ -87,7 +87,6 @@ export const Profile = () => {
       <NavigateToPrevContainer children="내 정보" />
 
       <div className="laptop:w-[500px] min-h-[700px] mobile:w-full mx-auto laptop:border border-gray-200  rounded-lg">
-        {/* 사용자 정보 */}
         <div className="p-5 flex   gap-3">
           <img src={profileIcon} alt="profile icon" />
           <div className="space-y-1">
@@ -143,8 +142,6 @@ export const Profile = () => {
           </div>
         </div>
       </div>
-
-      {/* <EditProfile /> */}
     </section>
   );
 };
