@@ -1,6 +1,16 @@
 import { ShareCard } from "../ui/cards/ShareCard";
 
-export const ShareCourtDetailBox = ({ courtDetailData }: any) => {
+export interface CourtDetailProp {
+  courtDetailData: {
+    data: {
+      name: string;
+      info: string;
+      address: string;
+    };
+  };
+}
+
+export const ShareCourtDetailBox = ({ courtDetailData }: CourtDetailProp) => {
   const handleSharePage = async () => {
     if (navigator.share) {
       try {

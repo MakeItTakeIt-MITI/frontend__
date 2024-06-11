@@ -18,7 +18,7 @@ export const CourtDetail = () => {
   } = useGetCourtListInfiniteQuery(courtIdParam);
 
   return (
-    <section className="laptop:my-[20px] mobile:mb-16 ">
+    <section className="laptop:my-[20px] laptop:h-screen mobile:h-full mobile:mb-16 ">
       <NavigateToPrevContainer children="경기장 상세 정보" />
 
       <div className=" flex laptop:flex-row mobile:flex-col gap-5 laptop:px-3 mobile:px-1 laptop:w-[981px] laptop:h-[745px]  mx-auto ">
