@@ -1,4 +1,3 @@
-// import { useNavigate } from "react-router-dom";
 import useUserDataStore from "../../../store/useUserDataStore";
 import { useUserInfoQuery } from "../../../hooks/games/useUserInfoQuery";
 import profileIcon from "../../../assets/svg/profile_icon_64.svg";
@@ -48,7 +47,6 @@ export const EditProfile = () => {
   const onSubmit = (userData: PasswordField) => {
     removeEmptyFields(userData);
     mutatePassword(userData);
-    console.log(passwordResponse);
   };
 
   if (isPending) {
@@ -56,9 +54,10 @@ export const EditProfile = () => {
   }
 
   const handleChangeNickname = () => {
-    const nicknameData: any = { nickname: getValues("nickname") };
+    const nicknameData = getValues("nickname");
+
     if (nicknameData) {
-      mutateNickname(nicknameData);
+      mutateNickname({ nickname: nicknameData });
     }
   };
 
