@@ -5,6 +5,7 @@ import { RegionFilterBox } from "../../../components/game/RegionFilterBox";
 import { useGetAllCourtsInfiniteQuery } from "../../../hooks/courts/useGetAllCourtsInfiniteQuery";
 import { NoListFoundMessageBox } from "../../../components/common/NoListFoundMessageBox";
 import { CourtsCard } from "../../../components/ui/cards/CourtsCard";
+import { CourtField } from "../../../interface/gameInterface";
 
 export const SearchCourts = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -27,7 +28,7 @@ export const SearchCourts = () => {
 
   useEffect(() => {
     refetch();
-  }, [defaultTabName, searchValue, gameStatusQuery]);
+  }, [defaultTabName, searchValue, gameStatusQuery, refetch]);
 
   return (
     <section className="laptop:my-[69px] mobile:mb-16">
@@ -73,7 +74,7 @@ export const SearchCourts = () => {
           <h2 className="text-[20px] font-[500]">조회 결과</h2>
           {courtsData?.pages.map((page) => {
             return page.data.page_content.length > 0 ? (
-              page.data.page_content.map((court: any) => (
+              page.data.page_content.map((court: CourtField) => (
                 <CourtsCard
                   key={court.id}
                   path={`/courts/detail/${court.id}`}

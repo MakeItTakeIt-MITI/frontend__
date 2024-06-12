@@ -15,28 +15,36 @@ interface GameDetailsCardProps {
 }
 
 export const GameDetailsCard = ({ data }: GameDetailsCardProps) => {
+  const status = data.game_status;
+  const title = data.title;
+  const start_date = data.startdate;
+  const start_time = data.starttime.slice(0, 5);
+  const end_time = data.endtime.slice(0, 5);
+  const address = data.court.address;
+  const address_detail = data.court.address_detail;
+  const max_invitation = data.max_invitation;
+  const confirmed_participants = data.num_of_confirmed_participations;
+  const fee = data.fee.toLocaleString("ko-KR", {
+    style: "currency",
+    currency: "KRW",
+  });
   return (
     <>
       {data && (
         <div className="w-[453px] h-[170px] p-3 space-y-2 border border-gray-200 rounded-lg">
-          {data.game_status === "open" && <MatchTags {...RecruitingTag.args} />}
-          {data.game_status === "canceled" && (
-            <MatchTags {...GameCancelledTag.args} />
-          )}
-          {data.game_status === "closed" && (
+          {status === "open" && <MatchTags {...RecruitingTag.args} />}
+          {status === "canceled" && <MatchTags {...GameCancelledTag.args} />}
+          {status === "closed" && (
             <MatchTags {...RecruitingCompletedTag.args} />
           )}
-          {data.game_status === "completed" && (
-            <MatchTags {...GameFinishedTag.args} />
-          )}
+          {status === "completed" && <MatchTags {...GameFinishedTag.args} />}
           <div className="space-y-1">
             <h1 className="text-neutral-800 text-base font-bold leading-[18px] max-w-[351px] truncate">
-              {data.title}
+              {title}
             </h1>
 
             <p className="text-neutral-400 text-sm font-medium  leading-none">
-              {data.startdate} {data.starttime.slice(0, 5)} ~{" "}
-              {data.endtime.slice(0, 5)}
+              {start_date} {start_time} ~ {end_time}
             </p>
           </div>
 
@@ -44,26 +52,19 @@ export const GameDetailsCard = ({ data }: GameDetailsCardProps) => {
             <div className="flex gap-1">
               <img src={markerIcon} alt="pin icon" className="" />
               <p>
-                {" "}
-                {data.court.address} {data.court.address_detail}
+                {address} {address_detail}
               </p>
             </div>
             <div className="flex gap-1">
               <img src={peopleIcon} alt="pin icon" className="" />
               <p>
-                {" "}
-                총 {data.max_invitation}명 중{" "}
-                {data.num_of_confirmed_participations}명 모집 완료
+                총 {max_invitation}명 중 {confirmed_participants}명 모집 완료
               </p>
             </div>
           </div>
 
           <h2 className="text-blue-600 text-base font-bold leading-[18px]">
-            {" "}
-            {data.fee.toLocaleString("ko-KR", {
-              style: "currency",
-              currency: "KRW",
-            })}{" "}
+            {fee}
           </h2>
         </div>
       )}

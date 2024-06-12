@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import badge from "../../assets/authentication-badge.svg";
 import profile from "../../assets/game_detail_profile.svg";
 
@@ -72,18 +71,14 @@ export const UserReviewDetailCard = ({ gameDetail }: GameDetailBoxProp) => {
                   : 0}
               </p>
             </div>
-            <Link to="/" className="font-bold underline">
+            <p className="font-bold underline">
               후기 {gameDetail?.host.rating.num_of_reviews}
-            </Link>
+            </p>
           </div>
         </div>
       </div>
       <div className="space-y-2  ">
-        <p className="text-[#666] ">
-          {/* 나이, 키, 성별 상관 없습니다. 농구를 잘 모르시는 분들도 환영합니다.
-          즐겁게 농구하는 즐농팀입니다. 과격하고 승리에 집착하시는 분들은
-          사양합니다. */}
-        </p>
+        <p className="text-[#666] "></p>
       </div>
     </div>
   );

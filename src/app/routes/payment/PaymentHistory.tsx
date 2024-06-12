@@ -13,6 +13,31 @@ import {
   TransferFulfilled,
 } from "../../../stories/Tags.stories";
 
+export interface PaymentHistoryField {
+  id: number;
+  comission: number;
+  status: string;
+  game: {
+    id: number;
+    court: {
+      id: number;
+      address: string;
+      address_detail: string;
+      latitude: number;
+      longitude: number;
+    };
+    game_status: string;
+    title: string;
+    startdate: string;
+    starttime: string;
+    enddate: string;
+    endtime: string;
+    max_invitation: number;
+    min_invitation: number;
+    fee: number;
+  };
+}
+
 export const PaymentHistory = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
   const [gameStatusQuery, setGameStatusQuery] = useState("");
@@ -33,7 +58,7 @@ export const PaymentHistory = () => {
       setGameStatusQuery("waiting");
     }
     refetch();
-  }, [defaultTabName, gameStatusQuery]);
+  }, [defaultTabName, gameStatusQuery, refetch]);
 
   const tabList = ["전체보기", "정산 완료", "대기중"];
   const handleOpenList = () => setOpenList(!openList);
@@ -85,42 +110,45 @@ export const PaymentHistory = () => {
           className="overflow-y-auto laptop:w-[593px] bg-[#FBFBFB]  laptop:h-[653px] mobile:h-full   mobile:w-full mx-auto   p-3 rounded-lg flex flex-col gap-[15px] "
         >
           {paymentHistoryData?.data?.page_content.length !== 0 ? (
-            paymentHistoryData?.data?.page_content.map((page: any) => {
-              return (
-                <Link
-                  to={`detail/${page.id}`}
-                  className="p-3 rounded-lg border space-y-[7px] border-gray-200 bg-white"
-                >
-                  <h2 className="text-[10px]">
-                    {page.status === "waiting" && (
-                      <MatchTags {...AwaitingPayment.args} />
-                    )}
-                    {page.status === "confirmed" && (
-                      <MatchTags {...TransferFulfilled.args} />
-                    )}
-                    {page.status === "partial_completed" && (
-                      <MatchTags {...PaymentPartiallyFulfilled.args} />
-                    )}
-                  </h2>
-                  <h3 className="font-bold">{page.game.title}</h3>
-                  <p className="text-xs text-[#99999999]">
-                    {page.game.startdate} {page.game.starttime} ~{" "}
-                    {page.game.enddate} {page.game.endtime}
-                  </p>
-                  <div className="flex justify-between">
-                    <span className="text-xs text-[#99999999]">
-                      {page.game.court.address} {page.game.court.address_detail}
-                    </span>
-                    <span className="text-[#4065F5] font-bold">
-                      {page.game.fee.toLocaleString("ko-KR", {
-                        style: "currency",
-                        currency: "KRW",
-                      })}
-                    </span>
-                  </div>
-                </Link>
-              );
-            })
+            paymentHistoryData?.data?.page_content.map(
+              (page: PaymentHistoryField) => {
+                return (
+                  <Link
+                    to={`detail/${page.id}`}
+                    className="p-3 rounded-lg border space-y-[7px] border-gray-200 bg-white"
+                  >
+                    <h2 className="text-[10px]">
+                      {page.status === "waiting" && (
+                        <MatchTags {...AwaitingPayment.args} />
+                      )}
+                      {page.status === "confirmed" && (
+                        <MatchTags {...TransferFulfilled.args} />
+                      )}
+                      {page.status === "partial_completed" && (
+                        <MatchTags {...PaymentPartiallyFulfilled.args} />
+                      )}
+                    </h2>
+                    <h3 className="font-bold">{page.game.title}</h3>
+                    <p className="text-xs text-[#99999999]">
+                      {page.game.startdate} {page.game.starttime} ~{" "}
+                      {page.game.enddate} {page.game.endtime}
+                    </p>
+                    <div className="flex justify-between">
+                      <span className="text-xs text-[#99999999]">
+                        {page.game.court.address}{" "}
+                        {page.game.court.address_detail}
+                      </span>
+                      <span className="text-[#4065F5] font-bold">
+                        {page.game.fee.toLocaleString("ko-KR", {
+                          style: "currency",
+                          currency: "KRW",
+                        })}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              }
+            )
           ) : (
             <NoListFoundMessageBox
               title="정산내역이 없습니다."

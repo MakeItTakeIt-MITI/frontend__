@@ -7,8 +7,17 @@ import { NoListFoundMessageBox } from "../../../components/common/NoListFoundMes
 import { useGetUserWrittenReviewsQuery } from "../../../hooks/reviews/useGetUserWrittenReviewsQuery";
 import MITI_logo from "../../../assets/MITI_logo.svg";
 import { ReviewCard } from "../../../components/ui/cards/ReviewCard";
-import { MatchTags } from "../../../components/game/MatchTags";
-import { GuestReviewTag, HostReviewTag } from "../../../stories/Tags.stories";
+
+export interface ReviewDataField {
+  id: number;
+  reviewee: string;
+  rating: number;
+  comment: string;
+  review_type: string;
+  game_title: string;
+  game_status: string;
+  reviewee_nickname?: string;
+}
 
 export const ReviewsByUser = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -47,7 +56,15 @@ export const ReviewsByUser = () => {
 
     userDataRefetch();
     reviewDataRefetch();
-  }, [ratingId, userData, reviewData, gameStatusQuery, defaultTabName]);
+  }, [
+    ratingId,
+    userData,
+    reviewData,
+    gameStatusQuery,
+    defaultTabName,
+    reviewDataRefetch,
+    userDataRefetch,
+  ]);
 
   return (
     <section className="laptop:mt-[17px] laptop:mb-[55px] mobile:my-0">
@@ -59,7 +76,6 @@ export const ReviewsByUser = () => {
             <TabFilterList
               tabList={tabList}
               defaultTabName={""}
-              setGameStatusQuery={setGameStatusQuery}
               openList={openList}
               handleOpenList={handleOpenList}
               handleChangeTab={handleChangeTab}
@@ -79,7 +95,6 @@ export const ReviewsByUser = () => {
             <TabFilterList
               tabList={tabList}
               defaultTabName={defaultTabName}
-              setGameStatusQuery={setGameStatusQuery}
               openList={openList}
               handleOpenList={handleOpenList}
               handleChangeTab={handleChangeTab}
@@ -90,22 +105,9 @@ export const ReviewsByUser = () => {
             className="h-[653px] p-3 bg-[#FBFBFB] space-y-[15px] overflow-y-auto border border-gray-200 rounded-lg"
           >
             {reviewData && reviewData?.data?.page_content.length !== 0 ? (
-              reviewData?.data?.page_content.map((review: any) => {
+              reviewData?.data?.page_content.map((review: ReviewDataField) => {
                 return (
-                  <ReviewCard
-                    path={`detail/${review.id}`}
-                    key={review.id}
-                    game_status={
-                      review?.review_type === "host_review" ? (
-                        <MatchTags {...HostReviewTag.args} />
-                      ) : review?.review_type === "guest_review" ? (
-                        <MatchTags {...GuestReviewTag.args} />
-                      ) : null
-                    }
-                    rating={review.rating}
-                    review={review.comment}
-                    reviewee={review.reviewee_nickname}
-                  />
+                  <ReviewCard review={review} key={review?.id} isHost={true} />
                 );
               })
             ) : (

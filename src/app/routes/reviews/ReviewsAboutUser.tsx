@@ -6,8 +6,16 @@ import { NoListFoundMessageBox } from "../../../components/common/NoListFoundMes
 import { useGetMyReviewsQuery } from "../../../hooks/reviews/useGetMyReviewsQuery";
 import MITI_logo from "../../../assets/MITI_logo.svg";
 import { ReviewCard } from "../../../components/ui/cards/ReviewCard";
-import { MatchTags } from "../../../components/game/MatchTags";
-import { GuestReviewTag, HostReviewTag } from "../../../stories/Tags.stories";
+
+export interface ReviewsAboutUserField {
+  id: number;
+  reviewee: string;
+  rating: number;
+  comment: string;
+  review_type: string;
+  game_title: string;
+  game_status: string;
+}
 
 export const ReviewsAboutUser = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
@@ -39,7 +47,7 @@ export const ReviewsAboutUser = () => {
       setGameStatusQuery("guest_review");
     }
     refetchReviews();
-  }, [allReviewsData, gameStatusQuery, defaultTabName]);
+  }, [allReviewsData, gameStatusQuery, defaultTabName, refetchReviews]);
   return (
     <section className="laptop:mt-[17px] laptop:mb-[55px] mobile:my-0">
       <NavigateToPrevContainer children="내 리뷰 조회" />
@@ -50,7 +58,6 @@ export const ReviewsAboutUser = () => {
             <TabFilterList
               tabList={tabList}
               defaultTabName={""}
-              setGameStatusQuery={setGameStatusQuery}
               openList={openList}
               handleOpenList={handleOpenList}
               handleChangeTab={handleChangeTab}
@@ -70,7 +77,6 @@ export const ReviewsAboutUser = () => {
             <TabFilterList
               tabList={tabList}
               defaultTabName={defaultTabName}
-              setGameStatusQuery={setGameStatusQuery}
               openList={openList}
               handleOpenList={handleOpenList}
               handleChangeTab={handleChangeTab}
@@ -79,24 +85,11 @@ export const ReviewsAboutUser = () => {
           <div className="h-[653px] p-3 bg-[#FBFBFB] space-y-[15px] overflow-y-auto border border-gray-200 rounded-lg">
             {allReviewsData &&
             allReviewsData?.data?.page_content.length !== 0 ? (
-              allReviewsData?.data?.page_content.map((review: any) => {
-                return (
-                  <ReviewCard
-                    path={`detail/${review.id}`}
-                    key={review.id}
-                    game_status={
-                      review?.review_type === "host_review" ? (
-                        <MatchTags {...HostReviewTag.args} />
-                      ) : review?.review_type === "guest_review" ? (
-                        <MatchTags {...GuestReviewTag.args} />
-                      ) : null
-                    }
-                    rating={review?.rating}
-                    review={review?.comment}
-                    title={review?.game_title}
-                  />
-                );
-              })
+              allReviewsData?.data?.page_content.map(
+                (review: ReviewsAboutUserField) => {
+                  return <ReviewCard review={review} key={review?.id} />;
+                }
+              )
             ) : (
               <NoListFoundMessageBox
                 title="작성된 리뷰가 없습니다."

@@ -7,6 +7,16 @@ import { NoListFoundMessageBox } from "../../../components/common/NoListFoundMes
 import { Link } from "react-router-dom";
 import { useGetUserDataQuery } from "../../../hooks/user/useGetUserDataQuery";
 
+export interface BankAccountTransaction {
+  id: number;
+  amount: number;
+  account_bank: string;
+  account_holder: string;
+  account_number: string;
+  status: "waiting" | "completed" | "failed" | "cancelled";
+  created_at: string;
+}
+
 export const BankTransferHistory = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
   const [gameStatusQuery, setGameStatusQuery] = useState("");
@@ -106,20 +116,22 @@ export const BankTransferHistory = () => {
             />
           ) : (
             <>
-              {bankTransferHistoryData?.data.page_content.map((page: any) => {
-                <div key={page.id}>
-                  <div className="flex items-center justify-between py-[15px]">
-                    <span className="text-xs text-[#99999999]">
-                      {page.created_at}
-                    </span>
-                    <span className="font-bold text-[#4065F5]">
-                      {page.amount}
-                    </span>
-                    <span>{page.status}</span>
-                  </div>
-                  <hr />
-                </div>;
-              })}
+              {bankTransferHistoryData?.data.page_content.map(
+                (page: BankAccountTransaction) => {
+                  <div key={page.id}>
+                    <div className="flex items-center justify-between py-[15px]">
+                      <span className="text-xs text-[#99999999]">
+                        {page.created_at}
+                      </span>
+                      <span className="font-bold text-[#4065F5]">
+                        {page.amount}
+                      </span>
+                      <span>{page.status}</span>
+                    </div>
+                    <hr />
+                  </div>;
+                }
+              )}
             </>
           )}
         </div>

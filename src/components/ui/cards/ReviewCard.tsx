@@ -13,26 +13,16 @@ import {
   TwoAndHalfStars,
   TwoStars,
 } from "../../../stories/Reviews.stories";
+import { ReviewDataField } from "../../../app/routes/reviews/ReviewsByUser";
+import { MatchTags } from "../../game/MatchTags";
+import { GuestReviewTag, HostReviewTag } from "../../../stories/Tags.stories";
 
 interface ReviewCardProps {
-  path: string;
-  key: string;
-  game_status: React.ReactNode;
-  rating: number;
-  review: string;
-  title?: string;
-  reviewee?: string;
+  review: ReviewDataField;
+  isHost?: boolean;
 }
 
-export const ReviewCard = ({
-  path = "",
-  key,
-  game_status,
-  rating,
-  review,
-  title,
-  reviewee,
-}: ReviewCardProps) => {
+export const ReviewCard = ({ review, isHost }: ReviewCardProps) => {
   const getRatingComponent = (rating: number) => {
     if (rating === 5) {
       return <ReviewRating {...FiveStars.args} />;
@@ -58,29 +48,38 @@ export const ReviewCard = ({
       return null;
     }
   };
+  const game_status =
+    review?.review_type === "host_review" ? (
+      <MatchTags {...HostReviewTag.args} />
+    ) : review?.review_type === "guest_review" ? (
+      <MatchTags {...GuestReviewTag.args} />
+    ) : null;
+
   return (
     <Link
-      to={path}
-      key={key}
+      to={`detail/${review.id}`}
+      key={review?.id}
       className="p-3 h-[89px] w-full rounded-lg border border-gray-200 flex items-center justify-between"
     >
       <div className="space-y-[2px]">
         {game_status}
-        <p className="text-zinc-800 text-base font-bold font-['Pretendard'] leading-[18px]">
-          {reviewee}
-        </p>
+        {isHost && (
+          <p className="text-zinc-800 text-base font-bold font-['Pretendard'] leading-[18px]">
+            {review.reviewee_nickname}
+          </p>
+        )}
         <div className="space-x-[5px] flex items-center">
-          {getRatingComponent(rating)}
+          {getRatingComponent(review.rating)}
           <span className="text-neutral-800 text-xs font-medium">
-            {rating.toFixed(1)}
+            {review.rating.toFixed(1)}
           </span>
         </div>
 
         <p className="text-stone-500 text-[9px] font-normal  leading-[11px]">
-          {review}
+          {review.comment}
         </p>
         <p className="text-zinc-800 text-base font-bold font-['Pretendard'] leading-[18px]">
-          {title}
+          {review.game_title}
         </p>
       </div>
       <img src={right_arrow} alt="right arrow icon" />
