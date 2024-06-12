@@ -1,6 +1,5 @@
 import profileIcon from "../../assets/game_detail_profile.svg";
 import rightArrIcon from "../../assets/Chevron_Right_MD.svg";
-import { ReviewRating } from "../common/ReviewRating";
 import {
   FiveStars,
   FourAndHalfStars,
@@ -15,6 +14,7 @@ import {
 } from "../../stories/Reviews.stories";
 import { Link } from "react-router-dom";
 import { GameDetailField } from "../../interface/gameInterface";
+import { ReviewRating } from "../ui/common/ReviewRating";
 
 interface UserReviewDetailCardProps {
   data?: GameDetailField;

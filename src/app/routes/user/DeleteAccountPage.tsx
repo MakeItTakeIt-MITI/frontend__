@@ -3,11 +3,11 @@ import { useDeleteAccountMutation } from "../../../hooks/auth/useDeleteAccountMu
 import useAuthStore from "../../../store/useAuthStore";
 import useUserDataStore from "../../../store/useUserDataStore";
 import { useEffect, useState } from "react";
-import { AlertModal } from "../../../components/common/AlertModal";
 import {
   DeleteAccountGuestFailure,
   DeleteAccountHostingFailure,
 } from "../../../stories/Modal.stories";
+import { AlertModal } from "../../../components/ui/common/AlertModal";
 
 export const DeleteAccountPage = () => {
   const [displayModal, setDisplayModal] = useState(false);

@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { AlertModal } from "../components/common/AlertModal";
 import { MemoryRouter } from "react-router-dom";
+import { AlertModal } from "../components/ui/common/AlertModal";
 
 export default {
   title: "Modal Popups",

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useGetQuestionDetailQuery } from "../../../hooks/support/useGetQuestionDetailQuery";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
-import { NoListFoundMessageBox } from "../../../components/common/NoListFoundMessageBox";
+import { NoListFoundMessageBox } from "../../../components/ui/common/NoListFoundMessageBox";
 
 export const UserInquiryDetailPage = () => {
   const { id } = useParams();

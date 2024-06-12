@@ -9,10 +9,10 @@ import { GameFinishedTag } from "../../../stories/Tags.stories";
 import markerSvg from "../../../assets/Map_Pin.svg";
 import peopleSvg from "../../../assets/people.svg";
 import { useGetParticipantsDetailsQuery } from "../../../hooks/games/useGetParticipantsDetailsQuery";
-import { NoListFoundMessageBox } from "../../../components/common/NoListFoundMessageBox";
 import { GameReviewSkeleton } from "../../../components/ui/skeleton/GameReviewSkeleton";
 import { DetailPageMap } from "../../../components/naver/DetailPageMap";
 import { NotFoundPage } from "../NotFoundPage";
+import { NoListFoundMessageBox } from "../../../components/ui/common/NoListFoundMessageBox";
 
 export interface ParticipantDataField {
   id: number;

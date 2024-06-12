@@ -5,7 +5,6 @@ import { ErrorMessage } from "../../../components/StatusMessages/ErrorMessage";
 import { useFindEmailPhoneMutation } from "../../../hooks/auth/useFindEmailPhoneMutation";
 import { SuccessMessage } from "../../../components/StatusMessages/SuccessMessage";
 import { useRequestEmailCode } from "../../../hooks/auth/useRequestEmailCode";
-import { AlertModal } from "../../../components/common/AlertModal";
 import {
   KakaoAccountFound,
   NotFoundInactiveUser,
@@ -15,6 +14,7 @@ import {
   Inactive,
 } from "../../../components/ui/buttons/Button.stories";
 import { SubmitButton } from "../../../components/ui/buttons/SubmitButton";
+import { AlertModal } from "../../../components/ui/common/AlertModal";
 
 export const FindEmailPage = () => {
   const [phone, setPhone] = useState("");

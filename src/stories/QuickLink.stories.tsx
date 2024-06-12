@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { QuickLinkTitle } from "../components/common/QuickLinkTitle";
 import { MemoryRouter } from "react-router-dom";
+import { QuickLinkTitle } from "../components/ui/common/QuickLinkTitle";
 
 export default {
   title: "Links",

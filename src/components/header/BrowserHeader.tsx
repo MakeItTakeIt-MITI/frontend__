@@ -3,7 +3,7 @@ import mitiLogo from "../../assets/MITI_logo.svg";
 import { HeaderField } from "../home/Header";
 import bars from "../../assets/tab-bars.svg";
 import { useState } from "react";
-import { HeaderTabContainer } from "../common/HeaderTabContainer";
+import { HeaderTabContainer } from "../ui/common/HeaderTabContainer";
 
 const BrowserHeader = ({ handleLogout, isLoggedIn }: HeaderField) => {
   const [displayTabItems, setDisplayTabItems] = useState(false);

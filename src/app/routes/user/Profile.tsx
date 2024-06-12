@@ -3,7 +3,6 @@ import useUserDataStore from "../../../store/useUserDataStore";
 import { useUserInfoQuery } from "../../../hooks/games/useUserInfoQuery";
 import profileIcon from "../../../assets/svg/profile-icon.svg";
 import { NotFoundPage } from "../NotFoundPage";
-import { QuickLinkTitle } from "../../../components/common/QuickLinkTitle";
 import {
   CustomerSupport,
   EditProfile,
@@ -15,7 +14,6 @@ import {
 } from "../../../stories/QuickLink.stories";
 import { useLogoutMutation } from "../../../hooks/auth/useLogoutMutation";
 import useAuthStore from "../../../store/useAuthStore";
-import { ReviewRating } from "../../../components/common/ReviewRating";
 import {
   FiveStars,
   FourAndHalfStars,
@@ -30,6 +28,8 @@ import {
 } from "../../../stories/Reviews.stories";
 import { Link } from "react-router-dom";
 import { ProfileSkeleton } from "../../../components/ui/skeleton/ProfileSkeleton";
+import { ReviewRating } from "../../../components/ui/common/ReviewRating";
+import { QuickLinkTitle } from "../../../components/ui/common/QuickLinkTitle";
 
 export const Profile = () => {
   const { userId } = useUserDataStore();

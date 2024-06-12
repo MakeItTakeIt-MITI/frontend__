@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { LargeReviewRating } from "../components/common/ReviewRating";
+import { LargeReviewRating } from "../components/ui/common/ReviewRating";
 
 export default {
   title: "Ratings",

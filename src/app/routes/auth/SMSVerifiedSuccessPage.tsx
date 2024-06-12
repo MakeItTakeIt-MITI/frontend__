@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
-import { SuccessBadgeContainer } from "../../../components/common/SuccessBadgeContainer";
 import { SubmitButton } from "../../../components/ui/buttons/SubmitButton";
 import { Active } from "../../../components/ui/buttons/Button.stories";
+import { SuccessBadgeContainer } from "../../../components/ui/common/SuccessBadgeContainer";
 
 export const SMSVerifiedSuccessPage = () => {
   const navigate = useNavigate();

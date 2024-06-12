@@ -5,13 +5,13 @@ import useUserDataStore from "../../../store/useUserDataStore";
 import { useGetPaymentHistory } from "../../../hooks/account/useGetPaymentHistory";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
 import { MatchTags } from "../../../components/game/MatchTags";
-import { NoListFoundMessageBox } from "../../../components/common/NoListFoundMessageBox";
 
 import {
   AwaitingPayment,
   PaymentPartiallyFulfilled,
   TransferFulfilled,
 } from "../../../stories/Tags.stories";
+import { NoListFoundMessageBox } from "../../../components/ui/common/NoListFoundMessageBox";
 
 export interface PaymentHistoryField {
   id: number;

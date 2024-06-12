@@ -23,8 +23,8 @@ import {
 } from "../../../components/StatusMessages/SuccessMessage.stories";
 import { usePasswordChangeMutation } from "../../../hooks/user/usePasswordChangeMutation";
 import { PasswordField } from "../../../interface/usersInterface";
-import { AlertModal } from "../../../components/common/AlertModal";
 import { ProfileEditSuccess } from "../../../stories/Modal.stories";
+import { AlertModal } from "../../../components/ui/common/AlertModal";
 
 export const EditProfile = () => {
   const { userId } = useUserDataStore();

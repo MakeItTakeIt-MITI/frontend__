@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useKakaoLoginMutation } from "../../../hooks/auth/useKakaoLoginMutation";
-import { AlertModal } from "../../../components/common/AlertModal";
 import { NotFoundPage } from "../NotFoundPage";
 import { KakaoAuthFailure, NotKakaoUser } from "../../../stories/Modal.stories";
 import { LoadingPage } from "../LoadingPage";
+import { AlertModal } from "../../../components/ui/common/AlertModal";
 
 export const KakaoAuthHandler = () => {
   const [displayModal, setDisplayModal] = useState(false);

@@ -14,7 +14,7 @@ import {
   TwoAndHalfStars,
   TwoStars,
 } from "../../stories/Reviews.stories";
-import { ReviewRating } from "../common/ReviewRating";
+import { ReviewRating } from "../ui/common/ReviewRating";
 
 interface GuestDetailContainerProps {
   reviewDetail: {

@@ -1,4 +1,4 @@
-import auth_icon from "../../assets/authenticated_icon.svg";
+import auth_icon from "../../../assets/authenticated_icon.svg";
 
 interface BadgeContainerProps {
   title: string;

@@ -1,6 +1,6 @@
-import star from "../../assets/star.png";
-import emptyStar from "../../assets/empty_star_icon.svg";
-import halfStar from "../../assets/halfStar.png";
+import star from "../../../assets/star.png";
+import emptyStar from "../../../assets/empty_star_icon.svg";
+import halfStar from "../../../assets/halfStar.png";
 
 interface ReviewRatingProp {
   reviewRating?: number[];

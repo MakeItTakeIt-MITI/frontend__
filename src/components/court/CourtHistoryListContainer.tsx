@@ -9,8 +9,8 @@ import {
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { MatchTags } from "../game/MatchTags";
-import { NoListFoundMessageBox } from "../common/NoListFoundMessageBox";
 import { GameStatusCard } from "../ui/cards/GameStatusCard";
+import { NoListFoundMessageBox } from "../ui/common/NoListFoundMessageBox";
 
 interface CourtHistoryProp {
   data: any;

@@ -3,9 +3,9 @@ import { NavigateToPrevContainer } from "../../../components/NavigateToPrevConta
 import searchIcon from "../../../assets/court/search_icon.svg";
 import { RegionFilterBox } from "../../../components/game/RegionFilterBox";
 import { useGetAllCourtsInfiniteQuery } from "../../../hooks/courts/useGetAllCourtsInfiniteQuery";
-import { NoListFoundMessageBox } from "../../../components/common/NoListFoundMessageBox";
 import { CourtsCard } from "../../../components/ui/cards/CourtsCard";
 import { CourtField } from "../../../interface/gameInterface";
+import { NoListFoundMessageBox } from "../../../components/ui/common/NoListFoundMessageBox";
 
 export const SearchCourts = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");

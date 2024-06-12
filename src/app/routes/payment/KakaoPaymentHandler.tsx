@@ -3,11 +3,11 @@ import { useKakaoPayApprovedMutation } from "../../../hooks/payments/useKakaoPay
 import { Link } from "react-router-dom";
 import { LoadingPage } from "../LoadingPage";
 import { NotFoundPage } from "../NotFoundPage";
-import { AlertModal } from "../../../components/common/AlertModal";
 import {
   KakaoPayFailureToJoin,
   KakaoPaymentFailure,
 } from "../../../stories/Modal.stories";
+import { AlertModal } from "../../../components/ui/common/AlertModal";
 
 export const KakaoPaymentHandler = () => {
   const payment_request_id = new URL(

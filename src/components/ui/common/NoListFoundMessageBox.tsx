@@ -1,5 +1,5 @@
 import React from "react";
-import noGamesAlertIcon from "../../assets/nogames_alert_cion.svg";
+import noGamesAlertIcon from "../../../assets/nogames_alert_cion.svg";
 
 interface NoListFoundMessageBoxProp {
   title?: string;

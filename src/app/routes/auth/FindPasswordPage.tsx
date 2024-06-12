@@ -6,7 +6,6 @@ import { usePasswordCodeMutation } from "../../../hooks/auth/usePasswordCodeMuta
 import { phoneNumberAutoFormat } from "../../../utils/phone_format";
 import { SuccessMessage } from "../../../components/StatusMessages/SuccessMessage";
 import { ErrorMessage } from "../../../components/StatusMessages/ErrorMessage";
-import { AlertModal } from "../../../components/common/AlertModal";
 import {
   KakaoAccountFound,
   NotFoundInactiveUser,
@@ -16,6 +15,7 @@ import {
   Active,
   Inactive,
 } from "../../../components/ui/buttons/Button.stories";
+import { AlertModal } from "../../../components/ui/common/AlertModal";
 
 export const FindPasswordPage = () => {
   const [phone, setPhone] = useState("");

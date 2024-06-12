@@ -3,9 +3,9 @@ import { NavigateToPrevContainer } from "../../../components/NavigateToPrevConta
 import downArrow from "../../../assets/Chevron_Down_MD.svg";
 import useUserDataStore from "../../../store/useUserDataStore";
 import { useGetBankTransferHistory } from "../../../hooks/account/useGetBankTransferHistory";
-import { NoListFoundMessageBox } from "../../../components/common/NoListFoundMessageBox";
 import { Link } from "react-router-dom";
 import { useGetUserDataQuery } from "../../../hooks/user/useGetUserDataQuery";
+import { NoListFoundMessageBox } from "../../../components/ui/common/NoListFoundMessageBox";
 
 export interface BankAccountTransaction {
   id: number;

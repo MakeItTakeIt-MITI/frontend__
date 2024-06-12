@@ -1,7 +1,6 @@
 import linkArrow from "../../assets/Chevron_Right_MD.svg";
 import { MatchTags } from "../game/MatchTags";
 import { GuestReviewTag, HostReviewTag } from "../../stories/Tags.stories";
-import { ReviewRating } from "../common/ReviewRating";
 import {
   FiveStars,
   FourAndHalfStars,
@@ -15,6 +14,7 @@ import {
   TwoStars,
 } from "../../stories/Reviews.stories";
 import { ReviewDataField } from "../../app/routes/reviews/ReviewsByUser";
+import { ReviewRating } from "../ui/common/ReviewRating";
 
 interface ReviewProps {
   review: ReviewDataField;

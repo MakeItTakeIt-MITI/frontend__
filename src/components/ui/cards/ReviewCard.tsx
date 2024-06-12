@@ -1,6 +1,5 @@
 import right_arrow from "../../../assets/svg/right-arrow-lg.svg";
 import { Link } from "react-router-dom";
-import { ReviewRating } from "../../common/ReviewRating";
 import {
   FiveStars,
   FourAndHalfStars,
@@ -16,6 +15,7 @@ import {
 import { ReviewDataField } from "../../../app/routes/reviews/ReviewsByUser";
 import { MatchTags } from "../../game/MatchTags";
 import { GuestReviewTag, HostReviewTag } from "../../../stories/Tags.stories";
+import { ReviewRating } from "../common/ReviewRating";
 
 interface ReviewCardProps {
   review: ReviewDataField;

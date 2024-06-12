@@ -11,9 +11,9 @@ import { NotFoundPage } from "../NotFoundPage";
 import { GameRefundPaymentDetailBox } from "../../../components/game/GameRefundPaymentDetailBox";
 import { GameRefundAgreementInfoBox } from "../../../components/game/GameRefundAgreementInfoBox";
 import { useState } from "react";
-import { AlertModal } from "../../../components/common/AlertModal";
 import { ParticipationCancelled } from "../../../stories/Modal.stories";
 import { useGetRefundFeeDetailsQuery } from "../../../hooks/games/useGetRefundFeeDetailsQuery";
+import { AlertModal } from "../../../components/ui/common/AlertModal";
 
 export const CancelParticipation = () => {
   const [checked, setChecked] = useState(false);

@@ -7,7 +7,6 @@ import { useLoginMutation } from "../../../hooks/auth/useLoginMutation";
 import { ErrorMessage } from "../../StatusMessages/ErrorMessage";
 import useDisplayPwStore from "../../../store/useDisplayPwStore";
 import { useEffect, useState } from "react";
-import { AlertModal } from "../../common/AlertModal";
 
 import close from "../../../assets/clarity_eye-hide-line.svg";
 import open from "../../../assets/clarity_eye-show-line.svg";
@@ -24,6 +23,7 @@ import {
 import { SubmitButton } from "../buttons/SubmitButton";
 import { Active, Inactive } from "../buttons/Button.stories";
 import { FormLabel } from "./FormLabel";
+import { AlertModal } from "../common/AlertModal";
 
 export const LoginForm = () => {
   const { displayPassword, setDisplayPassword } = useDisplayPwStore();

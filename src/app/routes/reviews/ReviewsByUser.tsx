@@ -3,10 +3,10 @@ import { NavigateToPrevContainer } from "../../../components/NavigateToPrevConta
 import { TabFilterList } from "../../../components/game/TabFilterList";
 import { useGetUserDataQuery } from "../../../hooks/user/useGetUserDataQuery";
 import useUserDataStore from "../../../store/useUserDataStore";
-import { NoListFoundMessageBox } from "../../../components/common/NoListFoundMessageBox";
 import { useGetUserWrittenReviewsQuery } from "../../../hooks/reviews/useGetUserWrittenReviewsQuery";
 import MITI_logo from "../../../assets/MITI_logo.svg";
 import { ReviewCard } from "../../../components/ui/cards/ReviewCard";
+import { NoListFoundMessageBox } from "../../../components/ui/common/NoListFoundMessageBox";
 
 export interface ReviewDataField {
   id: number;

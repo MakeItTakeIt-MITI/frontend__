@@ -1,5 +1,5 @@
-import MITI_logo from "../../assets/MITI_logo.svg";
-import useAuthStore from "../../store/useAuthStore";
+import useAuthStore from "../../../store/useAuthStore";
+import MITI_logo from "../../../assets/MITI_logo.svg";
 import {
   CustomerSupport,
   DeleteAccount,
@@ -13,7 +13,7 @@ import {
   ReviewsAboutMe,
   SettlementDetails,
   TranscationHistory,
-} from "../../stories/QuickLink.stories";
+} from "../../../stories/QuickLink.stories";
 import { QuickLinkTitle } from "./QuickLinkTitle";
 
 interface TabProps {

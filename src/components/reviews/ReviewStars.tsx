@@ -10,7 +10,7 @@ import {
   LargeTwoAndHalfStars,
   LargeTwoStars,
 } from "../../stories/LargeReviewRating.stories";
-import { LargeReviewRating } from "../common/ReviewRating";
+import { LargeReviewRating } from "../ui/common/ReviewRating";
 
 interface ReviewDetailDataProps {
   reviewDetailData: {

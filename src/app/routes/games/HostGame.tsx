@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
-import { SuccessfulSubmitContainer } from "../../../components/common/SuccessfulSubmitContainer";
 import { GameHostForm } from "../../../components/ui/forms/GameHostForm";
+import { SuccessfulSubmitContainer } from "../../../components/ui/common/SuccessfulSubmitContainer";
 
 export const HostGame = () => {
   const [successfulSubmission, setSuccessfulSubmission] = useState(false);

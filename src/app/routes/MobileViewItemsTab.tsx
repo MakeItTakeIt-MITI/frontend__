@@ -1,4 +1,4 @@
-import { QuickLinkTitle } from "../../components/common/QuickLinkTitle";
+import { QuickLinkTitle } from "../../components/ui/common/QuickLinkTitle";
 import {
   CustomerSupport,
   EditProfile,

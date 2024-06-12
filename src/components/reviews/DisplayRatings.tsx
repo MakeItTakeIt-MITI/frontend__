@@ -1,4 +1,4 @@
-import { ReviewRating } from "../common/ReviewRating";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   FiveStars,
   FourAndHalfStars,
@@ -12,6 +12,7 @@ import {
   TwoStars,
 } from "../../stories/Reviews.stories";
 import { Link } from "react-router-dom";
+import { ReviewRating } from "../ui/common/ReviewRating";
 
 export const DisplayRatings = ({ reviewData, isHost, gameDetailData }: any) => {
   const getRatingComponent = (rating: number) => {
