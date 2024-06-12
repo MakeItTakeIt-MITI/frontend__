@@ -11,10 +11,7 @@ export const PaymentDetail = () => {
   const { settlement_id } = useParams();
   const { userId } = useUserDataStore();
 
-  const { data, isPending } = useGetPaymentDetails(
-    userId,
-    Number(settlement_id)
-  );
+  const { data } = useGetPaymentDetails(userId, Number(settlement_id));
 
   return (
     <section className="laptop:mt-[15px] laptop:mb-[38px]  mobile:my-0">
@@ -24,7 +21,7 @@ export const PaymentDetail = () => {
         <div className="flex gap-2">
           <div className="flex flex-col gap-2">
             {/* <GameDetailBox detailData={data} /> */}
-            <GameDetailsCard data={data?.data} isPending={isPending} />
+            <GameDetailsCard data={data?.data} />
             <GameTotalPaymentBox detailData={data} />
           </div>
           <ParticipantsPaymentStatusBox detailData={data} />

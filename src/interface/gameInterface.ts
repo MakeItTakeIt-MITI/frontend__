@@ -184,7 +184,7 @@ export interface GameDetailField {
     account_number: string;
     created_at: string;
     modified_at: string;
-    confirmed_participations: string;
+    confirmed_participations?: [];
     num_of_confirmed_participations: number;
 
 }
@@ -227,6 +227,7 @@ export interface GameDetailBoxProp {
     gameDetail: GameDetailField
     height?: string;
     width?: string;
+    confirmed_participations?: []
 }
 
 export interface GameEditParameters {

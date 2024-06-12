@@ -27,8 +27,8 @@ export const GameDetailParticipantsBox = ({
             className="flex gap-4 overflow-x-auto "
             style={{ scrollbarWidth: "thin", scrollbarColor: "#fff" }}
           >
-            {gameDetail.confirmed_participations.length !== 0 &&
-              gameDetail.confirmed_participations.map(
+            {gameDetail.confirmed_participation?.length !== 0 &&
+              gameDetail.confirmed_participations?.map(
                 (participant: ConfirmedParticipation) => {
                   return (
                     <div

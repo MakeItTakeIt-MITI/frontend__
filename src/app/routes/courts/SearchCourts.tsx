@@ -9,7 +9,6 @@ import { CourtField } from "../../../interface/gameInterface";
 
 export const SearchCourts = () => {
   const [defaultTabName, setDefaultTabName] = useState("전체 보기");
-  const [gameStatusQuery, setGameStatusQuery] = useState("");
   const [openList, setOpenList] = useState(false);
   const [enumType, setEnumType] = useState<null | undefined | string>("");
   const [searchValue, setSearchValue] = useState<string | null>("");
@@ -28,7 +27,7 @@ export const SearchCourts = () => {
 
   useEffect(() => {
     refetch();
-  }, [defaultTabName, searchValue, gameStatusQuery, refetch]);
+  }, [defaultTabName, searchValue, refetch]);
 
   return (
     <section className="laptop:my-[69px] mobile:mb-16">
@@ -57,12 +56,10 @@ export const SearchCourts = () => {
             </div>
             <RegionFilterBox
               defaultTabName={defaultTabName}
-              setGameStatusQuery={setGameStatusQuery}
               openList={openList}
               handleOpenList={handleOpenList}
               handleChangeTab={handleChangeTab}
               setEnumType={setEnumType}
-              enumType={enumType}
             />
           </div>
         </div>
