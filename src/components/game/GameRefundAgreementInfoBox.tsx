@@ -4,7 +4,9 @@ import checkedIon from "../../assets/games/refund_agreement_checked.svg";
 interface GameRefundAgreementProp {
   checked: boolean;
   setChecked: (arg: boolean) => void;
-  refundDetails: any;
+  refundDetails: {
+    status_code: number;
+  };
 }
 
 export const GameRefundAgreementInfoBox: React.FC<GameRefundAgreementProp> = ({

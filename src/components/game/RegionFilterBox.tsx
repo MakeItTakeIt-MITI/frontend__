@@ -2,13 +2,21 @@ import { useEffect, useState } from "react";
 import downArrow from "../../assets/Chevron_Down_MD.svg";
 import axiosUrl from "../../utils/axios";
 
+interface RegionFilterBoxProp {
+  defaultTabName: string;
+  openList: boolean;
+  handleOpenList: () => void;
+  handleChangeTab: (arg: string) => void;
+  setEnumType: (arg: string) => void;
+}
+
 export const RegionFilterBox = ({
   defaultTabName,
   openList,
   handleOpenList,
   handleChangeTab,
   setEnumType,
-}: any) => {
+}: RegionFilterBoxProp) => {
   const [data, setData] = useState<string[] | null>([]);
 
   useEffect(() => {

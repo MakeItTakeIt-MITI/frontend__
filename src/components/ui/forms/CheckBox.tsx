@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { AgreementPolicyModal } from "./AgreementPolicyModal";
 
+interface CheckboxProps {
+  handleCheckAll: () => void;
+  checkAll: boolean;
+  checkPolicy: boolean;
+  checkAgreement: boolean;
+  checkMarketing: boolean;
+  setCheckPolicy: (arg: boolean) => void;
+  setCheckAgreement: (arg: boolean) => void;
+  setCheckMarketing: (arg: boolean) => void;
+}
+
 export const CheckBox = ({
   handleCheckAll,
   checkAll,
@@ -10,7 +21,7 @@ export const CheckBox = ({
   setCheckPolicy,
   setCheckAgreement,
   setCheckMarketing,
-}: any) => {
+}: CheckboxProps) => {
   const [displayPolicy, setDisplayPolicy] = useState(false);
   return (
     <>

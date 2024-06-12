@@ -1,5 +1,6 @@
 import markerSvg from "../assets/Map_Pin.svg";
 import peopleSvg from "../assets/people.svg";
+import { GameDetailField } from "../interface/gameInterface";
 import {
   AwaitingPayment,
   PaymentPartiallyFulfilled,
@@ -7,7 +8,11 @@ import {
 } from "../stories/Tags.stories";
 import { MatchTags } from "./game/MatchTags";
 
-export const GameDetailBox = ({ detailData }: any) => {
+export interface GameDetailBoxProp {
+  detailData: GameDetailField;
+}
+
+export const GameDetailBox = ({ detailData }: GameDetailBoxProp) => {
   return (
     <div className="w-[453px] p-3 space-y-3 border border-gray-200  rounded-lg ">
       {detailData.data.status === "waiting" && (

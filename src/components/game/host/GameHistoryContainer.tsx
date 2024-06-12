@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MatchTags } from "../MatchTags";
 import {
   GameCancelledTag,
@@ -32,7 +33,7 @@ export const GameHistoryContainer: React.FC<GameHistoryProps> = ({
     if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [inView, fetchNextPage]);
+  }, [inView, fetchNextPage, hasNextPage]);
   return (
     <div
       ref={ref}

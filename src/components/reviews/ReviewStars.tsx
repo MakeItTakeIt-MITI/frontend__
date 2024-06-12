@@ -12,7 +12,15 @@ import {
 } from "../../stories/LargeReviewRating.stories";
 import { LargeReviewRating } from "../common/ReviewRating";
 
-export const ReviewStars = ({ reviewDetailData }: any) => {
+interface ReviewDetailDataProps {
+  reviewDetailData: {
+    data: {
+      rating: number;
+    };
+  };
+}
+
+export const ReviewStars = ({ reviewDetailData }: ReviewDetailDataProps) => {
   const getRatingComponent = (rating: number) => {
     if (rating === 5) {
       return <LargeReviewRating {...LargeFiveStars.args} />;

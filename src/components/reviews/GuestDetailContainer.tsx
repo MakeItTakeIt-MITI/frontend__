@@ -16,10 +16,28 @@ import {
 } from "../../stories/Reviews.stories";
 import { ReviewRating } from "../common/ReviewRating";
 
+interface GuestDetailContainerProps {
+  reviewDetail: {
+    data: {
+      nickname: string;
+      rating: {
+        average_rating: number;
+        num_of_reviews: number;
+      };
+    };
+  };
+  reviewDetailData: {
+    data: {
+      review_type: string;
+      comment: string;
+    };
+  };
+}
+
 export const GuestDetailContainer = ({
   reviewDetail,
   reviewDetailData,
-}: any) => {
+}: GuestDetailContainerProps) => {
   const getRatingComponent = (rating: number) => {
     if (rating === 5) {
       return <ReviewRating {...FiveStars.args} />;

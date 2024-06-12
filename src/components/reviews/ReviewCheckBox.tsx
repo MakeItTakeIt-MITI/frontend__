@@ -16,7 +16,7 @@ export const ReviewCheckBox: React.FC<ReviewCheckBoxProp> = ({
   setSelectedText,
 }) => {
   const [selectedOption, setSelectedOption] = useState<null | number>(null);
-  const [options, _] = useState([
+  const [options] = useState([
     {
       id: 0,
       text: !isHost ? "수비를 열심히 해주셨어요!" : "경기 진행이 매끄럽습니다.",
@@ -49,7 +49,7 @@ export const ReviewCheckBox: React.FC<ReviewCheckBoxProp> = ({
 
   return (
     <div className="text-sm font-[500] ">
-      {options.map((i: any) => {
+      {options.map((i: { id: number; text: string }) => {
         return (
           <button
             onClick={() => handleCheckBox(i.id, i.text)}

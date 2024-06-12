@@ -7,11 +7,6 @@ import { getCurrentLocation } from "./geolocation";
 import markerIcon from "../../assets/new_map_marker.svg";
 import markerIconSelected from "../../assets//svg/map-marker-white.svg";
 
-declare global {
-  interface Window {
-    naver: any;
-  }
-}
 const { naver } = window;
 
 interface NaverMapProp {

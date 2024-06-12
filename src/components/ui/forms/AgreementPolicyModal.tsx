@@ -1,4 +1,8 @@
-export const AgreementPolicyModal = ({ setDisplayPolicy }: any) => {
+type Prop = {
+  setDisplayPolicy: (arg: boolean) => void;
+};
+
+export const AgreementPolicyModal = ({ setDisplayPolicy }: Prop) => {
   return (
     <div className="z-[9999] flex items-center justify-center w-full h-full fixed top-0 left-0 right-0 bottom-0 bg-[#ffffffd5] ">
       <div className="text-zinc-900 text-sm w-[348px]  p-4 bg-gray-100 rounded-lg border border-slate-200 flex-col justify-start items-start gap-4 inline-flex">

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import { AddressField, GameHostField } from "../../../interface/gameInterface";
 import { useEffect, useState } from "react";
@@ -84,6 +85,8 @@ export const GameHostForm = ({
     courtAddress,
     courtAddressDetail,
     displayOptions,
+    refetchCourts,
+    closeOptions,
   ]);
 
   const watchValueLength = (value: any) => watch(value);

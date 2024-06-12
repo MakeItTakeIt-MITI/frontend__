@@ -1,7 +1,12 @@
 import { AwaitingPayment, TransferFulfilled } from "../stories/Tags.stories";
+import { PlayerDetailField } from "./ParticipantsPaymentStatusBox";
 import { MatchTags } from "./game/MatchTags";
 
-export const UserPaymentStatusBox = ({ player }: any) => {
+interface PlayerDetailProps {
+  player: PlayerDetailField;
+}
+
+export const UserPaymentStatusBox = ({ player }: PlayerDetailProps) => {
   return (
     <div className="w-[412px]  px-5 py-[15px] bg-white rounded-lg border-b border-gray-200 justify-between items-center flex">
       <div className="w-[87px] truncate text-neutral-400 text-xs font-normal font-['Pretendard'] leading-[14px]">

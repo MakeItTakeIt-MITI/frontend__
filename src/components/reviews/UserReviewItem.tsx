@@ -14,8 +14,13 @@ import {
   TwoAndHalfStars,
   TwoStars,
 } from "../../stories/Reviews.stories";
+import { ReviewDataField } from "../../app/routes/reviews/ReviewsByUser";
 
-export const UserReviewItem = ({ review }: any) => {
+interface ReviewProps {
+  review: ReviewDataField;
+}
+
+export const UserReviewItem = ({ review }: ReviewProps) => {
   const getRatingComponent = (rating: number) => {
     if (rating === 5) {
       return <ReviewRating {...FiveStars.args} />;

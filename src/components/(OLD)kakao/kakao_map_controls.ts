@@ -2,11 +2,7 @@
 import { GameDetailField } from '../../interface/gameInterface';
 
 
-declare global {
-    interface Window {
-        kakao: any;
-    }
-}
+
 const { kakao } = window;
 
 // 지도 생성

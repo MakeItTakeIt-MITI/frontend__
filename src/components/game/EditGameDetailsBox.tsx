@@ -10,7 +10,9 @@ import { MinParticipants } from "../StatusMessages/ErrorMessage.stories";
 interface EditGameDetailBoxProp {
   gameDetail: GameDetailField;
   register: UseFormRegister<GameEditParameters>;
-  editGameResponse: any;
+  editGameResponse: {
+    status_code: number;
+  };
 }
 
 export const EditGameDetailsBox = ({

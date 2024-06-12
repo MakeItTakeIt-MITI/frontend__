@@ -55,6 +55,7 @@ export interface RatingsField {
     average_rating: number;
 }
 export interface GameDetailField {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [x: string]: any;
     id: number;
     game_status: string;
@@ -183,8 +184,8 @@ export interface GameDetailField {
     account_number: string;
     created_at: string;
     modified_at: string;
-    confirmed_participations: any;
-    num_of_confirmed_participations: any;
+    confirmed_participations: string;
+    num_of_confirmed_participations: number;
 
 }
 

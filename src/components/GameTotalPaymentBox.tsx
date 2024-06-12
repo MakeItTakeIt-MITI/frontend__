@@ -1,4 +1,6 @@
-export const GameTotalPaymentBox = ({ detailData }: any) => {
+import { GameDetailBoxProp } from "./GameDetailBox";
+
+export const GameTotalPaymentBox = ({ detailData }: GameDetailBoxProp) => {
   return (
     <div className="w-[453px] p-3 bg-white rounded-lg border border-gray-200 flex-col justify-start items-start gap-3.5 inline-flex">
       <div className="text-neutral-800 text-base font-bold font-['Pretendard'] leading-[18px]">

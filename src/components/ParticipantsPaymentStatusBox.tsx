@@ -1,6 +1,16 @@
+import { GameDetailBoxProp } from "./GameDetailBox";
 import { UserPaymentStatusBox } from "./UserPaymentStatusBox";
 
-export const ParticipantsPaymentStatusBox = ({ detailData }: any) => {
+export interface PlayerDetailField {
+  id: number;
+  nickname: string;
+  fee: number;
+  isSettled?: boolean;
+}
+
+export const ParticipantsPaymentStatusBox = ({
+  detailData,
+}: GameDetailBoxProp) => {
   return (
     <div
       style={{ scrollbarWidth: "thin" }}
@@ -13,7 +23,7 @@ export const ParticipantsPaymentStatusBox = ({ detailData }: any) => {
           </div>
         </div>
         <div className=" h-full">
-          {detailData?.data.participations.map((player: any) => {
+          {detailData?.data.participations.map((player: PlayerDetailField) => {
             return <UserPaymentStatusBox key={player.id} player={player} />;
           })}
         </div>

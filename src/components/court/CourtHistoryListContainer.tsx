@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   GameCancelledTag,
   GameFinishedTag,
@@ -30,7 +31,7 @@ export const CourtHistoryListContainer: React.FC<CourtHistoryProp> = ({
     if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [inView, fetchNextPage]);
+  }, [inView, fetchNextPage, hasNextPage]);
 
   return (
     <div
