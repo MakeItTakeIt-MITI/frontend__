@@ -33,7 +33,7 @@ export const JoinGame = () => {
   }
 
   return (
-    <section className="laptop:my-[30px] ">
+    <section className="laptop:my-[30px] tablet:my-0 mobile:my-0 ">
       <NavigateToPrevContainer children="경기 상세" />
 
       <div className=" relative laptop:w-[915px]  laptop:min-h-[735px] h-full mb-16   mobile:w-full mx-auto laptop:mb-0  mobile:mb-[140px]  rounded-lg flex flex-col gap-1.5 ">
@@ -42,7 +42,7 @@ export const JoinGame = () => {
           width="100%"
           gameDetail={gameDetail.data}
         />{" "}
-        <div className="flex laptop:flex-row laptop:space-x-2 mobile:space-x-0 mobile:flex-col">
+        <div className="flex laptop:flex-row mobile:flex-col-reverse tablet:flex-col-reverse  laptop:space-x-2 mobile:space-x-0 ">
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
             {/* <div className="space-y-2 p-3 laptop:border  rounded-lg"> */}
             <GamePaymentInfoBox />
@@ -66,6 +66,7 @@ export const JoinGame = () => {
           <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
             <UserReviewDetailCard gameDetail={gameDetail.data} />
             <GameDetailExtraInfoBox gameDetail={gameDetail.data} />
+            <hr className="mobile:block laptop:hidden" />
           </div>
         </div>
       </div>

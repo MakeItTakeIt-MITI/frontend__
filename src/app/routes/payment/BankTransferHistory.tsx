@@ -45,7 +45,7 @@ export const BankTransferHistory = () => {
   const handleChangeTab = (tab: string) => setDefaultTabName(tab);
 
   return (
-    <section className="laptop:mt-[15px] laptop:mb-[69px] mobile:mb-16">
+    <section className="laptop:mt-[15px] laptop:mb-[69px] mobile:mb-16  mobile:my-0 tablet:px-[80px] laptop:px-0">
       <NavigateToPrevContainer children="송금 내역" />
 
       <div className="laptop:w-[593px] mobile:w-full mx-auto flex flex-col gap-[20px] ">
@@ -56,7 +56,7 @@ export const BankTransferHistory = () => {
           <div className="flex justify-between items-center w-full p-3 border border-gray-200 rounded-lg">
             <span className="text-xs text-[#333]">💰 나의 지갑</span>
             <p className="text-end	text-sm  w-[230px] font-bold">
-              {userData?.data.account.balance.toLocaleString("ko-KR", {
+              {userData?.data?.account?.balance.toLocaleString("ko-KR", {
                 style: "currency",
                 currency: "KRW",
               })}

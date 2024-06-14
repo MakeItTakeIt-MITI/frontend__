@@ -83,7 +83,7 @@ export const Profile = () => {
   }
 
   return (
-    <section className="laptop:mb-[100px] laptop:mt-[15px]  mobile:my-0">
+    <section className="laptop:mb-[100px] laptop:mt-[15px]  mobile:my-0 tablet:px-[80px] laptop:px-0 ">
       <NavigateToPrevContainer children="내 정보" />
 
       <div className="laptop:w-[500px] min-h-[700px] mobile:w-full mx-auto laptop:border border-gray-200  rounded-lg">
@@ -97,9 +97,9 @@ export const Profile = () => {
               {data?.data.email}
             </h2>
             <div className="flex gap-1 text-sm text-[#222] font-bold">
-              {getRatingComponent(data?.data.rating.average_rating)}{" "}
+              {getRatingComponent(data?.data?.rating?.average_rating)}{" "}
               <span className="text-neutral-800 text-xs font-medium">
-                {data?.data.rating.average_rating.toFixed(1)}
+                {data?.data?.rating?.average_rating.toFixed(1)}
               </span>
             </div>
           </div>

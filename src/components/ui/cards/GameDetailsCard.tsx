@@ -31,7 +31,7 @@ export const GameDetailsCard = ({ data }: GameDetailsCardProps) => {
   return (
     <>
       {data && (
-        <div className="w-[453px] h-[170px] p-3 space-y-2 border border-gray-200 rounded-lg">
+        <div className="laptop:w-[453px] mobile:w-full tablet:w-full h-[170px] p-3 space-y-2 border border-gray-200 rounded-lg">
           {status === "open" && <MatchTags {...RecruitingTag.args} />}
           {status === "canceled" && <MatchTags {...GameCancelledTag.args} />}
           {status === "closed" && (

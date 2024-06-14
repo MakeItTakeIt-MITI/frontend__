@@ -27,7 +27,7 @@ export const MobileViewGameList = ({
   const isDataAvailable = allGamesData && Array.isArray(allGamesData.data);
 
   return (
-    <div className="tablet:hidden flex flex-col  gap-4  flex-nowrap  px-2 w-full pb-20">
+    <div className=" flex flex-col  gap-4  flex-nowrap  px-2 w-full pb-20">
       {!displayCollapsedList &&
         isDataAvailable &&
         allGamesData?.data &&

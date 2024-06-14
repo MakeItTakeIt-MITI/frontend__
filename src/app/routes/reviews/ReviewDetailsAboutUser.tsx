@@ -33,13 +33,11 @@ export const ReviewDetailsAboutUser = () => {
 
   return (
     <section className="laptop:my-[20px] mobile:mb-16 ">
-      <NavigateToPrevContainer children="경기장 상세 정보" />
+      <NavigateToPrevContainer children="내/작성 리뷰 상세" />
 
       <div className="laptop:w-[981px] laptop:h-[745px]  mx-auto space-y-[32px]">
-        <h1 className="text-[26px] font-bold px-3">
-          {reviewDetailData?.data.review_type !== "host_review"
-            ? "작성 리뷰 상세"
-            : "내 리뷰 상세"}
+        <h1 className="tablet:block mobile:hidden text-[26px] font-bold px-3">
+          작성 리뷰 상세
         </h1>
         <div className="flex laptop:flex-row mobile:flex-col gap-5 laptop:px-3 mobile:px-1  ">
           <div className="laptop:max-w-[431px]  mobile:w-full gap-[20px] w-full flex flex-col">

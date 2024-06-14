@@ -8,7 +8,7 @@ import useUserDataStore from "../../../store/useUserDataStore";
 export const BankTransaction = () => {
   const { userId } = useUserDataStore();
   const { data: userData } = useGetUserDataQuery(userId);
-  const accountId = userData?.data.account.id;
+  const accountId = userData?.data?.account.id;
   const { data: accountBalanceData, refetch: refetchUser } =
     useGetAccountBalance(accountId);
 
@@ -16,7 +16,7 @@ export const BankTransaction = () => {
     refetchUser();
   }, [accountBalanceData, userData]);
   return (
-    <section className="laptop:mt-[15px] laptop:mb-[256px] mobile:my-0">
+    <section className="laptop:mt-[15px] laptop:mb-[256px] mobile:my-0 ">
       <NavigateToPrevContainer children="송금하기" />
 
       <div className="w-[915px] h-[516px] space-y-[32px] mx-auto">

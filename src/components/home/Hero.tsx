@@ -33,12 +33,15 @@ export const HeroCarousel = () => {
     cssEase: "linear",
   };
   return (
-    <section className="mb-10 relative laptop:block mobile:hidden">
+    <section className="mb-10 relative laptop:block tablet:block mobile:hidden">
       <Slider {...settings}>
         {data.map((hero) => {
           return (
             <div className="space-x-4 relative" key={hero.id}>
-              <img src={hero.src} className="rounded-3xl" />
+              <img
+                src={hero.src}
+                className="laptop:rounded-3xl tablet:rounded-sm "
+              />
               <div className="absolute left-6 bottom-6 ">
                 <h2 className="text-[#FFCF0A] text-[1rem] font-bold">
                   {hero.header}

@@ -28,24 +28,24 @@ export const GameDetails = () => {
   }
 
   return (
-    <section className="laptop:my-[30px] ">
+    <section className="laptop:my-[30px] mobile:my-0 tablet:my-0  ">
       <NavigateToPrevContainer children="경기 상세" />
 
-      <div className=" relative laptop:w-[915px]  laptop:min-h-[735px] h-full mb-16   mobile:w-full mx-auto laptop:mb-0  mobile:mb-[140px]  rounded-lg flex flex-col gap-1.5 ">
+      <div className=" relative laptop:w-[915px]  laptop:min-h-[735px] tablet:h-full h-full  mobile:w-full mx-auto laptop:mb-0 tablet:mb-0  mobile:mb-[140px]  rounded-lg flex flex-col gap-1.5 ">
         <DetailPageMap
           height="495px"
           width="100%"
           gameDetail={gameDetail.data}
         />
         <div className="flex laptop:flex-row laptop:space-x-2 mobile:space-x-0 mobile:flex-col">
-          <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
+          <div className="laptop:w-[453px] mobile:w-full tablet:w-full laptop:space-y-2 mobile:space-y-0">
             <GameDetailsCard data={gameDetail?.data} />
             <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />
             <GameDetailParticipantsBox gameDetail={gameDetail.data} />
             <hr className="mobile:block laptop:hidden w-full h-[8px] bg-gray-100" />
             <GameDetailButtonsBox gameDetail={gameDetail.data} />
           </div>
-          <div className="laptop:w-[453px] laptop:space-y-2 mobile:space-y-0">
+          <div className="laptop:w-[453px] mobile:w-full tablet:w-full laptop:space-y-2 mobile:space-y-0">
             <UserReviewDetailCard gameDetail={gameDetail.data} />
             <GameDetailExtraInfoBox gameDetail={gameDetail.data} />
           </div>

@@ -35,8 +35,6 @@ export const Home = () => {
     refetch();
   };
   useEffect(() => {
-    // console.log(filteredGames);
-
     refetch();
   }, [
     selectingDate,
@@ -56,11 +54,11 @@ export const Home = () => {
       {isPending ? (
         <HomeSkeleton />
       ) : (
-        <section className="laptop:mb-[69px] mobile:my-0">
+        <section className="laptop:mb-[69px] mobile:my-0  tablet:px-[80px] laptop:px-0  ">
           <div className="  flex flex-col gap-6  w-full   mx-auto  max-w-[1024px] ">
             <HeroCarousel />
-            <div className="flex   tablet:gap-10   ">
-              <div className="space-y-4">
+            <div className="flex   laptop:gap-10   ">
+              <div className="space-y-4 tablet:hidden laptop:block">
                 <DesktopViewDatesList
                   selectingDate={selectingDate}
                   setSelectedDate={setSelectedDate}
@@ -82,14 +80,16 @@ export const Home = () => {
                 displayCollapsedList={false}
               />
             </div>
-            <MobileViewDatesList setSelectedDate={setSelectedDate} />
-
-            <MobileViewGameList
-              formatDate={formatDate}
-              handleSearchCoords={handleSearchCoords}
-              displayCollapsedList={displayCollapsedList}
-              filteredGames={filteredGames}
-            />
+            <div className="laptop:hidden mobile:block tablet:block ">
+              {" "}
+              <MobileViewDatesList setSelectedDate={setSelectedDate} />
+              <MobileViewGameList
+                formatDate={formatDate}
+                handleSearchCoords={handleSearchCoords}
+                displayCollapsedList={displayCollapsedList}
+                filteredGames={filteredGames}
+              />
+            </div>
           </div>
         </section>
       )}

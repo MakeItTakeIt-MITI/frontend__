@@ -24,7 +24,7 @@ export const MobileViewDatesList = ({ setSelectedDate }: DateBoxProps) => {
   };
 
   return (
-    <div className="flex gap-4 px-4 items-center tablet:hidden  overflow-y-scroll">
+    <div className="flex gap-4 px-4 items-center  overflow-y-scroll py-2">
       <div className="flex gap-4 justify-center items-center">
         {availableDates.map((date, index) => {
           return (

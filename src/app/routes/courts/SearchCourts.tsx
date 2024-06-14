@@ -30,7 +30,7 @@ export const SearchCourts = () => {
   }, [defaultTabName, searchValue, refetch]);
 
   return (
-    <section className="laptop:my-[69px] mobile:mb-16">
+    <section className="laptop:my-[69px] mobile:mb-16  mobile:my-0 tablet:px-[80px] laptop:px-0">
       <NavigateToPrevContainer children="경기장 조회" />
 
       <div className="laptop:space-y-8 mobile:mt-8 laptop:mt-0">

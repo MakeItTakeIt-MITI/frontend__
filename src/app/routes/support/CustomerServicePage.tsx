@@ -16,7 +16,7 @@ export const CustomerServicePage = () => {
   const { data: questionsData } = useGetQuestionsQuery();
 
   return (
-    <section className="laptop:mt-[15px] laptop:mb-[100px]  mobile:my-0">
+    <section className="laptop:mt-[15px] laptop:mb-[100px]  mobile:my-0 tablet:px-[80px] laptop:px-0">
       <NavigateToPrevContainer children="고객센터" />
       <div className="flex flex-col gap-[15px] laptop:w-[495px] min-h-[700px]   mobile:w-full mx-auto   laptop:py-10 laptop:px-6 mobile:p-4 rounded-lg">
         <h1 className="mobile:hidden tablet:block font-bold text-[26px] ">

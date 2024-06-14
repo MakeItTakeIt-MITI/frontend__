@@ -76,7 +76,7 @@ export const EditProfile = () => {
       style={{
         marginBottom: data?.data.oauth === null ? "100px" : "667px",
       }}
-      className={"laptop:mt-[15px] mobile:my-0"}
+      className="laptop:mt-[15px] mobile:my-0 tablet:px-[80px] laptop:px-0 "
     >
       <NavigateToPrevContainer children="내 정보" />
       <form

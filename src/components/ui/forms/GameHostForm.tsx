@@ -264,7 +264,7 @@ export const GameHostForm = ({
         {/* max participants */}
 
         <div className="flex flex-col gap-2   mobile:justify-between ">
-          <div className="flex items-center gap-4 h-full">
+          <div className="flex items-center mobile:justify-center gap-4 h-full">
             <div className="flex flex-col gap-2 tablet:w-full">
               <FormLabel id="max_players" children="총 인원 모집" />
               <input
@@ -323,7 +323,9 @@ export const GameHostForm = ({
             style={{ resize: "none" }}
             placeholder="주차, 샤워 가능 여부, 경기 진행 방식, 필요한 유니폼 색상 등 참가들에게 공지할 정보들을 입력해주세요."
             className="w-full h-[150px]   mobile:text-[14px] tablet:text-[16px] px-4 py-3 bg-[#F7F7F7] rounded-lg "
-            {...register("info")}
+            {...register("info", {
+              required: true,
+            })}
           />
         </div>
 

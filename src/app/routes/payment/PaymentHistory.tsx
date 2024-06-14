@@ -65,7 +65,7 @@ export const PaymentHistory = () => {
   const handleChangeTab = (tab: string) => setDefaultTabName(tab);
 
   return (
-    <section className="laptop:my-[69px] mobile:mb-16">
+    <section className="laptop:my-[69px] mobile:mb-16  mobile:my-0 tablet:px-[80px] laptop:px-0">
       <NavigateToPrevContainer children="정산 내역" />
 
       <div className="laptop:w-[593px] mobile:w-full mx-auto flex flex-col gap-[22px]">

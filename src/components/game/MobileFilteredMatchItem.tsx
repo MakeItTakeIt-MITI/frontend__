@@ -6,10 +6,10 @@ import {
   RecruitingCompletedTag,
   RecruitingTag,
 } from "../../stories/Tags.stories";
-import { MatchTags } from "./MatchTags";
 import groupIcon from "../../assets/people.svg";
 
 import "../home/animation.css";
+import { MatchTags } from "./MatchTags";
 
 interface MobileMatchItemProp {
   game: GameDetailField;
@@ -36,7 +36,7 @@ export const MobileFilteredMatchItem = ({
             {game.game_status === "open" && (
               <MatchTags {...RecruitingTag.args} />
             )}
-            {game.game_status === "cancelled" && (
+            {game.game_status === "canceled" && (
               <MatchTags {...GameCancelledTag.args} />
             )}
             {game.game_status === "closed" && (

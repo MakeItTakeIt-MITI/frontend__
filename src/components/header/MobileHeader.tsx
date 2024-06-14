@@ -1,10 +1,10 @@
 import homeIcon from "../../assets/header_home_icon.svg";
 import gamesIcon from "../../assets/header_games_icon.svg";
-import profileIcon from "../../assets/header_profile_icon.svg";
 import viewAllIcon from "../../assets/header_all_icon.svg";
 import viewAllIconColor from "../../assets/header_view_color.svg";
 import homeIconColor from "../../assets/header_home_color.svg";
 import gamesIconColor from "../../assets/header_game_color.svg";
+import profileIcon from "../../assets/header_profile_icon.svg";
 import profileIconColor from "../../assets/header_profile_color.svg";
 import { Link, useLocation } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";

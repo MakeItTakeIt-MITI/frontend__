@@ -26,7 +26,7 @@ export const HeaderTabContainer: React.FC<TabProps> = ({ displayTab }) => {
   return (
     <div
       onMouseLeave={() => setTimeout(displayTab, 250)}
-      className="justify-center p-5 bg-white rounded-lg w-[1024px] mx-auto  absolute left-0  right-0 top-[58px] border border-gray-200"
+      className="justify-center p-5 bg-white rounded-lg tablet:w-full  laptop:w-[1024px] mx-auto  absolute left-0  right-0 top-[58px] border border-gray-200"
     >
       <div className="flex gap-5 max-md:flex-col max-md:gap-0">
         <div className="flex flex-col w-[30%] max-md:ml-0 max-md:w-full">

@@ -6,7 +6,6 @@ import useGeolocationStore from "../../store/useGeolocationStore";
 import { getCurrentLocation } from "./geolocation";
 import markerIcon from "../../assets/new_map_marker.svg";
 import markerIconSelected from "../../assets//svg/map-marker-white.svg";
-
 const { naver } = window;
 
 interface NaverMapProp {
@@ -44,6 +43,7 @@ export const NaverMapEL = ({
     }
 
     const naverMap = new naver.maps.Map("map", {
+      // center: new naver.maps.LatLng(latitude, longitude),
       center: new naver.maps.LatLng(coordX, coordY),
       zoom: 14,
       zoomControl: true,
@@ -64,6 +64,7 @@ export const NaverMapEL = ({
     }
 
     let selectedMarker: any | null = null;
+    const markers: string[] = [];
 
     for (let index = 0; index < allGamesData.data.length; index++) {
       const data = allGamesData.data[index];
@@ -136,7 +137,27 @@ export const NaverMapEL = ({
         setDisplayCollapsedList(selectedMarker !== null);
         setFilteredGames(selectedMarker !== null ? filteredAddresses : []);
       });
+      markers.push(marker);
     }
+
+    //     // cluster;
+    //     new MarkerClustering({
+    //       minClusterSize: 1,
+    //       maxZoom: 14,
+    //       map: naverMap,
+    //       markers: markers,
+    //       gridSize: 120,
+    //       disableClickZoom: false,
+    //       icons: [
+    //         {
+    //           content: `<div style="position: absolute; width: 40px; height: 40px; background: #4065F5; border-radius: 20px; color: #fff; display: flex; justify-content: center; align-items: center; font-weight: bold;">
+    // +
+    // </div>`,
+    //           size: naver.maps.Size(40, 40),
+    //           anchor: naver.maps.Point(20, 20),
+    //         },
+    //       ],
+    //     });
 
     getCurrentLocation(setCurrentMyLocation, gameSearched);
     setCoordsToSelectedGame(naverMap, coordX, coordY, gameSearched);
@@ -150,6 +171,7 @@ export const NaverMapEL = ({
     displayCollapsedList,
     coordX,
     coordY,
+    setDisplayCollapsedList,
   ]);
 
   return <section id="map" className="w-full  h-[473px]" />;

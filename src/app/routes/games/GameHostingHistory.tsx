@@ -60,12 +60,12 @@ export const GameHostingHistory = () => {
     return <NotFoundPage />;
   }
   return (
-    <section className="laptop:my-[69px] mobile:mb-16">
+    <section className="laptop:my-[69px] mobile:mb-16 mobile:my-0 tablet:px-[80px] laptop:px-0">
       <NavigateToPrevContainer children="나의 호스팅 경기" />
 
-      <div className="laptop:space-y-8 mobile:mt-8 laptop:mt-0">
+      <div className=" tablet:space-y-8 mobile:m-0 laptop:mt-0">
         <div className="laptop:w-[593px] mobile:w-full mx-auto flex justify-between">
-          <h1 className="text-[26px] w-full font-bold laptop:block mobile:hidden">
+          <h1 className="text-[26px] w-full font-bold tablet:block mobile:hidden">
             나의 호스팅 경기
           </h1>
           {/* tab */}

@@ -18,7 +18,7 @@ export const TabFilterList = ({
   return (
     <>
       {/* tab */}
-      <div className="flex justify-end w-full ">
+      <div className="flex justify-end w-full mobile:p-4 tablet:p-0 ">
         <div
           onClick={handleOpenList}
           style={{

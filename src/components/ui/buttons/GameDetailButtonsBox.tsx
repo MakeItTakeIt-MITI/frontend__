@@ -12,7 +12,7 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailButtonProps) => {
   const gameIdParam = Number(id);
 
   return (
-    <div className="laptop:static mobile:fixed mobile:bottom-[80px] mobile:px-4 laptop:px-0  mobile:w-full text-[14px]">
+    <div className="laptop:static mobile:fixed mobile:bottom-[80px] tablet:bottom-[40px] mobile:px-4 laptop:px-0  mobile:w-full text-[14px]">
       {gameDetail?.game_status === "open" && gameDetail?.is_host && (
         <Link to={`/games/detail/${gameIdParam}/edit`}>
           <SubmitButton children="경기 수정하기" {...Edit.args} />

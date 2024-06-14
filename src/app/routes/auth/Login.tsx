@@ -37,7 +37,7 @@ export const Login = () => {
           </div>
         </div>
         <div className="laptop:absolute mobile:static   w-full left-0 right-0 laptop:bottom-8  flex  justify-center  gap-4 text-[#8c8c8c] text-[13px] ">
-          <Link to="/support/customer-service">고객센터</Link>
+          <Link to="/auth/login">고객센터</Link>
           <p>|</p>
           <Link to="/support/find-email">
             <button>ID / PW를 잊으셨나요?</button>

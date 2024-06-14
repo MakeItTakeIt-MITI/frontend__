@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
-import { useState } from "react";
 import { PostQuestionProps } from "../../../interface/supportInterace";
 import { usePostQuestionMutation } from "../../../hooks/support/usePostQuestionMutation";
 import { useNavigate } from "react-router-dom";
@@ -12,14 +11,10 @@ import {
 import { FormLabel } from "../../../components/ui/forms/FormLabel";
 
 export const UserInquiryPage = () => {
-  const [_displayModal, _setDisplayModal] = useState(false);
   const navigate = useNavigate();
 
   const { register, formState, handleSubmit, watch } =
     useForm<PostQuestionProps>();
-
-  // const isFormEmpty =
-  //   !formState.dirtyFields.title || !formState.dirtyFields.content;
 
   const { mutate: postQuestionMutate, data: postResponse } =
     usePostQuestionMutation();
@@ -38,7 +33,7 @@ export const UserInquiryPage = () => {
   return (
     <section
       onSubmit={handleSubmit(handleSubmitPost)}
-      className="laptop:my-4 mobile:my-0 "
+      className="laptop:my-4 mobile:my-0 tablet:px-[80px] laptop:px-0 "
     >
       <NavigateToPrevContainer children="문의하기" />
 
