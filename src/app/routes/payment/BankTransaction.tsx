@@ -16,12 +16,14 @@ export const BankTransaction = () => {
     refetchUser();
   }, [accountBalanceData, userData]);
   return (
-    <section className="laptop:mt-[15px] laptop:mb-[256px] mobile:my-0 ">
+    <section className="laptop:mt-[15px] laptop:mb-[256px] mobile:mb-[100px] tablet:px-[80px] laptop:px-0">
       <NavigateToPrevContainer children="송금하기" />
 
-      <div className="w-[915px] h-[516px] space-y-[32px] mx-auto">
-        <h1 className="text-[26px] font-bold">송금하기</h1>
-        <div className="flex gap-5">
+      <div className="laptop:w-[915px] laptop:h-[516px] space-y-[32px] mx-auto">
+        <h1 className="mobile:hidden tablet:block text-[26px] font-bold">
+          송금하기
+        </h1>
+        <div className="flex laptop:flex-row mobile:flex-col gap-5">
           {/* left */}
           <div className="w-full h-[198px] border border-gray-200 rounded-lg pt-3 pl-3 pr-3 pb-5 space-y-[14px]">
             <h2 className="font-bold">보유 잔고</h2>
