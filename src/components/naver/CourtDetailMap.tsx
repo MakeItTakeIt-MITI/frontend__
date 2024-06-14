@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 import { newCustomMarker } from "./naver_map_controls";
-declare global {
-  interface Window {
-    naver: any;
-  }
-}
+
 const { naver } = window;
 
 export const CourtDetailMap = ({ courtData }: any) => {
@@ -30,5 +26,10 @@ export const CourtDetailMap = ({ courtData }: any) => {
       },
     });
   }, [courtData]);
-  return <section id="map" className="w-full h-[303px] rounded-lg" />;
+  return (
+    <section
+      id="map"
+      className="w-full h-[303px] mobile:hidden tablet:block rounded-lg"
+    />
+  );
 };

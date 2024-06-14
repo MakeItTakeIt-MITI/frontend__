@@ -38,7 +38,7 @@ export const DetailPageMap: React.FC<GameDetailBoxProp> = ({
         width: width,
         height: height,
       }}
-      className=" mobile:h-[300px] rounded-lg"
+      className=" mobile:h-[300px] mobile:hidden tablet:block rounded-lg"
     />
   );
 };
