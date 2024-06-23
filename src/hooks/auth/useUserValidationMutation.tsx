@@ -1,28 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
 import { userValidation } from "../../api/validation";
 
-export const useValidateDuplicateEmail = (
-  setValidEmail: (arg: boolean) => void
-) => {
+export const useValidateDuplicateEmail = () => {
   return useMutation({
     mutationFn: userValidation,
-    onSuccess: (response) => {
-      if (response?.data.email.is_duplicated === false) {
-        setValidEmail(true);
-      }
-    },
   });
 };
 
-export const useValidateDuplicateNickname = (
-  setValidNickname: (arg: boolean) => void
-) => {
+export const useValidateDuplicateNickname = () => {
   return useMutation({
     mutationFn: userValidation,
-    onSuccess: (response) => {
-      if (response?.data.nickname.is_duplicated === false) {
-        setValidNickname(true);
-      }
-    },
   });
 };

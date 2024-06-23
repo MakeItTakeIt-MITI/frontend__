@@ -1,8 +1,9 @@
 import axios from "axios";
 import { CodeVerificationField, ResetPassField } from "../interface/authInterface";
 import { FindEmailField, NewPassworldField } from "../interface/user-edit-interface";
-import { LoginField, RegisterField } from "../interface/usersInterface";
+import { LoginField } from "../interface/usersInterface";
 import axiosUrl from "../utils/axios"
+import { AuthInputField } from "../components/ui/forms/AuthInput";
 
 export const deleteAccount = async (userId: number | null) => {
     try {
@@ -38,15 +39,15 @@ export const userLogout = async (accessToken: string | null, refreshToken: strin
 }
 
 
-export const userSignup = async (data: RegisterField) => {
+export const userSignup = async (data: AuthInputField) => {
     try {
         const response = await axiosUrl.post('/auth/signup', data)
-        if (response.data.status_code === 201) {
-            localStorage.setItem("authentication_token", response.data.data.authentication_token)
-            localStorage.setItem("nickname", response.data.data.nickname)
-            return response.data
-        }
-
+        // if (response.data.status_code === 201) {
+        //     localStorage.setItem("authentication_token", response.data.data.authentication_token)
+        //     localStorage.setItem("nickname", response.data.data.nickname)
+        //     return response.data
+        // }
+        return response.data
     } catch {
         throw new Error
     }

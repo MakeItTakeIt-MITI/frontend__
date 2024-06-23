@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 
-import { LoginField } from "../../../interface/usersInterface";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginSchema } from "../../../modals/useLoginSchema";
 import { useLoginMutation } from "../../../hooks/auth/useLoginMutation";
@@ -24,6 +23,8 @@ import { SubmitButton } from "../buttons/SubmitButton";
 import { Active, Inactive } from "../buttons/Button.stories";
 import { FormLabel } from "./FormLabel";
 import { AlertModal } from "../common/AlertModal";
+import { AuthInputField } from "./AuthInput";
+import AuthInput from "./AuthInput";
 
 export const LoginForm = () => {
   const { displayPassword, setDisplayPassword } = useDisplayPwStore();
@@ -34,7 +35,7 @@ export const LoginForm = () => {
     formState: { errors },
     formState,
     register,
-  } = useForm<LoginField>({
+  } = useForm<AuthInputField>({
     resolver: zodResolver(useLoginSchema),
   });
 
@@ -43,7 +44,7 @@ export const LoginForm = () => {
   const handleCloseModal = () => {
     setDisplayModal(false);
   };
-  const onSubmit = (data: LoginField) => {
+  const onSubmit = (data: AuthInputField) => {
     loginMutation(data);
   };
 
@@ -57,15 +58,16 @@ export const LoginForm = () => {
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-2">
         <FormLabel id="user-email" children="이메일" />
-        <input
+
+        <AuthInput
           type="email"
           id="user-email"
           data-testid="email-input"
-          className="input-primary"
           placeholder="이메일을 입력해주세요."
-          {...register("email", {
-            required: true,
-          })}
+          register={register}
+          register_type="email"
+          aria-label="이메일을 입력해주세요"
+          aria-invalid={errors.email ? true : false}
         />
       </div>
       {errors.email && <ErrorMessage {...EmailRegexFailure.args} />}
@@ -73,15 +75,15 @@ export const LoginForm = () => {
         <FormLabel id="user-password" children="비밀번호" />
 
         <div className="relative">
-          <input
+          <AuthInput
             type={displayPassword ? "text" : "password"}
             id="user-password"
             data-testid="password-input"
-            className="input-primary"
             placeholder="비밀번호를 입력해주세요."
-            {...register("password", {
-              required: true,
-            })}
+            register={register}
+            register_type="password"
+            aria-label="비밀번호를 입력해주세요."
+            aria-invalid={errors.password ? true : false}
           />
 
           <button
@@ -97,27 +99,27 @@ export const LoginForm = () => {
           </button>
         </div>
       </div>
-
-      {errors.password && <ErrorMessage {...PasswordRegexFailure.args} />}
-
-      {!errors.email &&
-        !errors.password &&
-        data?.status_code === 401 &&
-        data?.error_code === 140 && <ErrorMessage {...UserNotFound.args} />}
-      {data?.status_code === 403 && data?.error_code === 140 && (
-        <AlertModal
-          modal={displayModal}
-          handleCloseModal={handleCloseModal}
-          {...InactiveUserNotification.args}
-        />
-      )}
-      {data?.status_code === 403 && data?.error_code === 141 && (
-        <AlertModal
-          modal={displayModal}
-          handleCloseModal={handleCloseModal}
-          {...NotAuthroizedUser.args}
-        />
-      )}
+      <>
+        {errors.password && <ErrorMessage {...PasswordRegexFailure.args} />}
+        {!errors.email &&
+          !errors.password &&
+          data?.status_code === 401 &&
+          data?.error_code === 140 && <ErrorMessage {...UserNotFound.args} />}
+        {data?.status_code === 403 && data?.error_code === 140 && (
+          <AlertModal
+            modal={displayModal}
+            handleCloseModal={handleCloseModal}
+            {...InactiveUserNotification.args}
+          />
+        )}
+        {data?.status_code === 403 && data?.error_code === 141 && (
+          <AlertModal
+            modal={displayModal}
+            handleCloseModal={handleCloseModal}
+            {...NotAuthroizedUser.args}
+          />
+        )}
+      </>
 
       {!formState.isValid ? (
         <SubmitButton children="로그인 하기" {...Inactive.args} />

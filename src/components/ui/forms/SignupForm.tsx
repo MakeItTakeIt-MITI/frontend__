@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { userRegisterSchema } from "../../../modals/userSignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterField } from "../../../interface/usersInterface";
 import { useEffect, useState } from "react";
 import { useRegisterMutation } from "../../../hooks/auth/useRegisterMutation";
 import {
@@ -10,14 +9,11 @@ import {
 } from "../../../hooks/auth/useUserValidationMutation";
 import { ErrorMessage } from "../../StatusMessages/ErrorMessage";
 import { SuccessMessage } from "../../StatusMessages/SuccessMessage";
-import { RegisterInputField } from "./FormInputContainer";
 import { CheckBox } from "./CheckBox";
 import {
-  EmailRegexFailure,
   ExistingEmail,
   ExistingNickname,
   NameRegexFailure,
-  NicknameRegexFailure,
   PasswordConfirmNotMatching,
   PasswordRegexFailure,
   PhoneRegexFailure,
@@ -29,6 +25,8 @@ import {
 } from "../../StatusMessages/SuccessMessage.stories";
 import { SubmitButton } from "../buttons/SubmitButton";
 import { Active, Inactive } from "../buttons/Button.stories";
+import { FormLabel } from "./FormLabel";
+import AuthInput, { AuthInputField } from "./AuthInput";
 
 export const SignupForm = () => {
   const [validEmail, setValidEmail] = useState(false);
@@ -45,20 +43,22 @@ export const SignupForm = () => {
     getValues,
     formState: { errors },
     formState,
-  } = useForm<RegisterField>({
+  } = useForm<AuthInputField>({
     resolver: zodResolver(userRegisterSchema),
     mode: "onBlur",
   });
 
-  const { mutate: registerMutation, data: registerResult } =
+  const { mutate: registerMutation, data: registrationResponse } =
     useRegisterMutation();
   const { mutate: emailMutation, data: emailValidationData } =
-    useValidateDuplicateEmail(setValidEmail);
+    useValidateDuplicateEmail();
   const { mutate: nicknameMutation, data: nicknameValidationData } =
-    useValidateDuplicateNickname(setValidNickname);
-  console.log(registerResult);
+    useValidateDuplicateNickname();
+  console.log(registrationResponse);
 
-  const onSubmit = (data: RegisterField) => registerMutation(data);
+  const onSubmit = (data: AuthInputField) => {
+    registerMutation(data);
+  };
 
   const handleValidateEmail = () => {
     emailMutation({ email: getValues("email") });
@@ -76,7 +76,22 @@ export const SignupForm = () => {
       setCheckAgreement(true);
       setCheckMarketing(true);
     }
-  }, [checkAll, checkPolicy, checkAgreement, checkMarketing]);
+
+    if (nicknameValidationData?.data.nickname.is_duplicated === false) {
+      setValidNickname(true);
+    }
+
+    if (emailValidationData?.data.email.is_duplicated === false) {
+      setValidEmail(true);
+    }
+  }, [
+    checkAll,
+    checkPolicy,
+    checkAgreement,
+    checkMarketing,
+    nicknameValidationData,
+    emailValidationData,
+  ]);
 
   return (
     <form
@@ -84,58 +99,89 @@ export const SignupForm = () => {
       className="flex flex-col gap-[30px]"
     >
       <div className="space-y-2">
-        <RegisterInputField
-          type="email"
-          id="email"
-          dataTestid="email-input"
-          label="이메일"
-          placeholder="이메일을 입력해주세요."
-          register_value="email"
-          isRequired={true}
-          register={register}
-          isValidatorField={true}
-          isValid={validEmail && !errors.email}
-          handleValidation={
-            !validEmail ? handleValidateEmail : () => setValidEmail(false)
-          }
-        />
+        <FormLabel id="email" children="이메일" />
+        <div className="relative">
+          <AuthInput
+            type="email"
+            id="email"
+            data-testid="email-input"
+            placeholder="이메일을 입력해주세요."
+            register={register}
+            register_type="email"
+            aria-label="이메일을 입력하세요"
+            aria-invalid={errors.email ? true : false}
+          />
+          <button
+            onClick={() => {
+              if (!validEmail) {
+                handleValidateEmail();
+              } else {
+                setValidEmail(false);
+              }
+            }}
+            type="button"
+            style={{
+              backgroundColor: !validEmail ? "#4065f6" : "#E8E8E8",
+            }}
+            className="w-[81px] absolute right-4 bottom-[11px] top-[11px] text-[12px] text-white  rounded-lg"
+          >
+            {!validEmail ? "중복확인" : "수정하기"}
+          </button>
+        </div>
 
-        {errors.email?.message && <ErrorMessage {...EmailRegexFailure.args} />}
+        <>
+          {/* {errors.email?.message && (
+            <ErrorMessage {...EmailRegexFailure.args} />
+          )} */}
 
-        {emailValidationData?.data.email.is_duplicated && (
-          <ErrorMessage {...ExistingEmail.args} />
-        )}
-        {emailValidationData?.status_code === 200 &&
-          !emailValidationData?.data.email.is_duplicated && (
-            <SuccessMessage {...EmailAllowed.args} />
+          {emailValidationData?.data.email.is_duplicated && !validEmail && (
+            <ErrorMessage {...ExistingEmail.args} />
           )}
+          {emailValidationData?.status_code === 200 &&
+            !emailValidationData?.data.email.is_duplicated &&
+            validEmail && <SuccessMessage {...EmailAllowed.args} />}
+        </>
       </div>
       <div className="space-y-2">
-        <RegisterInputField
-          type="nickname"
-          id="nickname"
-          dataTestid="nickname-input"
-          label="닉네임"
-          placeholder="닉네임을 입력해주세요."
-          register_value="nickname"
-          isRequired={true}
-          register={register}
-          isValidatorField={true}
-          isValid={validNickname && !errors.nickname}
-          handleValidation={
-            !validNickname ? handleValidateNick : () => setValidNickname(false)
-          }
-        />
-        {errors.nickname?.message && (
-          <ErrorMessage {...NicknameRegexFailure.args} />
-        )}
-        {nicknameValidationData?.data.nickname.is_duplicated && (
-          <ErrorMessage {...ExistingNickname.args} />
-        )}
-        {nicknameValidationData?.status_code === 200 &&
-          !nicknameValidationData?.data.nickname.is_duplicated && (
-            <SuccessMessage {...NicknameAllowed.args} />
-          )}
+        <FormLabel id="nickname" children="닉네임" />
+        <div className="relative">
+          <AuthInput
+            type="nickname"
+            id="nickname"
+            data-testid="nickname-input"
+            placeholder="닉네임을 입력해주세요."
+            register={register}
+            register_type="nickname"
+            aria-label="닉네임을 입력해주세요."
+            aria-invalid={!validNickname ? true : false}
+          />
+          <button
+            onClick={() => {
+              if (!validNickname) {
+                handleValidateNick();
+              } else {
+                setValidNickname(false);
+              }
+            }}
+            type="button"
+            style={{
+              backgroundColor: !validNickname ? "#4065f6" : "#E8E8E8",
+            }}
+            className="w-[81px] absolute right-4 bottom-[11px] top-[11px] text-[12px] text-white  rounded-lg"
+          >
+            {!validNickname ? "중복확인" : "수정하기"}
+          </button>
+        </div>
+        <>
+          {/* {errors.nickname?.message && (
+            <ErrorMessage {...NicknameRegexFailure.args} />
+          )} */}
+          {nicknameValidationData?.data.nickname.is_duplicated &&
+            !validNickname && <ErrorMessage {...ExistingNickname.args} />}
+          {nicknameValidationData?.status_code === 200 &&
+            !nicknameValidationData?.data.nickname.is_duplicated &&
+            validNickname && <SuccessMessage {...NicknameAllowed.args} />}
+        </>
       </div>
 
       <div className="space-y-2 noselect">
@@ -146,81 +192,96 @@ export const SignupForm = () => {
         </p>
       </div>
       <div className="space-y-2">
-        <RegisterInputField
+        <AuthInput
           type="password"
           id="password"
-          dataTestid="password-input"
-          label=""
+          data-testid="password-input"
           placeholder="비밀번호를 입력해주세요."
-          register_value="password"
-          isRequired={true}
           register={register}
+          register_type="password"
+          aria-label="비밀번호를 입력해주세요."
+          aria-invalid={errors.password ? true : false}
         />
 
-        {errors.password?.message && (
-          <ErrorMessage {...PasswordRegexFailure.args} />
-        )}
-        {!errors.password?.message && getValues("password") && (
-          <SuccessMessage {...SafePassword.args} />
-        )}
+        <>
+          {errors.password?.message && (
+            <ErrorMessage {...PasswordRegexFailure.args} />
+          )}
+          {!errors.password?.message && getValues("password") && (
+            <SuccessMessage {...SafePassword.args} />
+          )}
+        </>
       </div>
       <div className="space-y-2">
-        <RegisterInputField
+        <AuthInput
           type="password"
           id="password_check"
-          dataTestid="password-check-input"
-          label=""
+          data-testid="password-check-input"
           placeholder="비밀번호를 다시 입력해주세요."
-          register_value="password_check"
-          isRequired={true}
           register={register}
+          register_type="password_check"
+          aria-label="비밀번호를 다시 입력해주세요."
+          aria-invalid={errors.password_check ? true : false}
         />
-        {errors.password_check?.message && (
-          <ErrorMessage {...PasswordConfirmNotMatching.args} />
-        )}
-        {!errors.password_check?.message && getValues("password_check") && (
-          <SuccessMessage {...SafePassword.args} />
-        )}
+
+        <>
+          {errors.password_check?.message && (
+            <ErrorMessage {...PasswordConfirmNotMatching.args} />
+          )}
+          {!errors.password_check?.message && getValues("password_check") && (
+            <SuccessMessage {...SafePassword.args} />
+          )}
+        </>
       </div>
       <div className="space-y-2">
-        <RegisterInputField
-          type="name"
+        <FormLabel id="name" children="이름" />
+        <AuthInput
+          type="text"
           id="name"
-          dataTestid="name-input"
-          label="이름"
+          data-testid="name-input"
           placeholder="이름을 입력해주세요."
-          register_value="name"
-          isRequired={true}
           register={register}
+          register_type="name"
+          aria-label="이름을 입력해주세요."
+          aria-invalid={errors.name ? true : false}
         />
-        {errors.name?.message && <ErrorMessage {...NameRegexFailure.args} />}
+        <>
+          {errors.name?.message && <ErrorMessage {...NameRegexFailure.args} />}
+          {/* {} */}
+        </>{" "}
       </div>
 
-      <RegisterInputField
-        type="date"
-        id="birthday"
-        dataTestid="birthday-input"
-        label="생년월일"
-        placeholder=""
-        register_value="birthday"
-        isRequired={true}
-        register={register}
-      />
+      <div className="space-y-2">
+        <FormLabel id="date" children="생년월일" />
+        <AuthInput
+          type="date"
+          id="birthday"
+          data-testid="birthday-input"
+          register={register}
+          register_type="birthday"
+          aria-label="생일을 입력해주세요."
+        />
+      </div>
 
       <div className="space-y-2">
-        <RegisterInputField
+        <FormLabel id="phone" children="휴대폰 번호" />
+        <AuthInput
           type="string"
           id="phone"
-          dataTestid="phone-input"
-          label="핸드폰 번호"
-          placeholder="핸드폰 번호를 입력해주세요."
-          register_value="phone"
-          isRequired={true}
+          data-testid="phone-input"
           register={register}
+          register_type="phone"
+          placeholder="핸드폰 번호를 입력해주세요"
+          aria-label="핸드폰 번호를 입력해주세요."
+          aria-invalid={errors.phone ? true : false}
         />
-
         {errors.phone?.message && <ErrorMessage {...PhoneRegexFailure.args} />}
+        {registrationResponse?.status_code === 400 &&
+          registrationResponse?.data.phone && (
+            <ErrorMessage children="이미 회원으로 등록된 번호입니다." />
+          )}
       </div>
+
       <CheckBox
         handleCheckAll={handleCheckAll}
         checkAll={checkAll}
