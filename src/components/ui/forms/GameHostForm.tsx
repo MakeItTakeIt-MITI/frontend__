@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
-import { AddressField, GameHostField } from "../../../interface/gameInterface";
+import { AddressField } from "../../../interface/gameInterface";
 import { useEffect, useState } from "react";
 import { useHostGameMutation } from "../../../hooks/games/useHostGameMutation";
 
 import { useDaumPostcodePopup } from "react-daum-postcode";
-import { GameHostInputField } from "./FormInputContainer";
 import { FormLabel } from "./FormLabel";
 import { ErrorMessage } from "../../StatusMessages/ErrorMessage";
 import { useGetAllCourtsInfiniteQuery } from "../../../hooks/courts/useGetAllCourtsInfiniteQuery";
@@ -13,6 +12,7 @@ import { MatchingCourtModal } from "../../game/MatchingCourtModal";
 import useDisplayAddressOptionsStore from "../../../store/useDisplayAddressOptionsStore";
 import { SubmitButton } from "../../ui/buttons/SubmitButton";
 import { Active, Inactive } from "../../ui/buttons/Button.stories";
+import GameInput, { GameInputField } from "./GameInput";
 
 interface GameHostFormProps {
   setSuccessfulSubmission: (arg: boolean) => void;
@@ -22,7 +22,7 @@ export const GameHostForm = ({
   setSuccessfulSubmission,
 }: GameHostFormProps) => {
   const { handleSubmit, register, setValue, watch, formState } =
-    useForm<GameHostField>();
+    useForm<GameInputField>();
   const [startDateTime, setStartDateTime] = useState("");
   const [endDateTime, setEndDateTime] = useState("");
 
@@ -89,9 +89,6 @@ export const GameHostForm = ({
     closeOptions,
   ]);
 
-  const watchValueLength = (value: any) => watch(value);
-  const handleEraseValue = (value: any) => setValue(value, "");
-
   const handleOpenAddressBox = useDaumPostcodePopup();
   const handleComplete = (data: AddressField) => {
     // 결가는 항상 도로명 주소로 변환
@@ -119,7 +116,7 @@ export const GameHostForm = ({
     handleOpenAddressBox({ onComplete: handleComplete });
   };
 
-  const onSubmitForm = (data: GameHostField) => {
+  const onSubmitForm = (data: GameInputField) => {
     hostGameMutation(data);
   };
 
@@ -138,24 +135,24 @@ export const GameHostForm = ({
         className="flex flex-col laptop:gap-[35px] mobile:gap-4 text-[14px]"
         onSubmit={handleSubmit(onSubmitForm)}
       >
-        <GameHostInputField
-          type="string"
-          id="title"
-          label="경기 제목"
-          placeholder="경기 제목을 입력해주세요."
-          register_value="title"
-          isRequired={true}
-          register={register}
-          handleEraseValue={() => handleEraseValue("title")}
-          gameHostValue={watchValueLength("title")}
-        />
+        <div className="space-y-2">
+          <FormLabel id="title" children="경기 제목" />
+          <GameInput
+            type="string"
+            id="title"
+            dataId="title-input"
+            placeholder="경기 제목을 입력해주세요."
+            register={register}
+            register_type="title"
+            height="59px"
+          />
+        </div>
 
-        {/* Game start date and time */}
-        <div className="flex flex-col gap-2">
+        <div className="space-y-2">
           <FormLabel id="start_date" children="경기 시작" />
 
           <div className="flex gap-2 w-full">
-            <div className="flex items-center  h-[50px] p-4  bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
+            <div className="flex items-center  h-[59px] px-4 py-[17px]  bg-[#F7F7F7] text-[#969696] w-full rounded-lg text-sm font-medium ">
               {startDateTime.length > 1 ? startDateTime.split("T")[0] : null}{" "}
               {startDateTime.length > 1
                 ? startDateTime.split("T")[1]
@@ -166,7 +163,7 @@ export const GameHostForm = ({
               type="datetime-local"
               id="start_date"
               required
-              className="w-[54px] h-[54px] p-4  bg-[#DFEFFE] text-[#999] rounded-lg "
+              className="w-[54px] h-[59px] px-4   bg-[#DFEFFE] text-[#999] rounded-lg "
               onChange={(e) => setStartDateTime(e.target.value)}
             />
 
@@ -186,13 +183,11 @@ export const GameHostForm = ({
             />
           </div>
         </div>
-        {/* 경기 종료 */}
         <div className="flex flex-col gap-2 justify-center ">
           <FormLabel id="end_date" children="경기 종료" />
 
           <div className="flex items-center gap-2 w-full">
-            <div className="flex items-center  h-[50px] p-4  bg-[#F7F7F7] text-[#969696] w-full rounded-lg ">
-              {/* {endDateTime.split("T")[0]} {endDateTime.split("T")[1]} */}
+            <div className="flex items-center  h-[59px] px-4 py-[17px]  bg-[#F7F7F7] text-[#969696] w-full rounded-lg text-sm font-medium ">
               {endDateTime.length > 1 ? endDateTime.split("T")[0] : null}{" "}
               {endDateTime.length > 1
                 ? endDateTime.split("T")[1]
@@ -204,68 +199,71 @@ export const GameHostForm = ({
               required
               id="end_date"
               onChange={(e) => setEndDateTime(e.target.value)}
-              className=" w-[54px] h-[54px] p-4  bg-[#DFEFFE] text-[#999] rounded-lg "
+              className=" w-[54px] h-[59px] p-4  bg-[#DFEFFE] text-[#999] rounded-lg "
             />
 
-            <input
-              hidden
-              type="text"
-              // className="input-primary"
-              {...register("enddate", {})}
-            />
+            <input hidden type="text" {...register("enddate", {})} />
             <input
               hidden
               type="text"
               id="endtime"
-              className=" input-primary"
               step={900}
               {...register("endtime", {})}
             />
           </div>
         </div>
-        {/* game address */}
-        <GameHostInputField
-          type="string"
-          id="address"
-          label="경기 주소"
-          placeholder="주소를 검색해주세요."
-          register_value="court.address"
-          isRequired={true}
-          register={register}
-          gameHostValue={false}
-          buttonField={true}
-          handleFindAddress={handleClick}
-        />
-        <GameHostInputField
-          type="string"
-          id="address"
-          label="경기 상세 주소"
-          placeholder="상세 주소를 입해주세요."
-          register_value="court.address_detail"
-          isRequired={true}
-          register={register}
-          handleFindAddress={handleClick}
-          handleEraseValue={() => handleEraseValue("court.address_detail")}
-          gameHostValue={watchValueLength("court.address_detail")}
-        />
 
-        <GameHostInputField
-          type="string"
-          id="title"
-          label="경기장 이름"
-          placeholder="경기 이름을 입력해주세요."
-          register_value="court.name"
-          isRequired={true}
-          register={register}
-          handleEraseValue={() => handleEraseValue("court.name")}
-          gameHostValue={watchValueLength("court.name")}
-        />
+        <div className="space-y-2">
+          <FormLabel id="address" children="경기 주소" />
+          <div className="relative">
+            <GameInput
+              type="string"
+              id="address"
+              dataId="address-input"
+              placeholder="주소를 검색해주세요."
+              register={register}
+              register_type="court.address"
+              height="51px"
+              pr="110px"
+            />
+            <button
+              onClick={handleClick}
+              type="button"
+              className=" bg-[#4065f6] w-[81px] h-[36px]  absolute right-2 top-2 bottom-2 m-auto text-[12px] text-white  rounded-lg"
+            >
+              주소검색
+            </button>{" "}
+          </div>
+        </div>
 
-        {/* max participants */}
+        <div className="space-y-2">
+          <FormLabel id="address" children="경기 상세 주소" />
+          <GameInput
+            type="string"
+            id="address"
+            dataId="address-input"
+            placeholder="상세 주소를 입해주세요."
+            register={register}
+            register_type="court.address_detail"
+            height="59px"
+          />
+        </div>
+        <div className="space-y-2">
+          <FormLabel id="court_name" children="경기장 이름" />
+          <GameInput
+            type="string"
+            id="court_name"
+            dataId="court-name-input"
+            placeholder="경기장 이름을 입력해주세요."
+            register={register}
+            register_type="court.name"
+            height="59px"
+          />
+        </div>
 
         <div className="flex flex-col gap-2   mobile:justify-between ">
           <div className="flex items-center mobile:justify-center gap-4 h-full">
-            <div className="flex flex-col gap-2 tablet:w-full">
+            <div className="space-y-2 tablet:w-full">
               <FormLabel id="max_players" children="총 인원 모집" />
               <input
                 type="number"
@@ -279,7 +277,7 @@ export const GameHostForm = ({
             </div>
 
             {/* recruiting participants */}
-            <div className="flex flex-col gap-2 tablet:w-full ">
+            <div className="space-y-2 tablet:w-full ">
               <FormLabel id="min_players" children=" 최소 모집 인원" />
 
               <input
@@ -298,18 +296,22 @@ export const GameHostForm = ({
           )}
         </div>
 
-        {/* participation fee */}
         <div className="space-y-2">
-          <GameHostInputField
-            type="string"
-            id="string"
-            label="참가비"
-            placeholder="경기 참가비를 입해주세요."
-            register_value="fee"
-            isRequired={true}
-            register={register}
-            feeField={true}
-          />
+          <FormLabel id="fee" children="참가비" />
+          <div className="relative">
+            <GameInput
+              type="string"
+              id="fee"
+              dataId="fee-input"
+              placeholder="경기 참가비를 입해주세요."
+              register={register}
+              register_type="fee"
+              height="50px"
+            />
+            <div className="absolute right-4 top-4 bottom-4 text-[#999] ">
+              ₩
+            </div>
+          </div>
           {gameFee < 0 && (
             <ErrorMessage children="경기 참가비는 0 이상의 정수이어야합니다." />
           )}

@@ -12,7 +12,11 @@ import {
   Active,
   Inactive,
 } from "../../../components/ui/buttons/Button.stories";
-import { LoginInputField } from "../../../components/ui/forms/FormInputContainer";
+import { FormLabel } from "../../../components/ui/forms/FormLabel";
+import AuthInput from "../../../components/ui/forms/AuthInput";
+
+import close from "../../../assets/clarity_eye-hide-line.svg";
+import open from "../../../assets/clarity_eye-show-line.svg";
 
 export const NotVerifiedInputDetailPage = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
@@ -49,32 +53,49 @@ export const NotVerifiedInputDetailPage = () => {
           </div>
           <form className="flex flex-col gap-2">
             <div className="space-y-2">
-              <LoginInputField
+              <FormLabel id="user-email" children="이메일" />
+
+              <AuthInput
                 type="email"
-                id="email"
-                label="이메일"
+                id="user-email"
+                data-testid="email-input"
                 placeholder="이메일을 입력해주세요."
-                register_value="email"
-                isRequired={true}
                 register={register}
-              />{" "}
+                register_type="email"
+                aria-label="이메일을 입력해주세요"
+                aria-invalid={errors.email ? true : false}
+              />
               {errors.email && (
                 <ErrorMessage children="이메일 형식으로 입력해주세요." />
               )}
             </div>
             <div className="space-y-2">
-              <LoginInputField
-                type={displayPassword ? "text" : "password"}
-                id="password"
-                label="비밀번호"
-                placeholder="비밀번호를 입력해주세요."
-                isRequired={false}
-                handleDisplayPassword={handleDisplayPassword}
-                passwordImg={displayPassword}
-                register_value="password"
-                isPasswordField={true}
-                register={register}
-              />
+              <FormLabel id="user-password" children="비밀번호" />
+
+              <div className="relative">
+                <AuthInput
+                  type={displayPassword ? "text" : "password"}
+                  id="user-password"
+                  data-testid="password-input"
+                  placeholder="비밀번호를 입력해주세요."
+                  register={register}
+                  register_type="password"
+                  aria-label="비밀번호를 입력해주세요."
+                  aria-invalid={errors.password ? true : false}
+                />
+
+                <button
+                  onClick={handleDisplayPassword}
+                  className="absolute right-2 top-2 bottom-2"
+                  type="button"
+                >
+                  <img
+                    src={displayPassword ? open : close}
+                    alt="toggle show password"
+                    className="size-6"
+                  />
+                </button>
+              </div>
               {authenticateUserResponse?.status_code === 401 &&
                 authenticateUserResponse?.error_code === 140 && (
                   <ErrorMessage children="일치하는 사용자가 없습니다." />

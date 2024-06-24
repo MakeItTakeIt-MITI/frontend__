@@ -1,12 +1,10 @@
 import { useForm } from "react-hook-form";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginSchema } from "../../../modals/useLoginSchema";
 import { useLoginMutation } from "../../../hooks/auth/useLoginMutation";
 import { ErrorMessage } from "../../StatusMessages/ErrorMessage";
 import useDisplayPwStore from "../../../store/useDisplayPwStore";
 import { useEffect, useState } from "react";
-
 import close from "../../../assets/clarity_eye-hide-line.svg";
 import open from "../../../assets/clarity_eye-show-line.svg";
 
