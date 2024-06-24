@@ -162,6 +162,64 @@ const router = createBrowserRouter([
       },
 
       {
+        path: "/games",
+        children: [
+          {
+            path: "detail/:id/:title",
+            element: <GameDetails />,
+          },
+
+          {
+            element: <PrivateRoute />,
+            children: [
+              { path: "host", element: <HostGame /> },
+
+              {
+                path: "detail/:id/edit",
+                element: <EditGameDetails />,
+              },
+              {
+                path: "detail/:id/review",
+                element: <ReviewGame />,
+              },
+              {
+                path: "detail/:id/review/guest/:ratingId",
+                element: <WriteGuestReview />,
+              },
+              {
+                path: "detail/:id/review/host/:ratingId",
+                element: <WriteHostReview />,
+              },
+              {
+                path: "detail/:id/:title/join",
+                element: <JoinGame />,
+              },
+              {
+                path: "my-games",
+                element: <MyGames />,
+              },
+
+              {
+                path: "host-history",
+                element: <GameHostingHistory />,
+              },
+              {
+                path: "guest-history",
+                element: <ParticipationHistory />,
+              },
+
+              { path: "join/submitted", element: <MatchSubmittedPage /> },
+
+              {
+                path: "cancel-participation/:id",
+                element: <CancelParticipation />,
+              },
+            ],
+          },
+        ],
+      },
+
+      {
         element: <PrivateRoute />,
         children: [
           {
@@ -218,58 +276,6 @@ const router = createBrowserRouter([
               {
                 path: "transaction-history/payment",
                 element: <BankTransaction />,
-              },
-            ],
-          },
-          {
-            path: "/games",
-            children: [
-              { path: "host", element: <HostGame /> },
-
-              {
-                path: "detail/:id/:title",
-                element: <GameDetails />,
-              },
-
-              {
-                path: "detail/:id/edit",
-                element: <EditGameDetails />,
-              },
-              {
-                path: "detail/:id/review",
-                element: <ReviewGame />,
-              },
-              {
-                path: "detail/:id/review/guest/:ratingId",
-                element: <WriteGuestReview />,
-              },
-              {
-                path: "detail/:id/review/host/:ratingId",
-                element: <WriteHostReview />,
-              },
-              {
-                path: "detail/:id/:title/join",
-                element: <JoinGame />,
-              },
-              {
-                path: "my-games",
-                element: <MyGames />,
-              },
-
-              {
-                path: "host-history",
-                element: <GameHostingHistory />,
-              },
-              {
-                path: "guest-history",
-                element: <ParticipationHistory />,
-              },
-
-              { path: "join/submitted", element: <MatchSubmittedPage /> },
-
-              {
-                path: "cancel-participation/:id",
-                element: <CancelParticipation />,
               },
             ],
           },
