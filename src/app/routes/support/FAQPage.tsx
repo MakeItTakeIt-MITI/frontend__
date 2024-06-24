@@ -18,7 +18,7 @@ export const FAQPage = () => {
   };
 
   return (
-    <section className="laptop:my-[69px]  mobile:mb-[100px] tablet:px-[80px] laptop:px-0 ">
+    <section className="laptop:mt-[69px]  mobile:mb-[100px] tablet:px-[80px] laptop:px-0 tablet:h-screen">
       <NavigateToPrevContainer children="FAQ" />
       <div className="flex flex-col gap-4 laptop:w-[495px]  min-h-[720px] tablet:p-0 mobile:p-2   mobile:w-full mx-auto rounded-lg">
         <h1 className="mobile:hidden tablet:block text-black text-[26px] font-bold">

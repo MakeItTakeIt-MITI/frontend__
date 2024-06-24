@@ -48,26 +48,28 @@ export const GameHistoryContainer: React.FC<GameHistoryProps> = ({
               <div key={newData.startdate}>
                 <h2 className="font-bold">{newData?.startdate}</h2>
                 <div className="space-y-[15px]">
-                  {newData.games.map((detail: GameDetailField) => (
-                    <GameStatusCard
-                      key={detail.id}
-                      path={`/games/detail/${detail.id}`}
-                      game_status={
-                        detail.game_status === "open" ? (
-                          <MatchTags {...RecruitingTag.args} />
-                        ) : detail.game_status === "canceled" ? (
-                          <MatchTags {...GameCancelledTag.args} />
-                        ) : detail.game_status === "closed" ? (
-                          <MatchTags {...RecruitingCompletedTag.args} />
-                        ) : detail.game_status === "completed" ? (
-                          <MatchTags {...GameFinishedTag.args} />
-                        ) : null
-                      }
-                      title={detail.title}
-                      address={`${detail.court.address} ${detail.court.address_detail}`}
-                      time={`${detail.starttime.slice(0, 5)} ~ ${detail.endtime.slice(0, 5)}`}
-                    />
-                  ))}
+                  {newData.games.map((detail: GameDetailField) => {
+                    return (
+                      <GameStatusCard
+                        key={detail.id}
+                        path={`/games/detail/${detail.id}/${detail.title.replace(/\s+/g, "-")}`}
+                        game_status={
+                          detail.game_status === "open" ? (
+                            <MatchTags {...RecruitingTag.args} />
+                          ) : detail.game_status === "canceled" ? (
+                            <MatchTags {...GameCancelledTag.args} />
+                          ) : detail.game_status === "closed" ? (
+                            <MatchTags {...RecruitingCompletedTag.args} />
+                          ) : detail.game_status === "completed" ? (
+                            <MatchTags {...GameFinishedTag.args} />
+                          ) : null
+                        }
+                        title={detail.title}
+                        address={`${detail.court.address} ${detail.court.address_detail}`}
+                        time={`${detail.starttime.slice(0, 5)} ~ ${detail.endtime.slice(0, 5)}`}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             ))

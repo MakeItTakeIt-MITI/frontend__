@@ -8,8 +8,9 @@ interface GameDetailButtonProps {
 }
 
 export const GameDetailButtonsBox = ({ gameDetail }: GameDetailButtonProps) => {
-  const { id } = useParams();
+  const { id, title } = useParams();
   const gameIdParam = Number(id);
+  const gameTitleParam = title;
 
   return (
     <div className="laptop:static mobile:fixed mobile:bottom-[80px] tablet:bottom-[40px] mobile:px-4 laptop:px-0  mobile:w-full text-[14px]">
@@ -22,7 +23,7 @@ export const GameDetailButtonsBox = ({ gameDetail }: GameDetailButtonProps) => {
       {gameDetail?.game_status === "open" &&
         !gameDetail?.is_participated &&
         !gameDetail?.is_host && (
-          <Link to={`/games/detail/${gameIdParam}/join`}>
+          <Link to={`/games/detail/${gameIdParam}/${gameTitleParam}/join`}>
             <SubmitButton children="경기 참가하기" {...Active.args} />
           </Link>
         )}

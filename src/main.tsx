@@ -227,7 +227,7 @@ const router = createBrowserRouter([
               { path: "host", element: <HostGame /> },
 
               {
-                path: "detail/:id",
+                path: "detail/:id/:title",
                 element: <GameDetails />,
               },
 
@@ -248,7 +248,7 @@ const router = createBrowserRouter([
                 element: <WriteHostReview />,
               },
               {
-                path: "detail/:id/join",
+                path: "detail/:id/:title/join",
                 element: <JoinGame />,
               },
               {

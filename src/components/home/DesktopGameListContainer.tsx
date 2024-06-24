@@ -4,6 +4,9 @@ import { MatchItem } from "../game/MatchItem";
 import React from "react";
 import { NoGamesAvailableInfoBox } from "./NoGamesAvailableInfoBox";
 import "./animation.css";
+import { LoadingPage } from "../../app/routes/LoadingPage";
+
+import slugify from "slugify";
 
 interface DesktopGameListProps {
   allGamesData: {
@@ -14,6 +17,7 @@ interface DesktopGameListProps {
   displayCollapsedList: boolean;
   handleSearchCoords: (arg: number, argTwo: number) => void;
   filteredGames: string[];
+  isPending: boolean;
 }
 
 export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
@@ -21,9 +25,13 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
   displayCollapsedList,
   handleSearchCoords,
   filteredGames,
+  isPending,
 }) => {
   const isDataAvailable = allGamesData && Array.isArray(allGamesData.data);
 
+  if (isPending) {
+    return <LoadingPage />;
+  }
   return (
     <div
       style={{
@@ -50,13 +58,15 @@ export const DesktopGameListContainer: React.FC<DesktopGameListProps> = ({
       {displayCollapsedList &&
         isDataAvailable &&
         allGamesData?.data.map((game: GameDetailField) => {
+          const titleSlug = slugify(game.title);
+
           if (filteredGames.includes(game.court.address)) {
             return (
               <div
                 key={game.id}
                 className="space-y-2 cssanimation sequence fadeInBottom"
               >
-                <Link to={`/games/detail/${game.id}`}>
+                <Link to={`/games/detail/${game.id}/${titleSlug}`}>
                   <MatchItem
                     game={game}
                     handleSearchCoords={handleSearchCoords}

@@ -67,7 +67,7 @@ export const ReviewsByUser = () => {
   ]);
 
   return (
-    <section className="laptop:mt-[17px] laptop:mb-[55px] mobile:my-0 tablet:px-[80px] laptop:px-0 ">
+    <section className="laptop:mt-[17px] mobile:my-0 tablet:px-[80px] laptop:px-0 tablet:h-screen">
       <NavigateToPrevContainer
         children=" 작성 리뷰 조회
 "

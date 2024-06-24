@@ -48,7 +48,7 @@ export const CourtHistoryListContainer: React.FC<CourtHistoryProp> = ({
                 {newData.games.map((detail: any) => (
                   <GameStatusCard
                     key={detail.id}
-                    path={`/games/detail/${detail.id}`}
+                    path={`/games/detail/${detail.id}/${detail.title.replace(/\s+/g, "-")}`}
                     game_status={
                       detail.game_status === "open" ? (
                         <MatchTags {...RecruitingTag.args} />

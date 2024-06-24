@@ -49,7 +49,7 @@ export const ReviewsAboutUser = () => {
     refetchReviews();
   }, [allReviewsData, gameStatusQuery, defaultTabName, refetchReviews]);
   return (
-    <section className="laptop:mt-[17px] laptop:mb-[55px] mobile:my-0 tablet:px-[80px] laptop:px-0 ">
+    <section className="laptop:mt-[17px] mobile:my-0 tablet:px-[80px] laptop:px-0  tablet:h-screen">
       <NavigateToPrevContainer children="내 리뷰 조회" />
       {isLoading ? (
         <div className="space-y-[34px] laptop:w-[593px]     mobile:w-full mx-auto  ">

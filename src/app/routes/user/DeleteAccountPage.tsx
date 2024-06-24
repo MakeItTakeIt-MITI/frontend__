@@ -36,7 +36,7 @@ export const DeleteAccountPage = () => {
 
   return (
     <>
-      <section className="laptop:mt-[15px] laptop:mb-[164px] mobile:my-0 space-y-[15px]">
+      <section className="laptop:mt-[15px] mobile:my-0 space-y-[15px] tablet:h-screen">
         <h1 className="w-[496px] mx-auto text-[26px] font-bold text-[#000]">
           회원탈퇴
         </h1>

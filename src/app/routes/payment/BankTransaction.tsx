@@ -16,7 +16,7 @@ export const BankTransaction = () => {
     refetchUser();
   }, [accountBalanceData, userData]);
   return (
-    <section className="laptop:mt-[15px] laptop:mb-[256px] mobile:mb-[100px] tablet:px-[80px] laptop:px-0">
+    <section className="laptop:mt-[15px] mobile:mb-[100px] tablet:px-[80px] laptop:px-0 tablet:h-screen">
       <NavigateToPrevContainer children="송금하기" />
 
       <div className="laptop:w-[915px] laptop:h-[516px] space-y-[32px] mx-auto">
