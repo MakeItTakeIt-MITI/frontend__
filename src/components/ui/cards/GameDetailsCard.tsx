@@ -51,7 +51,7 @@ export const GameDetailsCard = ({ data }: GameDetailsCardProps) => {
           <div className="text-neutral-700 text-sm font-medium space-y-1">
             <div className="flex gap-1">
               <img src={markerIcon} alt="pin icon" className="" />
-              <p>
+              <p className="truncate">
                 {address} {address_detail}
               </p>
             </div>
