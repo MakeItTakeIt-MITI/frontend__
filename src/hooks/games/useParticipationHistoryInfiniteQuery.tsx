@@ -15,7 +15,7 @@ export const useParticipationHistoryInfiniteQuery = (
       return response.data.data;
     },
     initialPageParam: 1,
-    getNextPageParam: (lastPage, allPages) => {
+    getNextPageParam: (_lastPage, allPages) => {
       const nextPage = allPages.length ? allPages.length + 1 : undefined;
       return nextPage;
     },
