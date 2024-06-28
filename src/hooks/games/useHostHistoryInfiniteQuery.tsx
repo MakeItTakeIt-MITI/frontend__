@@ -15,11 +15,9 @@ export const useHostHistoryInfiniteQuery = (
       return response.data.data;
     },
     initialPageParam: 1,
-    getNextPageParam: (lastPage) => {
-      const nextPage = lastPage.current_index + 1;
-      const hasNextPage = nextPage <= lastPage.end_index;
-
-      return hasNextPage ? nextPage : null;
+    getNextPageParam: (lastPage, allPages) => {
+      const nextPage = allPages.length ? allPages.length + 1 : undefined;
+      return nextPage;
     },
   });
 };
