@@ -46,7 +46,7 @@ describe("Checks if UI is rendered when signup form is loaded", () => {
     const nicknameButton = screen.getByTestId("nickname-check-button");
 
     expect(emailButton).toBeInTheDocument();
-    expect(nicknameButton).toBeInTheDocument();
+    expect(nicknameButton).not.toBeInTheDocument();
   });
 
   it("should render checkbox conatiner on initial load", () => {
