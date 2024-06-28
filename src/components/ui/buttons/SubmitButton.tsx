@@ -20,6 +20,7 @@ export const SubmitButton = ({
       onClick={onClick}
       type={type}
       disabled={isDisabled}
+      data-testid="submit-button"
       style={{ backgroundColor: backgroundColor, color: textColor }}
       className="w-full h-12 bg-gray-200 rounded-lg text-sm font-bold"
     >

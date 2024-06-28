@@ -15,7 +15,7 @@ import { Active, Inactive } from "../../ui/buttons/Button.stories";
 import GameInput, { GameInputField } from "./GameInput";
 
 interface GameHostFormProps {
-  setSuccessfulSubmission: (arg: boolean) => void;
+  setSuccessfulSubmission?: (arg: boolean) => void;
 }
 
 export const GameHostForm = ({
@@ -38,7 +38,7 @@ export const GameHostForm = ({
     useGetAllCourtsInfiniteQuery(courtAddress);
 
   const { mutate: hostGameMutation } = useHostGameMutation(
-    setSuccessfulSubmission
+    setSuccessfulSubmission ?? (() => {})
   );
   const maxParticipants = Number(watch("max_invitation"));
   const minParticipants = Number(watch("min_invitation"));
@@ -162,6 +162,7 @@ export const GameHostForm = ({
             <input
               type="datetime-local"
               id="start_date"
+              data-testid="start-datetime-input"
               required
               className="w-[54px] h-[59px] px-4   bg-[#DFEFFE] text-[#999] rounded-lg "
               onChange={(e) => setStartDateTime(e.target.value)}
@@ -196,6 +197,7 @@ export const GameHostForm = ({
             <input
               type="datetime-local"
               placeholder="Select date and time"
+              data-testid="end-datetime-input"
               required
               id="end_date"
               onChange={(e) => setEndDateTime(e.target.value)}
@@ -229,6 +231,7 @@ export const GameHostForm = ({
             <button
               onClick={handleClick}
               type="button"
+              data-testid="search-address-button"
               className=" bg-[#4065f6] w-[81px] h-[36px]  absolute right-2 top-2 bottom-2 m-auto text-[12px] text-white  rounded-lg"
             >
               주소검색
@@ -241,7 +244,7 @@ export const GameHostForm = ({
           <GameInput
             type="string"
             id="address"
-            dataId="address-input"
+            dataId="address-detail-input"
             placeholder="상세 주소를 입해주세요."
             register={register}
             register_type="court.address_detail"
@@ -268,6 +271,7 @@ export const GameHostForm = ({
               <input
                 type="number"
                 id="max_players"
+                data-testid="max-participants-input"
                 placeholder="00 명"
                 className=" h-[50px] p-4  bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
                 {...register("max_invitation", {
@@ -283,6 +287,7 @@ export const GameHostForm = ({
               <input
                 type="number"
                 id="min_players"
+                data-testid="min-participants-input"
                 placeholder="00 명"
                 className=" h-[50px] p-4  bg-[#F7F7F7] w-full rounded-lg text-center font-bold"
                 {...register("min_invitation", {
@@ -323,6 +328,7 @@ export const GameHostForm = ({
           <textarea
             id="info"
             style={{ resize: "none" }}
+            data-testid="description-input"
             placeholder="주차, 샤워 가능 여부, 경기 진행 방식, 필요한 유니폼 색상 등 참가들에게 공지할 정보들을 입력해주세요."
             className="w-full h-[150px]   mobile:text-[14px] tablet:text-[16px] px-4 py-3 bg-[#F7F7F7] rounded-lg "
             {...register("info", {

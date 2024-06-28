@@ -104,7 +104,8 @@ export const SignupForm = () => {
           <AuthInput
             type="email"
             id="email"
-            data-testid="email-input"
+            // data-testid="email-input"
+            dataId="email-input"
             placeholder="이메일을 입력해주세요."
             register={register}
             register_type="email"
@@ -148,7 +149,7 @@ export const SignupForm = () => {
           <AuthInput
             type="nickname"
             id="nickname"
-            data-testid="nickname-input"
+            dataId="nickname-input"
             placeholder="닉네임을 입력해주세요."
             register={register}
             register_type="nickname"
@@ -195,7 +196,7 @@ export const SignupForm = () => {
         <AuthInput
           type="password"
           id="password"
-          data-testid="password-input"
+          dataId="password-input"
           placeholder="비밀번호를 입력해주세요."
           register={register}
           register_type="password"
@@ -216,7 +217,7 @@ export const SignupForm = () => {
         <AuthInput
           type="password"
           id="password_check"
-          data-testid="password-check-input"
+          dataId="password-check-input"
           placeholder="비밀번호를 다시 입력해주세요."
           register={register}
           register_type="password_check"
@@ -238,7 +239,7 @@ export const SignupForm = () => {
         <AuthInput
           type="text"
           id="name"
-          data-testid="name-input"
+          dataId="name-input"
           placeholder="이름을 입력해주세요."
           register={register}
           register_type="name"
@@ -256,7 +257,7 @@ export const SignupForm = () => {
         <AuthInput
           type="date"
           id="birthday"
-          data-testid="birthday-input"
+          dataId="birthday-input"
           register={register}
           register_type="birthday"
           aria-label="생일을 입력해주세요."
@@ -268,7 +269,7 @@ export const SignupForm = () => {
         <AuthInput
           type="string"
           id="phone"
-          data-testid="phone-input"
+          dataId="phone-input"
           register={register}
           register_type="phone"
           placeholder="핸드폰 번호를 입력해주세요"

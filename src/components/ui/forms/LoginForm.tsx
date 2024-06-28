@@ -60,7 +60,7 @@ export const LoginForm = () => {
         <AuthInput
           type="email"
           id="user-email"
-          data-testid="email-input"
+          dataId="email-input"
           placeholder="이메일을 입력해주세요."
           register={register}
           register_type="email"
@@ -76,7 +76,7 @@ export const LoginForm = () => {
           <AuthInput
             type={displayPassword ? "text" : "password"}
             id="user-password"
-            data-testid="password-input"
+            dataId="password-input"
             placeholder="비밀번호를 입력해주세요."
             register={register}
             register_type="password"
