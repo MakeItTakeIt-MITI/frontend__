@@ -9,6 +9,7 @@ export const KakaoLoginButton = () => {
     <a
       role="kakao-login-btn"
       href={KakaoLoginUrl}
+      data-testid="kakao-button"
       className="relative w-full bg-[#FAE64D] h-[48px]  rounded-lg text-[14px] font-bold"
     >
       <p className="flex items-center justify-center h-full">

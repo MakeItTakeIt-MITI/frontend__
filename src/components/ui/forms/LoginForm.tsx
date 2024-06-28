@@ -35,6 +35,7 @@ export const LoginForm = () => {
     register,
   } = useForm<AuthInputField>({
     resolver: zodResolver(useLoginSchema),
+    mode: "onChange",
   });
 
   const { mutate: loginMutation, data } = useLoginMutation();
