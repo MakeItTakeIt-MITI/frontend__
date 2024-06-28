@@ -113,6 +113,7 @@ export const SignupForm = () => {
             aria-invalid={errors.email ? true : false}
           />
           <button
+            data-testid="email-check-button"
             onClick={() => {
               if (!validEmail) {
                 handleValidateEmail();
@@ -131,10 +132,6 @@ export const SignupForm = () => {
         </div>
 
         <>
-          {/* {errors.email?.message && (
-            <ErrorMessage {...EmailRegexFailure.args} />
-          )} */}
-
           {emailValidationData?.data.email.is_duplicated && !validEmail && (
             <ErrorMessage {...ExistingEmail.args} />
           )}
@@ -157,6 +154,7 @@ export const SignupForm = () => {
             aria-invalid={!validNickname ? true : false}
           />
           <button
+            data-testid="nickname-check-button"
             onClick={() => {
               if (!validNickname) {
                 handleValidateNick();

@@ -174,5 +174,5 @@ export const NaverMapEL = ({
     setDisplayCollapsedList,
   ]);
 
-  return <section id="map" className="w-full  h-[473px]" />;
+  return <section data-testid="map" id="map" className="w-full  h-[473px]" />;
 };

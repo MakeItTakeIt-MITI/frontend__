@@ -68,7 +68,6 @@ export const Home = () => {
                   displayCollapsedList={displayCollapsedList}
                   handleSearchCoords={handleSearchCoords}
                   filteredGames={filteredGames}
-                  isPending={isPending}
                 />
               </div>{" "}
               <NaverMapEL

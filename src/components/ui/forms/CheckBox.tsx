@@ -28,7 +28,7 @@ export const CheckBox = ({
       {displayPolicy && (
         <AgreementPolicyModal setDisplayPolicy={setDisplayPolicy} />
       )}
-      <div className="text-[14px] space-y-2">
+      <div data-testid="checkbox-container" className="text-[14px] space-y-2">
         <h4>MITI 회원 이용약관</h4>
         <div className="space-y-3">
           <div onChange={handleCheckAll} className="flex items-center gap-3">
