@@ -8,7 +8,9 @@ const BrowserNavbar = () => {
   return (
     <nav className="w-full h-[3.75rem]  bg-primary-black flexCenter">
       <div className="w-[768px] mx-auto flex items-center gap-[3.75rem]">
-        <img src={logo} alt="logo" />
+        <Link to="/">
+          <img src={logo} alt="logo" />
+        </Link>{" "}
         <div className="space-x-[1.25rem] text-primary-white font-bold">
           {NAVITEMS.map((nav) => (
             <Link

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "./components/home/Header";
+import { Header } from "./components/homepage/Header";
 import { AdvertisementBanner } from "./components/ui/advertisement/AdvertisementBanner";
 import { ScrollToTop } from "./components/ui/common/ScrollToTop";
 import { Footer } from "./components/ui/common/Footer";

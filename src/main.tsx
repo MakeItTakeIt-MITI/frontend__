@@ -66,6 +66,10 @@ const router = createBrowserRouter([
         element: <KakaoPaymentHandler />,
       },
       {
+        path: "faq",
+        element: <FAQPage />,
+      },
+      {
         path: "/account",
         children: [
           {
@@ -119,11 +123,6 @@ const router = createBrowserRouter([
       {
         path: "/support",
         children: [
-          {
-            path: "faq",
-            element: <FAQPage />,
-          },
-
           {
             path: "customer-service",
             element: <CustomerServicePage />,

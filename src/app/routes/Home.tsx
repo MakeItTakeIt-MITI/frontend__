@@ -1,13 +1,13 @@
-import { MobileViewDatesList } from "../../components/home/MobileViewDatesList";
+import { MobileViewDatesList } from "../../components/homepage/MobileViewDatesList";
 import { useGetGamesDataQuery } from "../../hooks/games/useGetGamesDataQuery";
-import { DesktopViewDatesList } from "../../components/home/DesktopViewDatesList";
+import { DesktopViewDatesList } from "../../components/homepage/DesktopViewDatesList";
 import { useEffect, useState } from "react";
-import { MobileViewGameList } from "../../components/home/MobileViewGameList";
+import { MobileViewGameList } from "../../components/homepage/MobileViewGameList";
 import { NaverMapEL } from "../../components/naver/NaverMap";
 import { NotFoundPage } from "./NotFoundPage";
 import useGeolocationStore from "../../store/useGeolocationStore";
-import { DesktopGameListContainer } from "../../components/home/DesktopGameListContainer";
-import Hero, { HeroCarousel } from "../../components/home/Hero";
+import { DesktopGameListContainer } from "../../components/homepage/DesktopGameListContainer";
+import Hero, { HeroCarousel } from "../../components/homepage/Hero";
 
 export const Home = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
