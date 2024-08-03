@@ -1,4 +1,3 @@
-import { HeroCarousel } from "../../components/home/Hero";
 import { MobileViewDatesList } from "../../components/home/MobileViewDatesList";
 import { useGetGamesDataQuery } from "../../hooks/games/useGetGamesDataQuery";
 import { DesktopViewDatesList } from "../../components/home/DesktopViewDatesList";
@@ -8,7 +7,7 @@ import { NaverMapEL } from "../../components/naver/NaverMap";
 import { NotFoundPage } from "./NotFoundPage";
 import useGeolocationStore from "../../store/useGeolocationStore";
 import { DesktopGameListContainer } from "../../components/home/DesktopGameListContainer";
-import { HomeSkeleton } from "../../components/ui/skeleton/HomeSkeleton";
+import { HeroCarousel } from "../../components/home/Hero";
 
 export const Home = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
@@ -51,49 +50,45 @@ export const Home = () => {
 
   return (
     <>
-      {isPending ? (
-        <HomeSkeleton />
-      ) : (
-        <section className="laptop:mb-[69px] mobile:my-0  tablet:px-[80px] laptop:px-0  ">
-          <div className="  flex flex-col gap-6  w-full   mx-auto  max-w-[1024px] ">
-            <HeroCarousel />
-            <div className="flex   laptop:gap-10   ">
-              <div className="space-y-4 tablet:hidden laptop:block">
-                <DesktopViewDatesList
-                  selectingDate={selectingDate}
-                  setSelectedDate={setSelectedDate}
-                />
-                <DesktopGameListContainer
-                  allGamesData={allGamesData}
-                  displayCollapsedList={displayCollapsedList}
-                  handleSearchCoords={handleSearchCoords}
-                  filteredGames={filteredGames}
-                  isPending={isPending}
-                />
-              </div>{" "}
-              <NaverMapEL
+      {/* <section className="laptop:mb-[69px] mobile:my-0  tablet:px-[80px] laptop:px-0  ">
+        <div className="  flex flex-col gap-6  w-full   mx-auto  max-w-[1024px] ">
+          <HeroCarousel />
+          <div className="flex   laptop:gap-10   ">
+            <div className="space-y-4 tablet:hidden laptop:block">
+              <DesktopViewDatesList
+                selectingDate={selectingDate}
+                setSelectedDate={setSelectedDate}
+              />
+              <DesktopGameListContainer
                 allGamesData={allGamesData}
-                refetch={refetch}
-                gameSearched={gameSearched}
-                isGameSearched={isGameSearched}
-                setFilteredGames={setFilteredGames}
-                setDisplayCollapsedList={setDisplayCollapsedList}
-                displayCollapsedList={false}
-              />
-            </div>
-            <div className="laptop:hidden mobile:block tablet:block ">
-              {" "}
-              <MobileViewDatesList setSelectedDate={setSelectedDate} />
-              <MobileViewGameList
-                formatDate={formatDate}
-                handleSearchCoords={handleSearchCoords}
                 displayCollapsedList={displayCollapsedList}
+                handleSearchCoords={handleSearchCoords}
                 filteredGames={filteredGames}
+                isPending={isPending}
               />
-            </div>
+            </div>{" "}
+            <NaverMapEL
+              allGamesData={allGamesData}
+              refetch={refetch}
+              gameSearched={gameSearched}
+              isGameSearched={isGameSearched}
+              setFilteredGames={setFilteredGames}
+              setDisplayCollapsedList={setDisplayCollapsedList}
+              displayCollapsedList={false}
+            />
           </div>
-        </section>
-      )}
+          <div className="laptop:hidden mobile:block tablet:block ">
+            {" "}
+            <MobileViewDatesList setSelectedDate={setSelectedDate} />
+            <MobileViewGameList
+              formatDate={formatDate}
+              handleSearchCoords={handleSearchCoords}
+              displayCollapsedList={displayCollapsedList}
+              filteredGames={filteredGames}
+            />
+          </div>
+        </div>
+      </section> */}
     </>
   );
 };

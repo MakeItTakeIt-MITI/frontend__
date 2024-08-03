@@ -10,8 +10,8 @@ function App() {
       <ScrollToTop />
       <Header />
       <Outlet />
-      <AdvertisementBanner />
-      <Footer />
+      {/* <AdvertisementBanner /> */}
+      {/* <Footer /> */}
     </>
   );
 }

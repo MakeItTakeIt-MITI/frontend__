@@ -1,8 +1,9 @@
 import useAuthStore from "../../store/useAuthStore";
-import { MobileHeader } from "../header/MobileHeader";
+import { MobileHeader } from "../navigation/MobileHeader";
 import { useLogoutMutation } from "../../hooks/auth/useLogoutMutation";
 import { useEffect } from "react";
-import BrowserHeader from "../header/BrowserHeader";
+import BrowserHeader from "../navigation/BrowserHeader";
+import BrowserNavbar from "../navigation/BrowserHeader";
 
 export interface HeaderField {
   isLoggedIn: boolean;
@@ -28,7 +29,7 @@ export const Header = () => {
   return (
     <header className="relative">
       <MobileHeader />
-      <BrowserHeader handleLogout={handleLogout} isLoggedIn={isLoggedIn} />
+      <BrowserNavbar />
     </header>
   );
 };

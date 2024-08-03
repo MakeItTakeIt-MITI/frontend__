@@ -42,6 +42,10 @@ li:hover {
   .section-layer {
     @apply laptop:my-[69px] mobile:mb-12;
   }
+
+  .flexCenter {
+    @apply flex items-center justify-center;
+  }
 }
 
 /* Chrome, Safari, Edge, Opera */

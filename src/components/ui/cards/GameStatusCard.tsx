@@ -19,7 +19,7 @@ export const GameStatusCard = ({
   return (
     <Link
       to={path}
-      className="border mb-2.5 border-gray-200 bg-white rounded-lg p-2 w-full h-[95px] flex items-center justify-between"
+      className="border border-gray-200 bg-white rounded-lg p-2 w-full h-[95px] flex items-center justify-between"
     >
       <div className=" h-full truncate space-y-[6px] flex flex-col justify-center">
         {game_status}
