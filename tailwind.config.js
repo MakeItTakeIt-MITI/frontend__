@@ -12,6 +12,7 @@ export default {
       "primary-black": "#171717",
       "secondary-black": "#262626",
       "primary-white": "#F1F1F1",
+      "primary-green": "#151E1C",
     },
 
     extend: {},

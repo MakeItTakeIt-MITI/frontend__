@@ -7,7 +7,7 @@ import { NaverMapEL } from "../../components/naver/NaverMap";
 import { NotFoundPage } from "./NotFoundPage";
 import useGeolocationStore from "../../store/useGeolocationStore";
 import { DesktopGameListContainer } from "../../components/home/DesktopGameListContainer";
-import { HeroCarousel } from "../../components/home/Hero";
+import Hero, { HeroCarousel } from "../../components/home/Hero";
 
 export const Home = () => {
   const [selectingDate, setSelectedDate] = useState(new Date());
@@ -50,6 +50,7 @@ export const Home = () => {
 
   return (
     <>
+      <Hero />
       {/* <section className="laptop:mb-[69px] mobile:my-0  tablet:px-[80px] laptop:px-0  ">
         <div className="  flex flex-col gap-6  w-full   mx-auto  max-w-[1024px] ">
           <HeroCarousel />

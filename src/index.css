@@ -30,10 +30,6 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   background: url("./assets//calender_icon_vector.svg") no-repeat;
 }
 
-li:hover {
-  /* text-decoration: underline; */
-}
-
 @layer components {
   .input-primary {
     @apply h-[58px] p-[17px]  rounded-lg font-medium  bg-[#F7F7F7] w-full text-base;
