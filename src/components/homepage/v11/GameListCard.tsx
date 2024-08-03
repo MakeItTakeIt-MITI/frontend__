@@ -1,9 +1,13 @@
 import time from "../../../assets/v11/time.svg";
 import participants from "../../../assets/v11/participants.svg";
+import { Link } from "react-router-dom";
 
 const GameListCard = () => {
   return (
-    <div className="flex flex-col justify-center space-y-3 w-full h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4">
+    <Link
+      to=""
+      className="flex flex-col justify-center space-y-3 w-full h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
+    >
       {/* Status and title */}
       <div className="space-y-2">
         <span className="p-1 text-[10px] h-[18px] bg-[#4152EB]">모집중</span>
@@ -28,7 +32,7 @@ const GameListCard = () => {
         {/* FEE */}
         <h2 className="text-[#7FEEF0] font-bold">₩23,000</h2>
       </div>
-    </div>
+    </Link>
   );
 };
 

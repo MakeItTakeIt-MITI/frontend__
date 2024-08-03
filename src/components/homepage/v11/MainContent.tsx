@@ -1,8 +1,7 @@
 import FilterItem from "./FilterItem";
 import filter from "../../../assets/v11/filter.svg";
 import NaverMap from "./NaverMap";
-import GameListCard from "./GameListCard";
-import "./scrollbar.css";
+import GameListContainer from "./GameListContainer";
 
 const MainContent = () => {
   return (
@@ -31,20 +30,7 @@ const MainContent = () => {
           {/* Game list and map container */}
           <div className="flex gap-5 h-full ">
             {/* LIST */}
-            <div
-              style={{
-                scrollbarWidth: "thin",
-              }}
-              className="bg-light-dark w-[381px] h-[494px] p-4 rounded-[20px] space-y-3 overflow-y-scroll"
-            >
-              <GameListCard />
-              <GameListCard />
-              <GameListCard />
-              <GameListCard />
-              <GameListCard />
-              <GameListCard />
-              <GameListCard />
-            </div>
+            <GameListContainer />
             {/* MAP */}
             {/* <div className="bg-light-dark w-[381px] h-[494px]">s</div> */}
             <NaverMap />
