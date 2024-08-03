@@ -11,6 +11,8 @@ export default {
     colors: {
       "primary-black": "#171717",
       "secondary-black": "#262626",
+      "light-dark": "#343434",
+      "dark-card": "#404040",
       "primary-white": "#F1F1F1",
       "primary-green": "#151E1C",
     },

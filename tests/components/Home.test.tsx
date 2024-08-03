@@ -1,7 +1,7 @@
 import { MemoryRouter } from "react-router-dom";
 import { render } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Home } from "../../src/app/routes/Home";
+import { Home } from "../../src/pages/Home";
 const queryClient = new QueryClient();
 
 describe("Renders UI components for Home page", () => {

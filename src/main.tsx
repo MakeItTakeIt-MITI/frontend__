@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { Home } from "./app/routes/Home.tsx";
+import { Home } from "./pages/Home.tsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Login } from "./app/routes/auth/Login.tsx";
 import { Signup } from "./app/routes/auth/Signup.tsx";
