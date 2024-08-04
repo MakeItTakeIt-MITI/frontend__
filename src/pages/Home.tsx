@@ -9,6 +9,7 @@
 // import { DesktopGameListContainer } from "../components/homepage/DesktopGameListContainer";
 // import Hero, { HeroCarousel } from "../components/homepage/Hero";
 
+import Footer from "../components/common/Footer";
 import Hero from "../components/homepage/v11/Hero";
 import MainContent from "../components/homepage/v11/MainContent";
 
