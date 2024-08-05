@@ -1,4 +1,4 @@
-export const GAMETIME = ['오전', '오후']
+export const GAMEDAYTYPE = ['오전', '오후']
 export const GAMEHOUR = [
     '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'
 ]

@@ -1,76 +1,71 @@
-import { useState } from "react";
-import Calender from "./Calender";
-import DateDropItem from "./DateDropItem";
-import FilterItem from "./FilterItem";
-import GameStatusItem from "./GameStatusItem";
-import { GAMESTATUS } from "../../../constants/status";
+import { useEffect, useState } from "react";
 
-const GameFilterContainer = () => {
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState([]);
+import { DAYSTATUS } from "../../../constants/calender";
+import FilterTimeField from "./FilterTimeField";
+import FilterButtonsField from "./FilterButtonsField";
+import FilterCalenderField from "./FilterCalenderField";
+import FilterHeader from "./FilterHeader";
+import FilterStatusField from "./FilterStatusField";
 
+interface GameFilterProps {
+  handleCloseFilterBox: () => void;
+}
+
+const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
+  const day = DAYSTATUS(); //현재 오전/오후 상태
+
+  const date = new Date();
+  const hours = String(date.getHours());
+
+  const [selectedDate, setSelectedDate] = useState<string>("날짜");
+  const [selectedStatus, setSelectedStatus] = useState("경기 상태");
+  const [selectedTimeDate, setSelectedTimeDate] = useState("경기 시작 시간");
+
+  const [selectedDayStatus, setSelectedDayStatus] = useState<string>(day);
+  const [selectedHour, setSelectedHour] = useState<string>(hours);
+  const [selectedMinute, setSelectedMinute] = useState<string>("00");
+
+  // const gameTimeFormat = `${selectedDate} ${selectedHour}:${selectedMinute}`; //경기 시작 시간
+
+  const handleResetField = () => {
+    setSelectedDate("날짜");
+    setSelectedTimeDate("경기 시작 시간");
+    setSelectedStatus("경기 상태");
+  };
+
+  useEffect(() => {
+    // setSelectedDayStatus(day);
+  }, [setSelectedDayStatus, selectedDayStatus]);
   return (
     <section
       style={{
         backgroundColor: "rgba(0, 0, 0, 0.64)",
       }}
-      className=" fixed top-0 right-0 bottom-0 left-0 h-full  z-[999] overflow-hidden"
+      className=" fixed top-0 right-0 bottom-0 left-0 h-full  z-[999] "
     >
       <div className="rounded-tl-[20px] rounded-tr-[20px] absolute right-0 bottom-0 left-0 mx-auto w-[48rem]   bg-secondary-black">
-        {/* Filter iteme */}
-        <div className="p-[1.25rem] space-x-[0.5rem]">
-          <FilterItem content="날짜" />
-          <FilterItem content="경기 시작 시간" />
-          <FilterItem content="경기 상태" />
-        </div>
+        <FilterHeader
+          handleCloseFilterBox={handleCloseFilterBox}
+          selectedDate={selectedDate}
+          selectedStatus={selectedStatus}
+          selectedTimeDate={selectedTimeDate}
+        />
         <hr className="border-[#404040] " />
-
-        {/* calender */}
-        <Calender />
+        <FilterCalenderField />
         <hr className="border-[#404040] " />
-        {/* time  */}
-        <div className="py-[2rem] px-[2.5rem] space-y-[1.25rem]">
-          <h1 className="font-bold text-secondary-white">시간</h1>
-          <div className="flex items-center gap-[2.5rem]">
-            <div className="space-x-[1.25rem] flex items-center">
-              <DateDropItem content="오전" />
-              <DateDropItem content="10" timeFormat="시" />
-              <DateDropItem content="23" timeFormat="분" />
-            </div>
-            <h2 className="text-primary-white font-bold">이후 경기</h2>
-          </div>
-        </div>
+        <FilterTimeField
+          selectedDayStatus={selectedDayStatus}
+          setSelectedDayStatus={setSelectedDayStatus}
+          selectedHour={selectedHour}
+          selectedMinute={selectedMinute}
+          setSelectedHour={setSelectedHour}
+          setSelectedMinute={setSelectedMinute}
+        />
         <hr className="border-[#404040] " />
+        <FilterStatusField />
 
-        {/* game status */}
-        <div className="py-[2rem] px-[2.5rem] space-y-[1.25rem]">
-          <h1 className="font-bold text-secondary-white">경기 상태</h1>
-          <div className="space-x-[1rem] flex items-center">
-            {GAMESTATUS.map((status) => (
-              <GameStatusItem isSelected content={status} />
-            ))}
-            {/* <GameStatusItem isSelected content="모집 중" />
-            <GameStatusItem isSelected={false} content="모집 완료" />
-            <GameStatusItem isSelected content="경기 완료" />
-            <GameStatusItem isSelected={false} content="경기 취소" /> */}
-          </div>
-        </div>
         <hr className="border-[#404040] " />
-
-        {/* buttons */}
-        <div className="py-[1.25rem] px-[1.31rem] flex items-center gap-[0.75rem]">
-          <button
-            type="button"
-            className="w-[6.125rem] h-[3rem] py-[1rem] px-[1.25rem] flex items-center justify-center bg-[#737373] text-secondary-white font-[500] rounded-[0.5rem] "
-          >
-            초기화
-          </button>
-
-          <button className="w-full h-full p-[0.62rem] flex items-center justify-center rounded-[0.5rem] bg-[#7FEEF0] text-secondary-black font-bold">
-            적용하기
-          </button>
-        </div>
+        <FilterButtonsField handleResetField={handleResetField} />
       </div>
     </section>
   );

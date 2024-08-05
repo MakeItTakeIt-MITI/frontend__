@@ -9,7 +9,7 @@
 // import { DesktopGameListContainer } from "../components/homepage/DesktopGameListContainer";
 // import Hero, { HeroCarousel } from "../components/homepage/Hero";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../components/common/Footer";
 import Hero from "../components/homepage/v11/Hero";
 import MainContent from "../components/homepage/v11/MainContent";
@@ -58,9 +58,21 @@ export const Home = () => {
   const handleDisplayFilterBox = () => {
     setDisplayFilterBox(true);
   };
+  const handleCloseFilterBox = () => {
+    setDisplayFilterBox(false);
+  };
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (body) {
+      body.style.overflow = displayFilterBox ? "hidden" : "auto";
+    }
+  }, [displayFilterBox]);
   return (
     <>
-      {displayFilterBox && <GameFilterContainer />}
+      {displayFilterBox && (
+        <GameFilterContainer handleCloseFilterBox={handleCloseFilterBox} />
+      )}
 
       <Hero />
       <MainContent handleDisplayFilterBox={handleDisplayFilterBox} />

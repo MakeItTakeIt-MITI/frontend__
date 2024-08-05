@@ -1,7 +1,9 @@
+// Display dates for 2 weeks
 export const DATES = () => {
     const availableDates = [];
 
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 14; i++) {
+        // for (let i = 0; i < 31; i++) {
         const newDate = new Date();
         newDate.setDate(newDate.getDate() + i);
         availableDates.push(newDate);
@@ -16,6 +18,16 @@ export const DATES = () => {
         dayKorean: koreanDays[date.getDay()], // Map the day to its Korean equivalent
     }));
 
+}
 
+// display morning or afternoon status 오전/오후
+export const DAYSTATUS = () => {
+    const getCurrentTimePeriodInKorean = (): string => {
+        const date = new Date();
+        const hour = date.getHours();
+
+        return hour < 12 ? "오전" : "오후";
+    };
+    return getCurrentTimePeriodInKorean();
 
 }

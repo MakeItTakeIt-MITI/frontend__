@@ -1,9 +1,9 @@
 import { DATES } from "../../../constants/calender";
 import DateCard from "./DateCard";
+import "./scrollbar.css";
 
-const Calender = () => {
+const FilterCalenderField = () => {
   const datesList = DATES();
-  console.log(datesList);
 
   const newDate = new Date();
   const thisMonth = newDate.getMonth() + 1;
@@ -14,7 +14,8 @@ const Calender = () => {
         <h1 className="font-bold text-primary-white">날짜</h1>
         <span className="font-[400] text-[12px] text-[#D4D4D4]">월</span>
       </div>
-      <div className="flex items-center gap-[0.5rem]">
+
+      <div className="flex items-center gap-[0.5rem] overflow-x-auto ">
         {datesList.map((date) => (
           <DateCard
             key={date.date}
@@ -28,4 +29,4 @@ const Calender = () => {
   );
 };
 
-export default Calender;
+export default FilterCalenderField;

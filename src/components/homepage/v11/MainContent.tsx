@@ -1,4 +1,4 @@
-import FilterItem from "./FilterItem";
+import FilterItem from "./FilteredStatus";
 import filter from "../../../assets/v11/filter.svg";
 import NaverMap from "./NaverMap";
 import GameListContainer from "./GameListContainer";
@@ -6,7 +6,7 @@ import GameListContainer from "./GameListContainer";
 const MainContent = ({ handleDisplayFilterBox }) => {
   return (
     <section className="bg-secondary-black h-[882px] pt-[3.75rem] pb-[6.25rem]">
-      <div className="w-[768px] h-full mx-auto space-y-[2.62rem]">
+      <div x className="w-[768px] h-full mx-auto space-y-[2.62rem]">
         {/* Top */}
         <div className="space-y-5 text-[#fff]">
           <h1 className="font-[600] text-[32px]">MITI 경기 목록</h1>

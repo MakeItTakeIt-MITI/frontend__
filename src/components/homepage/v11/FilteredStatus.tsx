@@ -1,8 +1,8 @@
-type FilterItem = {
+type FilteredStatus = {
   content: string;
 };
 
-const FilterItem = ({ content }: FilterItem) => {
+const FilteredStatus = ({ content }: FilteredStatus) => {
   return (
     <button
       type="button"
@@ -13,4 +13,4 @@ const FilterItem = ({ content }: FilterItem) => {
   );
 };
 
-export default FilterItem;
+export default FilteredStatus;
