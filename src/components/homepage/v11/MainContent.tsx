@@ -3,7 +3,7 @@ import filter from "../../../assets/v11/filter.svg";
 import NaverMap from "./NaverMap";
 import GameListContainer from "./GameListContainer";
 
-const MainContent = () => {
+const MainContent = ({ handleDisplayFilterBox }) => {
   return (
     <section className="bg-secondary-black h-[882px] pt-[3.75rem] pb-[6.25rem]">
       <div className="w-[768px] h-full mx-auto space-y-[2.62rem]">
@@ -23,7 +23,7 @@ const MainContent = () => {
               <FilterItem content="경기 시작 시간" />
               <FilterItem content="경기 상태" />
             </div>
-            <button type="button">
+            <button type="button" onClick={handleDisplayFilterBox}>
               <img src={filter} alt="filter" />
             </button>
           </div>

@@ -14,6 +14,7 @@ export default {
       "light-dark": "#343434",
       "dark-card": "#404040",
       "primary-white": "#F1F1F1",
+      "secondary-white": "#F5f5f5",
       "primary-green": "#151E1C",
     },
 

@@ -65,3 +65,7 @@ input[type="number"] {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+.disable-scroll {
+  overflow: hidden;
+}

@@ -9,11 +9,14 @@
 // import { DesktopGameListContainer } from "../components/homepage/DesktopGameListContainer";
 // import Hero, { HeroCarousel } from "../components/homepage/Hero";
 
+import { useState } from "react";
 import Footer from "../components/common/Footer";
 import Hero from "../components/homepage/v11/Hero";
 import MainContent from "../components/homepage/v11/MainContent";
+import GameFilterContainer from "../components/homepage/\bv11/GameFilterContainer";
 
 export const Home = () => {
+  const [displayFilterBox, setDisplayFilterBox] = useState(false);
   // const [selectingDate, setSelectedDate] = useState(new Date());
   // const [gameSearched, isGameSearched] = useState(false);
   // const { setCurrentMyLocation } = useGeolocationStore();
@@ -52,15 +55,15 @@ export const Home = () => {
   //   return <NotFoundPage />;
   // }
 
+  const handleDisplayFilterBox = () => {
+    setDisplayFilterBox(true);
+  };
   return (
-    <main
-      style={{
-        scrollbarWidth: "thin",
-      }}
-      className=""
-    >
+    <>
+      {displayFilterBox && <GameFilterContainer />}
+
       <Hero />
-      <MainContent />
+      <MainContent handleDisplayFilterBox={handleDisplayFilterBox} />
       {/* <section className="laptop:mb-[69px] mobile:my-0  tablet:px-[80px] laptop:px-0  ">
         <div className="  flex flex-col gap-6  w-full   mx-auto  max-w-[1024px] ">
           <HeroCarousel />
@@ -100,6 +103,6 @@ export const Home = () => {
           </div>
         </div>
       </section> */}
-    </main>
+    </>
   );
 };
