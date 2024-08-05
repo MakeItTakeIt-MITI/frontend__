@@ -1,11 +1,14 @@
+import { useState } from "react";
 import Calender from "./Calender";
 import DateDropItem from "./DateDropItem";
 import FilterItem from "./FilterItem";
 import GameStatusItem from "./GameStatusItem";
+import { GAMESTATUS } from "../../../constants/status";
 
 const GameFilterContainer = () => {
-  const date = new Date();
-  console.log(date);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState([]);
 
   return (
     <section
@@ -21,10 +24,11 @@ const GameFilterContainer = () => {
           <FilterItem content="경기 시작 시간" />
           <FilterItem content="경기 상태" />
         </div>
-        <hr />
+        <hr className="border-[#404040] " />
+
         {/* calender */}
         <Calender />
-        <hr />
+        <hr className="border-[#404040] " />
         {/* time  */}
         <div className="py-[2rem] px-[2.5rem] space-y-[1.25rem]">
           <h1 className="font-bold text-secondary-white">시간</h1>
@@ -37,18 +41,23 @@ const GameFilterContainer = () => {
             <h2 className="text-primary-white font-bold">이후 경기</h2>
           </div>
         </div>
-        <hr />
+        <hr className="border-[#404040] " />
+
         {/* game status */}
         <div className="py-[2rem] px-[2.5rem] space-y-[1.25rem]">
           <h1 className="font-bold text-secondary-white">경기 상태</h1>
           <div className="space-x-[1rem] flex items-center">
-            <GameStatusItem isSelected content="모집 중" />
+            {GAMESTATUS.map((status) => (
+              <GameStatusItem isSelected content={status} />
+            ))}
+            {/* <GameStatusItem isSelected content="모집 중" />
             <GameStatusItem isSelected={false} content="모집 완료" />
             <GameStatusItem isSelected content="경기 완료" />
-            <GameStatusItem isSelected={false} content="경기 취소" />
+            <GameStatusItem isSelected={false} content="경기 취소" /> */}
           </div>
         </div>
-        <hr />
+        <hr className="border-[#404040] " />
+
         {/* buttons */}
         <div className="py-[1.25rem] px-[1.31rem] flex items-center gap-[0.75rem]">
           <button
