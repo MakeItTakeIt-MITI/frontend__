@@ -1,5 +1,5 @@
-import time from "../../../assets/v11/time.svg";
-import participants from "../../../assets/v11/participants.svg";
+import time from "../../assets/v11/time.svg";
+import participants from "../../assets/v11/participants.svg";
 import { Link } from "react-router-dom";
 
 const GameListCard = () => {

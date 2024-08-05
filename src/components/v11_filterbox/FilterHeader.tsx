@@ -1,4 +1,4 @@
-import close from "../../../assets/v11/close.svg";
+import close from "../../assets/v11/close.svg";
 import FilteredStatus from "./FilteredStatus";
 
 type FilterHeaderProps = {

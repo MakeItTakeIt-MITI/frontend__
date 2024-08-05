@@ -10,10 +10,9 @@
 // import Hero, { HeroCarousel } from "../components/homepage/Hero";
 
 import { useEffect, useState } from "react";
-import Footer from "../components/common/Footer";
-import Hero from "../components/homepage/v11/Hero";
-import MainContent from "../components/homepage/v11/MainContent";
-import GameFilterContainer from "../components/homepage/\bv11/GameFilterContainer";
+import Hero from "../components/\bv11_homepage/Hero";
+import MainContent from "../components/\bv11_homepage/MainContent";
+import GameFilterContainer from "../components/v11_filterbox/GameFilterContainer";
 
 export const Home = () => {
   const [displayFilterBox, setDisplayFilterBox] = useState(false);

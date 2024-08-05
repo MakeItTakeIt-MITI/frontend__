@@ -1,5 +1,5 @@
-import { MobileHeader } from "../../navigation/MobileHeader";
-import BrowserNavbar from "../../navigation/BrowserHeader";
+import BrowserNavbar from "../navigation/BrowserHeader";
+import { MobileHeader } from "../navigation/MobileHeader";
 
 export interface HeaderField {
   isLoggedIn: boolean;

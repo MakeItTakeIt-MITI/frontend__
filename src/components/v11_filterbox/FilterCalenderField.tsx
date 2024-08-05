@@ -1,6 +1,5 @@
-import { DATES } from "../../../constants/calender";
+import { DATES } from "../../constants/calender";
 import DateCard from "./DateCard";
-import "./scrollbar.css";
 
 const FilterCalenderField = () => {
   const datesList = DATES();

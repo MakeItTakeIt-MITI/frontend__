@@ -1,8 +1,6 @@
 import { useState } from "react";
-import drop from "../../../assets/v11/drop.svg";
-import { GAMEDAYTYPE, GAMEHOUR, GAMEMINUTE } from "../../../constants/time";
-import "./scrollbar.css";
 import Dropdown from "./Dropdown";
+import { GAMEDAYTYPE, GAMEHOUR, GAMEMINUTE } from "../../constants/time";
 
 type FilterTimeFieldProps = {
   selectedDayStatus: string;

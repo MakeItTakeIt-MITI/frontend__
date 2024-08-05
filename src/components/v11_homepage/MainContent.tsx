@@ -1,12 +1,16 @@
-import FilterItem from "./FilteredStatus";
-import filter from "../../../assets/v11/filter.svg";
+import filter from "../../assets/v11/filter.svg";
 import NaverMap from "./NaverMap";
 import GameListContainer from "./GameListContainer";
+import FilteredStatus from "../v11_filterbox/FilteredStatus";
 
-const MainContent = ({ handleDisplayFilterBox }) => {
+interface MainContentProps {
+  handleDisplayFilterBox: () => void;
+}
+
+const MainContent = ({ handleDisplayFilterBox }: MainContentProps) => {
   return (
     <section className="bg-secondary-black h-[882px] pt-[3.75rem] pb-[6.25rem]">
-      <div x className="w-[768px] h-full mx-auto space-y-[2.62rem]">
+      <div className="w-[768px] h-full mx-auto space-y-[2.62rem]">
         {/* Top */}
         <div className="space-y-5 text-[#fff]">
           <h1 className="font-[600] text-[32px]">MITI 경기 목록</h1>
@@ -19,9 +23,9 @@ const MainContent = ({ handleDisplayFilterBox }) => {
           {/* Filter Row */}
           <div className="flex items-center justify-between">
             <div className="flex gap-3">
-              <FilterItem content="날짜" />
-              <FilterItem content="경기 시작 시간" />
-              <FilterItem content="경기 상태" />
+              <FilteredStatus content="날짜" />
+              <FilteredStatus content="경기 시작 시간" />
+              <FilteredStatus content="경기 상태" />
             </div>
             <button type="button" onClick={handleDisplayFilterBox}>
               <img src={filter} alt="filter" />

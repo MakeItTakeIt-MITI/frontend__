@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { DAYSTATUS } from "../../../constants/calender";
 import FilterTimeField from "./FilterTimeField";
 import FilterButtonsField from "./FilterButtonsField";
 import FilterCalenderField from "./FilterCalenderField";
 import FilterHeader from "./FilterHeader";
 import FilterStatusField from "./FilterStatusField";
+import { DAYSTATUS } from "../../constants/calender";
 
 interface GameFilterProps {
   handleCloseFilterBox: () => void;

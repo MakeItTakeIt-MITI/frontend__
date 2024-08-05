@@ -30,6 +30,16 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   background: url("./assets//calender_icon_vector.svg") no-repeat;
 }
 
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #a3a3a3;
+  border-radius: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 80px;
+}
+
 @layer components {
   .input-primary {
     @apply h-[58px] p-[17px]  rounded-lg font-medium  bg-[#F7F7F7] w-full text-base;

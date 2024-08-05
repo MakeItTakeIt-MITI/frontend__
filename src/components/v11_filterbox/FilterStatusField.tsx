@@ -1,5 +1,5 @@
-import { GAMESTATUS } from "../../../constants/status";
-import GameStatusItem from "./GameStatusItem";
+import GameStatusItem from "../\bv11_homepage/GameStatusItem";
+import { GAMESTATUS } from "../../constants/status";
 
 const FilterStatusField = () => {
   return (

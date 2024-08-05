@@ -1,6 +1,5 @@
 import { useState } from "react";
-import drop from "../../../assets/v11/drop.svg";
-import "./scrollbar.css";
+import drop from "../../assets/v11/drop.svg";
 
 type DropdownProps = {
   label: string;
