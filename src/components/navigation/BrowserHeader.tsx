@@ -15,7 +15,11 @@ const BrowserNavbar = () => {
           {NAVITEMS.map((nav) => (
             <Link
               style={{
-                color: pathname === nav.path ? "#7FEEF0" : "#F1F1F1",
+                color:
+                  pathname === nav.path ||
+                  (pathname.includes("/game") && nav.path === "/")
+                    ? "#7FEEF0"
+                    : "#F1F1F1",
               }}
               to={nav.path}
               key={nav.title}

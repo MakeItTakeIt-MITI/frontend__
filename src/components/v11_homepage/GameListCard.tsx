@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const GameListCard = () => {
   return (
     <Link
-      to=""
+      to="game/1"
       className="flex flex-col justify-center space-y-3 w-full h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and title */}

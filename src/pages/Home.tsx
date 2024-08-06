@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Hero from "../components/\bv11_homepage/Hero";
 import MainContent from "../components/\bv11_homepage/MainContent";
 import GameFilterContainer from "../components/v11_filterbox/GameFilterContainer";
+import Footer from "../components/common/Footer";
 
 export const Home = () => {
   const [displayFilterBox, setDisplayFilterBox] = useState(false);
@@ -46,6 +47,7 @@ export const Home = () => {
         selectedStatus={selectedStatus}
         handleDisplayFilterBox={handleDisplayFilterBox}
       />
+      <Footer />
     </>
   );
 };
