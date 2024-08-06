@@ -10,7 +10,7 @@ const DateCard = ({ dayOfWeek, date, month }: DateCard) => {
     <>
       <div className="flex items-center gap-[0.5rem]">
         {currentMonth !== month && date === 1 && (
-          <p className="font-bold text-sm text-[#7FEEF0] px-1 mx-[calc(0.5rem - 16)] w-[32px]">
+          <p className="font-bold text-sm text-primary-teal px-1 mx-[calc(0.5rem - 16)] w-[32px]">
             {month}월
           </p>
         )}

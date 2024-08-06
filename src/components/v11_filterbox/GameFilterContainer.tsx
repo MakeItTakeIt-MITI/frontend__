@@ -9,23 +9,35 @@ import { DAYSTATUS } from "../../constants/calender";
 
 interface GameFilterProps {
   handleCloseFilterBox: () => void;
+  selectedDate: string;
+  setSelectedDate: (arg: string) => void;
+  selectedTimeDate: string;
+  setSelectedTimeDate: (arg: string) => void;
+  selectedStatus: string;
+  setSelectedStatus: (arg: string) => void;
 }
 
-const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
+const GameFilterContainer = ({
+  handleCloseFilterBox,
+  selectedDate,
+  setSelectedDate,
+  selectedTimeDate,
+  setSelectedTimeDate,
+  selectedStatus,
+  setSelectedStatus,
+}: GameFilterProps) => {
   const day = DAYSTATUS(); //현재 오전/오후 상태
 
   const date = new Date();
   const hours = String(date.getHours());
 
-  const [selectedDate, setSelectedDate] = useState<string>("날짜");
-  const [selectedStatus, setSelectedStatus] = useState("경기 상태");
-  const [selectedTimeDate, setSelectedTimeDate] = useState("경기 시작 시간");
-
+  // game time fields
   const [selectedDayStatus, setSelectedDayStatus] = useState<string>(day);
   const [selectedHour, setSelectedHour] = useState<string>(hours);
   const [selectedMinute, setSelectedMinute] = useState<string>("00");
 
-  // const gameTimeFormat = `${selectedDate} ${selectedHour}:${selectedMinute}`; //경기 시작 시간
+  const timeFormat = `${selectedDayStatus} ${selectedHour}:${selectedMinute}`;
+  console.log(timeFormat);
 
   const handleResetField = () => {
     setSelectedDate("날짜");
@@ -33,9 +45,17 @@ const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
     setSelectedStatus("경기 상태");
   };
 
-  useEffect(() => {
-    // setSelectedDayStatus(day);
-  }, [setSelectedDayStatus, selectedDayStatus]);
+  const handleApplyFilters = () => {
+    setSelectedTimeDate(timeFormat);
+  };
+
+  useEffect(() => {}, [
+    setSelectedDayStatus,
+    selectedDayStatus,
+    selectedHour,
+    selectedMinute,
+  ]);
+
   return (
     <section
       style={{
@@ -65,7 +85,10 @@ const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
         <FilterStatusField />
 
         <hr className="border-[#404040] " />
-        <FilterButtonsField handleResetField={handleResetField} />
+        <FilterButtonsField
+          handleResetField={handleResetField}
+          handleApplyFilters={handleApplyFilters}
+        />
       </div>
     </section>
   );

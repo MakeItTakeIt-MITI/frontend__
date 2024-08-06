@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Dropdown from "./Dropdown";
 import { GAMEDAYTYPE, GAMEHOUR, GAMEMINUTE } from "../../constants/time";
 
@@ -19,15 +18,11 @@ const FilterTimeField = ({
   setSelectedHour,
   setSelectedMinute,
 }: FilterTimeFieldProps) => {
-  const [displayDayOverplay, setDisplayDayOverloy] = useState(false);
-  const [displayHourOverlay, setDisplayHourOverloy] = useState(false);
-  const [displayMinutesOverplay, setDisplayMinutesOverloy] = useState(false);
   return (
     <div className="py-[2rem] px-[2.5rem] space-y-[1.25rem]">
       <h1 className="font-bold text-secondary-white">시간</h1>
       <div className="flex items-center gap-[2.5rem]">
         <div className="space-x-[1.25rem] flex items-center">
-          {/* 오전 /오후 */}
           {/* 오전 /오후 */}
           <div className="space-x-[0.5rem] flex items-center">
             <Dropdown

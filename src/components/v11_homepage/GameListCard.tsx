@@ -30,7 +30,7 @@ const GameListCard = () => {
           </div>
         </div>
         {/* FEE */}
-        <h2 className="text-[#7FEEF0] font-bold">₩23,000</h2>
+        <h2 className="text-primary-teal font-bold">₩23,000</h2>
       </div>
     </Link>
   );

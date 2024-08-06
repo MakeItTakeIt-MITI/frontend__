@@ -5,9 +5,17 @@ import FilteredStatus from "../v11_filterbox/FilteredStatus";
 
 interface MainContentProps {
   handleDisplayFilterBox: () => void;
+  selectedDate: string;
+  selectedTimeDate: string;
+  selectedStatus: string;
 }
 
-const MainContent = ({ handleDisplayFilterBox }: MainContentProps) => {
+const MainContent = ({
+  handleDisplayFilterBox,
+  selectedDate,
+  selectedTimeDate,
+  selectedStatus,
+}: MainContentProps) => {
   return (
     <section className="bg-secondary-black h-[882px] pt-[3.75rem] pb-[6.25rem]">
       <div className="w-[768px] h-full mx-auto space-y-[2.62rem]">
@@ -23,9 +31,9 @@ const MainContent = ({ handleDisplayFilterBox }: MainContentProps) => {
           {/* Filter Row */}
           <div className="flex items-center justify-between">
             <div className="flex gap-3">
-              <FilteredStatus content="날짜" />
-              <FilteredStatus content="경기 시작 시간" />
-              <FilteredStatus content="경기 상태" />
+              <FilteredStatus content={selectedDate} />
+              <FilteredStatus content={selectedTimeDate} />
+              <FilteredStatus content={selectedStatus} />
             </div>
             <button type="button" onClick={handleDisplayFilterBox}>
               <img src={filter} alt="filter" />

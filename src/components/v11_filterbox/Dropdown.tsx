@@ -1,5 +1,6 @@
 import { useState } from "react";
 import drop from "../../assets/v11/drop.svg";
+import useTimeFieldStore from "../../store/useTimeFieldStore";
 
 type DropdownProps = {
   label: string;
@@ -19,7 +20,11 @@ const Dropdown = ({
   const handleSelect = (option: string) => {
     onSelect(option);
     setIsOpen(false);
+
+    const timeData = option;
+    console.log(timeData);
   };
+
   return (
     <div className="relative pl-[1.25rem] pr-[0.25rem] py-[0.25rem] w-[10rem] h-[2rem] rounded-[0.75rem] border border-dark-card flex items-center justify-between">
       <span className="text-primary-white font-bold">{selectedOption}</span>
