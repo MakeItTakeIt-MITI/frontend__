@@ -28,12 +28,12 @@ const GameFilterContainer = ({
 }: GameFilterProps) => {
   const day = DAYSTATUS(); //현재 오전/오후 상태
 
-  const date = new Date();
-  const hours = String(date.getHours());
+  // calender field
+  const [dateField, setDateField] = useState<string>("");
 
   // game time fields
   const [selectedDayStatus, setSelectedDayStatus] = useState<string>(day);
-  const [selectedHour, setSelectedHour] = useState<string>(hours);
+  const [selectedHour, setSelectedHour] = useState<string>("12");
   const [selectedMinute, setSelectedMinute] = useState<string>("00");
   const [timeFieldClicked, setTimeFieldClicked] = useState(false);
 
@@ -49,9 +49,13 @@ const GameFilterContainer = ({
   };
 
   const handleApplyFilters = () => {
-    if (timeFieldClicked === true) {
-      setSelectedTimeDate(timeFormat);
+    // if (timeFieldClicked === true) {
+
+    if (dateField.length > 1) {
+      setSelectedDate(dateField);
     }
+    setSelectedTimeDate(timeFormat);
+    // }
 
     if (status.length >= 1 && status.length < 2) {
       setSelectedStatus(`${status}`);
@@ -73,6 +77,7 @@ const GameFilterContainer = ({
     setStatus,
     status,
     timeFieldClicked,
+    dateField,
   ]);
 
   return (
@@ -80,7 +85,7 @@ const GameFilterContainer = ({
       style={{
         backgroundColor: "rgba(0, 0, 0, 0.64)",
       }}
-      className=" fixed top-0 right-0 bottom-0 left-0 h-full  z-[999] "
+      className="overflow-hidden fixed top-0 right-0 bottom-0 left-0 h-full  z-[999] "
     >
       <div className="rounded-tl-[20px] rounded-tr-[20px] absolute right-0 bottom-0 left-0 mx-auto w-[48rem]   bg-secondary-black">
         <FilterHeader
@@ -90,7 +95,12 @@ const GameFilterContainer = ({
           selectedTimeDate={selectedTimeDate}
         />
         <hr className="border-[#404040] " />
-        <FilterCalenderField />
+        <FilterCalenderField
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          setDateField={setDateField}
+          dateField={dateField}
+        />
         <hr className="border-[#404040] " />
         <FilterTimeField
           selectedDayStatus={selectedDayStatus}

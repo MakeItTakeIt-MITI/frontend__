@@ -24,7 +24,7 @@ export const Home = () => {
     if (body) {
       body.style.overflow = displayFilterBox ? "hidden" : "auto";
     }
-  }, []);
+  }, [displayFilterBox]);
   return (
     <>
       {displayFilterBox && (

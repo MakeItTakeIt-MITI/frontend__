@@ -1,12 +1,19 @@
 import { DATES } from "../../constants/calender";
 import DateCard from "./DateCard";
 
-const FilterCalenderField = () => {
+type CalenderFieldProps = {
+  selectedDate: string;
+  setSelectedDate: (arg: string) => void;
+  setDateField: (arg: string) => void;
+  dateField: string;
+};
+
+const FilterCalenderField = ({
+  setDateField,
+  dateField,
+}: CalenderFieldProps) => {
   const datesList = DATES();
 
-  const newDate = new Date();
-  const thisMonth = newDate.getMonth() + 1;
-  console.log(thisMonth);
   return (
     <div className="py-[2rem] px-[2.5rem] space-y-[0.75rem]">
       <div className="flex items-center gap-[0.75rem]">
@@ -15,12 +22,15 @@ const FilterCalenderField = () => {
       </div>
 
       <div className="flex items-center gap-[0.5rem] overflow-x-auto ">
-        {datesList.map((date) => (
+        {datesList.map((date, index) => (
           <DateCard
-            key={date.date}
+            index={index}
+            key={index}
             dayOfWeek={date.dayKorean}
             date={date.date}
             month={date.month}
+            setDateField={setDateField}
+            dateField={dateField}
           />
         ))}
       </div>
