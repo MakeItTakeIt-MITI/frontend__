@@ -8,22 +8,23 @@ export const Home = () => {
 
   // FILTER TAB ITEMS
   const [selectedDate, setSelectedDate] = useState<string>("날짜");
-  const [selectedTimeDate, setSelectedTimeDate] = useState("경기 시작 시간");
-  const [selectedStatus, setSelectedStatus] = useState("경기 상태");
+  const [selectedTimeDate, setSelectedTimeDate] =
+    useState<string>("경기 시작 시간");
+  const [selectedStatus, setSelectedStatus] = useState<string>("경기 상태");
 
-  const handleDisplayFilterBox = () => {
-    setDisplayFilterBox(true);
-  };
   const handleCloseFilterBox = () => {
     setDisplayFilterBox(false);
   };
 
+  const handleDisplayFilterBox = () => {
+    setDisplayFilterBox(true);
+  };
   useEffect(() => {
     const body = document.querySelector("body");
     if (body) {
       body.style.overflow = displayFilterBox ? "hidden" : "auto";
     }
-  }, [displayFilterBox]);
+  }, []);
   return (
     <>
       {displayFilterBox && (

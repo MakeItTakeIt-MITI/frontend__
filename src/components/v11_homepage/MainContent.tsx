@@ -41,10 +41,7 @@ const MainContent = ({
           </div>
           {/* Game list and map container */}
           <div className="flex gap-5 h-full ">
-            {/* LIST */}
             <GameListContainer />
-            {/* MAP */}
-            {/* <div className="bg-light-dark w-[381px] h-[494px]">s</div> */}
             <NaverMap />
           </div>
         </div>

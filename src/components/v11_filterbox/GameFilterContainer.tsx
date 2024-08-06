@@ -36,8 +36,10 @@ const GameFilterContainer = ({
   const [selectedHour, setSelectedHour] = useState<string>(hours);
   const [selectedMinute, setSelectedMinute] = useState<string>("00");
 
+  // game status field
+  const [status, setStatus] = useState<string>("");
+
   const timeFormat = `${selectedDayStatus} ${selectedHour}:${selectedMinute}`;
-  console.log(timeFormat);
 
   const handleResetField = () => {
     setSelectedDate("날짜");
@@ -47,13 +49,25 @@ const GameFilterContainer = ({
 
   const handleApplyFilters = () => {
     setSelectedTimeDate(timeFormat);
+
+    if (status.length >= 1 && status.length < 2) {
+      setSelectedStatus(`${status}`);
+    } else if (status.length > 1 && status.length <= 4) {
+      setSelectedStatus(`${status + "   "}`);
+    }
+
+    handleCloseFilterBox();
   };
 
   useEffect(() => {}, [
-    setSelectedDayStatus,
     selectedDayStatus,
+    setSelectedDayStatus,
+    setSelectedTimeDate,
+    setSelectedStatus,
     selectedHour,
     selectedMinute,
+    setStatus,
+    status,
   ]);
 
   return (
@@ -82,7 +96,7 @@ const GameFilterContainer = ({
           setSelectedMinute={setSelectedMinute}
         />
         <hr className="border-[#404040] " />
-        <FilterStatusField />
+        <FilterStatusField setStatus={setStatus} />
 
         <hr className="border-[#404040] " />
         <FilterButtonsField
