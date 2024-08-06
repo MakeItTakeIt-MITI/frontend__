@@ -35,6 +35,7 @@ const GameFilterContainer = ({
   const [selectedDayStatus, setSelectedDayStatus] = useState<string>(day);
   const [selectedHour, setSelectedHour] = useState<string>(hours);
   const [selectedMinute, setSelectedMinute] = useState<string>("00");
+  const [timeFieldClicked, setTimeFieldClicked] = useState(false);
 
   // game status field
   const [status, setStatus] = useState<string>("");
@@ -48,12 +49,15 @@ const GameFilterContainer = ({
   };
 
   const handleApplyFilters = () => {
-    setSelectedTimeDate(timeFormat);
+    if (timeFieldClicked === true) {
+      setSelectedTimeDate(timeFormat);
+    }
 
     if (status.length >= 1 && status.length < 2) {
       setSelectedStatus(`${status}`);
     } else if (status.length > 1 && status.length <= 4) {
-      setSelectedStatus(`${status + "   "}`);
+      const statusSpacing = `${status} `;
+      setSelectedStatus(statusSpacing);
     }
 
     handleCloseFilterBox();
@@ -68,6 +72,7 @@ const GameFilterContainer = ({
     selectedMinute,
     setStatus,
     status,
+    timeFieldClicked,
   ]);
 
   return (
@@ -94,6 +99,7 @@ const GameFilterContainer = ({
           selectedMinute={selectedMinute}
           setSelectedHour={setSelectedHour}
           setSelectedMinute={setSelectedMinute}
+          setTimeFieldClicked={setTimeFieldClicked}
         />
         <hr className="border-[#404040] " />
         <FilterStatusField setStatus={setStatus} />
