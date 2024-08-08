@@ -10,7 +10,9 @@ const GameListCard = () => {
     >
       {/* Status and title */}
       <div className="space-y-2">
-        <span className="p-1 text-[10px] h-[18px] bg-[#4152EB]">모집중</span>
+        <span className="flex items-center justify-center text-[10px] rounded-[0.125rem] max-w-[2.8125rem] w-full h-[1.125rem]  text-[#009799] bg-[#b9dbdc] ">
+          모집 완료
+        </span>
         <h1 className="font-bold  text-[#E5E5E5]">
           수원 매탄 공원 4 vs 4 (주차 12자리)
         </h1>

@@ -3,9 +3,12 @@ import Hero from "../components/\bv11_homepage/Hero";
 import MainContent from "../components/\bv11_homepage/MainContent";
 import GameFilterContainer from "../components/v11_filterbox/GameFilterContainer";
 import Footer from "../components/common/Footer";
+import { DATES } from "../constants/calender";
 
 export const Home = () => {
   const [displayFilterBox, setDisplayFilterBox] = useState(false);
+
+  console.log(DATES());
 
   // FILTER TAB ITEMS
   const [selectedDate, setSelectedDate] = useState<string>("날짜");

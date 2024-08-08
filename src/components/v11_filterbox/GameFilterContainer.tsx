@@ -5,7 +5,7 @@ import FilterButtonsField from "./FilterButtonsField";
 import FilterCalenderField from "./FilterCalenderField";
 import FilterHeader from "./FilterHeader";
 import FilterStatusField from "./FilterStatusField";
-import { DAYSTATUS } from "../../constants/calender";
+import { DATES, DAYSTATUS } from "../../constants/calender";
 
 interface GameFilterProps {
   handleCloseFilterBox: () => void;
@@ -27,9 +27,17 @@ const GameFilterContainer = ({
   setSelectedStatus,
 }: GameFilterProps) => {
   const day = DAYSTATUS(); //현재 오전/오후 상태
+  const datesList = DATES();
 
   // calender field
-  const [dateField, setDateField] = useState<string>("");
+  // const [dateField, setDateField] = useState<string>("");
+  const [dateField, setDateField] = useState<string>(() => {
+    if (datesList.length > 0) {
+      const firstDate = datesList[0];
+      return `${firstDate.month}.${firstDate.date} (${firstDate.dayKorean})`;
+    }
+    return "";
+  });
 
   // game time fields
   const [selectedDayStatus, setSelectedDayStatus] = useState<string>(day);
@@ -38,7 +46,7 @@ const GameFilterContainer = ({
   const [timeFieldClicked, setTimeFieldClicked] = useState(false);
 
   // game status field
-  const [status, setStatus] = useState<string>("");
+  const [status, setStatus] = useState("");
 
   const timeFormat = `${selectedDayStatus} ${selectedHour}:${selectedMinute}`;
 
