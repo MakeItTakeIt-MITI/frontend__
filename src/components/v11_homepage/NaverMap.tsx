@@ -11,7 +11,12 @@ const NaverMap = () => {
       scrollWheel: true,
     });
   }, []);
-  return <div id="map" className=" w-[381px] h-[494px] rounded-[20px]"></div>;
+  return (
+    <div
+      id="map"
+      className="sm:hidden md:block w-[381px] h-[494px] rounded-[20px]"
+    ></div>
+  );
 };
 
 export default NaverMap;

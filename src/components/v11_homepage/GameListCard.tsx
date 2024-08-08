@@ -6,11 +6,11 @@ const GameListCard = () => {
   return (
     <Link
       to="game/1"
-      className="flex flex-col justify-center space-y-3 w-full h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
+      className="flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and title */}
       <div className="space-y-2">
-        <span className="flex items-center justify-center text-[10px] rounded-[0.125rem] max-w-[2.8125rem] w-full h-[1.125rem]  text-[#009799] bg-[#b9dbdc] ">
+        <span className="flex items-center justify-center text-[10px] rounded-[0.125rem] max-w-[2.8125rem] w-full md:h-[1.125rem]  text-[#009799] bg-[#b9dbdc] ">
           모집 완료
         </span>
         <h1 className="font-bold  text-[#E5E5E5]">

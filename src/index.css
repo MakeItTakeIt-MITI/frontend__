@@ -85,3 +85,13 @@ input[type="number"] {
     linear-gradient(0deg, rgba(0, 0, 0, 0) 15.95%, #151E1C96.62%),
     url(./assets/v11//hero.png) lightgray 50% / cover no-repeat;
 }
+
+.disable-scrollbar::-webkit-scrollbar-thumb {
+  background: #a3a3a3;
+  border-radius: 20px;
+}
+
+.disable-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 80px;
+}

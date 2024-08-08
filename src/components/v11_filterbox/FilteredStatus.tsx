@@ -1,3 +1,5 @@
+import mobile_drop from "../../assets/v11/mobile-drop.svg";
+
 type FilteredStatus = {
   content: string;
 };
@@ -14,11 +16,12 @@ const FilteredStatus = ({ content }: FilteredStatus) => {
   return (
     <button
       type="button"
-      className={`py-[10px] px-4 ${filterDate || filterTime || filterStatus ? "text-[#fff]" : "text-primary-teal"}  text-sm 
+      className={`flex items-center justify-center gap-1 py-[10px] px-4 ${filterDate || filterTime || filterStatus ? "text-[#fff]" : "text-primary-teal"}  text-sm 
       ${filterDate || filterTime || filterStatus ? "font-[500] " : "font-[600]"} 
       rounded-[50px] border border-[#737373]`}
     >
-      {content}
+      <span> {content}</span>
+      <img src={mobile_drop} alt="drop" className="sm:block md:hidden" />
     </button>
   );
 };
