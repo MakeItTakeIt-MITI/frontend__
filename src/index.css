@@ -79,3 +79,9 @@ input[type="number"] {
 .disable-scroll {
   overflow: hidden;
 }
+
+.shadow-image {
+  background:
+    linear-gradient(0deg, rgba(0, 0, 0, 0) 15.95%, #151E1C96.62%),
+    url(./assets/v11//hero.png) lightgray 50% / cover no-repeat;
+}
