@@ -46,7 +46,7 @@ const GameFilterContainer = ({
   const [timeFieldClicked, setTimeFieldClicked] = useState(false);
 
   // game status field
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState<string[]>([]);
 
   const timeFormat = `${selectedDayStatus} ${selectedHour}:${selectedMinute}`;
 

@@ -2,17 +2,17 @@ import { useState } from "react";
 
 type GameStatusItemProps = {
   content: string;
-  setStatus: (arg: string) => void;
+  setStatus: (status: (prevStatus: string[]) => string[]) => void;
 };
 
 const GameStatusItem = ({ content, setStatus }: GameStatusItemProps) => {
   const [selected, isSelected] = useState(false);
 
   const addUniqueStatus = (newStatus: string) => {
-    setStatus((prevStatus) => {
+    setStatus((prevStatus: string[]) => {
       if (prevStatus.includes(newStatus)) {
         isSelected(false);
-        return prevStatus.filter((status: string) => status !== newStatus);
+        return prevStatus.filter((status) => status !== newStatus);
       } else {
         isSelected(true);
         return [...prevStatus, newStatus];

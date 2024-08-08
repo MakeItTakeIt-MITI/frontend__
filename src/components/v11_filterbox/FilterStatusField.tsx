@@ -2,7 +2,7 @@ import GameStatusItem from "../\bv11_homepage/GameStatusItem";
 import { GAMESTATUS } from "../../constants/status";
 
 type FilterStatusFieldProps = {
-  setStatus: (arg: string) => void;
+  setStatus: (status: (prevStatus: string[]) => string[]) => void;
 };
 
 const FilterStatusField = ({ setStatus }: FilterStatusFieldProps) => {
