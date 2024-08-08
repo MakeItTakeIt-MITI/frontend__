@@ -3,10 +3,8 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     screens: {
-      mobile: "320px",
-      tablet: "600px",
-      laptop: "1024px",
-      desktop: "1280px",
+      sm: "320px",
+      md: "600px",
     },
     colors: {
       "primary-black": "#171717",

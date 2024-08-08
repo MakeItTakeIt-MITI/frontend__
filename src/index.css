@@ -46,7 +46,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   }
 
   .section-layer {
-    @apply laptop:my-[69px] mobile:mb-12;
+    @apply md:my-[69px] sm:mb-12;
   }
 
   .flexCenter {

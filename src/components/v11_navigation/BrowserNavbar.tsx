@@ -6,7 +6,7 @@ const BrowserNavbar = () => {
   const { pathname } = useLocation();
 
   return (
-    <nav className="w-full h-[3.75rem]  bg-primary-black flexCenter">
+    <nav className="sm:hidden md:flex items-center justify-center;  w-full h-[3.75rem]  bg-primary-black ">
       <div className="w-[768px] mx-auto flex items-center gap-[3.75rem]">
         <Link to="/">
           <img src={logo} alt="logo" />
