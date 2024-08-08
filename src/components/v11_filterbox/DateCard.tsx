@@ -1,11 +1,8 @@
-import { useState } from "react";
-
 type DateCard = {
   dayOfWeek: string;
   date: string | number;
   month: string | number;
   setDateField: (arg: string) => void;
-  index: number;
   dateField: string;
 };
 
@@ -15,7 +12,6 @@ const DateCard = ({
   month,
   setDateField,
   dateField,
-  index,
 }: DateCard) => {
   const currentMonth = new Date().getMonth() + 1;
 

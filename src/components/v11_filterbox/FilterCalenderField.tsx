@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { DATES } from "../../constants/calender";
 import DateCard from "./DateCard";
 
@@ -25,7 +24,6 @@ const FilterCalenderField = ({
       <div className="flex items-center gap-[0.5rem] overflow-x-auto ">
         {datesList.map((date, index) => (
           <DateCard
-            index={index}
             key={index}
             dayOfWeek={date.dayKorean}
             date={date.date}
