@@ -25,6 +25,10 @@
     sans-serif;
 }
 
+body {
+  background: "#262626";
+}
+
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   display: block;
   background: url("./assets//calender_icon_vector.svg") no-repeat;

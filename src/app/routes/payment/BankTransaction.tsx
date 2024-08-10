@@ -3,7 +3,7 @@ import { NavigateToPrevContainer } from "../../../components/NavigateToPrevConta
 import { BankTransferBox } from "../../../components/payment/BankTransferBox";
 import { useGetAccountBalance } from "../../../hooks/account/useGetAccountBalance";
 import { useGetUserDataQuery } from "../../../hooks/user/useGetUserDataQuery";
-import useUserDataStore from "../../../store/useUserDataStore";
+import useUserDataStore from "../../../store/_useUserDataStore";
 
 export const BankTransaction = () => {
   const { userId } = useUserDataStore();

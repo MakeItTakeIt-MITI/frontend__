@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { oAuthKakaoLogin } from "../../api/auth";
-import useAuthStore from "../../store/useAuthStore";
-import useUserDataStore from "../../store/useUserDataStore";
+import useAuthStore from "../../store/_useAuthStore";
+import useUserDataStore from "../../store/_useUserDataStore";
 
 export const useKakaoLoginMutation = () => {
   const { login } = useAuthStore();

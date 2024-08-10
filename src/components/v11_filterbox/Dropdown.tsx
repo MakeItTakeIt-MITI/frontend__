@@ -32,6 +32,7 @@ const Dropdown = ({
       </button>
       {isOpen && (
         <ul
+          onMouseLeave={() => setIsOpen(false)}
           style={{
             height: label === "시" || label === "분" ? "12.375rem" : "",
           }}

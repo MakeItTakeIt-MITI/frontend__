@@ -2,7 +2,7 @@ import { useState } from "react";
 import closeBtn from "../../assets/games/game_form_x.svg";
 import unCheckedBtn from "../../assets/games/refund_agreement_unchecked.svg";
 import checkedBtn from "../../assets/games/refund_agreement_checked.svg";
-import useDisplayAddressOptionsStore from "../../store/useDisplayAddressOptionsStore";
+import useDisplayAddressOptionsStore from "../../store/_useDisplayAddressOptionsStore";
 export const MatchingCourtModal = ({
   matchingAddressData,
   setCourtAddressDetail,

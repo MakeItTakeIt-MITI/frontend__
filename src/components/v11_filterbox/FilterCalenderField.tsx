@@ -1,17 +1,7 @@
 import { DATES } from "../../constants/calender";
 import DateCard from "./DateCard";
 
-type CalenderFieldProps = {
-  selectedDate: string;
-  setSelectedDate: (arg: string) => void;
-  setDateField: (arg: string) => void;
-  dateField: string;
-};
-
-const FilterCalenderField = ({
-  setDateField,
-  dateField,
-}: CalenderFieldProps) => {
+const FilterCalenderField = () => {
   const datesList = DATES();
 
   return (
@@ -28,8 +18,6 @@ const FilterCalenderField = ({
             dayOfWeek={date.dayKorean}
             date={date.date}
             month={date.month}
-            setDateField={setDateField}
-            dateField={dateField}
           />
         ))}
       </div>

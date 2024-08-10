@@ -1,18 +1,14 @@
+import useDateSelectionStore from "../../store/useDateSelectionStore";
+
 type DateCard = {
   dayOfWeek: string;
   date: string | number;
   month: string | number;
-  setDateField: (arg: string) => void;
-  dateField: string;
 };
 
-const DateCard = ({
-  dayOfWeek,
-  date,
-  month,
-  setDateField,
-  dateField,
-}: DateCard) => {
+const DateCard = ({ dayOfWeek, date, month }: DateCard) => {
+  const { dateField, setDateField } = useDateSelectionStore();
+
   const currentMonth = new Date().getMonth() + 1;
 
   const displayDate = `${month}.${date} (${dayOfWeek})`;
@@ -48,7 +44,7 @@ const DateCard = ({
         <div
           style={{
             backgroundColor: isSelected ? "#7FEEF0" : "#262626",
-            color: isSelected ? "#171717" : "#080505",
+            color: isSelected ? "#171717" : "#525252",
             borderRadius: isSelected ? "100px" : "0px",
           }}
           className={`size-[2rem] flex items-center justify-center font-bold text-sm `}

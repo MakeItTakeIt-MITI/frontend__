@@ -5,7 +5,7 @@ import { useState } from "react";
 import { BankList } from "./BankList";
 import checked from "../../assets/games/refund_agreement_checked.svg";
 import unchecked from "../../assets/games/refund_agreement_unchecked.svg";
-import useUserDataStore from "../../store/useUserDataStore";
+import useUserDataStore from "../../store/_useUserDataStore";
 import { useMutateTransferMoney } from "../../hooks/account/useMutateTransferMoney";
 
 export interface RequestTransferField {

@@ -1,31 +1,22 @@
-import { useState } from "react";
+// import { useState } from "react";
+import useStatusSelectionStore from "../../store/useStatusSelectionStore";
 
 type GameStatusItemProps = {
   content: string;
-  setStatus: (status: (prevStatus: string[]) => string[]) => void;
 };
 
-const GameStatusItem = ({ content, setStatus }: GameStatusItemProps) => {
-  const [selected, isSelected] = useState(false);
+const GameStatusItem = ({ content }: GameStatusItemProps) => {
+  const { selectedStatuses, toggleStatus } = useStatusSelectionStore();
+  const isSelected = selectedStatuses.includes(content);
+  //
 
-  const addUniqueStatus = (newStatus: string) => {
-    setStatus((prevStatus: string[]) => {
-      if (prevStatus.includes(newStatus)) {
-        isSelected(false);
-        return prevStatus.filter((status) => status !== newStatus);
-      } else {
-        isSelected(true);
-        return [...prevStatus, newStatus];
-      }
-    });
-  };
   return (
     <button
       type="button"
-      onClick={() => addUniqueStatus(content)}
+      onClick={() => toggleStatus(content)}
       style={{
-        border: !selected ? "1px solid #A3A3A3" : "1px solid #7FEEF0",
-        color: !selected ? "#A3A3A3" : "#7FEEF0",
+        border: !isSelected ? "1px solid #A3A3A3" : "1px solid #7FEEF0",
+        color: !isSelected ? "#A3A3A3" : "#7FEEF0",
       }}
       className="flex items-center justify-center space-y-[0.62rem] font-[500] w-[10rem] h-[2.25rem] rounded-[1.25rem]"
     >

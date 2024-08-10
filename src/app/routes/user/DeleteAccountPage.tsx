@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useDeleteAccountMutation } from "../../../hooks/auth/useDeleteAccountMutation";
-import useAuthStore from "../../../store/useAuthStore";
-import useUserDataStore from "../../../store/useUserDataStore";
+import useAuthStore from "../../../store/_useAuthStore";
+import useUserDataStore from "../../../store/_useUserDataStore";
 import { useEffect, useState } from "react";
 import {
   DeleteAccountGuestFailure,

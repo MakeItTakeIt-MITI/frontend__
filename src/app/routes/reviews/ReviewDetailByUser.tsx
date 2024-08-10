@@ -3,7 +3,7 @@ import { CourtDetailMap } from "../../../components/naver/CourtDetailMap";
 import { getCourtDetailQuery } from "../../../hooks/courts/getCourtDetailQuery";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import useUserDataStore from "../../../store/useUserDataStore";
+import useUserDataStore from "../../../store/_useUserDataStore";
 import { ReviewGameDetailBox } from "../../../components/reviews/ReviewGameDetailBox";
 import { GuestDetailContainer } from "../../../components/reviews/GuestDetailContainer";
 import { useUserInfoQuery } from "../../../hooks/games/useUserInfoQuery";

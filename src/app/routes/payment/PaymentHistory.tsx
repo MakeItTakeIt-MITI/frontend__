@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import downArrow from "../../../assets/Chevron_Down_MD.svg";
-import useUserDataStore from "../../../store/useUserDataStore";
+import useUserDataStore from "../../../store/_useUserDataStore";
 import { useGetPaymentHistory } from "../../../hooks/account/useGetPaymentHistory";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
 import { MatchTags } from "../../../components/game/MatchTags";

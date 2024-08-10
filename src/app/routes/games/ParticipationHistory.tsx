@@ -1,6 +1,6 @@
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
 import { useEffect, useState } from "react";
-import useUserDataStore from "../../../store/useUserDataStore";
+import useUserDataStore from "../../../store/_useUserDataStore";
 
 import { TabFilterList } from "../../../components/game/TabFilterList";
 import { useParticipationHistoryInfiniteQuery } from "../../../hooks/games/useParticipationHistoryInfiniteQuery";

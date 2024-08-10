@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
 import { TabFilterList } from "../../../components/game/TabFilterList";
 import { useGetUserDataQuery } from "../../../hooks/user/useGetUserDataQuery";
-import useUserDataStore from "../../../store/useUserDataStore";
+import useUserDataStore from "../../../store/_useUserDataStore";
 import { useGetUserWrittenReviewsQuery } from "../../../hooks/reviews/useGetUserWrittenReviewsQuery";
 import MITI_logo from "../../../assets/MITI_logo.svg";
 import { ReviewCard } from "../../../components/ui/cards/ReviewCard";

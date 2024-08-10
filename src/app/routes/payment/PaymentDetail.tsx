@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { GameTotalPaymentBox } from "../../../components/GameTotalPaymentBox";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
 import { ParticipantsPaymentStatusBox } from "../../../components/ParticipantsPaymentStatusBox";
-import useUserDataStore from "../../../store/useUserDataStore";
+import useUserDataStore from "../../../store/_useUserDataStore";
 import { useGetPaymentDetails } from "../../../hooks/account/useGetPaymentDetails";
 import { GameDetailsCard } from "../../../components/ui/cards/GameDetailsCard";
 

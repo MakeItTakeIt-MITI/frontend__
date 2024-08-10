@@ -1,33 +1,22 @@
 import Dropdown from "./Dropdown";
 import { GAMEDAYTYPE, GAMEHOUR, GAMEMINUTE } from "../../constants/time";
+import useTimeFieldStore from "../../store/useTimeStore";
 
-type FilterTimeFieldProps = {
-  selectedDayStatus: string;
-  selectedHour: string;
-  selectedMinute: string;
-  setSelectedDayStatus: (arg: string) => void;
-  setSelectedHour: (arg: string) => void;
-  setSelectedMinute: (arg: string) => void;
-  setTimeFieldClicked: (arg: boolean) => void;
-};
+const FilterTimeField = () => {
+  const {
+    selectedDayStatus,
+    setSelectedDayStatus,
+    setSelectedHour,
+    setSelectedMinute,
+    selectedHour,
+    selectedMinute,
+  } = useTimeFieldStore();
 
-const FilterTimeField = ({
-  selectedDayStatus,
-  selectedHour,
-  selectedMinute,
-  setSelectedDayStatus,
-  setSelectedHour,
-  setSelectedMinute,
-  setTimeFieldClicked,
-}: FilterTimeFieldProps) => {
   return (
     <div className="py-[2rem] px-[2.5rem] space-y-[1.25rem]">
       <h1 className="font-bold text-secondary-white">시간</h1>
       <div className="flex items-center gap-[2.5rem]">
-        <div
-          onClick={() => setTimeFieldClicked(true)}
-          className="space-x-[1.25rem] flex items-center "
-        >
+        <div className="space-x-[1.25rem] flex items-center ">
           {/* 오전 /오후 */}
           <div className="space-x-[0.5rem] flex items-center">
             <Dropdown

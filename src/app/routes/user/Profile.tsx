@@ -1,5 +1,5 @@
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
-import useUserDataStore from "../../../store/useUserDataStore";
+import useUserDataStore from "../../../store/_useUserDataStore";
 import { useUserInfoQuery } from "../../../hooks/games/useUserInfoQuery";
 import profileIcon from "../../../assets/svg/profile-icon.svg";
 import { NotFoundPage } from "../NotFoundPage";
@@ -13,7 +13,7 @@ import {
   TranscationHistory,
 } from "../../../stories/QuickLink.stories";
 import { useLogoutMutation } from "../../../hooks/auth/useLogoutMutation";
-import useAuthStore from "../../../store/useAuthStore";
+import useAuthStore from "../../../store/_useAuthStore";
 import {
   FiveStars,
   FourAndHalfStars,

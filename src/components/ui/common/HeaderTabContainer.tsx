@@ -1,4 +1,4 @@
-import useAuthStore from "../../../store/useAuthStore";
+import useAuthStore from "../../../store/_useAuthStore";
 import MITI_logo from "../../../assets/MITI_logo.svg";
 import {
   CustomerSupport,

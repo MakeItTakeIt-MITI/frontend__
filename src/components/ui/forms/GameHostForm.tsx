@@ -9,7 +9,7 @@ import { FormLabel } from "./FormLabel";
 import { ErrorMessage } from "../../StatusMessages/ErrorMessage";
 import { useGetAllCourtsInfiniteQuery } from "../../../hooks/courts/useGetAllCourtsInfiniteQuery";
 import { MatchingCourtModal } from "../../game/MatchingCourtModal";
-import useDisplayAddressOptionsStore from "../../../store/useDisplayAddressOptionsStore";
+import useDisplayAddressOptionsStore from "../../../store/_useDisplayAddressOptionsStore";
 import { SubmitButton } from "../../ui/buttons/SubmitButton";
 import { Active, Inactive } from "../../ui/buttons/Button.stories";
 import GameInput, { GameInputField } from "./GameInput";

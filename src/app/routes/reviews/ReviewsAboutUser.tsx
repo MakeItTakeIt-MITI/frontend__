@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
 import { TabFilterList } from "../../../components/game/TabFilterList";
-import useUserDataStore from "../../../store/useUserDataStore";
+import useUserDataStore from "../../../store/_useUserDataStore";
 import { useGetMyReviewsQuery } from "../../../hooks/reviews/useGetMyReviewsQuery";
 import MITI_logo from "../../../assets/MITI_logo.svg";
 import { ReviewCard } from "../../../components/ui/cards/ReviewCard";

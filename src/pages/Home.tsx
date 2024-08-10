@@ -3,18 +3,9 @@ import Hero from "../components/\bv11_homepage/Hero";
 import MainContent from "../components/\bv11_homepage/MainContent";
 import GameFilterContainer from "../components/v11_filterbox/GameFilterContainer";
 import Footer from "../components/common/Footer";
-import { DATES } from "../constants/calender";
 
 export const Home = () => {
   const [displayFilterBox, setDisplayFilterBox] = useState(false);
-
-  console.log(DATES());
-
-  // FILTER TAB ITEMS
-  const [selectedDate, setSelectedDate] = useState<string>("날짜");
-  const [selectedTimeDate, setSelectedTimeDate] =
-    useState<string>("경기 시작 시간");
-  const [selectedStatus, setSelectedStatus] = useState<string>("경기 상태");
 
   const handleCloseFilterBox = () => {
     setDisplayFilterBox(false);
@@ -23,6 +14,7 @@ export const Home = () => {
   const handleDisplayFilterBox = () => {
     setDisplayFilterBox(true);
   };
+
   useEffect(() => {
     const body = document.querySelector("body");
     if (body) {
@@ -32,24 +24,11 @@ export const Home = () => {
   return (
     <>
       {displayFilterBox && (
-        <GameFilterContainer
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate}
-          selectedTimeDate={selectedTimeDate}
-          setSelectedTimeDate={setSelectedTimeDate}
-          selectedStatus={selectedStatus}
-          setSelectedStatus={setSelectedStatus}
-          handleCloseFilterBox={handleCloseFilterBox}
-        />
+        <GameFilterContainer handleCloseFilterBox={handleCloseFilterBox} />
       )}
 
       <Hero />
-      <MainContent
-        selectedDate={selectedDate}
-        selectedTimeDate={selectedTimeDate}
-        selectedStatus={selectedStatus}
-        handleDisplayFilterBox={handleDisplayFilterBox}
-      />
+      <MainContent handleDisplayFilterBox={handleDisplayFilterBox} />
       <Footer />
     </>
   );

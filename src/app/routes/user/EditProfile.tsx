@@ -1,4 +1,4 @@
-import useUserDataStore from "../../../store/useUserDataStore";
+import useUserDataStore from "../../../store/_useUserDataStore";
 import { useUserInfoQuery } from "../../../hooks/games/useUserInfoQuery";
 import profileIcon from "../../../assets/svg/profile_icon_64.svg";
 

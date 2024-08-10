@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavigateToPrevContainer } from "../../../components/NavigateToPrevContainer";
 import downArrow from "../../../assets/Chevron_Down_MD.svg";
-import useUserDataStore from "../../../store/useUserDataStore";
+import useUserDataStore from "../../../store/_useUserDataStore";
 import { useGetBankTransferHistory } from "../../../hooks/account/useGetBankTransferHistory";
 import { Link } from "react-router-dom";
 import { useGetUserDataQuery } from "../../../hooks/user/useGetUserDataQuery";
