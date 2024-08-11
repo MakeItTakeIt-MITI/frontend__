@@ -1,13 +1,15 @@
+import useCurrentMonthStore from "../../store/useCurrentMonthStore";
 import useDateSelectionStore from "../../store/useDateSelectionStore";
 
 type DateCard = {
   dayOfWeek: string;
   date: string | number;
-  month: string | number;
+  month: number;
 };
 
 const DateCard = ({ dayOfWeek, date, month }: DateCard) => {
   const { dateField, setDateField } = useDateSelectionStore();
+  const { setCurrentMonth } = useCurrentMonthStore();
 
   const currentMonth = new Date().getMonth() + 1;
 
@@ -20,7 +22,10 @@ const DateCard = ({ dayOfWeek, date, month }: DateCard) => {
 
   return (
     <div
-      onClick={() => handleFilterDate(displayDate)}
+      onClick={() => {
+        handleFilterDate(displayDate);
+        setCurrentMonth(month);
+      }}
       className="flex items-center gap-[0.5rem] hover:cursor-pointer"
     >
       {currentMonth !== month && date === 1 && (
