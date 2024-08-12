@@ -3,14 +3,42 @@ import NaverMap from "./NaverMap";
 import GameListContainer from "./GameListContainer";
 import FilteredStatus from "../v11_filterbox/FilteredStatus";
 import useGameFilterStore from "../../store/useGameFilterStore";
+import useTimeFieldStore from "../../store/useTimeStore";
+import useStatusSelectionStore from "../../store/useStatusSelectionStore";
+import useDateSelectionStore from "../../store/useDateSelectionStore";
 
 interface MainContentProps {
   handleDisplayFilterBox: () => void;
 }
 
 const MainContent = ({ handleDisplayFilterBox }: MainContentProps) => {
-  const { selectedStatus, selectedDate, selectedTimeDate } =
-    useGameFilterStore();
+  const {
+    selectedStatus,
+    selectedDate,
+    selectedTimeDate,
+    resetSelectedDate,
+    resetSelectedTimeDate,
+    resetSelectedStatus,
+  } = useGameFilterStore();
+  const { resetTimeField } = useTimeFieldStore();
+  const { resetStatuses } = useStatusSelectionStore();
+  const { resetDateField } = useDateSelectionStore();
+
+  const handleResetDateField = () => {
+    resetSelectedDate();
+    resetDateField();
+  };
+
+  const handleResetTimeField = () => {
+    resetSelectedTimeDate();
+    resetTimeField();
+  };
+
+  const handleResetGameStatus = () => {
+    resetSelectedStatus();
+    resetStatuses();
+  };
+
   return (
     <section className="bg-secondary-black h-[882px] sm:px-[0.81rem] md:px-0  pt-[3.75rem]  sm:pb-[3.75rem] md:pb-[6.25rem]">
       <div className=" sm:w-full md:w-[768px] sm:px-[0.5rem] md:px-0 h-full mx-auto sm:space-y-[1.75rem] md:space-y-[2.62rem]">
@@ -26,19 +54,22 @@ const MainContent = ({ handleDisplayFilterBox }: MainContentProps) => {
         {/* Bottom */}
         <div className="sm:space-y-[1.25rem] md:space-y-5">
           {/* Filter Row */}
-          <div className="flex items-center justify-between md:w-full ">
-            <div className=" flex mx-auto sm:px-[1.25rem] md:px-0 sm:w-[25rem] md:w-full sm:justify-center items-center md:justify-start sm:items-center sm:gap-2 md:gap-3 sm:overflow-x-scroll sm:overflow-y-hidden md:overflow-hidden">
+          <div className="flex items-center justify-between w-full ">
+            <div className=" flex mx-auto  px-0 w-full items-center justify-start gap-3 ">
               <FilteredStatus
                 handleDisplayFilterBox={handleDisplayFilterBox}
                 content={selectedDate}
+                resetStatus={handleResetDateField}
               />
               <FilteredStatus
                 content={selectedTimeDate}
                 handleDisplayFilterBox={handleDisplayFilterBox}
+                resetStatus={handleResetTimeField}
               />
               <FilteredStatus
                 content={selectedStatus}
                 handleDisplayFilterBox={handleDisplayFilterBox}
+                resetStatus={handleResetGameStatus}
               />
             </div>
             <button

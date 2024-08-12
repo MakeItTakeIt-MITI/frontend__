@@ -8,7 +8,8 @@ interface TimeField {
     setSelectedDayStatus: (dayStatus: string) => void;
     setSelectedHour: (hour: string) => void;
     setSelectedMinute: (minute: string) => void;
-    resetTimeField: () => void
+    resetTimeField: () => void;
+
 
 }
 
@@ -27,7 +28,7 @@ const useTimeFieldStore = create<TimeField>((set) => ({
         selectedDayStatus: DEFAULT_DAY_STATUS,
         selectedHour: DEFAULT_HOUR,
         selectedMinute: DEFAULT_MINUTE,
-    }),
+    })
 }));
 
 export default useTimeFieldStore;

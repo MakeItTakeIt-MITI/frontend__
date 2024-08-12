@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface State {
+interface GameFilterState {
     selectedDate: string;
     selectedTimeDate: string;
     selectedStatus: string;
@@ -8,9 +8,12 @@ interface State {
     setSelectedTimeDate: (timeDate: string) => void;
     setSelectedStatus: (status: string) => void;
     resetFilterHeader: () => void
+    resetSelectedDate: () => void
+    resetSelectedTimeDate: () => void
+    resetSelectedStatus: () => void
 }
 
-const useGameFilterStore = create<State>((set) => ({
+const useGameFilterStore = create<GameFilterState>((set) => ({
     selectedDate: "날짜",
     selectedTimeDate: "경기 시작 시간",
     selectedStatus: "경기 상태",
@@ -21,7 +24,16 @@ const useGameFilterStore = create<State>((set) => ({
         selectedDate: "날짜",
         selectedTimeDate: "경기 시작 시간",
         selectedStatus: "경기 상태",
-    })
+    }),
+    resetSelectedDate: () => set({
+        selectedDate: "날짜",
+    }),
+    resetSelectedTimeDate: () => set({
+        selectedTimeDate: "경기 시작 시간",
+    }),
+    resetSelectedStatus: () => set({
+        selectedStatus: "경기 상태",
+    }),
 }));
 
 export default useGameFilterStore;
