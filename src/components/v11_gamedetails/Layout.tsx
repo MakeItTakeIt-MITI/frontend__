@@ -7,7 +7,7 @@ const Layout = ({ height, children }: LayoutProps) => {
   return (
     <div
       style={{ height: height }}
-      className={`${height} p-[1.75rem] rounded-[1.25rem] bg-dark-card  border border-[#525252] space-y-[1.25rem] flex flex-col justify-center`}
+      className={`${height} sm:px-[1.31rem] sm:py-[1.25rem] md:p-[1.75rem] md:rounded-[1.25rem] sm:bg-light-dark md:bg-dark-card  md:border border-[#525252] space-y-[1.25rem] flex flex-col justify-center`}
     >
       {children}
     </div>

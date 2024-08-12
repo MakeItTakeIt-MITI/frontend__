@@ -12,7 +12,10 @@ const GameDetailMap = () => {
     });
   }, []);
   return (
-    <div id="map" className=" w-full h-[31.25rem] rounded-[1.25rem]"></div>
+    <div
+      id="map"
+      className=" w-full sm:h-[14.5rem] md:h-[31.25rem] md:rounded-[1.25rem]"
+    ></div>
   );
 };
 

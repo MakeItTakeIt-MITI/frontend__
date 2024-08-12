@@ -61,7 +61,7 @@ const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
       }}
       className="overflow-hidden fixed top-0 right-0 bottom-0 left-0 h-full  z-[999] "
     >
-      <div className="rounded-tl-[20px] rounded-tr-[20px] absolute right-0 bottom-0 left-0 mx-auto w-[48rem]   bg-secondary-black">
+      <div className="rounded-tl-[20px] rounded-tr-[20px] absolute right-0 bottom-0 left-0 mx-auto sm:w-full md:w-[48rem]   bg-secondary-black">
         <FilterHeader handleCloseFilterBox={handleCloseFilterBox} />
         <hr className="border-[#404040] " />
         <FilterCalenderField />

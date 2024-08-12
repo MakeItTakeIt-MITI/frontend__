@@ -1,7 +1,5 @@
 import hero from "../../assets/v11/hero.png";
-import hero_shadow from "../../assets/v11/hero-shadow.png";
-import playstore from "../../assets/v11/google-play.svg";
-import applestore from "../../assets/v11/apple-store.svg";
+import mobile_hero from "../../assets/v11/mobile-hero.png";
 
 const Hero = () => {
   return (
@@ -25,38 +23,21 @@ const Hero = () => {
       </section>
 
       {/* Mobile */}
-      <section className="sm:block md:hidden  bg-full bg-cover bg-no-repeat px-[1.25rem] pb-[60px] bg-primary-green">
+      <section className="sm:block md:hidden h-[16.125rem]  bg-full bg-cover bg-no-repeat  bg-primary-green relative">
         {/* img */}
         <div className="mx-auto   ">
-          <img src={hero_shadow} alt="hero shadow" className="h-full w-full" />
+          <img src={mobile_hero} alt="hero shadow" className="h-full w-full" />
         </div>
         <div className="space-y-10">
           {/* text */}
-          <div className="space-y-6 flex flex-col items-center text-[#fff]">
-            <div className="space-y-3 flex flex-col items-center font-bold">
+          <div className=" flexCenter flex-col  gap-[1.5rem] text-[#fff] absolute bottom-[3.75rem] left-0 right-0 ">
+            <div className="flexCenter flex-col gap-[0.75rem]   font-bold">
               <h2 className="text-sm ">MITI 서비스 런칭</h2>
               <h1 className="text-2xl ">오늘 퇴근하고 농구 어떠세요? </h1>
             </div>
             <h3 className="font-[300] text-sm">
               당신 근처의 경기를 지금 찾아보세요.
             </h3>
-          </div>
-          {/* app */}
-          <div className="flex  items-center justify-center gap-[14px] text-[#fff]    py-2 px-4">
-            <button
-              type="button"
-              className=" rounded-[10px] h-10  flex gap-2 items-center py-2 px-4 bg-dark-card"
-            >
-              <img src={playstore} alt="playstore" />
-              <span className="font-bold text-[12px] ">Google Play</span>
-            </button>
-            <button
-              type="button"
-              className=" rounded-[10px] h-10 flex gap-2 items-center py-2 px-4 bg-dark-card"
-            >
-              <img src={applestore} alt="applestore" />
-              <span className="font-bold text-[12px] ">Apple Store</span>
-            </button>
           </div>
         </div>
       </section>

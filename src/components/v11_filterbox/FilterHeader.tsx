@@ -10,8 +10,8 @@ const FilterHeader = ({ handleCloseFilterBox }: FilterHeaderProps) => {
   const { selectedStatus, selectedDate, selectedTimeDate } =
     useGameFilterStore();
   return (
-    <div className="p-[1.25rem] w-full flex items-center justify-between">
-      <div className="flex space-x-[0.5rem]">
+    <div className="p-[1.25rem] w-full flex items-center justify-between ">
+      <div className="flex space-x-[0.5rem] ">
         <FilteredStatus content={selectedDate} />
         <FilteredStatus content={selectedTimeDate} />
         <FilteredStatus content={selectedStatus} />

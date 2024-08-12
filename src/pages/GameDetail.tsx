@@ -10,8 +10,8 @@ import GameDetailFooter from "../components/v11_gamedetails/GameDetailFooter";
 const GameDetail = () => {
   return (
     <>
-      <section className="bg-light-dark  pt-[3.75rem] pb-[5rem] mb-[4.375rem]">
-        <div className="w-[43.25rem]  mx-auto space-y-[1.25rem]">
+      <section className="sm:bg-secondary-black md:bg-light-dark  md:pt-[3.75rem] md:pb-[5rem] sm:mb-[3.75rem] md:mb-[4.375rem]">
+        <div className="sm:w-full md:w-[43.25rem]  mx-auto sm:space-y-[0.25rem] md:space-y-[1.25rem]">
           {/* map h-[31.25rem] */}
           <GameDetailMap />
 
@@ -23,7 +23,7 @@ const GameDetail = () => {
               </span>
               {/* title and datetime */}
               <div className="space-y-[0.5rem]">
-                <h1 className="text-lg font-bold text-primary-white">
+                <h1 className="sm:text-base md:text-lg font-bold text-primary-white">
                   [5:5 풀코트] 더모스트 바스켓볼 3파전 픽업게임
                 </h1>
                 <p className="text-neutral-400 text-sm font-normal text-[#A3A3A3]">
@@ -32,7 +32,7 @@ const GameDetail = () => {
               </div>
             </div>
             {/* game details */}
-            <div className="space-y-[0.38rem] text-primary-white ">
+            <div className="space-y-[0.38rem] text-primary-white text-sm font-[400] ">
               <div className="flex items-center gap-2">
                 <img src={clock} alt="clock" />
                 <span>120분 경기</span>
@@ -47,20 +47,20 @@ const GameDetail = () => {
               </div>
             </div>
             {/* FEE */}
-            <h1 className="text-[#7feef0] text-lg font-bold">
+            <h1 className="text-[#7feef0] sm:text-base md:text-lg font-bold">
               참가비 10,000 원
             </h1>
           </Layout>
 
           {/* host info 8.125rem */}
-          <Layout height="8.125rem">
-            <h1 className="text-primary-white font-bold text-lg">
+          <Layout height="">
+            <h1 className="text-primary-white font-bold sm:text-base md:text-lg">
               호스트 소개
             </h1>
             <div className="flex gap-[.75rem]">
               <img src={profile} alt="profile" />
               <div className="space-y-[.25rem] text-primary-white">
-                <h2 className="font-bold text-[14px]">어니언수제어묵 님</h2>
+                <h2 className="font-bold text-sm">어니언수제어묵 님</h2>
                 <div className="flex items-center gap-[.38rem] font-[400] text-[14px]">
                   <div className="flex">
                     <img src={star} alt="star" />
@@ -70,15 +70,17 @@ const GameDetail = () => {
                     <img src={star} alt="star" />
                   </div>
                   <span>5.0</span>
-                  <span>리뷰</span>
+                  <span className="underline">리뷰</span>
                 </div>
               </div>
             </div>
           </Layout>
 
           {/* recruiting detaisl h-[24.25rem] */}
-          <Layout height="24.25rem">
-            <h1 className="text-lg font-bold text-primary-white">모집 정보</h1>
+          <Layout height="">
+            <h1 className="sm:text-base md:text-lg font-bold text-primary-white">
+              모집 정보
+            </h1>
             <div className="text-primary-white font-[400] text-sm h-full">
               <p>
                 준비물 <br />

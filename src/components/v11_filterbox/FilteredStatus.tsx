@@ -18,6 +18,8 @@ const FilteredStatus = ({
   const filterTime = content === time;
   const filterStatus = content === status;
 
+  console.log(content);
+
   return (
     <>
       {/* Non mobile devices */}
@@ -35,12 +37,12 @@ const FilteredStatus = ({
       <button
         type="button"
         onClick={handleDisplayFilterBox}
-        className={`min-h-[34px] w-full  md:hidden sm:flex items-center justify-center gap-1 py-[10px] px-4 ${filterDate || filterTime || filterStatus ? "text-[#fff]" : "text-primary-teal"}  text-sm 
+        className={`md:hidden  h-[34px] px-[1rem] py-[0.62rem]  flex items-center justify-center gap-1  ${filterDate || filterTime || filterStatus ? "text-[#fff]" : "text-primary-teal"}  text-sm 
       ${filterDate || filterTime || filterStatus ? "font-[500] " : "font-[600]"} 
       rounded-[50px] border border-[#737373]`}
       >
         {/* <span> {content === '경기 시작 시간' && setSelectedTimeDate('시간')}</span> */}
-        {content}
+        <span> {content}</span>
         {filterDate || filterTime || filterStatus ? (
           <img src={mobile_drop} alt="drop" />
         ) : (

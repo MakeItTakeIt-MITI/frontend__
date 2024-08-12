@@ -13,9 +13,9 @@ const MainContent = ({ handleDisplayFilterBox }: MainContentProps) => {
     useGameFilterStore();
   return (
     <section className="bg-secondary-black h-[882px] sm:px-[0.81rem] md:px-0  pt-[3.75rem]  sm:pb-[3.75rem] md:pb-[6.25rem]">
-      <div className=" sm:w-full md:w-[768px] h-full mx-auto sm:space-y-[2.5rem] md:space-y-[2.62rem]">
+      <div className=" sm:w-full md:w-[768px] sm:px-[0.5rem] md:px-0 h-full mx-auto sm:space-y-[1.75rem] md:space-y-[2.62rem]">
         {/* Top */}
-        <div className="space-y-5 text-[#fff]">
+        <div className="space-y-5 sm:text-center md:text-left text-[#fff]">
           <h1 className="sm:font-bold md:font-[600] sm:text-[26px] md:text-[32px]">
             MITI 경기 목록
           </h1>
@@ -26,8 +26,8 @@ const MainContent = ({ handleDisplayFilterBox }: MainContentProps) => {
         {/* Bottom */}
         <div className="sm:space-y-[1.25rem] md:space-y-5">
           {/* Filter Row */}
-          <div className="flex items-center justify-between">
-            <div className="flex w-full sm:justify-center md:justify-start sm:items-center sm:gap-2 md:gap-3">
+          <div className="flex items-center justify-between md:w-full ">
+            <div className=" flex mx-auto sm:px-[1.25rem] md:px-0 sm:w-[25rem] md:w-full sm:justify-center items-center md:justify-start sm:items-center sm:gap-2 md:gap-3 sm:overflow-x-scroll sm:overflow-y-hidden md:overflow-hidden">
               <FilteredStatus
                 handleDisplayFilterBox={handleDisplayFilterBox}
                 content={selectedDate}
