@@ -38,8 +38,9 @@ const FilteredStatus = ({
       ${filterDate || filterTime || filterStatus ? "font-[500] " : "font-[600]"} 
       rounded-[50px] border border-[#737373]`}
       >
-        <p> {content}</p>
-
+        {/* <div className="flex items-center gap-2"> {content}</div> */}
+        {/* {content} */}
+        <span>{content}</span>
         {filterDate || filterTime || filterStatus ? (
           false
         ) : (
@@ -50,13 +51,22 @@ const FilteredStatus = ({
       {/* Mobile device */}
       <button
         type="button"
-        onClick={handleDisplayFilterBox}
-        className={`md:hidden px-4 py-2.5  min-w-[4.75rem] h-[34px]  flex gap-2  items-center justify-center   ${filterDate || filterTime || filterStatus ? "text-[#fff]" : "text-primary-teal"}  text-sm 
+        // onClick={handleDisplayFilterBox}
+        onClick={() => {
+          if (content == date || content === time || content === status) {
+            if (handleDisplayFilterBox) {
+              handleDisplayFilterBox();
+            }
+          } else {
+            resetStatus();
+          }
+        }}
+        className={`whitespace-nowrap text-[14px] py-2.5 px-4  md:hidden   h-[34px]  sm:flex gap-2  items-center justify-center   ${filterDate || filterTime || filterStatus ? "text-[#fff]" : "text-primary-teal"}  
       ${filterDate || filterTime || filterStatus ? "font-[500] " : "font-[600]"} 
       rounded-[50px] border border-[#737373]`}
       >
         {/* <span> {content === '경기 시작 시간' && setSelectedTimeDate('시간')}</span> */}
-        {content}
+        <div className="flex "> {content}</div>
         {filterDate || filterTime || filterStatus ? (
           <img src={mobile_drop} alt="drop" />
         ) : (

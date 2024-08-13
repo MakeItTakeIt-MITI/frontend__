@@ -18,7 +18,7 @@ const GameStatusItem = ({ content }: GameStatusItemProps) => {
         border: !isSelected ? "1px solid #A3A3A3" : "1px solid #7FEEF0",
         color: !isSelected ? "#A3A3A3" : "#7FEEF0",
       }}
-      className="flex items-center justify-center space-y-[0.62rem] font-[500] w-[10rem] h-[2.25rem] rounded-[1.25rem]"
+      className="flex items-center justify-center font-[500] sm:w-[4.8125rem] sm:h-[2.25rem]  md:w-[10rem] md:h-[2.25rem] sm:rounded-[0.5rem] md:rounded-[1.25rem]"
     >
       {content}
     </button>

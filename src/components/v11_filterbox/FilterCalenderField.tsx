@@ -8,7 +8,7 @@ const FilterCalenderField = () => {
   const { currentMonth } = useCurrentMonthStore();
 
   return (
-    <div className="py-[2rem] px-[2.5rem] space-y-[0.75rem]">
+    <div className="md:py-[2rem] md:px-[2.5rem] sm:py-[1.25rem] sm:px-[1.31rem] space-y-[0.75rem]">
       <div className="flex items-center gap-[0.75rem]">
         <h1 className="font-bold text-primary-white">날짜</h1>
         <span className="font-[400] text-[12px] text-[#D4D4D4]">

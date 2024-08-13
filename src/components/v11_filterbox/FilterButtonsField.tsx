@@ -8,7 +8,7 @@ const FilterButtonsField = ({
   handleApplyFilters,
 }: FilterButtonsFieldProps) => {
   return (
-    <div className="py-[1.25rem] px-[1.31rem] flex items-center gap-[0.75rem]">
+    <div className="md:py-[2rem] md:px-[2.5rem] sm:py-[1.25rem] sm:px-[1.31rem] flex items-center gap-[0.75rem]">
       <button
         type="button"
         onClick={handleResetField}

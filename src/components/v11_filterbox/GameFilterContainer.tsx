@@ -7,7 +7,9 @@ import useGameFilterStore from "../../store/useGameFilterStore";
 import useTimeFieldStore from "../../store/useTimeStore";
 import useStatusSelectionStore from "../../store/useStatusSelectionStore";
 import useDateSelectionStore from "../../store/useDateSelectionStore";
+import MobileFilterTimeField from "./MobileFilterTimeField";
 
+// !Change sttates 8.13
 interface GameFilterProps {
   handleCloseFilterBox: () => void;
 }
@@ -27,12 +29,18 @@ const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
   const { dateField, resetDateField } = useDateSelectionStore();
 
   const timeFormat = `${selectedDayStatus} ${selectedHour}:${selectedMinute}`;
+  // const dayStatusFormat = selectedDayStatus;
+  // const timeDayFormat = `${selectedHour}:${selectedMinute}`;
+
+  // const format = [selectedDayStatus, timeDayFormat];
 
   const handleApplyFilters = () => {
     if (dateField.length > 1) {
       setSelectedDate(dateField);
     }
+    // setSelectedTimeDate(timeFormat);
     setSelectedTimeDate(timeFormat);
+    // setSelectedTimeDate(timeDayFormat);
 
     if (selectedStatuses.length >= 1 && selectedStatuses.length < 2) {
       setSelectedStatus(`${selectedStatuses}`);
@@ -59,14 +67,19 @@ const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
       style={{
         backgroundColor: "rgba(0, 0, 0, 0.64)",
       }}
-      className="overflow-hidden fixed top-0 right-0 bottom-0 left-0 h-full  z-[999] "
+      className=" overflow-hidden fixed top-0 right-0 bottom-0 left-0 h-full  z-[999] "
     >
       <div className="rounded-tl-[20px] rounded-tr-[20px] absolute right-0 bottom-0 left-0 mx-auto sm:w-full md:w-[48rem]   bg-secondary-black">
         <FilterHeader handleCloseFilterBox={handleCloseFilterBox} />
         <hr className="border-[#404040] " />
         <FilterCalenderField />
         <hr className="border-[#404040] " />
-        <FilterTimeField />
+        <>
+          {/* non-mobile devices */}
+          <FilterTimeField />
+          {/* mobile */}
+          {/* <MobileFilterTimeField /> */}
+        </>
         <hr className="border-[#404040] " />
         <FilterStatusField />
 

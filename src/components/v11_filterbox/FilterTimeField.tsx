@@ -13,12 +13,12 @@ const FilterTimeField = () => {
   } = useTimeFieldStore();
 
   return (
-    <div className="py-[2rem] px-[2.5rem] space-y-[1.25rem]">
+    <div className=" py-[2rem] px-[2.5rem] sm:space-y-[0.75rem]  md:space-y-[1.25rem]">
       <h1 className="font-bold text-secondary-white">시간</h1>
       <div className="flex items-center gap-[2.5rem]">
-        <div className="space-x-[1.25rem] flex items-center ">
+        <div className="sm:gap-[0.62rem] md:gap-[1.25rem] flex items-center ">
           {/* 오전 /오후 */}
-          <div className="space-x-[0.5rem] flex items-center">
+          <div className="space-x-[0.5rem] flex items-center justify-center">
             <Dropdown
               label="오전 / 오후"
               options={GAMEDAYTYPE}

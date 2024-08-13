@@ -37,9 +37,10 @@ const FilterHeader = ({ handleCloseFilterBox }: FilterHeaderProps) => {
     resetSelectedStatus();
     resetStatuses();
   };
+
   return (
-    <div className="p-[1.25rem] w-full flex items-center justify-between ">
-      <div className="flex space-x-[0.5rem] ">
+    <div className="sm:py-[1rem] sm:px-[0.81rem] md:p-[1.25rem] w-full flex items-center justify-between ">
+      <div className="flex space-x-[0.5rem] md:overflow-hidden sm:overflow-x-scroll mr-2  ">
         <FilteredStatus
           content={selectedDate}
           resetStatus={handleResetDateField}
