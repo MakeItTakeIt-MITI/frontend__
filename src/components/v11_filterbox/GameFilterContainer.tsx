@@ -7,9 +7,7 @@ import useGameFilterStore from "../../store/useGameFilterStore";
 import useTimeFieldStore from "../../store/useTimeStore";
 import useStatusSelectionStore from "../../store/useStatusSelectionStore";
 import useDateSelectionStore from "../../store/useDateSelectionStore";
-import MobileFilterTimeField from "./MobileFilterTimeField";
 
-// !Change sttates 8.13
 interface GameFilterProps {
   handleCloseFilterBox: () => void;
 }
