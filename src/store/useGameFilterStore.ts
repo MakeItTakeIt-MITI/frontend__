@@ -21,7 +21,7 @@ const useGameFilterStore = create<GameFilterState>((set) => ({
     setSelectedTimeDate: (timeDate) => set({ selectedTimeDate: timeDate }),
     setSelectedStatus: (status) => set({ selectedStatus: status }),
     resetFilterHeader: () => set({
-        selectedDate: "날씨",
+        selectedDate: "날짜",
         selectedTimeDate: "경기 시작 시간",
         selectedStatus: "경기 상태",
     }),

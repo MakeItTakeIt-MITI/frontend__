@@ -29,18 +29,12 @@ const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
   const { dateField, resetDateField } = useDateSelectionStore();
 
   const timeFormat = `${selectedDayStatus} ${selectedHour}:${selectedMinute}`;
-  // const dayStatusFormat = selectedDayStatus;
-  // const timeDayFormat = `${selectedHour}:${selectedMinute}`;
-
-  // const format = [selectedDayStatus, timeDayFormat];
 
   const handleApplyFilters = () => {
     if (dateField.length > 1) {
       setSelectedDate(dateField);
     }
-    // setSelectedTimeDate(timeFormat);
     setSelectedTimeDate(timeFormat);
-    // setSelectedTimeDate(timeDayFormat);
 
     if (selectedStatuses.length >= 1 && selectedStatuses.length < 2) {
       setSelectedStatus(`${selectedStatuses}`);
@@ -74,12 +68,7 @@ const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
         <hr className="border-[#404040] " />
         <FilterCalenderField />
         <hr className="border-[#404040] " />
-        <>
-          {/* non-mobile devices */}
-          <FilterTimeField />
-          {/* mobile */}
-          {/* <MobileFilterTimeField /> */}
-        </>
+        <FilterTimeField />
         <hr className="border-[#404040] " />
         <FilterStatusField />
 
