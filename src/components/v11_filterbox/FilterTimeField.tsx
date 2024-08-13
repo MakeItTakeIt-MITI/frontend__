@@ -13,10 +13,12 @@ const FilterTimeField = () => {
   } = useTimeFieldStore();
 
   return (
-    <div className=" py-[2rem] px-[2.5rem] sm:space-y-[0.75rem]  md:space-y-[1.25rem]">
-      <h1 className="font-bold text-secondary-white">시간</h1>
+    <div className=" md:py-[2rem] md:px-[2.5rem] sm:py-[1.25rem] sm:px-[1.31rem]  space-y-[1.25rem]">
+      <h1 className="sm:font-[600] md:font-bold sm:text-sm md:text-base text-secondary-white">
+        시간
+      </h1>
       <div className="flex items-center gap-[2.5rem]">
-        <div className="sm:gap-[0.62rem] md:gap-[1.25rem] flex items-center ">
+        <div className="sm:gap-[0.62rem] md:gap-[1.25rem] flex md:justify-start sm:justify-center items-center w-full">
           {/* 오전 /오후 */}
           <div className="space-x-[0.5rem] flex items-center justify-center">
             <Dropdown
@@ -28,7 +30,7 @@ const FilterTimeField = () => {
           </div>
 
           {/* HOURS */}
-          <div className="space-x-[0.5rem] flex items-center">
+          <div className="space-x-[0.5rem] flex items-center justify-center">
             <Dropdown
               label="시"
               options={GAMEHOUR}
@@ -39,7 +41,7 @@ const FilterTimeField = () => {
           </div>
 
           {/* Minutes */}
-          <div className="space-x-[0.5rem] flex items-center">
+          <div className="space-x-[0.5rem] flex items-center justify-center">
             <Dropdown
               label="분"
               options={GAMEMINUTE}
@@ -49,10 +51,14 @@ const FilterTimeField = () => {
             <span className="font-[300] text-[#A3A3A3]">분</span>
           </div>
 
-          {/* ----- */}
+          <h2 className="text-primary-white font-bold text-sm sm:hidden md:block">
+            이후 경기
+          </h2>
         </div>
-        <h2 className="text-primary-white font-bold">이후 경기</h2>
       </div>
+      <h2 className="text-primary-white font-[400] text-sm sm:block md:hidden text-right">
+        이후 경기
+      </h2>
     </div>
   );
 };

@@ -61,7 +61,7 @@ const FilteredStatus = ({
             resetStatus();
           }
         }}
-        className={`whitespace-nowrap text-[14px] py-2.5 px-4  md:hidden   h-[34px]  sm:flex gap-2  items-center justify-center   ${filterDate || filterTime || filterStatus ? "text-[#fff]" : "text-primary-teal"}  
+        className={`whitespace-nowrap text-[14px] py-[0.62rem] px-[1rem]  md:hidden   h-[34px]  sm:flex gap-1  items-center justify-center   ${filterDate || filterTime || filterStatus ? "text-[#fff]" : "text-primary-teal"}  
       ${filterDate || filterTime || filterStatus ? "font-[500] " : "font-[600]"} 
       rounded-[50px] border border-[#737373]`}
       >
@@ -70,7 +70,7 @@ const FilteredStatus = ({
         {filterDate || filterTime || filterStatus ? (
           <img src={mobile_drop} alt="drop" />
         ) : (
-          <img src={close} alt="close" className="size-[10px]" />
+          <img src={close} alt="close" className="size-[12px]" />
         )}
       </button>
     </>

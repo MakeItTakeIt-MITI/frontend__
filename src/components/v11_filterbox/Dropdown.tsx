@@ -45,7 +45,7 @@ const Dropdown = ({
     <div
       ref={dropdownRef}
       onClick={() => setIsOpen(!isOpen)}
-      className="cursor-pointer relative pl-[1.25rem] pr-[0.25rem] py-[0.25rem] sm:w-[6rem] md:w-[10rem] h-[2rem] rounded-[0.75rem] border border-dark-card flex items-center justify-between"
+      className="cursor-pointer relative pl-[1.25rem] pr-[0.25rem] py-[0.25rem] sm:w-[5.25rem] md:w-[10rem] h-[2rem] rounded-[0.75rem] border border-dark-card flex items-center justify-between"
     >
       <span className="text-primary-white font-bold md:text-base sm:text-sm">
         {selectedOption}
@@ -59,7 +59,7 @@ const Dropdown = ({
           style={{
             height: label === "시" || label === "분" ? "12.375rem" : "",
           }}
-          className=" justify-center custom-scrollbar overflow-y-scroll  space-y-[0.5rem] font-[400] text-sm rounded-[0.75rem] absolute top-[2.25rem] left-0 right-0 sm:w-[6rem] md:w-[10rem] p-[.75rem] bg-light-dark"
+          className=" justify-center custom-scrollbar overflow-y-scroll  space-y-[0.5rem] font-[400] text-sm rounded-[0.75rem] absolute top-[2.25rem] left-0 right-0 sm:w-[5.25rem] md:w-[10rem] p-[.75rem] bg-light-dark"
         >
           {options.map((option) => (
             <li
