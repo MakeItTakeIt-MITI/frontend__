@@ -1,11 +1,11 @@
-import GameDetailMap from "../components/v11_gamedetails/GameDetailMap";
-import Layout from "../components/v11_gamedetails/Layout";
+import GameDetailMap from "../components/game-details/GameDetailMap";
+import Layout from "../components/game-details/Layout";
 import clock from "../assets/v11/clock.svg";
 import location from "../assets/v11/location.svg";
 import participants from "../assets/v11/participants.svg";
 import profile from "../assets/v11/profile.svg";
 import star from "../assets/v11/star.svg";
-import GameDetailFooter from "../components/v11_gamedetails/GameDetailFooter";
+import GameDetailFooter from "../components/game-details/GameDetailFooter";
 
 const GameDetail = () => {
   return (

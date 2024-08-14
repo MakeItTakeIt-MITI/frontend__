@@ -1,11 +1,10 @@
 import { Outlet } from "react-router-dom";
-import { ScrollToTop } from "./components/ui/common/ScrollToTop";
-import { Navbar } from "./components/v11_navigation/Navbar";
+import { Navbar } from "./components/navigation/Navbar";
 
 function App() {
   return (
     <>
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
       <Navbar />
       <Outlet />
       {/* <AdvertisementBanner /> */}

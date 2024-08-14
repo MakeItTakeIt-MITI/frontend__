@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Hero from "../components/\bv11_homepage/Hero";
-import MainContent from "../components/\bv11_homepage/MainContent";
-import GameFilterContainer from "../components/v11_filterbox/GameFilterContainer";
+import Hero from "../components/home/Hero";
+import MainContent from "../components/home/MainContent";
+import GameFilterContainer from "../components/game-filter/GameFilterContainer";
 import Footer from "../components/common/Footer";
 
 export const Home = () => {
