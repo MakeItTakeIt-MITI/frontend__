@@ -99,3 +99,15 @@ input[type="number"] {
   width: 4px;
   height: 80px;
 }
+
+.courtsPlaceHolder::placeholder {
+  font-size: 15px;
+  font-weight: 500;
+  color: #525252;
+  border: none;
+}
+
+.courtsPlaceHolder:focus {
+  outline: none;
+  border: none;
+}

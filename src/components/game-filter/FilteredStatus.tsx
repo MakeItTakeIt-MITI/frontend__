@@ -56,9 +56,9 @@ const FilteredStatus = ({
           if (content == date || content === time || content === status) {
             if (handleDisplayFilterBox) {
               handleDisplayFilterBox();
+            } else {
+              resetStatus();
             }
-          } else {
-            resetStatus();
           }
         }}
         className={`whitespace-nowrap text-[14px] py-[0.62rem] px-[1rem]  md:hidden   h-[34px]  sm:flex gap-1  items-center justify-center   ${filterDate || filterTime || filterStatus ? "text-[#fff]" : "text-primary-teal"}  
