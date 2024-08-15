@@ -1,5 +1,3 @@
-import React from "react";
-
 const TimeSlider = () => {
   return (
     <div className="flex items-center justify-center gap-[7px]">
