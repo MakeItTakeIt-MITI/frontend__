@@ -5,7 +5,7 @@ import location from "../assets/v11/location.svg";
 import participants from "../assets/v11/participants.svg";
 import profile from "../assets/v11/profile.svg";
 import star from "../assets/v11/star.svg";
-import GameDetailFooter from "../components/game-details/GameDetailFooter";
+import ShareFeatureFooter from "../components/common/ShareFeatureFooter";
 
 const GameDetail = () => {
   return (
@@ -107,7 +107,7 @@ const GameDetail = () => {
           </Layout>
         </div>
       </section>
-      <GameDetailFooter />
+      <ShareFeatureFooter />
     </>
   );
 };

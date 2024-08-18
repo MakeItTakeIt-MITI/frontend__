@@ -2,8 +2,21 @@ import CourtMap from "./CourtMap";
 import dropdown from "../../assets/v11/drop.svg";
 import search from "../../assets/v11/search.svg";
 import CourtCard from "./CourtCard";
+import { CITIES } from "../../constants/locations";
+import { useState } from "react";
 
 const Main = () => {
+  const [displayDropbox, setDisplayDropbox] = useState(false);
+  const [selectedCity, setSelectedCity] = useState("");
+
+  const handleSelectCity = (input: string) => {
+    setSelectedCity(input);
+    setDisplayDropbox(false);
+  };
+
+  const handleDisplayDropbox = () => {
+    setDisplayDropbox(!displayDropbox);
+  };
   return (
     <div className="pt-[3.75rem] px-[36px] pb-[6.25rem] flex flex-col justify-center  gap-[2.62rem] mx-auto w-[768px]">
       {/* title */}
@@ -29,17 +42,48 @@ const Main = () => {
             </div>
 
             {/* dropdown */}
-            <button
-              type="button"
-              className="bg-light-dark flex items-center justify-between h-full w-[7.625rem] rounded-[0.75rem] py-3 pl-5 pr-3"
-            >
-              <span className="text-primary-white font-[500]">전체</span>
-              <img src={dropdown} alt="dropdown" className="size-[1.5rem]" />
-            </button>
+            <div className="relative">
+              <button
+                type="button"
+                onClick={handleDisplayDropbox}
+                className=" bg-light-dark flex items-center justify-between h-full w-[7.625rem] rounded-[0.75rem] py-3 pl-5 pr-3"
+              >
+                <span className="text-primary-white font-[500]">
+                  {selectedCity.length ? selectedCity : "전체"}
+                </span>
+                <img src={dropdown} alt="dropdown" className="size-[1.5rem]" />
+              </button>
+              {displayDropbox && (
+                <ul className="overflow-y-scroll custom-scrollbar absolute left-0 right-0 top-14 rounded-[.75rem] w-full  h-[27.625rem] p-[.75rem] bg-light-dark flex flex-col ">
+                  {CITIES.map((city) => (
+                    <li
+                      onClick={() => handleSelectCity(city)}
+                      style={{
+                        color: selectedCity !== city ? "#fff" : "#7FEEF0",
+                      }}
+                      className="cursor-pointer px-[0.5rem] py-[0.25rem] text-sm font-bold hover:bg-[#404040] hover:rounded-lg "
+                    >
+                      {city}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
           {/* game list */}
           <div className="bg-light-dark h-[426px] w-full p-4 space-y-3 overflow-y-scroll rounded-[20px]  custom-scrollbar">
             {/* court item */}
+
+            {/* if no items available */}
+            {/* <NoResults /> */}
+            {/* <div className="w-full h-full flex  flex-col gap-3 items-center justify-center ">
+              <h1 className="text-primary-white text-[24px] font-bold ">
+                조회 결과가 없습니다.
+              </h1>
+              <h2 className="text-sm font-[400] text-[#d4d4d4]">
+                검색어와 필터를 변경하여 다른 경기를 찾아보세요!
+              </h2>
+            </div> */}
             <CourtCard />
             <CourtCard />
             <CourtCard />
@@ -55,17 +99,22 @@ const Main = () => {
       </div>
 
       {/* bottom */}
-      <div className="w-full h-[100px] bg-[#9EEFF0] rounded-xl px-10 flex items-center justify-between">
+      <div
+        style={{
+          background: "linear-gradient(97deg, #DAFEFF 11.57%, #9EEFF0 88.43%)",
+        }}
+        className="w-full h-[100px] rounded-xl px-10 flex items-center justify-between"
+      >
         <p className="font-bold">
           편하게 농구게임에 참여하고 싶다면 <br />
           MITI를 이용해보세요!
         </p>
         <button
           style={{
-            backgroundColor:
+            background:
               "linear-gradient(94deg, rgba(255, 255, 255, 0.42) 4.64%, rgba(255, 255, 255, 0.60) 96.13%)",
           }}
-          className="px-4 py-3 rounded-lg text-sm fold-bold text-dark-card bg- "
+          className="px-4 py-3 rounded-lg text-sm font-[700] text-dark-card  "
         >
           MITI 앱으로 열기
         </button>

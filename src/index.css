@@ -26,7 +26,11 @@
 }
 
 body {
-  background-color: "#262626";
+  background: "#262626";
+}
+
+section {
+  background: "#262626";
 }
 
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
