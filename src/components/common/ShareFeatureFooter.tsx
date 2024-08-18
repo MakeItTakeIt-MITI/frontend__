@@ -1,7 +1,7 @@
 import share from "../../assets/v11/share.svg";
-const GameDetailFooter = () => {
+const ShareFeatureFooter = () => {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 sm:h-[3.75rem] md:h-[4.375rem]  z-99 bg-primary-black flex items-center  justify-center  sm:py-[0.75rem]  md:py-[0.81rem]">
+    <footer className="fixed bottom-0 left-0 right-0 sm:h-[3.75rem] md:h-[4.375rem]  z-[9999] bg-primary-black flex items-center  justify-center  sm:py-[0.75rem]  md:py-[0.81rem]">
       <div className="flex items-center  sm:gap-[3rem] md:gap-[8.12rem]">
         <p className="text-primary-white font-bold sm:text-sm md:text-lg">
           경기에 참여하고 싶다면?
@@ -24,4 +24,4 @@ const GameDetailFooter = () => {
   );
 };
 
-export default GameDetailFooter;
+export default ShareFeatureFooter;

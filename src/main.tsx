@@ -8,6 +8,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import GameDetail from "./pages/GameDetail.tsx";
 import Courts from "./pages/Courts.tsx";
 import Faq from "./pages/Faq.tsx";
+import CourtsDetail from "./pages/CourtsDetail.tsx";
+import React from "react";
 
 const queryClient = new QueryClient();
 
@@ -22,17 +24,23 @@ const router = createBrowserRouter([
         path: "game/:id",
         element: <GameDetail />,
       },
-      { path: "courts", element: <Courts /> },
+      {
+        path: "courts",
+        children: [
+          { path: "", element: <Courts /> },
+          { path: "detail", element: <CourtsDetail /> },
+        ],
+      },
       { path: "faq", element: <Faq /> },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  // <React.StrictMode>
-  <QueryClientProvider client={queryClient}>
-    <ReactQueryDevtools initialIsOpen={false} />
-    <RouterProvider router={router}></RouterProvider>
-  </QueryClientProvider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <RouterProvider router={router}></RouterProvider>
+    </QueryClientProvider>
+  </React.StrictMode>
 );
