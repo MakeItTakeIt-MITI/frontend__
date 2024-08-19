@@ -18,21 +18,21 @@ const Main = () => {
     setDisplayDropbox(!displayDropbox);
   };
   return (
-    <div className="pt-[3.75rem] px-[36px] pb-[6.25rem] flex flex-col justify-center  gap-[2.62rem] mx-auto w-[768px]">
+    <div className="pt-[3.75rem] sm:px-[.81rem] md:px-[36px] pb-[6.25rem] flex flex-col  justify-center  gap-[2.62rem] mx-auto sm:w-full md:w-[768px]">
       {/* title */}
-      <div className="space-y-[1.25rem] text-[#fff]">
-        <h1 className="text-[32px] font-[600]">MITI 경기 목록</h1>
+      <div className="space-y-[1.25rem] text-[#fff] sm:text-center md:text-start">
+        <h1 className="text-[32px] font-[600]">경기 목록</h1>
         <h2 className="text-[20px] font-[400]">
-          당신의 참여 기다리는 경기들입니다. 지금 참여하세요!
+          동네에 있는 경기장을 찾아보세요!
         </h2>
       </div>
       {/* middle section */}
-      <div className="flex items-center gap-[1.25rem]">
+      <div className="flex items-center sm:justify-center gap-[1.25rem]">
         {/* searchbar & list */}
         <div className="space-y-[1.25rem]">
           <div className="flex items-center gap-[0.75rem] h-[3rem]">
             {/* searchbar */}
-            <div className="flex items-center justify-between bg-light-dark w-[15.5rem] h-full py-[0.75rem] pl-[1.25rem] pr-[0.75rem] rounded-[0.75rem]">
+            <div className="flex items-center justify-between bg-light-dark sm:w-[14.8125rem] md:w-[15.5rem] h-full py-[0.75rem] pl-[1.25rem] pr-[0.75rem] rounded-[0.75rem]">
               <input
                 type="text"
                 className="bg-light-dark text-secondary-white font-[500] courtsPlaceHolder"
@@ -46,9 +46,9 @@ const Main = () => {
               <button
                 type="button"
                 onClick={handleDisplayDropbox}
-                className=" bg-light-dark flex items-center justify-between h-full w-[7.625rem] rounded-[0.75rem] py-3 pl-5 pr-3"
+                className=" bg-light-dark flex items-center justify-between h-full sm:w-[6.25rem] md:w-[7.625rem] rounded-[0.75rem] py-3 pl-5 pr-3"
               >
-                <span className="text-primary-white font-[500]">
+                <span className="text-primary-white sm:font-[400] md:font-[500] md:text-base sm:text-sm">
                   {selectedCity.length ? selectedCity : "전체"}
                 </span>
                 <img src={dropdown} alt="dropdown" className="size-[1.5rem]" />
@@ -71,7 +71,7 @@ const Main = () => {
             </div>
           </div>
           {/* game list */}
-          <div className="bg-light-dark h-[426px] w-full p-4 space-y-3 overflow-y-scroll rounded-[20px]  custom-scrollbar">
+          <div className="bg-light-dark sm:h-[29.5rem] md:h-[426px] w-full p-4 space-y-3 overflow-y-scroll rounded-[20px]  custom-scrollbar">
             {/* court item */}
 
             {/* if no items available */}
@@ -103,7 +103,7 @@ const Main = () => {
         style={{
           background: "linear-gradient(97deg, #DAFEFF 11.57%, #9EEFF0 88.43%)",
         }}
-        className="w-full h-[100px] rounded-xl px-10 flex items-center justify-between"
+        className="w-full h-[100px] rounded-xl px-10 sm:hidden md:flex items-center justify-between"
       >
         <p className="font-bold">
           편하게 농구게임에 참여하고 싶다면 <br />

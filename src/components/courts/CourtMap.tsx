@@ -21,7 +21,10 @@ const CourtMap = () => {
     });
   }, []);
   return (
-    <div id="map" className=" w-[367px] h-[30.875rem] rounded-[1.25rem]"></div>
+    <div
+      id="map"
+      className="sm:hidden md:block w-[367px] h-[30.875rem] rounded-[1.25rem]"
+    ></div>
   );
 };
 
