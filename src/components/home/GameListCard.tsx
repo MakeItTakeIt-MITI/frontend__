@@ -1,21 +1,55 @@
 import time from "../../assets/v11/time.svg";
 import participants from "../../assets/v11/participants.svg";
 import { Link } from "react-router-dom";
+import { Game } from "../../interfaces/games";
 
-const GameListCard = () => {
+interface GameListCardProp {
+  game: Game;
+}
+
+const GameListCard = ({ game }: GameListCardProp) => {
   return (
     <Link
-      to="game/1"
+      to={`game/${game.id}`}
       className="flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and title */}
       <div className="space-y-2">
-        <span className="flex items-center justify-center text-[10px] rounded-[0.125rem] max-w-[2.8125rem] w-full md:h-[1.125rem]  text-[#009799] bg-[#b9dbdc] ">
-          모집 완료
+        <span
+          style={{
+            backgroundColor:
+              game.game_status === "open"
+                ? "#b9dbdc"
+                : game.game_status === "canceled"
+                  ? "#E3C6CB"
+                  : game.game_status === "closed"
+                    ? "#d3d3d3"
+                    : game.game_status === "completed"
+                      ? "#B9DBDC"
+                      : "",
+
+            color:
+              game.game_status === "open"
+                ? "#4152EB"
+                : game.game_status === "canceled"
+                  ? "#C93568"
+                  : game.game_status === "closed"
+                    ? "#d3d3d3"
+                    : game.game_status === "completed"
+                      ? "#00979A"
+                      : "",
+          }}
+          // className="p-[.25rem] text-[10px] rounded-[0.125rem] w-full  text-[#009799] bg-[#b9dbdc] ">
+          className="p-[.25rem] text-[10px] rounded-[0.125rem] w-full font-bold  "
+        >
+          {(game.game_status === "open" && "모집중") ||
+            (game.game_status === "canceled" && "경기 취소") ||
+            (game.game_status === "closed" && "모집 마감") ||
+            (game.game_status === "completed" && "모집 완료")}
+
+          {/* {game.game_status === "cancelled" && "경기 취소"} */}
         </span>
-        <h1 className="font-bold  text-[#E5E5E5]">
-          수원 매탄 공원 4 vs 4 (주차 12자리)
-        </h1>
+        <h1 className="font-bold  text-[#E5E5E5]">{game.title}</h1>
       </div>
       {/* Game Information */}
       <div className="flex justify-between items-end">
@@ -23,16 +57,25 @@ const GameListCard = () => {
         <div className="space-y-[4.5px] text-[#E5E5E5] text-[12px]">
           <div className="flex gap-1">
             <img src={time} alt="time" />
-            <span>15:30~ 18:00 </span>
+            <span>
+              {game.starttime.slice(0, 5)} ~ {game.endtime.slice(0, 5)}
+            </span>
           </div>
 
           <div className="flex gap-1">
             <img src={participants} alt="participants" />
-            <span>15/18</span>
+            <span>
+              {game.num_of_participations} / {game.max_invitation}
+            </span>
           </div>
         </div>
         {/* FEE */}
-        <h2 className="text-primary-teal font-bold">₩23,000</h2>
+        <h2 className="text-primary-teal font-bold">
+          {game.fee.toLocaleString("ko-KR", {
+            style: "currency",
+            currency: "KRW",
+          })}
+        </h2>
       </div>
     </Link>
   );

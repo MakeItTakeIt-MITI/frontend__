@@ -6,13 +6,18 @@ import useGameFilterStore from "../../store/useGameFilterStore";
 import useTimeFieldStore from "../../store/useTimeStore";
 import useStatusSelectionStore from "../../store/useStatusSelectionStore";
 import useDateSelectionStore from "../../store/useDateSelectionStore";
+import { Game } from "../../interfaces/games";
 // import drop from "../../assets/v11/drop.svg";
 
 interface MainContentProps {
   handleDisplayFilterBox: () => void;
+  allGamesData: Game[];
 }
 
-const MainContent = ({ handleDisplayFilterBox }: MainContentProps) => {
+const MainContent = ({
+  handleDisplayFilterBox,
+  allGamesData,
+}: MainContentProps) => {
   const {
     selectedStatus,
     selectedDate,
@@ -39,8 +44,6 @@ const MainContent = ({ handleDisplayFilterBox }: MainContentProps) => {
     resetSelectedStatus();
     resetStatuses();
   };
-
-  console.log(selectedTimeDate);
 
   return (
     <section className="bg-secondary-black h-[882px] sm:px-[0.81rem] md:px-0  pt-[3.75rem]  sm:pb-[3.75rem] md:pb-[6.25rem]">
@@ -84,27 +87,10 @@ const MainContent = ({ handleDisplayFilterBox }: MainContentProps) => {
                 <img src={filter} alt="filter" />
               </button>
             </div>
-
-            {/* Filter Row  & mobile  */}
-            {/* <div className="hidden items-center gap-2 h-[1.25rem] py-[1rem] px-[0.81rem] text-primary-white overflow-x-auto">
-              <button className="flex items-center gap-1 rounded-[50px] h-[34px] px-2.5 py-2 border border-[#737373]">
-                <span>날짜</span>
-                <img src={drop} alt="drop" />
-              </button>
-              <button className="flex items-center gap-1 rounded-[50px] h-[34px] px-2.5 py-2 border border-[#737373]">
-                <span>경기 시작 시간</span>
-                <img src={drop} alt="drop" />
-              </button>
-
-              <button className="flex items-center gap-1 rounded-[50px] h-[34px] px-2.5 py-2 border border-[#737373]">
-                <span>경기 상태 경기 상태경기 상태경기 상태경기 상태</span>
-                <img src={drop} alt="drop" />
-              </button>
-            </div> */}
           </>
           {/* Game list and map container */}
           <div className="flex gap-5 h-full ">
-            <GameListContainer />
+            <GameListContainer allGamesData={allGamesData} />
             <NaverMap />
           </div>
         </div>

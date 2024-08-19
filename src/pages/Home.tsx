@@ -3,9 +3,11 @@ import Hero from "../components/home/Hero";
 import MainContent from "../components/home/MainContent";
 import GameFilterContainer from "../components/game-filter/GameFilterContainer";
 import Footer from "../components/common/Footer";
+import { useGamesDataHook } from "../hooks/useGamesDataHook";
 
 export const Home = () => {
   const [displayFilterBox, setDisplayFilterBox] = useState(false);
+  const { data: allGamesData } = useGamesDataHook();
 
   const handleCloseFilterBox = () => {
     setDisplayFilterBox(false);
@@ -28,7 +30,10 @@ export const Home = () => {
       )}
 
       <Hero />
-      <MainContent handleDisplayFilterBox={handleDisplayFilterBox} />
+      <MainContent
+        handleDisplayFilterBox={handleDisplayFilterBox}
+        allGamesData={allGamesData?.data}
+      />
       <Footer />
     </>
   );
