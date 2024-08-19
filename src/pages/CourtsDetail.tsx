@@ -2,15 +2,17 @@ import ShareFeatureFooter from "../components/common/ShareFeatureFooter";
 import DetailHeader from "../components/courts/DetailHeader";
 import DetailMap from "../components/courts/DetailMap";
 import DetailsList from "../components/courts/DetailsList";
+import MobileDetailMap from "../components/courts/MobileDetailMap";
 
 const CourtsDetail = () => {
   return (
-    <section className="  flex items-center justify-center   pt-[3.75rem] pb-[9.375rem] bg-light-dark  ">
-      <div className="w-[43.25rem] space-y-5  h-full">
+    <section className="  flex items-center justify-center   sm:pt-0 md:pt-[3.75rem] sm:pb-[5.875rem] md:pb-[9.375rem] bg-light-dark  ">
+      <div className="w-[43.25rem] sm:space-y-1 md:space-y-5  h-full">
         {/* header */}
+        <MobileDetailMap />
         <DetailHeader />
         {/* container */}
-        <div className=" space-x-5  flex">
+        <div className=" sm:space-x-0  md:space-x-5  flex sm:justify-center">
           {/* left */}
           {/* map */}
           <DetailsList />

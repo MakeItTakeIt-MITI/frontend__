@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import marker from "../../assets/v11/detail-marker.svg";
 const { naver } = window;
 
-const DetailMap = () => {
+const MobileDetailMap = () => {
   useEffect(() => {
     const map = new naver.maps.Map("map", {
       // center: new naver.maps.LatLng(latitude, longitude),
@@ -20,12 +20,7 @@ const DetailMap = () => {
       },
     });
   }, []);
-  return (
-    <div
-      id="map"
-      className="md:block sm:hidden w-[367px] h-[618px] rounded-[1.25rem]"
-    ></div>
-  );
+  return <div id="map" className="md:hidden sm:block w-full h-[232px] "></div>;
 };
 
-export default DetailMap;
+export default MobileDetailMap;

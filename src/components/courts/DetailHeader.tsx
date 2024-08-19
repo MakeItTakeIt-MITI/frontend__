@@ -1,6 +1,6 @@
 const DetailHeader = () => {
   return (
-    <div className="w-full rounded-[20px] space-y-[1.25rem] bg-dark-card p-6 border border-[#525252]">
+    <div className="w-full sm:rounded-none md:rounded-[20px] sm:space-y-5 md:space-y-[1.25rem] bg-dark-card sm:p-5 md:p-6 sm:border-none md:border border-[#525252]">
       <div className="space-y-[0.5rem]">
         <h1 className="text-primary-white font-bold text-[18px]">
           더모스트 바스켓볼 - 수지점
