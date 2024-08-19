@@ -7,7 +7,7 @@ import MobileDetailMap from "../components/courts/MobileDetailMap";
 const CourtsDetail = () => {
   return (
     <section className="  flex items-center justify-center   sm:pt-0 md:pt-[3.75rem] sm:pb-[5.875rem] md:pb-[9.375rem] bg-light-dark  ">
-      <div className="w-[43.25rem] sm:space-y-1 md:space-y-5  h-full">
+      <div className="relative w-[43.25rem] sm:space-y-1 md:space-y-5  h-full">
         {/* header */}
         <MobileDetailMap />
         <DetailHeader />
@@ -16,6 +16,7 @@ const CourtsDetail = () => {
           {/* left */}
           {/* map */}
           <DetailsList />
+
           <DetailMap />
         </div>
       </div>

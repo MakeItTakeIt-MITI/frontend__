@@ -4,9 +4,8 @@ const { naver } = window;
 
 const DetailMap = () => {
   useEffect(() => {
-    const map = new naver.maps.Map("map", {
+    const map2 = new naver.maps.Map("map1", {
       // center: new naver.maps.LatLng(latitude, longitude),
-      center: new naver.maps.LatLng(37.3595704, 127.105399),
       zoom: 13,
       pinchZoom: true,
       scrollWheel: true,
@@ -14,7 +13,7 @@ const DetailMap = () => {
 
     new naver.maps.Marker({
       position: new naver.maps.LatLng(37.3595704, 127.105399),
-      map: map,
+      map: map2,
       icon: {
         content: `<img src=${marker} alt="marker" />`,
       },
@@ -22,8 +21,8 @@ const DetailMap = () => {
   }, []);
   return (
     <div
-      id="map"
-      className="md:block sm:hidden w-[367px] h-[618px] rounded-[1.25rem]"
+      id="map1"
+      className="sm:hidden md:block w-[367px] h-[618px] rounded-[1.25rem]"
     ></div>
   );
 };
