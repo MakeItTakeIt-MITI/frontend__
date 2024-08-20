@@ -1,4 +1,4 @@
-import GameListCard from "../home/GameListCard";
+import CourtDetailCard from "./CourtDetailCard";
 
 const DetailsList = () => {
   return (
@@ -9,18 +9,17 @@ const DetailsList = () => {
       </p>
       <div className="space-y-[0.75rem]">
         <h1 className="font-bold text-primary-white ">2024년 5월 1일 일요일</h1>
-        <GameListCard />
-        <GameListCard />
+
+        <CourtDetailCard />
+        <CourtDetailCard />
       </div>
       <div className="space-y-[0.75rem]">
         <h1 className="font-bold text-primary-white ">2024년 5월 5일 일요일</h1>
-        <GameListCard />
-        <GameListCard />
+        <CourtDetailCard />
       </div>
       <div className="space-y-[0.75rem]">
         <h1 className="font-bold text-primary-white ">2024년 5월 8일 일요일</h1>
-        <GameListCard />
-        <GameListCard />
+        <CourtDetailCard />
       </div>
     </div>
   );

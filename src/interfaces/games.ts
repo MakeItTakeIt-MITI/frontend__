@@ -21,3 +21,7 @@ export type Game = {
     max_invitation: number;
 }
 
+
+export interface AllGamesProps {
+    allGamesData: Game[]
+}

@@ -1,6 +1,7 @@
 import Dropdown from "./Dropdown";
 import { GAMEDAYTYPE, GAMEHOUR, GAMEMINUTE } from "../../constants/time";
 import useTimeFieldStore from "../../store/useTimeStore";
+import { useEffect } from "react";
 
 const FilterTimeField = () => {
   const {
@@ -10,7 +11,28 @@ const FilterTimeField = () => {
     setSelectedMinute,
     selectedHour,
     selectedMinute,
+    setFormattedFullTime,
   } = useTimeFieldStore();
+
+  useEffect(() => {
+    const formatTime = (dayType: string, hour: string, minute: string) => {
+      let formattedHour = parseInt(hour, 10);
+
+      if (dayType === "오후" && formattedHour !== 12) {
+        formattedHour += 12;
+      } else if (dayType === "오전" && formattedHour === 12) {
+        formattedHour = 0;
+      }
+
+      const hourString = formattedHour.toString().padStart(2, "0");
+      return `${hourString}:${minute}`;
+    };
+
+    if (selectedDayStatus && selectedHour && selectedMinute) {
+      const time = formatTime(selectedDayStatus, selectedHour, selectedMinute);
+      setFormattedFullTime(time);
+    }
+  }, [selectedDayStatus, selectedHour, selectedMinute, setFormattedFullTime]);
 
   return (
     <div className=" md:py-[2rem] md:px-[2.5rem] sm:py-[1.25rem] sm:px-[1.31rem]  space-y-[1.25rem]">

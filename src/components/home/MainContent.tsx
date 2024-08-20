@@ -91,7 +91,7 @@ const MainContent = ({
           {/* Game list and map container */}
           <div className="flex gap-5 h-full ">
             <GameListContainer allGamesData={allGamesData} />
-            <NaverMap />
+            <NaverMap allGamesData={allGamesData} />
           </div>
         </div>
       </div>

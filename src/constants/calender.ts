@@ -12,9 +12,12 @@ export const DATES = () => {
     const koreanDays = ["일", "월", "화", "수", "목", "금", "토"];
 
     return availableDates.map((date) => ({
+        year: date.getFullYear(), // get the year
         month: date.getMonth() + 1, // getMonth() is zero-based, so we add 1
+        formattedMonth: (date.getMonth() + 1).toString().padStart(2, '0'), // getMonth() is zero-based, so we add 1
         day: date.getDay(), // getDay() returns the day of the week (0-6)
         date: date.getDate(), // getDate() returns the day of the month (1-31)
+        formattedDate: date.getDate().toString().padStart(2, '0'),
         dayKorean: koreanDays[date.getDay()], // Map the day to its Korean equivalent
     }));
 

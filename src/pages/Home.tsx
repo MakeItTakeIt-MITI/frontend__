@@ -4,10 +4,25 @@ import MainContent from "../components/home/MainContent";
 import GameFilterContainer from "../components/game-filter/GameFilterContainer";
 import Footer from "../components/common/Footer";
 import { useGamesDataHook } from "../hooks/useGamesDataHook";
+import useDateSelectionStore from "../store/useDateSelectionStore";
+import useTimeFieldStore from "../store/useTimeStore";
+import useStatusSelectionStore from "../store/useStatusSelectionStore";
 
 export const Home = () => {
+  // react hooks
   const [displayFilterBox, setDisplayFilterBox] = useState(false);
-  const { data: allGamesData } = useGamesDataHook();
+
+  //zustand store
+  const { yearMonthDay } = useDateSelectionStore();
+  const { formattedFullTime } = useTimeFieldStore();
+  const { selectedStatuses } = useStatusSelectionStore();
+
+  // data fetching
+  const { data: allGamesData, refetch } = useGamesDataHook({
+    startdate: yearMonthDay,
+    starttime: formattedFullTime,
+    status: selectedStatuses,
+  });
 
   const handleCloseFilterBox = () => {
     setDisplayFilterBox(false);
@@ -22,7 +37,9 @@ export const Home = () => {
     if (body) {
       body.style.overflow = displayFilterBox ? "hidden" : "auto";
     }
-  }, [displayFilterBox]);
+
+    refetch();
+  }, [displayFilterBox, allGamesData, refetch, selectedStatuses]);
   return (
     <>
       {displayFilterBox && (

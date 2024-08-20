@@ -25,6 +25,9 @@ const FilterCalenderField = () => {
             dayOfWeek={date.dayKorean}
             date={date.date}
             month={date.month}
+            year={date.year}
+            formattedDate={date.formattedDate}
+            formattedMonth={date.formattedMonth}
           />
         ))}
       </div>

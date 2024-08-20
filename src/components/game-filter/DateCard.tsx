@@ -3,19 +3,39 @@ import useDateSelectionStore from "../../store/useDateSelectionStore";
 
 type DateCard = {
   dayOfWeek: string;
-  date: string | number;
+  date: number;
   month: number;
+  year: number;
+  formattedDate: string;
+  formattedMonth: string;
 };
 
-const DateCard = ({ dayOfWeek, date, month }: DateCard) => {
-  const { dateField, setDateField } = useDateSelectionStore();
+const DateCard = ({
+  dayOfWeek,
+  date,
+  month,
+  year,
+  formattedDate,
+  formattedMonth,
+}: DateCard) => {
+  const { dateField, setDateField, setYearMonthDay } = useDateSelectionStore();
   const { setCurrentMonth } = useCurrentMonthStore();
 
   const currentMonth = new Date().getMonth() + 1;
+  const currentYear = new Date().getFullYear();
 
   const displayDate = `${month}.${date} (${dayOfWeek})`;
-  const handleFilterDate = (date: string) => {
-    setDateField(date);
+
+  const handleFilterDate = (
+    inputDate: string,
+    inputYear: number,
+    inputMonth: string,
+    date: string
+  ) => {
+    const yearMonthDayFormat = `${inputYear}-${inputMonth}-${date}`;
+
+    setDateField(inputDate);
+    setYearMonthDay(yearMonthDayFormat);
   };
 
   const isSelected = dateField === displayDate;
@@ -23,15 +43,18 @@ const DateCard = ({ dayOfWeek, date, month }: DateCard) => {
   return (
     <div
       onClick={() => {
-        handleFilterDate(displayDate);
+        handleFilterDate(displayDate, year, formattedMonth, formattedDate);
         setCurrentMonth(month);
       }}
       className="flex items-center gap-[0.5rem] hover:cursor-pointer"
     >
+      {" "}
       {currentMonth !== month && date === 1 && (
-        <p className="font-bold text-sm text-primary-teal px-1 mx-[calc(0.5rem - 16)] w-[32px]">
-          {month}월
-        </p>
+        // mx-[calc(0.5rem - 16)]
+        <div className="flex flex-col justify-center items-center gap-[5px] mx-4 px-1 text-primary-teal font-bold text-sm  ">
+          {currentYear !== year && <span>{year}</span>}
+          <span className="">{month}월</span>
+        </div>
       )}
       <div className="flex flex-col items-center gap-[0.5rem]">
         <h2
