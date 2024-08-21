@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 declare global {
     interface Window {
@@ -9,9 +10,14 @@ declare global {
 const { naver } = window;
 
 
+interface MarkersProps {
+    allGamesData: any
+    map: any
+}
+
 
 // iterate game data
-export const displayMarkers = ({ allGamesData, map }) => {
+export const displayMarkers = ({ allGamesData, map }: MarkersProps) => {
     for (let index = 0; index < allGamesData?.length; index++) {
         const game = allGamesData[index];
         const marker =

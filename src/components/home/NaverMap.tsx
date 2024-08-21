@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { AllGamesProps } from "../../interfaces/games";
-import { displayMarkers } from "./map-controls";
 
 declare global {
   interface Window {
@@ -13,7 +12,7 @@ const { naver } = window;
 
 const NaverMap = ({ allGamesData }: AllGamesProps) => {
   useEffect(() => {
-    const map = new naver.maps.Map("map", {
+    new naver.maps.Map("map", {
       zoom: 13,
       pinchZoom: true,
       scrollWheel: true,
