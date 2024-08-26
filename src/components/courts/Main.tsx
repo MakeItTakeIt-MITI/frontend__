@@ -4,10 +4,14 @@ import search from "../../assets/v11/search.svg";
 import CourtCard from "./CourtCard";
 import { CITIES } from "../../constants/locations";
 import { useState } from "react";
+import { useCourtsDataHook } from "../../hooks/useCourtsDataHook";
+import NoResults from "../common/NoResults";
 
 const Main = () => {
   const [displayDropbox, setDisplayDropbox] = useState(false);
   const [selectedCity, setSelectedCity] = useState("");
+  const { data: courtsData } = useCourtsDataHook(selectedCity);
+  console.log(courtsData);
 
   const handleSelectCity = (input: string) => {
     setSelectedCity(input);
@@ -72,29 +76,16 @@ const Main = () => {
           </div>
           {/* game list */}
           <div className="bg-light-dark sm:h-[29.5rem] md:h-[426px] w-full p-4 space-y-3 overflow-y-scroll rounded-[20px]  custom-scrollbar">
-            {/* court item */}
-
-            {/* if no items available */}
-            {/* <NoResults /> */}
-            {/* <div className="w-full h-full flex  flex-col gap-3 items-center justify-center ">
-              <h1 className="text-primary-white text-[24px] font-bold ">
-                조회 결과가 없습니다.
-              </h1>
-              <h2 className="text-sm font-[400] text-[#d4d4d4]">
-                검색어와 필터를 변경하여 다른 경기를 찾아보세요!
-              </h2>
-            </div> */}
-            <CourtCard />
-            <CourtCard />
-            <CourtCard />
-            <CourtCard />
-            <CourtCard />
-            <CourtCard />
-            <CourtCard />
+            {courtsData.data.length > 1 ? (
+              courtsData?.data.map((court) => (
+                <CourtCard key={court.id} court={court} />
+              ))
+            ) : (
+              <NoResults />
+            )}
           </div>
         </div>
 
-        {/* <div></div> */}
         <CourtMap />
       </div>
 

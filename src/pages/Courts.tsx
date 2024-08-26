@@ -5,11 +5,8 @@ import Main from "../components/courts/Main";
 const Courts = () => {
   return (
     <section className="bg-secondary-black ">
-      {/* hero */}
       <Hero />
-      {/* main */}
       <Main />
-
       <Footer />
     </section>
   );
