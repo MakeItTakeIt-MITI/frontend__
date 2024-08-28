@@ -3,14 +3,20 @@ import dropdown from "../../assets/v11/drop.svg";
 import search from "../../assets/v11/search.svg";
 import CourtCard from "./CourtCard";
 import { CITIES } from "../../constants/locations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCourtsDataHook } from "../../hooks/useCourtsDataHook";
 import NoResults from "../common/NoResults";
+import { Court } from "../../interfaces/games";
 
 const Main = () => {
   const [displayDropbox, setDisplayDropbox] = useState(false);
   const [selectedCity, setSelectedCity] = useState("");
-  const { data: courtsData } = useCourtsDataHook(selectedCity);
+  const [input, setInput] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const { data: courtsData, refetch } = useCourtsDataHook(
+    searchInput,
+    selectedCity
+  );
   console.log(courtsData);
 
   const handleSelectCity = (input: string) => {
@@ -21,6 +27,15 @@ const Main = () => {
   const handleDisplayDropbox = () => {
     setDisplayDropbox(!displayDropbox);
   };
+
+  const handleSearchInput = () => {
+    setSearchInput(input);
+    refetch();
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [selectedCity, setSelectedCity, refetch, searchInput, input]);
   return (
     <div className="pt-[3.75rem] sm:px-[.81rem] md:px-[36px] pb-[6.25rem] flex flex-col  justify-center  gap-[2.62rem] mx-auto sm:w-full md:w-[768px]">
       {/* title */}
@@ -39,10 +54,21 @@ const Main = () => {
             <div className="flex items-center justify-between bg-light-dark sm:w-[14.8125rem] md:w-[15.5rem] h-full py-[0.75rem] pl-[1.25rem] pr-[0.75rem] rounded-[0.75rem]">
               <input
                 type="text"
+                onChange={(e) => setInput(e.target.value)}
                 className="bg-light-dark text-secondary-white font-[500] courtsPlaceHolder"
                 placeholder="경기장 (주소/경기장 명) 검색"
               />
-              <img src={search} alt="search" />
+              <button
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSearchInput();
+                  }
+                }}
+                onClick={handleSearchInput}
+              >
+                {" "}
+                <img src={search} alt="search" />
+              </button>
             </div>
 
             {/* dropdown */}
@@ -59,8 +85,9 @@ const Main = () => {
               </button>
               {displayDropbox && (
                 <ul className="overflow-y-scroll custom-scrollbar absolute left-0 right-0 top-14 rounded-[.75rem] w-full  h-[27.625rem] p-[.75rem] bg-light-dark flex flex-col ">
-                  {CITIES.map((city) => (
+                  {CITIES.map((city, index) => (
                     <li
+                      key={index}
                       onClick={() => handleSelectCity(city)}
                       style={{
                         color: selectedCity !== city ? "#fff" : "#7FEEF0",
@@ -76,13 +103,15 @@ const Main = () => {
           </div>
           {/* game list */}
           <div className="bg-light-dark sm:h-[29.5rem] md:h-[426px] w-full p-4 space-y-3 overflow-y-scroll rounded-[20px]  custom-scrollbar">
-            {courtsData.data.length > 1 ? (
-              courtsData?.data.map((court) => (
-                <CourtCard key={court.id} court={court} />
-              ))
-            ) : (
-              <NoResults />
-            )}
+            {courtsData?.pages.map((page) => {
+              return page.data.page_content.length > 0 ? (
+                page.data.page_content.map((court: Court) => (
+                  <CourtCard court={court} />
+                ))
+              ) : (
+                <NoResults />
+              );
+            })}
           </div>
         </div>
 
