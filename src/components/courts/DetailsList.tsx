@@ -19,15 +19,15 @@ const DetailsList = ({ selectedCourtsData }: any) => {
         <h1 className="font-bold text-primary-white ">2024년 5월 5일 일요일</h1>
         <CourtDetailCard />
       </div> */}
-      {selectedCourtsData?.pages.map((page) => {
+      {selectedCourtsData?.pages.map((page: any) => {
         return page.data.page_content.length > 0 ? (
-          page.data.page_content.map((court: Court) => (
+          page.data.page_content.map((court: any) => (
             <div className="space-y-[0.75rem]">
               <h1 className="font-bold text-primary-white">
                 {court.startdate}
               </h1>
 
-              {court.games.map((game) => (
+              {court.games.map((game: any) => (
                 <CourtDetailCard key={game.id} game={game} />
               ))}
             </div>
