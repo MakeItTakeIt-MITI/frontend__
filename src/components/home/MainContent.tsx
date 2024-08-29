@@ -7,7 +7,6 @@ import useTimeFieldStore from "../../store/useTimeStore";
 import useStatusSelectionStore from "../../store/useStatusSelectionStore";
 import useDateSelectionStore from "../../store/useDateSelectionStore";
 import { Game } from "../../interfaces/games";
-// import drop from "../../assets/v11/drop.svg";
 
 interface MainContentProps {
   handleDisplayFilterBox: () => void;
@@ -66,6 +65,7 @@ const MainContent = ({
                 <FilteredStatus
                   handleDisplayFilterBox={handleDisplayFilterBox}
                   content={selectedDate}
+                  // content={currentMonth}
                   resetStatus={handleResetDateField}
                 />
                 <FilteredStatus

@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { DATES } from '../constants/calender';
 
 interface GameFilterState {
     selectedDate: string;
@@ -13,26 +14,40 @@ interface GameFilterState {
     resetSelectedStatus: () => void
 }
 
+
+
+const displayDate = `${DATES()[0].month}.${DATES()[0].date} (${DATES()[0].dayKorean})`;
+const displayTime = `오전 00:00`
+const displayStatus = '모집중,모집 완료,경기 완료,경기 취소'
+
 const useGameFilterStore = create<GameFilterState>((set) => ({
-    selectedDate: "날짜",
-    selectedTimeDate: "경기 시작 시간",
-    selectedStatus: "경기 상태",
+    // selectedDate: "날짜",
+    selectedDate: displayDate,
+    // selectedTimeDate: "경기 시작 시간",
+    selectedTimeDate: displayTime,
+    selectedStatus: displayStatus,
     setSelectedDate: (date) => set({ selectedDate: date }),
     setSelectedTimeDate: (timeDate) => set({ selectedTimeDate: timeDate }),
     setSelectedStatus: (status) => set({ selectedStatus: status }),
     resetFilterHeader: () => set({
-        selectedDate: "날짜",
-        selectedTimeDate: "경기 시작 시간",
-        selectedStatus: "경기 상태",
+        selectedDate: displayDate,
+        // selectedDate: "날짜",
+        // selectedTimeDate: "경기 시작 시간",
+        selectedTimeDate: displayTime,
+        selectedStatus: displayStatus,
+        // selectedStatus: "경기 상태",
     }),
     resetSelectedDate: () => set({
-        selectedDate: "날짜",
+        // selectedDate: "날짜",
+        selectedDate: displayDate,
     }),
     resetSelectedTimeDate: () => set({
-        selectedTimeDate: "경기 시작 시간",
+        // selectedTimeDate: "경기 시작 시간",
+        selectedTimeDate: displayTime,
     }),
     resetSelectedStatus: () => set({
-        selectedStatus: "경기 상태",
+        selectedStatus: displayStatus,
+        // selectedStatus: "경기 상태",
     }),
 }));
 

@@ -3,34 +3,25 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  background: "#262626";
-}
-
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  background: "#262626";
   font-family:
     "Pretendard Variable",
     Pretendard,
-    -apple-system,
-    BlinkMacSystemFont,
-    system-ui,
-    Roboto,
-    "Helvetica Neue",
-    "Segoe UI",
-    "Apple SD Gothic Neo",
-    "Noto Sans KR",
-    "Malgun Gothic",
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    sans-serif;
+    -apple-system;
+}
+
+html {
+  overflow: hidden;
+  height: 100%;
 }
 
 body {
-  background: "#262626";
+  overflow: auto;
+  height: 100%;
 }
 
 section {
