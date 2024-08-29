@@ -1,6 +1,8 @@
+import MainLayout from "../common/MainLayout";
+
 const Main = () => {
   return (
-    <div className="h-[57.8125rem] flex flex-col w-full  gap-[2.5rem] px-[36rem] pt-[3.75rem] pb-[6.25rem] bg-secondary-black">
+    <MainLayout>
       {/* upper */}
       <div className="space-y-[1.25rem] text-primary-white">
         <h1 className="text-[32px] font-[600] ">자주 묻는 질문</h1>
@@ -28,7 +30,7 @@ const Main = () => {
           MITI 앱으로 열기
         </button>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 

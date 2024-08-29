@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useCourtsDataHook } from "../../hooks/useCourtsDataHook";
 import NoResults from "../common/NoResults";
 import { Court } from "../../interfaces/games";
+import MainLayout from "../common/MainLayout";
 
 const Main = () => {
   const [displayDropbox, setDisplayDropbox] = useState(false);
@@ -37,7 +38,7 @@ const Main = () => {
     refetch();
   }, [selectedCity, setSelectedCity, refetch, searchInput, input]);
   return (
-    <div className="pt-[3.75rem] sm:px-[.81rem] md:px-[36px] pb-[6.25rem] flex flex-col  justify-center  gap-[2.62rem] mx-auto sm:w-full md:w-[768px]">
+    <MainLayout>
       {/* title */}
       <div className="space-y-[1.25rem] text-[#fff] sm:text-center md:text-start">
         <h1 className="text-[32px] font-[600]">경기 목록</h1>
@@ -139,7 +140,7 @@ const Main = () => {
           MITI 앱으로 열기
         </button>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 
