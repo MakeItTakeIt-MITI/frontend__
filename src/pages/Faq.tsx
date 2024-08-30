@@ -4,7 +4,7 @@ import Main from "../components/faq/Main";
 
 const Faq = () => {
   return (
-    <section className="bg-secondary-black h-screen ">
+    <section className="bg-secondary-black  ">
       <Header />
       <Main />
       <Footer />

@@ -1,6 +1,5 @@
 import instagram from "../../assets/v11/instagram.svg";
-import miti_logo from "../../assets/v11/logo.svg";
-import miti_text from "../../assets/v11/makeittakeit.png";
+import miti_logo from "../../assets/v11/footer-logo.svg";
 import playstore from "../../assets/v11/google-play.svg";
 import applestore from "../../assets/v11/apple-store.svg";
 
@@ -48,9 +47,8 @@ const Footer = () => {
           </div>
           {/* RIGHT container */}
           <div className="flex flex-col items-center w-[16.5rem] h-[8rem] space-y-[2.88rem]">
-            <div className="space-y-[0.5rem]">
+            <div className="">
               <img src={miti_logo} alt="logo" />
-              <img src={miti_text} alt="miti text" />
             </div>
             <div className="flex gap-[0.75rem]">
               <button className="flex  text-[#fff] space-x-[8px] py-2 px-4">
@@ -70,9 +68,8 @@ const Footer = () => {
       <footer className=" sm:flex items-center justify-center h-[26rem] px-[0.81rem] py-[3.75rem] md:hidden bg-primary-black">
         <div className="space-y-[2.5rem]">
           {/* logo */}
-          <div className="space-y-[0.5rem] flex flex-col items-center">
+          <div>
             <img src={miti_logo} alt="miti logo" />
-            <img src={miti_text} alt="miti text" />
           </div>
           {/* info */}
           <div className="space-y-[1.25rem]">
