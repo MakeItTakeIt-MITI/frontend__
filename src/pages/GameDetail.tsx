@@ -6,28 +6,74 @@ import participants from "../assets/v11/participants.svg";
 import profile from "../assets/v11/profile.svg";
 import star from "../assets/v11/star.svg";
 import ShareFeatureFooter from "../components/common/ShareFeatureFooter";
+import { useGameDetailDataHook } from "../hooks/useGameDetailDataHook";
+import { useParams } from "react-router-dom";
 
 const GameDetail = () => {
+  const { id } = useParams();
+  const gameId = Number(id);
+
+  const { data: game } = useGameDetailDataHook({ id: gameId });
+  console.log(game);
+
   return (
     <>
       <section className="sm:bg-secondary-black md:bg-light-dark  md:pt-[3.75rem] md:pb-[5rem] sm:mb-[3.75rem] md:mb-[4.375rem]">
         <div className="sm:w-full md:w-[43.25rem]  mx-auto sm:space-y-[0.25rem] md:space-y-[1.25rem]">
           {/* map h-[31.25rem] */}
-          <GameDetailMap />
+          <GameDetailMap
+            longitude={game?.data.court.longitude}
+            latitude={game?.data.court.latitude}
+          />
 
           {/* game info h-[15rem] */}
           <Layout height="">
-            <div className="space-y-[.75rem] flex flex-col  justify-center">
-              <span className="flex items-center justify-center text-[10px] rounded-[0.125rem] max-w-[2.8125rem] w-full h-[1.125rem]  text-[#009799] bg-[#b9dbdc] ">
+            <div className="space-y-[.75rem] ">
+              {/* <span className="flex items-center justify-center text-[10px] rounded-[0.125rem] max-w-[2.8125rem] w-full h-[1.125rem]  text-[#009799] bg-[#b9dbdc] ">
                 모집 완료
+              </span> */}
+              <span
+                style={{
+                  backgroundColor:
+                    game?.data.game_status === "open"
+                      ? "#b9dbdc"
+                      : game?.data.game_status === "canceled"
+                        ? "#E3C6CB"
+                        : game?.data.game_status === "closed"
+                          ? "#d3d3d3"
+                          : game?.data.game_status === "completed"
+                            ? "#B9DBDC"
+                            : "",
+
+                  color:
+                    game?.data.game_status === "open"
+                      ? "#4152EB"
+                      : game?.data.game_status === "canceled"
+                        ? "#C93568"
+                        : game?.data.game_status === "closed"
+                          ? "#d3d3d3"
+                          : game?.data.game_status === "completed"
+                            ? "#00979A"
+                            : "",
+                }}
+                // className="p-[.25rem] text-[10px] rounded-[0.125rem] w-full  text-[#009799] bg-[#b9dbdc] ">
+                className="p-[.25rem] text-[10px] rounded-[0.125rem] font-bold  "
+              >
+                {(game?.data.game_status === "open" && "모집중") ||
+                  (game?.data.game_status === "canceled" && "경기 취소") ||
+                  (game?.data.game_status === "closed" && "모집 마감") ||
+                  (game?.data.game_status === "completed" && "모집 완료")}
+
+                {/* {game.game_status === "cancelled" && "경기 취소"} */}
               </span>
               {/* title and datetime */}
               <div className="space-y-[0.5rem]">
                 <h1 className="sm:text-base md:text-lg font-bold text-primary-white">
-                  [5:5 풀코트] 더모스트 바스켓볼 3파전 픽업게임
+                  {game?.data.title}
                 </h1>
                 <p className="text-neutral-400 text-sm font-normal text-[#A3A3A3]">
-                  2023. 12 .15 15:30 ~ 18:00
+                  {game?.data.startdate} {game?.data.starttime.slice(0, 5)} ~{" "}
+                  {game?.data.endtime.slice(0, 5)}
                 </p>
               </div>
             </div>
@@ -35,20 +81,29 @@ const GameDetail = () => {
             <div className="space-y-[0.38rem] text-primary-white text-sm font-[400] ">
               <div className="flex items-center gap-2">
                 <img src={clock} alt="clock" />
-                <span>120분 경기</span>
+                <span>0분 경기</span>
               </div>
               <div className="flex items-center gap-2">
                 <img src={location} alt="location" />
-                <span>경기도 수원시 매탄로 23-1</span>
+                <span>
+                  {game?.data.court.address} {game?.data.court.adress_detail}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <img src={participants} alt="participants" />
-                <span>15 / 18</span>
+                <span>
+                  {game?.data.num_of_confirmed_participations} /{" "}
+                  {game?.data.max_invitation}
+                </span>
               </div>
             </div>
             {/* FEE */}
             <h1 className="text-[#7feef0] sm:text-base md:text-lg font-bold">
-              참가비 10,000 원
+              참가비{" "}
+              {game?.data.fee.toLocaleString("ko-KR", {
+                style: "currency",
+                currency: "KRW",
+              })}
             </h1>
           </Layout>
 
@@ -60,7 +115,9 @@ const GameDetail = () => {
             <div className="flex gap-[.75rem]">
               <img src={profile} alt="profile" />
               <div className="space-y-[.25rem] text-primary-white">
-                <h2 className="font-bold text-sm">어니언수제어묵 님</h2>
+                <h2 className="font-bold text-sm">
+                  {game?.data.host.nickname} 님
+                </h2>
                 <div className="flex items-center gap-[.38rem] font-[400] text-[14px]">
                   <div className="flex">
                     <img src={star} alt="star" />

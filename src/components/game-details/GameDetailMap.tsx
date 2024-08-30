@@ -2,24 +2,28 @@ import { useEffect } from "react";
 import marker from "../../assets/v11/detail-marker.svg";
 const { naver } = window;
 
-const GameDetailMap = () => {
+interface GameDetailMapProp {
+  latitude: string;
+  longitude: string;
+}
+
+const GameDetailMap = ({ latitude, longitude }: GameDetailMapProp) => {
   useEffect(() => {
     const map = new naver.maps.Map("map", {
-      // center: new naver.maps.LatLng(latitude, longitude),
-      center: new naver.maps.LatLng(37.3595704, 127.105399),
-      zoom: 13,
+      center: new naver.maps.LatLng(latitude, longitude),
+      zoom: 14,
       pinchZoom: true,
       scrollWheel: true,
     });
 
     new naver.maps.Marker({
-      position: new naver.maps.LatLng(37.3595704, 127.105399),
+      position: new naver.maps.LatLng(latitude, longitude),
       map: map,
       icon: {
         content: `<img src=${marker} alt="marker" />`,
       },
     });
-  }, []);
+  }, [latitude, longitude]);
   return (
     <div
       id="map"
