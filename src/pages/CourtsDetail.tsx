@@ -10,20 +10,14 @@ const CourtsDetail = () => {
   const { id } = useParams();
   const courtId = Number(id);
   const { data: selectedCourtsData } = useSelectedCourtsListHook(courtId);
-  console.log(selectedCourtsData);
 
   return (
     <section className="  flex items-center justify-center   sm:pt-0 md:pt-[3.75rem] sm:pb-[5.875rem] md:pb-[9.375rem] bg-light-dark  ">
       <div className="relative w-[43.25rem] sm:space-y-1 md:space-y-5  h-full">
-        {/* header */}
         <MobileDetailMap />
         <DetailHeader />
-        {/* container */}
         <div className=" sm:space-x-0  md:space-x-5  flex sm:justify-center">
-          {/* left */}
-          {/* map */}
           <DetailsList selectedCourtsData={selectedCourtsData} />
-
           <DetailMap />
         </div>
       </div>

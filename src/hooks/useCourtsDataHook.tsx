@@ -1,14 +1,3 @@
-// import { useQuery } from "@tanstack/react-query";
-// import { getAllCourts } from "../api/courts";
-
-// export const useCourtsDataHook = (city?: string) => {
-//   return useQuery({
-//     queryKey: ["courts list", city],
-//     queryFn: () => getAllCourts(city || ""),
-//     enabled: !!city,
-//   });
-// };
-
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getAllCourts } from "../api/courts";
 
