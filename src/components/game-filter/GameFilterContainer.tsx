@@ -14,17 +14,13 @@ interface GameFilterProps {
 
 const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
   // stage management store
-  const {
-    setSelectedStatus,
-    setSelectedDate,
-    setSelectedTimeDate,
-    resetFilterHeader,
-  } = useGameFilterStore();
+  const { setSelectedStatus, setSelectedDate, setSelectedTimeDate } =
+    useGameFilterStore();
 
-  const { selectedDayStatus, selectedHour, selectedMinute, resetTimeField } =
+  const { selectedDayStatus, selectedHour, selectedMinute } =
     useTimeFieldStore();
-  const { selectedStatuses, resetStatuses } = useStatusSelectionStore();
-  const { dateField, resetDateField } = useDateSelectionStore();
+  const { selectedStatuses } = useStatusSelectionStore();
+  const { dateField } = useDateSelectionStore();
 
   const timeFormat = `${selectedDayStatus} ${selectedHour}:${selectedMinute}`;
 
@@ -45,13 +41,18 @@ const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
   };
 
   const handleResetField = () => {
-    //reset headers
-    resetFilterHeader();
+    alert("Disabled at the moment - 수정중. 새로고침을 이요해주세요.");
+    // if (dateField.length > 1) {
+    //   setSelectedDate(yearMonthDayFormat);
+    // }
+    // // reset filter status
 
-    // reset filter status
-    resetDateField();
-    resetTimeField();
-    resetStatuses();
+    // resetDateField();
+    // resetTimeField();
+    // resetStatuses();
+    // //reset headers
+    // resetFilterHeader();
+    // refetch();
   };
 
   return (

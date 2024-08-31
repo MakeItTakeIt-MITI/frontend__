@@ -1,17 +1,27 @@
 import time from "../../assets/v11/time.svg";
 import participants from "../../assets/v11/participants.svg";
-import { Link } from "react-router-dom";
 import { Game } from "../../interfaces/games";
 
 interface GameListCardProp {
   game: Game;
+  setLatitude: (arg: string) => void;
+  setLongitude: (arg: string) => void;
 }
 
-const GameListCard = ({ game }: GameListCardProp) => {
+const GameListCard = ({
+  game,
+  setLongitude,
+  setLatitude,
+}: GameListCardProp) => {
+  const handleSetLatLong = () => {
+    setLatitude(game.court.latitude);
+    setLongitude(game.court.longitude);
+  };
+
   return (
-    <Link
-      to={`game/${game.id}`}
-      className="flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
+    <div
+      onClick={handleSetLatLong}
+      className="cursor-pointer flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and title */}
       <div className="space-y-2">
@@ -77,7 +87,7 @@ const GameListCard = ({ game }: GameListCardProp) => {
           })}
         </h2>
       </div>
-    </Link>
+    </div>
   );
 };
 

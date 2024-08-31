@@ -25,6 +25,8 @@ export const displayMarkers = ({ allGamesData, map }: MarkersProps) => {
         <span>${game.fee}</span>
         <span>/</span>
         <span class="font-[300] text-[10px] text-[#737373]">23:00</span>
+
+    
         </a>`;
 
         new naver.maps.Marker({
