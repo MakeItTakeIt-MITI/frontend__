@@ -12,7 +12,11 @@ declare global {
 
 const { naver } = window;
 
-const NaverMap = ({ allGamesData }: AllGamesProps) => {
+interface NaverMapProps extends AllGamesProps {
+  handleSetSelected: () => void;
+}
+
+const NaverMap = ({ allGamesData }: NaverMapProps) => {
   const { latitude, longitude } = useLatLongStore();
 
   useEffect(() => {
@@ -24,10 +28,10 @@ const NaverMap = ({ allGamesData }: AllGamesProps) => {
 
     // 지도 이동 이벤트
     const location = new naver.maps.LatLng(latitude, longitude);
+
     if (latitude !== null && longitude !== null) {
       naverMap.setCenter(location);
     }
-
     const addressesList: string[] = [];
     if (allGamesData && Array.isArray(allGamesData)) {
       allGamesData?.map((game) => {
@@ -51,14 +55,14 @@ const NaverMap = ({ allGamesData }: AllGamesProps) => {
           </a>`;
 
       const overlappedMarkerHTML = `
-          <a key=${game.id} href="game/${game.id}" class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+          <button type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
               <span>${game.fee.toLocaleString("ko-KR", {
                 style: "currency",
                 currency: "KRW",
               })}</span>
               <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
               <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#fff] text-[#525252]  flex items-center justify-center text-[10px] font-bold ">${filteredAddresses.length}</div>
-          </a>`;
+          </button>`;
 
       const marker = new naver.maps.Marker({
         position: new naver.maps.LatLng(

@@ -10,9 +10,13 @@ import useDateSelectionStore from "../../store/useDateSelectionStore";
 
 interface GameFilterProps {
   handleCloseFilterBox: () => void;
+  handleResetFilters: () => void;
 }
 
-const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
+const GameFilterContainer = ({
+  handleCloseFilterBox,
+  handleResetFilters,
+}: GameFilterProps) => {
   // stage management store
   const { setSelectedStatus, setSelectedDate, setSelectedTimeDate } =
     useGameFilterStore();
@@ -40,21 +44,6 @@ const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
     handleCloseFilterBox();
   };
 
-  const handleResetField = () => {
-    alert("Disabled at the moment - 수정중. 새로고침을 이요해주세요.");
-    // if (dateField.length > 1) {
-    //   setSelectedDate(yearMonthDayFormat);
-    // }
-    // // reset filter status
-
-    // resetDateField();
-    // resetTimeField();
-    // resetStatuses();
-    // //reset headers
-    // resetFilterHeader();
-    // refetch();
-  };
-
   return (
     <section
       style={{
@@ -73,7 +62,7 @@ const GameFilterContainer = ({ handleCloseFilterBox }: GameFilterProps) => {
 
         <hr className="border-[#404040] " />
         <FilterButtonsField
-          handleResetField={handleResetField}
+          handleResetField={handleResetFilters}
           handleApplyFilters={handleApplyFilters}
         />
       </div>

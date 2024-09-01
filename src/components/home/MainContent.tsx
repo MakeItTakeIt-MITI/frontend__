@@ -7,6 +7,7 @@ import useTimeFieldStore from "../../store/useTimeStore";
 import useStatusSelectionStore from "../../store/useStatusSelectionStore";
 import useDateSelectionStore from "../../store/useDateSelectionStore";
 import { Game } from "../../interfaces/games";
+import { useState } from "react";
 
 interface MainContentProps {
   handleDisplayFilterBox: () => void;
@@ -25,6 +26,8 @@ const MainContent = ({
     resetSelectedTimeDate,
     resetSelectedStatus,
   } = useGameFilterStore();
+  const [selected, setSelected] = useState(false);
+
   const { resetTimeField } = useTimeFieldStore();
   const { resetStatuses } = useStatusSelectionStore();
   const { resetDateField } = useDateSelectionStore();
@@ -42,6 +45,10 @@ const MainContent = ({
   const handleResetGameStatus = () => {
     resetSelectedStatus();
     resetStatuses();
+  };
+
+  const handleSetSelected = () => {
+    setSelected(!selected);
   };
 
   return (
@@ -91,7 +98,10 @@ const MainContent = ({
           {/* Game list and map container */}
           <div className="flex gap-5 h-full ">
             <GameListContainer allGamesData={allGamesData} />
-            <NaverMap allGamesData={allGamesData} />
+            <NaverMap
+              allGamesData={allGamesData}
+              handleSetSelected={handleSetSelected}
+            />
           </div>
         </div>
       </div>
