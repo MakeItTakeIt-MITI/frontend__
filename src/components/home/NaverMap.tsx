@@ -1,8 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import { AllGamesProps } from "../../interfaces/games";
-import { displayMarkers } from "./map-controls";
 import useLatLongStore from "../../store/useLatLongStore";
-import useOverlappedAddressStore from "../../store/useOverlappedAddressStore";
 
 declare global {
   interface Window {
@@ -15,7 +14,6 @@ const { naver } = window;
 
 const NaverMap = ({ allGamesData }: AllGamesProps) => {
   const { latitude, longitude } = useLatLongStore();
-  const { setFilteredGames } = useOverlappedAddressStore();
 
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
@@ -53,7 +51,7 @@ const NaverMap = ({ allGamesData }: AllGamesProps) => {
           </a>`;
 
       const overlappedMarkerHTML = `
-          <a href="game/${game.id}" class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+          <a key=${game.id} href="game/${game.id}" class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
               <span>${game.fee.toLocaleString("ko-KR", {
                 style: "currency",
                 currency: "KRW",
