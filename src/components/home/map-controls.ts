@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+
 declare global {
     interface Window {
         naver: any;
@@ -10,25 +11,12 @@ const { naver } = window;
 interface MarkersProps {
     allGamesData: any;
     map: any;
+    setFilteredGames: (arg: string) => void
+
 }
 
 // iterate game data
-export const displayMarkers = ({ allGamesData, map }: MarkersProps) => {
-    const repeatedAddress = []
-    const addresses: string[] = []
-
-
-    // console.log(allGamesData);
-    const addressesList: string[] = [];
-    if (allGamesData && Array.isArray(allGamesData)) {
-        allGamesData?.map((game) => {
-            addressesList.push(game.court.address);
-            return addressesList;
-        });
-    }
-
-    // console.log(addressesList);
-
+export const displayMarkers = ({ allGamesData, map, setFilteredGames }: MarkersProps) => {
 
 
 
@@ -38,6 +26,8 @@ export const displayMarkers = ({ allGamesData, map }: MarkersProps) => {
         const filteredAddresses = addressesList.filter(
             (address) => address === game.court.address
         );
+
+        setFilteredGames(filteredAddresses)
 
         const markerHTML = `
             <a href="game/${game.id}" class="relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
@@ -78,17 +68,7 @@ export const displayMarkers = ({ allGamesData, map }: MarkersProps) => {
 
 
 
-        // Create marker on the map
-        // new naver.maps.Marker({
-        //     position: new naver.maps.LatLng(
-        //         game.court.latitude,
-        //         game.court.longitude
-        //     ),
-        //     map: map,
-        //     icon: {
-        //         content: overlappedMarkerHTML,
-        //     },
-        // });
+
     });
 
 };

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { AllGamesProps } from "../../interfaces/games";
 import { displayMarkers } from "./map-controls";
 import useLatLongStore from "../../store/useLatLongStore";
+import useOverlappedAddressStore from "../../store/useOverlappedAddressStore";
 
 declare global {
   interface Window {
@@ -14,6 +15,8 @@ const { naver } = window;
 
 const NaverMap = ({ allGamesData }: AllGamesProps) => {
   const { latitude, longitude } = useLatLongStore();
+  const { setFilteredGames } = useOverlappedAddressStore();
+
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
       zoom: 13,
@@ -27,8 +30,59 @@ const NaverMap = ({ allGamesData }: AllGamesProps) => {
       naverMap.setCenter(location);
     }
 
+    const addressesList: string[] = [];
+    if (allGamesData && Array.isArray(allGamesData)) {
+      allGamesData?.map((game) => {
+        addressesList.push(game.court.address);
+        return addressesList;
+      });
+    }
+
     // 다중 마커 표시
-    displayMarkers({ allGamesData, map: naverMap });
+    allGamesData?.forEach((game: any) => {
+      const filteredAddresses = addressesList.filter(
+        (address) => address === game.court.address
+      );
+
+      // setFilteredGames(filtsweredAddresses);
+
+      const markerHTML = `
+          <a href="game/${game.id}" class="relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+              <span>${game.fee}</span>
+              <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
+          </a>`;
+
+      const overlappedMarkerHTML = `
+          <a href="game/${game.id}" class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+              <span>${game.fee.toLocaleString("ko-KR", {
+                style: "currency",
+                currency: "KRW",
+              })}</span>
+              <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
+              <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#fff] text-[#525252]  flex items-center justify-center text-[10px] font-bold ">${filteredAddresses.length}</div>
+          </a>`;
+
+      const marker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(
+          game.court.latitude,
+          game.court.longitude
+        ),
+        zoom: 12,
+        map: naverMap,
+        pinchZoom: true,
+        clickable: true,
+        icon: {
+          content: markerHTML,
+        },
+      });
+
+      marker.setIcon({
+        content:
+          filteredAddresses.length > 1 ? overlappedMarkerHTML : markerHTML,
+      });
+    });
+
+    // displayMarkers({ allGamesData, map: naverMap, setFilteredGames });
   }, [allGamesData, latitude, longitude]);
   return (
     <div
