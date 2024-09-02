@@ -29,10 +29,8 @@ const MainContent = ({
     resetSelectedStatus,
   } = useGameFilterStore();
   const [selected, setSelected] = useState(false);
-  // const [selectedFilter, setSelectedFilter] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState("");
-  const [isAddressSelected, setIsAddressSelected] = useState(false);
-  console.log(selectedAddress);
+  const [selectedAddress, setSelectedAddress] = useState<string>("");
+  const [isAddressSelected, setIsAddressSelected] = useState<boolean>(false);
 
   const { resetTimeField } = useTimeFieldStore();
   const { resetStatuses } = useStatusSelectionStore();

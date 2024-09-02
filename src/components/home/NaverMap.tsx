@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import { AllGamesProps } from "../../interfaces/games";
@@ -5,7 +6,6 @@ import useLatLongStore from "../../store/useLatLongStore";
 
 declare global {
   interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     naver: any;
   }
 }
@@ -99,20 +99,29 @@ const NaverMap = ({
       });
 
       naver.maps.Event.addListener(marker, "click", function () {
+        // naver.maps.Event.addListener(marker, "click", function () {
+        //   setIsAddressSelected((prev: boolean) => {
+        //     if (!prev) {
+        //       marker.setIcon({
+        //         content: selectedMarkerHTML,
+        //       });
+        //       return true;
+        //     } else {
+        //       marker.setIcon({
+        //         content: overlappedMarkerHTML,
+        //       });
+        //       return false;
+        //     }
+        //   });
+        // @ts-expect-error
         setIsAddressSelected((prev) => {
-          if (!prev) {
-            setIsAddressSelected(true);
-            marker.setIcon({
-              content: selectedMarkerHTML,
-            });
-          } else {
-            setIsAddressSelected(false);
-
-            marker.setIcon({
-              content: overlappedMarkerHTML,
-            });
-          }
+          const newState = !prev;
+          marker.setIcon({
+            content: newState ? selectedMarkerHTML : overlappedMarkerHTML,
+          });
+          return newState;
         });
+
         setSelectedAddress(`${game.court.address}`);
       });
 
@@ -123,7 +132,7 @@ const NaverMap = ({
     });
 
     // displayMarkers({ allGamesData, map: naverMap, setFilteredGames });
-  }, [allGamesData, latitude, longitude]);
+  }, [NaverMap, allGamesData, latitude, longitude]);
   return (
     <div
       id="map"

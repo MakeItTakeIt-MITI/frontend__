@@ -12,9 +12,6 @@ interface FilteredContainerProps extends AllGamesProps {
 const FilteredGameListContainer = ({
   allGamesData,
   selectedAddress,
-  //   setSelectedAddress,
-  //   setIsAddressSelected,
-  //   isAddressSelected,
 }: FilteredContainerProps) => {
   const addressFilterData = allGamesData?.filter(
     (game) => selectedAddress === game.court.address

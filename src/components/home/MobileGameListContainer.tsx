@@ -12,7 +12,7 @@ const MobileGameListContainer = ({ allGamesData }: AllGamesProps) => {
       ) : (
         allGamesData?.map((game) => (
           <>
-            <MobileGameListCard game={game} />
+            <MobileGameListCard game={game} key={game.id} />
           </>
         ))
       )}
