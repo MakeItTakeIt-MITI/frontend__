@@ -1,6 +1,7 @@
 import { AllGamesProps } from "../../interfaces/games";
 import useLatLongStore from "../../store/useLatLongStore";
 import GameListCard from "./GameListCard";
+import MobileGameListCard from "./MobileGameListCard";
 import "./scrollbar.css";
 
 const GameListContainer = ({ allGamesData }: AllGamesProps) => {
@@ -14,12 +15,15 @@ const GameListContainer = ({ allGamesData }: AllGamesProps) => {
         </div>
       ) : (
         allGamesData?.map((game) => (
-          <GameListCard
-            key={game.id}
-            game={game}
-            setLatitude={setLatitude}
-            setLongitude={setLongitude}
-          />
+          <>
+            <GameListCard
+              key={game.id}
+              game={game}
+              setLatitude={setLatitude}
+              setLongitude={setLongitude}
+            />
+            <MobileGameListCard key={game.id} game={game} />
+          </>
         ))
       )}
     </div>
