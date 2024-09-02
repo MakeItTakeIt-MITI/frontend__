@@ -9,6 +9,7 @@ import useDateSelectionStore from "../../store/useDateSelectionStore";
 import { Game } from "../../interfaces/games";
 import { useState } from "react";
 import MobileGameListContainer from "./MobileGameListContainer";
+import FilteredGameListContainer from "./FilteredGameListContainer";
 
 interface MainContentProps {
   handleDisplayFilterBox: () => void;
@@ -28,6 +29,10 @@ const MainContent = ({
     resetSelectedStatus,
   } = useGameFilterStore();
   const [selected, setSelected] = useState(false);
+  // const [selectedFilter, setSelectedFilter] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState("");
+  const [isAddressSelected, setIsAddressSelected] = useState(false);
+  console.log(selectedAddress);
 
   const { resetTimeField } = useTimeFieldStore();
   const { resetStatuses } = useStatusSelectionStore();
@@ -98,11 +103,24 @@ const MainContent = ({
           </>
           {/* Game list and map container */}
           <div className="flex gap-5 h-full ">
-            <GameListContainer allGamesData={allGamesData} />
+            {isAddressSelected ? (
+              <FilteredGameListContainer
+                allGamesData={allGamesData}
+                selectedAddress={selectedAddress}
+                setSelectedAddress={setSelectedAddress}
+                setIsAddressSelected={setIsAddressSelected}
+                isAddressSelected={isAddressSelected}
+              />
+            ) : (
+              <GameListContainer allGamesData={allGamesData} />
+            )}
             <MobileGameListContainer allGamesData={allGamesData} />
             <NaverMap
               allGamesData={allGamesData}
               handleSetSelected={handleSetSelected}
+              setSelectedAddress={setSelectedAddress}
+              setIsAddressSelected={setIsAddressSelected}
+              isAddressSelected={isAddressSelected}
             />
           </div>
         </div>

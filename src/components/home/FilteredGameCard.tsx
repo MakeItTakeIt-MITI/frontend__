@@ -1,27 +1,17 @@
 import time from "../../assets/v11/time.svg";
 import participants from "../../assets/v11/participants.svg";
 import { Game } from "../../interfaces/games";
+import { Link } from "react-router-dom";
 
 interface FilteredGameCardProp {
   game: Game;
-  setLatitude: (arg: string) => void;
-  setLongitude: (arg: string) => void;
 }
 
-const FilteredGameCard = ({
-  game,
-  setLongitude,
-  setLatitude,
-}: FilteredGameCardProp) => {
-  const handleSetLatLong = () => {
-    setLatitude(game.court.latitude);
-    setLongitude(game.court.longitude);
-  };
-
+const FilteredGameCard = ({ game }: FilteredGameCardProp) => {
   return (
-    <div
-      onClick={handleSetLatLong}
-      className="sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
+    <Link
+      to={`/game/${game.id}`}
+      className="cssanimation sequence fadeInBottom sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and title */}
       <div className="space-y-2">
@@ -87,7 +77,7 @@ const FilteredGameCard = ({
           })}
         </h2>
       </div>
-    </div>
+    </Link>
   );
 };
 

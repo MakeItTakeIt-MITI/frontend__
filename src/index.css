@@ -110,3 +110,27 @@ input[type="number"] {
   outline: none;
   border: none;
 }
+
+/* game list animation slide */
+.cssanimation,
+.cssanimation {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.cssanimation {
+  display: inline-block;
+}
+
+.fadeInBottom {
+  animation-name: fadeInBottom;
+}
+@keyframes fadeInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+  }
+}
