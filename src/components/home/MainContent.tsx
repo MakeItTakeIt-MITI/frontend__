@@ -8,6 +8,7 @@ import useStatusSelectionStore from "../../store/useStatusSelectionStore";
 import useDateSelectionStore from "../../store/useDateSelectionStore";
 import { Game } from "../../interfaces/games";
 import { useState } from "react";
+import MobileGameListContainer from "./MobileGameListContainer";
 
 interface MainContentProps {
   handleDisplayFilterBox: () => void;
@@ -98,6 +99,7 @@ const MainContent = ({
           {/* Game list and map container */}
           <div className="flex gap-5 h-full ">
             <GameListContainer allGamesData={allGamesData} />
+            <MobileGameListContainer allGamesData={allGamesData} />
             <NaverMap
               allGamesData={allGamesData}
               handleSetSelected={handleSetSelected}

@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { AllGamesProps } from "../../interfaces/games";
 import useLatLongStore from "../../store/useLatLongStore";
+import useFilteredAddressesStore from "../../store/useFilteredAddressesState";
 
 declare global {
   interface Window {
@@ -18,6 +19,7 @@ interface NaverMapProps extends AllGamesProps {
 
 const NaverMap = ({ allGamesData }: NaverMapProps) => {
   const { latitude, longitude } = useLatLongStore();
+  const { setFilteredAddresses } = useFilteredAddressesStore();
 
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
@@ -46,6 +48,7 @@ const NaverMap = ({ allGamesData }: NaverMapProps) => {
         (address) => address === game.court.address
       );
 
+      setFilteredAddresses(filteredAddresses);
       // setFilteredGames(filtsweredAddresses);
 
       const markerHTML = `

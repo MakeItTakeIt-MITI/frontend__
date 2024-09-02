@@ -9,8 +9,12 @@ import useTimeFieldStore from "../store/useTimeStore";
 import useStatusSelectionStore from "../store/useStatusSelectionStore";
 import { DATES } from "../constants/calender";
 import useGameFilterStore from "../store/useGameFilterStore";
+import useFilteredAddressesStore from "../store/useFilteredAddressesState";
 
 export const Home = () => {
+  const { filteredAddresses } = useFilteredAddressesStore();
+  console.log(filteredAddresses);
+
   const INITIAL_DATES = DATES();
   const FIRST_DATE = INITIAL_DATES[0];
   const initialDateField = `${FIRST_DATE.month}.${FIRST_DATE.date} (${FIRST_DATE.dayKorean})`;

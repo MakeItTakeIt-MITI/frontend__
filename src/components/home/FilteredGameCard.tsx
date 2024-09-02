@@ -1,18 +1,27 @@
 import time from "../../assets/v11/time.svg";
 import participants from "../../assets/v11/participants.svg";
 import { Game } from "../../interfaces/games";
-import { Link } from "react-router-dom";
 
-interface MobileGameListCardProp {
+interface FilteredGameCardProp {
   game: Game;
+  setLatitude: (arg: string) => void;
+  setLongitude: (arg: string) => void;
 }
 
-const MobileGameListCard = ({ game }: MobileGameListCardProp) => {
+const FilteredGameCard = ({
+  game,
+  setLongitude,
+  setLatitude,
+}: FilteredGameCardProp) => {
+  const handleSetLatLong = () => {
+    setLatitude(game.court.latitude);
+    setLongitude(game.court.longitude);
+  };
+
   return (
-    <Link
-      key={game.id}
-      to={`/game/${game.id}`}
-      className="md:hidden cursor-pointer sm:flex flex-col  justify-center space-y-3 w-full h-[7.5rem]  bg-dark-card border border-[#525252] rounded-xl p-4"
+    <div
+      onClick={handleSetLatLong}
+      className="sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and title */}
       <div className="space-y-2">
@@ -63,7 +72,7 @@ const MobileGameListCard = ({ game }: MobileGameListCardProp) => {
             </span>
           </div>
 
-          <div className="flex ">
+          <div className="flex gap-1">
             <img src={participants} alt="participants" />
             <span>
               {game.num_of_participations} / {game.max_invitation}
@@ -78,8 +87,8 @@ const MobileGameListCard = ({ game }: MobileGameListCardProp) => {
           })}
         </h2>
       </div>
-    </Link>
+    </div>
   );
 };
 
-export default MobileGameListCard;
+export default FilteredGameCard;
