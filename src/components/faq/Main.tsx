@@ -3,9 +3,14 @@ import search from "../../assets/v11/search.svg";
 import { FAQ_GUIDELINES, FAQ_TOPICS } from "../../constants/faq";
 import dropdown from "../../assets/v11/drop.svg";
 import { useState } from "react";
+import { useFaqDataHook } from "../../hooks/useFaqDataHook";
+import { FAQItem } from "../../interfaces/support";
 
 const Main = () => {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
+
+  const { data: faqData } = useFaqDataHook();
+  console.log(faqData?.page_content);
 
   const handleOpenFAQ = (index: number) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
@@ -48,38 +53,39 @@ const Main = () => {
           ))}
         </ul>
         {/* FAQ items */}
-        {FAQ_GUIDELINES.map((item, index) => (
-          <>
-            <div
-              key={index}
-              className="flex items-center justify-between py-[1.25rem] "
-            >
-              <span className="text-secondary-white text-[18px] font-[400]">
-                {item.title}
-              </span>
-              <button onClick={() => handleOpenFAQ(index)} type="button">
-                <img
-                  src={dropdown}
-                  alt="dropdown"
-                  className={`size-6 ${index === openFAQIndex ? "rotate-180" : ""}`}
-                />
-              </button>
-            </div>
-            {/* description */}
-            {openFAQIndex === index && (
-              <div className="p-[1.25rem] bg-light-dark rounded-[20px] min-h-[200px] space-y-3">
-                <h2 className="text-primary-white"> {item.subtitle}</h2>
-                <p className="text-[#d4d4d4] text-[12px] font-[300]">
-                  {item.description}
-                </p>
+        {faqData?.page_content?.length > 0 &&
+          faqData.page_content.map((item: FAQItem) => (
+            <>
+              <div
+                key={item.id}
+                className="flex items-center justify-between py-[1.25rem] "
+              >
+                <span className="text-secondary-white text-[18px] font-[400]">
+                  {item.title}
+                </span>
+                <button onClick={() => handleOpenFAQ(item.id)} type="button">
+                  <img
+                    src={dropdown}
+                    alt="dropdown"
+                    className={`size-6 ${item.id === openFAQIndex ? "rotate-180" : ""}`}
+                  />
+                </button>
               </div>
-            )}
+              {/* description */}
+              {openFAQIndex === item.id && (
+                <div className="p-[1.25rem] bg-light-dark rounded-[20px]  space-y-3">
+                  {/* <h2 className="text-primary-white"> {item.subtitle}</h2> */}
+                  <p className="text-[#d4d4d4] text-[12px] font-[300]">
+                    {item.content}
+                  </p>
+                </div>
+              )}
 
-            {index !== FAQ_GUIDELINES.length - 1 && (
-              <hr className="bg-[#525252] h-[2px]" />
-            )}
-          </>
-        ))}
+              {item.id !== FAQ_GUIDELINES.length - 1 && (
+                <hr className="bg-[#525252] h-[2px]" />
+              )}
+            </>
+          ))}
       </div>
       {/* bottom */}
       <div
