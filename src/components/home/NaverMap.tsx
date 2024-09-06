@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AllGamesProps } from "../../interfaces/games";
 import useLatLongStore from "../../store/useLatLongStore";
+import current_marker from "../../assets/v11/current_pin.svg";
 
 declare global {
   interface Window {
@@ -25,6 +26,8 @@ const NaverMap = ({
   setIsAddressSelected,
 }: NaverMapProps) => {
   const { latitude, longitude } = useLatLongStore();
+  const [geoLatitude, setGeoLatitude] = useState<null | number>(null);
+  const [geoLongitude, setGeoLongtitude] = useState<null | number>(null);
 
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
@@ -99,20 +102,6 @@ const NaverMap = ({
       });
 
       naver.maps.Event.addListener(marker, "click", function () {
-        // naver.maps.Event.addListener(marker, "click", function () {
-        //   setIsAddressSelected((prev: boolean) => {
-        //     if (!prev) {
-        //       marker.setIcon({
-        //         content: selectedMarkerHTML,
-        //       });
-        //       return true;
-        //     } else {
-        //       marker.setIcon({
-        //         content: overlappedMarkerHTML,
-        //       });
-        //       return false;
-        //     }
-        //   });
         // @ts-expect-error
         setIsAddressSelected((prev) => {
           const newState = !prev;
@@ -131,8 +120,57 @@ const NaverMap = ({
       });
     });
 
+    // current geolocation
+    function geolocation() {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setGeoLatitude(latitude);
+          setGeoLongtitude(longitude);
+          console.log(geoLatitude, geoLongitude);
+          return;
+        },
+        (error) => {
+          console.error("geolocation error:", error.message);
+        }
+      );
+    }
+
+    const locationBtnHtml = `<button class='bg-black p-2 flex gap-2 items-center'> <img src=${current_marker} alt="current" class="size-10"  /> 현재 위치 (임시) </button>`;
+
+    // custom overlay
+    naver.maps.Event.once(naverMap, "init", function () {
+      const customControl = new naver.maps.CustomControl(locationBtnHtml, {
+        position: naver.maps.Position.TOP_LEFT,
+      });
+
+      customControl.setMap(naverMap);
+
+      naver.maps.Event.addDOMListener(
+        customControl.getElement(),
+        "click",
+        function () {
+          // geolocation();
+          naverMap.setCenter(new naver.maps.LatLng(geoLatitude, geoLongitude));
+        }
+      );
+    });
+
+    geolocation();
     // displayMarkers({ allGamesData, map: naverMap, setFilteredGames });
-  }, [NaverMap, allGamesData, latitude, longitude]);
+  }, [
+    NaverMap,
+
+    allGamesData,
+    latitude,
+    longitude,
+    geoLatitude,
+    geoLongitude,
+    latitude,
+    longitude,
+    setGeoLatitude,
+    setGeoLongtitude,
+  ]);
   return (
     <div
       id="map"
