@@ -4,23 +4,25 @@ import { Game } from "../../interfaces/games";
 
 interface GameListCardProp {
   game: Game;
-  setLatitude: (arg: string) => void;
-  setLongitude: (arg: string) => void;
+  // setLatitude: (arg: string) => void;
+  // setLongitude: (arg: string) => void;
+  handleSetCoords: (arg1: string, arg2: string) => void;
 }
 
 const GameListCard = ({
   game,
-  setLongitude,
-  setLatitude,
+  // setLongitude,
+  // setLatitude,
+  handleSetCoords,
 }: GameListCardProp) => {
-  const handleSetLatLong = () => {
-    setLatitude(game.court.latitude);
-    setLongitude(game.court.longitude);
-  };
+  // const handleSetLatLong = () => {
+  //   setLatitude(game.court.latitude);
+  //   setLongitude(game.court.longitude);
+  // };
 
   return (
     <div
-      onClick={handleSetLatLong}
+      onClick={() => handleSetCoords(game.court.latitude, game.court.longitude)}
       className="cssanimation sequence fadeInBottom  sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and title */}

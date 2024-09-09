@@ -6,7 +6,7 @@ const CourtCard = ({ court }: any) => {
   return (
     <Link
       key={court.id}
-      to={`${court.id}`}
+      to={`/courts/${court.id}`}
       className="p-4 bg-dark-card w-full h-[66px] flex flex-col justify-center rounded-[12px]"
     >
       <h1 className="font-bold text-primary-white ">{court.name}</h1>

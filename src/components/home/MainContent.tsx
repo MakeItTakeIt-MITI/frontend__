@@ -32,9 +32,17 @@ const MainContent = ({
   const [selectedAddress, setSelectedAddress] = useState<string>("");
   const [isAddressSelected, setIsAddressSelected] = useState<boolean>(false);
 
+  const [latitude, setLatitude] = useState<null | string>(null);
+  const [longitude, setLongitude] = useState<null | string>(null);
+
   const { resetTimeField } = useTimeFieldStore();
   const { resetStatuses } = useStatusSelectionStore();
   const { resetDateField } = useDateSelectionStore();
+
+  const handleSetCoords = (lat: string, long: string) => {
+    setLatitude(lat);
+    setLongitude(long);
+  };
 
   const handleResetDateField = () => {
     resetSelectedDate();
@@ -110,7 +118,10 @@ const MainContent = ({
                 isAddressSelected={isAddressSelected}
               />
             ) : (
-              <GameListContainer allGamesData={allGamesData} />
+              <GameListContainer
+                allGamesData={allGamesData}
+                handleSetCoords={handleSetCoords}
+              />
             )}
             <MobileGameListContainer allGamesData={allGamesData} />
             <NaverMap
@@ -119,6 +130,8 @@ const MainContent = ({
               setSelectedAddress={setSelectedAddress}
               setIsAddressSelected={setIsAddressSelected}
               isAddressSelected={isAddressSelected}
+              latitude={latitude}
+              longitude={longitude}
             />
           </div>
         </div>

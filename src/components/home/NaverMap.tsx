@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { AllGamesProps } from "../../interfaces/games";
-import useLatLongStore from "../../store/useLatLongStore";
+// import useLatLongStore from "../../store/useLatLongStore";
 import current_marker from "../../assets/v11/current_pin.svg";
 
 declare global {
@@ -18,14 +18,18 @@ interface NaverMapProps extends AllGamesProps {
   setSelectedAddress: (arg: string) => void;
   setIsAddressSelected: (arg: boolean) => void;
   isAddressSelected: boolean;
+  latitude: string | null;
+  longitude: string | null;
 }
 
 const NaverMap = ({
   allGamesData,
   setSelectedAddress,
   setIsAddressSelected,
+  latitude,
+  longitude,
 }: NaverMapProps) => {
-  const { latitude, longitude } = useLatLongStore();
+  // const { latitude, longitude } = useLatLongStore();
   const [geoLatitude, setGeoLatitude] = useState<null | number>(null);
   const [geoLongitude, setGeoLongtitude] = useState<null | number>(null);
 
@@ -160,7 +164,6 @@ const NaverMap = ({
     // displayMarkers({ allGamesData, map: naverMap, setFilteredGames });
   }, [
     NaverMap,
-
     allGamesData,
     latitude,
     longitude,

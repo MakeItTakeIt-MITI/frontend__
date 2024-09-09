@@ -58,12 +58,13 @@ const Main = () => {
             <>
               <div
                 key={item.id}
-                className="flex items-center justify-between py-[1.25rem] "
+                onClick={() => handleOpenFAQ(item.id)}
+                className="cursor-pointer flex items-center justify-between py-[1.25rem] "
               >
                 <span className="text-secondary-white text-[18px] font-[400]">
                   {item.title}
                 </span>
-                <button onClick={() => handleOpenFAQ(item.id)} type="button">
+                <button type="button">
                   <img
                     src={dropdown}
                     alt="dropdown"

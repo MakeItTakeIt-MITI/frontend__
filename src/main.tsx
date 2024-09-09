@@ -10,6 +10,7 @@ import Courts from "./pages/Courts.tsx";
 import Faq from "./pages/Faq.tsx";
 import CourtsDetail from "./pages/CourtsDetail.tsx";
 import React from "react";
+import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
 
@@ -27,11 +28,15 @@ const router = createBrowserRouter([
       {
         path: "courts",
         children: [
-          { path: "", element: <Courts /> },
           { path: ":id", element: <CourtsDetail /> },
+          { path: "list", element: <Courts /> },
         ],
       },
-      { path: "faq", element: <Faq /> },
+      {
+        path: "support",
+        children: [{ path: "faq", element: <Faq /> }],
+      },
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);
