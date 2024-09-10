@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AllGamesProps } from "../../interfaces/games";
 // import useLatLongStore from "../../store/useLatLongStore";
 import current_marker from "../../assets/v11/current_pin.svg";
+import selected_marker from "../../assets/v11/current_pin_selected.svg";
 
 declare global {
   interface Window {
@@ -140,21 +141,21 @@ const NaverMap = ({
       );
     }
 
-    const locationBtnHtml = `<button class='bg-black p-2 flex gap-2 items-center'> <img src=${current_marker} alt="current" class="size-10"  /> 현재 위치 (임시) </button>`;
+    const locationBtnHtml = `<button class='mt-[10px] ml-[10px] p-2 flex gap-2 items-center justify-center bg-[#fff] size-[44px] rounded-full  '> <img src=${current_marker} alt="current location"   />  </button>`;
+    const selectedLocationBtn = `<button class='mt-[10px] ml-[10px] p-2 flex gap-2 items-center justify-center bg-[#fff] size-[44px] rounded-full  '> <img src=${selected_marker} alt="selected current"   />  </button>`;
 
     // custom overlay
     naver.maps.Event.once(naverMap, "init", function () {
       const customControl = new naver.maps.CustomControl(locationBtnHtml, {
         position: naver.maps.Position.TOP_LEFT,
       });
-
       customControl.setMap(naverMap);
-
       naver.maps.Event.addDOMListener(
         customControl.getElement(),
         "click",
         function () {
-          // geolocation();
+          customControl.getElement().innerHTML = selectedLocationBtn;
+
           naverMap.setCenter(new naver.maps.LatLng(geoLatitude, geoLongitude));
         }
       );
@@ -162,18 +163,7 @@ const NaverMap = ({
 
     geolocation();
     // displayMarkers({ allGamesData, map: naverMap, setFilteredGames });
-  }, [
-    NaverMap,
-    allGamesData,
-    latitude,
-    longitude,
-    geoLatitude,
-    geoLongitude,
-    latitude,
-    longitude,
-    setGeoLatitude,
-    setGeoLongtitude,
-  ]);
+  }, [allGamesData, latitude, longitude]);
   return (
     <div
       id="map"
