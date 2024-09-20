@@ -10,8 +10,6 @@ const Main = () => {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
 
   const { data: faqData } = useFaqDataHook();
-  console.log(faqData?.page_content);
-
   const handleOpenFAQ = (index: number) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
   };
@@ -53,8 +51,8 @@ const Main = () => {
           ))}
         </ul>
         {/* FAQ items */}
-        {faqData?.page_content?.length > 0 &&
-          faqData.page_content.map((item: FAQItem) => (
+        {faqData?.length > 0 &&
+          faqData.map((item: FAQItem) => (
             <>
               <div
                 key={item.id}
@@ -75,10 +73,10 @@ const Main = () => {
               {/* description */}
               {openFAQIndex === item.id && (
                 <div className="p-[1.25rem] bg-light-dark rounded-[20px]  space-y-3">
-                  {/* <h2 className="text-primary-white"> {item.subtitle}</h2> */}
-                  <p className="text-[#d4d4d4] text-[12px] font-[300]">
-                    {item.content}
-                  </p>
+                  <p
+                    className="text-[#d4d4d4] text-[12px] font-[300]   "
+                    dangerouslySetInnerHTML={{ __html: `${item?.content}` }}
+                  />
                 </div>
               )}
 
