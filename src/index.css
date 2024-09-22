@@ -8,10 +8,8 @@
   margin: 0;
   box-sizing: border-box;
   background: "#262626";
-  font-family:
-    "Pretendard Variable",
-    Pretendard,
-    -apple-system;
+  font-family: "Pretendard Variable", Pretendard;
+  /* -apple-system; */
 }
 
 html {

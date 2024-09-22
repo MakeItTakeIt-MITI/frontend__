@@ -1,5 +1,9 @@
 import Footer from "../components/common/Footer";
 import Hero from "../components/landing/Hero";
+import games from "../assets/v11/landing-games.png";
+import courts from "../assets/v11/landing-court.png";
+import payment from "../assets/v11/landing-payment.png";
+import Games from "../components/landing/Games";
 
 const Landing = () => {
   return (
@@ -8,9 +12,15 @@ const Landing = () => {
       <Hero />
 
       {/* second layer */}
-      <div className="w-full h-[800px] bg-dark-card"></div>
-      <div className="w-full h-[800px] bg-secondary-black"></div>
-      <div className="w-full h-[800px] bg-light-dark"></div>
+      <Games />
+      {/*  */}
+      <div className="w-full h-[800px] bg-secondary-black">
+        <img src={courts} alt="games mobile page" />
+      </div>
+      {/*  */}
+      <div className="w-full h-[800px] bg-light-dark">
+        <img src={payment} alt="games mobile page" />
+      </div>
       <Footer />
     </div>
   );

@@ -1,19 +1,12 @@
-import hero from "../../assets/v11/landing.png";
+import background from "../../assets/v11/landing-bg.png";
 import googlePlay from "../../assets/v11/google-play-black.svg";
 import appleStore from "../../assets/v11/apple-store-black.svg";
 const Hero = () => {
   return (
-    <div className="w-full  pl-[28rem] pr-[19.5rem] relative">
+    <section className="relative ">
       {/* image */}
-      <img src={hero} alt="hero" className="relative z-10" />
-      {/* liner gradient shadow layer */}
-      <div
-        className="absolute top-0 left-0 w-full h-full z-20"
-        style={{
-          background:
-            "linear-gradient(270deg, #000 16.18%, rgba(0, 0, 0, 0.42) 36.04%, rgba(0, 0, 0, 0) 48.61%, rgba(0, 0, 0, 0.42) 61.75%, #000 75.9%)",
-        }}
-      ></div>
+      <img src={background} alt="hero" className="w-full h-full" />
+
       {/* content */}
       <div className="z-30 absolute bottom-[8.44rem] left-[22.5rem] space-y-[2rem]">
         <h1 className=" h-10 text-[#eafeff] text-[40px] font-bold  leading-[60px]">
@@ -45,7 +38,7 @@ const Hero = () => {
           <button> </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
