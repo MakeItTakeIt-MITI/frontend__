@@ -11,6 +11,7 @@ import Faq from "./pages/Faq.tsx";
 import CourtsDetail from "./pages/CourtsDetail.tsx";
 import React from "react";
 import NotFound from "./pages/NotFound.tsx";
+import Landing from "./pages/Landing.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
+      { path: "/landing", element: <Landing /> },
       { path: "/", element: <Home /> },
 
       {

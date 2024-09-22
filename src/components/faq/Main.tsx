@@ -1,18 +1,27 @@
 import MainLayout from "../common/MainLayout";
-import search from "../../assets/v11/search.svg";
+import searchIcon from "../../assets/v11/search.svg";
 import { FAQ_GUIDELINES, FAQ_TOPICS } from "../../constants/faq";
 import dropdown from "../../assets/v11/drop.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFaqDataHook } from "../../hooks/useFaqDataHook";
 import { FAQItem } from "../../interfaces/support";
 
 const Main = () => {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
-
-  const { data: faqData } = useFaqDataHook();
+  const [search, setSearch] = useState("");
+  console.log(search);
+  const { data: faqData, refetch } = useFaqDataHook(search);
   const handleOpenFAQ = (index: number) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
   };
+  const handleSearchFaq = () => {
+    refetch();
+  };
+
+  useEffect(() => {
+    // Check if faqData is updating correctly after refetch
+    console.log(faqData);
+  }, [faqData]);
 
   return (
     <MainLayout>
@@ -28,10 +37,12 @@ const Main = () => {
           type="text"
           className="w-full h-full bg-light-dark text-primary-white  font-[500] b courtsPlaceHolder "
           placeholder="궁금한 내용을 검색해보세요."
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
         />
 
-        <button type="button">
-          <img src={search} alt="search" className="size-6" />
+        <button type="button" onClick={handleSearchFaq}>
+          <img src={searchIcon} alt="search" className="size-6" />
         </button>
       </div>
       {/* main */}
