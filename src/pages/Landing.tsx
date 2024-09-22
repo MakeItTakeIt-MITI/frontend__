@@ -1,19 +1,11 @@
-import hero from "../assets/v11/landing.png";
 import Footer from "../components/common/Footer";
+import Hero from "../components/landing/Hero";
+
 const Landing = () => {
   return (
-    <div className=" w-full  flex justify-center flex-col bg-[#000]">
+    <div className=" w-full bg-[#000]">
       {/* first layer */}
-      <div
-        style={{
-          backgroundImage: `url(${hero})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          height: "800px",
-          backgroundRepeat: "no-repeat",
-        }}
-        className="w-full h-[800px]"
-      ></div>
+      <Hero />
 
       {/* second layer */}
       <div className="w-full h-[800px] bg-dark-card"></div>
