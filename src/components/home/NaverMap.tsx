@@ -36,7 +36,7 @@ const NaverMap = ({
 
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
-      zoom: 13,
+      zoom: 3,
       pinchZoom: true,
       scrollWheel: true,
     });
@@ -64,7 +64,7 @@ const NaverMap = ({
       // setFilteredGames(filtsweredAddresses);
 
       const markerHTML = `
-          <a href="game/${game.id}" class="relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+          <a href="${game.id}" class="relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
                <span>${game.fee.toLocaleString("ko-KR", {
                  style: "currency",
                  currency: "KRW",

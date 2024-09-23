@@ -116,7 +116,7 @@ const GameDetail = () => {
               <img src={profile} alt="profile" />
               <div className="space-y-[.25rem] text-primary-white">
                 <h2 className="font-bold text-sm">
-                  {game?.data.host.nickname} 님
+                  {/* {game?.data.host.nickname} 님 */}
                 </h2>
                 <div className="flex items-center gap-[.38rem] font-[400] text-[14px]">
                   <div className="flex">

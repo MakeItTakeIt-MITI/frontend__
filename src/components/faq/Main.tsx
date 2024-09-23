@@ -1,6 +1,6 @@
 import MainLayout from "../common/MainLayout";
 import searchIcon from "../../assets/v11/search.svg";
-import { FAQ_GUIDELINES, FAQ_TOPICS } from "../../constants/faq";
+import { FAQ_TOPICS } from "../../constants/faq";
 import dropdown from "../../assets/v11/drop.svg";
 import { useEffect, useState } from "react";
 import { useFaqDataHook } from "../../hooks/useFaqDataHook";
@@ -9,19 +9,19 @@ import { FAQItem } from "../../interfaces/support";
 const Main = () => {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
   const [search, setSearch] = useState("");
-  console.log(search);
+
   const { data: faqData, refetch } = useFaqDataHook(search);
+
   const handleOpenFAQ = (index: number) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
   };
-  const handleSearchFaq = () => {
+
+  const handleSearchFaq = (input: string) => {
     refetch();
+    setSearch(input);
   };
 
-  useEffect(() => {
-    // Check if faqData is updating correctly after refetch
-    console.log(faqData);
-  }, [faqData]);
+  useEffect(() => {}, [search]);
 
   return (
     <MainLayout>
@@ -35,13 +35,17 @@ const Main = () => {
       <div className="w-full h-[3rem] bg-light-dark  rounded-xl relative py-[.75rem] px-[1.25rem] flex items-center justify-between gap-2">
         <input
           type="text"
-          className="w-full h-full bg-light-dark text-primary-white  font-[500] b courtsPlaceHolder "
+          className="w-full h-full bg-light-dark text-primary-white  font-[500]  courtsPlaceHolder "
           placeholder="궁금한 내용을 검색해보세요."
           onChange={(e) => setSearch(e.target.value)}
-          value={search}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearchFaq(search);
+            }
+          }}
         />
 
-        <button type="button" onClick={handleSearchFaq}>
+        <button type="button" onClick={() => handleSearchFaq(search)}>
           <img src={searchIcon} alt="search" className="size-6" />
         </button>
       </div>
@@ -52,7 +56,7 @@ const Main = () => {
           {FAQ_TOPICS.map((topic, index) => (
             <li
               style={{
-                color: "#737373",
+                color: index === 0 ? "#7FEEF0" : "#737373",
               }}
               className="cursor-pointer"
               key={index}
@@ -91,9 +95,9 @@ const Main = () => {
                 </div>
               )}
 
-              {item.id !== FAQ_GUIDELINES.length - 1 && (
-                <hr className="bg-[#525252] h-[2px]" />
-              )}
+              {/* {item.id !== faqData.length - 1 && ( */}
+              <hr className="bg-[#525252] h-[2px]" />
+              {/* )} */}
             </>
           ))}
       </div>
