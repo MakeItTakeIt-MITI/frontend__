@@ -1,11 +1,10 @@
 import courts from "../../assets/v11/landing-court.png";
-import courts_detail from "../../assets/v11/court-detail-landing.png";
-import courts_list from "../../assets/v11/courts-list-landing.png";
 
 const Courts = () => {
   return (
-    <div className="w-full h-[800px] bg-secondary-black flex">
-      <div className="flex items-center justify-end w-full">
+    // <div className="w-full h-[800px] bg-secondary-black flex justify-center">
+    <div className="w-full h-[800px] bg-secondary-black flex justify-center  ">
+      <div className="flex items-center ">
         <div className="space-y-3">
           <h1 className="text-primary-teal font-bold text-[18px]">
             경기장 조회
@@ -16,7 +15,7 @@ const Courts = () => {
           </h2>
           <p className="text-[#E5E5E5] text-xl font-[400]">
             우리 동네의 숨겨진 농구 경기장과 게스트를 모집 중인 경기를 <br />한
-            번에 조회하실 수 있습니다
+            번에 조회하실 수 있습니다
           </p>
           <button
             type="button"
@@ -26,8 +25,9 @@ const Courts = () => {
           </button>
         </div>
       </div>
-      <img src={courts} alt="courts landing" className="-pr-[200px]" />
-      {/* <img src={courts_list} alt="courts landing" className="" /> */}
+      <div>
+        <img src={courts} alt="courts landing" />
+      </div>
     </div>
   );
 };

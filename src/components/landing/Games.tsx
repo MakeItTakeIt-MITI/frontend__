@@ -2,9 +2,10 @@ import games from "../../assets/v11/landing-games.png";
 
 const Games = () => {
   return (
-    <div className="w-full h-[800px] bg-dark-card flex ">
-      <img src={games} alt="games mobile page" />
-
+    <div className="w-full h-[800px] bg-dark-card flex justify-center gap-[78px] ">
+      <div>
+        <img src={games} alt="games mobile page" />
+      </div>
       <div className="flex  items-center justify-start">
         <div className="space-y-3">
           <h1 className="text-primary-teal font-bold text-[18px]">경기 조회</h1>

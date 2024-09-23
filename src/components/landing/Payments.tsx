@@ -1,10 +1,13 @@
+/* eslint-disable no-irregular-whitespace */
 import payment from "../../assets/v11/landing-payment.png";
 
 const Payments = () => {
   return (
-    <div className="w-full h-[800px] bg-light-dark flex">
-      <img src={payment} alt="payments landing" />
-      <div className="flex items-center justify-end w-full">
+    <div className="w-full h-[800px] bg-light-dark flex justify-center gap-[25px]">
+      <div>
+        <img src={payment} alt="payments landing" />
+      </div>
+      <div className="flex items-center justify-end ">
         <div className="space-y-3">
           <h1 className="text-primary-teal font-bold text-[18px]">경기 정산</h1>
           <h2 className="text-white text-[52px] font-bold">
