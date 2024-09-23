@@ -2,26 +2,43 @@ import MainLayout from "../common/MainLayout";
 import searchIcon from "../../assets/v11/search.svg";
 import { FAQ_TOPICS } from "../../constants/faq";
 import dropdown from "../../assets/v11/drop.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFaqDataHook } from "../../hooks/useFaqDataHook";
 import { FAQItem } from "../../interfaces/support";
 
 const Main = () => {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
   const [search, setSearch] = useState("");
-
   const { data: faqData, refetch } = useFaqDataHook(search);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleOpenFAQ = (index: number) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
   };
-
-  const handleSearchFaq = (input: string) => {
-    refetch();
-    setSearch(input);
+  const handleSearchFaq = () => {
+    if (inputRef.current) {
+      const inputValue = inputRef.current?.value;
+      if (inputValue === "전체") {
+        setSearch("");
+      } else {
+        setSearch(inputValue);
+      }
+      refetch();
+    }
   };
 
-  useEffect(() => {}, [search]);
+  const handleSelectCategory = (input: string) => {
+    if (input === "전체") {
+      setSearch("");
+    } else {
+      setSearch(input);
+    }
+    refetch();
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [search, refetch]);
 
   return (
     <MainLayout>
@@ -37,15 +54,16 @@ const Main = () => {
           type="text"
           className="w-full h-full bg-light-dark text-primary-white  font-[500]  courtsPlaceHolder "
           placeholder="궁금한 내용을 검색해보세요."
-          onChange={(e) => setSearch(e.target.value)}
+          // onChange={(e) => setSearch(e.target.value)}
+          ref={inputRef}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              handleSearchFaq(search);
+              handleSearchFaq();
             }
           }}
         />
 
-        <button type="button" onClick={() => handleSearchFaq(search)}>
+        <button type="button" onClick={handleSearchFaq}>
           <img src={searchIcon} alt="search" className="size-6" />
         </button>
       </div>
@@ -56,10 +74,14 @@ const Main = () => {
           {FAQ_TOPICS.map((topic, index) => (
             <li
               style={{
-                color: index === 0 ? "#7FEEF0" : "#737373",
+                color:
+                  search === topic || (search === "" && topic === "전체")
+                    ? "#7FEEF0"
+                    : "#737373",
               }}
               className="cursor-pointer"
               key={index}
+              onClick={() => handleSelectCategory(topic)}
             >
               {topic}
             </li>
