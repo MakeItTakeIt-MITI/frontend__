@@ -3,12 +3,15 @@ import googlePlay from "../../assets/v11/google-play-black.svg";
 import appleStore from "../../assets/v11/apple-store-black.svg";
 const Hero = () => {
   return (
-    <section className="relative ">
-      {/* image */}
-      <img src={background} alt="hero" className="w-full h-full" />
-
-      {/* content */}
-      <div className="z-30 absolute bottom-[8.44rem] left-[22.5rem] space-y-[2rem]">
+    <section
+      style={{
+        backgroundImage: `url(${background})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+      className="relative h-[800px] w-full"
+    >
+      <div className="z-30  flex flex-col justify-end h-full  space-y-[2rem] pl-[22.5rem] pb-[8.44rem]">
         <h1 className=" h-10 text-[#eafeff] text-[40px] font-bold  leading-[60px]">
           MITI 서비스 런칭
         </h1>
