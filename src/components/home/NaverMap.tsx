@@ -33,6 +33,7 @@ const NaverMap = ({
   // const { latitude, longitude } = useLatLongStore();
   const [geoLatitude, setGeoLatitude] = useState<null | number>(null);
   const [geoLongitude, setGeoLongtitude] = useState<null | number>(null);
+  const [selectedMarkerId, setSelectedMarkerId] = useState<string | null>(null);
 
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
