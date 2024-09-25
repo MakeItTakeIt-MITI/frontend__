@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, useState } from "react";
-import { AllGamesProps, Game } from "../../interfaces/games";
+import { AllGamesProps } from "../../interfaces/games";
 import current_marker from "../../assets/v11/current_pin.svg";
 import selected_marker from "../../assets/v11/current_pin_selected.svg";
 
@@ -51,9 +51,8 @@ const NaverMap = ({
     }
     const addressesList: string[] = [];
     if (allGamesData && Array.isArray(allGamesData)) {
-      allGamesData?.map((game) => {
+      allGamesData?.forEach((game) => {
         addressesList.push(game.court.address);
-        return addressesList;
       });
     }
 
@@ -61,7 +60,10 @@ const NaverMap = ({
     // const markers: string[] = [];
 
     // 다중 마커 표시
-    allGamesData?.map((game: Game) => {
+    // allGamesData?.map((game: Game) => {
+    for (let index = 0; index < allGamesData?.length; index++) {
+      const game = allGamesData[index];
+
       const filteredAddresses = addressesList.filter(
         (address) => address === game.court.address
       );
@@ -78,7 +80,7 @@ const NaverMap = ({
       </a>`;
 
       const overlappedMarkerHTML = `
-      <button id="marker" type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+      <button key=${game.id} id="overlappedMarker" type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
           <span>${game.fee.toLocaleString("ko-KR", {
             style: "currency",
             currency: "KRW",
@@ -88,7 +90,7 @@ const NaverMap = ({
       </button>`;
 
       const selectedMarkerHTML = `
-      <button id="marker" type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#525252]  bg-[#BFF9FA] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+      <button key=${game.id}  id="selectedMarker" type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#525252]  bg-[#BFF9FA] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
           <span>${game.fee.toLocaleString("ko-KR", {
             style: "currency",
             currency: "KRW",
@@ -104,11 +106,6 @@ const NaverMap = ({
         ),
         zoom: 12,
         map: naverMap,
-        pinchZoom: true,
-        clickable: true,
-        icon: {
-          content: markerHTML,
-        },
       });
 
       marker.setIcon({
@@ -117,6 +114,9 @@ const NaverMap = ({
       });
 
       naver.maps.Event.addListener(marker, "click", function () {
+        console.log("clicked 1");
+
+        //change marker back to non-selected marker on 2 click
         if (selectedMarker === marker) {
           marker.setIcon({
             content: overlappedMarkerHTML,
@@ -132,18 +132,18 @@ const NaverMap = ({
 
           // 다중 마커 렌더링
           marker.setIcon({
-            content:
-              filteredAddresses.length > 1 ? selectedMarkerHTML : markerHTML,
+            content: selectedMarkerHTML,
           });
+
+          console.log("last counter", markerCount);
 
           selectedMarker = marker;
         }
 
         setIsAddressSelected(selectedMarker !== null);
         setSelectedAddress(game.court.address);
-        // setFilteredGames(selectedMarker !== null ? filteredAddresses : []);
       });
-    });
+    }
 
     // current geolocation
     function geolocation() {
@@ -181,8 +181,13 @@ const NaverMap = ({
     });
 
     geolocation();
-    // displayMarkers({ allGamesData, map: naverMap, setFilteredGames });
-  }, [allGamesData, latitude, longitude]);
+  }, [
+    allGamesData,
+    latitude,
+    longitude,
+    setSelectedAddress,
+    setIsAddressSelected,
+  ]);
   return (
     <div
       id="map"
