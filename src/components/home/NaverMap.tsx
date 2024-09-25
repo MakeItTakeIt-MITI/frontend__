@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, useState } from "react";
-import { AllGamesProps } from "../../interfaces/games";
-// import useLatLongStore from "../../store/useLatLongStore";
+import { AllGamesProps, Game } from "../../interfaces/games";
 import current_marker from "../../assets/v11/current_pin.svg";
 import selected_marker from "../../assets/v11/current_pin_selected.svg";
 
@@ -12,6 +11,9 @@ declare global {
   }
 }
 
+if (!window.naver) {
+  console.error("Error in loading Naver Maps");
+}
 const { naver } = window;
 
 interface NaverMapProps extends AllGamesProps {
@@ -33,7 +35,6 @@ const NaverMap = ({
   // const { latitude, longitude } = useLatLongStore();
   const [geoLatitude, setGeoLatitude] = useState<null | number>(null);
   const [geoLongitude, setGeoLongtitude] = useState<null | number>(null);
-  const [selectedMarkerId, setSelectedMarkerId] = useState<string | null>(null);
 
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
@@ -56,42 +57,45 @@ const NaverMap = ({
       });
     }
 
+    let selectedMarker: any | null = null;
+    // const markers: string[] = [];
+
     // 다중 마커 표시
-    allGamesData?.forEach((game: any) => {
+    allGamesData?.map((game: Game) => {
       const filteredAddresses = addressesList.filter(
         (address) => address === game.court.address
       );
 
-      // setFilteredGames(filtsweredAddresses);
+      const markerCount = filteredAddresses.length;
 
       const markerHTML = `
-          <a href="${game.id}" class="relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
-               <span>${game.fee.toLocaleString("ko-KR", {
-                 style: "currency",
-                 currency: "KRW",
-               })}</span>
-              <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
-          </a>`;
+      <a href="${game.id}" class="relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+           <span>${game.fee.toLocaleString("ko-KR", {
+             style: "currency",
+             currency: "KRW",
+           })}</span>
+          <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
+      </a>`;
 
       const overlappedMarkerHTML = `
-          <button id="marker" type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
-              <span>${game.fee.toLocaleString("ko-KR", {
-                style: "currency",
-                currency: "KRW",
-              })}</span>
-              <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
-              <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#fff] text-[#525252]  flex items-center justify-center text-[10px] font-bold ">${filteredAddresses.length}</div>
-          </button>`;
+      <button id="marker" type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+          <span>${game.fee.toLocaleString("ko-KR", {
+            style: "currency",
+            currency: "KRW",
+          })}</span>
+          <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
+          <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#fff] text-[#525252]  flex items-center justify-center text-[10px] font-bold ">${markerCount}</div>
+      </button>`;
 
       const selectedMarkerHTML = `
-          <button id="marker" type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#525252]  bg-[#BFF9FA] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
-              <span>${game.fee.toLocaleString("ko-KR", {
-                style: "currency",
-                currency: "KRW",
-              })}</span>
-              <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
-              <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#404040] text-[#fff]  flex items-center justify-center text-[10px] font-bold ">${filteredAddresses.length}</div>
-          </button>`;
+      <button id="marker" type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#525252]  bg-[#BFF9FA] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+          <span>${game.fee.toLocaleString("ko-KR", {
+            style: "currency",
+            currency: "KRW",
+          })}</span>
+          <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
+          <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#404040] text-[#fff]  flex items-center justify-center text-[10px] font-bold ">${markerCount}</div>
+      </button>`;
 
       const marker = new naver.maps.Marker({
         position: new naver.maps.LatLng(
@@ -107,22 +111,37 @@ const NaverMap = ({
         },
       });
 
-      naver.maps.Event.addListener(marker, "click", function () {
-        // @ts-expect-error
-        setIsAddressSelected((prev) => {
-          const newState = !prev;
-          marker.setIcon({
-            content: newState ? selectedMarkerHTML : overlappedMarkerHTML,
-          });
-          return newState;
-        });
-
-        setSelectedAddress(`${game.court.address}`);
-      });
-
       marker.setIcon({
         content:
-          filteredAddresses.length > 1 ? overlappedMarkerHTML : markerHTML,
+          filteredAddresses?.length > 1 ? overlappedMarkerHTML : markerHTML,
+      });
+
+      naver.maps.Event.addListener(marker, "click", function () {
+        if (selectedMarker === marker) {
+          marker.setIcon({
+            content: overlappedMarkerHTML,
+          });
+
+          selectedMarker = null;
+        } else {
+          if (selectedMarker) {
+            selectedMarker.setIcon({
+              content: overlappedMarkerHTML,
+            });
+          }
+
+          // 다중 마커 렌더링
+          marker.setIcon({
+            content:
+              filteredAddresses.length > 1 ? selectedMarkerHTML : markerHTML,
+          });
+
+          selectedMarker = marker;
+        }
+
+        setIsAddressSelected(selectedMarker !== null);
+        setSelectedAddress(game.court.address);
+        // setFilteredGames(selectedMarker !== null ? filteredAddresses : []);
       });
     });
 
@@ -133,7 +152,6 @@ const NaverMap = ({
           const { latitude, longitude } = position.coords;
           setGeoLatitude(latitude);
           setGeoLongtitude(longitude);
-          console.log(geoLatitude, geoLongitude);
           return;
         },
         (error) => {

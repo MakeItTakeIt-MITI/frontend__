@@ -113,9 +113,6 @@ const MainContent = ({
               <FilteredGameListContainer
                 allGamesData={allGamesData}
                 selectedAddress={selectedAddress}
-                setSelectedAddress={setSelectedAddress}
-                setIsAddressSelected={setIsAddressSelected}
-                isAddressSelected={isAddressSelected}
               />
             ) : (
               <GameListContainer
