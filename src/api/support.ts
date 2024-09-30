@@ -8,3 +8,4 @@ export const faqList = async (search?: string | undefined) => {
         throw new Error
     }
 }
+
