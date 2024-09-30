@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface SectionProps {
   title: string;
   subtitle: string;
@@ -10,6 +12,7 @@ interface SectionProps {
   reverse: boolean;
   textPosition: string;
   isButton: boolean;
+  path: string;
 }
 
 const Section = ({
@@ -24,16 +27,17 @@ const Section = ({
   reverse,
   textPosition,
   isButton,
+  path,
 }: SectionProps) => {
   return (
     <div
-      className={`w-full sm:h-full md:min-h-[800px] bg-${backgroundColor} flex ${reverse ? "md:flex-row" : "md:flex-row-reverse"} sm:flex-col-reverse sm:justify-end sm:items-center md:items-stretch md:justify-center sm:gap-[${mobileGap}] md:gap-[78px]`}
+      className={`md:h-[800px] bg-${backgroundColor} flex ${reverse ? "md:flex-row" : "md:flex-row-reverse"} sm:flex-col-reverse sm:justify-end sm:items-center md:items-stretch md:justify-center sm:gap-[${mobileGap}] md:gap-[78px]`}
     >
       <div>
         <img
           src={desktopImage}
           alt="desktop view"
-          className="sm:hidden md:block"
+          className="sm:hidden md:block align-bottom"
         />
         <img
           src={mobileImage}
@@ -62,7 +66,7 @@ const Section = ({
               type="button"
               className="sm:w-[120px] md:w-[180px] sm:h-[40px] md:h-[54px] bg-[#D4D4D4] text-[#262626] sm:text-sm md:text-[18px] font-bold rounded-[14.286px]"
             >
-              {buttonText}
+              <Link to={path}> {buttonText}</Link>
             </button>
           )}
         </div>

@@ -68,8 +68,12 @@ const Footer = () => {
       <footer className=" sm:flex items-center justify-center h-[26rem] px-[0.81rem] py-[3.75rem] md:hidden bg-primary-black">
         <div className="space-y-[2.5rem]">
           {/* logo */}
-          <div>
-            <img src={miti_logo} alt="miti logo" />
+          <div className="flex justify-center">
+            <img
+              src={miti_logo}
+              alt="miti logo"
+              className=" w-[82px] h-[42px]"
+            />
           </div>
           {/* info */}
           <div className="space-y-[1.25rem]">

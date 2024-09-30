@@ -28,9 +28,10 @@ const Landing = () => {
         mobileImage={mobile_games}
         mobileGap="102px"
         backgroundColor="dark-card"
-        reverse={false}
+        reverse={true}
         textPosition="right"
         isButton={true}
+        path="/game/list"
       />
       <Section
         title="경기장 조회"
@@ -41,9 +42,10 @@ const Landing = () => {
         mobileImage={mobile_courts}
         mobileGap="62px"
         backgroundColor="secondary-black"
-        reverse={true}
+        reverse={false}
         textPosition="left"
         isButton={true}
+        path="/courts/list"
       />
       <Section
         title="경기 정산"
@@ -54,9 +56,10 @@ const Landing = () => {
         mobileImage={mobile_payment}
         mobileGap="113px"
         backgroundColor="light-dark"
-        reverse={false}
+        reverse={true}
         textPosition="right"
         isButton={false}
+        path=""
       />
       {/* <Games /> */}
       {/* <Courts /> */}
