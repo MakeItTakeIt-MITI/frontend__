@@ -4,11 +4,13 @@ import Hero from "../components/landing/Hero";
 import Games from "../components/landing/Games";
 import Payments from "../components/landing/Payments";
 import Courts from "../components/landing/Courts";
+import HeroMobile from "../components/landing/HeroMobile";
 
 const Landing = () => {
   return (
     <div className=" w-full bg-[#000]">
       <Hero />
+      <HeroMobile />
       <Games />
       <Courts />
       <Payments />
