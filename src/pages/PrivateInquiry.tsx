@@ -5,19 +5,24 @@ import Footer from "../components/common/Footer";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { PrivateInquiryField } from "../interfaces/support";
+import { usePrivateInquiryHook } from "../hooks/usePrivateInquiryHook";
 
 const PrivateInquiry = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
+  const { mutate } = usePrivateInquiryHook();
 
-    // formState: { errors },
-  } = useForm<PrivateInquiryField>();
+  const { register, handleSubmit, watch } = useForm<PrivateInquiryField>();
 
-  const onSubmit: SubmitHandler<PrivateInquiryField> = (data) =>
-    console.log(data);
+  const onSubmit: SubmitHandler<PrivateInquiryField> = (data) => {
+    mutate(data);
+  };
+
+  const title = watch("title");
+  const password = watch("password");
+  const content = watch("content");
+
+  const isFormFilled = title && password && content;
 
   const handleTogglePassword = () => setDisplayPassword(!displayPassword);
   return (
@@ -98,7 +103,12 @@ const PrivateInquiry = () => {
 
         <button
           type="submit"
-          className="w-full h-[48px]  text-[#f4f4f4] bg-[#737373] rounded-lg"
+          disabled={isFormFilled ? false : true}
+          style={{
+            backgroundColor: isFormFilled ? "#7FEEF0" : "#737373",
+            color: isFormFilled ? "#262626" : "#f4f4f4",
+          }}
+          className="w-full h-[48px] font-bold  rounded-lg"
         >
           작성하기
         </button>

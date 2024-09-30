@@ -1,3 +1,4 @@
+import { PrivateInquiryField } from "../interfaces/support"
 import axiosUrl from "../utils/axios"
 
 export const faqList = async (search?: string | undefined) => {
@@ -9,3 +10,12 @@ export const faqList = async (search?: string | undefined) => {
     }
 }
 
+
+export const privateInquiry = async (data: PrivateInquiryField) => {
+    try {
+        const response = await axiosUrl.post(`support/anonymous-questions`, data)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
