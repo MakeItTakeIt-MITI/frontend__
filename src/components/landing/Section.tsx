@@ -27,7 +27,7 @@ const Section = ({
 }: SectionProps) => {
   return (
     <div
-      className={`w-full sm:h-full md:h-[800px] bg-${backgroundColor} flex md:${reverse ? "flex-row" : "flex-row-reverse"} sm:flex-col-reverse sm:justify-end sm:items-center md:items-stretch md:justify-center sm:gap-[${mobileGap}] md:gap-[78px]`}
+      className={`w-full sm:h-full md:min-h-[800px] bg-${backgroundColor} flex ${reverse ? "md:flex-row" : "md:flex-row-reverse"} sm:flex-col-reverse sm:justify-end sm:items-center md:items-stretch md:justify-center sm:gap-[${mobileGap}] md:gap-[78px]`}
     >
       <div>
         <img
