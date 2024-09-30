@@ -23,6 +23,7 @@ interface NaverMapProps extends AllGamesProps {
   isAddressSelected: boolean;
   latitude: string | null;
   longitude: string | null;
+  selectedAddress: string;
 }
 
 const NaverMap = ({
@@ -31,14 +32,21 @@ const NaverMap = ({
   setIsAddressSelected,
   latitude,
   longitude,
+  selectedAddress,
 }: NaverMapProps) => {
   // const { latitude, longitude } = useLatLongStore();
   const [geoLatitude, setGeoLatitude] = useState<null | number>(null);
   const [geoLongitude, setGeoLongtitude] = useState<null | number>(null);
 
+  const addressesList: string[] = [];
+  if (allGamesData && Array.isArray(allGamesData)) {
+    allGamesData?.forEach((game) => {
+      addressesList.push(game.court.address);
+    });
+  }
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
-      zoom: 3,
+      zoom: 4,
       pinchZoom: true,
       scrollWheel: true,
     });
@@ -49,13 +57,9 @@ const NaverMap = ({
     if (latitude !== null && longitude !== null) {
       naverMap.setCenter(location);
     }
-    const addressesList: string[] = [];
-    if (allGamesData && Array.isArray(allGamesData)) {
-      allGamesData?.forEach((game) => {
-        addressesList.push(game.court.address);
-      });
-    }
 
+    console.log("Address list", addressesList.length);
+    console.log("Selected Address", selectedAddress);
     let selectedMarker: any | null = null;
     // const markers: string[] = [];
 
@@ -71,7 +75,7 @@ const NaverMap = ({
       const markerCount = filteredAddresses.length;
 
       const markerHTML = `
-      <a href="${game.id}" class="relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+      <a href="${game.id}" id="element-${index}"  class="relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
            <span>${game.fee.toLocaleString("ko-KR", {
              style: "currency",
              currency: "KRW",
@@ -80,7 +84,7 @@ const NaverMap = ({
       </a>`;
 
       const overlappedMarkerHTML = `
-      <button key=${game.id} id="overlappedMarker" type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+      <button id="element-${index}"  type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
           <span>${game.fee.toLocaleString("ko-KR", {
             style: "currency",
             currency: "KRW",
@@ -90,7 +94,7 @@ const NaverMap = ({
       </button>`;
 
       const selectedMarkerHTML = `
-      <button key=${game.id}  id="selectedMarker" type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#525252]  bg-[#BFF9FA] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+      <button key=${game.id}  id="element-${index}"  type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#525252]  bg-[#BFF9FA] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
           <span>${game.fee.toLocaleString("ko-KR", {
             style: "currency",
             currency: "KRW",
@@ -134,8 +138,6 @@ const NaverMap = ({
           marker.setIcon({
             content: selectedMarkerHTML,
           });
-
-          console.log("last counter", markerCount);
 
           selectedMarker = marker;
         }
@@ -181,13 +183,7 @@ const NaverMap = ({
     });
 
     geolocation();
-  }, [
-    allGamesData,
-    latitude,
-    longitude,
-    setSelectedAddress,
-    setIsAddressSelected,
-  ]);
+  }, [allGamesData, setSelectedAddress, setIsAddressSelected]);
   return (
     <div
       id="map"

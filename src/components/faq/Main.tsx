@@ -5,6 +5,7 @@ import dropdown from "../../assets/v11/drop.svg";
 import { useEffect, useRef, useState } from "react";
 import { useFaqDataHook } from "../../hooks/useFaqDataHook";
 import { FAQItem } from "../../interfaces/support";
+import "./faq.css";
 
 const Main = () => {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
@@ -71,6 +72,7 @@ const Main = () => {
       <div className="space-y-[.75rem] sm:px-[.5rem]">
         {/* topics boxes */}
         <ul className="flex items-center gap-[1.25rem]">
+          {/* <ul className="flex items-center gap-[1.25rem]"> */}
           {FAQ_TOPICS.map((topic, index) => (
             <li
               style={{
@@ -110,8 +112,13 @@ const Main = () => {
               {/* description */}
               {openFAQIndex === item.id && (
                 <div className="p-[1.25rem] bg-light-dark rounded-[20px]  space-y-3">
-                  <p
+                  {/* <p
                     className="text-[#d4d4d4] text-[12px] font-[300]   "
+                    dangerouslySetInnerHTML={{ __html: `${item?.content}` }}
+                    /> */}
+                  <p
+                    className="faq-content text-white list-none"
+                    id="custom-content"
                     dangerouslySetInnerHTML={{ __html: `${item?.content}` }}
                   />
                 </div>

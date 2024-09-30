@@ -129,6 +129,7 @@ const MainContent = ({
               isAddressSelected={isAddressSelected}
               latitude={latitude}
               longitude={longitude}
+              selectedAddress={selectedAddress}
             />
           </div>
         </div>
