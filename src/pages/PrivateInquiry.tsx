@@ -10,9 +10,9 @@ import { usePrivateInquiryHook } from "../hooks/usePrivateInquiryHook";
 const PrivateInquiry = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
 
-  const { mutate } = usePrivateInquiryHook();
-
-  const { register, handleSubmit, watch } = useForm<PrivateInquiryField>();
+  const { register, handleSubmit, watch, reset } =
+    useForm<PrivateInquiryField>();
+  const { mutate } = usePrivateInquiryHook(reset);
 
   const onSubmit: SubmitHandler<PrivateInquiryField> = (data) => {
     mutate(data);
