@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <>
       {/* NON MOBILE */}
-      <footer className="sm:hidden md:block h-[17.5rem] w-full bg-primary-black  px-[36rem] pt-[3.75rem] pb-[5rem]">
+      <footer className="sm:hidden md:block h-[17.5rem] w-full bg-primary-black   pt-[3.75rem] pb-[5rem]">
         <div className="flex items-center justify-between w-[768px] mx-auto ">
           {/* LEFT Container */}
           <div className="space-y-[2rem]">
