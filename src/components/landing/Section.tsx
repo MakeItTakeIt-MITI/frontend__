@@ -13,6 +13,8 @@ interface SectionProps {
   textPosition: string;
   isButton: boolean;
   path: string;
+  sectionRef: () => void;
+  introView: boolean;
 }
 
 const Section = ({
@@ -28,12 +30,19 @@ const Section = ({
   textPosition,
   isButton,
   path,
+  sectionRef,
+  introView,
 }: SectionProps) => {
+  const transitionStyle = {
+    transition: "opacity 2000ms",
+    opacity: introView ? 1 : 0,
+  };
+
   return (
     <div
       className={`md:h-[800px] bg-${backgroundColor} flex ${reverse ? "md:flex-row" : "md:flex-row-reverse"} sm:flex-col-reverse sm:justify-end sm:items-center md:items-stretch md:justify-center sm:gap-[${mobileGap}] md:gap-[78px]`}
     >
-      <div>
+      <div ref={sectionRef} style={transitionStyle}>
         <img
           src={desktopImage}
           alt="desktop view"
@@ -45,17 +54,19 @@ const Section = ({
           className="sm:block md:hidden"
         />
       </div>
-      <div className="flex items-center justify-start md:pt-[0px] sm:pt-[70px]">
+      <div
+        ref={sectionRef}
+        style={transitionStyle}
+        className="flex items-center justify-start md:pt-[0px] sm:pt-[70px]"
+      >
         <div className={`space-y-3 md:text-left sm:text-${textPosition} p-3`}>
           <h1 className="text-primary-teal font-bold text-[18px]">{title}</h1>
 
-          {/* Render subtitle with potential HTML (including <br/>) */}
           <h2
             className="text-white sm:text-[24px] md:text-[52px] font-bold"
             dangerouslySetInnerHTML={{ __html: subtitle }}
           ></h2>
 
-          {/* Render description with potential HTML (including <br/>) */}
           <p
             className="text-[#E5E5E5] sm:text-sm md:text-xl font-[400]"
             dangerouslySetInnerHTML={{ __html: description }}
