@@ -13,6 +13,7 @@ import React from "react";
 import NotFound from "./pages/NotFound.tsx";
 import Landing from "./pages/Landing.tsx";
 import PrivateInquiry from "./pages/PrivateInquiry.tsx";
+import InquiriesList from "./pages/Inquiries.tsx";
 
 const queryClient = new QueryClient();
 
@@ -43,7 +44,8 @@ const router = createBrowserRouter([
         path: "support",
         children: [
           { path: "faq", element: <Faq /> },
-          { path: "inquiry", element: <PrivateInquiry /> },
+          { path: "inquiry/new", element: <PrivateInquiry /> },
+          { path: "inquiry", element: <InquiriesList /> },
         ],
       },
       { path: "*", element: <NotFound /> },
