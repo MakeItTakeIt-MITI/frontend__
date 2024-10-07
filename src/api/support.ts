@@ -19,3 +19,12 @@ export const privateInquiry = async (data: PrivateInquiryField) => {
         throw new Error
     }
 }
+
+export const privateInquiriesData = async (page: number) => {
+    try {
+        const response = await axiosUrl.get(`support/anonymous-questions?=${page}`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}

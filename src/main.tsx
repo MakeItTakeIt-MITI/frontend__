@@ -44,8 +44,8 @@ const router = createBrowserRouter([
         path: "support",
         children: [
           { path: "faq", element: <Faq /> },
-          { path: "inquiry/new", element: <PrivateInquiry /> },
-          { path: "inquiry", element: <InquiriesList /> },
+          { path: "inquiries/new", element: <PrivateInquiry /> },
+          { path: "inquiries", element: <InquiriesList /> },
         ],
       },
       { path: "*", element: <NotFound /> },

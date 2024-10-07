@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "./Modal";
 
-const ListCard = () => {
+const ListCard = ({ inquiry }) => {
   const [modal, setModal] = useState(false);
 
   const handleDisplayModal = () => setModal(true);
@@ -11,8 +11,10 @@ const ListCard = () => {
         onClick={handleDisplayModal}
         className="flex justify-between items-center text-white px-2.5 cursor-pointer"
       >
-        <h2 className="text-lg font-normal">익명 문의하기 제목입니다. </h2>
-        <p className="text-sm font-light">2024년 10월 11일</p>
+        <h2 className="md:text-lg sm:text-sm font-normal">{inquiry.title}</h2>
+        <p className="md:text-sm sm:text-[10px] text-white font-[300] ">
+          {`${inquiry.created_at.slice(0, 4)}년 ${inquiry.created_at.slice(5, 7).padStart(2, "0")}월 ${inquiry.created_at.slice(8, 10).padStart(2, "0")}일`}
+        </p>
       </div>
       <hr className="w-full h-[1px] text-[#525252]" />
       {modal && <Modal setModal={setModal} />}

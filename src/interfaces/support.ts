@@ -13,3 +13,11 @@ export interface PrivateInquiryField {
     password: string;
     content: string;
 }
+
+
+export interface InquiryListField {
+    id: number;
+    title: string;
+    num_of_answers: number;
+    created_at: string;
+}
