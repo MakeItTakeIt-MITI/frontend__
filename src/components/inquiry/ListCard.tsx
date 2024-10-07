@@ -1,7 +1,12 @@
 import { useState } from "react";
 import Modal from "./Modal";
+import { InquiryListField } from "../../interfaces/support";
 
-const ListCard = ({ inquiry }) => {
+interface ListCardProps {
+  inquiry: InquiryListField;
+}
+
+const ListCard = ({ inquiry }: ListCardProps) => {
   const [modal, setModal] = useState(false);
 
   const handleDisplayModal = () => setModal(true);

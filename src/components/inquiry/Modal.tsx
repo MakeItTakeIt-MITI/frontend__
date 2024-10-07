@@ -8,7 +8,7 @@ interface ModalProps {
 
 const Modal = ({ setModal }: ModalProps) => {
   const [exposePassword, setExposePassword] = useState(false);
-  const [password, setPassword] = useState("");
+  const [, setPassword] = useState("");
 
   const handleCloseModal = () => setModal(false);
 
