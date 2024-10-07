@@ -10,7 +10,7 @@ interface MobileGameListCardProp {
 const MobileGameListCard = ({ game }: MobileGameListCardProp) => {
   return (
     <Link
-      to={`/game/${game.id}`}
+      to={`/games/${game.id}`}
       className="md:hidden cursor-pointer sm:flex flex-col  justify-center space-y-3 w-full h-[7.5rem]  bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and title */}

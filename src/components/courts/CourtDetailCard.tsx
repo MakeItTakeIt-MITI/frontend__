@@ -7,7 +7,7 @@ const CourtDetailCard = ({ game }: any) => {
   return (
     <Link
       key={game.id}
-      to={`/game/${game.id}`}
+      to={`/games/${game.id}`}
       className="flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and title */}

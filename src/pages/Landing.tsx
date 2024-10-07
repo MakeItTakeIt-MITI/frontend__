@@ -46,7 +46,7 @@ const Landing = () => {
         reverse={true}
         textPosition="right"
         isButton={true}
-        path="/game/list"
+        path="/games/list"
         sectionRef={gamesRef}
         introView={gamesInView}
       />

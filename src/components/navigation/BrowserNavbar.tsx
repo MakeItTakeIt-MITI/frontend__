@@ -17,7 +17,8 @@ const BrowserNavbar = () => {
               style={{
                 color:
                   pathname.startsWith(nav.path) ||
-                  (pathname.startsWith("/game") && nav.path === "/game/list") ||
+                  (pathname.startsWith("/games") &&
+                    nav.path === "/games/list") ||
                   (pathname.startsWith("/courts") &&
                     nav.path === "/courts/list")
                     ? "#7FEEF0"
