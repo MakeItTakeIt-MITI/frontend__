@@ -2,6 +2,7 @@ import instagram from "../../assets/v11/instagram.svg";
 import miti_logo from "../../assets/v11/footer-logo.svg";
 import playstore from "../../assets/v11/google-play.svg";
 import applestore from "../../assets/v11/apple-store.svg";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -15,7 +16,7 @@ const Footer = () => {
             <div className="space-y-[1.25rem]">
               {/* 이용약관 / 개인정보 / 위치기반 이용약관 */}
               <div className="space-x-[1.25rem] text-[#E5E5E5] text-[12px] font-bold">
-                <span>이용약관</span>
+                <Link to="/support/guide">이용약관</Link>
                 <span>|</span>
                 <span>개인정보처리방침</span>
                 <span>|</span>

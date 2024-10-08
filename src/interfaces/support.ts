@@ -21,3 +21,13 @@ export interface InquiryListField {
     num_of_answers: number;
     created_at: string;
 }
+
+export interface ServiceAgreementField {
+    id: number;
+    category: string;
+    title: string;
+    content: string;
+    image: string[];
+    created_at: string;
+    modified_at: string;
+}

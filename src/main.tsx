@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound.tsx";
 import Landing from "./pages/Landing.tsx";
 import PrivateInquiry from "./pages/PrivateInquiry.tsx";
 import InquiriesList from "./pages/Inquiries.tsx";
+import ServiceAgreement from "./pages/ServiceAgreement.tsx";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
           { path: "faq", element: <Faq /> },
           { path: "inquiries/new", element: <PrivateInquiry /> },
           { path: "inquiries", element: <InquiriesList /> },
+          { path: "guide", element: <ServiceAgreement /> },
         ],
       },
       { path: "*", element: <NotFound /> },

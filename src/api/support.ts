@@ -28,3 +28,12 @@ export const privateInquiriesData = async (page: number) => {
         throw new Error
     }
 }
+
+export const serviceTermsData = async () => {
+    try {
+        const response = await axiosUrl.get(`/support/guide`)
+        return response.data
+    } catch {
+        throw new Error
+    }
+}
