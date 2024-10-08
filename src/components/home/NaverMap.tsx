@@ -24,7 +24,6 @@ interface NaverMapProps extends AllGamesProps {
   isAddressSelected: boolean;
   latitude: string | null;
   longitude: string | null;
-  selectedAddress: string;
 }
 
 const NaverMap = ({
@@ -33,7 +32,6 @@ const NaverMap = ({
   setIsAddressSelected,
   latitude,
   longitude,
-  selectedAddress,
 }: NaverMapProps) => {
   // const { latitude, longitude } = useLatLongStore();
   const [geoLatitude, setGeoLatitude] = useState<null | number>(null);
@@ -48,19 +46,18 @@ const NaverMap = ({
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
       zoom: 14,
+
       pinchZoom: true,
       scrollWheel: true,
     });
 
     // 지도 이동 이벤트
-    const location = new naver.maps.LatLng(latitude, longitude);
-
+    // console.log(longitude, latitude);
     if (latitude !== null && longitude !== null) {
+      const location = new naver.maps.LatLng(latitude, longitude);
       naverMap.setCenter(location);
     }
 
-    console.log("Address list", addressesList.length);
-    console.log("Selected Address", selectedAddress);
     let selectedMarker: any | null = null;
     // const markers: string[] = [];
 
@@ -111,6 +108,10 @@ const NaverMap = ({
         ),
         zoom: 12,
         map: naverMap,
+        gameId: game.id,
+        markerHTML: markerHTML,
+        overlappedMarkerHTML: overlappedMarkerHTML,
+        selectedMarkerHTML: selectedMarkerHTML,
       });
 
       marker.setIcon({
@@ -181,11 +182,12 @@ const NaverMap = ({
         function () {
           isSelected = !isSelected;
 
+          geolocation();
           if (isSelected) {
             customControl.getElement().innerHTML = loadingBtnHTML;
             setTimeout(function () {
               customControl.getElement().innerHTML = selectedLocationBtn;
-
+              naverMap.setZoom(15);
               naverMap.setCenter(
                 new naver.maps.LatLng(geoLatitude, geoLongitude)
               );
@@ -198,7 +200,15 @@ const NaverMap = ({
     });
 
     geolocation();
-  }, [allGamesData, setSelectedAddress, setIsAddressSelected]);
+  }, [
+    allGamesData,
+    setSelectedAddress,
+    setIsAddressSelected,
+    geoLatitude,
+    geoLongitude,
+    latitude,
+    longitude,
+  ]);
   return (
     <div
       id="map"

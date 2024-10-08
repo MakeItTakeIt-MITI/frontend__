@@ -42,6 +42,7 @@ const MainContent = ({
   const handleSetCoords = (lat: string, long: string) => {
     setLatitude(lat);
     setLongitude(long);
+    console.log(lat, long);
   };
 
   const handleResetDateField = () => {
@@ -129,7 +130,6 @@ const MainContent = ({
               isAddressSelected={isAddressSelected}
               latitude={latitude}
               longitude={longitude}
-              selectedAddress={selectedAddress}
             />
           </div>
         </div>

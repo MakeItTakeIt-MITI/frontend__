@@ -4,22 +4,15 @@ import { Game } from "../../interfaces/games";
 
 interface GameListCardProp {
   game: Game;
-  // setLatitude: (arg: string) => void;
-  // setLongitude: (arg: string) => void;
+
   handleSetCoords: (arg1: string, arg2: string) => void;
 }
 
 const GameListCard = ({
   game,
-  // setLongitude,
-  // setLatitude,
+
   handleSetCoords,
 }: GameListCardProp) => {
-  // const handleSetLatLong = () => {
-  //   setLatitude(game.court.latitude);
-  //   setLongitude(game.court.longitude);
-  // };
-
   return (
     <div
       onClick={() => handleSetCoords(game.court.latitude, game.court.longitude)}
