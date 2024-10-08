@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AllGamesProps } from "../../interfaces/games";
 import current_marker from "../../assets/v11/current_pin.svg";
 import selected_marker from "../../assets/v11/current_pin_selected.svg";
+import marker_loading from "../../assets/v11/marker-loading.gif";
 
 declare global {
   interface Window {
@@ -46,7 +47,7 @@ const NaverMap = ({
   }
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
-      zoom: 4,
+      zoom: 14,
       pinchZoom: true,
       scrollWheel: true,
     });
@@ -84,7 +85,7 @@ const NaverMap = ({
       </a>`;
 
       const overlappedMarkerHTML = `
-      <button id="element-${index}"  type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+      <button key=${game.id} id="element-${index}"  type="button" " class="cursor-pointer relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
           <span>${game.fee.toLocaleString("ko-KR", {
             style: "currency",
             currency: "KRW",
@@ -162,10 +163,13 @@ const NaverMap = ({
       );
     }
 
+    // custom overlay
+    let isSelected = false;
     const locationBtnHtml = `<button class='mt-[10px] ml-[10px] p-2 flex gap-2 items-center justify-center bg-[#fff] size-[44px] rounded-full  '> <img src=${current_marker} alt="current location"   />  </button>`;
     const selectedLocationBtn = `<button class='mt-[10px] ml-[10px] p-2 flex gap-2 items-center justify-center bg-[#fff] size-[44px] rounded-full  '> <img src=${selected_marker} alt="selected current"   />  </button>`;
+    const loadingBtnHTML = `<button class='mt-[10px] ml-[10px] p-2 flex gap-2 items-center justify-center bg-[#fff] size-[44px] rounded-full  '> <img src=${marker_loading} alt="marker loading"   />  </button>`;
 
-    // custom overlay
+    // custom overlay event
     naver.maps.Event.once(naverMap, "init", function () {
       const customControl = new naver.maps.CustomControl(locationBtnHtml, {
         position: naver.maps.Position.TOP_LEFT,
@@ -175,9 +179,20 @@ const NaverMap = ({
         customControl.getElement(),
         "click",
         function () {
-          customControl.getElement().innerHTML = selectedLocationBtn;
+          isSelected = !isSelected;
 
-          naverMap.setCenter(new naver.maps.LatLng(geoLatitude, geoLongitude));
+          if (isSelected) {
+            customControl.getElement().innerHTML = loadingBtnHTML;
+            setTimeout(function () {
+              customControl.getElement().innerHTML = selectedLocationBtn;
+
+              naverMap.setCenter(
+                new naver.maps.LatLng(geoLatitude, geoLongitude)
+              );
+            }, 500);
+          } else {
+            customControl.getElement().innerHTML = locationBtnHtml;
+          }
         }
       );
     });
