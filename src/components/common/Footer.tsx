@@ -16,11 +16,7 @@ const Footer = () => {
             <div className="space-y-[1.25rem]">
               {/* 이용약관 / 개인정보 / 위치기반 이용약관 */}
               <div className="space-x-[1.25rem] text-[#E5E5E5] text-[12px] font-bold">
-                <Link to="/support/guide">이용약관</Link>
-                <span>|</span>
-                <span>개인정보처리방침</span>
-                <span>|</span>
-                <span>위치기반서비스 이용약관</span>
+                <Link to="/support/guide">서비스 약관</Link>
               </div>
 
               {/* contact */}
