@@ -2,48 +2,26 @@ import Footer from "../components/common/Footer";
 import Hero from "../components/landing/Hero";
 
 import HeroMobile from "../components/landing/HeroMobile";
-import Section from "../components/landing/Section";
 
-import games from "../assets/v11/landing-games.png";
-import mobile_games from "../assets/v11/landing-games-mobille.png";
-
-import courts from "../assets/v11/landing-court.png";
-import mobile_courts from "../assets/v11/landing-court-mobile.png";
-
-import payment from "../assets/v11/landing-payment.png";
-import mobile_payment from "../assets/v11/landing-payment-mobile.png";
-
-import { useInView } from "react-intersection-observer";
 import Games from "../components/landing/Games";
+import GamesMobile from "../components/landing/GamesMobile";
 
 const Landing = () => {
-  const { ref: gamesRef, inView: gamesInView } = useInView({
-    threshold: 0.75,
-    triggerOnce: true,
-  });
-  const { ref: courtsRef, inView: courtsInView } = useInView({
-    threshold: 0.75,
-    triggerOnce: true,
-  });
-  const { ref: paymentsRef, inView: introInView } = useInView({
-    threshold: 0.75,
-    triggerOnce: true,
-  });
+  // const userAgent = navigator.userAgent;
+  // const mobileCheck =
+  //   /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+  //     userAgent
+  //   );
 
-  const userAgent = navigator.userAgent;
-  const mobileCheck =
-    /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-      userAgent
-    );
-
-  if (mobileCheck) {
-    alert(userAgent);
-  }
+  // if (mobileCheck) {
+  //   alert(userAgent);
+  // }
   return (
     <div className=" w-full bg-[#000]">
       <Hero />
       <HeroMobile />
       <Games />
+      <GamesMobile />
       {/* <Section
         title="경기 조회"
         subtitle="간편하게 경기를 조회하고 <br /> 바로 참여해보세요."

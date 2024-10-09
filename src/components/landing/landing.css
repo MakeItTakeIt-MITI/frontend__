@@ -1,13 +1,13 @@
 .toast {
   opacity: 1;
   transform: translateY(0);
-  animation: fade-in 0.5s ease-in;
+  animation: fade-in 0.7s ease-in;
 }
 
 @keyframes fade-in {
   0% {
     opacity: 0;
-    transform: translateY(100px);
+    transform: translateY(20px);
   }
 }
 
@@ -33,5 +33,31 @@
   0% {
     opacity: 0;
     transform: translateX(120px);
+  }
+}
+
+.shake {
+  animation: shake-animation 2s ease-in-out;
+  animation-iteration-count: 2;
+}
+
+@keyframes shake-animation {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-5px);
+  }
+  20% {
+    transform: translateX(3px);
+  }
+  30% {
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: translateX(1px);
+  }
+  50% {
+    transform: translateX(0);
   }
 }
