@@ -14,6 +14,7 @@ import payment from "../assets/v11/landing-payment.png";
 import mobile_payment from "../assets/v11/landing-payment-mobile.png";
 
 import { useInView } from "react-intersection-observer";
+import Games from "../components/landing/Games";
 
 const Landing = () => {
   const { ref: gamesRef, inView: gamesInView } = useInView({
@@ -29,12 +30,21 @@ const Landing = () => {
     triggerOnce: true,
   });
 
+  const userAgent = navigator.userAgent;
+  const mobileCheck =
+    /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+      userAgent
+    );
+
+  if (mobileCheck) {
+    alert(userAgent);
+  }
   return (
     <div className=" w-full bg-[#000]">
       <Hero />
       <HeroMobile />
-
-      <Section
+      <Games />
+      {/* <Section
         title="경기 조회"
         subtitle="간편하게 경기를 조회하고 <br /> 바로 참여해보세요."
         description="지도를 통해 내 주변의 경기를 빠르게 찾아보고 클릭 몇번으로 <br /> 간편하게 경기에 참여해보세요!"
@@ -49,8 +59,8 @@ const Landing = () => {
         path="/games/list"
         sectionRef={gamesRef}
         introView={gamesInView}
-      />
-      <Section
+      /> */}
+      {/* <Section
         title="경기장 조회"
         subtitle="우리 동네 농구 핫플레이스 <br /> 지금 찾아보세요!"
         description=" 우리 동네의 숨겨진 농구 경기장과 게스트를 모집 중인 경기를 <br />한 번에 조회하실 수 있습니다"
@@ -65,8 +75,8 @@ const Landing = () => {
         path="/courts/list"
         sectionRef={courtsRef}
         introView={courtsInView}
-      />
-      <Section
+      /> */}
+      {/* <Section
         title="경기 정산"
         subtitle="번거로운 정산은 MITI가, <br /> 농구만 즐기세요!"
         description="  수많은 게스트의 참가비 일일이 관리하기 힘드시죠? <br /> 이제 참가비는 MITI가 자동으로 정산해 드리니 농구만 즐기세요"
@@ -81,7 +91,7 @@ const Landing = () => {
         path=""
         sectionRef={paymentsRef}
         introView={introInView}
-      />
+      /> */}
       {/* <Games /> */}
       {/* <Courts /> */}
       {/* <Payments /> */}

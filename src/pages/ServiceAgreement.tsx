@@ -7,12 +7,12 @@ const ServiceAgreement = () => {
 
   return (
     <>
-      <section className="bg-secondary-black h-screen pt-[3.75rem] pb-[6.25rem]">
-        <div className="md:w-[768px] sm:w-full mx-auto space-y-[40px] mb-[40px]">
-          <h1 className="h-[72px] text-white text-5xl font-bold">
+      <section className="bg-secondary-black h-screen  md:pt-[3.75rem] md:pb-[6.25rem] sm:pt-5 sm:pb-10 sm:px-5 md:px-0">
+        <div className="md:w-[768px] sm:w-full mx-auto sm:space-y-[24px] md:space-y-[40px] mb-[40px]">
+          <h1 className=" sm:text-[26px] text-white md:text-5xl font-bold">
             서비스 약관
           </h1>
-          <div className="py-10 border-t border-b  border-[#525252] ">
+          <div className="md:py-10 sm:py-5 border-t border-b  border-[#525252] ">
             <ul className="space-y-5">
               {data?.data.map((service: ServiceAgreementField) => (
                 <li key={service.id} className="text-white text-xl">
