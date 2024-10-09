@@ -1,5 +1,20 @@
 import share from "../../assets/v11/share.svg";
+
 const ShareFeatureFooter = () => {
+  const userAgent = navigator.userAgent;
+  const mobileCheck = /android|iphone|ipad|ipod/i.test(userAgent);
+
+  const handleWebShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          url: window.location.href,
+        })
+        .then(() => console.log("share success"))
+        .catch((error) => console.log(error, "share failed"));
+    }
+  };
+
   return (
     <footer className="fixed bottom-0 left-0 right-0 sm:h-[3.75rem] md:h-[4.375rem]  z-[9999] bg-primary-black flex items-center  justify-center  sm:py-[0.75rem]  md:py-[0.81rem]">
       <div className="flex items-center  sm:gap-[3rem] md:gap-[8.12rem]">
@@ -16,7 +31,11 @@ const ShareFeatureFooter = () => {
             <button className="sm:block md:hidden w-[7rem] h-[2.25rem] flex items-center justify-center  bg-[#7FEEF0] text-[#262626] font-bold text-sm rounded-[6.24rem]">
               앱 다운로드{" "}
             </button>
-            <img src={share} alt="share" />
+            {mobileCheck && (
+              <button onClick={handleWebShare}>
+                <img src={share} alt="share" />
+              </button>
+            )}
           </div>
         </div>
       </div>

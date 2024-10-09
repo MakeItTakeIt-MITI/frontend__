@@ -9,15 +9,6 @@ import Courts from "../components/landing/Courts";
 import Payments from "../components/landing/Payments";
 
 const Landing = () => {
-  // const userAgent = navigator.userAgent;
-  // const mobileCheck =
-  //   /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-  //     userAgent
-  //   );
-
-  // if (mobileCheck) {
-  //   alert(userAgent);
-  // }
   return (
     <div className=" w-full bg-[#000]">
       <Hero />
