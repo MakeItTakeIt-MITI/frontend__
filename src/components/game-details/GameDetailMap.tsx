@@ -11,7 +11,7 @@ const GameDetailMap = ({ latitude, longitude }: GameDetailMapProp) => {
   useEffect(() => {
     const map = new naver.maps.Map("map", {
       center: new naver.maps.LatLng(latitude, longitude),
-      zoom: 14,
+      zoom: 16,
       pinchZoom: true,
       scrollWheel: true,
     });
