@@ -1,7 +1,7 @@
 .toast {
   opacity: 1;
   transform: translateY(0);
-  animation: fade-in 0.7s ease-in;
+  animation: fade-in 0.3s ease-in;
 }
 
 @keyframes fade-in {
@@ -14,7 +14,7 @@
 .slide-from-left {
   opacity: 1;
   transform: translateX(0);
-  animation: slide-in-left 0.5s ease-in;
+  animation: slide-in-left 0.3s ease-in;
 }
 
 @keyframes slide-in-left {
@@ -27,7 +27,7 @@
 .slide-from-right {
   opacity: 1;
   transform: translateX(0);
-  animation: slide-in-right 0.5s ease-in;
+  animation: slide-in-right 0.3s ease-in;
 }
 @keyframes slide-in-right {
   0% {
@@ -38,7 +38,7 @@
 
 .shake {
   animation: shake-animation 2s ease-in-out;
-  animation-iteration-count: 2;
+  animation-iteration-count: 1;
 }
 
 @keyframes shake-animation {
