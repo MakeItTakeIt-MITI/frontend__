@@ -10,6 +10,7 @@ export interface FAQItem {
 
 export interface PrivateInquiryField {
     title: string;
+    nickname: string;
     password: string;
     content: string;
 }
@@ -18,6 +19,7 @@ export interface PrivateInquiryField {
 export interface InquiryListField {
     id: number;
     title: string;
+    nickname: string
     num_of_answers: number;
     created_at: string;
 }
