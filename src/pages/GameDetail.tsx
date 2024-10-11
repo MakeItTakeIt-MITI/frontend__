@@ -9,6 +9,16 @@ import ShareFeatureFooter from "../components/common/ShareFeatureFooter";
 import { useGameDetailDataHook } from "../hooks/useGameDetailDataHook";
 import { useParams } from "react-router-dom";
 
+import no_stars from "../assets/v11/reviews/zero-star.svg";
+import one_half_stars from "../assets/v11/reviews/one-half-star.svg";
+import two_stars from "../assets/v11/reviews/two-star.svg";
+import two_half_stars from "../assets/v11/reviews/two-half-star.svg";
+import three_stars from "../assets/v11/reviews/three-star.svg";
+import three_half_stars from "../assets/v11/reviews/three-half-star.svg";
+import four_stars from "../assets/v11/reviews/four-star.svg";
+import four_half_stars from "../assets/v11/reviews/four-half-star.svg";
+import fivestars from "../assets/v11/reviews/five-star.svg";
+
 const GameDetail = () => {
   const { id } = useParams();
   const gameId = Number(id);
@@ -114,6 +124,7 @@ const GameDetail = () => {
                     <img src={star} alt="star" />
                     <img src={star} alt="star" />
                     <img src={star} alt="star" /> */}
+                    <img src="" alt="" />
                   </div>
                   <span>
                     {game?.data.host.rating.host_rating.average_rating ===

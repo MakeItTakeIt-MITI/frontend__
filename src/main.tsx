@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { Home } from "./pages/Home.tsx";
+import { Games } from "./pages/Games.tsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -24,13 +24,13 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Landing /> },
-      // { path: "/", element: <Home /> },
+      // { path: "/", element: <Games /> },
 
       {
         path: "games",
 
         children: [
-          { path: "list", element: <Home /> },
+          { path: "list", element: <Games /> },
           { path: ":id", element: <GameDetail /> },
         ],
       },

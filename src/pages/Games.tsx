@@ -10,7 +10,7 @@ import useStatusSelectionStore from "../store/useStatusSelectionStore";
 import { DATES } from "../constants/calender";
 import useGameFilterStore from "../store/useGameFilterStore";
 
-export const Home = () => {
+export const Games = () => {
   const INITIAL_DATES = DATES();
   const FIRST_DATE = INITIAL_DATES[0];
   const initialDateField = `${FIRST_DATE.month}.${FIRST_DATE.date} (${FIRST_DATE.dayKorean})`;
