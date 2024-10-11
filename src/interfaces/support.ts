@@ -33,3 +33,9 @@ export interface ServiceAgreementField {
     created_at: string;
     modified_at: string;
 }
+
+export interface PoliciesField {
+    id: number;
+    type: string;
+    name: string
+}

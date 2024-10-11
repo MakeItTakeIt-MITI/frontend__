@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import Footer from "../components/common/Footer";
 import { useServiceTermsDataHook } from "../hooks/useServiceTermsDataHook";
-import { ServiceAgreementField } from "../interfaces/support";
+import { PoliciesField } from "../interfaces/support";
 
-const ServiceAgreement = () => {
-  const { data } = useServiceTermsDataHook();
+const Policies = () => {
+  const { data, isLoading } = useServiceTermsDataHook();
 
   return (
     <>
@@ -14,12 +15,18 @@ const ServiceAgreement = () => {
           </h1>
           <div className="md:py-10 sm:py-5 border-t border-b  border-[#525252] ">
             <ul className="space-y-5">
-              {data?.data.map((service: ServiceAgreementField) => (
-                <li key={service.id} className="text-white text-xl">
-                  {service.title}
-                  {/* <p dangerouslySetInnerHTML={service.content} /> */}
-                </li>
-              ))}
+              {isLoading ? (
+                <p className="text-center text-white text-sm">MITI...</p>
+              ) : (
+                data?.data.map((service: PoliciesField) => (
+                  <li
+                    key={service.id}
+                    className="text-white text-xl cursor-pointer"
+                  >
+                    <Link to={`${service.id}`}> {service.name}</Link>
+                  </li>
+                ))
+              )}
             </ul>
           </div>
           <div
@@ -51,4 +58,4 @@ const ServiceAgreement = () => {
   );
 };
 
-export default ServiceAgreement;
+export default Policies;
