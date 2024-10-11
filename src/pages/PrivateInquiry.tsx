@@ -21,8 +21,10 @@ const PrivateInquiry = () => {
   const title = watch("title");
   const password = watch("password");
   const content = watch("content");
+  const nickname = watch("nickname");
 
-  const isFormFilled = title && password && content;
+  const isFormFilled =
+    title && password && content && nickname && password.length === 4;
 
   const handleTogglePassword = () => setDisplayPassword(!displayPassword);
   return (
@@ -53,7 +55,7 @@ const PrivateInquiry = () => {
               autoComplete="off"
               placeholder="문의의 제목을 입력해주세요."
               type="text"
-              className="w-full p-5 border border-[#737373] bg-secondary-black rounded-[10px] sm:h-[60px] md:h-[64px]"
+              className="w-full p-5 border border-[#737373] focus:border-[#7FEEF6] focus:outline-none  bg-secondary-black rounded-[10px] sm:h-[60px] md:h-[64px]"
             />
           </div>
         </div>
@@ -65,7 +67,7 @@ const PrivateInquiry = () => {
             resize: "none",
           }}
           placeholder="문의 내용을 입력해주세요."
-          className="w-full h-[262px] border border-[#737373] p-5 sm:text-sm md:text-[18px] font-[400] rounded-[10px] bg-secondary-black text-primary-white"
+          className="w-full h-[262px] border border-[#737373] focus:border-[#7FEEF6] focus:outline-none  p-5 sm:text-sm md:text-[18px] font-[400] rounded-[10px] bg-secondary-black text-primary-white"
         />
 
         <div className="flex md:flex-row sm:flex-col  sm:gap-[30px] md:gap-5  sm:text-sm md:text-lg font-normal leading-[18px] text-primary-white">
@@ -74,24 +76,33 @@ const PrivateInquiry = () => {
             autoComplete="off"
             placeholder="닉네임"
             type="text"
-            className="w-full p-5 border border-[#737373] bg-secondary-black rounded-[10px] sm:h-[60px] md:h-[64px]"
+            className="w-full p-5 border border-[#737373] focus:border-[#7FEEF6] focus:outline-none  bg-secondary-black rounded-[10px] sm:h-[60px] md:h-[64px]"
           />
-          <div className="relative  ">
-            {" "}
-            <input
-              {...register("password")}
-              autoComplete="new-password"
-              placeholder="비밀번호"
-              type={displayPassword ? "text" : "password"}
-              className="  bg-secondary-black border border-[#737373] p-5  rounded-[10px] sm:w-full md:w-[250px] sm:h-[60px] md:h-[64px]"
-            />
-            <button onClick={handleTogglePassword}>
-              <img
-                src={displayPassword ? open : close}
-                alt="show password"
-                className=" absolute right-5 top-0 bottom-0 my-auto sm:size-5 md:size-6"
+          <div>
+            <div className="relative  ">
+              {" "}
+              <input
+                {...register("password")}
+                autoComplete="new-password"
+                placeholder="비밀번호"
+                type={displayPassword ? "text" : "password"}
+                inputMode="numeric"
+                pattern="[0-9]*"
+                className="  bg-secondary-black border border-[#737373] focus:border-[#7FEEF6] focus:outline-none  p-5  rounded-[10px] sm:w-full md:w-[250px] sm:h-[60px] md:h-[64px]"
               />
-            </button>
+              <button onClick={handleTogglePassword}>
+                <img
+                  src={displayPassword ? open : close}
+                  alt="show password"
+                  className=" absolute right-5 top-0 bottom-0 my-auto sm:size-5 md:size-6"
+                />
+              </button>
+            </div>
+            {password?.length !== 4 && password?.length > 0 && (
+              <p className="text-[#FF4079] text-xs p-2">
+                유효한 비밀번호가 아닙니다.
+              </p>
+            )}
           </div>
         </div>
 
