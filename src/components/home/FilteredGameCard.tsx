@@ -71,10 +71,12 @@ const FilteredGameCard = ({ game }: FilteredGameCardProp) => {
         </div>
         {/* FEE */}
         <h2 className="text-primary-teal font-bold">
-          {game.fee.toLocaleString("ko-KR", {
-            style: "currency",
-            currency: "KRW",
-          })}
+          {game.fee == 0
+            ? "무료"
+            : game.fee.toLocaleString("ko-KR", {
+                style: "currency",
+                currency: "KRW",
+              })}
         </h2>
       </div>
     </Link>
