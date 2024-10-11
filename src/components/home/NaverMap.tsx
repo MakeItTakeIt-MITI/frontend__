@@ -5,6 +5,7 @@ import { AllGamesProps } from "../../interfaces/games";
 import current_marker from "../../assets/v11/current_pin.svg";
 import selected_marker from "../../assets/v11/current_pin_selected.svg";
 import marker_loading from "../../assets/v11/marker-loading.gif";
+import { setGeolocation } from "../naver/map-controls";
 
 declare global {
   interface Window {
@@ -45,8 +46,7 @@ const NaverMap = ({
   }
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
-      zoom: 14,
-
+      zoom: 4,
       pinchZoom: true,
       scrollWheel: true,
     });
@@ -58,11 +58,12 @@ const NaverMap = ({
       naverMap.setCenter(location);
     }
 
-    let selectedMarker: any | null = null;
     // const markers: string[] = [];
 
     // 다중 마커 표시
     // allGamesData?.map((game: Game) => {
+    let selectedMarker: any | null = null;
+
     for (let index = 0; index < allGamesData?.length; index++) {
       const game = allGamesData[index];
 
@@ -120,8 +121,6 @@ const NaverMap = ({
       });
 
       naver.maps.Event.addListener(marker, "click", function () {
-        console.log("clicked 1");
-
         //change marker back to non-selected marker on 2 click
         if (selectedMarker === marker) {
           marker.setIcon({
@@ -132,7 +131,7 @@ const NaverMap = ({
         } else {
           if (selectedMarker) {
             selectedMarker.setIcon({
-              content: overlappedMarkerHTML,
+              content: selectedMarker.overlappedMarkerHTML,
             });
           }
 
@@ -147,21 +146,6 @@ const NaverMap = ({
         setIsAddressSelected(selectedMarker !== null);
         setSelectedAddress(game.court.address);
       });
-    }
-
-    // current geolocation
-    function geolocation() {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setGeoLatitude(latitude);
-          setGeoLongtitude(longitude);
-          return;
-        },
-        (error) => {
-          console.error("geolocation error:", error.message);
-        }
-      );
     }
 
     // custom overlay
@@ -182,7 +166,8 @@ const NaverMap = ({
         function () {
           isSelected = !isSelected;
 
-          geolocation();
+          setGeolocation(setGeoLatitude, setGeoLongtitude);
+          // geolocation();
           if (isSelected) {
             customControl.getElement().innerHTML = loadingBtnHTML;
             setTimeout(function () {
@@ -199,7 +184,7 @@ const NaverMap = ({
       );
     });
 
-    geolocation();
+    setGeolocation(setGeoLatitude, setGeoLongtitude);
   }, [
     allGamesData,
     setSelectedAddress,
