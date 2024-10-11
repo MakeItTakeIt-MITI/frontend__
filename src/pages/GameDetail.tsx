@@ -117,14 +117,46 @@ const GameDetail = () => {
                 </h2>
                 <div className="flex items-center gap-[.38rem] font-[400] text-[14px]">
                   <div className="flex">
-                    {/* {game?.data.host.rating.host_rating.average_rating} */}
-                    {/* <img src={star} alt="star" /> */}
-                    {/* <img src={star} alt="star" />
-                    <img src={star} alt="star" />
-                    <img src={star} alt="star" />
-                    <img src={star} alt="star" />
-                    <img src={star} alt="star" /> */}
-                    <img src="" alt="" />
+                    {game?.data.host.rating.host_rating.average_rating ===
+                      null && <img src={no_stars} alt="no reviews" />}
+                    {game?.data.host.rating.host_rating.average_rating ===
+                      0 && <img src={no_stars} alt="zero stars" />}
+                    {game?.data.host.rating.host_rating.average_rating > 0.5 &&
+                      game?.data.host.rating.host_rating.average_rating <=
+                        1.4 && <img src={one_half_stars} alt="one half star" />}
+                    {game?.data.host.rating.host_rating.average_rating > 1.4 &&
+                      game?.data.host.rating.host_rating.average_rating <=
+                        2 && <img src={two_stars} alt="two stars" />}
+                    {game?.data.host.rating.host_rating.average_rating > 2 &&
+                      game?.data.host.rating.host_rating.average_rating <=
+                        2.4 && (
+                        <img src={two_half_stars} alt="two and a half stars" />
+                      )}
+                    {game?.data.host.rating.host_rating.average_rating > 2.4 &&
+                      game?.data.host.rating.host_rating.average_rating <=
+                        3 && <img src={three_stars} alt="three stars" />}
+                    {game?.data.host.rating.host_rating.average_rating > 3 &&
+                      game?.data.host.rating.host_rating.average_rating <=
+                        3.4 && (
+                        <img
+                          src={three_half_stars}
+                          alt="three and a half stars"
+                        />
+                      )}
+                    {game?.data.host.rating.host_rating.average_rating > 3.4 &&
+                      game?.data.host.rating.host_rating.average_rating <=
+                        4 && <img src={four_stars} alt="four stars" />}
+                    {game?.data.host.rating.host_rating.average_rating > 4 &&
+                      game?.data.host.rating.host_rating.average_rating <=
+                        4.4 && (
+                        <img
+                          src={four_half_stars}
+                          alt="four and a half stars"
+                        />
+                      )}
+                    {game?.data.host.rating.host_rating.average_rating > 4.4 &&
+                      game?.data.host.rating.host_rating.average_rating <=
+                        5 && <img src={fivestars} alt="five stars" />}
                   </div>
                   <span>
                     {game?.data.host.rating.host_rating.average_rating ===
