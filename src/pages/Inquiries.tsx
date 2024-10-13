@@ -15,8 +15,8 @@ const InquiriesList = () => {
 
   const { data } = usePrivateInquiriesDataHook(pageNumber);
 
-  const currentPage = data?.data.current_page;
-  const pageLength = data?.data.end_index;
+  const currentPage = data?.data.current_index;
+  const pageLength = data?.data.end_index || 1;
   const content = data?.data.page_content;
 
   const pages = [];
@@ -83,7 +83,7 @@ const InquiriesList = () => {
                   type="button"
                   onClick={() => setPageNumber(page)}
                   className={`p-2.5 ${
-                    currentPage ? "text-[#7FEEF0]" : "text-[#737373]"
+                    currentPage === page ? "text-[#7FEEF0]" : "text-[#737373]"
                   }`}
                 >
                   {page}
