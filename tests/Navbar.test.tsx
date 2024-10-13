@@ -33,11 +33,13 @@ describe("MobileNavbar responsiveness", () => {
     const logo = screen.getByAltText("logo");
     const games = screen.queryByRole("link", { name: /경기 목록/i });
     const courts = screen.queryByRole("link", { name: /경기장/i });
-    const faq = screen.queryByRole("link", { name: /FAQ/i });
+    const faq = screen.queryByRole("link", { name: /자주 묻는 질문/i });
+    const inquiries = screen.queryByRole("link", { name: /문의하기/i });
 
     expect(games).toBeInTheDocument();
     expect(courts).toBeInTheDocument();
     expect(faq).toBeInTheDocument();
+    expect(inquiries).toBeInTheDocument();
     expect(logo).toBeInTheDocument();
     expect(screen.queryByAltText("hamburger")).not.toBeInTheDocument();
   });
