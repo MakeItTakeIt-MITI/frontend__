@@ -4,11 +4,15 @@ import { ScrollToTop } from "./components/common/ScrollToTop";
 
 function App() {
   return (
-    <>
+    <main
+      style={{
+        backgroundColor: "#171717",
+      }}
+    >
       <ScrollToTop />
       <Navbar />
       <Outlet />
-    </>
+    </main>
   );
 }
 
