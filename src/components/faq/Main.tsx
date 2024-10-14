@@ -112,10 +112,6 @@ const Main = () => {
               {/* description */}
               {openFAQIndex === item.id && (
                 <div className="p-[1.25rem] bg-light-dark rounded-[20px]  space-y-3">
-                  {/* <p
-                    className="text-[#d4d4d4] text-[12px] font-[300]   "
-                    dangerouslySetInnerHTML={{ __html: `${item?.content}` }}
-                    /> */}
                   <p
                     className="faq-content text-white list-none"
                     id="custom-content"
@@ -124,9 +120,7 @@ const Main = () => {
                 </div>
               )}
 
-              {/* {item.id !== faqData.length - 1 && ( */}
-              <hr className="bg-[#525252] h-[2px]" />
-              {/* )} */}
+              <hr className="bg-[#525252] h-[3px]" />
             </>
           ))}
       </div>

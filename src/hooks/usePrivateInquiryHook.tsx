@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { privateInquiry } from "../api/support";
+import { addPrivateInquiry } from "../api/support";
 
 export const usePrivateInquiryHook = (reset: () => void) => {
   return useMutation({
-    mutationFn: privateInquiry,
+    mutationFn: addPrivateInquiry,
     onSuccess: (data) => {
       const statusCode = data?.status_code;
       if (statusCode == 201) {

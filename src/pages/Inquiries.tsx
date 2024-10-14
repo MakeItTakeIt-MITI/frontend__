@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 
 import left from "../assets/v11/pagination-left.svg";
 import right from "../assets/v11/pagination-right.svg";
-import { usePrivateInquiriesDataHook } from "../hooks/usePrivateInquiriesDataHook";
 import { InquiryListField } from "../interfaces/support";
+import { useInquiriesDataHook } from "../hooks/useInquiriesDataHook";
 
 const InquiriesList = () => {
   const [input, setInput] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { data } = usePrivateInquiriesDataHook(pageNumber);
+  const { data } = useInquiriesDataHook(pageNumber);
 
   const currentPage = data?.data.current_index;
   const pageLength = data?.data.end_index || 1;

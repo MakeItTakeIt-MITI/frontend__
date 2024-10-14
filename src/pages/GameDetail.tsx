@@ -27,7 +27,7 @@ const GameDetail = () => {
 
   return (
     <>
-      <section className="sm:bg-secondary-black  min-h-screen md:bg-light-dark  md:pt-[3.75rem] md:pb-[5rem]  ">
+      <section className="sm:bg-secondary-black  min-h-screen md:bg-light-dark  md:pt-[3.75rem] md:pb-[10.375rem]  ">
         <div className="sm:w-full md:w-[43.25rem]  mx-auto sm:space-y-[0.25rem] md:space-y-[1.25rem]">
           <GameDetailMap
             longitude={game?.data.court.longitude}

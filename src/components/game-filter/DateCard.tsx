@@ -50,7 +50,6 @@ const DateCard = ({
     >
       {" "}
       {currentMonth !== month && date === 1 && (
-        // mx-[calc(0.5rem - 16)]
         <div className="flex flex-col justify-center items-center gap-[5px] mx-4 px-1 text-primary-teal font-bold text-sm  ">
           {currentYear !== year && <span>{year}</span>}
           <span className="">{month}월</span>

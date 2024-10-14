@@ -5,8 +5,8 @@ import { ScrollToTop } from "./components/common/ScrollToTop";
 function App() {
   return (
     <>
-      <Navbar />
       <ScrollToTop />
+      <Navbar />
       <Outlet />
     </>
   );

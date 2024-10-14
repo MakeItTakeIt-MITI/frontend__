@@ -89,7 +89,7 @@ const NaverMap = ({
             currency: "KRW",
           })}</span>
           <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
-          <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#fff] text-[#525252]  flex items-center justify-center text-[10px] font-bold ">${markerCount}</div>
+          <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#fff] text-[#525252]  flex items-center justify-center text-[10px] font-bold ">${markerCount >= 99 && "+99"}</div>
       </button>`;
 
       const selectedMarkerHTML = `
@@ -99,7 +99,7 @@ const NaverMap = ({
             currency: "KRW",
           })}</span>
           <span class="font-[300] text-[10px] text-[#737373]">/ ${game.starttime.slice(0, 5)}</span>
-          <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#404040] text-[#fff]  flex items-center justify-center text-[10px] font-bold ">${markerCount}</div>
+          <div class="absolute -top-2.5 -right-2.5 rounded-full size-[1.25rem] bg-[#404040] text-[#fff]  flex items-center justify-center text-[10px] font-bold ">${markerCount >= 99 && "+99"}</div>
       </button>`;
 
       const marker = new naver.maps.Marker({

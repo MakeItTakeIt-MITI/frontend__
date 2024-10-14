@@ -39,3 +39,24 @@ export interface PoliciesField {
     type: string;
     name: string
 }
+
+export interface InquiryDetailField {
+    password: string;
+}
+
+interface InquiryAnswer {
+    id: number;
+    content: string;
+    created_at: string;
+    modified_at: string;
+}
+
+export interface InquiryDetailsField {
+    id: number;
+    title: string;
+    nickname: string;
+    content: string;
+    created_at: string;
+    modified_at: string;
+    answers: InquiryAnswer[];
+}

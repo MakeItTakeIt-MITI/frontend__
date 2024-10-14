@@ -23,12 +23,12 @@ const Footer = () => {
               <div className="space-y-[0.75rem] font-[400] text-[12px] text-[#D4D4D4]">
                 <div className="space-x-[1.25rem] ">
                   <span>대표 : 전재완</span>
-                  <span>사업자번호 : 000-00-00000</span>
+                  <span>사업자번호 : 547-03-03467</span>
                   <span>전화 : 02-123-1234</span>
                 </div>
                 <div className="space-x-[1.25rem] ">
                   <span>주소 : 서울특별시 여의도동 여의대로 65 22호</span>
-                  <span>메일 : miti.makeittakeit@gmail.com</span>
+                  <span>메일 : miti.makeittakeit@makeittakeit.kr</span>
                 </div>
               </div>
             </div>
@@ -86,14 +86,14 @@ const Footer = () => {
             <div className="space-y-[0.75rem] text-[#d4d4d4] font-[400] text-[12px]">
               {/* ceo / business number */}
               <div className="flex items-center gap-[1.25rem]">
-                <span>대표 : 홍길동</span>
-                <span>사업자번호 : 000-00-00000</span>
+                <span>대표 : 전재완</span>
+                <span>사업자번호 : 547-03-03467</span>
               </div>
               {/* number and email */}
 
               <div className="flex items-center gap-[1.25rem]">
                 <span>전화 : 02-123-1234</span>
-                <span>메일 : 메일주소@naver.com</span>
+                <span>메일 : miti.makeittakeit@makeittakeit.kr</span>
               </div>
               {/* address */}
               <div>
