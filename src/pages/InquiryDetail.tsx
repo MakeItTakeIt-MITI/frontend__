@@ -41,7 +41,7 @@ const InquiryDetail = () => {
       ) : (
         <>
           {" "}
-          <section className="bg-secondary-black md:pt-[3.75rem] md:pb-[6.25rem]  md:space-y-[100px]">
+          <section className="min-h-screen bg-secondary-black md:pt-[3.75rem] md:pb-[6.25rem]  md:space-y-[100px]">
             <div className="md:w-[767px] sm:w-full space-y-[40px] mx-auto">
               {/* top */}
               <div className="space-y-5 text-white">
