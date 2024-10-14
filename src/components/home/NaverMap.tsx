@@ -46,7 +46,7 @@ const NaverMap = ({
   }
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
-      zoom: 4,
+      zoom: 14,
       pinchZoom: true,
       scrollWheel: true,
     });
