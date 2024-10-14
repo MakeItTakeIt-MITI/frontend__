@@ -24,10 +24,10 @@ const Footer = () => {
                 <div className="space-x-[1.25rem] ">
                   <span>대표 : 전재완</span>
                   <span>사업자번호 : 547-03-03467</span>
-                  <span>전화 : 02-123-1234</span>
+                  {/* <span>전화 : 02-123-1234</span> */}
                 </div>
                 <div className="space-x-[1.25rem] ">
-                  <span>주소 : 서울특별시 여의도동 여의대로 65 22호</span>
+                  {/* <span>주소 : 서울특별시 여의도동 여의대로 65 22호</span> */}
                   <span>메일 : miti.makeittakeit@makeittakeit.kr</span>
                 </div>
               </div>
