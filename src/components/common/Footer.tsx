@@ -76,11 +76,9 @@ const Footer = () => {
           <div className="space-y-[1.25rem]">
             {/* 약관 */}
             <div className="flex items-center gap-[1.25rem] text-[#E5E5E5] font-bold text-[12px]">
-              <span>이용약관</span>
-              <span>|</span>
-              <span>개인정보처리방침</span>
-              <span>|</span>
-              <span>위치기반서비스 이용약관</span>
+              <Link to="/support/policies">서비스 약관</Link>
+              <p>|</p>
+              <Link to="/support/inquiries">고객센터</Link>
             </div>
             {/* ceo/miti info */}
             <div className="space-y-[0.75rem] text-[#d4d4d4] font-[400] text-[12px]">
@@ -92,13 +90,13 @@ const Footer = () => {
               {/* number and email */}
 
               <div className="flex items-center gap-[1.25rem]">
-                <span>전화 : 02-123-1234</span>
+                {/* <span>전화 : 02-123-1234</span> */}
                 <span>메일 : miti.makeittakeit@makeittakeit.kr</span>
               </div>
               {/* address */}
-              <div>
+              {/* <div>
                 <span>주소 : 서울특별시 여의도동 여의대로 65 22호</span>
-              </div>
+              </div> */}
             </div>
           </div>
 
