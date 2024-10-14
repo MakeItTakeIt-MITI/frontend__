@@ -56,7 +56,7 @@ const Main = () => {
               <input
                 type="text"
                 onChange={(e) => setInput(e.target.value)}
-                className="bg-light-dark text-secondary-white font-[500] courtsPlaceHolder"
+                className="bg-light-dark text-secondary-white font-[500] courtsPlaceHolder sm:w-[11rem] md:w-[12rem]"
                 placeholder="경기장 (주소/경기장 명) 검색"
               />
               <button
