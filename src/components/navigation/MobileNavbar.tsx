@@ -35,6 +35,7 @@ const MobileNavbar = () => {
           {NAVITEMS.map((nav) => (
             <Link
               to={nav.path}
+              onClick={() => setDisplayTab(false)}
               style={{
                 color: pathname === `${nav.path}` ? "#7FEEF0" : "#fff",
               }}
