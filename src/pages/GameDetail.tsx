@@ -10,6 +10,7 @@ import { useGameDetailDataHook } from "../hooks/useGameDetailDataHook";
 import { useParams } from "react-router-dom";
 
 import no_stars from "../assets/v11/reviews/zero-star.svg";
+import one_star from "../assets/v11/reviews/one-star.svg";
 import one_half_stars from "../assets/v11/reviews/one-half-star.svg";
 import two_stars from "../assets/v11/reviews/two-star.svg";
 import two_half_stars from "../assets/v11/reviews/two-half-star.svg";
@@ -120,7 +121,7 @@ const GameDetail = () => {
                     {game?.data.host.rating.host_rating.average_rating ===
                       null && <img src={no_stars} alt="no reviews" />}
                     {game?.data.host.rating.host_rating.average_rating ===
-                      0 && <img src={no_stars} alt="zero stars" />}
+                      0 && <img src={one_star} alt="one stars" />}
                     {game?.data.host.rating.host_rating.average_rating > 0.5 &&
                       game?.data.host.rating.host_rating.average_rating <=
                         1.4 && <img src={one_half_stars} alt="one half star" />}
@@ -161,6 +162,7 @@ const GameDetail = () => {
                   <span>
                     {game?.data.host.rating.host_rating.average_rating ===
                       null && "0"}
+                    {game?.data.host.rating.host_rating.average_rating}
                   </span>
                   <span className="underline">리뷰</span>
                 </div>
