@@ -19,11 +19,10 @@ const PoliciesDetails = () => {
               {`${data?.data.created_at.slice(0, 4)}년 ${data?.data.created_at.slice(5, 7).padStart(2, "0")}월 ${data?.data.created_at.slice(8, 10).padStart(2, "0")}일`}
             </p>
             <p
+              dangerouslySetInnerHTML={{ __html: `${data?.data.content}` }}
               style={{ scrollbarWidth: "thin" }}
               className="text-sm text-[#d5d5d5] font-[400] h-[600px] overflow-y-auto "
-            >
-              {data?.data.content}
-            </p>
+            ></p>
           </div>
           {/* bottom */}
           <div
