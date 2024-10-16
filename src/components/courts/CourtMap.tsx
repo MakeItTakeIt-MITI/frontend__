@@ -2,11 +2,7 @@ import { useEffect } from "react";
 import marker from "../../assets/v11/detail-marker.svg";
 const { naver } = window;
 
-interface CourtsMapProps {
-  courtsData: any;
-}
-
-const CourtMap = ({ courtsData }) => {
+const CourtMap = () => {
   useEffect(() => {
     const map = new naver.maps.Map("map", {
       center: new naver.maps.LatLng(37.3595704, 127.105399),
@@ -20,6 +16,8 @@ const CourtMap = ({ courtsData }) => {
       map: map,
       icon: {
         content: `<img src=${marker} alt="marker" />`,
+        anchor: new naver.maps.Point(16, 40),
+        offset: new naver.maps.Point(0, 0),
       },
     });
     map.setCenter(markerLocation.getPosition());

@@ -98,7 +98,7 @@ const Main = () => {
                 onClick={() => handleOpenFAQ(item.id)}
                 className="cursor-pointer flex items-center justify-between py-[1.25rem] "
               >
-                <span className="text-secondary-white text-[18px] font-[400]">
+                <span className="text-secondary-white text-base font-[400]">
                   {item.title}
                 </span>
                 <button type="button">

@@ -4,7 +4,7 @@ import search from "../../assets/v11/search.svg";
 import CourtCard from "./CourtCard";
 import { CITIES } from "../../constants/locations";
 import { useEffect, useState } from "react";
-import { useCourtsDataHook } from "../../hooks/useCourtsDataHook";
+import { useCourtsInfiniteDataHook } from "../../hooks/useCourtsInfiniteDataHook";
 import NoResults from "../common/NoResults";
 import { Court } from "../../interfaces/games";
 import MainLayout from "../common/MainLayout";
@@ -21,7 +21,7 @@ const Main = () => {
     refetch,
     fetchNextPage,
     hasNextPage,
-  } = useCourtsDataHook(searchInput, selectedCity);
+  } = useCourtsInfiniteDataHook(searchInput, selectedCity);
 
   const { ref, inView } = useInView({
     threshold: 0.2,
@@ -129,7 +129,7 @@ const Main = () => {
             {hasNextPage && <div ref={ref} className="h-1 w-full opacity-0" />}{" "}
           </div>
         </div>
-        <CourtMap courtsData={courtsData} />
+        <CourtMap />
       </div>
 
       <MoveToAppBanner />

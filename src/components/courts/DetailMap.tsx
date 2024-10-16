@@ -30,6 +30,7 @@ const DetailMap = () => {
       map: map2,
       icon: {
         content: `<img src=${marker} alt="marker" />`,
+        anchor: new naver.maps.Point(16, 20),
       },
     });
 
