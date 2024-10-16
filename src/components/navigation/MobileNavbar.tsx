@@ -30,7 +30,7 @@ const MobileNavbar = () => {
       {displayTab && (
         <div
           onMouseLeave={() => setDisplayTab(false)}
-          className="z-[9999] absolute left-0 right-0 -bottom-[8.2rem]  bg-primary-black "
+          className="z-[9999] absolute left-0 right-0 -bottom-[10.9rem]  bg-primary-black "
         >
           {NAVITEMS.map((nav) => (
             <Link
