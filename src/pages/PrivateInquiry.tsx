@@ -23,8 +23,10 @@ const PrivateInquiry = () => {
   const content = watch("content");
   const nickname = watch("nickname");
 
+  const passwordRegex = /^[0-9]{4}$/;
+
   const isFormFilled =
-    title && password && content && nickname && password.length === 4;
+    title && password && content && nickname && passwordRegex.test(password);
 
   const handleTogglePassword = () => setDisplayPassword(!displayPassword);
   return (
@@ -78,7 +80,7 @@ const PrivateInquiry = () => {
             type="text"
             className="w-full p-5 border border-[#737373] focus:border-[#7FEEF6] focus:outline-none  bg-secondary-black rounded-[10px] sm:h-[60px] md:h-[64px]"
           />
-          <div>
+          <div className="">
             <div className="relative  ">
               {" "}
               <input
@@ -98,9 +100,9 @@ const PrivateInquiry = () => {
                 />
               </button>
             </div>
-            {password?.length !== 4 && password?.length > 0 && (
-              <p className="text-[#FF4079] text-xs p-2">
-                유효한 비밀번호가 아닙니다.
+            {password && !passwordRegex.test(password) && (
+              <p className="text-[#FF4079] text-xs p-2 ">
+                비밀번호는 숫자 4자리만 입력할 수 있습니다.
               </p>
             )}
           </div>
