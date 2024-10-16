@@ -9,9 +9,13 @@ export const useCourtsDataHook = (
     queryKey: ["all courts data", search, district],
     queryFn: ({ pageParam = 1 }) => getAllCourts(pageParam, search, district),
     initialPageParam: 1,
-    getNextPageParam: (lastPage) => {
-      const nextPage = lastPage.data.current_index + 1;
-      const hasNextPage = nextPage <= lastPage.data.end_index;
+    getNextPageParam: (page) => {
+      const { current_index, end_index } = page.data;
+      console.log("currrent index", current_index);
+      console.log("End index:", end_index);
+
+      const nextPage = current_index + 1;
+      const hasNextPage = nextPage <= end_index;
 
       return hasNextPage ? nextPage : undefined;
     },

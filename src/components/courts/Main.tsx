@@ -8,17 +8,23 @@ import { useCourtsDataHook } from "../../hooks/useCourtsDataHook";
 import NoResults from "../common/NoResults";
 import { Court } from "../../interfaces/games";
 import MainLayout from "../common/MainLayout";
+import { useInView } from "react-intersection-observer";
 
 const Main = () => {
   const [displayDropbox, setDisplayDropbox] = useState(false);
   const [selectedCity, setSelectedCity] = useState("");
   const [input, setInput] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const { data: courtsData, refetch } = useCourtsDataHook(
-    searchInput,
-    selectedCity
-  );
-  console.log(courtsData);
+  const {
+    data: courtsData,
+    refetch,
+    fetchNextPage,
+    hasNextPage,
+  } = useCourtsDataHook(searchInput, selectedCity);
+
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+  });
 
   const handleSelectCity = (input: string) => {
     setSelectedCity(input);
@@ -35,13 +41,19 @@ const Main = () => {
   };
 
   useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
+
+  useEffect(() => {
     refetch();
   }, [selectedCity, setSelectedCity, refetch, searchInput, input]);
   return (
     <MainLayout>
       {/* title */}
       <div className="space-y-[1.25rem] text-[#fff] sm:text-center md:text-start">
-        <h1 className="text-[32px] font-[600]">경기 목록</h1>
+        <h1 className="text-[32px] font-[600]">경기장 목록</h1>
         <h2 className="text-[20px] font-[400]">
           동네에 있는 경기장을 찾아보세요!
         </h2>
@@ -107,16 +119,16 @@ const Main = () => {
             {courtsData?.pages.map((page) => {
               return page.data.page_content.length > 0 ? (
                 page.data.page_content.map((court: Court) => (
-                  <CourtCard court={court} />
+                  <CourtCard key={court.id} court={court} />
                 ))
               ) : (
                 <NoResults />
               );
             })}
+            {hasNextPage && <div ref={ref} className="h-1 w-full opacity-0" />}{" "}
           </div>
         </div>
-
-        <CourtMap />
+        <CourtMap courtsData={courtsData} />
       </div>
 
       {/* bottom */}
