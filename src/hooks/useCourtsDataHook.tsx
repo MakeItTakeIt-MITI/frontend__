@@ -6,14 +6,14 @@ export const useCourtsDataHook = (
   district?: string | null | undefined
 ) => {
   return useInfiniteQuery({
-    queryKey: ["all courts data"],
-    queryFn: ({ pageParam = 1 }) => getAllCourts(search, pageParam, district),
+    queryKey: ["all courts data", search, district],
+    queryFn: ({ pageParam = 1 }) => getAllCourts(pageParam, search, district),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      const nextPage = lastPage.current_index + 1;
-      const hasNextPage = nextPage <= lastPage.end_index;
+      const nextPage = lastPage.data.current_index + 1;
+      const hasNextPage = nextPage <= lastPage.data.end_index;
 
-      return hasNextPage ? nextPage : null;
+      return hasNextPage ? nextPage : undefined;
     },
   });
 };
