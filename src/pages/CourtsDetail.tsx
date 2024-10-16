@@ -16,7 +16,7 @@ const CourtsDetail = () => {
       <div className="relative w-[43.25rem] sm:space-y-1 md:space-y-5  h-full">
         <MobileDetailMap />
         <DetailHeader />
-        <div className=" sm:space-x-0  md:space-x-5  flex sm:justify-center">
+        <div className=" sm:space-x-0  md:space-x-5  flex sm:justify-center  ">
           <DetailsList selectedCourtsData={selectedCourtsData} />
           <DetailMap />
         </div>
