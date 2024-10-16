@@ -15,11 +15,13 @@ import MoveToAppBanner from "../common/MoveToAppBanner";
 interface MainContentProps {
   handleDisplayFilterBox: () => void;
   allGamesData: Game[];
+  isLoading: boolean;
 }
 
 const MainContent = ({
   handleDisplayFilterBox,
   allGamesData,
+  isLoading,
 }: MainContentProps) => {
   const {
     selectedStatus,
@@ -120,6 +122,7 @@ const MainContent = ({
               <GameListContainer
                 allGamesData={allGamesData}
                 handleSetCoords={handleSetCoords}
+                isLoading={isLoading}
               />
             )}
             <MobileGameListContainer allGamesData={allGamesData} />

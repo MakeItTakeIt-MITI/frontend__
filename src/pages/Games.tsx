@@ -27,7 +27,11 @@ export const Games = () => {
   const { setSelectedDate, resetFilterHeader } = useGameFilterStore();
 
   // data fetching
-  const { data: allGamesData, refetch } = useGamesDataHook({
+  const {
+    data: allGamesData,
+    refetch,
+    isLoading,
+  } = useGamesDataHook({
     startdate: yearMonthDay,
     starttime: formattedFullTime,
     status: selectedStatuses,
@@ -71,6 +75,7 @@ export const Games = () => {
       <MainContent
         handleDisplayFilterBox={handleDisplayFilterBox}
         allGamesData={allGamesData?.data}
+        isLoading={isLoading}
       />
       <Footer />
     </>
