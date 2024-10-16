@@ -10,6 +10,7 @@ import { Game } from "../../interfaces/games";
 import { useState } from "react";
 import MobileGameListContainer from "./MobileGameListContainer";
 import FilteredGameListContainer from "./FilteredGameListContainer";
+import MoveToAppBanner from "../common/MoveToAppBanner";
 
 interface MainContentProps {
   handleDisplayFilterBox: () => void;
@@ -65,7 +66,7 @@ const MainContent = ({
   };
 
   return (
-    <section className="bg-secondary-black h-[882px] sm:px-[0.81rem] md:px-0  pt-[3.75rem]  sm:pb-[3.75rem] md:pb-[6.25rem]">
+    <section className="bg-secondary-black min-h-screen sm:px-[0.81rem] md:px-0  pt-[3.75rem]  sm:pb-[3.75rem] md:pb-[6.25rem]">
       <div className=" sm:w-full  md:w-[768px] sm:px-[0.5rem] md:px-0 h-full mx-auto sm:space-y-[1.75rem] md:space-y-[2.62rem]">
         {/* Top */}
         <div className="space-y-5 sm:text-center md:text-left text-[#fff]">
@@ -133,6 +134,7 @@ const MainContent = ({
             />
           </div>
         </div>
+        <MoveToAppBanner />
       </div>
     </section>
   );

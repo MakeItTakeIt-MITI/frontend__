@@ -52,7 +52,6 @@ const NaverMap = ({
     });
 
     // 지도 이동 이벤트
-    // console.log(longitude, latitude);
     if (latitude !== null && longitude !== null) {
       const location = new naver.maps.LatLng(latitude, longitude);
       naverMap.setCenter(location);

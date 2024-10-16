@@ -17,12 +17,12 @@ const DetailMap = () => {
         courtDetail?.latitude,
         courtDetail?.longitude
       ),
-      zoom: 13,
+      zoom: 16,
       pinchZoom: true,
       scrollWheel: true,
     });
 
-    new naver.maps.Marker({
+    const markerLocation = new naver.maps.Marker({
       position: new naver.maps.LatLng(
         courtDetail?.latitude,
         courtDetail?.longitude
@@ -32,6 +32,8 @@ const DetailMap = () => {
         content: `<img src=${marker} alt="marker" />`,
       },
     });
+
+    map2.setCenter(markerLocation.getPosition());
   }, [courtDetail]);
   return (
     <div

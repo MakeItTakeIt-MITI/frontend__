@@ -1,4 +1,4 @@
-import GameStatusItem from "../home/GameStatusItem";
+import GameStatusItem from "../games/GameStatusItem";
 import { GAMESTATUS } from "../../constants/status";
 
 const FilterStatusField = () => {

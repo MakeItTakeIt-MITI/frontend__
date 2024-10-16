@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Hero from "../components/home/Hero";
-import MainContent from "../components/home/MainContent";
+import Hero from "../components/games/Hero";
+import MainContent from "../components/games/MainContent";
 import GameFilterContainer from "../components/game-filter/GameFilterContainer";
 import Footer from "../components/common/Footer";
 import { useGamesDataHook } from "../hooks/useGamesDataHook";
