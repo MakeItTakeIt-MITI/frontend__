@@ -11,8 +11,6 @@ export const useCourtsDataHook = (
     initialPageParam: 1,
     getNextPageParam: (page) => {
       const { current_index, end_index } = page.data;
-      console.log("currrent index", current_index);
-      console.log("End index:", end_index);
 
       const nextPage = current_index + 1;
       const hasNextPage = nextPage <= end_index;
