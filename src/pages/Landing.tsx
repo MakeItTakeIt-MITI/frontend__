@@ -22,7 +22,7 @@ const Landing = () => {
       <Payments />
       <PaymentsMobile />
 
-      <div className="h-[32.5rem] w-full pt-[6.12rem] pb-[8.88rem] bg-primary-black">
+      <div className="h-[21.375rem] w-full pt-[3.75rem] pb-[5rem] bg-primary-black">
         <Footer />
       </div>
     </div>
