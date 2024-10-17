@@ -44,11 +44,11 @@ const NaverMap = ({
       addressesList.push(game.court.address);
     });
   }
+
   useEffect(() => {
     const naverMap = new naver.maps.Map("map", {
+      center: new naver.maps.LatLng(37.554722, 126.972778),
       zoom: 14,
-      pinchZoom: true,
-      scrollWheel: true,
     });
 
     // 지도 이동 이벤트
@@ -57,10 +57,7 @@ const NaverMap = ({
       naverMap.setCenter(location);
     }
 
-    // const markers: string[] = [];
-
     // 다중 마커 표시
-    // allGamesData?.map((game: Game) => {
     let selectedMarker: any | null = null;
 
     for (let index = 0; index < allGamesData?.length; index++) {
@@ -73,7 +70,7 @@ const NaverMap = ({
       const markerCount = filteredAddresses.length;
 
       const markerHTML = `
-      <a href="${game.id}" id="element-${index}"  class="relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+      <a href="${game.id}" id="elem nt-${index}"  class="relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
            <span>${game.fee.toLocaleString("ko-KR", {
              style: "currency",
              currency: "KRW",
@@ -175,7 +172,12 @@ const NaverMap = ({
               naverMap.setCenter(
                 new naver.maps.LatLng(geoLatitude, geoLongitude)
               );
-            }, 500);
+
+              setTimeout(() => {
+                customControl.getElement().innerHTML = locationBtnHtml;
+                isSelected = false;
+              }, 1500);
+            }, 800);
           } else {
             customControl.getElement().innerHTML = locationBtnHtml;
           }
