@@ -7,9 +7,13 @@ import FilteredStatus from "./FilteredStatus";
 
 type FilterHeaderProps = {
   handleCloseFilterBox: () => void;
+  handleResetFilters: () => void;
 };
 
-const FilterHeader = ({ handleCloseFilterBox }: FilterHeaderProps) => {
+const FilterHeader = ({
+  handleCloseFilterBox,
+  handleResetFilters,
+}: FilterHeaderProps) => {
   const {
     selectedStatus,
     selectedDate,
@@ -54,7 +58,12 @@ const FilterHeader = ({ handleCloseFilterBox }: FilterHeaderProps) => {
           resetStatus={handleResetGameStatus}
         />
       </div>
-      <button onClick={handleCloseFilterBox}>
+      <button
+        onClick={() => {
+          handleResetFilters();
+          handleCloseFilterBox();
+        }}
+      >
         <img src={close} alt="close" />
       </button>
     </div>

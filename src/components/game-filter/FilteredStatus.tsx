@@ -28,8 +28,6 @@ const FilteredStatus = ({
       ${filterDate || filterTime || filterStatus ? "font-[500] " : "font-[600]"} 
       rounded-[50px] border border-[#737373]`}
       >
-        {/* <div className="flex items-center gap-2"> {content}</div> */}
-        {/* {content} */}
         <h1>{content}</h1>
       </button>
 
@@ -41,7 +39,6 @@ const FilteredStatus = ({
       ${filterDate || filterTime || filterStatus ? "font-[500] " : "font-[600]"} 
       rounded-[50px] border border-[#737373]`}
       >
-        {/* <span> {content === '경기 시작 시간' && setSelectedTimeDate('시간')}</span> */}
         <h1> {content}</h1>
         {filterDate || filterTime || filterStatus ? (
           <img src={mobile_drop} alt="drop" />
