@@ -14,7 +14,7 @@ export const getAllCourts = async (pageParam: number | null, search: string | nu
 
 export const getProceededCourtList = async (courtId: number | null, pageParam: number | null) => {
     try {
-        const response = await axiosUrl.get(`/courts/${courtId}/games`, { params: { pageParam } })
+        const response = await axiosUrl.get(`/courts/${courtId}/games?page=${pageParam}`)
         return response.data
     } catch {
         throw new Error

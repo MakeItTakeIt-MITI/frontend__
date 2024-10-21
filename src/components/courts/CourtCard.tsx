@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-// import { Court } from "../../interfaces/games";
+import { CourtsCardField } from "../../interfaces/courts";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const CourtCard = ({ court }: any) => {
+const CourtCard = ({ court }: { court: CourtsCardField }) => {
   return (
     <Link
       to={`/courts/${court.id}`}

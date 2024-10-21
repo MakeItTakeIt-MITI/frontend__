@@ -67,8 +67,8 @@ const MainContent = ({
   };
 
   return (
-    <section className="bg-secondary-black min-h-screen sm:px-[0.81rem] md:px-0  pt-[3.75rem]  sm:pb-[3.75rem] md:pb-[6.25rem]">
-      <div className=" sm:w-full  md:w-[768px] sm:px-[0.5rem] md:px-0 h-full mx-auto sm:space-y-[1.75rem] md:space-y-[2.62rem]">
+    <section className="page-padding bg-secondary-black min-h-screen sm:px-[0.81rem] md:px-0  ">
+      <div className=" page-layer sm:px-[0.5rem] md:px-0 h-full sm:space-y-[1.75rem] md:space-y-[2.62rem]">
         {/* Top */}
         <div className="space-y-5 sm:text-center md:text-left text-[#fff]">
           <h1 className="sm:font-bold md:font-[600] sm:text-[26px] md:text-[32px]">

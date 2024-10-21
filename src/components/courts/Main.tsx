@@ -5,7 +5,6 @@ import CourtCard from "./CourtCard";
 import { CITIES } from "../../constants/locations";
 import { useEffect, useState } from "react";
 import { useCourtsInfiniteDataHook } from "../../hooks/useCourtsInfiniteDataHook";
-import NoResults from "../common/NoResults";
 import { Court } from "../../interfaces/games";
 import MainLayout from "../common/MainLayout";
 import { useInView } from "react-intersection-observer";
@@ -22,6 +21,8 @@ const Main = () => {
     fetchNextPage,
     hasNextPage,
   } = useCourtsInfiniteDataHook(searchInput, selectedCity);
+
+  console.log(courtsData);
 
   const { ref, inView } = useInView({
     threshold: 0.2,
@@ -115,7 +116,7 @@ const Main = () => {
               )}
             </div>
           </div>
-          {/* game list */}
+
           <div className="bg-light-dark sm:h-[29.5rem] md:h-[426px] w-full p-4 space-y-3 overflow-y-scroll rounded-[20px]  custom-scrollbar">
             {courtsData?.pages.map((page) => {
               return page.data.page_content.length > 0 ? (
@@ -123,7 +124,14 @@ const Main = () => {
                   <CourtCard key={court.id} court={court} />
                 ))
               ) : (
-                <NoResults />
+                <div className="w-full h-full flex  flex-col gap-3 items-center justify-center ">
+                  <h1 className="text-primary-white text-[24px] font-bold ">
+                    조회 결과가 없습니다.
+                  </h1>
+                  <h2 className="text-sm font-[400] text-[#d4d4d4]">
+                    검색어와 필터를 변경하여 다른 경기를 찾아보세요!
+                  </h2>
+                </div>
               );
             })}
             {hasNextPage && <div ref={ref} className="h-1 w-full opacity-0" />}{" "}

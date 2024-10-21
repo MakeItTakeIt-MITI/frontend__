@@ -27,8 +27,8 @@ const InquiriesList = () => {
 
   return (
     <>
-      <section className="bg-secondary-black  md:pt-[3.75rem] md:pb-[6.25rem]  md:space-y-[100px]">
-        <div className="md:w-[767px] sm:w-full sm:p-5 md:p-0 sm:space-y-[22px] md:space-y-[42px] mx-auto">
+      <section className="bg-secondary-black  page-padding  md:space-y-[100px]">
+        <div className="page-layer sm:p-5 md:p-0 sm:space-y-[22px] md:space-y-[42px] ">
           <div className="space-y-5">
             <h1 className="text-white md:text-[32px] sm:text-[26px] font-semibold ">
               문의하기

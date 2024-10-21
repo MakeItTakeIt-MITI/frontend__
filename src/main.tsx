@@ -8,7 +8,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import GameDetail from "./pages/GameDetail.tsx";
 import Courts from "./pages/Courts.tsx";
 import Faq from "./pages/Faq.tsx";
-import CourtsDetail from "./pages/CourtsDetail.tsx";
 import React from "react";
 import NotFound from "./pages/NotFound.tsx";
 import Landing from "./pages/Landing.tsx";
@@ -17,6 +16,7 @@ import InquiriesList from "./pages/Inquiries.tsx";
 import Policies from "./pages/Policies.tsx";
 import PoliciesDetails from "./pages/PoliciesDetails.tsx";
 import InquiryDetail from "./pages/InquiryDetail.tsx";
+import CourtGamesList from "./pages/CourtGamesList.tsx";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       {
         path: "courts",
         children: [
-          { path: ":id", element: <CourtsDetail /> },
+          { path: ":id", element: <CourtGamesList /> },
           { path: "list", element: <Courts /> },
         ],
       },

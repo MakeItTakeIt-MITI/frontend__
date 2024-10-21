@@ -5,7 +5,7 @@ import hero from "../assets/v11/court_hero.png";
 
 const Courts = () => {
   return (
-    <section className="bg-secondary-black ">
+    <div className="bg-secondary-black ">
       {/* top */}
       <div className="sm:h-[16rem] md:h-[20rem] flex items-center justify-center bg-[#000] relative">
         <img src={hero} alt="hero" className="h-full " />
@@ -23,7 +23,7 @@ const Courts = () => {
 
       <Main />
       <Footer />
-    </section>
+    </div>
   );
 };
 

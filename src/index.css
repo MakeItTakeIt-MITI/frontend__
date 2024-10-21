@@ -55,6 +55,14 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   .flexCenter {
     @apply flex items-center justify-center;
   }
+
+  .page-layer {
+    @apply md:w-[48rem] sm:w-full mx-auto;
+  }
+
+  .page-padding {
+    @apply pt-[3.75rem] md:pb-[6.25rem] sm:pb-[3.76rem];
+  }
 }
 
 /* Chrome, Safari, Edge, Opera */

@@ -45,9 +45,9 @@ const Dropdown = ({
     <div
       ref={dropdownRef}
       onClick={() => setIsOpen(!isOpen)}
-      className="cursor-pointer relative pl-[1.25rem] pr-[0.25rem] py-[0.25rem] sm:w-[5.25rem] md:w-[10rem] h-[2rem] rounded-[0.75rem] border border-dark-card flex items-center justify-between"
+      className="cursor-pointer relative pl-[1.25rem] pr-[0.25rem] py-[0.25rem] sm:w-[5.25rem] md:w-[10rem] h-[2rem] rounded-[0.75rem] bg-[#404040] text-white  border border-dark-card flex items-center justify-between"
     >
-      <span className="text-primary-white font-bold md:text-base sm:text-sm">
+      <span className="text-primary-white font-bold md:text-sm sm:text-base">
         {selectedOption}
       </span>
       <button type="button">
