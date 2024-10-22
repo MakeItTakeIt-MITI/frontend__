@@ -18,7 +18,7 @@ const CourtDetailCard = ({ game }: CourtDetailCard) => {
           style={{
             backgroundColor:
               game.game_status === "open"
-                ? "#b9dbdc"
+                ? "#A3C0E3"
                 : game.game_status === "canceled"
                   ? "#E3C6CB"
                   : game.game_status === "closed"
@@ -38,7 +38,7 @@ const CourtDetailCard = ({ game }: CourtDetailCard) => {
                       ? "#00979A"
                       : "",
           }}
-          className="flex items-center justify-center text-[10px] rounded-[0.125rem] max-w-[2.8125rem] w-full md:h-[1.125rem]  "
+          className="font-bold p-1 text-[10px] rounded-[0.125rem]  "
         >
           {(game?.game_status === "open" && "모집중") ||
             (game?.game_status === "canceled" && "경기 취소") ||
@@ -48,25 +48,23 @@ const CourtDetailCard = ({ game }: CourtDetailCard) => {
         <h1 className="font-bold  text-[#E5E5E5]">{game.title}</h1>
       </div>
       <div className="flex justify-between items-end">
-        <div className="space-y-[4.5px] text-[#E5E5E5] text-[12px]">
+        <div className="space-y-[4.5px] text-[#E5E5E5] text-xs">
           <div className="flex gap-1">
             <img src={time} alt="time" />
             <span>
-              {game.startdate} {game.starttime.slice(0, 5)} ~{" "}
-              {game.endtime.slice(0, 5)}
+              {game.starttime.slice(0, 5)} ~ {game.endtime.slice(0, 5)}
             </span>
           </div>
 
           <div className="flex gap-1">
             <img src={participants} alt="participants" />
             <span>
-              {game.num_of_participations} / {game.max_invitation}
+              {game.num_of_participations}/{game.max_invitation}
             </span>
           </div>
         </div>
-        {/* FEE */}
+
         <h2 className="text-primary-teal font-bold">
-          {" "}
           {game?.fee === 0
             ? "무료"
             : game?.fee.toLocaleString("ko-KR", {
