@@ -1,6 +1,5 @@
 import { AllGamesProps } from "../../interfaces/games";
 import { GameCardSkeleton } from "./GameCardSkeleton";
-// import useLatLongStore from "../../store/useLatLongStore";
 import GameListCard from "./GameListCard";
 import "./scrollbar.css";
 
@@ -25,7 +24,7 @@ const GameListContainer = ({
         </>
       )}
       {allGamesData?.length === 0 ? (
-        <div className="w-full h-full flex items-center justify-center">
+        <div className="w-full h-full flex items-center justify-center text-white font-[500] text-lg">
           <h1>진행중인 경기가 없습니다.</h1>
         </div>
       ) : (

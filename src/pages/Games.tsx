@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Hero from "../components/games/Hero";
 import MainContent from "../components/games/MainContent";
 import GameFilterContainer from "../components/game-filter/GameFilterContainer";
 import Footer from "../components/common/Footer";
@@ -7,40 +6,31 @@ import { useGamesDataHook } from "../hooks/useGamesDataHook";
 import useDateSelectionStore from "../store/useDateSelectionStore";
 import useTimeFieldStore from "../store/useTimeStore";
 import useStatusSelectionStore from "../store/useStatusSelectionStore";
-import { DATES } from "../constants/calender";
-import useGameFilterStore from "../store/useGameFilterStore";
+
 import useCurrentMonthStore from "../store/useCurrentMonthStore";
 
-export const Games = () => {
-  const INITIAL_DATES = DATES();
-  const FIRST_DATE = INITIAL_DATES[0];
-  const initialDateField = `${FIRST_DATE.month}.${FIRST_DATE.date} (${FIRST_DATE.dayKorean})`;
-  const yearMonthToDate = `${FIRST_DATE.year}-${FIRST_DATE.formattedMonth}-${FIRST_DATE.formattedDate}`;
+import hero from "../assets/v11/hero.png";
+import mobile_hero from "../assets/v11/mobile-hero.png";
+import { useFilterBox } from "../hooks/game-list-filters/useFilterBox";
+import { useFilterBoxSettings } from "../hooks/game-list-filters/useFilterBoxSettings";
 
-  // react hooks
-  const [displayFilterBox, setDisplayFilterBox] = useState(false);
+export const Games = () => {
+  const [displayFilterBox, setDisplayFilterBox] = useState<boolean>(false);
+  // react custom hooks
+  const { handleToggleFilterBox } = useFilterBox(
+    displayFilterBox,
+    setDisplayFilterBox
+  );
+  const { handleResetFilters, handleApplyFilters } =
+    useFilterBoxSettings(setDisplayFilterBox);
 
   //zustand store
-  const { yearMonthDay, setYearMonthDay, setDateField, dateField } =
-    useDateSelectionStore();
-  const {
-    formattedFullTime,
-    resetTimeField,
-    selectedDayStatus,
-    selectedHour,
-    selectedMinute,
-  } = useTimeFieldStore();
-  const { selectedStatuses, resetStatuses } = useStatusSelectionStore();
-  const {
-    setSelectedDate,
-    resetFilterHeader,
-    setSelectedTimeDate,
-    setSelectedStatus,
-  } = useGameFilterStore();
-
+  const { yearMonthDay } = useDateSelectionStore();
+  const { formattedFullTime } = useTimeFieldStore();
+  const { selectedStatuses } = useStatusSelectionStore();
   const { currentMonth } = useCurrentMonthStore();
 
-  // data fetching
+  // fetch game list API
   const {
     data: allGamesData,
     refetch,
@@ -51,66 +41,64 @@ export const Games = () => {
     status: selectedStatuses,
   });
 
-  const handleCloseFilterBox = () => {
-    setDisplayFilterBox(false);
-  };
-
-  const handleDisplayFilterBox = () => {
-    setDisplayFilterBox(true);
-  };
-
-  const handleResetFilters = () => {
-    setYearMonthDay(yearMonthToDate);
-    setSelectedDate(initialDateField);
-    setDateField(initialDateField);
-    resetFilterHeader();
-    resetTimeField();
-    resetStatuses();
-  };
-
-  const timeFormat = `${selectedDayStatus} ${selectedHour}:${selectedMinute}`;
-
-  const handleApplyFilters = () => {
-    if (dateField.length > 1) {
-      setSelectedDate(dateField);
-    }
-    setSelectedTimeDate(timeFormat);
-
-    if (selectedStatuses.length >= 1 && selectedStatuses.length < 2) {
-      setSelectedStatus(`${selectedStatuses}`);
-    } else if (selectedStatuses.length > 1 && selectedStatuses.length <= 4) {
-      const statusSpacing = `${selectedStatuses} `;
-      setSelectedStatus(statusSpacing);
-    }
-
-    handleCloseFilterBox();
-  };
-
   useEffect(() => {
-    const body = document.querySelector("body");
-    if (body) {
-      body.style.overflow = displayFilterBox ? "hidden" : "auto";
-    }
-
     refetch();
-  }, [displayFilterBox, allGamesData, refetch, selectedStatuses]);
+  }, [selectedStatuses, refetch, displayFilterBox]);
+
   return (
     <>
+      <section className="sm:hidden md:block w-full h-[20rem] bg-primary-green">
+        <div className="  flex justify-end items-center pr-[11rem]">
+          <div className=" w-[511px] h-[120px] flex flex-col gap-4 text-[#fff]">
+            <span className="font-bold">MITI 서비스 런칭</span>
+            <h1 className="text-[44px] font-bold">
+              오늘 퇴근하고 농구 어떠세요?{" "}
+            </h1>
+            <span className="text-5 font-[400]">
+              당신 근처의 경기를 지금 찾아보세요.
+            </span>
+          </div>
+          <div className="w-[549px]">
+            <img src={hero} alt="hero" />
+          </div>
+        </div>
+      </section>
+
+      {/* Mobile */}
+      <section className="sm:block md:hidden h-[16.125rem]  bg-full bg-cover bg-no-repeat  bg-primary-green relative">
+        {/* img */}
+        <div className="mx-auto   ">
+          <img src={mobile_hero} alt="hero shadow" className="h-full w-full" />
+        </div>
+        <div className="space-y-10">
+          {/* text */}
+          <div className=" flexCenter flex-col  gap-[1.5rem] text-[#fff] absolute bottom-[3.75rem] left-0 right-0 ">
+            <div className="flexCenter flex-col gap-[0.75rem]   font-bold">
+              <h2 className="text-sm ">MITI 서비스 런칭</h2>
+              <h1 className="text-2xl ">오늘 퇴근하고 농구 어떠세요? </h1>
+            </div>
+            <h3 className="font-[300] text-sm">
+              당신 근처의 경기를 지금 찾아보세요.
+            </h3>
+          </div>
+        </div>
+      </section>
+
+      <MainContent
+        handleToggleFilterBox={handleToggleFilterBox}
+        allGamesData={allGamesData?.data}
+        isLoading={isLoading}
+      />
+
       {displayFilterBox && (
         <GameFilterContainer
-          handleCloseFilterBox={handleCloseFilterBox}
+          handleToggleFilterBox={handleToggleFilterBox}
           handleResetFilters={handleResetFilters}
           handleApplyFilters={handleApplyFilters}
           currentMonth={currentMonth}
         />
       )}
 
-      <Hero />
-      <MainContent
-        handleDisplayFilterBox={handleDisplayFilterBox}
-        allGamesData={allGamesData?.data}
-        isLoading={isLoading}
-      />
       <Footer />
     </>
   );

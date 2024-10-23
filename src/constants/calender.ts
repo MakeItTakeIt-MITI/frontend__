@@ -3,7 +3,6 @@ export const DATES = () => {
     const availableDates = [];
 
     for (let i = 0; i < 14; i++) {
-        // for (let i = 0; i < 31; i++) {
         const newDate = new Date();
         newDate.setDate(newDate.getDate() + i);
         availableDates.push(newDate);
@@ -34,3 +33,10 @@ export const DAYSTATUS = () => {
     return getCurrentTimePeriodInKorean();
 
 }
+
+
+
+const INITIAL_DATES = DATES();
+const FIRST_DATE = INITIAL_DATES[0];
+export const initialDateField = `${FIRST_DATE.month}.${FIRST_DATE.date} (${FIRST_DATE.dayKorean})`;
+export const yearMonthToDate = `${FIRST_DATE.year}-${FIRST_DATE.formattedMonth}-${FIRST_DATE.formattedDate}`;

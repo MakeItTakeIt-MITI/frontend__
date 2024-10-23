@@ -3,9 +3,9 @@ import NaverMap from "./NaverMap";
 import GameListContainer from "./GameListContainer";
 import FilteredStatus from "../game-filter/FilteredStatus";
 import useGameFilterStore from "../../store/useGameFilterStore";
-import useTimeFieldStore from "../../store/useTimeStore";
-import useStatusSelectionStore from "../../store/useStatusSelectionStore";
-import useDateSelectionStore from "../../store/useDateSelectionStore";
+// import useTimeFieldStore from "../../store/useTimeStore";
+// import useStatusSelectionStore from "../../store/useStatusSelectionStore";
+// import useDateSelectionStore from "../../store/useDateSelectionStore";
 import { Game } from "../../interfaces/games";
 import { useState } from "react";
 import MobileGameListContainer from "./MobileGameListContainer";
@@ -13,24 +13,18 @@ import FilteredGameListContainer from "./FilteredGameListContainer";
 import MoveToAppBanner from "../common/MoveToAppBanner";
 
 interface MainContentProps {
-  handleDisplayFilterBox: () => void;
+  handleToggleFilterBox: () => void;
   allGamesData: Game[];
   isLoading: boolean;
 }
 
 const MainContent = ({
-  handleDisplayFilterBox,
+  handleToggleFilterBox,
   allGamesData,
   isLoading,
 }: MainContentProps) => {
-  const {
-    selectedStatus,
-    selectedDate,
-    selectedTimeDate,
-    resetSelectedDate,
-    resetSelectedTimeDate,
-    resetSelectedStatus,
-  } = useGameFilterStore();
+  const { selectedStatus, selectedDate, selectedTimeDate } =
+    useGameFilterStore();
   const [selected, setSelected] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<string>("");
   const [isAddressSelected, setIsAddressSelected] = useState<boolean>(false);
@@ -38,28 +32,9 @@ const MainContent = ({
   const [latitude, setLatitude] = useState<null | string>(null);
   const [longitude, setLongitude] = useState<null | string>(null);
 
-  const { resetTimeField } = useTimeFieldStore();
-  const { resetStatuses } = useStatusSelectionStore();
-  const { resetDateField } = useDateSelectionStore();
-
   const handleSetCoords = (lat: string, long: string) => {
     setLatitude(lat);
     setLongitude(long);
-  };
-
-  const handleResetDateField = () => {
-    resetSelectedDate();
-    resetDateField();
-  };
-
-  const handleResetTimeField = () => {
-    resetSelectedTimeDate();
-    resetTimeField();
-  };
-
-  const handleResetGameStatus = () => {
-    resetSelectedStatus();
-    resetStatuses();
   };
 
   const handleSetSelected = () => {
@@ -85,26 +60,22 @@ const MainContent = ({
             <div className="flex items-center justify-between w-full ">
               <div className=" flex  items-center justify-start gap-3    md:px-0  sm:overflow-x-scroll sm:overflow-y-hidden md:overflow-hidden  ">
                 <FilteredStatus
-                  handleDisplayFilterBox={handleDisplayFilterBox}
+                  handleDisplayFilterBox={handleToggleFilterBox}
                   content={selectedDate}
-                  // content={currentMonth}
-                  resetStatus={handleResetDateField}
                 />
                 <FilteredStatus
                   content={selectedTimeDate}
-                  handleDisplayFilterBox={handleDisplayFilterBox}
-                  resetStatus={handleResetTimeField}
+                  handleDisplayFilterBox={handleToggleFilterBox}
                 />
                 <FilteredStatus
                   content={selectedStatus}
-                  handleDisplayFilterBox={handleDisplayFilterBox}
-                  resetStatus={handleResetGameStatus}
+                  handleDisplayFilterBox={handleToggleFilterBox}
                 />
               </div>
               <button
                 className="sm:hidden md:block"
                 type="button"
-                onClick={handleDisplayFilterBox}
+                onClick={handleToggleFilterBox}
               >
                 <img src={filter} alt="filter" />
               </button>

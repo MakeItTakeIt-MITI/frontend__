@@ -3,7 +3,7 @@ import mobile_drop from "../../assets/v11/mobile-drop.svg";
 type FilteredStatus = {
   content: string;
   handleDisplayFilterBox?: () => void;
-  resetStatus: () => void;
+  // resetStatus: () => void;
 };
 
 const FilteredStatus = ({

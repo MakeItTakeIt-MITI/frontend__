@@ -6,14 +6,14 @@ import { DATES } from "../../constants/calender";
 import DateCard from "./DateCard";
 
 interface GameFilterProps {
-  handleCloseFilterBox: () => void;
+  handleToggleFilterBox: () => void;
   handleResetFilters: () => void;
   handleApplyFilters: () => void;
   currentMonth: number;
 }
 
 const GameFilterContainer = ({
-  handleCloseFilterBox,
+  handleToggleFilterBox,
   handleResetFilters,
   handleApplyFilters,
   currentMonth,
@@ -29,7 +29,7 @@ const GameFilterContainer = ({
     >
       <div className="rounded-tl-[20px] rounded-tr-[20px] absolute right-0 bottom-0 left-0 mx-auto sm:w-full md:w-[48rem]   bg-secondary-black">
         <FilterHeader
-          handleCloseFilterBox={handleCloseFilterBox}
+          handleCloseFilterBox={handleToggleFilterBox}
           handleResetFilters={handleResetFilters}
         />
         <hr className="border-[#404040] " />
@@ -66,7 +66,7 @@ const GameFilterContainer = ({
 
         <hr className="border-[#404040] " />
         <FilterButtonsField
-          handleResetField={handleResetFilters}
+          handleResetFilters={handleResetFilters}
           handleApplyFilters={handleApplyFilters}
         />
       </div>
