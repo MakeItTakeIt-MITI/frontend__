@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 export const useFilterBox = (
   displayFilterBox: boolean,
   setDisplayFilterBox: (arg: boolean) => void
 ) => {
-  const handleToggleFilterBox = () => {
+  const handleToggleFilterBox = useCallback(() => {
     setDisplayFilterBox(!displayFilterBox);
-  };
+  }, [displayFilterBox]);
 
   useEffect(() => {
     const body = document.querySelector("body");

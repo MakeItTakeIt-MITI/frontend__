@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import useDateSelectionStore from "../../store/useDateSelectionStore";
 import useStatusSelectionStore from "../../store/useStatusSelectionStore";
 import useTimeFieldStore from "../../store/useTimeStore";
@@ -19,14 +19,14 @@ export const useFilterBoxSettings = (
     setSelectedStatus,
   } = useGameFilterStore();
 
-  const handleResetFilters = () => {
+  const handleResetFilters = useCallback(() => {
     setYearMonthDay(yearMonthToDate);
     setSelectedDate(initialDateField);
     setDateField(initialDateField);
     resetFilterHeader();
     resetTimeField();
     resetStatuses();
-  };
+  }, [yearMonthToDate, initialDateField, initialDateField]);
 
   const timeFormat = useMemo(
     () => `${selectedDayStatus} ${selectedHour}:${selectedMinute}`,

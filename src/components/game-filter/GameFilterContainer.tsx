@@ -29,7 +29,7 @@ const GameFilterContainer = ({
     >
       <div className="rounded-tl-[20px] rounded-tr-[20px] absolute right-0 bottom-0 left-0 mx-auto sm:w-full md:w-[48rem]   bg-secondary-black">
         <FilterHeader
-          handleCloseFilterBox={handleToggleFilterBox}
+          handleToggleFilterBox={handleToggleFilterBox}
           handleResetFilters={handleResetFilters}
         />
         <hr className="border-[#404040] " />
