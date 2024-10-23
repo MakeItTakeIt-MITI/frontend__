@@ -9,6 +9,7 @@ import useTimeFieldStore from "../store/useTimeStore";
 import useStatusSelectionStore from "../store/useStatusSelectionStore";
 import { DATES } from "../constants/calender";
 import useGameFilterStore from "../store/useGameFilterStore";
+import useCurrentMonthStore from "../store/useCurrentMonthStore";
 
 export const Games = () => {
   const INITIAL_DATES = DATES();
@@ -20,11 +21,24 @@ export const Games = () => {
   const [displayFilterBox, setDisplayFilterBox] = useState(false);
 
   //zustand store
-  const { yearMonthDay, setYearMonthDay, setDateField } =
+  const { yearMonthDay, setYearMonthDay, setDateField, dateField } =
     useDateSelectionStore();
-  const { formattedFullTime, resetTimeField } = useTimeFieldStore();
+  const {
+    formattedFullTime,
+    resetTimeField,
+    selectedDayStatus,
+    selectedHour,
+    selectedMinute,
+  } = useTimeFieldStore();
   const { selectedStatuses, resetStatuses } = useStatusSelectionStore();
-  const { setSelectedDate, resetFilterHeader } = useGameFilterStore();
+  const {
+    setSelectedDate,
+    resetFilterHeader,
+    setSelectedTimeDate,
+    setSelectedStatus,
+  } = useGameFilterStore();
+
+  const { currentMonth } = useCurrentMonthStore();
 
   // data fetching
   const {
@@ -54,6 +68,24 @@ export const Games = () => {
     resetStatuses();
   };
 
+  const timeFormat = `${selectedDayStatus} ${selectedHour}:${selectedMinute}`;
+
+  const handleApplyFilters = () => {
+    if (dateField.length > 1) {
+      setSelectedDate(dateField);
+    }
+    setSelectedTimeDate(timeFormat);
+
+    if (selectedStatuses.length >= 1 && selectedStatuses.length < 2) {
+      setSelectedStatus(`${selectedStatuses}`);
+    } else if (selectedStatuses.length > 1 && selectedStatuses.length <= 4) {
+      const statusSpacing = `${selectedStatuses} `;
+      setSelectedStatus(statusSpacing);
+    }
+
+    handleCloseFilterBox();
+  };
+
   useEffect(() => {
     const body = document.querySelector("body");
     if (body) {
@@ -68,6 +100,8 @@ export const Games = () => {
         <GameFilterContainer
           handleCloseFilterBox={handleCloseFilterBox}
           handleResetFilters={handleResetFilters}
+          handleApplyFilters={handleApplyFilters}
+          currentMonth={currentMonth}
         />
       )}
 

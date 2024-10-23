@@ -46,7 +46,7 @@ const DateCard = ({
         handleFilterDate(displayDate, year, formattedMonth, formattedDate);
         setCurrentMonth(month);
       }}
-      className="flex items-center gap-[0.5rem] hover:cursor-pointer"
+      className="flex items-center gap-[0.5rem] cursor-pointer"
     >
       {" "}
       {currentMonth !== month && date === 1 && (

@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import { useCourtsInfiniteDataHook } from "../hooks/useCourtsInfiniteDataHook";
 import { useInView } from "react-intersection-observer";
 
-import CourtCard from "../components/courts/CourtCard";
 import { Court } from "../interfaces/games";
 import CourtMap from "../components/courts/CourtMap";
 import MoveToAppBanner from "../components/common/MoveToAppBanner";
 import SearchContainer from "../components/courts/SearchContainer";
 import FilterContainer from "../components/courts/FilterContainer";
+import { Link } from "react-router-dom";
 
 const Courts = () => {
   const [displayDropbox, setDisplayDropbox] = useState(false);
@@ -99,7 +99,17 @@ const Courts = () => {
               {courtsData?.pages.map((page) => {
                 return page.data.page_content.length > 0 ? (
                   page.data.page_content.map((court: Court) => (
-                    <CourtCard key={court.id} court={court} />
+                    <Link
+                      to={`/courts/${court.id}`}
+                      className="p-4 bg-dark-card md:w-[350px] sm:w-[333px] h-[66px] flex flex-col justify-center rounded-[12px]"
+                    >
+                      <h1 className="font-bold text-primary-white truncate ">
+                        {court.name}
+                      </h1>
+                      <h2 className="text-[12px] text-[#a3a3a3] font-[500] truncate">
+                        {court.address} {court.address_detail}
+                      </h2>
+                    </Link>
                   ))
                 ) : (
                   <div className="w-full h-full flex  flex-col gap-3 items-center justify-center ">

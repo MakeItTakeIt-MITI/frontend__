@@ -46,9 +46,12 @@ const NaverMap = ({
   }
 
   useEffect(() => {
-    const naverMap = new naver.maps.Map("map", {
+    const naverMap = new naver.maps.Map("games-map", {
       center: new naver.maps.LatLng(37.554722, 126.972778),
       zoom: 14,
+      scrollWheel: true,
+      disableKineticPan: false,
+      // tileDuration: 700,
     });
 
     // 지도 이동 이벤트
@@ -197,7 +200,7 @@ const NaverMap = ({
   ]);
   return (
     <div
-      id="map"
+      id="games-map"
       className="sm:hidden md:block w-[381px] h-[494px] rounded-[20px]"
     ></div>
   );

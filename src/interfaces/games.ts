@@ -4,6 +4,7 @@ export type Court = {
     address_detail: string;
     latitude: string;
     longitude: string;
+    name: string
 }
 
 export type Game = {

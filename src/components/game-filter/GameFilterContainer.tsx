@@ -1,48 +1,24 @@
 import FilterTimeField from "./FilterTimeField";
 import FilterButtonsField from "./FilterButtonsField";
-import FilterCalenderField from "./FilterCalenderField";
 import FilterHeader from "./FilterHeader";
 import FilterStatusField from "./FilterStatusField";
-import useGameFilterStore from "../../store/useGameFilterStore";
-import useTimeFieldStore from "../../store/useTimeStore";
-import useStatusSelectionStore from "../../store/useStatusSelectionStore";
-import useDateSelectionStore from "../../store/useDateSelectionStore";
+import { DATES } from "../../constants/calender";
+import DateCard from "./DateCard";
 
 interface GameFilterProps {
   handleCloseFilterBox: () => void;
   handleResetFilters: () => void;
+  handleApplyFilters: () => void;
+  currentMonth: number;
 }
 
 const GameFilterContainer = ({
   handleCloseFilterBox,
   handleResetFilters,
+  handleApplyFilters,
+  currentMonth,
 }: GameFilterProps) => {
-  // stage management store
-  const { setSelectedStatus, setSelectedDate, setSelectedTimeDate } =
-    useGameFilterStore();
-
-  const { selectedDayStatus, selectedHour, selectedMinute } =
-    useTimeFieldStore();
-  const { selectedStatuses } = useStatusSelectionStore();
-  const { dateField } = useDateSelectionStore();
-
-  const timeFormat = `${selectedDayStatus} ${selectedHour}:${selectedMinute}`;
-
-  const handleApplyFilters = () => {
-    if (dateField.length > 1) {
-      setSelectedDate(dateField);
-    }
-    setSelectedTimeDate(timeFormat);
-
-    if (selectedStatuses.length >= 1 && selectedStatuses.length < 2) {
-      setSelectedStatus(`${selectedStatuses}`);
-    } else if (selectedStatuses.length > 1 && selectedStatuses.length <= 4) {
-      const statusSpacing = `${selectedStatuses} `;
-      setSelectedStatus(statusSpacing);
-    }
-
-    handleCloseFilterBox();
-  };
+  const datesList = DATES();
 
   return (
     <section
@@ -57,7 +33,32 @@ const GameFilterContainer = ({
           handleResetFilters={handleResetFilters}
         />
         <hr className="border-[#404040] " />
-        <FilterCalenderField />
+        {/* <FilterCalenderField /> */}
+        <div className="md:py-[2rem] md:px-[2.5rem] sm:py-[1.25rem] sm:px-[1.31rem] space-y-[0.75rem]">
+          <div className="flex items-center gap-[0.75rem]">
+            <h1 className="sm:font-[600] md:font-bold sm:text-sm md:text-base text-secondary-white">
+              날짜
+            </h1>
+            <span className="font-[400] text-[12px] text-[#D4D4D4]">
+              {currentMonth}월
+            </span>
+          </div>
+
+          <div className="flex items-center gap-[0.5rem] overflow-x-auto ">
+            {datesList.map((date, index) => (
+              <DateCard
+                key={index}
+                dayOfWeek={date.dayKorean}
+                date={date.date}
+                month={date.month}
+                year={date.year}
+                formattedDate={date.formattedDate}
+                formattedMonth={date.formattedMonth}
+              />
+            ))}
+          </div>
+        </div>
+
         <hr className="border-[#404040] " />
         <FilterTimeField />
         <hr className="border-[#404040] " />
