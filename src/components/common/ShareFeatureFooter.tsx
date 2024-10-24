@@ -1,8 +1,10 @@
 import share from "../../assets/v11/share.svg";
+import { APPLE_STORE } from "../../utils/app";
 
 const ShareFeatureFooter = () => {
   const userAgent = navigator.userAgent;
   const mobileCheck = /android|iphone|ipad|ipod/i.test(userAgent);
+  const isAppleDevice = /iPhone|iPad|iPod|iOS|Macintosh|Mac/i.test(userAgent);
 
   const handleWebShare = () => {
     if (navigator.share) {
@@ -28,9 +30,18 @@ const ShareFeatureFooter = () => {
           </button>
           {/* mobile */}
           <div className="flex items-center gap-[1.25rem]">
-            <button className="sm:block md:hidden w-[7rem] h-[2.25rem] flex items-center justify-center  bg-[#7FEEF0] text-[#262626] font-bold text-sm rounded-[6.24rem]">
-              앱 다운로드{" "}
-            </button>
+            {isAppleDevice ? (
+              <a href={APPLE_STORE} target="_blank">
+                <button className="sm:block md:hidden w-[7rem] h-[2.25rem] flex items-center justify-center  bg-[#7FEEF0] text-[#262626] font-bold text-sm rounded-[6.24rem]">
+                  앱 다운로드{" "}
+                </button>
+              </a>
+            ) : (
+              <button className="sm:block md:hidden w-[7rem] h-[2.25rem] flex items-center justify-center  bg-[#7FEEF0] text-[#262626] font-bold text-sm rounded-[6.24rem]">
+                앱 다운로드{" "}
+              </button>
+            )}
+
             {mobileCheck && (
               <button onClick={handleWebShare}>
                 <img src={share} alt="share" />

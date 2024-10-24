@@ -3,6 +3,7 @@ import miti_logo from "../../assets/v11/footer-logo.svg";
 import playstore from "../../assets/v11/google-play.svg";
 import applestore from "../../assets/v11/apple-store.svg";
 import { Link } from "react-router-dom";
+import { APPLE_STORE } from "../../utils/app";
 
 const Footer = () => {
   return (
@@ -52,10 +53,12 @@ const Footer = () => {
                 <img src={playstore} alt="google playstore" />
                 <span className="text-[12px] font-bold">Google Play</span>
               </button>
-              <button className="flex items-center justify-center  rounded-[10px] text-[#fff]  bg-dark-card space-x-[8px]  py-2 px-4">
-                <img src={applestore} alt="app store" />
-                <span className="text-[12px] font-bold">App Store</span>
-              </button>
+              <a href={APPLE_STORE} target="_blank">
+                <button className="flex items-center justify-center  rounded-[10px] text-[#fff]  bg-dark-card space-x-[8px]  py-2 px-4">
+                  <img src={applestore} alt="app store" />
+                  <span className="text-[12px] font-bold">App Store</span>
+                </button>
+              </a>
             </div>
           </div>
         </div>

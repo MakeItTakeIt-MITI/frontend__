@@ -1,0 +1,1 @@
+export const APPLE_STORE = 'https://apps.apple.com/us/app/miti/id6503062372'
