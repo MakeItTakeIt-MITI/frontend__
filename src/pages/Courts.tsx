@@ -23,7 +23,6 @@ const Courts = () => {
     refetch,
     fetchNextPage,
     hasNextPage,
-    isLoading,
   } = useCourtsInfiniteDataHook(searchInput, selectedCity);
 
   const { ref, inView } = useInView({
@@ -100,26 +99,17 @@ const Courts = () => {
               {courtsData?.pages.map((page) => {
                 return page.data.page_content.length > 0 ? (
                   page.data.page_content.map((court: Court) => (
-                    <>
-                      {isLoading ? (
-                        <div className="p-4 bg-dark-card md:w-[350px] sm:w-[333px] h-[66px] flex flex-col gap-2 justify-center rounded-[12px] ">
-                          <h1 className="w-[100px] h-full bg-light-dark rounded-lg"></h1>
-                          <h1 className="w-[200px] h-full bg-light-dark rounded-lg"></h1>
-                        </div>
-                      ) : (
-                        <Link
-                          to={`/courts/${court.id}`}
-                          className="p-4 bg-dark-card md:w-[350px] sm:w-[333px] h-[66px] flex flex-col justify-center rounded-[12px]"
-                        >
-                          <h1 className="font-bold text-primary-white truncate ">
-                            {court.name}
-                          </h1>
-                          <h2 className="text-[12px] text-[#a3a3a3] font-[500] truncate">
-                            {court.address} {court.address_detail}
-                          </h2>
-                        </Link>
-                      )}
-                    </>
+                    <Link
+                      to={`/courts/${court.id}`}
+                      className="p-4 bg-dark-card md:w-[350px] sm:w-[333px] h-[66px] flex flex-col justify-center rounded-[12px]"
+                    >
+                      <h1 className="font-bold text-primary-white truncate ">
+                        {court.name}
+                      </h1>
+                      <h2 className="text-[12px] text-[#a3a3a3] font-[500] truncate">
+                        {court.address} {court.address_detail}
+                      </h2>
+                    </Link>
                   ))
                 ) : (
                   <div className="w-full h-full flex  flex-col gap-3 items-center justify-center ">

@@ -8,6 +8,7 @@ import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { CourtsList } from "../interfaces/courts";
 import { useCourtGamesInfiniteData } from "../hooks/useCourtGamesInfiniteData";
+import { GameCardSkeleton } from "../components/games/GameCardSkeleton";
 
 const CourtGamesList = () => {
   const { id } = useParams();
@@ -17,7 +18,7 @@ const CourtGamesList = () => {
     fetchNextPage,
     hasNextPage,
   } = useCourtGamesInfiniteData(courtId);
-  const { data } = useCourtDetailData({ courtId: courtId });
+  const { data, isLoading } = useCourtDetailData({ courtId: courtId });
   const courtDetail = data?.data;
 
   const { ref, inView } = useInView({
@@ -54,26 +55,38 @@ const CourtGamesList = () => {
             <p className="text-[18px] font-bold text-primary-white">
               이 경기장에 생성된 경기
             </p>
-            {selectedCourtsData?.pages.map((page) => {
-              return page.data.page_content.length > 0 ? (
-                page.data.page_content.map((court: CourtsList) => (
-                  <div className="space-y-[0.75rem]">
-                    <h1 className="font-bold text-primary-white">
-                      {court.startdate}
+            {isLoading ? (
+              <div className="space-y-[0.75rem]">
+                <h1 className="w-[100px] h-[10px] rounded-xl bg-dark-card"></h1>
+                <GameCardSkeleton />
+                <GameCardSkeleton />
+                <GameCardSkeleton />
+                <GameCardSkeleton />
+                <GameCardSkeleton />
+                <GameCardSkeleton />
+              </div>
+            ) : (
+              selectedCourtsData?.pages.map((page) => {
+                return page.data.page_content.length > 0 ? (
+                  page.data.page_content.map((court: CourtsList) => (
+                    <div className="space-y-[0.75rem]">
+                      <h1 className="font-bold text-primary-white">
+                        {court.startdate}
+                      </h1>
+                      {court.games.map((game) => (
+                        <CourtDetailCard key={game.id} game={game} />
+                      ))}
+                    </div>
+                  ))
+                ) : (
+                  <div className="w-full h-full flex  flex-col gap-3 items-center justify-center ">
+                    <h1 className="text-primary-white text-[24px] font-bold ">
+                      조회 결과가 없습니다.
                     </h1>
-                    {court.games.map((game) => (
-                      <CourtDetailCard key={game.id} game={game} />
-                    ))}
                   </div>
-                ))
-              ) : (
-                <div className="w-full h-full flex  flex-col gap-3 items-center justify-center ">
-                  <h1 className="text-primary-white text-[24px] font-bold ">
-                    조회 결과가 없습니다.
-                  </h1>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
             {hasNextPage && <div ref={ref} className="h-1 w-full opacity-0" />}{" "}
           </div>
           <DetailMap />
