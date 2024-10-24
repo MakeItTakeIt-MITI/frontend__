@@ -1,5 +1,5 @@
 import share from "../../assets/v11/share.svg";
-import { APPLE_STORE } from "../../utils/app";
+import { APPLE_STORE, PLAYSTORE } from "../../utils/app";
 
 const ShareFeatureFooter = () => {
   const userAgent = navigator.userAgent;
@@ -30,17 +30,14 @@ const ShareFeatureFooter = () => {
           </button>
           {/* mobile */}
           <div className="flex items-center gap-[1.25rem]">
-            {isAppleDevice ? (
-              <a href={APPLE_STORE} target="_blank">
-                <button className="sm:block md:hidden w-[7rem] h-[2.25rem] flex items-center justify-center  bg-[#7FEEF0] text-[#262626] font-bold text-sm rounded-[6.24rem]">
-                  앱 다운로드{" "}
-                </button>
-              </a>
-            ) : (
+            <a
+              href={`${isAppleDevice ? APPLE_STORE : PLAYSTORE}`}
+              target="_blank"
+            >
               <button className="sm:block md:hidden w-[7rem] h-[2.25rem] flex items-center justify-center  bg-[#7FEEF0] text-[#262626] font-bold text-sm rounded-[6.24rem]">
                 앱 다운로드{" "}
               </button>
-            )}
+            </a>
 
             {mobileCheck && (
               <button onClick={handleWebShare}>

@@ -13,7 +13,7 @@ import hero from "../assets/v11/landing-hero-bg.png";
 import googlePlay from "../assets/v11/google-play-teal.svg";
 import appleStore from "../assets/v11/apple-store-teal.svg";
 import mobile_top from "../assets/v11/mobile-landing.png";
-import { APPLE_STORE } from "../utils/app";
+import { APPLE_STORE, PLAYSTORE } from "../utils/app";
 
 const Landing = () => {
   return (
@@ -42,13 +42,16 @@ const Landing = () => {
           <div
             className={`shake flex items-center sm:justify-center md:justify-start sm:gap-3 md:gap-4 text-primary-white sm:px-[17.5px] md:px-0  `}
           >
-            <button
-              type="button"
-              className="text-[18px] text-sm font-[600] flex items-center justify-center gap-3 bg-[#363636]  sm:h-[45px] md:h-[58px] sm:w-[140px] md:w-[180px] rounded-[14px] text-[#BFF9FA] "
-            >
-              <img src={googlePlay} alt="Google store" />
-              <p>Google Play</p>
-            </button>
+            <a href={APPLE_STORE} target="_blank">
+              <button
+                type="button"
+                className="text-[18px] text-sm font-[600] flex items-center justify-center gap-3 bg-[#363636]  sm:h-[45px] md:h-[58px] sm:w-[140px] md:w-[180px] rounded-[14px] text-[#BFF9FA] "
+              >
+                <img src={googlePlay} alt="Google store" />
+                <p>Google Play</p>
+              </button>
+            </a>
+
             <a href={APPLE_STORE} target="_blank">
               <button
                 type="button"
@@ -85,13 +88,15 @@ const Landing = () => {
           <div
             className={`shake flex items-center sm:justify-center md:justify-start sm:gap-3 md:gap-4 text-primary-white sm:px-[17.5px] md:px-0  `}
           >
-            <button
-              type="button"
-              className="text-[18px] text-sm font-[600] flex items-center justify-center gap-3 bg-[#363636]  sm:h-[45px] md:h-[58px] sm:w-[140px] md:w-[180px] rounded-[14px] text-[#BFF9FA] "
-            >
-              <img src={googlePlay} alt="Google store" />
-              <p>Google Play</p>
-            </button>
+            <a href={PLAYSTORE} target="_blank">
+              <button
+                type="button"
+                className="text-[18px] text-sm font-[600] flex items-center justify-center gap-3 bg-[#363636]  sm:h-[45px] md:h-[58px] sm:w-[140px] md:w-[180px] rounded-[14px] text-[#BFF9FA] "
+              >
+                <img src={googlePlay} alt="Google store" />
+                <p>Google Play</p>
+              </button>
+            </a>
             <a href={APPLE_STORE} target="_blank">
               <button
                 type="button"

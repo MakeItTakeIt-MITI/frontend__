@@ -5,7 +5,7 @@ import dropdown from "../../assets/v11/drop.svg";
 import { useEffect, useRef, useState } from "react";
 import { useFaqDataHook } from "../../hooks/useFaqDataHook";
 import { FAQItem } from "../../interfaces/support";
-import "./faq.css";
+// import "./faq.css";
 import MoveToAppBanner from "../common/MoveToAppBanner";
 
 const Main = () => {
@@ -114,7 +114,7 @@ const Main = () => {
               {openFAQIndex === item.id && (
                 <div className="p-[1.25rem] bg-light-dark rounded-[20px]  space-y-3">
                   <p
-                    className="faq-content text-[#d4d4d4] list-none"
+                    className=" text-[#d4d4d4] "
                     id="custom-content"
                     dangerouslySetInnerHTML={{ __html: `${item?.content}` }}
                   />

@@ -1,6 +1,9 @@
-import { APPLE_STORE } from "../../utils/app";
+import { APPLE_STORE, PLAYSTORE } from "../../utils/app";
 
 const MoveToAppBanner = () => {
+  const userAgent = navigator.userAgent;
+  const isAppleDevice = /iPhone|iPad|iPod|iOS|Macintosh|Mac/i.test(userAgent);
+
   return (
     <div
       style={{
@@ -12,7 +15,7 @@ const MoveToAppBanner = () => {
         편하게 농구게임에 참여하고 싶다면 <br />
         MITI를 이용해보세요!
       </p>
-      <a href={APPLE_STORE} target="_blank">
+      <a href={`${isAppleDevice ? APPLE_STORE : PLAYSTORE}`} target="_blank">
         <button
           type="button"
           style={{
