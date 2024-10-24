@@ -11,7 +11,7 @@ const PoliciesDetails = () => {
   const { data } = usePolicyDetailHook({ policyId: policyId });
   return (
     <>
-      <section className="bg-secondary-black h-screen  md:pt-[3.75rem] md:pb-[6.25rem] sm:pt-5 sm:pb-10 sm:px-5 md:px-0">
+      <section className="bg-secondary-black min-h-screen  md:pt-[3.75rem] md:pb-[6.25rem] sm:pt-5 sm:pb-10 sm:px-5 md:px-0">
         <div className="md:w-[768px] sm:w-full mx-auto space-y-[7.62rem]">
           <div className="space-y-[20px]">
             <h1 className=" md:text-[26px] sm:text-[20px] font-bold text-white">

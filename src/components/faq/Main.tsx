@@ -11,7 +11,7 @@ import MoveToAppBanner from "../common/MoveToAppBanner";
 const Main = () => {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
   const [search, setSearch] = useState("");
-  const { data: faqData, refetch } = useFaqDataHook(search);
+  const { data: faqData, refetch, isLoading } = useFaqDataHook(search);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleOpenFAQ = (index: number) => {
@@ -73,7 +73,6 @@ const Main = () => {
       <div className="space-y-[.75rem] sm:px-[.5rem]">
         {/* topics boxes */}
         <ul className="flex items-center gap-[1.25rem]">
-          {/* <ul className="flex items-center gap-[1.25rem]"> */}
           {FAQ_TOPICS.map((topic, index) => (
             <li
               style={{
@@ -94,22 +93,39 @@ const Main = () => {
         {faqData?.length > 0 &&
           faqData.map((item: FAQItem) => (
             <>
-              <div
-                key={item.id}
-                onClick={() => handleOpenFAQ(item.id)}
-                className="cursor-pointer flex items-center justify-between py-[1.25rem] "
-              >
-                <span className="text-secondary-white text-base font-[400]">
-                  {item.title}
-                </span>
-                <button type="button">
-                  <img
-                    src={dropdown}
-                    alt="dropdown"
-                    className={`size-6 ${item.id === openFAQIndex ? "rotate-180" : ""}`}
-                  />
-                </button>
-              </div>
+              {isLoading ? (
+                <div
+                  key={item.id}
+                  className="cursor-pointer flex items-center justify-between py-[1.25rem] "
+                >
+                  <h1 className="w-[200px] h-[8px] bg-light-dark rounded-lg"></h1>
+                  <button disabled type="button">
+                    <img
+                      src={dropdown}
+                      alt="dropdown"
+                      className={`size-6 ${item.id === openFAQIndex ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                </div>
+              ) : (
+                <div
+                  key={item.id}
+                  onClick={() => handleOpenFAQ(item.id)}
+                  className="cursor-pointer flex items-center justify-between py-[1.25rem] "
+                >
+                  <span className="text-secondary-white text-base font-[400]">
+                    {item.title}
+                  </span>
+                  <button type="button">
+                    <img
+                      src={dropdown}
+                      alt="dropdown"
+                      className={`size-6 ${item.id === openFAQIndex ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                </div>
+              )}
+
               {/* description */}
               {openFAQIndex === item.id && (
                 <div className="p-[1.25rem] bg-light-dark rounded-[20px]  space-y-3">

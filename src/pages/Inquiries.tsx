@@ -14,7 +14,7 @@ const InquiriesList = () => {
   const [input, setInput] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { data } = useInquiriesDataHook(pageNumber);
+  const { data, isLoading } = useInquiriesDataHook(pageNumber);
 
   const currentPage = data?.data.current_index;
   const pageLength = data?.data.end_index || 1;
@@ -61,10 +61,31 @@ const InquiriesList = () => {
 
             {content?.length > 1 ? (
               content.map((inquiry: InquiryListField) => (
-                <ListCard inquiry={inquiry} />
+                <>
+                  {isLoading ? (
+                    <>
+                      <div className="flex justify-between items-center text-white px-2.5 ">
+                        <div className="flex items-center md:gap-[3.0rem] sm:gap-[.44rem]">
+                          <div className="bg-dark-card w-[110px] h-[6px]"></div>
+
+                          <div className="flex items-center sm:gap-[.31rem] md:gap-[.31rem] ">
+                            <div className="bg-dark-card w-[250px] h-[6px]"></div>
+                          </div>
+                        </div>
+
+                        <div className="bg-dark-card w-[100px] h-[6px]"></div>
+                      </div>
+                      <hr className="w-full h-[1px] text-[#525252]" />
+                    </>
+                  ) : (
+                    <ListCard inquiry={inquiry} />
+                  )}
+                </>
               ))
             ) : (
-              <h1>문의 목록이 없습니다.</h1>
+              <h1 className="text-white text-center font-[500]">
+                문의가 없습니다.
+              </h1>
             )}
           </div>
 
