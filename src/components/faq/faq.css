@@ -1,4 +1,4 @@
-.custom-content {
+/* .custom-content {
   color: #f1f1f1;
   font-size: 12px;
   font-weight: 300;
@@ -26,4 +26,30 @@
 #custom-content b {
   color: #7feef0 !important;
   font-weight: bold;
+} */
+
+.section {
+  margin: 8px 0px 25px 0px;
+}
+.subsection {
+  padding-left: 5px;
+  margin: 6px 0px 15px 0px;
+}
+.lg-bold {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 10px 0px 10px 0px;
+}
+.m-bold {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 10px 0px 10px 0px;
+}
+.sm {
+  font-size: 12px;
+  line-height: 150%;
+  margin: 0px 0px 2px 0px;
+}
+b {
+  color: #7feef0;
 }

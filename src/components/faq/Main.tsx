@@ -114,7 +114,7 @@ const Main = () => {
               {openFAQIndex === item.id && (
                 <div className="p-[1.25rem] bg-light-dark rounded-[20px]  space-y-3">
                   <p
-                    className="faq-content text-white list-none"
+                    className="faq-content text-[#d4d4d4] list-none"
                     id="custom-content"
                     dangerouslySetInnerHTML={{ __html: `${item?.content}` }}
                   />
