@@ -5,7 +5,7 @@ import dropdown from "../../assets/v11/drop.svg";
 import { useEffect, useRef, useState } from "react";
 import { useFaqDataHook } from "../../hooks/useFaqDataHook";
 import { FAQItem } from "../../interfaces/support";
-// import "./faq.css";
+import "./faq.css";
 import MoveToAppBanner from "../common/MoveToAppBanner";
 
 const Main = () => {

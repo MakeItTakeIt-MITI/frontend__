@@ -48,13 +48,14 @@ const Footer = () => {
             <div className="">
               <img src={miti_logo} alt="logo" className="h-[42px]" />
             </div>
-            <a href={PLAYSTORE} target="_blank">
-              <button className="flex items-center justify-center  rounded-[10px] text-[#fff] bg-dark-card space-x-[8px] py-2 px-4 ">
-                <img src={playstore} alt="google playstore" />
-                <span className="text-[12px] font-bold">Google Play</span>
-              </button>
-            </a>
+
             <div className="flex gap-[0.75rem]">
+              <a href={PLAYSTORE} target="_blank">
+                <button className="flex items-center justify-center  rounded-[10px] text-[#fff] bg-dark-card space-x-[8px] py-2 px-4 ">
+                  <img src={playstore} alt="google playstore" />
+                  <span className="text-[12px] font-bold">Google Play</span>
+                </button>
+              </a>
               <a href={APPLE_STORE} target="_blank">
                 <button className="flex items-center justify-center  rounded-[10px] text-[#fff]  bg-dark-card space-x-[8px]  py-2 px-4">
                   <img src={applestore} alt="app store" />
