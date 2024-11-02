@@ -3,153 +3,162 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 - Page Not Found</title>
+    <title>Make It Take It</title>
 
     <link
       rel="icon"
       type="image/svg+xml"
       href="https://www.makeittakeit.kr/images/favicon_180x180_.png"
     />
+    <link rel="stylesheet" href="src/index.css" />
     <link
-      rel="apple-touch-icon"
-      sizes="16x16"
-      href="https://www.makeittakeit.kr/images/favicon-16x16.png"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
     />
-    <link
-      rel="apple-touch-icon"
-      sizes="48x48"
-      href="https://www.makeittakeit.kr/images/favicon_48x48.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="76x76"
-      href="https://www.makeittakeit.kr/images/favicon_76x76.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="120x120"
-      href="https://www.makeittakeit.kr/images/favicon_120x120.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="152x152"
-      href="https://www.makeittakeit.kr/images/favicon_152x152.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="167x167"
-      href="https://www.makeittakeit.kr/images/favicon_167x167.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="https://www.makeittakeit.kr/images/favicon_180x180.png"
-    />
-    <meta
-      property="og:image"
-      content="https://www.makeittakeit.kr/images/miti_thumbnail.png"
-    />
-    <meta property="og:url" content="https://www.makeittakeit.kr/" />
-    <meta property="og:title" content="Make It Take It" />
-    <meta property="og:description" content="농구인의 필수앱" />
-
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      .nav-link {
+        color: #f1f1f1; /* Default link color */
       }
-      body,
-      html {
-        height: 100%;
-        font-family: Arial, sans-serif;
-        color: #ffffff;
-        background-color: #333;
-      }
-      .container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        text-align: center;
-      }
-      .content {
-        width: 90%;
-        max-width: 768px;
-        padding: 60px;
-      }
-      .error-title {
-        font-size: 120px;
-        font-weight: bold;
-        color: #7feef0;
-      }
-      .error-message h2 {
-        font-size: 36px;
-        font-weight: bold;
-      }
-      .error-message p {
-        font-size: 18px;
-      }
-      .suggestion-box {
-        margin-top: 42px;
-        padding: 15px;
-        background: linear-gradient(97deg, #dafefe 11.57%, #9eeff0 88.43%);
-        border-radius: 10px;
-        color: #333;
-        text-align: left;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .suggestion-text {
-        font-weight: bold;
-        font-size: 16px;
-      }
-      .suggestion-button {
-        background: rgba(255, 255, 255, 0.6);
-        padding: 10px 20px;
-        border-radius: 8px;
-        color: #333;
-        font-weight: 700;
-        text-decoration: none;
-      }
-      @media (max-width: 768px) {
-        .error-title {
-          font-size: 60px;
-        }
-        .error-message h2 {
-          font-size: 24px;
-        }
-        .error-message p {
-          font-size: 14px;
-        }
-        .suggestion-text {
-          font-size: 14px;
-        }
+      .nav-link.active {
+        color: #7feef0; /* Active link color */
       }
     </style>
   </head>
-  <body>
-    <div class="container">
-      <div class="content">
-        <div>
-          <h1 class="error-title">404</h1>
-          <div class="error-message">
-            <h2>페이지를 찾을 수 없습니다.</h2>
-            <p>
-              요청하신 페이지가 존재하지 않거나, 사용할 수 없는 페이지입니다.<br />입력하신
-              주소를 다시 한 번 확인해주세요.
+  <body class="bg-secondary-black h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="relative sm:flex h-[3.75rem] w-full justify-between md:hidden px-[1.25rem] py-[1rem] bg-primary-black">
+      <a href="/" class="flex items-center">
+        <img src="/src/assets/v11/logo.svg" alt="logo" />
+      </a>
+      <button type="button" id="toggleButton">
+        <img src="/src/assets/v11/hamburger.svg" alt="hamburger" id="hamburgerIcon" />
+      </button>
+
+      <div id="mobileNav" class="hidden absolute left-0 right-0 top-full bg-primary-black z-[999999]">
+        {NAVITEMS.map((nav) => (
+          <Link
+            to={nav.path}
+            className="nav-link flex flex-col cursor-pointer font-[500] py-[.62rem] px-[1.31rem] text-primary-white w-full h-full"
+          >
+            {nav.title}
+          </Link>
+        ))}
+      </div>
+    </nav>
+
+    <!-- 404 Section -->
+    <section class="bg-secondary-black h-screen pt-[60px] pb-[60px]">
+      <div class="md:w-[768px] sm:w-full md:px-0 sm:px-5 space-y-[42px] mx-auto px-[13rem]">
+        <div class="space-y-[25px] py-[50px] h-[530px]">
+          <h1 class="text-[#7feef0] md:text-[120px] sm:text-[60px] font-bold">404</h1>
+          <div class="space-y-3">
+            <h2 class="text-white md:text-4xl sm:text-md font-bold">페이지를 찾을 수 없습니다.</h2>
+            <p class="text-white md:text-2xl sm:text-sm font-normal">
+              요청하신 페이지가 존재하지 않거나, 사용할 수 없는 페이지입니다.<br />
+              입력하신 주소를 다시 한 번 확인해주세요.
             </p>
           </div>
         </div>
-        <div class="suggestion-box">
-          <p class="suggestion-text">
+        <div class="w-full h-[100px] rounded-xl sm:px-5 md:px-10 flex items-center justify-between bg-gradient-to-r from-[#dafeff] to-[#9eeff0]">
+          <p class="font-bold sm:text-sm md:text-base">
             편하게 농구게임에 참여하고 싶다면 <br />
             MITI를 이용해보세요!
           </p>
-          <a href="/" class="suggestion-button">MITI 앱으로 열기</a>
+          <a
+            href="/"
+            class="px-4 py-3 rounded-lg sm:text-[10px] md:text-sm font-[700] text-dark-card bg-gradient-to-r from-white to-white/60"
+          >
+            MITI 앱으로 열기
+          </a>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="sm:hidden md:block h-[17.5rem] w-full bg-primary-black pt-[3.75rem] pb-[5rem]">
+      <div class="flex items-center justify-between w-[768px] mx-auto">
+        <div class="space-y-[2rem]">
+          <div class="space-y-[1.25rem]">
+            <div class="space-x-[1.25rem] text-[#E5E5E5] text-[12px] font-bold">
+              <a href="/support/policies">서비스 약관</a>
+            </div>
+            <div class="space-y-[0.75rem] font-[400] text-[12px] text-[#D4D4D4]">
+              <div class="space-x-[1.25rem]">
+                <span>대표 : 전재완</span>
+                <span>사업자번호 : 547-03-03467</span>
+              </div>
+              <div class="space-x-[1.25rem]">
+                <span>주소 : 인천광역시 동구 화도진로 16</span>
+                <span>메일 : miti.makeittakeit@makeittakeit.kr</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <a href="https://www.instagram.com/miti_makeittakeit_official/" target="_blank">
+              <img src="path/to/your/instagram.svg" alt="instagram" />
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col items-center w-[16.5rem] h-[8rem] space-y-[2.88rem]">
+          <div>
+            <img src="/src/assets/v11/logo.svg" alt="logo" class="h-[42px]" />
+          </div>
+          <div class="flex gap-[0.75rem]">
+            <a href="https://play.google.com/store" target="_blank">
+              <button class="flex items-center justify-center rounded-[10px] text-[#fff] bg-dark-card space-x-[8px] py-2 px-4">
+                <img src="/src/assets/v11/google-play.svg" alt="google playstore" />
+                <span class="text-[12px] font-bold">Google Play</span>
+              </button>
+            </a>
+            <a href="https://www.apple.com/app-store/" target="_blank">
+              <button class="flex items-center justify-center rounded-[10px] text-[#fff] bg-dark-card space-x-[8px] py-2 px-4">
+                <img src="/src/assets/v11/apple-store.svg" alt="app store" />
+                <span class="text-[12px] font-bold">App Store</span>
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Mobile Footer -->
+    <footer class="sm:flex items-center justify-center h-[26rem] px-[0.81rem] py-[3.75rem] md:hidden bg-primary-black">
+      <div class="space-y-[2.5rem]">
+        <div class="flex justify-center">
+          <img src="/src/assets/v11/logo.svg" alt="miti logo" class="w-[82px] h-[42px]" />
+        </div>
+
+        <div class="space-y-[1.25rem]">
+          <div class="flex items-center gap-[1.25rem] text-[#E5E5E5] font-bold text-[12px]">
+            <a href="/support/policies">서비스 약관</a>
+            <p>|</p>
+            <a href="/support/inquiries">고객센터</a>
+          </div>
+          <div class="space-y-[0.75rem] text-[#d4d4d4] font-[400] text-[12px]">
+            <div class="flex items-center gap-[1.25rem]">
+              <span>대표 : 전재완</span>
+              <span>사업자번호 : 547-03-03467</span>
+            </div>
+            <div class="flex items-center gap-[1.25rem]">
+              <span>메일 : miti.makeittakeit@makeittakeit.kr</span>
+            </div>
+            <div>
+              <span>주소 : 인천광역시 동구 화도진로 16</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <a href="https://www.instagram.com/miti_makeittakeit_official/" target="_blank">
+            <img src="/src/assets/v11/instagram.svg" alt="instagram" />
+          </a>
+        </div>
+        <h2 class="text-center text-[10px] text-[#C8C8C8] font-[300]">
+          Copyright MITI All Rights Reserved.
+        </h2>
+      </div>
+    </footer>
+
+    <script src="src/index.js"></script>
   </body>
 </html>

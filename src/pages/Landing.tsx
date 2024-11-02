@@ -42,7 +42,7 @@ const Landing = () => {
           <div
             className={`shake flex items-center sm:justify-center md:justify-start sm:gap-3 md:gap-4 text-primary-white sm:px-[17.5px] md:px-0  `}
           >
-            <a href={APPLE_STORE} target="_blank">
+            <a href={PLAYSTORE} target="_blank">
               <button
                 type="button"
                 className="text-[18px] text-sm font-[600] flex items-center justify-center gap-3 bg-[#363636]  sm:h-[45px] md:h-[58px] sm:w-[140px] md:w-[180px] rounded-[14px] text-[#BFF9FA] "
