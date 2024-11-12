@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -18,7 +19,17 @@ export default {
       "primary-teal": "#7FEEF0",
     },
 
-    extend: {},
+    extend: {
+      backgroundImage: {
+        faq_web: "url('/src/assets/v11/banners/faq_banner_web.png')",
+        faq_mobile: "url('/src/assets/v11/banners/faq_banner_mobile.png')",
+        games_web: "url('/src/assets/v11/banners/games_banner_web.png')",
+        games_mobile: "url('/src/assets/v11/banners/games_banner_mobile.png')",
+        courts_web: "url('/src/assets/v11/banners/courts_banner_web.png')",
+        courts_mobile:
+          "url('/src/assets/v11/banners/courts_banner_mobile.png')",
+      },
+    },
   },
   plugins: [],
 };
