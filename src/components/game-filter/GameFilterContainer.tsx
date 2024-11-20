@@ -44,7 +44,7 @@ const GameFilterContainer = ({
             </span>
           </div>
 
-          <div className="flex items-center gap-[0.5rem] overflow-x-auto ">
+          <div className="flex items-center gap-[0.5rem] overflow-x-auto custom-dates-scrollbar">
             {datesList.map((date, index) => (
               <DateCard
                 key={index}

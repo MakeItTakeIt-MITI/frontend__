@@ -41,6 +41,16 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   height: 80px;
 }
 
+.custom-dates-scrollbar::-webkit-scrollbar-thumb {
+  background: #a3a3a3;
+  border-radius: 20px;
+}
+
+.custom-dates-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 7px;
+}
+
 @layer components {
   .input-primary {
     @apply h-[58px] p-[17px]  rounded-lg font-medium  bg-[#F7F7F7] w-full text-base;

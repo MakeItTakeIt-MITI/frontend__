@@ -2,7 +2,7 @@
 export const DATES = () => {
     const availableDates = [];
 
-    for (let i = 0; i < 14; i++) {
+    for (let i = 0; i < 30; i++) {
         const newDate = new Date();
         newDate.setDate(newDate.getDate() + i);
         availableDates.push(newDate);
