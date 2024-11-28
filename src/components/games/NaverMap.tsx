@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, useState } from "react";
-import { AllGamesProps } from "../../interfaces/games";
+import { AllGamesProps } from "../../interfaces/games.ts";
 import current_marker from "../../assets/v11/current_pin.svg";
 import selected_marker from "../../assets/v11/current_pin_selected.svg";
 import marker_loading from "../../assets/v11/marker-loading.gif";
-import { setGeolocation } from "../naver/map-controls";
+import { setGeolocation } from "../naver/map-controls.ts";
 
 declare global {
   interface Window {

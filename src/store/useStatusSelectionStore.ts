@@ -1,6 +1,6 @@
 
 import { create } from 'zustand';
-import { GAMESTATUS } from '../constants/status';
+import { GAMESTATUS } from '../constants/status.ts';
 
 type StatusSelectionStore = {
     selectedStatuses: string[];

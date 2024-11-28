@@ -1,7 +1,7 @@
 import time from "../../assets/v11/time.svg";
 import participants from "../../assets/v11/participants.svg";
 import { Link } from "react-router-dom";
-import { CourtField } from "../../interfaces/courts";
+import { CourtField } from "../../interfaces/courts.ts";
 
 interface CourtDetailCard {
   game: CourtField;

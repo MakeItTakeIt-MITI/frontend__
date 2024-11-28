@@ -1,16 +1,16 @@
 import filter from "../../assets/v11/filter.svg";
-import NaverMap from "./NaverMap";
-import GameListContainer from "./GameListContainer";
-import FilteredStatus from "../game-filter/FilteredStatus";
-import useGameFilterStore from "../../store/useGameFilterStore";
+import NaverMap from "./NaverMap.tsx";
+import GameListContainer from "./GameListContainer.tsx";
+import FilteredStatus from "../game-filter/FilteredStatus.tsx";
+import useGameFilterStore from "../../store/useGameFilterStore.ts";
 // import useTimeFieldStore from "../../store/useTimeStore";
 // import useStatusSelectionStore from "../../store/useStatusSelectionStore";
 // import useDateSelectionStore from "../../store/useDateSelectionStore";
-import { Game } from "../../interfaces/games";
+import { Game } from "../../interfaces/games.ts";
 import { useState } from "react";
-import MobileGameListContainer from "./MobileGameListContainer";
-import FilteredGameListContainer from "./FilteredGameListContainer";
-import MoveToAppBanner from "../common/MoveToAppBanner";
+import MobileGameListContainer from "./MobileGameListContainer.tsx";
+import FilteredGameListContainer from "./FilteredGameListContainer.tsx";
+import MoveToAppBanner from "../common/MoveToAppBanner.tsx";
 
 interface MainContentProps {
   handleToggleFilterBox: () => void;

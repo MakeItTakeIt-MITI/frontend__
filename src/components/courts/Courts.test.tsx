@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 
-import SearchContainer from "./SearchContainer";
-import FilterContainer from "./FilterContainer";
-import { CITIES } from "../../constants/locations";
+import SearchContainer from "./SearchContainer.tsx";
+import FilterContainer from "./FilterContainer.tsx";
+import { CITIES } from "../../constants/locations.ts";
 
 describe("SearchContainer testing UI and logic", () => {
   const handleSearchInput = vi.fn();

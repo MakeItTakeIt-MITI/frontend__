@@ -1,6 +1,6 @@
 
 import { create } from 'zustand';
-import { DATES } from '../constants/calender';
+import { DATES } from '../constants/calender.ts';
 
 type DatesSelectionStore = {
     selectedStatuses: string;

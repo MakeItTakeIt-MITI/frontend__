@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import MobileNavbar from "./MobileNavbar";
-import BrowserNavbar from "./BrowserNavbar";
+import MobileNavbar from "./MobileNavbar.tsx";
+import BrowserNavbar from "./BrowserNavbar.tsx";
 
 const setWindowWidth = (width: number) => {
   global.innerWidth = width;

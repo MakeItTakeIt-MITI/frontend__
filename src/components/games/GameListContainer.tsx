@@ -1,6 +1,6 @@
-import { AllGamesProps } from "../../interfaces/games";
-import { GameCardSkeleton } from "./GameCardSkeleton";
-import GameListCard from "./GameListCard";
+import { AllGamesProps } from "../../interfaces/games.ts";
+import { GameCardSkeleton } from "./GameCardSkeleton.tsx";
+import GameListCard from "./GameListCard.tsx";
 import "./scrollbar.css";
 
 interface GameListProps extends AllGamesProps {

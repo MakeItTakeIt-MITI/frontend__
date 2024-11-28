@@ -1,12 +1,13 @@
 import { useState } from "react";
 import open from "../assets/v11/display-password.svg";
 import close from "../assets/v11/hide-password.svg";
-import Footer from "../components/common/Footer";
+import Footer from "../components/common/Footer.tsx";
 
-import { useForm, SubmitHandler } from "react-hook-form";
-import { PrivateInquiryField } from "../interfaces/support";
-import { usePrivateInquiryHook } from "../hooks/usePrivateInquiryHook";
-import MoveToAppBanner from "../components/common/MoveToAppBanner";
+// eslint-disable-next-line import/named
+import { SubmitHandler, useForm } from "react-hook-form";
+import { PrivateInquiryField } from "../interfaces/support.ts";
+import { usePrivateInquiryHook } from "../hooks/usePrivateInquiryHook.tsx";
+import MoveToAppBanner from "../components/common/MoveToAppBanner.tsx";
 
 const PrivateInquiry = () => {
   const [displayPassword, setDisplayPassword] = useState(false);

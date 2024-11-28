@@ -1,5 +1,5 @@
 import share from "../../assets/v11/share.svg";
-import { APPLE_STORE, PLAYSTORE } from "../../utils/app";
+import { APPLE_STORE, PLAYSTORE } from "../../utils/app.ts";
 
 const ShareFeatureFooter = () => {
   const userAgent = navigator.userAgent;

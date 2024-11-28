@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/named
 import axios, { AxiosInstance } from "axios";
 
 const baseUrl = 'https://dev.makeittakeit.kr'

@@ -1,6 +1,6 @@
 import time from "../../assets/v11/time.svg";
 import participants from "../../assets/v11/participants.svg";
-import { Game } from "../../interfaces/games";
+import { Game } from "../../interfaces/games.ts";
 
 interface GameListCardProp {
   game: Game;

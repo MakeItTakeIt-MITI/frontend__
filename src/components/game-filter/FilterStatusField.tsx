@@ -1,5 +1,5 @@
-import { GAMESTATUS } from "../../constants/status";
-import useStatusSelectionStore from "../../store/useStatusSelectionStore";
+import { GAMESTATUS } from "../../constants/status.ts";
+import useStatusSelectionStore from "../../store/useStatusSelectionStore.ts";
 
 const FilterStatusField = () => {
   const { selectedStatuses, toggleStatus } = useStatusSelectionStore();

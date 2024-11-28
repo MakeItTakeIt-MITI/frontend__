@@ -1,6 +1,6 @@
 import close from "../../assets/v11/close.svg";
-import useGameFilterStore from "../../store/useGameFilterStore";
-import FilteredStatus from "./FilteredStatus";
+import useGameFilterStore from "../../store/useGameFilterStore.ts";
+import FilteredStatus from "./FilteredStatus.tsx";
 
 type FilterHeaderProps = {
   handleToggleFilterBox: () => void;

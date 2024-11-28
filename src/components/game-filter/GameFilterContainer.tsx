@@ -1,9 +1,9 @@
-import FilterTimeField from "./FilterTimeField";
-import FilterButtonsField from "./FilterButtonsField";
-import FilterHeader from "./FilterHeader";
-import FilterStatusField from "./FilterStatusField";
-import { DATES } from "../../constants/calender";
-import DateCard from "./DateCard";
+import FilterTimeField from "./FilterTimeField.tsx";
+import FilterButtonsField from "./FilterButtonsField.tsx";
+import FilterHeader from "./FilterHeader.tsx";
+import FilterStatusField from "./FilterStatusField.tsx";
+import { DATES } from "../../constants/calender.ts";
+import DateCard from "./DateCard.tsx";
 
 interface GameFilterProps {
   handleToggleFilterBox: () => void;

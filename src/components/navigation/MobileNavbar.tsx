@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/v11/logo.svg";
 import hamburger from "../../assets/v11/hamburger.svg";
 import { useState } from "react";
-import { NAVITEMS } from "../../constants/navigation";
+import { NAVITEMS } from "../../constants/navigation.ts";
 import close from "../../assets/v11/mobile_close.svg";
 
 const MobileNavbar = () => {

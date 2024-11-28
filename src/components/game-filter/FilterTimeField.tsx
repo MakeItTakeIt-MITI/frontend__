@@ -1,6 +1,6 @@
-import Dropdown from "./Dropdown";
-import { GAMEDAYTYPE, GAMEHOUR, GAMEMINUTE } from "../../constants/time";
-import useTimeFieldStore from "../../store/useTimeStore";
+import Dropdown from "./Dropdown.tsx";
+import { GAMEDAYTYPE, GAMEHOUR, GAMEMINUTE } from "../../constants/time.ts";
+import useTimeFieldStore from "../../store/useTimeStore.ts";
 import { useEffect } from "react";
 
 const FilterTimeField = () => {

@@ -1,12 +1,12 @@
-import MainLayout from "../common/MainLayout";
+import MainLayout from "../common/MainLayout.tsx";
 import searchIcon from "../../assets/v11/search.svg";
-import { FAQ_TOPICS } from "../../constants/faq";
+import { FAQ_TOPICS } from "../../constants/faq.ts";
 import dropdown from "../../assets/v11/drop.svg";
 import { useEffect, useRef, useState } from "react";
-import { useFaqDataHook } from "../../hooks/useFaqDataHook";
-import { FAQItem } from "../../interfaces/support";
+import { useFaqDataHook } from "../../hooks/useFaqDataHook.tsx";
+import { FAQItem } from "../../interfaces/support.ts";
 import "./faq.css";
-import MoveToAppBanner from "../common/MoveToAppBanner";
+import MoveToAppBanner from "../common/MoveToAppBanner.tsx";
 
 const Main = () => {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);

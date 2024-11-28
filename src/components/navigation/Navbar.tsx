@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
-import BrowserNavbar from "./BrowserNavbar";
-import MobileNavbar from "./MobileNavbar";
+import BrowserNavbar from "./BrowserNavbar.tsx";
+import MobileNavbar from "./MobileNavbar.tsx";
 import { useEffect } from "react";
 
 export const Navbar = () => {

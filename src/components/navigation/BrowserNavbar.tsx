@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/v11/logo.svg";
-import { NAVITEMS } from "../../constants/navigation";
+import { NAVITEMS } from "../../constants/navigation.ts";
 
 const BrowserNavbar = () => {
   const { pathname } = useLocation();

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { DATES } from '../constants/calender';
+import { DATES } from '../constants/calender.ts';
 
 interface GameFilterState {
     selectedDate: string;

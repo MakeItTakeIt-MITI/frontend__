@@ -1,6 +1,6 @@
 // import { useState } from "react";
 // import Modal from "./Modal";
-import { InquiryListField } from "../../interfaces/support";
+import { InquiryListField } from "../../interfaces/support.ts";
 import commented from "../../assets/v11/inquiry/commented.svg";
 import { Link } from "react-router-dom";
 

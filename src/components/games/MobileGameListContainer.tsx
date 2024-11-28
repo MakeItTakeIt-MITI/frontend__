@@ -1,6 +1,6 @@
-import { AllGamesProps } from "../../interfaces/games";
+import { AllGamesProps } from "../../interfaces/games.ts";
 import "./scrollbar.css";
-import MobileGameListCard from "./MobileGameListCard";
+import MobileGameListCard from "./MobileGameListCard.tsx";
 
 const MobileGameListContainer = ({ allGamesData }: AllGamesProps) => {
   return (

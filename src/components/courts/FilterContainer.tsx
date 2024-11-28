@@ -1,5 +1,5 @@
 import dropdown from "../../assets/v11/drop.svg";
-import { CITIES } from "../../constants/locations";
+import { CITIES } from "../../constants/locations.ts";
 
 interface Props {
   handleDisplayDropbox: () => void;

@@ -1,5 +1,5 @@
-import useCurrentMonthStore from "../../store/useCurrentMonthStore";
-import useDateSelectionStore from "../../store/useDateSelectionStore";
+import useCurrentMonthStore from "../../store/useCurrentMonthStore.ts";
+import useDateSelectionStore from "../../store/useDateSelectionStore.ts";
 
 type DateCard = {
   dayOfWeek: string;

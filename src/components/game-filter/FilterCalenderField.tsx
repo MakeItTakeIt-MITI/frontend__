@@ -1,6 +1,6 @@
-import { DATES } from "../../constants/calender";
-import useCurrentMonthStore from "../../store/useCurrentMonthStore";
-import DateCard from "./DateCard";
+import { DATES } from "../../constants/calender.ts";
+import useCurrentMonthStore from "../../store/useCurrentMonthStore.ts";
+import DateCard from "./DateCard.tsx";
 
 const FilterCalenderField = () => {
   const datesList = DATES();

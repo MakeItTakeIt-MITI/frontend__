@@ -1,5 +1,5 @@
-import { AllGamesProps } from "../../interfaces/games";
-import FilteredGameCard from "./FilteredGameCard";
+import { AllGamesProps } from "../../interfaces/games.ts";
+import FilteredGameCard from "./FilteredGameCard.tsx";
 import "./scrollbar.css";
 
 interface FilteredContainerProps extends AllGamesProps {
