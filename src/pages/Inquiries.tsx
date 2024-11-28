@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 import left from "../assets/v11/pagination-left.svg";
 import right from "../assets/v11/pagination-right.svg";
 import { InquiryListField } from "../interfaces/support";
-import { useInquiriesDataHook } from "../hooks/useInquiriesDataHook";
-import MoveToAppBanner from "../components/common/MoveToAppBanner";
+import { useInquiriesDataHook } from "../hooks/useInquiriesDataHook.tsx";
+import MoveToAppBanner from "../components/common/MoveToAppBanner.tsx";
 
 const InquiriesList = () => {
   const [input, setInput] = useState("");

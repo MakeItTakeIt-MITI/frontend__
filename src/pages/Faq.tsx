@@ -1,6 +1,6 @@
-import Footer from "../components/common/Footer";
-import Header from "../components/faq/Header";
-import Main from "../components/faq/Main";
+import Footer from "../components/common/Footer.tsx";
+import Header from "../components/faq/Header.tsx";
+import Main from "../components/faq/Main.tsx";
 
 const Faq = () => {
   return (

@@ -3,7 +3,7 @@ import miti_logo from "../../assets/v11/footer-logo.svg";
 import playstore from "../../assets/v11/google-play.svg";
 import applestore from "../../assets/v11/apple-store.svg";
 import { Link } from "react-router-dom";
-import { APPLE_STORE, PLAYSTORE } from "../../utils/app";
+import { APPLE_STORE, PLAYSTORE } from "../../utils/app.ts";
 
 const Footer = () => {
   return (

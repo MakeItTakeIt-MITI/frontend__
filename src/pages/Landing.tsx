@@ -1,11 +1,11 @@
-import Footer from "../components/common/Footer";
+import Footer from "../components/common/Footer.tsx";
 
-import Games from "../components/landing/Games";
-import GamesMobile from "../components/landing/GamesMobile";
-import Courts from "../components/landing/Courts";
-import Payments from "../components/landing/Payments";
-import CourtsMobile from "../components/landing/CourtsMobile";
-import PaymentsMobile from "../components/landing/PaymentsMobile";
+import Games from "../components/landing/Games.tsx";
+import GamesMobile from "../components/landing/GamesMobile.tsx";
+import Courts from "../components/landing/Courts.tsx";
+import Payments from "../components/landing/Payments.tsx";
+import CourtsMobile from "../components/landing/CourtsMobile.tsx";
+import PaymentsMobile from "../components/landing/PaymentsMobile.tsx";
 
 import "../../src/components/landing/landing.css";
 
@@ -13,7 +13,7 @@ import hero from "../assets/v11/landing-hero-bg.png";
 import googlePlay from "../assets/v11/google-play-teal.svg";
 import appleStore from "../assets/v11/apple-store-teal.svg";
 import mobile_top from "../assets/v11/mobile-landing.png";
-import { APPLE_STORE, PLAYSTORE } from "../utils/app";
+import { APPLE_STORE, PLAYSTORE } from "../utils/app.ts";
 
 const Landing = () => {
   return (

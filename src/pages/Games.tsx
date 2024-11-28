@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import MainContent from "../components/games/MainContent";
-import GameFilterContainer from "../components/game-filter/GameFilterContainer";
-import Footer from "../components/common/Footer";
-import { useGamesDataHook } from "../hooks/useGamesDataHook";
-import useDateSelectionStore from "../store/useDateSelectionStore";
-import useTimeFieldStore from "../store/useTimeStore";
-import useStatusSelectionStore from "../store/useStatusSelectionStore";
+import MainContent from "../components/games/MainContent.tsx";
+import GameFilterContainer from "../components/game-filter/GameFilterContainer.tsx";
+import Footer from "../components/common/Footer.tsx";
+import { useGamesDataHook } from "../hooks/useGamesDataHook.tsx";
+import useDateSelectionStore from "../store/useDateSelectionStore.ts";
+import useTimeFieldStore from "../store/useTimeStore.ts";
+import useStatusSelectionStore from "../store/useStatusSelectionStore.ts";
 
-import useCurrentMonthStore from "../store/useCurrentMonthStore";
+import useCurrentMonthStore from "../store/useCurrentMonthStore.ts";
 
-import { useFilterBox } from "../hooks/game-list-filters/useFilterBox";
-import { useFilterBoxSettings } from "../hooks/game-list-filters/useFilterBoxSettings";
+import { useFilterBox } from "../hooks/game-list-filters/useFilterBox.tsx";
+import { useFilterBoxSettings } from "../hooks/game-list-filters/useFilterBoxSettings.tsx";
 
 export const Games = () => {
   const [displayFilterBox, setDisplayFilterBox] = useState<boolean>(false);

@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
-import ShareFeatureFooter from "../components/common/ShareFeatureFooter";
-import DetailMap from "../components/courts/DetailMap";
-import MobileDetailMap from "../components/courts/MobileDetailMap";
-import { useCourtDetailData } from "../hooks/useCourtDetailData";
-import CourtDetailCard from "../components/courts/CourtDetailCard";
+import ShareFeatureFooter from "../components/common/ShareFeatureFooter.tsx";
+import DetailMap from "../components/courts/DetailMap.tsx";
+import MobileDetailMap from "../components/courts/MobileDetailMap.tsx";
+import { useCourtDetailData } from "../hooks/useCourtDetailData.tsx";
+import CourtDetailCard from "../components/courts/CourtDetailCard.tsx";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
-import { CourtsList } from "../interfaces/courts";
-import { useCourtGamesInfiniteData } from "../hooks/useCourtGamesInfiniteData";
-import { GameCardSkeleton } from "../components/games/GameCardSkeleton";
+import { CourtsList } from "../interfaces/courts.ts";
+import { useCourtGamesInfiniteData } from "../hooks/useCourtGamesInfiniteData.tsx";
+import { GameCardSkeleton } from "../components/games/GameCardSkeleton.tsx";
 
 const CourtGamesList = () => {
   const { id } = useParams();

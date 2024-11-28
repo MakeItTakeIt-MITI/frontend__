@@ -1,14 +1,14 @@
-import Footer from "../components/common/Footer";
+import Footer from "../components/common/Footer.tsx";
 
 import { useEffect, useState } from "react";
-import { useCourtsInfiniteDataHook } from "../hooks/useCourtsInfiniteDataHook";
+import { useCourtsInfiniteDataHook } from "../hooks/useCourtsInfiniteDataHook.tsx";
 import { useInView } from "react-intersection-observer";
 
-import { Court } from "../interfaces/games";
-import CourtMap from "../components/courts/CourtMap";
-import MoveToAppBanner from "../components/common/MoveToAppBanner";
-import SearchContainer from "../components/courts/SearchContainer";
-import FilterContainer from "../components/courts/FilterContainer";
+import { Court } from "../interfaces/games.ts";
+import CourtMap from "../components/courts/CourtMap.tsx";
+import MoveToAppBanner from "../components/common/MoveToAppBanner.tsx";
+import SearchContainer from "../components/courts/SearchContainer.tsx";
+import FilterContainer from "../components/courts/FilterContainer.tsx";
 import { Link } from "react-router-dom";
 
 const Courts = () => {

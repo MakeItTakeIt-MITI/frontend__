@@ -1,9 +1,9 @@
-import Footer from "../components/common/Footer";
-import MoveToAppBanner from "../components/common/MoveToAppBanner";
-import { useInquiryDetailsHook } from "../hooks/useInquiryDetailsHook";
+import Footer from "../components/common/Footer.tsx";
+import MoveToAppBanner from "../components/common/MoveToAppBanner.tsx";
+import { useInquiryDetailsHook } from "../hooks/useInquiryDetailsHook.tsx";
 import { useEffect, useState } from "react";
-import Modal from "../components/inquiry/Modal";
-import { InquiryDetailsField } from "../interfaces/support";
+import Modal from "../components/inquiry/Modal.tsx";
+import { InquiryDetailsField } from "../interfaces/support.ts";
 import { useParams } from "react-router-dom";
 
 const InquiryDetail = () => {

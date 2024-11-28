@@ -53,9 +53,9 @@ const router = createBrowserRouter([
           { path: "policies/:id", element: <PoliciesDetails /> },
         ],
       },
-      { path: "*", element: <NotFound /> },
     ],
   },
+  { path: "*", element: <NotFound /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
