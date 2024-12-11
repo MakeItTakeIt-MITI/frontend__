@@ -1,3 +1,5 @@
+import MoveToAppBanner from "../components/common/MoveToAppBanner.tsx";
+
 const NotFound = () => {
   return (
     <section className="bg-secondary-black h-screen pt-[60px] pb-[60px] ">
@@ -17,28 +19,7 @@ const NotFound = () => {
             </p>
           </div>
         </div>
-        <div
-          style={{
-            background:
-              "linear-gradient(97deg, #DAFEFF 11.57%, #9EEFF0 88.43%)",
-          }}
-          className="w-full h-[100px] rounded-xl sm:px-5 md:px-10  flex items-center justify-between"
-        >
-          <p className="font-bold sm:text-sm md:text-base">
-            편하게 농구게임에 참여하고 싶다면 <br />
-            MITI를 이용해보세요!
-          </p>
-          <button
-            type="button"
-            style={{
-              background:
-                "linear-gradient(94deg, rgba(255, 255, 255, 0.42) 4.64%, rgba(255, 255, 255, 0.60) 96.13%)",
-            }}
-            className="px-4 py-3 rounded-lg sm:text-[10px] md:text-sm font-[700] text-dark-card  "
-          >
-            MITI 앱으로 열기
-          </button>
-        </div>
+        <MoveToAppBanner />
       </div>
     </section>
   );
