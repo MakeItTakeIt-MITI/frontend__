@@ -73,7 +73,7 @@ const Modal = ({
             type="button"
             onClick={() => {
               handleCloseModal();
-              navigate("/support/inquiries");
+              navigate("/inquiries");
             }}
             className="w-full h-[42px] rounded-lg border border-[#7FEEF0] text-[#7FEEF0]"
           >

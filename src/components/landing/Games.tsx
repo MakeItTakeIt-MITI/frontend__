@@ -43,7 +43,7 @@ const Games = () => {
 
           <button className="w-[180px] h-[54px] bg-[#D4D4D4] text-[#262626] font-bold rounded-[14.286px]">
             <Link
-              to="/games/list"
+              to="/games"
               className=" w-full h-full text-center flex items-center justify-center"
             >
               경기 보러 가기

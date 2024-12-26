@@ -30,29 +30,28 @@ const router = createBrowserRouter([
 
       {
         path: "games",
-
-        children: [
-          { path: "list", element: <Games /> },
-          { path: ":id", element: <GameDetail /> },
-        ],
+        element: <Games />,
+        children: [{ path: ":id", element: <GameDetail /> }],
       },
       {
         path: "courts",
+        element: <Courts />,
+        children: [{ path: ":id", element: <CourtGamesList /> }],
+      },
+      { path: "faq", element: <Faq /> },
+      {
+        path: "inquiries",
+        element: <InquiriesList />,
         children: [
-          { path: ":id", element: <CourtGamesList /> },
-          { path: "list", element: <Courts /> },
+          { path: "new", element: <PrivateInquiry /> },
+          { path: ":id", element: <InquiryDetail /> },
         ],
       },
+
       {
-        path: "support",
-        children: [
-          { path: "faq", element: <Faq /> },
-          { path: "inquiries/new", element: <PrivateInquiry /> },
-          { path: "inquiries", element: <InquiriesList /> },
-          { path: "inquiries/:id", element: <InquiryDetail /> },
-          { path: "policies", element: <Policies /> },
-          { path: "policies/:id", element: <PoliciesDetails /> },
-        ],
+        path: "policies",
+        element: <Policies />,
+        children: [{ path: ":id", element: <PoliciesDetails /> }],
       },
       { path: "*", element: <NotFound /> },
     ],

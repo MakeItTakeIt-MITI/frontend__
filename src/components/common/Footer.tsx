@@ -17,7 +17,7 @@ const Footer = () => {
             <div className="space-y-[1.25rem]">
               {/* 이용약관 / 개인정보 / 위치기반 이용약관 */}
               <div className="space-x-[1.25rem] text-[#E5E5E5] text-[12px] font-bold">
-                <Link to="/support/policies">서비스 약관</Link>
+                <Link to="/policies">서비스 약관</Link>
               </div>
 
               {/* contact */}
@@ -80,9 +80,9 @@ const Footer = () => {
 
           <div className="space-y-[1.25rem]">
             <div className="flex items-center gap-[1.25rem] text-[#E5E5E5] font-bold text-[12px]">
-              <Link to="/support/policies">서비스 약관</Link>
+              <Link to="/policies">서비스 약관</Link>
               <p>|</p>
-              <Link to="/support/inquiries">고객센터</Link>
+              <Link to="/inquiries">고객센터</Link>
             </div>
             <div className="space-y-[0.75rem] text-[#d4d4d4] font-[400] text-[12px]">
               <div className="flex items-center gap-[1.25rem]">

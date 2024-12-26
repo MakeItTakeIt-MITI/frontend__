@@ -31,7 +31,7 @@ const GamesMobile = () => {
         </p>
         <button className="flex justify-end bg-[#D4d4d4] rounded-xl w-[120px] h-[40px] ">
           <Link
-            to="/games/list"
+            to="/games"
             className="h-full w-full flex items-center justify-center text-sm font-semibold"
           >
             경기 보러 가기

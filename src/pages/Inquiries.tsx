@@ -1,12 +1,12 @@
 import { useState } from "react";
 import search from "../assets/v11/inquiry-search.svg";
-import ListCard from "../components/inquiry/ListCard";
-import Footer from "../components/common/Footer";
+import ListCard from "../components/inquiry/ListCard.tsx";
+import Footer from "../components/common/Footer.tsx";
 import { Link } from "react-router-dom";
 
 import left from "../assets/v11/pagination-left.svg";
 import right from "../assets/v11/pagination-right.svg";
-import { InquiryListField } from "../interfaces/support";
+import { InquiryListField } from "../interfaces/support.ts";
 import { useInquiriesDataHook } from "../hooks/useInquiriesDataHook.tsx";
 import MoveToAppBanner from "../components/common/MoveToAppBanner.tsx";
 
