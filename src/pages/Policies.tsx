@@ -29,6 +29,7 @@ const Policies = () => {
           <MoveToAppBanner />
         </div>
       </section>
+
       <Footer />
     </>
   );

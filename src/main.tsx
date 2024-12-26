@@ -30,19 +30,25 @@ const router = createBrowserRouter([
 
       {
         path: "games",
-        element: <Games />,
-        children: [{ path: ":id", element: <GameDetail /> }],
+
+        children: [
+          { path: "", element: <Games /> },
+          { path: ":id", element: <GameDetail /> },
+        ],
       },
       {
         path: "courts",
-        element: <Courts />,
-        children: [{ path: ":id", element: <CourtGamesList /> }],
+
+        children: [
+          { path: "", element: <Courts /> },
+          { path: ":id", element: <CourtGamesList /> },
+        ],
       },
       { path: "faq", element: <Faq /> },
       {
         path: "inquiries",
-        element: <InquiriesList />,
         children: [
+          { path: "", element: <InquiriesList /> },
           { path: "new", element: <PrivateInquiry /> },
           { path: ":id", element: <InquiryDetail /> },
         ],
@@ -50,8 +56,10 @@ const router = createBrowserRouter([
 
       {
         path: "policies",
-        element: <Policies />,
-        children: [{ path: ":id", element: <PoliciesDetails /> }],
+        children: [
+          { path: "", element: <Policies /> },
+          { path: ":id", element: <PoliciesDetails /> },
+        ],
       },
       { path: "*", element: <NotFound /> },
     ],

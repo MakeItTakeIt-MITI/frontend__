@@ -5,9 +5,9 @@ import { ScrollToTop } from "./components/common/ScrollToTop.tsx";
 function App() {
   return (
     <main
-      style={{
-        backgroundColor: "#171717",
-      }}
+    // style={{
+    //   backgroundColor: "#171717",
+    // }}
     >
       <ScrollToTop />
       <Navbar />
