@@ -73,7 +73,7 @@ const NaverMap = ({
       const markerCount = filteredAddresses.length;
 
       const markerHTML = `
-      <a href="${game.id}" id="elem nt-${index}"  class="relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
+      <a href="games/${game.id}" id="elem nt-${index}"  class="relative text-[12px] font-bold border border-[#d4d4d4]  bg-[#f5f5f5] w-[120px] h-[32px] rounded-[20px] py-[10px] px-[14px] flex items-center gap-1 justify-center">
            <span>${game.fee.toLocaleString("ko-KR", {
              style: "currency",
              currency: "KRW",
