@@ -1,5 +1,5 @@
-import { InquiryDetailField, PrivateInquiryField } from "../interfaces/support"
-import axiosUrl from "../utils/axios"
+import { InquiryDetailField, PrivateInquiryField } from "../interfaces/support.ts"
+import axiosUrl from "../utils/axios.ts"
 
 export const faqList = async (search?: string | undefined) => {
     try {
