@@ -44,7 +44,7 @@ const router = createBrowserRouter([
           { path: ":id", element: <CourtGamesList /> },
         ],
       },
-      { path: "faq", element: <Faq /> },
+      { path: `faq/category/:categoryId`, element: <Faq /> },
       {
         path: "inquiries",
         children: [

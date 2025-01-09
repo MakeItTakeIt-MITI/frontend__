@@ -7,12 +7,15 @@ import { useFaqDataHook } from "../../hooks/useFaqDataHook.tsx";
 import { FAQItem } from "../../interfaces/support.ts";
 import "./faq.css";
 import MoveToAppBanner from "../common/MoveToAppBanner.tsx";
+import { Link, useParams } from "react-router-dom";
 
 const Main = () => {
   const [openFAQIndex, setOpenFAQIndex] = useState<number | null>(null);
   const [search, setSearch] = useState("");
-  const { data: faqData, refetch, isLoading } = useFaqDataHook(search);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { data: faqData, refetch, isLoading } = useFaqDataHook(search);
+
+  const { categoryId } = useParams();
 
   const handleOpenFAQ = (index: number) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
@@ -21,6 +24,7 @@ const Main = () => {
     if (inputRef.current) {
       const inputValue = inputRef.current?.value;
       if (inputValue === "전체") {
+        // if (categoryId === "all") {
         setSearch("");
       } else {
         setSearch(inputValue);
@@ -30,11 +34,12 @@ const Main = () => {
   };
 
   const handleSelectCategory = (input: string) => {
-    if (input === "전체") {
-      setSearch("");
-    } else {
-      setSearch(input);
-    }
+    // if (input === "전체") {
+    //   setSearch("");
+    // } else {
+    //   setSearch(input);
+    // }
+    setSearch("");
     refetch();
   };
 
@@ -74,72 +79,75 @@ const Main = () => {
         {/* topics boxes */}
         <ul className="flex items-center gap-[1.25rem]">
           {FAQ_TOPICS.map((topic, index) => (
-            <li
-              style={{
-                color:
-                  search === topic || (search === "" && topic === "전체")
-                    ? "#7FEEF0"
-                    : "#737373",
-              }}
-              className="cursor-pointer"
-              key={index}
-              onClick={() => handleSelectCategory(topic)}
-            >
-              {topic}
-            </li>
+            <Link to={`/faq/category/${topic.category}`}>
+              <li
+                style={{
+                  color:
+                    categoryId === topic.category ||
+                    (categoryId === "" && topic.category === "all")
+                      ? "#7FEEF0"
+                      : "#737373",
+                }}
+                className="cursor-pointer"
+                key={index}
+                onClick={() => handleSelectCategory(topic.category)}
+              >
+                {topic.title}
+              </li>
+            </Link>
           ))}
         </ul>
         {/* FAQ items */}
         {faqData?.length > 0 &&
-          faqData.map((item: FAQItem) => (
-            <>
-              {isLoading ? (
-                <div
-                  key={item.id}
-                  className="cursor-pointer flex items-center justify-between py-[1.25rem] "
-                >
-                  <h1 className="w-[200px] h-[8px] bg-light-dark rounded-lg"></h1>
-                  <button disabled type="button">
-                    <img
-                      src={dropdown}
-                      alt="dropdown"
-                      className={`size-6 ${item.id === openFAQIndex ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                </div>
-              ) : (
-                <div
-                  key={item.id}
-                  onClick={() => handleOpenFAQ(item.id)}
-                  className="cursor-pointer flex items-center justify-between py-[1.25rem] "
-                >
-                  <span className="text-secondary-white text-base font-[400]">
-                    {item.title}
-                  </span>
-                  <button type="button">
-                    <img
-                      src={dropdown}
-                      alt="dropdown"
-                      className={`size-6 ${item.id === openFAQIndex ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                </div>
-              )}
+          faqData
+            .filter(
+              (item) => categoryId === "all" || item.category === categoryId
+            )
+            .map((item: FAQItem) => (
+              <div key={item.id}>
+                {isLoading ? (
+                  <div className="cursor-pointer flex items-center justify-between py-[1.25rem]">
+                    <h1 className="w-[200px] h-[8px] bg-light-dark rounded-lg"></h1>
+                    <button disabled type="button">
+                      <img
+                        src={dropdown}
+                        alt="dropdown"
+                        className={`size-6 ${item.id === openFAQIndex ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => handleOpenFAQ(item.id)}
+                    className="cursor-pointer flex items-center justify-between py-[1.25rem]"
+                  >
+                    <span className="text-secondary-white text-base font-[400]">
+                      {item.title}
+                    </span>
+                    <button type="button">
+                      <img
+                        src={dropdown}
+                        alt="dropdown"
+                        className={`size-6 ${item.id === openFAQIndex ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                  </div>
+                )}
 
-              {/* description */}
-              {openFAQIndex === item.id && (
-                <div className="p-[1.25rem] bg-light-dark rounded-[20px]  space-y-3">
-                  <p
-                    className=" text-[#d4d4d4] "
-                    id="custom-content"
-                    dangerouslySetInnerHTML={{ __html: `${item?.content}` }}
-                  />
-                </div>
-              )}
+                {/* Description */}
+                {openFAQIndex === item.id && (
+                  <div className="p-[1.25rem] bg-light-dark rounded-[20px] space-y-3">
+                    <p
+                      className="text-[#d4d4d4]"
+                      id="custom-content"
+                      dangerouslySetInnerHTML={{ __html: `${item?.content}` }}
+                    />
+                  </div>
+                )}
 
-              <hr className="bg-[#525252] h-[3px]" />
-            </>
-          ))}
+                <hr className="bg-[#525252] h-[3px]" />
+              </div>
+            ))}
       </div>
       <MoveToAppBanner />
     </MainLayout>
