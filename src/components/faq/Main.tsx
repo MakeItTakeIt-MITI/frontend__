@@ -33,7 +33,7 @@ const Main = () => {
     }
   };
 
-  const handleSelectCategory = (input: string) => {
+  const handleSelectCategory = () => {
     // if (input === "전체") {
     //   setSearch("");
     // } else {
@@ -90,7 +90,7 @@ const Main = () => {
                 }}
                 className="cursor-pointer"
                 key={index}
-                onClick={() => handleSelectCategory(topic.category)}
+                onClick={() => handleSelectCategory()}
               >
                 {topic.title}
               </li>
@@ -101,7 +101,9 @@ const Main = () => {
         {faqData?.length > 0 &&
           faqData
             .filter(
-              (item) => categoryId === "all" || item.category === categoryId
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (item: any) =>
+                categoryId === "all" || item.category === categoryId
             )
             .map((item: FAQItem) => (
               <div key={item.id}>
@@ -136,7 +138,7 @@ const Main = () => {
 
                 {/* Description */}
                 {openFAQIndex === item.id && (
-                  <div className="p-[1.25rem] bg-light-dark rounded-[20px] space-y-3">
+                  <div className="p-[1.25rem] bg-light-dark rounded-[20px] space-y-3 mb-5">
                     <p
                       className="text-[#d4d4d4]"
                       id="custom-content"
