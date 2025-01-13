@@ -20,7 +20,7 @@ const InquiriesList = () => {
 
   const currentPage = data?.data.current_index;
   const pageLength = data?.data.end_index || 1;
-  const content = data?.data.page_content;
+  // const content = data?.data.page_content;
 
   const pages = [];
   for (let i = 1; i <= pageLength; i++) {
