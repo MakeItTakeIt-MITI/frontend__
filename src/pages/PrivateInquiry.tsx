@@ -25,6 +25,8 @@ const PrivateInquiry = () => {
   const content = watch("content");
   const nickname = watch("nickname");
 
+  console.log(title?.length);
+
   const passwordRegex = /^[0-9]{4}$/;
 
   const isFormFilled =
@@ -58,6 +60,7 @@ const PrivateInquiry = () => {
               {...register("title")}
               autoComplete="off"
               placeholder="문의의 제목을 입력해주세요."
+              maxLength={32}
               type="text"
               className="w-full p-5 border border-[#737373] focus:border-[#7FEEF6] focus:outline-none  bg-secondary-black rounded-[10px] sm:h-[60px] md:h-[64px]"
             />
