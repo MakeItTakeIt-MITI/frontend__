@@ -16,6 +16,8 @@ const InquiriesList = () => {
 
   const { data, isLoading } = useInquiriesDataHook(pageNumber);
 
+  console.log(data);
+
   const currentPage = data?.data.current_index;
   const pageLength = data?.data.end_index || 1;
   const content = data?.data.page_content;
@@ -25,6 +27,8 @@ const InquiriesList = () => {
     pages.push(i);
   }
 
+  // console.log(isLoading);
+  // console.log("content", content);
   return (
     <>
       <section className="bg-secondary-black md:pt-[3.75rem] md:pb-[6.25rem] sm:pb-[3.76rem]   md:space-y-[100px]">
@@ -59,8 +63,8 @@ const InquiriesList = () => {
           <div className="w-full  space-y-5">
             <hr className="w-full h-[1px] text-[#525252]" />
 
-            {content?.length > 1 ? (
-              content.map((inquiry: InquiryListField) => (
+            {data?.data.page_content.length >= 1 ? (
+              data?.data.page_content.map((inquiry: InquiryListField) => (
                 <>
                   {isLoading ? (
                     <>
