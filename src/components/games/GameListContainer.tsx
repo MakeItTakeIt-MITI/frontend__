@@ -4,11 +4,13 @@ import GameListCard from "./GameListCard.tsx";
 import "./scrollbar.css";
 
 interface GameListProps extends AllGamesProps {
+  statusCode: number;
   handleSetCoords: (arg1: string, arg2: string) => void;
   isLoading: boolean;
 }
 const GameListContainer = ({
   allGamesData,
+  statusCode,
   handleSetCoords,
   isLoading,
 }: GameListProps) => {
@@ -23,7 +25,7 @@ const GameListContainer = ({
           <GameCardSkeleton />
         </>
       )}
-      {allGamesData?.length === 0 ? (
+      {statusCode === 200 && allGamesData?.length === 0 ? (
         <div className="w-full h-full flex items-center justify-center text-white font-[500] text-lg">
           <h1>진행중인 경기가 없습니다.</h1>
         </div>

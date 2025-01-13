@@ -7,7 +7,7 @@ import profile from "../assets/v11/profile.svg";
 // import star from "../assets/v11/star.svg";
 import ShareFeatureFooter from "../components/common/ShareFeatureFooter.tsx";
 import { useGameDetailDataHook } from "../hooks/useGameDetailDataHook.tsx";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import no_stars from "../assets/v11/reviews/zero-star.svg";
 import one_star from "../assets/v11/reviews/one-star.svg";
@@ -19,12 +19,22 @@ import three_half_stars from "../assets/v11/reviews/three-half-star.svg";
 import four_stars from "../assets/v11/reviews/four-star.svg";
 import four_half_stars from "../assets/v11/reviews/four-half-star.svg";
 import fivestars from "../assets/v11/reviews/five-star.svg";
+import { useEffect } from "react";
 
 const GameDetail = () => {
   const { id } = useParams();
   const gameId = Number(id);
 
   const { data: game } = useGameDetailDataHook({ id: gameId });
+
+  const undefinedGame = game === undefined;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (undefinedGame) {
+      navigate("/");
+    }
+  }, [game]);
 
   return (
     <>
