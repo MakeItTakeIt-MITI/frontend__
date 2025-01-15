@@ -19,12 +19,30 @@ import three_half_stars from "../assets/v11/reviews/three-half-star.svg";
 import four_stars from "../assets/v11/reviews/four-star.svg";
 import four_half_stars from "../assets/v11/reviews/four-half-star.svg";
 import fivestars from "../assets/v11/reviews/five-star.svg";
+// import { useEffect } from "react";
 
 const GameDetail = () => {
   const { id } = useParams();
   const gameId = Number(id);
 
   const { data: game } = useGameDetailDataHook({ id: gameId });
+
+  // const undefinedGame = game?.status_code !== 200;
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (undefinedGame) {
+  //     navigate("/");
+  //   }
+  // }, [game, undefinedGame]);
+
+  const totalGameTime = game
+    ? (() => {
+        const startTime = new Date(`2025-01-16T${game.data.starttime}`);
+        const endTime = new Date(`2025-01-17T${game.data.endtime}`);
+        return (endTime.getTime() - startTime.getTime()) / (1000 * 60); // Duration in minutes
+      })()
+    : null;
 
   return (
     <>
@@ -81,7 +99,7 @@ const GameDetail = () => {
             <div className="space-y-[0.38rem] text-primary-white text-sm font-[400] ">
               <div className="flex items-center gap-2">
                 <img src={clock} alt="clock" />
-                <span>0분 경기</span>
+                <span>{totalGameTime}분 경기</span>
               </div>
               <div className="flex items-center gap-2">
                 <img src={location} alt="location" />
@@ -174,7 +192,10 @@ const GameDetail = () => {
             <h1 className="sm:text-base md:text-lg font-bold text-primary-white">
               모집 정보
             </h1>
-            <div className="text-primary-white font-[400] text-sm min-h-[350px]">
+            <div
+              style={{ whiteSpace: "pre-line" }}
+              className="text-primary-white font-[400] text-sm min-h-[350px]"
+            >
               {game?.data.info}
             </div>
           </Layout>

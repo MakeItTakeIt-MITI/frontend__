@@ -42,7 +42,7 @@ export const Games = () => {
 
   useEffect(() => {
     refetch();
-  }, [selectedStatuses, refetch, displayFilterBox]);
+  }, [selectedStatuses, displayFilterBox]);
 
   return (
     <>
@@ -68,7 +68,6 @@ export const Games = () => {
 
 const HeroSection = () => (
   <div className="bg-games_web bg-center bg-cover bg-no-repeat  h-[20rem] sm:hidden md:flex justify-center items-center bg-[#000] relative">
-    {/* <img src={hero} alt="hero" className="h-full" /> */}
     {/* content */}
     <div className="absolute md:w-[768px] flex flex-col sm:items-center md:items-start justify-center gap-[1.25rem] text-[#fff] ">
       <p className="text-base font-bold text-primary-teal">MITI 서비스 런칭</p>
@@ -82,8 +81,6 @@ const HeroSection = () => (
 
 const MobileHeroSection = () => (
   <section className="bg-games_mobile bg-center bg-cover bg-no-repeat    sm:flex items-center  justify-center md:hidden h-[16.125rem]  ">
-    {/* <img src={mobile_hero} alt="" className="" /> */}
-
     <div className="flexCenter flex-col gap-[1.5rem] text-[#fff]  ">
       <div className="space-y-[.75rem] text-center">
         <p className="text-sm font-bold text-primary-teal">MITI 서비스 런칭</p>

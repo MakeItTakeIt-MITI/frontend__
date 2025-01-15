@@ -58,9 +58,7 @@ const Courts = () => {
         data-testid="courts-header"
         className="sm:bg-courts_mobile md:bg-courts_web bg-center bg-cover bg-no-repeat   sm:h-[16rem] md:h-[20rem] flex items-center justify-center bg-[#000] relative"
       >
-        {/* <img src={hero} alt="hero" className="h-full " /> */}
-        {/* <div className=" sm:hidden md:block absolute top-0 bottom-0 left-[360px] w-[37.725rem] bg-[#151e1c] "></div> */}
-        <div className="w-[768px]  absolute top-0 bottom-0 flex flex-col sm:items-center md:items-start justify-center gap-[1.25rem] text-[#fff] ">
+        <div className="sm:w-full md:w-[768px]  absolute top-0 bottom-0 flex flex-col sm:items-center md:items-start justify-center gap-[1.25rem] text-[#fff] ">
           <p className="sm:text-sm md:text-base font-bold text-primary-teal">
             MITI 서비스 런칭
           </p>
