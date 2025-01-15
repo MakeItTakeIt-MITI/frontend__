@@ -51,7 +51,6 @@ export const Games = () => {
       <MainContent
         handleToggleFilterBox={handleToggleFilterBox}
         allGamesData={allGamesData?.data}
-        statusCode={allGamesData?.status_code}
         isLoading={isLoading}
       />
       {displayFilterBox && (

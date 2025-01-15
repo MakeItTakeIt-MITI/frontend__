@@ -15,14 +15,12 @@ import MoveToAppBanner from "../common/MoveToAppBanner.tsx";
 interface MainContentProps {
   handleToggleFilterBox: () => void;
   allGamesData: Game[];
-  statusCode: number;
   isLoading: boolean;
 }
 
 const MainContent = ({
   handleToggleFilterBox,
   allGamesData,
-  statusCode,
   isLoading,
 }: MainContentProps) => {
   const { selectedStatus, selectedDate, selectedTimeDate } =
@@ -42,8 +40,6 @@ const MainContent = ({
   const handleSetSelected = () => {
     setSelected(!selected);
   };
-
-  console.log(statusCode);
 
   return (
     <section className="page-padding bg-secondary-black min-h-screen sm:px-[0.81rem] md:px-0  ">
@@ -87,7 +83,7 @@ const MainContent = ({
           </>
           {/* Game list and map container */}
           <div className="flex gap-5 h-full ">
-            {!isAddressSelected ? (
+            {isAddressSelected ? (
               <FilteredGameListContainer
                 allGamesData={allGamesData}
                 selectedAddress={selectedAddress}
@@ -95,7 +91,6 @@ const MainContent = ({
             ) : (
               <GameListContainer
                 allGamesData={allGamesData}
-                statusCode={statusCode}
                 handleSetCoords={handleSetCoords}
                 isLoading={isLoading}
               />
