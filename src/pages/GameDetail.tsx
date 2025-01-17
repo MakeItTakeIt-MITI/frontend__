@@ -19,7 +19,7 @@ import three_half_stars from "../assets/v11/reviews/three-half-star.svg";
 import four_stars from "../assets/v11/reviews/four-star.svg";
 import four_half_stars from "../assets/v11/reviews/four-half-star.svg";
 import fivestars from "../assets/v11/reviews/five-star.svg";
-// import { useEffect } from "react";
+import { calculateGameDuration } from "../utils/games.ts";
 
 const GameDetail = () => {
   const { id } = useParams();
@@ -27,33 +27,10 @@ const GameDetail = () => {
 
   const { data: game } = useGameDetailDataHook({ id: gameId });
 
-  // function totalGameTime() {
   const start = game?.data.starttime || "00:00:00";
   const end = game?.data.endtime || "00:00:00";
 
-  function calculateDuration(startTime: string, endTime: string) {
-    const toMinutes = (time: string) => {
-      if (!time) {
-        console.log("error");
-      }
-
-      const [hours, minutes] = time.split(":").map(Number);
-      return hours * 60 + minutes;
-    };
-
-    const startMinutes = toMinutes(startTime);
-    const endMinutes = toMinutes(endTime);
-
-    if (endMinutes >= startMinutes) {
-      // same day
-      return endMinutes - startMinutes;
-    } else {
-      // after midnight
-      return endMinutes + 1440 - startMinutes;
-    }
-  }
-
-  const gameDuration = calculateDuration(start, end);
+  const gameDuration = calculateGameDuration(start, end);
 
   return (
     <>
