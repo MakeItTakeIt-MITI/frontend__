@@ -27,22 +27,33 @@ const GameDetail = () => {
 
   const { data: game } = useGameDetailDataHook({ id: gameId });
 
-  // const undefinedGame = game?.status_code !== 200;
-  // const navigate = useNavigate();
+  // function totalGameTime() {
+  const start = game?.data.starttime || "00:00:00";
+  const end = game?.data.endtime || "00:00:00";
 
-  // useEffect(() => {
-  //   if (undefinedGame) {
-  //     navigate("/");
-  //   }
-  // }, [game, undefinedGame]);
+  function calculateDuration(startTime: string, endTime: string) {
+    const toMinutes = (time: string) => {
+      if (!time) {
+        console.log("error");
+      }
 
-  const totalGameTime = game
-    ? (() => {
-        const startTime = new Date(`2025-01-16T${game.data.starttime}`);
-        const endTime = new Date(`2025-01-17T${game.data.endtime}`);
-        return (endTime.getTime() - startTime.getTime()) / (1000 * 60); // Duration in minutes
-      })()
-    : null;
+      const [hours, minutes] = time.split(":").map(Number);
+      return hours * 60 + minutes;
+    };
+
+    const startMinutes = toMinutes(startTime);
+    const endMinutes = toMinutes(endTime);
+
+    if (endMinutes >= startMinutes) {
+      // same day
+      return endMinutes - startMinutes;
+    } else {
+      // after midnight
+      return endMinutes + 1440 - startMinutes;
+    }
+  }
+
+  const gameDuration = calculateDuration(start, end);
 
   return (
     <>
@@ -99,7 +110,7 @@ const GameDetail = () => {
             <div className="space-y-[0.38rem] text-primary-white text-sm font-[400] ">
               <div className="flex items-center gap-2">
                 <img src={clock} alt="clock" />
-                <span>{totalGameTime}분 경기</span>
+                <span>{gameDuration}분 경기</span>
               </div>
               <div className="flex items-center gap-2">
                 <img src={location} alt="location" />
