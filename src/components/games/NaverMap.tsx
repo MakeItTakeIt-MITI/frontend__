@@ -201,7 +201,7 @@ const NaverMap = ({
   return (
     <div
       id="games-map"
-      className="sm:hidden md:block w-[381px] h-[494px] rounded-[20px]"
+      className="sm:hidden md:block w-full h-[494px] rounded-[20px]"
     ></div>
   );
 };
