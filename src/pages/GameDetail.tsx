@@ -74,7 +74,7 @@ const GameDetail = () => {
                       : game?.data.game_status === "canceled"
                         ? "#E3C6CB"
                         : game?.data.game_status === "closed"
-                          ? "#d3d3d3"
+                          ? "#B9DBDC"
                           : game?.data.game_status === "completed"
                             ? "#B9DBDC"
                             : "",
@@ -85,7 +85,7 @@ const GameDetail = () => {
                       : game?.data.game_status === "canceled"
                         ? "#C93568"
                         : game?.data.game_status === "closed"
-                          ? "#d3d3d3"
+                          ? "#00979A"
                           : game?.data.game_status === "completed"
                             ? "#00979A"
                             : "",

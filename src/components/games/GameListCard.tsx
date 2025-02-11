@@ -28,9 +28,9 @@ const GameListCard = ({
                 : game.game_status === "canceled"
                   ? "#E3C6CB"
                   : game.game_status === "closed"
-                    ? "#d3d3d3"
+                    ? "#B9DBDC"
                     : game.game_status === "completed"
-                      ? "#B9DBDC"
+                      ? "#C1C1C1"
                       : "",
 
             color:
@@ -39,18 +39,17 @@ const GameListCard = ({
                 : game.game_status === "canceled"
                   ? "#C93568"
                   : game.game_status === "closed"
-                    ? "#d3d3d3"
+                    ? "#00979A"
                     : game.game_status === "completed"
-                      ? "#00979A"
+                      ? "#484848"
                       : "",
           }}
-          // className="p-[.25rem] text-[10px] rounded-[0.125rem] w-full  text-[#009799] bg-[#b9dbdc] ">
           className="p-[.25rem] text-[10px] rounded-[0.125rem] w-full font-bold  "
         >
           {(game.game_status === "open" && "모집중") ||
             (game.game_status === "canceled" && "경기 취소") ||
             (game.game_status === "closed" && "모집 마감") ||
-            (game.game_status === "completed" && "모집 완료")}
+            (game.game_status === "completed" && "경기 완료")}
 
           {/* {game.game_status === "cancelled" && "경기 취소"} */}
         </span>
