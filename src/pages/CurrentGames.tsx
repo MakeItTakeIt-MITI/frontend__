@@ -12,7 +12,7 @@ import useCurrentMonthStore from "../store/useCurrentMonthStore.ts";
 import { useFilterBox } from "../hooks/game-list-filters/useFilterBox.tsx";
 import { useFilterBoxSettings } from "../hooks/game-list-filters/useFilterBoxSettings.tsx";
 
-export const Games = () => {
+export const CurrentGames = () => {
   const [displayFilterBox, setDisplayFilterBox] = useState<boolean>(false);
 
   // react custom hooks

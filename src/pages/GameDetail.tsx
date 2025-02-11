@@ -20,6 +20,7 @@ import four_stars from "../assets/v11/reviews/four-star.svg";
 import four_half_stars from "../assets/v11/reviews/four-half-star.svg";
 import fivestars from "../assets/v11/reviews/five-star.svg";
 import { calculateGameDuration } from "../utils/games.ts";
+import { GameStatus } from "../components/games/GameStatus.tsx";
 
 const GameDetail = () => {
   const { id } = useParams();
@@ -43,7 +44,7 @@ const GameDetail = () => {
 
           <Layout height="">
             <div className="space-y-[.75rem] ">
-              <span
+              {/* <span
                 style={{
                   backgroundColor:
                     game?.data.game_status === "open"
@@ -73,7 +74,8 @@ const GameDetail = () => {
                   (game?.data.game_status === "canceled" && "경기 취소") ||
                   (game?.data.game_status === "closed" && "모집 마감") ||
                   (game?.data.game_status === "completed" && "모집 완료")}
-              </span>
+              </span> */}
+              <GameStatus status={game?.data.game_status} />
               <div className="space-y-[0.5rem]">
                 <h1 className="sm:text-base md:text-lg font-bold text-primary-white">
                   {game?.data.title}

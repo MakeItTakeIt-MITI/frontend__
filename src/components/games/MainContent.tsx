@@ -13,6 +13,7 @@ import FilteredGameListContainer from "./FilteredGameListContainer.tsx";
 import MoveToAppBanner from "../common/MoveToAppBanner.tsx";
 
 import right_arrow from "../../assets/v11/games/right-arrow.svg";
+import { Link } from "react-router-dom";
 
 interface MainContentProps {
   handleToggleFilterBox: () => void;
@@ -58,9 +59,9 @@ const MainContent = ({
           </div>
 
           <div className="flex items-center p-5">
-            <button type="button" className="text-sm text-white">
+            <Link to="all" type="button" className="text-sm text-white">
               전체 경기
-            </button>
+            </Link>
             <img src={right_arrow} alt="right arrow" />
           </div>
         </div>
