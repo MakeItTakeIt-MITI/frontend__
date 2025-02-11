@@ -44,15 +44,12 @@ const GameListCard = ({
                       ? "#00979A"
                       : "",
           }}
-          // className="p-[.25rem] text-[10px] rounded-[0.125rem] w-full  text-[#009799] bg-[#b9dbdc] ">
           className="p-[.25rem] text-[10px] rounded-[0.125rem] w-full font-bold  "
         >
           {(game.game_status === "open" && "모집중") ||
             (game.game_status === "canceled" && "경기 취소") ||
             (game.game_status === "closed" && "모집 마감") ||
             (game.game_status === "completed" && "모집 완료")}
-
-          {/* {game.game_status === "cancelled" && "경기 취소"} */}
         </span>
         <h1 className="font-bold  text-[#E5E5E5]">{game.title}</h1>
       </div>
