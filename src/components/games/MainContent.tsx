@@ -27,12 +27,19 @@ const MainContent = ({
     useGameFilterStore();
   const [selected, setSelected] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<string>("");
+
   const [isAddressSelected, setIsAddressSelected] = useState<boolean>(false);
 
   const [latitude, setLatitude] = useState<null | string>(null);
   const [longitude, setLongitude] = useState<null | string>(null);
 
+  const [isGameCardSelected, setIsGameCardSelected] = useState(false);
+  const [cardAddress, setCardAddress] = useState("");
+  console.log(isGameCardSelected);
+
   const handleSetCoords = (lat: string, long: string) => {
+    setIsGameCardSelected(true);
+
     setLatitude(lat);
     setLongitude(long);
   };
@@ -104,6 +111,8 @@ const MainContent = ({
               isAddressSelected={isAddressSelected}
               latitude={latitude}
               longitude={longitude}
+              selectedAddress={selectedAddress}
+              cardAddress={cardAddress}
             />
           </div>
         </div>

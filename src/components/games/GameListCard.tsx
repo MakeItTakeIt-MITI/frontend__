@@ -6,7 +6,7 @@ import { Fee } from "../../features/games/components/Fee.tsx";
 
 interface GameListCardProp {
   game: Game;
-  handleSetCoords: (arg1: string, arg2: string) => void;
+  handleSetCoords: (arg1: string, arg2: string, address: string) => void;
 }
 
 const GameListCard = ({
@@ -16,7 +16,13 @@ const GameListCard = ({
 }: GameListCardProp) => {
   return (
     <div
-      onClick={() => handleSetCoords(game.court.latitude, game.court.longitude)}
+      onClick={() =>
+        handleSetCoords(
+          game.court.latitude,
+          game.court.longitude,
+          game.court.address
+        )
+      }
       className="cssanimation sequence fadeInBottom  sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and title */}

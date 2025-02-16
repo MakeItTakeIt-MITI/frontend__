@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { AllGamesProps } from "../../interfaces/games.ts";
 import { GameCardSkeleton } from "./GameCardSkeleton.tsx";
-import GameListCard from "./GameListCard.tsx";
+// import GameListCard from "./GameListCard.tsx";
+
 import "./scrollbar.css";
+import { GameCardStatic } from "../../features/games/components/GameCardStatic.tsx";
+import { GameCardLink } from "../../features/games/components/GameCardLink.tsx";
 
 interface GameListProps extends AllGamesProps {
   handleSetCoords: (arg1: string, arg2: string) => void;
@@ -12,8 +16,10 @@ const GameListContainer = ({
   handleSetCoords,
   isLoading,
 }: GameListProps) => {
+  const [clicked, isClicked] = useState(false);
+  const [gameId, setGameId] = useState<number | null>(0);
   return (
-    <div className="sm:hidden md:block custom-scrollbar bg-light-dark sm:w-full md:w-[381px] sm:h-[33.25rem] md:h-[494px] sm:p-[0.5rem] md:p-4 rounded-[20px] space-y-3 overflow-y-scroll">
+    <div className=" sm:hidden md:block custom-scrollbar bg-light-dark sm:w-full md:w-[381px] sm:h-[33.25rem] md:h-[494px] sm:p-[0.5rem] md:p-4 rounded-[20px] space-y-3 overflow-y-scroll">
       {isLoading && (
         <>
           {Array.from({ length: 5 }).map((_, index) => (
@@ -26,13 +32,30 @@ const GameListContainer = ({
           <h1>진행중인 경기가 없습니다.</h1>
         </div>
       ) : (
-        allGamesData?.map((game) => (
-          <GameListCard
-            key={game.id}
-            game={game}
-            handleSetCoords={handleSetCoords}
-          />
-        ))
+        allGamesData?.map(
+          (game) =>
+            clicked && gameId === game.id ? (
+              <GameCardLink
+                key={game.id}
+                game={game}
+                handleSetCoords={handleSetCoords}
+              />
+            ) : (
+              <GameCardStatic
+                key={game.id}
+                game={game}
+                handleSetCoords={handleSetCoords}
+                isClicked={isClicked}
+                setGameId={setGameId}
+              />
+            )
+
+          // <GameListCard
+          //   key={game.id}
+          //   game={game}
+          //   handleSetCoords={handleSetCoords}
+          // />
+        )
       )}
     </div>
   );

@@ -25,6 +25,8 @@ interface NaverMapProps extends AllGamesProps {
   isAddressSelected: boolean;
   latitude: string | null;
   longitude: string | null;
+  selectedAddress: string;
+  cardAddress: string;
 }
 
 const NaverMap = ({
@@ -33,6 +35,8 @@ const NaverMap = ({
   setIsAddressSelected,
   latitude,
   longitude,
+  selectedAddress,
+  cardAddress,
 }: NaverMapProps) => {
   // const { latitude, longitude } = useLatLongStore();
   const [geoLatitude, setGeoLatitude] = useState<null | number>(null);
@@ -44,6 +48,8 @@ const NaverMap = ({
       addressesList.push(game.court.address);
     });
   }
+
+  console.log("naver map selected address : ", selectedAddress);
 
   useEffect(() => {
     const naverMap = new naver.maps.Map("games-map", {
@@ -138,6 +144,8 @@ const NaverMap = ({
           marker.setIcon({
             content: selectedMarkerHTML,
           });
+
+          // clicked card
 
           selectedMarker = marker;
         }
