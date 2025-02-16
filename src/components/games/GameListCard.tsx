@@ -1,11 +1,11 @@
 import time from "../../assets/v11/time.svg";
 import participants from "../../assets/v11/participants.svg";
 import { Game } from "../../interfaces/games.ts";
-import { GameStatus } from "../../features/games/GameStatus.tsx";
+import { GameStatus } from "../../features/games/components/GameStatus.tsx";
+import { Fee } from "../../features/games/components/Fee.tsx";
 
 interface GameListCardProp {
   game: Game;
-
   handleSetCoords: (arg1: string, arg2: string) => void;
 }
 
@@ -42,15 +42,7 @@ const GameListCard = ({
             </span>
           </div>
         </div>
-        {/* FEE */}
-        <h2 className="text-primary-teal font-bold">
-          {game.fee == 0
-            ? "무료"
-            : game.fee.toLocaleString("ko-KR", {
-                style: "currency",
-                currency: "KRW",
-              })}
-        </h2>
+        <Fee fee={game.fee} />
       </div>
     </div>
   );

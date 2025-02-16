@@ -1,19 +1,19 @@
-import time from "../../assets/v11/time.svg";
-import participants from "../../assets/v11/participants.svg";
-import { Game } from "../../interfaces/games.ts";
-import { Link } from "react-router-dom";
-import { GameStatus } from "../../features/games/components/GameStatus.tsx";
-import { Fee } from "../../features/games/components/Fee.tsx";
+import { Game } from "../../../interfaces/games.ts";
+import { GameStatus } from "./GameStatus.tsx";
+import time from "../../../assets/v11/time.svg";
+import participants from "../../../assets/v11/participants.svg";
+import { Fee } from "./Fee.tsx";
 
-interface MobileGameListCardProp {
+interface GameListCardProp {
   game: Game;
+  handleSetCoords: (arg1: string, arg2: string) => void;
 }
 
-const MobileGameListCard = ({ game }: MobileGameListCardProp) => {
+export const GameCardStatic = ({ game, handleSetCoords }: GameListCardProp) => {
   return (
-    <Link
-      to={`/games/${game.id}`}
-      className="md:hidden cursor-pointer sm:flex flex-col  justify-center space-y-3 w-full h-[7.5rem]  bg-dark-card border border-[#525252] rounded-xl p-4"
+    <div
+      onClick={() => handleSetCoords(game.court.latitude, game.court.longitude)}
+      className="cssanimation sequence fadeInBottom  sm:hidden cursor-pointer md:flex flex-col justify-center space-y-3 w-full sm:h-[7.5rem] md:h-[120px] bg-dark-card border border-[#525252] rounded-xl p-4"
     >
       {/* Status and title */}
       <div className="space-y-2">
@@ -31,18 +31,16 @@ const MobileGameListCard = ({ game }: MobileGameListCardProp) => {
             </span>
           </div>
 
-          <div className="flex ">
+          <div className="flex gap-1">
             <img src={participants} alt="participants" />
             <span>
               {game.num_of_participations} / {game.max_invitation}
             </span>
           </div>
         </div>
-
+        {/* FEE */}
         <Fee fee={game.fee} />
       </div>
-    </Link>
+    </div>
   );
 };
-
-export default MobileGameListCard;
